@@ -1,0 +1,15 @@
+Nude MVC: A basic MVC boilerplate. You have to add all the other functionality yourself.
+
+Dressed MVC: A basic MVC with a provided admin panel to create and manage users, rights, contact(client) information.
+a front- and back-end integration.
+Basic file-upload solution.
+Templates can also be made for the  admin panel to meet your customers needs.
+User/contact information is encrypted with AES 128 algorithm. 
+
+Suit MVC: All functionality included in Dressed MVC plus: Storing encrypted texts. Send encrypted messages to
+other users.
+
+Dress to Impress MVC: Webshop integration.
+
+ 
+

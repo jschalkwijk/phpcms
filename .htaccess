@@ -1,0 +1,14 @@
+RewriteEngine on
+
+RewriteBase /
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+
+RewriteRule ^(.*)$ index.php?url=$1 [L,QSA]
+
+#block spiders
+Header set X-Robots-Tag noindex,nofollow
+#block spiders
+RewriteCond %{HTTP_USER_AGENT} ^.*(Baiduspider|HTTrack|Yandex|AhrefsBot|Ezooms|MJ12bot|YandexBot|Googlebot|Yahoo!|Slurp|bingbot).*$ [NC]
+RewriteRule .* - [F,L]
