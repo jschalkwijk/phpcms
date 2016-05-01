@@ -31,6 +31,9 @@ class content_Content{
 	public function getTitle(){
 		return $this->title;
 	}
+	public function getLink(){
+		return preg_replace("/[\s-]+/", "-", $this->title);
+	}
 	public function getDescription(){
 		return $this->description;
 	}
@@ -169,6 +172,18 @@ class content_Content{
 		// We return an array which contains value that can be passed from the controller to the view.
 		// If the form needs to be outputted, errors or success messages.
 		return $posts;
+	}
+
+	public function seoUrl($string) {
+		//Lower case everything
+		$string = strtolower($string);
+		//Make alphanumeric (removes all other characters)
+		$string = preg_replace("/[^a-z0-9_\s-]/", "", $string);
+		//Clean up multiple dashes or whitespaces
+		$string = preg_replace("/[\s-]+/", " ", $string);
+		//Convert whitespaces and underscore to dash
+		$string = preg_replace("/[\s_]/", "-", $string);
+		return $string;
 	}
 }
 ?>

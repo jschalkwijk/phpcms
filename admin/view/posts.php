@@ -11,7 +11,10 @@
 				$posts = $data['posts'];
 				// thisis a write function, it just writes out the data,
 				// the information is supplied by the model
-				$writer = content_ContentWriter::write($posts); 
+			foreach($posts as $single){
+				// write out in the content_table format.
+				require('view/content_table.php');
+			}
 				require($data['view']['actions']);
 			?>
 		</form>	

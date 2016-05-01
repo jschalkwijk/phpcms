@@ -1,3 +1,7 @@
+.mceContentBody {
+	width: 740px;
+}
+
 /* Search */
 .search input {
 	border-radius: 10px;

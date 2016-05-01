@@ -1,6 +1,6 @@
 <?php 
 	$post = $data['post'];
-	$readmore = HOST.'/blog/post/'.$post->getID().'/'.$post->getTitle();
+	$readmore = HOST.'/blog/post/'.$post->getID().'/'.$post->getLink();
 ?>
 <div class="top-margin">
 	<div class="container large">

@@ -11,7 +11,7 @@ function mce(){
 
 function insertImages(path,thumb = null) {
     if(thumb == null) {
-        tinyMCE.execCommand('mceInsertRawHTML', false, '<a href='+ path +'><img src=' + path + '></a>');
+        tinyMCE.execCommand('mceInsertRawHTML', false, '<a href='+ path +'><img src=' + path + ' width=100%></a>');
     } else {
         tinyMCE.execCommand('mceInsertRawHTML', false, '<a href='+ path +'><img src=' + thumb + '></a>');
     }

@@ -22,6 +22,9 @@ class posts_Post {
 	public function getTitle(){
 		return $this->title;
 	}
+	public function getLink(){
+		return preg_replace("/[\s-]+/", "-", $this->title);
+	}
 	public function getDescription(){
 		return $this->description;
 	}

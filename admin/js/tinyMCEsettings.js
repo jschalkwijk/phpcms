@@ -12,5 +12,6 @@ tinymce.init({
     toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
     paste_data_images: true,
     relative_urls :false,
-    convert_urls: false
+    convert_urls: false,
+    nowrap : false
 });
