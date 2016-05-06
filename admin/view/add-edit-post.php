@@ -1,4 +1,3 @@
-<script type="text/javascript" src="/admin/js/tinymce/tinymce.min.js"></script>
 <?php
 
 	$post = $data['post'];
@@ -13,7 +12,7 @@
 		echo '</div>';
 	}
 	if ($output_form){ ?>
-		<form id="addpost-form" action="<?php echo $action; ?>" method="post">
+		<form id="addpost-form" class="container large left" action="<?php echo $action; ?>" method="post">
 			<input type="hidden" name="id" value="<?php echo $post->getID();?>"/>
 			<input type="text" name="title" placeholder="Title" value="<?php echo $post->getTitle(); ?>"><br />
 			<input type="text" name="post_desc" placeholder="Post Description (max 160 characters)" value="<?php  echo $post->getDescription();?>"/><br />
@@ -35,12 +34,11 @@
 			
 			<button type="submit" name="submit">Submit</button>
 		</form>
-<div id="return">
+<div id="return" class="container medium left">
 	<?php }
-	require_once('blocks/include-files-tinymce.php');
+		require_once('blocks/include-files-tinymce.php');
 	?>
 </div>
-<div class="container"><button id="ajax" name="ajax" value="Jorn">Ajax</button></div>
 
 
 

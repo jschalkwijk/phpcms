@@ -20,7 +20,10 @@
 		}
 		$query = "SELECT * FROM files WHERE " . implode(' AND ', $searchTermBits);
 		$result = mysqli_query($dbc, $query) or die('Error connecting to database');
-		echo '<div id="add-image" class="container medium">';
+	?>
+		<div id="add-image" class="container medium">
+			<button id="check-all"><img class="glyph-small" src="/admin/images/check.png"/></button>
+	<?php
 		while ($row = mysqli_fetch_assoc($result)) {
 	?>
 			<div class="media">

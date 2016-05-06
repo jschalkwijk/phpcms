@@ -50,18 +50,7 @@
 }
 
 /* Blog / Pages / Blocks overview styling */
-.backend-form a img{
-	padding: 5px; 
-	margin: 0px 5px 0px 5px;
-	float: none;
-	background-color: #ea6a1b;
-	border: none;
-	color: white;
-	text-decoration: none;
-	border-radius: 5px;
-	font-size: 14px;
-	height: 28px;
-}
+
 .backend-form img:hover  {
 	background-color: black;
 }
@@ -72,7 +61,6 @@
 .title {
 	font-family: Helvetica,Arial,Sans Serif;
 	font-size: 16px;
-	background-color: none;
 	color:#333;
 	width: 100%;
 	padding:5px;
@@ -115,11 +103,14 @@
 }
 
 .backend-table td {
-	border-bottom: 2px solid #d2d2d2;	
+	border-bottom: 2px solid #d2d2d2;
+}
+.backend-table p {
+	padding: 0px;
 }
 .backend-table tr{
 	text-align:left;
-	
+	padding-top: 0px;
 }
 
 .backend-table th{
@@ -200,10 +191,10 @@ a {
 	text-decoration: none;
 	color: #ea6a1b;
 }
-
-input=['submit']
-
-
+form a {
+	text-decoration: none;
+	color: #ea6a1b;
+}
 
 h1, h2, h3, h4, h5, h6, h7, h8 {
 	color: #333333;
@@ -350,32 +341,30 @@ button {
 	font-size: 14px;
 }
 
-button a {
-	color: white;
-	text-decoration: none;
-}
-button a:hover {
-	color: white;
-	text-decoration: none;
-}
 button:hover  {
+	color: white;
+	text-decoration: none;
 	background-color: black;
 }
 
 /* if a link needs to look like a button  */
 .link-btn {
-	padding: 5px; 
-	margin: 0px 5px 0px 5px;
+	padding: 6px;
+	margin: 5px;
 	float: none;
-	/* background-color: #ea6a1b; */
 	background-color: #80B12C;
 	border: none;
 	color: white;
 	text-decoration: none;
 	border-radius: 5px;
-	font-size: 14px;
+	font-size: 15px;
 }
 
+.link-btn:hover {
+	color: white;
+	text-decoration: none;
+	background-color: black;
+}
 /* Wrapper */
 
 #wrapper {

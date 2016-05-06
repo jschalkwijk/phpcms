@@ -24,7 +24,7 @@
 				}
 			}
 		?>
-		<li><a href="/admin/search"><img class="glyph-medium" src="images/search-1.png"/></a></li>
-		<li><a href="<?php echo HOME.'/login.php?id='.$_SESSION['user_id'].'&amp;username='.$_SESSION['username'];?>"><img class="glyph-medium" src="images/logout-1.png"/></a></li>
+		<li><a href="/admin/search"><img class="glyph-medium" alt="search" src="images/search-1.png"/></a></li>
+		<li><a href="<?php echo HOME.'/login.php?id='.$_SESSION['user_id'].'&amp;username='.$_SESSION['username'];?>"><img class="glyph-medium" alt="logout" src="images/logout-1.png"/></a></li>
 	</ul>
 </nav>

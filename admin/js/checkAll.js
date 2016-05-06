@@ -2,24 +2,27 @@
  * Created by jorn on 11-04-16.
  */
 
-window.onload = init;
+handleCheck();
 
-function init(){
-    handler();
+/* called by mceAddons.js when needed*/
+function check(){
+    handleCheck();
 }
 
-var select = document.getElementById("check-all");
-var img = select.getElementsByTagName("img")[0];
 var toggle = true;
 
-function handler() {
-    select.addEventListener("click", function(event){
-        checkAll();
-    })
+function handleCheck() {
+    if (document.getElementById("check-all")){
+        var select = document.getElementById("check-all");
+        select.addEventListener("click", function (event) {
+            checkAll(select);
+        });
+    }
 }
 
 
-function checkAll() {
+function checkAll(select) {
+    var img = select.getElementsByTagName("img")[0];
     var c = document.querySelectorAll("input[type=checkbox]");
 
     if (!toggle){

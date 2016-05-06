@@ -16,7 +16,8 @@ class Posts extends Controller {
 		$scripts = [
 			JS.'tinymce/tinymce.min.js',
 			JS.'tinyMCEsettings.js',
-			JS.'mceAddons.js'
+			JS.'mceAddons.js',
+			JS.'checkAll.js'
 		];
 
 		if (!isset($_POST['submit'])){
@@ -58,7 +59,8 @@ class Posts extends Controller {
 		$scripts = [
 			JS.'tinymce/tinymce.min.js',
 			JS.'tinyMCEsettings.js',
-			JS.'mceAddons.js'
+			JS.'mceAddons.js',
+			JS.'checkAll.js'
 		];
 
 		if(!isset($_POST['submit'])){

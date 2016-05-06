@@ -2,21 +2,22 @@
 	onderling moeten kunnen delen. Daarnaast moeten ze een eigen apparte key hebben voor persoonlijke notities etc.
 	Hoer goed over nadenken! de scheiding van admins en normale gebruikers moet echt goed in elkaar zitten.
 </p>
-<div class="container">
+
 	<div class="container">
 		<div class="container">
-			<a href="users/add-user"><button>+ User</button></a>
-			<a href="users/deleted-users"><button>Deleted Users</button></a>
+			<a class="link-btn" href="users/add-user">+ User</a>
+			<a class="link-btn" href="users/deleted-users">Deleted Users</a>
 		</div>
-		<table class="backend-table title">
-			<tr><th>User</th><th>Rights</th><?php if ($_SESSION['rights'] == 'Admin') { ?> <th>Edit</th><th>View</th><th><button id="check-all"><img class="glyph-small" src="/admin/images/check.png"/></button></th></tr> <?php } ?>
 			<form class="backend-form" method="post" action="/admin/users">
-				<?php 
+				<table class="backend-table title">
+					<tr><th>User</th><th>Rights</th><?php if ($_SESSION['rights'] == 'Admin') { ?> <th>Edit</th><th>View</th><th><button type="button" id="check-all"><img class="glyph-small" src="/admin/images/check.png" alt="check-uncheck-all-items"/></button></th></tr> <?php } ?>
+					<?php
 					$users = $data['users'];
 					$writer = users_UserWriter::write($users);
-					require('view/manage_content.php');	
+					?>
+				</table>
+				<?php
+					require('view/manage_content.php');
 				?>
 			</form>
-		</tr></table>
 	</div>
-</div>

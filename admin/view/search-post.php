@@ -50,7 +50,7 @@
 	}
 ?>
 
-<form class="search"action="<?php echo "/admin/search"; ?>" method="post">
+<form class="search" action="<?php echo "/admin/search"; ?>" method="post">
 	<input type="text" name="search" placeholder="Search for posts"/>
 	<button type="submit" name="search-post">Search</button>
 </form>

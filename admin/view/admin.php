@@ -8,9 +8,9 @@
 	<a href="#"><button>+ Product</button></a>
 	<a href="#"><button>Send Mail</button></a>
 </div>
-<h2>Latest posts</h2>	
 
-<div class="large left">	
+
+<div class="large left">
 	<div class="large">
 		<h2>Posts</h2>
 		<table class="backend-table title">

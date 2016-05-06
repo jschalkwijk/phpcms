@@ -4,9 +4,11 @@
 /* Made to add files on click to the tinyMCE editor */
 
 window.onload = mce;
+
 // alled after image search.
 function mce(){
-    handler();
+    handleImagesAdding();
+    check();
 }
 
 function insertImages(path,thumb = null) {
@@ -17,7 +19,7 @@ function insertImages(path,thumb = null) {
     }
 }
 
-function handler(){
+function handleImagesAdding(){
 
     if(document.getElementById("add-image")) {
         console.log("hello");

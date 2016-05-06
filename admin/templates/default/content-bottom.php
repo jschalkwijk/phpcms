@@ -1,3 +1,3 @@
-</article>
-			</div><!-- End main content container -->
+
+	</div><!-- End main content container -->
 </div>
