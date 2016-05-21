@@ -10,6 +10,7 @@ class files_FileUpload{
 	private $img_path;
 	private $thumb_path;
 	private $fid;
+	private $album_name;
 
 	public function __construct($file_dest,$thumb_dest,$params,$empty_path = false){
 		$this->dbc = new DBC;
@@ -71,29 +72,31 @@ class files_FileUpload{
 								// if no album is selected, echo error, there must be a album selected or created.
 
 								// !!!!!!!! IMPORTANT, dit kan boven de for loop, hoeft maar een keer te worden gedaan!
-								if(!empty($_POST['album_name'])){
-									$album_name = mysqli_real_escape_string($this->dbc->connect(),trim($_POST['album_name']));
+								// Als ik nu een nieuwe folder maak dan komt de file in de hoofdolder, als ik dan de folder selecteer
+								// uit menu dan komt hij wel in die folder terrecht. ligt aan if not empty album_id
+								if(!empty($_POST['album_id'])){
+									$album_id = mysqli_real_escape_string($this->dbc->connect(),trim($_POST['album_id']));
 									if(!empty($_POST['new_album_name'])) {
-										$album_name = mysqli_real_escape_string($this->dbc->connect(),trim(htmlentities($_POST['new_album_name'])));
-										if(strlen($album_name) > 60){
+										$new_album_name = mysqli_real_escape_string($this->dbc->connect(),trim(htmlentities($_POST['new_album_name'])));
+										if(strlen($new_album_name) > 60){
 											$errors[] = 'Album name can only be 60 characters long.';
-										} else if(!empty($album_name)) {
-											(empty($this->path))? $this->path = $this->create_path($album_name) : "";
-											$this->create_album($album_name,$file_dest,$thumb_dest);
+										} else if(!empty($new_album_name)) {
+											(empty($this->path))? $this->path = $this->create_path($album_id,$new_album_name) : "";
+											$this->create_album($new_album_name,$file_dest,$thumb_dest);
 										}
-									} else if(empty($album_name)) {
+									} else if(empty($album_id)) {
 										$errors[] = 'Please select an album or create a new album.';
 									} else {
-										(empty($this->path))? $this->path = $this->create_path($album_name) : "";
+										(empty($this->path))? $this->path = $this->create_path($album_id) : "";
 										echo 'Line 86: this-path'.$this->path;
 									}
 								}
 								// the path has to be created only once. If this->path is empty,
 								//execute function,else it's already filled.
 								
-								if($this->uploadFile($file_tmp,$file_dest,$file_name,$file_ext,$file_name_new,$thumb_name,$thumb_dest,$position,$album_name,0)){
+								if($this->uploadFile($file_tmp,$file_dest,$file_name,$file_ext,$file_name_new,$thumb_name,$thumb_dest,$position,$this->album_name,0)){
 									$uploaded[] = $file_name;
-									if(!$this->createThumb($file_dest,$file_name_new,$thumb_name,$thumb_dest,$album_name)){
+									if(!$this->createThumb($file_dest,$file_name_new,$thumb_name,$thumb_dest,$this->album_name)){
 										$failed[] = 'Thumbnails failed to be created';
 										}
 								} else {
@@ -132,15 +135,13 @@ class files_FileUpload{
 		// Ik moet naar boven werken met de id's om het nieuwe pad te creeeren,met een loop die checked of de parent_id
 		// != 0,dan moet de naam van dat album in de file_dest.
 		// Deze loop MOET in de create_album en create RThumb functie, die hebben dit pad ook nodig!!!
-		if(!$this->empty_path) {
-			$path = $this->path;
-		} else {
-			$path = "";
-		}
-		echo 'Line: 137 | path: '.$path.'<br />';
-		$file_dest = $file_dest.$path.'/'.$file_name_new;
-		echo 'Line 139 | file_dest: '.$file_dest.'<br>';
 
+		$path = $this->path;
+
+		echo 'Line: 141 | path: '.$path.'<br />';
+		$file_dest = $file_dest.$path.'/'.$file_name_new;
+		echo 'Line 143 | file_dest: '.$file_dest.'<br>';
+		echo 'Line 144 | album_name: '.$album_name;
 		$sql = "SELECT album_id FROM albums WHERE name LIKE '$album_name'";
 		//$sql = "SELECT album_id FROM albums WHERE name LIKE '$album_name' AND path LIKE '$path'";
 		$data = mysqli_query($this->dbc->connect(),$sql) or die('Error connecting to server');
@@ -232,36 +233,49 @@ class files_FileUpload{
 		mysqli_close($this->dbc->connect());
 	}
 	
-	protected function create_path($album_name){
-		if(isset($this->params[0])){
-				// Ik moet naar boven werken met de id's om het nieuwe pad te creeeren,met een loop die checked of de parent_id
-		// != 0,dan moet de naam van dat album in de file_dest.
-		// Deze loop MOET in de create_album en create Thumb functie, die hebben dit pad ook nodig!!!
-			$id = mysqli_real_escape_string($this->dbc->connect(),trim($this->params[0]));
-			// if (album_id != this->params[0]) path equals file_dest inputed in the controller, or path equal file_dest+ album name..???
-			$query = "SELECT name,path FROM albums WHERE album_id = $id";
-			$data = mysqli_query($this->dbc->connect(),$query);
-			$row = mysqli_fetch_array($data);
-			echo 'Hier is het probleem!!! de namen komen niet overeen met elkaar waardoor het verkeerde pad wordt gecreeerd.';
-			echo 'Waarom doe ik in de add-file form geen album_id\'s in plaats van de namen, wordt deze functie dan niet veel makkelijker of overbodig?';
-			echo 'Als ik een foto upload in een bestaande folder hoef ik geen nieuw pad te creeeren maar alleen op te halen uit de DB!!';
-			echo 'Line 240 | Album name: '.$album_name.'<br />';
-			echo 'line 241 | row[name]: '.$row['name'].'<br />';
-			if($row['path'] === $album_name){
-				$path = $album_name;
-			} else if(str_replace("\\","",$album_name) === $row['name']){
-				echo '1'.'<br />';
-				$path = $row['path'];
-				// dit werkt voor folders die al bestaan: zoals products/ Hamsters/Henkie. Maar als je een nieuwe subfolder maakt dan werkt dit dus niet..
-				#$path = $row['path'];
-			} else {
-				echo '2'.'<br />';
-				$path = $row['path'].'/'.$album_name;
-			}
+	protected function create_path($album_id,$new_album_name = null){
+//		if(isset($this->params[0])){
+//				// Ik moet naar boven werken met de id's om het nieuwe pad te creeeren,met een loop die checked of de parent_id
+//		// != 0,dan moet de naam van dat album in de file_dest.
+//		// Deze loop MOET in de create_album en create Thumb functie, die hebben dit pad ook nodig!!!
+//			$id = mysqli_real_escape_string($this->dbc->connect(),trim($this->params[0]));
+//			// if (album_id != this->params[0]) path equals file_dest inputed in the controller, or path equal file_dest+ album name..???
+//			$query = "SELECT name,path FROM albums WHERE album_id = $id";
+//			$data = mysqli_query($this->dbc->connect(),$query);
+//			$row = mysqli_fetch_array($data);
+//			echo 'Hier is het probleem!!! de namen komen niet overeen met elkaar waardoor het verkeerde pad wordt gecreeerd.';
+//			echo 'Waarom doe ik in de add-file form geen album_id\'s in plaats van de namen, wordt deze functie dan niet veel makkelijker of overbodig?';
+//			echo 'Als ik een foto upload in een bestaande folder hoef ik geen nieuw pad te creeeren maar alleen op te halen uit de DB!!';
+//			echo 'Line 240 | Album name: '.$album_name.'<br />';
+//			echo 'line 241 | row[name]: '.$row['name'].'<br />';
+//			if($row['path'] === $album_name){
+//				$path = $album_name;git
+//			} else if(str_replace("\\","",$album_name) === $row['name']){
+//				echo '1'.'<br />';
+//				$path = $row['path'];
+//				// dit werkt voor folders die al bestaan: zoals products/ Hamsters/Henkie. Maar als je een nieuwe subfolder maakt dan werkt dit dus niet..
+//				#$path = $row['path'];
+//			} else {
+//				echo '2'.'<br />';
+//				$path = $row['path'].'/'.$album_name;
+//			}
+//		} else {
+//			echo '3'.'<br />';
+//			$path = $album_name;
+//		}
+		$id = mysqli_real_escape_string($this->dbc->connect(),trim((int)$album_id));
+		$query = "SELECT name,path FROM albums WHERE album_id = $id";
+		$data = mysqli_query($this->dbc->connect(),$query) or die ("Error line: 266");
+		$row = mysqli_fetch_array($data);
+
+		if($new_album_name == null){
+			$this->album_name = $row['name'];
+			$path = $row['path'];
 		} else {
-			echo '3'.'<br />';
-			$path = $album_name;
+			$this->album_name = $new_album_name;
+			$path = $row['path'].'/'.$new_album_name;
 		}
+
 		return $path;
 	}
 
