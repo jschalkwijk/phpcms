@@ -69,6 +69,8 @@ class files_FileUpload{
 							if(isset($_POST['public'])) {
 								//if you don't want to create a new album, the album name is the selected album name
 								// if no album is selected, echo error, there must be a album selected or created.
+
+								// !!!!!!!! IMPORTANT, dit kan boven de for loop, hoeft maar een keer te worden gedaan!
 								if(!empty($_POST['album_name'])){
 									$album_name = mysqli_real_escape_string($this->dbc->connect(),trim($_POST['album_name']));
 									if(!empty($_POST['new_album_name'])) {

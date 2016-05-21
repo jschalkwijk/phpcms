@@ -1,4 +1,14 @@
 <?php
+
+/*
+ *
+ * IMPORTANT
+ *
+ * als ik in een user of product foto's moet uploaden kan ik toch ook in de user table een
+ * folder_id row aanmaken, zodat ik meteen het pad van de gelinkte folder kan fetchen.
+ *
+ *
+ * */
 class files_Folders {
 	# Create a construct becaus we can then separate the html from the model.
 	use files_FileActions;
@@ -10,18 +20,18 @@ class files_Folders {
 	 * */
 	public static function get_albums($album_id,$album_name) {
 		$dbc = new DBC;
-		(!empty($album_id)) ? 	$id = mysqli_real_escape_string($dbc->connect(),trim((int)$album_id)) : $id = 0;
+		($album_id != null) ? $id = mysqli_real_escape_string($dbc->connect(),trim((int)$album_id)) : $id = 0;
 		$album_query = "SELECT * FROM albums WHERE parent_id = $id OR album_id = $id";
 		echo $album_query;
 		$albums_data = mysqli_query($dbc->connect(),$album_query) or die("Error connecting to database");
 		echo '<select id="albums" name="album_name">';
 		if(!isset($album_name)){
 			echo '<option name="none" value="None">None</option>';
-		} else {
-			while ($row = mysqli_fetch_array($albums_data)) {
-				echo '<option value="' . $row['name'] . '">' . $row['name'] . '</option>';
-			}
 		}
+		while ($row = mysqli_fetch_array($albums_data)) {
+			echo '<option value="' . $row['name'] . '">' . $row['name'] . '</option>';
+		}
+
 		// Join to select all products with matching album_id's
 		//$album_query = "SELECT album_id FROM products WHERE product_id = $id ";
 //		$album_query = "SELECT products.*, albums.name as name FROM products LEFT JOIN albums ON products.album_id = albums.album_id WHERE albums.album_id = $id";
@@ -147,7 +157,7 @@ class files_Folders {
 	}
 	
 	// we use this function in a slightly different way then in the file_upload class because we cant
-	// make use of the GET params here since we are not in the main folder structure but in the product creation.
+	// make use of the GET params here since we are not in the main folder structure but in the product/user creation.
 	public static function auto_create_path($album_name,$parent_id){
 		$dbc = new DBC;
 		$query = "SELECT path FROM albums WHERE album_id = $parent_id";
