@@ -25,20 +25,6 @@ class files_FileUpload{
 		// Als we een empty_path flag toevoegen kunnen we controlleren of we een pad moeten creeeren op basis van het huidige zichtbare album,
 		// of een leeg pad moeten hebben wanneer je een bestand toevoegd vanuit een product/user weergave.
 		$this->empty_path = $empty_path;
-/*
-		if(isset($params[0]) && isset($params[1])){
-			$album_id = $this->params[0];
-			$album_name = $this->params[1];
-			// check if the destination folders exist, otherwhise create them.
-			$query = "SELECT path FROM albums where album_id = $album_id AND name = '$album_name'";
-			$data = mysqli_query($this->dbc->connect(),$query) or die('Error selecting path from albums');
-			$row = mysqli_fetch_assoc($data);
-			echo $row['path'];
-		}
-*/
-		
-//		if(!file_exists($file_dest.$params[1])){ mkdir($file_dest.$params[1]); }
-//		if(!file_exists($thumb_dest.$params[1])) { mkdir($thumb_dest.$params[1]); }
 		
 		if (!empty($_FILES['files']['name'][0])) {
 			$files = $_FILES['files'];
@@ -176,11 +162,7 @@ class files_FileUpload{
 	}
 
 	protected function createThumb($file_dest,$file_name_new,$thumb_name,$thumb_dest,$album_name){
-		if(!$this->empty_path) {
-			$path = str_replace("\\", "", $this->path);
-		} else {
-			$path = "";
-		}
+		$path = str_replace("\\", "", $this->path);
 		$file_dest = $file_dest.$path.'/'.$file_name_new;
 		//echo $file_dest;
 		if(!empty($file_dest)){
@@ -267,14 +249,18 @@ class files_FileUpload{
 		$query = "SELECT name,path FROM albums WHERE album_id = $id";
 		$data = mysqli_query($this->dbc->connect(),$query) or die ("Error line: 266");
 		$row = mysqli_fetch_array($data);
-
-		if($new_album_name == null){
-			$this->album_name = $row['name'];
-			$path = $row['path'];
+		if(mysqli_num_rows($data) == 0){
+			$path = $new_album_name;
 		} else {
-			$this->album_name = $new_album_name;
-			$path = $row['path'].'/'.$new_album_name;
+			if($new_album_name == null){
+				$this->album_name = $row['name'];
+				$path = $row['path'];
+			} else {
+				$this->album_name = $new_album_name;
+				$path = $row['path'].'/'.$new_album_name;
+			}
 		}
+
 
 		return $path;
 	}

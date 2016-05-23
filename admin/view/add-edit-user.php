@@ -21,7 +21,7 @@
 		<label for='public'>Public</label>
 		<input type="checkbox" name="secure" value="secure"/>
 		<label for='secure'>Secure</label>
-		<?php (isset($params)) ? files_Folders::get_albums($user->getAlbumID(),$params[1]) : files_Folders::get_albums(null,null) ;?>
+		<?php (!empty($params)) ? files_Folders::get_albums($user->getAlbumID(),$params[1]) : files_Folders::get_albums(null,null) ;?>
 		<button type="submit" name="submit_file">Add File('s)</button>
 		</form>
 	</div>

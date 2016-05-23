@@ -29,8 +29,8 @@ class Products extends Controller{
 	public function editProduct($params = null){
 		if (isset($_POST['submit_file']) || !empty($_FILES['files']['name'][0])) {
 			# ik heb nu de products folder name in de het formulier staan, dit kan ik ook hier regelen doo het pad meteen goed aante geven
-			$file_dest = 'files/products/'.$_POST['category_name'].'/'.$params[1];
-			$thumb_dest= 'files/thumbs/products/'.$_POST['category_name'].'/'.$params[1];
+			$file_dest = 'files/';
+			$thumb_dest= 'files/thumbs/';
 			products_Product::addProductIMG($file_dest,$thumb_dest,$params);
 		}
 		

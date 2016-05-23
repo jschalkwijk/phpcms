@@ -28,7 +28,7 @@ class users_Users{
 	private $file_path = 'files/users/';
 	private $thumb_path = 'files/thumbs/users/';
 
-	public function __construct($username,$first_name,$last_name,$email,$function,$rights,$img_path = null,$album_id,$approved = null,$trashed = null,$dbt = null) {
+	public function __construct($username,$first_name,$last_name,$email,$function,$rights,$img_path = null,$album_id = null,$approved = null,$trashed = null,$dbt = null) {
 		$this->username = $username;
 		$this->first_name = $first_name;
 		$this->last_name = $last_name;

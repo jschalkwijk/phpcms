@@ -14,7 +14,7 @@ class Users extends Controller{
 			$add = $user->addUser($_POST['new_password'],$_POST['new_password_again']);
 			$this->view('Add User',['add-edit-user.php'],$params,['user' => $user, 'output_form' => $add['output_form'],'errors' => $add['errors'],'messages' => $add['messages']]);
 		} else {
-			$user = new users_Users(null,null,null,null,null,null);
+			$user = new users_Users(null,null,null,null,null,null,null,null);
 			$this->view('Add User',['add-edit-user.php'],$params,['user' => $user]);
 		}
 	}
@@ -25,8 +25,8 @@ class Users extends Controller{
 	}
 	public function EditUsers($params = null){
 		if (isset($_POST['submit_file']) || !empty($_FILES['files']['name'][0])) {
-			$file_dest = 'files/users/'.$params[1];
-			$thumb_dest= 'files/thumbs/users/'.$params[1];
+			$file_dest = 'files/';
+			$thumb_dest= 'files/thumbs/';
 			users_Users::addProfileIMG($file_dest,$thumb_dest,$params);
 		}
 		
