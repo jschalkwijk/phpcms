@@ -60,15 +60,20 @@ class files_FileUpload{
 								// !!!!!!!! IMPORTANT, dit kan boven de for loop, hoeft maar een keer te worden gedaan!
 								// Als ik nu een nieuwe folder maak dan komt de file in de hoofdolder, als ik dan de folder selecteer
 								// uit menu dan komt hij wel in die folder terrecht. ligt aan if not empty album_id
-								if(!empty($_POST['album_id'])){
-									$album_id = mysqli_real_escape_string($this->dbc->connect(),trim($_POST['album_id']));
-									if(!empty($_POST['new_album_name'])) {
+								if(isset($_POST['album_id'])){
+									$album_id = mysqli_real_escape_string($this->dbc->connect(),trim((int)$_POST['album_id']));
+									echo 'album_id : '.$album_id;
+									if(isset($_POST['new_album_name'])) {
 										$new_album_name = mysqli_real_escape_string($this->dbc->connect(),trim(htmlentities($_POST['new_album_name'])));
 										if(strlen($new_album_name) > 60){
 											$errors[] = 'Album name can only be 60 characters long.';
-										} else if(!empty($new_album_name)) {
-											(empty($this->path))? $this->path = $this->create_path($album_id,$new_album_name) : "";
-											$this->create_album($new_album_name,$file_dest,$thumb_dest);
+										} else {
+											if(empty($this->path) && $album_id != 0) {
+												$this->path = $this->create_path($album_id,$new_album_name);
+											} else {
+												$this->path = $new_album_name;
+											}
+											$this->create_album($new_album_name,$album_id,$file_dest,$thumb_dest);
 										}
 									} else if(empty($album_id)) {
 										$errors[] = 'Please select an album or create a new album.';
@@ -192,14 +197,14 @@ class files_FileUpload{
 		}
 	}
 
-	protected function create_album($album_name,$file_dest,$thumb_dest) {
+	protected function create_album($album_name,$album_id,$file_dest,$thumb_dest) {
 		// the album_name and dest can be the same if you create a main folder!
 		// else when creating a sub folder to a main folder, the album_dest is different.
 		// see create_sub_folder() for details.
 		// IF A ALBUM NAME ALREADY EXISTS, DON'T CREATE THE ALBUM.
 		$author = $_SESSION['username'];
 		$user_id = $_SESSION['user_id'];
-		(isset($this->params[0])) ? $parent_id = mysqli_real_escape_string($this->dbc->connect(),trim($this->params[0])): $parent_id = 0;
+		(!empty($album_id)) ? $parent_id = mysqli_real_escape_string($this->dbc->connect(),trim((int)$album_id): $parent_id = 0;
 		$file_dest = $file_dest.$this->path;
 		$thumb_dest = $thumb_dest.$this->path;
 		

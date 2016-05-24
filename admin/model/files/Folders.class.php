@@ -22,11 +22,10 @@ class files_Folders {
 		$dbc = new DBC;
 		($album_id != null) ? $id = mysqli_real_escape_string($dbc->connect(),trim((int)$album_id)) : $id = 0;
 		$album_query = "SELECT album_id,name FROM albums WHERE parent_id = $id OR album_id = $id";
-		echo $album_query;
 		$albums_data = mysqli_query($dbc->connect(),$album_query) or die("Error connecting to database");
 		echo '<select id="albums" name="album_id">';
 		if(!isset($album_name)){
-			echo '<option name="none" value="None">None</option>';
+			echo '<option value="0">None</option>';
 		}
 		while ($row = mysqli_fetch_array($albums_data)) {
 			echo '<option value="' . $row['album_id'] . '">' . $row['name'] . '</option>';

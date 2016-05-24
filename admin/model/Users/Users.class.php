@@ -213,7 +213,7 @@ class users_Users{
 			    die('Cannot safely create a key');
 			}
 			// Get shared encryption key. This key is used to encrypt the user data that admins and backend users
-			// need to see from one another. So the data is protected in the database, but accessesable for the baclkend users.
+			// need to see from one another. So the data is protected in the database, but accessible for the backend users.
 			if(file_exists('././keys/Shared/shared.txt')){
 				$key = file_get_contents('././keys/Shared/shared.txt');
 			} else {
