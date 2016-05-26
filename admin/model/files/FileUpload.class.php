@@ -88,7 +88,7 @@ class files_FileUpload{
 							// move uploaded file to destination folder
 							if(isset($_POST['public'])) {
 								
-								if($this->uploadFile($file_tmp,$file_dest,$file_name,$file_ext,$file_name_new,$thumb_name,$thumb_dest,$position,$this->album_name,0)){
+								if($this->uploadFile($file_tmp,$file_dest,$file_name,$file_ext,$file_name_new,$thumb_name,$thumb_dest,$position,$this->album_name)){
 									$uploaded[] = $file_name;
 									if(!$this->createThumb($file_dest,$file_name_new,$thumb_name,$thumb_dest,$this->album_name)){
 										$failed[] = 'Thumbnails failed to be created';
@@ -141,7 +141,7 @@ class files_FileUpload{
 		$data = mysqli_query($this->dbc->connect(),$sql) or die('Error connecting to server');
 		$row = mysqli_fetch_array($data);
 		$id = $row['album_id'];
-	
+
 		$thumb_path = $thumb_dest.$path.'/'.$thumb_name;
 		
 		// If upload paths contains 's etc we have to remove the \ (backslash) which is created automaticly.
@@ -218,9 +218,10 @@ class files_FileUpload{
 			mysqli_query($this->dbc->connect(),$query) or die('Error connecting to database');
 			mkdir(str_replace("\\","",$file_dest),0744);
 			mkdir(str_replace("\\","",$thumb_dest),0744);
-			}		
-		
+		}
+
 		mysqli_close($this->dbc->connect());
+
 	}
 	
 	protected function create_path($album_id,$new_album_name = null){
