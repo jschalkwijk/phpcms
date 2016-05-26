@@ -28,7 +28,7 @@ class users_Users{
 	private $file_path = 'files/users/';
 	private $thumb_path = 'files/thumbs/users/';
 
-	public function __construct($username,$first_name,$last_name,$email,$function,$rights,$img_path = null,$album_id,$approved = null,$trashed = null,$dbt = null) {
+	public function __construct($username,$first_name,$last_name,$email,$function,$rights,$img_path = null,$album_id = null,$approved = null,$trashed = null,$dbt = null) {
 		$this->username = $username;
 		$this->first_name = $first_name;
 		$this->last_name = $last_name;
@@ -213,7 +213,7 @@ class users_Users{
 			    die('Cannot safely create a key');
 			}
 			// Get shared encryption key. This key is used to encrypt the user data that admins and backend users
-			// need to see from one another. So the data is protected in the database, but accessesable for the baclkend users.
+			// need to see from one another. So the data is protected in the database, but accessible for the backend users.
 			if(file_exists('././keys/Shared/shared.txt')){
 				$key = file_get_contents('././keys/Shared/shared.txt');
 			} else {

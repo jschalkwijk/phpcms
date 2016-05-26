@@ -18,27 +18,6 @@ tinymce.init({
 	(isset($params[0]) && isset($params[1])) ? $action = '/admin/products/edit-product/'.$product->getID().'/'.$product->getName() : $action = '/admin/products/add-product';
 	(isset($data['output_form'])) ? $output_form = $data['output_form'] : $output_form = true;
 ?>
-	<div class="container small">
-		<form class="small" enctype="multipart/form-data" method="post" action="<?php echo $action; ?>">
-		<input type="hidden" name="MAX_FILE_SIZE" value="43500000" />
-		<label for="files[]">Choose File(max size: 3.5 MB): </label><br />
-		<input type="file" name="files[]" multiple/><br />
-		<input type="checkbox" name="public" value="public"/>
-		<label for='public'>Public</label>
-		<input type="checkbox" name="secure" value="secure"/>
-		<label for='secure'>Secure</label>
-		<input type="hidden" name="album_name" value=""/>
-		<input type="hidden" name="category_name" value="<?php echo $product->getCategory(); ?>"/>
-		<input type="hidden" name="album_id" value="<?php echo $product->getAlbumID(); ?>"/>
-		<?php (isset($params)) ? files_Folders::get_albums($product->getAlbumID(),$params[1]) : files_Folders::get_albums(null,null) ;?>
-	<?php 	if(!isset($_GET['album'])){ ?>
-				<input type="text" name="new_album_name" placeholder="Create New Album" maxlength="60"/>
-	<?php 	} else { ?>
-				<input type="text" name="new_album_name" placeholder="Create New Sub Folder" maxlength="60"/>
-	<?php 	} ?>
-		<button type="submit" name="submit_file">Add File('s)</button>
-		</form>
-	</div>
 
 <?php
 	if (isset($_POST['submit_product'])) {

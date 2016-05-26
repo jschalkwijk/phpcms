@@ -21,15 +21,14 @@ class files_Folders {
 	public static function get_albums($album_id,$album_name) {
 		$dbc = new DBC;
 		($album_id != null) ? $id = mysqli_real_escape_string($dbc->connect(),trim((int)$album_id)) : $id = 0;
-		$album_query = "SELECT * FROM albums WHERE parent_id = $id OR album_id = $id";
-		echo $album_query;
+		$album_query = "SELECT album_id,name FROM albums WHERE parent_id = $id OR album_id = $id";
 		$albums_data = mysqli_query($dbc->connect(),$album_query) or die("Error connecting to database");
-		echo '<select id="albums" name="album_name">';
+		echo '<select id="albums" name="album_id">';
 		if(!isset($album_name)){
-			echo '<option name="none" value="None">None</option>';
+			echo '<option value="0">None</option>';
 		}
 		while ($row = mysqli_fetch_array($albums_data)) {
-			echo '<option value="' . $row['name'] . '">' . $row['name'] . '</option>';
+			echo '<option value="' . $row['album_id'] . '">' . $row['name'] . '</option>';
 		}
 
 		// Join to select all products with matching album_id's
@@ -81,7 +80,8 @@ class files_Folders {
 		$dbc = new DBC;
 		$user_id = $_SESSION['user_id'];
 		if(!empty($album_id)){
-			$query = "SELECT album_id,name FROM albums WHERE parent_id = $album_id AND user_id = $user_id";
+//			$query = "SELECT album_id,name FROM albums WHERE parent_id = $album_id AND user_id = $user_id";
+			$query = "SELECT album_id,name FROM albums WHERE parent_id = $album_id";
 			$data = mysqli_query($dbc->connect(),$query);
 			//start form
 			echo '<form id="files-form" method="get" action="/admin/file">';
