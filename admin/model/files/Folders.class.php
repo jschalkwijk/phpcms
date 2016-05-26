@@ -80,7 +80,8 @@ class files_Folders {
 		$dbc = new DBC;
 		$user_id = $_SESSION['user_id'];
 		if(!empty($album_id)){
-			$query = "SELECT album_id,name FROM albums WHERE parent_id = $album_id AND user_id = $user_id";
+//			$query = "SELECT album_id,name FROM albums WHERE parent_id = $album_id AND user_id = $user_id";
+			$query = "SELECT album_id,name FROM albums WHERE parent_id = $album_id";
 			$data = mysqli_query($dbc->connect(),$query);
 			//start form
 			echo '<form id="files-form" method="get" action="/admin/file">';

@@ -1,4 +1,31 @@
-<?php $product = $data['product'];?>
+<?php
+	$product = $data['product'];
+
+	(isset($params[0]) && isset($params[1])) ? $action = '/admin/products/info/'.$product->getID().'/'.$product->getName() : $action = '/admin/products/add-product';
+	(isset($data['output_form'])) ? $output_form = $data['output_form'] : $output_form = true;
+?>
+
+<div class="container small">
+	<form class="small" enctype="multipart/form-data" method="post" action="<?php echo $action; ?>">
+		<input type="hidden" name="MAX_FILE_SIZE" value="43500000" />
+		<label for="files[]">Choose File(max size: 3.5 MB): </label><br />
+		<input type="file" name="files[]" multiple/><br />
+		<input type="checkbox" name="public" value="public"/>
+		<label for='public'>Public</label>
+		<input type="checkbox" name="secure" value="secure"/>
+		<label for='secure'>Secure</label>
+		<input type="hidden" name="album_name" value=""/>
+		<input type="hidden" name="category_name" value="<?php echo $product->getCategory(); ?>"/>
+		<input type="hidden" name="album_id" value="<?php echo $product->getAlbumID(); ?>"/>
+		<?php (isset($params)) ? files_Folders::get_albums($product->getAlbumID(),$product->getName()) : files_Folders::get_albums(null,null) ;?>
+		<?php 	if(!isset($_GET['album'])){ ?>
+			<input type="text" name="new_album_name" placeholder="Create New Album" maxlength="60"/>
+		<?php 	} else { ?>
+			<input type="text" name="new_album_name" placeholder="Create New Sub Folder" maxlength="60"/>
+		<?php 	} ?>
+		<button type="submit" name="submit_file">Add File('s)</button>
+	</form>
+</div>
 
 <div class="container">
 	<form method="post" action="<?php echo '/admin/products/info/'.$product->getID().'/'.$product->getName(); ?>">
@@ -29,6 +56,10 @@
 		</tbody>
 	</table>
 </div>
+<div class="container large">
+	<button id="check-all"><img class="glyph-small" src="/admin/images/check.png"/></button>
+	<?php files_Folders::show_albums($product->getAlbumID()); ?>
+</div>
 
 <div class="container medium">
 <?php
@@ -43,5 +74,4 @@
 			echo '</div>';
 		echo '</form>';
 	?>
-
 </div>

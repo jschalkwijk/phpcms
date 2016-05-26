@@ -27,13 +27,6 @@ class Products extends Controller{
 	}
 	
 	public function editProduct($params = null){
-		if (isset($_POST['submit_file']) || !empty($_FILES['files']['name'][0])) {
-			# ik heb nu de products folder name in de het formulier staan, dit kan ik ook hier regelen doo het pad meteen goed aante geven
-			$file_dest = 'files/';
-			$thumb_dest= 'files/thumbs/';
-			products_Product::addProductIMG($file_dest,$thumb_dest,$params);
-		}
-		
 		if(isset($_POST['submit_product'])){
 			$product = new products_Product($_POST['name'],$_POST['category'],$_POST['description'],$_POST['price'],$_POST['quantity'],null);
 			$edit = $product->addProduct($params[0],$_POST['confirm']);
@@ -46,7 +39,14 @@ class Products extends Controller{
 	
 	public function info($params = null) {
 		$this->UserActions('products');
-		
+
+		if (isset($_POST['submit_file']) || !empty($_FILES['files']['name'][0])) {
+			# ik heb nu de products folder name in de het formulier staan, dit kan ik ook hier regelen doo het pad meteen goed aante geven
+			$file_dest = 'files/';
+			$thumb_dest= 'files/thumbs/';
+			products_Product::addProductIMG($file_dest,$thumb_dest,$params);
+		}
+
 		if (isset($_GET['delete'])) {
 			$delete_file = files_File::delete_files($_GET['checkbox']);
 		}
