@@ -127,7 +127,8 @@ class products_Product {
 		$dbc = new DBC;
 		$multiple = implode(",",$ids);
 		$query = "SELECT products.*, categories.title as category FROM products LEFT JOIN categories ON products.category_id = categories.categorie_id WHERE product_id IN({$multiple})";
-		$data = mysqli_query($dbc->connect(), $query) or die('Error connecting to database.');
+		echo $query;
+		$data = mysqli_query($dbc->connect(), $query) or die('Error connecting to database. Fetchallbyid');
 
 		$products = array();
 

@@ -2,10 +2,13 @@
 
 class Cart extends Controller {
 
+    protected $basket;
+
+    public function __construct(Basket_Basket $basket = null){
+        $this->basket = $basket;
+    }
     public function index($params = null){
         $cart = new Support_SessionStorage('cart');
-        $cart->set(3,['product_id' => 3,'quantity' => 9]);
-        $cart->set(4,['product_id' => 4,'quantity' => 5]);
 
         $basket= new Basket_Basket($cart);
 
@@ -24,8 +27,20 @@ class Cart extends Controller {
             ]);
     }
 
-    public function add(){
+    public function add($params = null){
+        $id = $params[0];
+        $quantity = $params[1];
 
+        // TO DO: create exists function to only check if it exists.
+        $product = Products_Product::fetchSingle($id);
+
+        if(!$product){
+            header('Location: '.'/admin/cart');
+        }
+
+        $cart = new Support_SessionStorage('cart');
+        $cart->set($id,['product_id' => $id,'quantity' => $quantity]);
+        header('Location: '.'/admin/cart');
     }
 
     public function remove(){

@@ -24,9 +24,9 @@ class Basket_Basket
 
     public function update(Products_Product $product, $quantity)
     {
-        if(!$this->product->find($product->getID())->hasStock($quantity)) {
+        if(!$this->product->fetchSingle($product->getID())->hasStock($quantity)) {
 
-            //throw execption
+            throw new Basket_QuantityExc;
         }
 
         if ($quantity === 0) {
@@ -64,16 +64,17 @@ class Basket_Basket
 
         $ids = [];
         $items = [];
+        if(!empty($this->storage->all())) {
+            foreach ($this->storage->all() as $product) {
+                $ids[] = $product['product_id'];
+            }
 
-        foreach ($this->storage->all() as $product){
-            $ids[] = $product['product_id'];
-        }
+            $products = Products_Product::fetchAllByID($ids);
 
-        $products = Products_Product::fetchAllByID($ids);
-
-        foreach ($products as $product){
-            $product->setQuantity($this->get($product)['quantity']);
-            $items[] = $product;
+            foreach ($products as $product) {
+                $product->setQuantity($this->get($product)['quantity']);
+                $items[] = $product;
+            }
         }
 
         return $items;

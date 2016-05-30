@@ -38,14 +38,16 @@
 	<?php   } 
 		if ($product->getTrashed() == 0) { ?>
 			<button class="td-btn" type="submit" name="remove"><img class="glyph-small" src="<?php echo IMG_UPLOADPATH.'trash-post.png'?>"/></button>
+			<button><?php echo '<a href="/admin/products/edit-product/'.$product->getID().'/'.$product->getName().'">Edit</a>'?></button>
 	<?php } ?>
 	</form>
-	<button><?php echo '<a href="/admin/products/edit-product/'.$product->getID().'/'.$product->getName().'">Edit</a>'?></button>
+
 </div>
 
 <div class="container medium">
+	<a href="<?php echo "/admin/cart/add/".$product->getID()."/"."1";?>">Order</a>
 	<h1><?php echo $product->getName(); ?></h1>
-	<td><?php if($product->lowStock()) { echo "Low stock!"; } else { echo "Out of stock!"; }?></td>
+	<td><?php if($product->lowStock()) { echo "Low stock!"; } else if($product->outOfStock()) { echo "Out of stock!"; } else { echo "";}?></td>
 	<img class="left" src="<?php echo '/admin/'.$product->getProductImg(); ?>"/>
 	<table>
 		<tbody>
