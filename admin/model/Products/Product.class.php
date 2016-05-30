@@ -51,12 +51,17 @@ class products_Product {
 	public function getQuantity(){
 		return $this->quantity;
 	}
+
+	public function setQuantity($num){
+		$this->quantity = $num;
+	}
 	
 	public function getDescription(){
 		return $this->description;
 	}
 	
 	public function getTax(){
+		$this->tax = ($this->price * $this->tax_percentage) / 100;
 		return $this->tax;
 	}
 	
@@ -88,11 +93,7 @@ class products_Product {
 	public function getSavings(){
 		return $this->savings;
 	}
-	
-	public function calcTax(){
-		$this->tax = $this->price * $this->tax_percentage;
-	}
-	
+
 	public function total(){
 		return $this->price + $this->tax;
 	}
@@ -120,6 +121,32 @@ class products_Product {
 		}
 		
 		return ['products' => $products];
+	}
+
+	public static function fetchAllByID($ids){
+		$dbc = new DBC;
+		$multiple = implode(",",$ids);
+		$query = "SELECT products.*, categories.title as category FROM products LEFT JOIN categories ON products.category_id = categories.categorie_id WHERE product_id IN({$multiple})";
+		$data = mysqli_query($dbc->connect(), $query) or die('Error connecting to database.');
+
+		$products = array();
+
+		while($row = mysqli_fetch_array($data)){
+			$product = new products_Product(
+				$row['name'],
+				$row['category'],
+				$row['description'],
+				$row['price'],
+				$row['quantity'],
+				$row['img_path'],
+				$row['album_id'],
+				$row['approved']
+			);
+			$product->setID($row['product_id']);
+			$products[] = $product;
+		}
+
+		return $products;
 	}
 	
 	public static function fetchSingle($id){
@@ -216,14 +243,14 @@ class products_Product {
 		
 	
 		
-		if(!empty($name) && !empty($price) && !empty($quantity)){
+		if(!empty($name) && !empty($price)){
 			
 			if($confirm == 'Yes'){
-				$query = "UPDATE products SET name = '$name', category = '$category', description = '$description', price = $price, quantity = $quantity WHERE product_id = $id";
+				$query = "UPDATE products SET name = '$name', category_id = $category_id, description = '$description', price = $price, quantity = $quantity WHERE product_id = $id";
 			} else {
 				$query = "INSERT into products (name,category_id,description,price,album_id,quantity) VALUES('$name',$category_id,'$description',$price,$album_id,$quantity)";
 			}
-			
+			echo $query;
 			mysqli_query($dbc->connect(), $query) or die("Error adding product");
 			$output_form = false;
 			$messages[] = "Product {$name} successfully added/edited.";
@@ -234,6 +261,31 @@ class products_Product {
 		$dbc->disconnect();
 
 		return ['output_form' => $output_form,'messages' => $messages, 'errors' => $errors];
-	}	
+	}
+
+	// SHOPPING CART
+
+	public function lowStock()
+	{
+		if($this->outOfStock()){
+			return false;
+		}
+
+		return (bool) $this->quantity <= 5;
+
+	}
+	public function outOfStock()
+	{
+		return (bool) ($this->quantity == 0);
+	}
+	public function inStock()
+	{
+		return $this->quantity >= 1;
+	}
+	public function hasStock($quantity){
+		if($this->quantity >= $quantity){
+			return true;
+		}
+	}
 }
 ?>

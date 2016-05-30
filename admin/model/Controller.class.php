@@ -11,7 +11,7 @@ class Controller {
 		return new $model();
 	}
 	
-	public function view($page_title,$file_paths,$params,$data = [],$jscripts = null) {	
+	public function view($page_title,$file_paths = [],$params,$data = [],$jscripts = null) {
 	// takes an array with the file paths
 		$this->content = $file_paths;
 		$this->jscripts = $jscripts;

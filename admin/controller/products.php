@@ -55,7 +55,7 @@ class Products extends Controller{
 		}
 		
 		$product = products_Product::fetchSingle($params[0]);
-		$this->view('Product '.$params[1],['view-product.php'],$params,['product' => $product]);
+		$this->view('Product '.$params[1],['view-product.php'],$params,['product' => $product,'js' => ['/admin/js/checkAll.js']]);
 	}
 }
 

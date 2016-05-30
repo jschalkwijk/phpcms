@@ -45,6 +45,7 @@
 
 <div class="container medium">
 	<h1><?php echo $product->getName(); ?></h1>
+	<td><?php if($product->lowStock()) { echo "Low stock!"; } else { echo "Out of stock!"; }?></td>
 	<img class="left" src="<?php echo '/admin/'.$product->getProductImg(); ?>"/>
 	<table>
 		<tbody>
@@ -53,6 +54,7 @@
 			<tr><td>In Stock</td><td><?php echo $product->getQuantity();	 ?></td</tr>
 			<tr><td>Category</td><td><?php echo $product->getCategory();	 ?></td</tr>
 			<tr><td>Desciption</td><td><?php echo $product->getDescription();	 ?></td</tr>
+			<tr><td>VAT</td><td><?php echo $product->getTax();	 ?></td</tr>
 		</tbody>
 	</table>
 </div>
