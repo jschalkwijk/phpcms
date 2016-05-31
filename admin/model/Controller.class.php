@@ -4,23 +4,32 @@ class Controller {
 	private $tpl_name = 'default';
 	private $content;
 	private $jscripts;
+	protected $cart;
+	protected $basket;
+	public $itemCount;
 	public $error = '';
-	
+
 	public function model($model){
-		require('../admin/model/'.$model.'.model.php');
+		require('../cms/admin/model/'.$model.'.model.php');
 		return new $model();
 	}
-	
+
 	public function view($page_title,$file_paths = [],$params,$data = [],$jscripts = null) {
-	// takes an array with the file paths
+		// takes an array with the file paths
 		$this->content = $file_paths;
 		$this->jscripts = $jscripts;
 		$tpl_name = $this->tpl_name;
-		
+
+		if(empty($this->cart)){
+			$this->cart = new Support_SessionStorage('cart');
+			$this->basket = new Basket_Basket($this->cart);
+		}
+		$this->itemCount = $this->basket->itemCount();
+
 		require_once('templates/'.$tpl_name.'/header.php');
 		require_once('templates/'.$tpl_name.'/nav.php');
 		require_once('templates/'.$tpl_name.'/content-top.php');
-		
+
 		foreach ($this->content as $content){
 			if(file_exists('view/'.$content)){
 				require_once('view/'.$content);
@@ -34,12 +43,10 @@ class Controller {
 		require_once('templates/'.$tpl_name.'/content-bottom.php');
 		require_once('templates/'.$tpl_name.'/footer.php');
 	}
-	
+
 	public function err($params = null){
-		$content = new template_Template('Sorry, page doesn\'t exist.',['404.php'],$params,['error' => $this->error]);	
+		$content = new template_Template('Sorry, page doesn\'t exist.',['404.php'],$params,['error' => $this->error]);
 	}
 
 }
-
-
 ?>

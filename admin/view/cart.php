@@ -2,8 +2,8 @@
 
 $products = $data['products'];
 $count = $data['count'];
-print_r($products);
-
+$total = $data['sumTotal'];
+$countAll = $data['countAll'];
 ?>
 <h1 class="container">Your future possessions</h1>
 <h3 class="container"><?php echo "You have ".$count." item(s) in your cart"; ?></h3>
@@ -14,13 +14,15 @@ print_r($products);
             <?php foreach($products as $product){ ?>
                 <tr>
                     <td class="td-title"><a href="<?php echo 'products/info/'.$product->getID().'/'.$product->getName(); ?>"><?php echo $product->getName(); ?></a></td>
-                    <td class="td-author"><?php echo $product->getPrice();?></td>
+                    <td class="td-author"><?php echo $product->total();?></td>
                     <td class="td-category"><?php echo $product->getQuantity(); ?></td>
-                    <td class="td-category"><?php echo $product->getQuantity() * $product->getPrice(); ?></td>
+                    <td class="td-category"><?php echo $product->getQuantity() * $product->Total(); ?></td>
                     <td class="td-btn"><p><input type="checkbox" name="checkbox[]" value="<?php echo $product->getID(); ?>"/></p></td>
                 </tr>
             <?php } ?>
+            <tr><td></td><td></td><td></td><td></td><td></td></tr>
+            <tr><td><strong>Total</strong></td><td></td><td><span><?php echo $countAll; ?></span></td><td><strong>€ </strong><span><?php echo $total; ?></span></td> <td></td> </tr>
+
         </table>
     </form>
 </div>
-
