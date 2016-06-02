@@ -16,11 +16,8 @@ class Cart extends Controller {
             ["cart.php"],
             $params,
             [
-                'products' => $products['items'],
-                'sumTotal' => $products['sumTotal'],
-                'count' => $products['count'],
-                'countAll' => $products['countAll'],
-                'js' => ["/admin/js/checkAll.js"]
+                'products' => $products,
+                'js' => ["/cms/admin/js/checkAll.js"]
             ]);
     }
 
@@ -34,8 +31,14 @@ class Cart extends Controller {
         if(!$product){
             header('Location: '.'/admin/cart');
         }
-        $this->basket->add($product,$quantity);
-        header('Location: '.'/admin/cart');
+
+        try {
+            $this->basket->add($product,$quantity);
+            header('Location: '.'/cms/admin/cart');
+        } catch (Basket_QuantityExc $e){
+            echo "Sorry, we don't have more in stock!";
+        }
+
     }
 
     public function remove(){

@@ -6,7 +6,6 @@ class Controller {
 	private $jscripts;
 	protected $cart;
 	protected $basket;
-	public $itemCount;
 	public $error = '';
 
 	public function model($model){
@@ -24,7 +23,6 @@ class Controller {
 			$this->cart = new Support_SessionStorage('cart');
 			$this->basket = new Basket_Basket($this->cart);
 		}
-		$this->itemCount = $this->basket->itemCount();
 
 		require_once('templates/'.$tpl_name.'/header.php');
 		require_once('templates/'.$tpl_name.'/nav.php');
@@ -49,4 +47,6 @@ class Controller {
 	}
 
 }
+
+
 ?>

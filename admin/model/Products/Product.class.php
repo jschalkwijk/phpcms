@@ -18,6 +18,7 @@ class products_Product {
 	private $album_id;
 	private $file_path = 'files/products/';
 	private $thumb_path = 'files/thumbs/products/';
+	protected $maxStock;
 
 	public function __construct($name,$category,$description,$price,$quantity,$img_path,$album_id = null,$approved = null){
 		$this->name = $name;
@@ -286,6 +287,17 @@ class products_Product {
 		if($this->quantity >= $quantity){
 			return true;
 		}
+	}
+	// total of the product price * the quantity orderd.
+	public function productTotal(){
+		return $this->getQuantity() * $this->Total();
+	}
+
+	public function setMaxStock($num){
+		$this->maxStock = $num;
+	}
+	public function maxStock(){
+		return $this->maxStock;
 	}
 }
 ?>
