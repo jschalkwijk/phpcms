@@ -9,7 +9,7 @@ class Controller {
 	public $error = '';
 
 	public function model($model){
-		require('../cms/admin/model/'.$model.'.model.php');
+		require('../admin/model/'.$model.'.model.php');
 		return new $model();
 	}
 
