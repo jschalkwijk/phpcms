@@ -5,6 +5,11 @@ class Cart extends Controller {
     public function __construct(){
         $this->cart = new Support_SessionStorage('cart');
         $this->basket = new Basket_Basket($this->cart);
+        // imemediatly run the basket->all() method so that every page from this controller has
+        // instant access to this basket class.
+        // if not instantiated here,you have to call the basket all method in the methods of this cntroller to get access, otherwise
+        // the basket class is not.
+        $this->basket->all();
     }
     public function index($params = null){
 
@@ -17,7 +22,7 @@ class Cart extends Controller {
             $params,
             [
                 'products' => $products,
-                'js' => ["/cms/admin/js/checkAll.js"]
+                'js' => ["/admin/js/checkAll.js"]
             ]);
     }
 
@@ -41,8 +46,24 @@ class Cart extends Controller {
 
     }
 
-    public function remove(){
+    public function update($params = null){
+        $id = $params[0];
+        $quantity = $_POST['quantity'];
+        $product = Products_Product::fetchSingle($id);
 
+        $this->basket->update($product,$quantity);
+        header('Location: '.'/admin/cart');
+    }
+
+    public function order($params = null){
+
+        $this->view(
+            "Cart",
+            ["order.php"],
+            $params,
+            [
+                'js' => ["/admin/js/checkAll.js"]
+            ]);
     }
 }
 

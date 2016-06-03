@@ -33,7 +33,7 @@ class Basket_Basket
             throw new Basket_QuantityExc;
         }
 
-        if ($quantity === 0) {
+        if ($quantity == 0) {
             $this->remove($product);
 
             return;
@@ -114,6 +114,7 @@ class Basket_Basket
     }
 
     public function subTotal(){
+
         return $this->subTotal;
     }
 
