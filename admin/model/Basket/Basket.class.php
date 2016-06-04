@@ -19,6 +19,7 @@ class Basket_Basket
         if($this->has($product)){
             // set quantity to current quantity + new quantity
             $quantity = $this->get($product)['quantity'] + $quantity;
+            echo $quantity;
         }
 
         $this->update($product,$quantity);

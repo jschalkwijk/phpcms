@@ -27,8 +27,9 @@ class Cart extends Controller {
     }
 
     public function add($params = null){
+        $dbc = new DBC;
         $id = $params[0];
-        $quantity = $params[1];
+        $quantity = mysqli_real_escape_string($dbc->connect(),trim((int)$_POST['quantity']));
 
         // TO DO: create exists function to only check if it exists.
         $product = Products_Product::fetchSingle($id);
@@ -39,7 +40,7 @@ class Cart extends Controller {
 
         try {
             $this->basket->add($product,$quantity);
-            header('Location: '.'/cms/admin/cart');
+            header('Location: '.'/admin/cart');
         } catch (Basket_QuantityExc $e){
             echo "Sorry, we don't have more in stock!";
         }
@@ -47,8 +48,9 @@ class Cart extends Controller {
     }
 
     public function update($params = null){
+        $dbc = new DBC;
         $id = $params[0];
-        $quantity = $_POST['quantity'];
+        $quantity = mysqli_real_escape_string($dbc->connect(),trim((int)$_POST['quantity']));
         $product = Products_Product::fetchSingle($id);
 
         $this->basket->update($product,$quantity);

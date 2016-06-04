@@ -2,8 +2,8 @@
 
 $products = $data['products'];
 ?>
-<h1 class="container">Your future possessions</h1>
-<h3 class="container"><?php echo "You have ".$this->basket->itemCount()." item(s) in your cart"; ?></h3>
+    <h1 class="container">Your future possessions</h1>
+    <h3 class="container"><?php echo "You have ".$this->basket->itemCount()." item(s) in your cart"; ?></h3>
 <?php if($this->basket->itemCount()) { ?>
     <div class="container">
 
@@ -40,4 +40,3 @@ $products = $data['products'];
         <div class="container"><a href="/admin/cart/order" class="link-btn"> Place Order </a></div>
     </div>
 <?php } ?>
-
