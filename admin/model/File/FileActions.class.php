@@ -1,6 +1,6 @@
 <?php
 // Used by files_File and files_Folders
-trait files_FileActions{
+trait File_FileActions{
 	// used in files_Folders:
 	public static function removeRows($id){
 		$dbc = new DBC;

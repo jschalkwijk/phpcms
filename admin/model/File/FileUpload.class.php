@@ -1,6 +1,6 @@
 <?php
 
-class files_FileUpload{
+class File_FileUpload{
 	private $dbc;
 	private $file_dest;
 	private $thumb_dest;

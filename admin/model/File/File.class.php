@@ -1,6 +1,6 @@
 <?php
 
-class files_File{
+class File_File{
 	private $id = 0;
 	protected $name;
 	protected $type;
@@ -116,7 +116,7 @@ class files_File{
 	}
 	
 	//get the trait file for the user actions.
-	use files_FileActions;
+	use File_FileActions;
 }
 
 ?>

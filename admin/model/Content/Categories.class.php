@@ -1,6 +1,6 @@
 <?php
 
-class content_Categories extends content_Content{
+class Content_Categories extends Content_Content{
 	private $id;
 	protected $category;
 	protected $description;

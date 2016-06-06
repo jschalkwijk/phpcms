@@ -11,8 +11,8 @@
 			$img = ['jpg','jpeg','png'];
 			$url = $_SERVER["REQUEST_URI"];
 			echo '<form method="get" action="'.$url.'">';	
-					$files = files_File::fetchFilesByAlbum($album_id,0);
-					$writer = files_FileWriter::write($files,'view/singleFile.php',$doc,$img);
+					$files = File_File::fetchFilesByAlbum($album_id,0);
+					$writer = File_FileWriter::write($files,'view/singleFile.php',$doc,$img);
 				echo '<div class="left">';
 					echo '<button type="submit" name="delete" id="delete">Delete Selected</button>';
 					echo '<button type="submit" name="download_files" id="download_files" alt="Download File">Download files</button>';	
@@ -23,5 +23,5 @@
 </div><br/>
 	<div class="container large">
 		<button id="check-all"><img class="glyph-small" src="/admin/images/check.png"/></button>
-		<?php files_Folders::show_albums($album_id); ?>
+		<?php File_Folders::show_albums($album_id); ?>
 	</div>

@@ -1,6 +1,6 @@
 <?php
 // content management/user management/file management/product management/client management.
-class content_Content{
+class Content_Content{
 	// will get the TRAIT actions that the user can perform like edit,delete,approve
 	
 	private $id = 0;

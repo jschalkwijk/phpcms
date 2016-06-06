@@ -1,6 +1,6 @@
 <?php
 
-class products_Product {
+class Products_Product {
 	// will get the TRAIT actions that the user can perform like edit,delete,approve
 	private $id;
 	private $name;

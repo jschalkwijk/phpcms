@@ -3,7 +3,7 @@
 // ipv elke pagina deze functie te laten oproepen kan ik ook met een class en method de url analyzeren,
 // en op basis daarvan een method activeren met dezelfde naam alsde url,die dan de template functie.
 //oproept om de pagina te genereren. zie MVC, application.php,home.php, zoek op Google, php route url templates.
-class template_Template {
+class Template_Template {
 	private $content;
 	private $tpl_name = 'default';
 	// takes an array with the file paths

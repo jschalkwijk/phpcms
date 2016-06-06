@@ -4,7 +4,7 @@
 		$thumb_dest= 'files/thumbs/';
 		//print_r($params);
 		if (isset($_POST['submit_file']) || !empty($_FILES['files']['name'][0])) {
-			$upload = new files_FileUpload($file_dest,$thumb_dest,$params);
+			$upload = new File_FileUpload($file_dest,$thumb_dest,$params);
 		}
 		
 	?>
@@ -16,7 +16,7 @@
 	<label for='public'>Public</label>
 	<input type="checkbox" name="secure" value="secure"/>
 	<label for='secure'>Secure</label>
-	<?php (isset($params)) ? files_Folders::get_albums($params[0],$params[1]) : files_Folders::get_albums(null,null) ;?>
+	<?php (isset($params)) ? File_Folders::get_albums($params[0],$params[1]) : File_Folders::get_albums(null,null) ;?>
 	<?php 	if(!isset($params[0])){ ?>
 				<input type="text" name="new_album_name" placeholder="Create New Album" maxlength="60"/>
 	<?php 	} else { ?>

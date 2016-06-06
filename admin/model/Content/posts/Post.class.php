@@ -1,5 +1,5 @@
 <?php
-class content_posts_Post extends content_Content{
+class Content_Posts_Post extends Content_Content{
 	public $category_type;
 	
 	public function __construct($title,$description,$category,$content,$author,$dbt = null,$date = null,$approved = null,$trashed = null){

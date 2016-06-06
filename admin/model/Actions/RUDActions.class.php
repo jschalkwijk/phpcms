@@ -3,7 +3,7 @@
 // these will only remove rows, not files etc.
 // Import the UserActions trait inside the controller and enter the database name insid ethe function
 // to alter the DB rows.  UserActions handles the Post requests and calls these functions
-class actions_RUDActions{
+class Actions_RUDActions{
 
 	public static function trash_selected($dbt,$checkbox){
 		$dbc = new DBC;

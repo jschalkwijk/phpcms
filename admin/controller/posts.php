@@ -1,10 +1,10 @@
 <?php
 class Posts extends Controller {
 	// import useractions trait
-	use actions_UserActions;
+	use Actions_UserActions;
 	
 	public function index($params = null){
-		$posts = content_Content::fetchAll('posts',0);
+		$posts = Content_Content::fetchAll('posts',0);
 		// Post requests need to be handled first! Then load the page, otherwise you will get the headers already sent error.
 		$this->UserActions('posts');
 		// view takes: page_title,[array of view files],params from the router,array of data from model
@@ -14,14 +14,12 @@ class Posts extends Controller {
 	//
 	public function AddPost($params = null){
 		$scripts = [
-			JS.'tinymce/tinymce.min.js',
-			JS.'tinyMCEsettings.js',
 			JS.'mceAddons.js',
 			JS.'checkAll.js'
 		];
 
 		if (!isset($_POST['submit'])){
-			$post = new content_posts_Post(null,null,null,null,null,'posts');
+			$post = new Content_Posts_Post(null,null,null,null,null,'posts');
 			$this->view(
 				'Add Post',
 				['add-edit-post.php'],
@@ -32,7 +30,7 @@ class Posts extends Controller {
 				]
 			);
 		} else {
-			$post = new content_posts_Post($_POST['title'],$_POST['post_desc'],$_POST['category'],$_POST['content'],$_SESSION['username'],'posts');
+			$post = new Content_Posts_Post($_POST['title'],$_POST['post_desc'],$_POST['category'],$_POST['content'],$_SESSION['username'],'posts');
 			$add = $post->addPost();
 			$this->view(
 				'Add Post',
@@ -49,7 +47,7 @@ class Posts extends Controller {
 	}
 	//
 	public function DeletedPosts($params = null){
-		$posts = content_Content::fetchAll('posts',1);
+		$posts = Content_Content::fetchAll('posts',1);
 		$this->UserActions('posts');
 		$view = ['search' => 'view/search-post.php','actions' => 'view/manage_content.php'];
 		$this->view('Deleted Posts',['posts.php'],$params,[ 'posts' => $posts , 'view' => $view,'trashed' => 1,'js' => [JS.'checkAll.js']]);
@@ -64,7 +62,7 @@ class Posts extends Controller {
 		];
 
 		if(!isset($_POST['submit'])){
-			$post = content_Content::fetchSingle('posts',$params[0]);
+			$post = Content_Content::fetchSingle('posts',$params[0]);
 			$this->view(
 				'Edit Post',
 				['add-edit-post.php'],
@@ -76,7 +74,7 @@ class Posts extends Controller {
 				]
 			);
 		} else {
-			$post = new content_posts_Post($_POST['title'],$_POST['post_desc'],$_POST['category'],$_POST['content'],$_SESSION['username'],'posts');
+			$post = new Content_Posts_Post($_POST['title'],$_POST['post_desc'],$_POST['category'],$_POST['content'],$_SESSION['username'],'posts');
 			$edit = $post->addPost($_POST['id'],$_POST['cat_name'],$_POST['confirm']);
 			$this->view(
 				'Edit Post',

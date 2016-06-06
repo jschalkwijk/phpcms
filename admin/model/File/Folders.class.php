@@ -9,9 +9,9 @@
  *
  *
  * */
-class files_Folders {
+class File_Folders {
 	# Create a construct becaus we can then separate the html from the model.
-	use files_FileActions;
+	use File_FileActions;
 
 	/* used by view/add-files.php to get the selected folder and optional folders to
 	 * upload files to.

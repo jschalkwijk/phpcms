@@ -17,7 +17,7 @@ $product = $data['product'];
 		<input type="hidden" name="album_name" value=""/>
 		<input type="hidden" name="category_name" value="<?php echo $product->getCategory(); ?>"/>
 		<input type="hidden" name="album_id" value="<?php echo $product->getAlbumID(); ?>"/>
-		<?php (isset($params)) ? files_Folders::get_albums($product->getAlbumID(),$product->getName()) : files_Folders::get_albums(null,null) ;?>
+		<?php (isset($params)) ? File_Folders::get_albums($product->getAlbumID(),$product->getName()) : File_Folders::get_albums(null,null) ;?>
 		<?php 	if(!isset($_GET['album'])){ ?>
 			<input type="text" name="new_album_name" placeholder="Create New Album" maxlength="60"/>
 		<?php 	} else { ?>
@@ -70,7 +70,7 @@ $product = $data['product'];
 </div>
 <div class="container large">
 	<button id="check-all"><img class="glyph-small" src="/admin/images/check.png"/></button>
-	<?php files_Folders::show_albums($product->getAlbumID()); ?>
+	<?php File_Folders::show_albums($product->getAlbumID()); ?>
 </div>
 
 <div class="container medium">
@@ -78,8 +78,8 @@ $product = $data['product'];
 	$img = ['jpg','jpeg','png'];
 	$url = $_SERVER["REQUEST_URI"];
 	echo '<form method="get" action="'.$url.'">';
-	$files = files_File::fetchFilesByAlbum($product->getAlbumID(),0);
-	$writer = files_FileWriter::write($files,'view/singleFile.php',[],$img);
+	$files = File_File::fetchFilesByAlbum($product->getAlbumID(),0);
+	$writer = File_FileWriter::write($files,'view/singleFile.php',[],$img);
 	echo '<div class="left">';
 	echo '<button type="submit" name="delete" id="delete">Delete Selected</button>';
 	echo '<button type="submit" name="download_files" id="download_files" alt="Download File">Download files</button>';
