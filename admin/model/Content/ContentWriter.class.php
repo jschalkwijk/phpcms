@@ -1,5 +1,5 @@
 <?php
-class content_ContentWriter{
+class Content_ContentWriter{
 	// When the Objects are created and added to the array and is returned to the variable that holds the object
 	// the writer takes that object and writes out each Post object.
 	// With a foreach looping over every object we can access its methods and add the content to variables.

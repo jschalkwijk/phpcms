@@ -6,7 +6,7 @@
 	define ('DB_NAME', 'nerdcms_db');
 	define ('IMG_UPLOADPATH','/admin/images/');
 	define ('F_UPLOADPATH', $_SERVER['HTTP_HOST'].'/admin/files/');
-	define('JS','/admin/js/');
+	define('JS','http://'.$_SERVER['HTTP_HOST'].'/admin/js/');
 	define ('ADMIN', 'http://'.$_SERVER['HTTP_HOST'].'/admin/');
 	define ('HOME','http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']));
 	define ('HOST','http://'.$_SERVER['HTTP_HOST']);

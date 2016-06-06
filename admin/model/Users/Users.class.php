@@ -11,7 +11,7 @@
 use \Defuse\Crypto\Crypto;
 use \Defuse\Crypto\Exception as Ex;
 
-class users_Users{
+class Users_Users{
 
 	private $id = 0;
 	private $username;

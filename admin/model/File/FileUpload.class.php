@@ -1,6 +1,6 @@
 <?php
 
-class files_FileUpload{
+class File_FileUpload{
 	private $dbc;
 	private $file_dest;
 	private $thumb_dest;
@@ -9,11 +9,12 @@ class files_FileUpload{
 	private $params;
 	private $img_path;
 	private $thumb_path;
-	private $fid;
 	private $album_name;
 
 	public function __construct($file_dest,$thumb_dest,$params,$empty_path = false){
 		$this->dbc = new DBC;
+		$this->file_dest = $file_dest;
+		$this->thumb_dest = $thumb_dest;
 		$this->params = $params;
 		// nieuwe toevoeging empty_path is nodig in het geval wij een bestand willen uploaden buiten
 		// de hoofd album/files structuur, zoals bijvoorbeeld in het geval van een product of gebruikers afbeelding.
@@ -57,7 +58,7 @@ class files_FileUpload{
 						} else {
 							$this->path = $new_album_name;
 						}
-						$this->create_album($new_album_name,$album_id,$file_dest,$thumb_dest);
+						$album_id = $this->create_album($new_album_name,$album_id);
 					}
 				} else if(empty($album_id)) {
 					$errors[] = 'Please select an album or create a new album.';
@@ -66,6 +67,8 @@ class files_FileUpload{
 					echo 'Line 86: this-path'.$this->path;
 				}
 			}
+
+			echo "New album ID: ".$album_id;
 			// the path has to be created only once. If this->path is empty,
 			//execute function,else it's already filled.
 			// END ALBUM CREATION
@@ -88,7 +91,7 @@ class files_FileUpload{
 							// move uploaded file to destination folder
 							if(isset($_POST['public'])) {
 								
-								if($this->uploadFile($file_tmp,$file_dest,$file_name,$file_ext,$file_name_new,$thumb_name,$thumb_dest,$position,$this->album_name)){
+								if($this->uploadFile($file_tmp,$file_name,$file_ext,$file_name_new,$thumb_name,$position,$album_id)){
 									$uploaded[] = $file_name;
 									if(!$this->createThumb($file_dest,$file_name_new,$thumb_name,$thumb_dest,$this->album_name)){
 										$failed[] = 'Thumbnails failed to be created';
@@ -125,24 +128,25 @@ class files_FileUpload{
 		$this->dbc->disconnect();
 	}
 	
-	protected function uploadFile($file_tmp,$file_dest,$file_name,$file_ext,$file_name_new,$thumb_name,$thumb_dest,$position,$album_name){
+	protected function uploadFile($file_tmp,$file_name,$file_ext,$file_name_new,$thumb_name,$position,$album_id){
 		// Ik moet naar boven werken met de id's om het nieuwe pad te creeeren,met een loop die checked of de parent_id
 		// != 0,dan moet de naam van dat album in de file_dest.
 		// Deze loop MOET in de create_album en create RThumb functie, die hebben dit pad ook nodig!!!
 
 		$path = $this->path;
+		$id = $album_id;
+		$file_dest = $this->file_dest.$path.'/'.$file_name_new;
+		/*echo 'Line: 141 | path: '.$path.'<br />';
 
-		echo 'Line: 141 | path: '.$path.'<br />';
-		$file_dest = $file_dest.$path.'/'.$file_name_new;
 		echo 'Line 143 | file_dest: '.$file_dest.'<br>';
 		echo 'Line 144 | album_name: '.$album_name;
 		$sql = "SELECT album_id FROM albums WHERE name LIKE '$album_name'";
 		//$sql = "SELECT album_id FROM albums WHERE name LIKE '$album_name' AND path LIKE '$path'";
 		$data = mysqli_query($this->dbc->connect(),$sql) or die('Error connecting to server');
 		$row = mysqli_fetch_array($data);
-		$id = $row['album_id'];
+		$id = $row['album_id'];*/
 
-		$thumb_path = $thumb_dest.$path.'/'.$thumb_name;
+		$thumb_path = $this->thumb_dest.$path.'/'.$thumb_name;
 		
 		// If upload paths contains 's etc we have to remove the \ (backslash) which is created automaticly.
 		// To insert the path in the Database we have to keep the \ (backslash) otherwise the query will fail.
@@ -154,7 +158,7 @@ class files_FileUpload{
 		$thumb_path = str_replace(array("\\","'"),array("","''"),$thumb_path);
 		$user_id = $_SESSION['user_id'];
 		echo 'Line: 157 | path: '.$path.'<br />';
-		if($album_name != 'None') {	
+		if(!empty($album_id)) {
 			if(move_uploaded_file($file_tmp,$path)) {
 				// add to uploade array, we dont use the new filename because thats all numbers,
 				// we use the original file name, we store both the original and new file name to the DB.
@@ -200,7 +204,7 @@ class files_FileUpload{
 		}
 	}
 
-	protected function create_album($album_name,$album_id,$file_dest,$thumb_dest) {
+	protected function create_album($album_name,$album_id) {
 		// the album_name and dest can be the same if you create a main folder!
 		// else when creating a sub folder to a main folder, the album_dest is different.
 		// see create_sub_folder() for details.
@@ -208,8 +212,8 @@ class files_FileUpload{
 		$author = $_SESSION['username'];
 		$user_id = $_SESSION['user_id'];
 		(!empty($album_id)) ? $parent_id = mysqli_real_escape_string($this->dbc->connect(),trim((int)$album_id)) : $parent_id = 0;
-		$file_dest = $file_dest.$this->path;
-		$thumb_dest = $thumb_dest.$this->path;
+		$file_dest = $this->file_dest.$this->path;
+		$thumb_dest = $this->thumb_dest.$this->path;
 		
 		$path = $this->path;
 		
@@ -218,10 +222,17 @@ class files_FileUpload{
 			mysqli_query($this->dbc->connect(),$query) or die('Error connecting to database');
 			mkdir(str_replace("\\","",$file_dest),0744);
 			mkdir(str_replace("\\","",$thumb_dest),0744);
+
+			$query = "SELECT album_id FROM albums WHERE name = '$album_name'";
+			echo $query.'<br />';
+			$data = mysqli_query($this->dbc->connect(), $query) or die('Error connecting to database');
+			$row = mysqli_fetch_assoc($data);
+			$parent_id = $row['album_id'];
 		}
 
 		mysqli_close($this->dbc->connect());
 
+		return $parent_id;
 	}
 	
 	protected function create_path($album_id,$new_album_name = null){

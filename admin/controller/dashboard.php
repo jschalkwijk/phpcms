@@ -6,7 +6,7 @@ class Dashboard extends Controller {
 public function index($params = null){
 		$content = new template_Template('Dashboard',['admin.php'],$params);
 	}
-*/	use actions_UserActions;
+*/	use Actions_UserActions;
 
 	public function index($params = null){
 		// render the model like this:
@@ -15,9 +15,9 @@ public function index($params = null){
 		//or directly with the autoloader.
 		// the fetchAll method return an object array with DB data.
 		
-		$posts = content_Content::fetchAll('posts',0);
-		$pages = content_Content::fetchAll('pages',0);
-		$users = users_Users::fetchUsers('users',0);
+		$posts = Content_Content::fetchAll('posts',0);
+		$pages = Content_Content::fetchAll('pages',0);
+		$users = Users_Users::fetchUsers('users',0);
 		$views = ['actions' => 'view/manage_content.php'];
 		if(!empty($_POST)) {
 			$this->UserActions($_POST['dbt']);

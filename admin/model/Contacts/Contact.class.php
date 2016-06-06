@@ -3,7 +3,7 @@
 use \Defuse\Crypto\Crypto;
 use \Defuse\Crypto\Exception as Ex;
 
-class contacts_Contact {
+class Contacts_Contact {
 	private $id;
 	private $first_name;
 	private $last_name;

@@ -4,7 +4,7 @@
 // Depending on which post request is past to the controller the appropiate function will
 // be called from RUDactions. this will only be removing rows. Not files on the server.
 // That is handled by other functions inside the File classes.
-trait actions_UserActions {
+trait Actions_UserActions {
 	
 	private $id;
 	private $name;

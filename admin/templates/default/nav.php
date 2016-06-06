@@ -12,17 +12,18 @@
 		<li><a href="/admin/projects">Projects</a></li>
 -->
 		<li><a href="/admin/products">Products</a></li>
+		<li><a href="/admin/cart"><?php echo "Cart(".$this->basket->itemCount().")"; ?> </a></li>
 		<?php
-			$dbc = mysqli_connect(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME) or die ('Error connecting to server');
-			$query = "SELECT title,path,approved FROM pages";
-			$links = mysqli_query($dbc,$query);
-			while($row = mysqli_fetch_array($links)) {
-				// get url and place it in the menu.
-				// add column with a Num so we can change the position in the menu, eg, first, second, last.
-				if($row['approved'] == 1) {
-					echo '<li><a href="'.ADMIN.$row['path'].'">'.$row['title'].'</a></li>';
-				}
+		$dbc = mysqli_connect(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME) or die ('Error connecting to server');
+		$query = "SELECT title,path,approved FROM pages";
+		$links = mysqli_query($dbc,$query);
+		while($row = mysqli_fetch_array($links)) {
+			// get url and place it in the menu.
+			// add column with a Num so we can change the position in the menu, eg, first, second, last.
+			if($row['approved'] == 1) {
+				echo '<li><a href="'.ADMIN.$row['path'].'">'.$row['title'].'</a></li>';
 			}
+		}
 		?>
 		<li><a href="/admin/search"><img class="glyph-medium" alt="search" src="images/search-1.png"/></a></li>
 		<li><a href="<?php echo HOME.'/login.php?id='.$_SESSION['user_id'].'&amp;username='.$_SESSION['username'];?>"><img class="glyph-medium" alt="logout" src="images/logout-1.png"/></a></li>

@@ -1,5 +1,5 @@
 <?php 
-class content_Pages_Page extends content_Content{
+class Content_Pages_Page extends Content_Content{
 	private $url;
 	
 	public function __construct($title,$description,$category = null,$content,$author,$dbt = null,$date = null,$approved = null,$trashed = null){
@@ -111,7 +111,7 @@ class content_Pages_Page extends content_Content{
 
 		return ['output_form' => $output_form,'messages' => $messages];
 	}
-	public static function getSelection($selected_cat,$type) {
+	public static function getSelection($selected_cat) {
 		$dbc = new DBC;
 		$categories = array();
 		$query = "SELECT * FROM pages WHERE trashed = 0";

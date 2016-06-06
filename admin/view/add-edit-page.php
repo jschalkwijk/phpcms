@@ -36,7 +36,7 @@ if($output_form) { ?>
 		<label for="back-end">Back-End Page</label>
 		<select id="pages" name="sub_page">
 			<option name="none" value="None">None</option>
-			<?php $options = content_pages_Page::getSelection('none'); ?>
+			<?php $options = Content_Pages_Page::getSelection('none'); ?>
 		</select>
 		<input type="hidden" name="id" value="<?php echo $page->getID();?>"/>
 		<input type="text" name="page_title" placeholder="Page Title" value="<?php echo $page->getTitle(); ?>"/><br />
