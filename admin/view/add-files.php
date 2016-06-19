@@ -1,4 +1,4 @@
-<div class="container small">
+
 	<?php
 		$file_dest = 'files/';
 		$thumb_dest= 'files/thumbs/';
@@ -24,4 +24,3 @@
 	<?php 	} ?>
 	<button type="submit" name="submit_file">Add File('s)</button>
 	</form>
-</div>

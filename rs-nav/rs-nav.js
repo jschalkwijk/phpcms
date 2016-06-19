@@ -26,7 +26,7 @@ function rsMenu() {
 	/* Sets the Li elements to hidden, otherwise the show up immediatly when resizing */
 	
 	for(var i = 0; i < linkItems.length; i++) { 
-  				linkItems[i].className = "hidden";
+  				linkItems[i].className = "js-hidden";
   	}
   	
 	//Creates the menu div with the image 

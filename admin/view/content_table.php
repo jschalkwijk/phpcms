@@ -1,7 +1,7 @@
 <tr><td class="td-title"><p><?php echo $single->getTitle(); ?></p></td>
 <td class="td-author"><p><?php echo $single->getAuthor(); ?></p></td>
 <td class="td-category"><p><?php echo $single->getCategory(); ?></p></td>
-<td class="td-date"><p><?php echo $single->getDate(); ?></p></td> 
+<td class="td-date"><p><?php echo $single->getDate(); ?></p></td>
 <!--<input type="hidden" name="id" value="<?php // echo $single->getID() ?>"/>-->
 <?php 
 if ($_SESSION['rights'] == 'Admin' || $_SESSION['rights'] == 'Content Manager') { ?>
