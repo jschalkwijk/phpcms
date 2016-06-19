@@ -1,3 +1,14 @@
+/*
+Theme Name: Portfolio
+Theme URI: http://jornschalkwijk.nl
+Description: Jorn Portfolio Theme with Bootstrap & Wordpress
+Version: 0.1
+Tags:two-columns, right-sidebar, responsive
+Author: Jorn Schalkwijk
+License: All Rights Reserved
+The CSS, XHTML and design is released under GPL: http://www.opensource.org/licenses/gpl-license.php
+*/
+
 .mceContentBody {
 	width: 740px;
 }
@@ -95,18 +106,30 @@
 	display:inline;
 	font-size: 14px;
 }
-
+table {
+	width: max-content;
+}
+/*Tables*/
 .backend-table {
 	padding: 0px;
 	margin: 1px;
-	width:max-content;
+	width: max-content;
+	-webkit-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 }
 
-.backend-table td {
+.backend-table tr:nth-child(odd) {
+	background-color: #f9f9f9;
+}
+
+.backend-table td, .backend-table th {
 	border-bottom: 2px solid #d2d2d2;
+	padding-left: 5px;
 }
 .backend-table p {
-	padding: 0px;
+	line-height: 41px;
 }
 .backend-table tr{
 	text-align:left;
@@ -115,27 +138,52 @@
 
 .backend-table th{
 	text-align:left;
+	border-top: 2px solid #d2d2d2;
+	padding: 4px;
 }
 
 .backend-table button {
 	background-color: none;
 }
 
-.td-title, .td-author, .td-category {
-	min-width: 100px;
+.td-title, .td-author, .td-category, .td-date {
 	max-width: 200px;
-}
-.td-date {
-	width:90px
+	overflow: hidden;
 }
 
+@media (min-width: 768px) and (max-width : 993px) {
+	.td-author, .td-date {
+		display: none;
+	}
+}
+@media (max-width: 635px) {
+	.td-author, .td-date {
+		display: none;
+	}
+}
+
+@media (max-width: 363px) {
+	.td-category {
+		display: none;
+	}
+}
 .td-btn {
 	min-width:35px;
+}
+.td-btn img {
+	box-sizing: content-box;
+}
+.table>tbody>tr>td{
+	padding: 0px;
+}
+
+td p {
+	margin-bottom: 0px;
+	line-height: 41px;
 }
 input[type=submit] {
 	border: none;
 	background:transparent;
-	background-color: none;
 	color: #ea6a1b;
 	margin: 0px;
 	padding: 0px;
@@ -145,21 +193,9 @@ input[type=submit] {
 form a {
 	border: none;
 	background:transparent;
-	background-color: none;
 	color: blue;
 	margin: 0px;
 }
-
-/*
-Theme Name: Portfolio
-Theme URI: http://jornschalkwijk.nl
-Description: Jorn Portfolio Theme with Bootstrap & Wordpress
-Version: 0.1
-Tags:two-columns, right-sidebar, responsive
-Author: Jorn Schalkwijk
-License: All Rights Reserved
-The CSS, XHTML and design is released under GPL: http://www.opensource.org/licenses/gpl-license.php
-*/
 
 /*General*/
 
@@ -191,6 +227,9 @@ a {
 	text-decoration: none;
 	color: #ea6a1b;
 }
+a:hover {
+	text-decoration: none;
+}
 form a {
 	text-decoration: none;
 	color: #ea6a1b;
@@ -208,10 +247,23 @@ button {
 /* containers */
 
 .container {
-	width: max-content;
+	/*width: max-content;
 	height: auto;
 	padding: 5px;
-	margin: auto;
+	margin: auto;*/
+}
+
+/* centered columns styles */
+.row-centered {
+	text-align:center;
+}
+.col-centered {
+	display:inline-block;
+	float:none;
+	/* reset the text-align */
+	text-align:left;
+	/* inline-block space fix */
+	margin-right:-4px;
 }
 
 .full-width {
@@ -230,7 +282,7 @@ button {
 
 .xlarge {
 	max-width: 1080px;
-	min-height: auto;
+	height: auto;
 	margin: auto;
 	padding: 5px;
 }
@@ -319,6 +371,10 @@ button {
 	clear: both;
 }
 
+/*.center {*/
+	/*margin: 0 auto;*/
+	/*float: none;*/
+/*}*/
 .center {
 	width: max-content;
 	height: auto;
@@ -350,7 +406,7 @@ button:hover  {
 /* if a link needs to look like a button  */
 .link-btn {
 	padding: 6px;
-	margin: 5px;
+	margin: 2px;
 	float: none;
 	background-color: #80B12C;
 	border: none;
@@ -358,6 +414,10 @@ button:hover  {
 	text-decoration: none;
 	border-radius: 5px;
 	font-size: 15px;
+}
+
+.link-btn img{
+	vertical-align:none;
 }
 
 .link-btn:hover {
@@ -369,6 +429,7 @@ button:hover  {
 
 #wrapper {
 	background-color: #f2f2f2;
+	width: 100%;
 }
 
 /* Display Header */
@@ -406,6 +467,7 @@ nav {
 	margin: 0px;
 	height: 50px;
 	background-color: #333333;
+	z-index: 9999;
 }
 
 nav li {
@@ -416,6 +478,7 @@ nav li {
 
 nav li a:hover {
 	background-color: #000000;
+	color: #999;
 }
 
 nav li a {
@@ -563,6 +626,7 @@ nav li {
 
 /* Article or Post */
 #main {
+	width: 100%;
 	height: auto;
 	margin: auto;
 	padding-top: 50px;
@@ -648,7 +712,7 @@ article {
 
 .checkbox {
 	padding-right: 5px;
-	line-height: 35px;
+	line-height: 41px;
 }
 
 /* Widget */

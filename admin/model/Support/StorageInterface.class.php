@@ -1,5 +1,5 @@
 <?php
-
+// abstract class to set mandatory methods.
 interface Support_StorageInterface {
 
     public function get($index);

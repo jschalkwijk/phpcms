@@ -14,32 +14,33 @@ class Basket_Basket
 
     public function add(Products_Product $product, $quantity)
     {
+        // Takes a product class which holds all the information.
         $this->product = $product;
-
+        // Check if the product is already in the basket.
         if($this->has($product)){
-            // set quantity to current quantity + new quantity
+            // If we already have the product in the basket
+            // We get the product by the ID and set the quantity to current quantity + new quantity
             $quantity = $this->get($product)['quantity'] + $quantity;
             echo $quantity;
         }
-
+        // update session with product and quantity
         $this->update($product,$quantity);
-        // update session with product
     }
 
     public function update(Products_Product $product, $quantity)
     {
-
-        if(!$product->fetchSingle($product->getID())->hasStock($quantity)) {
+        // Check is the Product has enough stock for the desired amount given by user
+        if(!$product->hasStock($quantity)) {
 
             throw new Basket_QuantityExc;
         }
-
+        // if the quantity is set to 0 remove the product from the basket session
         if ($quantity == 0) {
             $this->remove($product);
 
             return;
         }
-
+        // set basket session to desired quantity $_SESSION['default']['10',[ 'product_id' => 10, 'quantity' => 3,]]
         $this->storage->set($product->getID(),[
             'product_id' => (int) $product->getID(),
             'quantity' => (int) $quantity,
@@ -48,20 +49,24 @@ class Basket_Basket
 
     public function remove(Products_Product $product)
     {
+        // remove item from the basket session
         $this->storage->unsetProduct($product->getID());
     }
 
     public function has(Products_Product $product)
     {
+        // Check if the product is already in the basket.
         return $this->storage->exists($product->getID());
     }
 
     public function get(Products_Product $product)
     {
+        // get a product from the basket session by ID
         return $this->storage->get($product->getID());
     }
 
     public function clear() {
+        // Removes the entire basket session
         $this->storage->clear();
     }
 
@@ -80,7 +85,7 @@ class Basket_Basket
 
             foreach ($products as $product) {
                 // The current stock is the max stock, this is not the quantity that a user wants to order perse,
-                // Will be used inside cart view for selecting only the maximum items;
+                // Will be used inside cart view for selecting only the maximum available items;
                 $product->setMaxStock($product->getQuantity());
                 // if the product still has enough stock we set the quantity to order
                 // to the desired amount. If a other user checked out when you are shopping

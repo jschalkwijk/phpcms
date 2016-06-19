@@ -5,7 +5,7 @@
 
 window.onload = mce;
 
-// alled after image search.
+// called after image search.
 function mce(){
     handleImagesAdding();
     check();
@@ -61,6 +61,7 @@ function handleImagesAdding(){
             xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function () {
                 change.innerHTML = xhttp.responseText;
+                // after changing the inner html of the searh results, call the mce init function again
                 mce();
             };
 
