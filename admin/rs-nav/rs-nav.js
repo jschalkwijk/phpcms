@@ -26,13 +26,14 @@ function rsMenu() {
 	/* Sets the Li elements to hidden, otherwise the show up immediatly when resizing */
 	
 	for(var i = 0; i < linkItems.length; i++) { 
-  				linkItems[i].className = "hidden";
+  				linkItems[i].className = "js-hidden";
   	}
   	
 	//Creates the menu div with the image 
 	var menu = document.createElement("div");
 	var img = document.createElement("img");
-	img.id = "show"; 	img.src = "rs-nav/menu-white.png";
+	img.id = "show";
+	img.src = "rs-nav/menu-white.png";
 	menu.id = "menu"; 	
 	/* Adding the img to the menu div and the menu to the navigation. It will be inserted before the Ul */
 	var para = document.createElement("p")
@@ -54,7 +55,7 @@ function rsMenu() {
   			hidden = false;
   		} else {
   			for(var i = 0; i < linkItems.length; i++) { 
-  				linkItems[i].className = "hidden";
+  				linkItems[i].className = "js-hidden";
   				}
   			hidden = true;	
   		}			

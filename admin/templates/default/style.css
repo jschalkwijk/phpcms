@@ -1,3 +1,14 @@
+/*
+Theme Name: Portfolio
+Theme URI: http://jornschalkwijk.nl
+Description: Jorn Portfolio Theme with Bootstrap & Wordpress
+Version: 0.1
+Tags:two-columns, right-sidebar, responsive
+Author: Jorn Schalkwijk
+License: All Rights Reserved
+The CSS, XHTML and design is released under GPL: http://www.opensource.org/licenses/gpl-license.php
+*/
+
 .mceContentBody {
 	width: 740px;
 }
@@ -95,18 +106,30 @@
 	display:inline;
 	font-size: 14px;
 }
-
+table {
+	width: max-content;
+}
+/*Tables*/
 .backend-table {
 	padding: 0px;
 	margin: 1px;
-	width:max-content;
+	width: max-content;
+	-webkit-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
 }
 
-.backend-table td {
+.backend-table tr:nth-child(odd) {
+	background-color: #f9f9f9;
+}
+
+.backend-table td, .backend-table th {
 	border-bottom: 2px solid #d2d2d2;
+	padding-left: 5px;
 }
 .backend-table p {
-	padding: 0px;
+	line-height: 41px;
 }
 .backend-table tr{
 	text-align:left;
@@ -115,27 +138,52 @@
 
 .backend-table th{
 	text-align:left;
+	border-top: 2px solid #d2d2d2;
+	padding: 4px;
 }
 
 .backend-table button {
 	background-color: none;
 }
 
-.td-title, .td-author, .td-category {
-	min-width: 100px;
+.td-title, .td-author, .td-category, .td-date {
 	max-width: 200px;
-}
-.td-date {
-	width:90px
+	overflow: hidden;
 }
 
+@media (min-width: 768px) and (max-width : 993px) {
+	.td-author, .td-date {
+		display: none;
+	}
+}
+@media (max-width: 635px) {
+	.td-author, .td-date {
+		display: none;
+	}
+}
+
+@media (max-width: 363px) {
+	.td-category {
+		display: none;
+	}
+}
 .td-btn {
 	min-width:35px;
+}
+.td-btn img {
+	box-sizing: content-box;
+}
+.table>tbody>tr>td{
+	padding: 0px;
+}
+
+td p {
+	margin-bottom: 0px;
+	line-height: 41px;
 }
 input[type=submit] {
 	border: none;
 	background:transparent;
-	background-color: none;
 	color: #ea6a1b;
 	margin: 0px;
 	padding: 0px;
@@ -145,21 +193,9 @@ input[type=submit] {
 form a {
 	border: none;
 	background:transparent;
-	background-color: none;
 	color: blue;
 	margin: 0px;
 }
-
-/*
-Theme Name: Portfolio
-Theme URI: http://jornschalkwijk.nl
-Description: Jorn Portfolio Theme with Bootstrap & Wordpress
-Version: 0.1
-Tags:two-columns, right-sidebar, responsive
-Author: Jorn Schalkwijk
-License: All Rights Reserved
-The CSS, XHTML and design is released under GPL: http://www.opensource.org/licenses/gpl-license.php
-*/
 
 /*General*/
 
@@ -191,6 +227,9 @@ a {
 	text-decoration: none;
 	color: #ea6a1b;
 }
+a:hover {
+	text-decoration: none;
+}
 form a {
 	text-decoration: none;
 	color: #ea6a1b;
@@ -208,10 +247,26 @@ button {
 /* containers */
 
 .container {
-	width: max-content;
+	/*width: max-content;
 	height: auto;
 	padding: 5px;
-	margin: auto;
+	margin: auto;*/
+}
+
+.center-block{
+	float:none;
+}
+/* centered columns styles */
+.row-centered {
+	text-align:center;
+}
+.col-centered {
+	display:inline-block;
+	float:none;
+	/* reset the text-align */
+	text-align:left;
+	/* inline-block space fix */
+	margin-right:-4px;
 }
 
 .full-width {
@@ -230,7 +285,7 @@ button {
 
 .xlarge {
 	max-width: 1080px;
-	min-height: auto;
+	height: auto;
 	margin: auto;
 	padding: 5px;
 }
@@ -319,6 +374,10 @@ button {
 	clear: both;
 }
 
+/*.center {*/
+/*margin: 0 auto;*/
+/*float: none;*/
+/*}*/
 .center {
 	width: max-content;
 	height: auto;
@@ -329,7 +388,7 @@ button {
 /* Button Styling */
 
 button {
-	padding: 5px; 
+	padding: 5px;
 	margin: 0px 5px 0px 5px;
 	float: none;
 	/* background-color: #ea6a1b; */
@@ -350,7 +409,7 @@ button:hover  {
 /* if a link needs to look like a button  */
 .link-btn {
 	padding: 6px;
-	margin: 5px;
+	margin: 2px;
 	float: none;
 	background-color: #80B12C;
 	border: none;
@@ -358,6 +417,10 @@ button:hover  {
 	text-decoration: none;
 	border-radius: 5px;
 	font-size: 15px;
+}
+
+.link-btn img{
+	vertical-align:none;
 }
 
 .link-btn:hover {
@@ -369,16 +432,17 @@ button:hover  {
 
 #wrapper {
 	background-color: #f2f2f2;
+	width: 100%;
 }
 
 /* Display Header */
 
 .display {
-  margin-top: 0px;
-  min-height: 250px;
-  background-color: #eee;
-  padding: 50px 5px 5px 5px;
-  -webkit-box-sizing: border-box;
+	margin-top: 0px;
+	min-height: 250px;
+	background-color: #eee;
+	padding: 50px 5px 5px 5px;
+	-webkit-box-sizing: border-box;
 	-o-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
@@ -386,9 +450,9 @@ button:hover  {
 }
 
 .display p {
-  margin-bottom: 15px;
-  font-size: 21px;
-  font-weight: 200;
+	margin-bottom: 15px;
+	font-size: 21px;
+	font-weight: 200;
 }
 
 .display h1 {
@@ -406,6 +470,7 @@ nav {
 	margin: 0px;
 	height: 50px;
 	background-color: #333333;
+	z-index: 9999;
 }
 
 nav li {
@@ -416,6 +481,7 @@ nav li {
 
 nav li a:hover {
 	background-color: #000000;
+	color: #999;
 }
 
 nav li a {
@@ -425,7 +491,7 @@ nav li a {
 	height: 100%;
 	padding: 0px 10px 0px 10px;
 	display: inline-table;
-	 -webkit-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
 	-o-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
@@ -459,103 +525,109 @@ nav li a {
 
 
 /* Responsive, screen width smaller then 700px; */
- 
+
 /* Javascript Disabled - These are always visibile */
-@media only screen and (max-width: 700px) { 
+@media only screen and (max-width: 700px) {
 
-nav li:nth-child(even) { background: #333; color: #999;  }
-nav li:nth-child(odd) { background: #474747; color: #999;  }  
+	nav li:nth-child(even) { background: #333; color: #999;  }
+	nav li:nth-child(odd) { background: #474747; color: #999;  }
 
-/* Jasvascript disabled*/
+	/* Jasvascript disabled*/
 
-nav {
-	list-style-type:none;
-	background: #BBB;
-	position: static;
-	padding-top: 0px;
-	width: 100%;
-	height: auto;
-}
+	nav {
+		list-style-type:none;
+		background: #BBB;
+		position: static;
+		padding-top: 0px;
+		width: 100%;
+		height: auto;
+	}
 
-nav ul {
-	margin-top: 0px;
-	width: 100%;
-}
+	nav ul {
+		margin-top: 0px;
+		width: 100%;
+	}
 
-nav li {
-	display: block;
-	margin: 0px;
-	width: 100%;
-}
+	nav li {
+		display: block;
+		margin: 0px;
+		width: 100%;
+	}
 
-nav li a{
-	padding: 10px 0px 10px 0px;
-	font-size: small;
-}
-nav li a:hover {
-	background:none;
-	padding: 20px 0px 20px 0px;
-}
+	nav li a{
+		padding: 10px 0px 10px 0px;
+		font-size: small;
+	}
+	nav li a:hover {
+		background:none;
+		padding: 20px 0px 20px 0px;
+	}
 
-/* Javascript Enabled */
+	/* Javascript Enabled */
 
-.hidden {
-	display: none;
-	margin: 0px;
-}
+	.js-hidden {
+		display: none;
+		margin: 0px;
+	}
 
-.show {
-	display: block;
-	margin: 0px;
-	width: 100%;
-}
+	.show {
+		display: block;
+		margin: 0px;
+		width: 100%;
+	}
 
-.js-nav {
-	position: fixed !important;
-}
+	.js-nav {
+		position: fixed !important;
+	}
 
-.js-ul {
-	position: absolute !important;
-	margin-top: 50px;
-}
+	.js-ul {
+		position: absolute !important;
+		margin-top: 50px;
+	}
 
-#menu {
-	display: block;
-	margin: 0px;
-	max-width: 700px;
-	position: fixed; 
-}
+	#menu {
+		display: block;
+		margin: 0px;
+		max-width: 700px;
+		position: fixed;
+	}
 
 }
 /* Responsive, screen width bigger then 700px; */
 
 /* Javascript Disabled - These are always visibile */
-@media only screen and (min-width: 700px) { 
-nav {
+@media only screen and (min-width: 700px) {
+	nav {
 		max-height: 50px;
 		margin: 0px;
 		width: 100%;
 		position: fixed;
-}
+	}
 
-nav ul {
-	margin-top: 0px;
-	line-height: 50px;
-}
+	nav ul {
+		margin-top: 0px;
+		line-height: 50px;
+	}
 
-nav li {
-	display: inline;
-}
+	nav li {
+		display: inline;
+	}
 
 
-/* Jasvascript Enabled */
-.show {
-	display: inline;
-}
+	/* Jasvascript Enabled */
 
-#menu {
-	display: none;
-}
+	.js-hidden {
+		display: inline;
+		margin: 0px;
+	}
+
+	.show {
+		display: inline;
+	}
+
+	#menu {
+		display: none;
+	}
 
 }
 
@@ -563,6 +635,7 @@ nav li {
 
 /* Article or Post */
 #main {
+	width: 100%;
 	height: auto;
 	margin: auto;
 	padding-top: 50px;
@@ -574,7 +647,7 @@ nav li {
 
 #article-wrapper {
 	width: 100%;
-	height: auto;	
+	height: auto;
 	float: left;
 	margin:0px 10px 5px 0px;
 }
@@ -586,7 +659,7 @@ article {
 }
 
 .article-content {
-	height: auto; 
+	height: auto;
 	padding: 5px;
 	margin: 0px;
 	background-color: rgba(255,255,255,0.5);
@@ -595,7 +668,7 @@ article {
 
 .article-content p {
 	padding: 0px 5px 10px 5px;
-	background-color: none;	
+	background-color: none;
 }
 
 /* Article Title/Meta */
@@ -648,7 +721,7 @@ article {
 
 .checkbox {
 	padding-right: 5px;
-	line-height: 35px;
+	line-height: 41px;
 }
 
 /* Widget */
@@ -690,7 +763,7 @@ footer {
 }
 
 footer p {
-	width: max-content;
+	width: auto;
 	color: white;
 	margin: auto;
 	padding: 5px;
@@ -705,8 +778,8 @@ footer img {
 /* Flexible Images/Video etc. */
 
 img, video, canvas, url {
-  max-width: 100%;
-  height: auto;
+	max-width: 100%;
+	height: auto;
 }
 
 /* Laptop/Tablet (1024px) */
@@ -722,18 +795,18 @@ img, video, canvas, url {
 }
 
 @media only screen and (max-width: 900px) {
-	
+
 	#article-wrapper  {
 		max-width: 100%;
 	}
 	.widget-wrapper {
 		max-width: 100%;
 	}
-	
+
 	nav li a {
 		font-size: small;
 	}
-	
+
 }
 
 
@@ -746,7 +819,7 @@ img, video, canvas, url {
 #frame {
 	max-width: 1080px;
 	max-height: 720px;
-	background-color: transparent; 
+	background-color: transparent;
 	margin-top:100px;
 	position: relative;
 }
@@ -764,9 +837,9 @@ img, video, canvas, url {
 .transition {
 	-o-transition:1.0s;
 	-ms-transition:1.0s;
- 	-moz-transition:1.0s;
- 	-webkit-transition:1.0s;
- 	transition:1.0s;
+	-moz-transition:1.0s;
+	-webkit-transition:1.0s;
+	transition:1.0s;
 
 }
 
@@ -780,24 +853,24 @@ img, video, canvas, url {
 	/*Hover Off*/
 	-o-transition:1.0s;
 	-ms-transition:1.0s;
- 	-moz-transition:1.0s;
- 	-webkit-transition:1.0s;
- 	transition:1.0s;
+	-moz-transition:1.0s;
+	-webkit-transition:1.0s;
+	transition:1.0s;
 }
 #dashboard:hover {
 	/*Hover On*/
-	background-color: rgba(255,255,255,0.6); 
+	background-color: rgba(255,255,255,0.6);
 	-o-transition:1.0s;
 	-ms-transition:1.0s;
- 	-moz-transition:1.0s;
- 	-webkit-transition:1.0s;
- 	transition:1.0s;
+	-moz-transition:1.0s;
+	-webkit-transition:1.0s;
+	transition:1.0s;
 }
 
 #controls {
 	width:max-content;
 	height: 65px;
-	margin: auto; 
+	margin: auto;
 	background-color: transparent;
 }
 
@@ -810,14 +883,14 @@ img, video, canvas, url {
 
 
 /* Smartphones (portrait and landscape) ----------- */
-@media only screen 
-and (min-device-width : 320px) 
+@media only screen
+and (min-device-width : 320px)
 and (max-device-width : 480px) {
-/*styles*/
+	/*styles*/
 }
 
 /* Smartphones (portrait and landscape) ----------- */
-@media only screen 
+@media only screen
 and (min-width : 320px)
 and (max-width : 480px) {
 	#controls {
@@ -835,7 +908,7 @@ and (max-width : 480px) {
 }
 
 /* Smartphones (portrait) ----------- */
-@media only screen 
+@media only screen
 and (max-width : 320px) {
 	#controls {
 		height: 40px;
@@ -866,7 +939,7 @@ div#specialBox {
 	position: relative;
 	z-index: 3;
 	margin: 150px auto 0px auto;
-	max-width: 1080px; 
+	max-width: 1080px;
 	max-height: 720px;
 	background: none;
 }
@@ -876,4 +949,3 @@ div#snapper {
 	left: 0px;
 	padding-left:24px;
 }
-

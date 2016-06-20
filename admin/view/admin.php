@@ -1,13 +1,15 @@
-<div class="container">
+<div class="container-fluid">
 	<div class="row">
-		<p class="logged">Hello <?php echo $_SESSION['username']; ?></p>
-		<a href="addpost"><button>+ Post</button></a>
-		<a href="addpage"><button>+ Page</button></a>
-		<?php if($_SESSION['rights'] == 'Admin') { echo '<a href="adduser"><button>+ User</button></a>'; } ?>
-		<a href="#"><button>+ Client</button></a>
-		<a href="#"><button>+ Project</button></a>
-		<a href="#"><button>+ Product</button></a>
-		<a href="#"><button>Send Mail</button></a>
+		<div class="center-block col-sm-8 col-md-8 col-lg-8">
+			<p class="logged">Hello <?php echo $_SESSION['username']; ?></p>
+			<a href="addpost"><button>+ Post</button></a>
+			<a href="addpage"><button>+ Page</button></a>
+			<?php if($_SESSION['rights'] == 'Admin') { echo '<a href="adduser"><button>+ User</button></a>'; } ?>
+			<a href="#"><button>+ Client</button></a>
+			<a href="#"><button>+ Project</button></a>
+			<a href="#"><button>+ Product</button></a>
+			<a href="#"><button>Send Mail</button></a>
+		</div>
 	</div>
 </div>
 
