@@ -46,12 +46,12 @@ h1, h2, h3, h4, h5, h6, h7, h8 {
 
 /* containers */
 
-.container {
-	width: max-content;
-	height: auto;
-	padding: 5px;
-	margin: auto;
-}
+/*.container {*/
+	/*width: max-content;*/
+	/*height: auto;*/
+	/*padding: 5px;*/
+	/*margin: auto;*/
+/*}*/
 
 .full-width {
 	width: 100%;
@@ -69,7 +69,7 @@ h1, h2, h3, h4, h5, h6, h7, h8 {
 
 .xlarge {
 	max-width: 1080px;
-	min-height: auto;
+	height: auto;
 	margin: auto;
 	padding: 5px;
 }
@@ -206,37 +206,41 @@ button:hover  {
 
 /* Navigation Basic Styling */
 
-nav {
+#nav nav {
 	text-align: center;
 	list-style-type:none;
-	width: max-content;
-	background: #CCC;
+	width: 100%;
 	margin: 0px;
 	height: 50px;
 	background-color: #333333;
+	z-index: 9999;
 }
 
-nav li {
+#nav nav ul{
+	line-height: 50px;
+	text-align: center;
+	margin: 0px;
+	background-color: #333333;
+}
+#nav nav li {
 	list-style-type:none;
-	display: inline;
 	padding: 0px;
 }
-
-nav li a:hover {
-	background-color: #000000;
-}
-
-nav li a {
+#nav nav li a {
 	color: #999;
 	font-size: large;
 	font-family: Helvetica;
 	height: 100%;
 	padding: 0px 10px 0px 10px;
-	display: inline-table;
-	 -webkit-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
 	-o-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
+}
+
+#nav nav li a:hover {
+	height: 50px;
+	background-color: #000000;
 }
 
 
@@ -265,18 +269,18 @@ nav li a {
 }
 
 /* Responsive */
-3
+
 /* Responsive, screen width smaller then 700px; */
  
 /* Javascript Disabled - These are always visibile */
 @media only screen and (max-width: 700px) { 
 
-nav li:nth-child(even) { background: #333; color: #999;  }
-nav li:nth-child(odd) { background: #474747; color: #999;  }  
+#nav nav li:nth-child(even) { background: #333; color: #999;  }
+#nav nav li:nth-child(odd) { background: #474747; color: #999;  }
 
 /* Jasvascript disabled*/
 
-nav {
+#nav nav {
 	list-style-type:none;
 	background: #BBB;
 	position: static;
@@ -285,43 +289,43 @@ nav {
 	height: auto;
 }
 
-nav ul {
+#nav nav ul {
 	margin-top: 0px;
 	width: 100%;
 }
 
-nav li {
+#nav nav li {
 	display: block;
 	margin: 0px;
 	width: 100%;
 }
 
-nav li a{
+#nav nav li a{
 	padding: 10px 0px 10px 0px;
 }
-nav li a:hover {
+#nav nav li a:hover {
 	background:none;
 	padding: 20px 0px 20px 0px;
 }
 
 /* Javascript Enabled */
 
-.hidden {
+#nav .js-hidden {
 	display: none;
 	margin: 0px;
 }
 
-.show {
+#nav .show {
 	display: block;
 	margin: 0px;
 	width: 100%;
 }
 
-.js-nav {
+#nav .js-nav {
 	position: fixed !important;
 }
 
-.js-ul {
+#nav .js-ul {
 	position: absolute !important;
 	margin-top: 50px;
 }
@@ -338,19 +342,19 @@ nav li a:hover {
 
 /* Javascript Disabled - These are always visibile */
 @media only screen and (min-width: 700px) { 
-nav {
-		max-height: 50px;
-		margin: 0px;
-		width: 100%;
-		position: fixed;
+#nav nav {
+	max-height: 50px;
+	margin: 0px;
+	width: 100%;
+	position: fixed;
 }
 
-nav ul {
+#nav nav ul {
 	margin-top: 0px;
 	line-height: 50px;
 }
 
-nav li {
+#nav nav li {
 	display: inline;
 }
 
@@ -373,6 +377,7 @@ nav li {
 	margin: auto;
 }
 #main-content {
+	width: 100%;
 	min-height: 580px;
 	margin-bottom: 5px;
 }
@@ -520,13 +525,14 @@ article {
 	text-align: center;
 }
 .image-holder {
-	max-width: 150px;
+	margin-bottom: 20px;
+}
+.image-holder img {
+	max-width: auto;
 	max-height: 150px;
 	background: none;
 	list-style: none;
-	margin: 0 auto;	
 	padding: 10px;
-	float: left;
 }
 
 .power {
@@ -623,7 +629,7 @@ footer {
 }
 
 footer p {
-	width: max-content;
+	width: auto;
 	color: white;
 	margin: auto;
 	padding: 5px;

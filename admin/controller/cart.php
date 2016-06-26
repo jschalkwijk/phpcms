@@ -56,17 +56,6 @@ class Cart extends Controller {
         $this->basket->update($product,$quantity);
         header('Location: '.'/admin/cart');
     }
-
-    public function order($params = null){
-
-        $this->view(
-            "Cart",
-            ["order.php"],
-            $params,
-            [
-                'js' => ["/admin/js/checkAll.js"]
-            ]);
-    }
 }
 
 ?>

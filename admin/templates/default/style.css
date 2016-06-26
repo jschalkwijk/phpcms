@@ -118,12 +118,21 @@ table {
 	-o-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
+<<<<<<< HEAD
 }
 
 .backend-table tr:nth-child(odd) {
 	background-color: #f9f9f9;
 }
 
+=======
+}
+
+.backend-table tr:nth-child(odd) {
+	background-color: #f9f9f9;
+}
+
+>>>>>>> remotes/origin/bootstrap
 .backend-table td, .backend-table th {
 	border-bottom: 2px solid #d2d2d2;
 	padding-left: 5px;
@@ -149,6 +158,7 @@ table {
 .td-title, .td-author, .td-category, .td-date {
 	max-width: 200px;
 	overflow: hidden;
+<<<<<<< HEAD
 }
 
 @media (min-width: 768px) and (max-width : 993px) {
@@ -156,6 +166,15 @@ table {
 		display: none;
 	}
 }
+=======
+}
+
+@media (min-width: 768px) and (max-width : 993px) {
+	.td-author, .td-date {
+		display: none;
+	}
+}
+>>>>>>> remotes/origin/bootstrap
 @media (max-width: 635px) {
 	.td-author, .td-date {
 		display: none;
@@ -253,6 +272,12 @@ button {
 	margin: auto;*/
 }
 
+<<<<<<< HEAD
+=======
+.center-block{
+	float:none;
+}
+>>>>>>> remotes/origin/bootstrap
 /* centered columns styles */
 .row-centered {
 	text-align:center;
@@ -372,8 +397,13 @@ button {
 }
 
 /*.center {*/
+<<<<<<< HEAD
 	/*margin: 0 auto;*/
 	/*float: none;*/
+=======
+/*margin: 0 auto;*/
+/*float: none;*/
+>>>>>>> remotes/origin/bootstrap
 /*}*/
 .center {
 	width: max-content;
@@ -385,7 +415,7 @@ button {
 /* Button Styling */
 
 button {
-	padding: 5px; 
+	padding: 5px;
 	margin: 0px 5px 0px 5px;
 	float: none;
 	/* background-color: #ea6a1b; */
@@ -435,11 +465,11 @@ button:hover  {
 /* Display Header */
 
 .display {
-  margin-top: 0px;
-  min-height: 250px;
-  background-color: #eee;
-  padding: 50px 5px 5px 5px;
-  -webkit-box-sizing: border-box;
+	margin-top: 0px;
+	min-height: 250px;
+	background-color: #eee;
+	padding: 50px 5px 5px 5px;
+	-webkit-box-sizing: border-box;
 	-o-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
@@ -447,9 +477,9 @@ button:hover  {
 }
 
 .display p {
-  margin-bottom: 15px;
-  font-size: 21px;
-  font-weight: 200;
+	margin-bottom: 15px;
+	font-size: 21px;
+	font-weight: 200;
 }
 
 .display h1 {
@@ -488,7 +518,7 @@ nav li a {
 	height: 100%;
 	padding: 0px 10px 0px 10px;
 	display: inline-table;
-	 -webkit-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
 	-o-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
@@ -522,103 +552,109 @@ nav li a {
 
 
 /* Responsive, screen width smaller then 700px; */
- 
+
 /* Javascript Disabled - These are always visibile */
-@media only screen and (max-width: 700px) { 
+@media only screen and (max-width: 700px) {
 
-nav li:nth-child(even) { background: #333; color: #999;  }
-nav li:nth-child(odd) { background: #474747; color: #999;  }  
+	nav li:nth-child(even) { background: #333; color: #999;  }
+	nav li:nth-child(odd) { background: #474747; color: #999;  }
 
-/* Jasvascript disabled*/
+	/* Jasvascript disabled*/
 
-nav {
-	list-style-type:none;
-	background: #BBB;
-	position: static;
-	padding-top: 0px;
-	width: 100%;
-	height: auto;
-}
+	nav {
+		list-style-type:none;
+		background: #BBB;
+		position: static;
+		padding-top: 0px;
+		width: 100%;
+		height: auto;
+	}
 
-nav ul {
-	margin-top: 0px;
-	width: 100%;
-}
+	nav ul {
+		margin-top: 0px;
+		width: 100%;
+	}
 
-nav li {
-	display: block;
-	margin: 0px;
-	width: 100%;
-}
+	nav li {
+		display: block;
+		margin: 0px;
+		width: 100%;
+	}
 
-nav li a{
-	padding: 10px 0px 10px 0px;
-	font-size: small;
-}
-nav li a:hover {
-	background:none;
-	padding: 20px 0px 20px 0px;
-}
+	nav li a{
+		padding: 10px 0px 10px 0px;
+		font-size: small;
+	}
+	nav li a:hover {
+		background:none;
+		padding: 20px 0px 20px 0px;
+	}
 
-/* Javascript Enabled */
+	/* Javascript Enabled */
 
-.hidden {
-	display: none;
-	margin: 0px;
-}
+	.js-hidden {
+		display: none;
+		margin: 0px;
+	}
 
-.show {
-	display: block;
-	margin: 0px;
-	width: 100%;
-}
+	.show {
+		display: block;
+		margin: 0px;
+		width: 100%;
+	}
 
-.js-nav {
-	position: fixed !important;
-}
+	.js-nav {
+		position: fixed !important;
+	}
 
-.js-ul {
-	position: absolute !important;
-	margin-top: 50px;
-}
+	.js-ul {
+		position: absolute !important;
+		margin-top: 50px;
+	}
 
-#menu {
-	display: block;
-	margin: 0px;
-	max-width: 700px;
-	position: fixed; 
-}
+	#menu {
+		display: block;
+		margin: 0px;
+		max-width: 700px;
+		position: fixed;
+	}
 
 }
 /* Responsive, screen width bigger then 700px; */
 
 /* Javascript Disabled - These are always visibile */
-@media only screen and (min-width: 700px) { 
-nav {
+@media only screen and (min-width: 700px) {
+	nav {
 		max-height: 50px;
 		margin: 0px;
 		width: 100%;
 		position: fixed;
-}
+	}
 
-nav ul {
-	margin-top: 0px;
-	line-height: 50px;
-}
+	nav ul {
+		margin-top: 0px;
+		line-height: 50px;
+	}
 
-nav li {
-	display: inline;
-}
+	nav li {
+		display: inline;
+	}
 
 
-/* Jasvascript Enabled */
-.show {
-	display: inline;
-}
+	/* Jasvascript Enabled */
 
-#menu {
-	display: none;
-}
+	.js-hidden {
+		display: inline;
+		margin: 0px;
+	}
+
+	.show {
+		display: inline;
+	}
+
+	#menu {
+		display: none;
+	}
 
 }
 
@@ -638,7 +674,7 @@ nav li {
 
 #article-wrapper {
 	width: 100%;
-	height: auto;	
+	height: auto;
 	float: left;
 	margin:0px 10px 5px 0px;
 }
@@ -650,7 +686,7 @@ article {
 }
 
 .article-content {
-	height: auto; 
+	height: auto;
 	padding: 5px;
 	margin: 0px;
 	background-color: rgba(255,255,255,0.5);
@@ -659,7 +695,7 @@ article {
 
 .article-content p {
 	padding: 0px 5px 10px 5px;
-	background-color: none;	
+	background-color: none;
 }
 
 /* Article Title/Meta */
@@ -754,7 +790,7 @@ footer {
 }
 
 footer p {
-	width: max-content;
+	width: auto;
 	color: white;
 	margin: auto;
 	padding: 5px;
@@ -769,8 +805,8 @@ footer img {
 /* Flexible Images/Video etc. */
 
 img, video, canvas, url {
-  max-width: 100%;
-  height: auto;
+	max-width: 100%;
+	height: auto;
 }
 
 /* Laptop/Tablet (1024px) */
@@ -786,18 +822,18 @@ img, video, canvas, url {
 }
 
 @media only screen and (max-width: 900px) {
-	
+
 	#article-wrapper  {
 		max-width: 100%;
 	}
 	.widget-wrapper {
 		max-width: 100%;
 	}
-	
+
 	nav li a {
 		font-size: small;
 	}
-	
+
 }
 
 
@@ -810,7 +846,7 @@ img, video, canvas, url {
 #frame {
 	max-width: 1080px;
 	max-height: 720px;
-	background-color: transparent; 
+	background-color: transparent;
 	margin-top:100px;
 	position: relative;
 }
@@ -828,9 +864,9 @@ img, video, canvas, url {
 .transition {
 	-o-transition:1.0s;
 	-ms-transition:1.0s;
- 	-moz-transition:1.0s;
- 	-webkit-transition:1.0s;
- 	transition:1.0s;
+	-moz-transition:1.0s;
+	-webkit-transition:1.0s;
+	transition:1.0s;
 
 }
 
@@ -844,24 +880,24 @@ img, video, canvas, url {
 	/*Hover Off*/
 	-o-transition:1.0s;
 	-ms-transition:1.0s;
- 	-moz-transition:1.0s;
- 	-webkit-transition:1.0s;
- 	transition:1.0s;
+	-moz-transition:1.0s;
+	-webkit-transition:1.0s;
+	transition:1.0s;
 }
 #dashboard:hover {
 	/*Hover On*/
-	background-color: rgba(255,255,255,0.6); 
+	background-color: rgba(255,255,255,0.6);
 	-o-transition:1.0s;
 	-ms-transition:1.0s;
- 	-moz-transition:1.0s;
- 	-webkit-transition:1.0s;
- 	transition:1.0s;
+	-moz-transition:1.0s;
+	-webkit-transition:1.0s;
+	transition:1.0s;
 }
 
 #controls {
 	width:max-content;
 	height: 65px;
-	margin: auto; 
+	margin: auto;
 	background-color: transparent;
 }
 
@@ -874,14 +910,14 @@ img, video, canvas, url {
 
 
 /* Smartphones (portrait and landscape) ----------- */
-@media only screen 
-and (min-device-width : 320px) 
+@media only screen
+and (min-device-width : 320px)
 and (max-device-width : 480px) {
-/*styles*/
+	/*styles*/
 }
 
 /* Smartphones (portrait and landscape) ----------- */
-@media only screen 
+@media only screen
 and (min-width : 320px)
 and (max-width : 480px) {
 	#controls {
@@ -899,7 +935,7 @@ and (max-width : 480px) {
 }
 
 /* Smartphones (portrait) ----------- */
-@media only screen 
+@media only screen
 and (max-width : 320px) {
 	#controls {
 		height: 40px;
@@ -930,7 +966,7 @@ div#specialBox {
 	position: relative;
 	z-index: 3;
 	margin: 150px auto 0px auto;
-	max-width: 1080px; 
+	max-width: 1080px;
 	max-height: 720px;
 	background: none;
 }
@@ -940,4 +976,3 @@ div#snapper {
 	left: 0px;
 	padding-left:24px;
 }
-
