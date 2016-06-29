@@ -22,7 +22,7 @@ class Cart extends Controller {
             $params,
             [
                 'products' => $products,
-                'js' => ["/admin/js/checkAll.js"]
+                'js' => [JS."checkAll.js"]
             ]);
     }
 
@@ -35,12 +35,12 @@ class Cart extends Controller {
         $product = Products_Product::fetchSingle($id);
 
         if(!$product){
-            header('Location: '.'/admin/cart');
+            header('Location: '.ADMIN.'cart');
         }
 
         try {
             $this->basket->add($product,$quantity);
-            header('Location: '.'/admin/cart');
+            header('Location: '.ADMIN.'cart');
         } catch (Basket_QuantityExc $e){
             echo "Sorry, we don't have more in stock!";
         }
@@ -54,7 +54,7 @@ class Cart extends Controller {
         $product = Products_Product::fetchSingle($id);
 
         $this->basket->update($product,$quantity);
-        header('Location: '.'/admin/cart');
+        header('Location: '.ADMIN.'cart');
     }
 }
 

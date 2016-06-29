@@ -7,7 +7,7 @@ class Order extends Controller{
             ["order.php"],
             $params,
             [
-                'js' => ["/admin/js/checkAll.js"]
+                'js' => [JS."checkAll.js"]
             ]);
     }
 

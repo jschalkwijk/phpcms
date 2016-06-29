@@ -4,8 +4,8 @@
 	define ('DB_USER','root');
 	define ('DB_PASSWORD', 'root');
 	define ('DB_NAME', 'nerdcms_db');
-	define ('IMG_UPLOADPATH','/admin/images/');
-	define ('F_UPLOADPATH', $_SERVER['HTTP_HOST'].'/admin/files/');
+	define ('IMG','/admin/images/');
+	define ('FILES', $_SERVER['HTTP_HOST'].'/admin/files/');
 	define('JS','http://'.$_SERVER['HTTP_HOST'].'/admin/js/');
 	define ('ADMIN', 'http://'.$_SERVER['HTTP_HOST'].'/admin/');
 	define ('HOME','http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']));

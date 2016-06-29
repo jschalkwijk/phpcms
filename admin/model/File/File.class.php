@@ -71,7 +71,7 @@ class File_File{
 		$data = mysqli_query($dbc->connect(),$query)or die ("Error connecting to server");
 		$files= array();
 		while($row = mysqli_fetch_array($data)){
-			$file = new files_File(
+			$file = new File_File(
 				$row['name'],
 				$row['type'],
 				$row['file_name'],
@@ -96,7 +96,7 @@ class File_File{
 		$data = mysqli_query($dbc->connect(),$query)or die ("Error connecting to server");
 		$files= array();
 		while($row = mysqli_fetch_array($data)){
-			$file = new files_File(
+			$file = new File_File(
 				$row['name'],
 				$row['type'],
 				$row['file_name'],

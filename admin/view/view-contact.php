@@ -1,19 +1,19 @@
 <?php $contact = $data['contact']; ?>
 
 <div class="container">
-	<form method="post" action="<?php echo '/admin/contacts/info/'.$contact->getID().'/'.$contact->getFirstName(); ?>">
+	<form method="post" action="<?php echo ADMIN.'contacts/info/'.$contact->getID().'/'.$contact->getFirstName(); ?>">
 		<input type="hidden" name="id" value="<?php echo $contact->getID(); ?>"/>
 		<input type="hidden" name="name" value="<?php echo $contact->getFirstName(); ?>"/>
 		<?php 
 		if ($contact->getTrashed() == 1) { // show restore button in deleted items ?>		
 			<button type="submit" name="restore">Restore</button>
-			<button type="submit" name="delete"><img class="glyph-small" src="<?php echo IMG_UPLOADPATH.'delete-post.png'?>"/></button>
+			<button type="submit" name="delete"><img class="glyph-small" src="<?php echo IMG.'delete-post.png'?>"/></button>
 	<?php   } 
 		if ($contact->getTrashed() == 0) { ?>
-			<button class="td-btn" type="submit" name="remove"><img class="glyph-small" src="<?php echo IMG_UPLOADPATH.'trash-post.png'?>"/></button>
+			<button class="td-btn" type="submit" name="remove"><img class="glyph-small" src="<?php echo IMG.'trash-post.png'?>"/></button>
 	<?php } ?>
 	</form>
-	<button><?php echo '<a href="/admin/contacts/edit-contact/'.$contact->getID().'/'.$contact->getFirstName().'">Edit</a>'?></button>
+	<button><?php echo '<a href="'.ADMIN.'contacts/edit-contact/'.$contact->getID().'/'.$contact->getFirstName().'">Edit</a>'?></button>
 </div>
 <div class="container medium">
 	<h1><?php echo $contact->getFirstName().' '.$contact->getLastName(); ?></h1>

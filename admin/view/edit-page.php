@@ -1,4 +1,4 @@
-<script type="text/javascript" src="/admin/js/tinymce/tinymce.min.js"></script>
+<script type="text/javascript" src="<?php echo JS."tinymce/tinymce.min.js"; ?>"></script>
 <script type="text/javascript">
 tinymce.init({
     selector: "textarea",
@@ -46,7 +46,7 @@ if (isset($id) && isset($title)) {
 	$query = "SELECT * FROM pages WHERE id = $id";
 	$data = mysqli_query($dbc->connect(),$query);
 	while($row = mysqli_fetch_array($data)) { ?>
-	<form id="edit-form"method="post" action="edit-pages.php">
+	<form id="edit-form"method="post" action="<?php echo ADMIN."edit-pages.php"; ?>">
 		<input type="hidden" name="id" value="<?php echo $row['id'];?>"/>
 	<input type="text" name="title" value="<?php echo $row['title'];?>"/><br />
 	<input type="text" name="page_desc" placeholder="Page Description (max 160 characters)" value="<?php if(!empty($row['description'])){ echo $row['description']; }?>"/><br />

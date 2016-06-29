@@ -7,13 +7,13 @@ class Contacts extends Controller {
 	public function index($params = null){
 		$this->UserActions('contacts');
 		$contacts = Contacts_Contact::fetchAll('contacts',0);
-		$this->view('Contacts',['contacts.php'],$params,['contacts' => $contacts, 'trashed' => 0,'js' => ['/admin/js/checkAll.js']]);
+		$this->view('Contacts',['contacts.php'],$params,['contacts' => $contacts, 'trashed' => 0,'js' => [JS.'checkAll.js']]);
 	}
 	
 	public function deletedContacts($params = null){
 		$this->UserActions('contacts');
 		$contacts = Contacts_Contact::fetchAll('contacts',1);
-		$this->view('Contacts',['contacts.php'],$params,['contacts' => $contacts, 'trashed' => 1,'js' => ['/admin/js/checkAll.js']]);
+		$this->view('Contacts',['contacts.php'],$params,['contacts' => $contacts, 'trashed' => 1,'js' => [JS.'checkAll.js']]);
 	}
 	
 	public function addContact($params = null){

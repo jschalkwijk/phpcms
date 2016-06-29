@@ -5,12 +5,12 @@
 
 	<div class="container">
 		<div class="container">
-			<a class="link-btn" href="users/add-user">+ User</a>
-			<a class="link-btn" href="users/deleted-users">Deleted Users</a>
+			<a class="link-btn" href="<?php echo ADMIN."users/add-user"; ?>">+ User</a>
+			<a class="link-btn" href="<?php echo ADMIN."users/deleted-users";?>">Deleted Users</a>
 		</div>
-			<form class="backend-form" method="post" action="/admin/users">
+			<form class="backend-form" method="post" action="<?php echo ADMIN."users"; ?>">
 				<table class="backend-table title">
-					<tr><th>User</th><th>Rights</th><?php if ($_SESSION['rights'] == 'Admin') { ?> <th>Edit</th><th>View</th><th><button type="button" id="check-all"><img class="glyph-small" src="/admin/images/check.png" alt="check-uncheck-all-items"/></button></th></tr> <?php } ?>
+					<tr><th>User</th><th>Rights</th><?php if ($_SESSION['rights'] == 'Admin') { ?> <th>Edit</th><th>View</th><th><button type="button" id="check-all"><img class="glyph-small" src="<?php echo IMG."check.png";?>" alt="check-uncheck-all-items"/></button></th></tr> <?php } ?>
 					<?php
 					$users = $data['users'];
 					$writer = users_UserWriter::write($users);

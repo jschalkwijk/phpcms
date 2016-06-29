@@ -21,7 +21,7 @@ class File extends Controller {
 		if(isset($_GET['download_files'])){
 			$download_file = File_File::downloadFiles();
 		}
-		$this->view('Albums',['add-files.php','albums.php'],$params,['js' => ['/admin/js/checkAll.js']]);
+		$this->view('Albums',['add-files.php','albums.php'],$params,['js' => [JS.'checkAll.js']]);
 	}
 }
 ?>

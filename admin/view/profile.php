@@ -1,22 +1,22 @@
 <?php $user = $data['user']; ?>
 
 <div class="container">
-	<form method="post" action="<?php echo '/admin/users/profile/'.$user->getID().'/'.$user->getFirstName(); ?>">
+	<form method="post" action="<?php echo ADMIN.'users/profile/'.$user->getID().'/'.$user->getFirstName(); ?>">
 		<input type="hidden" name="id" value="<?php echo $user->getID(); ?>"/>
 		<input type="hidden" name="name" value="<?php echo $user->getFirstName(); ?>"/>
 		<?php 
 		if ($user->getTrashed() == 1) { // show restore button in deleted items ?>		
 			<button type="submit" name="restore">Restore</button>
-			<button type="submit" name="delete"><img class="glyph-small" src="<?php echo IMG_UPLOADPATH.'delete-post.png'?>"/></button>
+			<button type="submit" name="delete"><img class="glyph-small" src="<?php echo IMG.'delete-post.png'?>"/></button>
 	<?php   } 
 		if ($user->getTrashed() == 0) { ?>
-			<button class="td-btn" type="submit" name="remove"><img class="glyph-small" src="<?php echo IMG_UPLOADPATH.'trash-post.png'?>"/></button>
+			<button class="td-btn" type="submit" name="remove"><img class="glyph-small" src="<?php echo IMG.'trash-post.png'?>"/></button>
 	<?php } ?>
 	</form>
-	<button><?php echo '<a href="/admin/users/edit-users/'.$user->getID().'/'.$user->getUserName().'">Edit</a>'?></button>
+	<button><?php echo '<a href="'.ADMIN.'users/edit-users/'.$user->getID().'/'.$user->getUserName().'">Edit</a>'?></button>
 </div>
 <div class="container medium">
-	<img class="left" src="<?php echo '/admin/'.$user->getUserImg(); ?>"/>
+	<img class="left" src="<?php echo ADMIN.$user->getUserImg(); ?>"/>
 	<h1><?php echo $user->getFirstName().' '.$user->getLastName(); ?></h1>
 	<img class="left" src="<?php # echo '/admin/'.$user->getProfileImg(); ?>"/> 
 	<table>

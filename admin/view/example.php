@@ -2,7 +2,7 @@
 
 use \Defuse\Crypto\Crypto;
 use \Defuse\Crypto\Exception as Ex;
-// !! autoloader must be requterd inside the existing autoloader function inside the globals.php
+// !! autoloader must be requterd inside the existing autoloader function inside the config.php
 //require_once 'model/Encryption/autoload.php';
 try {
 /*

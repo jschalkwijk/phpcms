@@ -6,7 +6,7 @@ class Users extends Controller{
 	public function index($params = null){
 		$users = Users_Users::fetchUsers('users',0);
 		$this->UserActions('users');
-		$this->view('Users',['users.php'],$params,['users' => $users,'trashed' => 0,'js' => ['/admin/js/checkAll.js']]);
+		$this->view('Users',['users.php'],$params,['users' => $users,'trashed' => 0,'js' => [JS.'checkAll.js']]);
 	}
 	public function AddUser($params = null){
 		if(isset($_POST['submit'])){
@@ -21,7 +21,7 @@ class Users extends Controller{
 	public function DeletedUsers($params = null){
 		$users = Users_Users::fetchUsers('users',1);
 		$this->UserActions('users');
-		$this->view('Deleted Users',['users.php'],$params,['users' => $users,'trashed' => 1,'js' => ['/admin/js/checkAll.js']]);
+		$this->view('Deleted Users',['users.php'],$params,['users' => $users,'trashed' => 1,'js' => [JS.'/checkAll.js']]);
 	}
 	public function EditUsers($params = null){
 		if (isset($_POST['submit_file']) || !empty($_FILES['files']['name'][0])) {

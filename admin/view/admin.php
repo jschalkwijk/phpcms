@@ -2,9 +2,9 @@
 	<div class="row">
 		<div class="center-block col-sm-8 col-md-8 col-lg-8">
 			<p class="logged">Hello <?php echo $_SESSION['username']; ?></p>
-			<a href="addpost"><button>+ Post</button></a>
-			<a href="addpage"><button>+ Page</button></a>
-			<?php if($_SESSION['rights'] == 'Admin') { echo '<a href="adduser"><button>+ User</button></a>'; } ?>
+			<a href="<?php echo ADMIN."add-post";?>"><button>+ Post</button></a>
+			<a href="<?php echo ADMIN."add-page"; ?>"><button>+ Page</button></a>
+			<?php if($_SESSION['rights'] == 'Admin') { echo '<a href="'.ADMIN."add-user".'><button>+ User</button></a>'; } ?>
 			<a href="#"><button>+ Client</button></a>
 			<a href="#"><button>+ Project</button></a>
 			<a href="#"><button>+ Product</button></a>
@@ -29,7 +29,7 @@
 							$posts = $data['posts'];
 							// thisis a write function, it just writes out the data,
 							// the information is supplied by the model
-							$writer = content_ContentWriter::write($posts);
+							$writer = Content_ContentWriter::write($posts);
 							require($data['view']['actions']);
 						?>
 						<input type="hidden" name="dbt" value="posts"/>
@@ -43,10 +43,10 @@
 				<table class="backend-table title">
 					<tr><th class="td-title">Title</th><th class="td-author">Author</th><th class="td-category">Category</th><th class="td-date">Date</th><th>Edit</th><th>View</th><!-- <th>Remove</th> --></tr>
 
-					<form class="backend-form" method="post" action="/admin">
+					<form class="backend-form" method="post" action="<?php echo ADMIN ;?>">
 						<?php
 							$pages = $data['pages'];
-							$writer = content_ContentWriter::write($pages);
+							$writer = Content_ContentWriter::write($pages);
 							require($data['view']['actions']);
 						?>
 						<input type="hidden" name="dbt" value="pages"/>
@@ -62,12 +62,12 @@
 			<h2>New Users</h2>
 			<table class="backend-table title">
 				<tr><th>User</th><th>Rights</th>
-					<form class="backend-form" method="post" action="/admin">
+					<form class="backend-form" method="post" action="<?php echo ADMIN; ?>">
 						<?php if ($_SESSION['rights'] == 'Admin') { ?> <th>Edit</th><th>View</th><!-- <th>Remove</th> --></tr> <?php } ?>
 
 						<?php
 							$users = $data['users'];
-							$writer = users_UserWriter::write($users);
+							$writer = Users_UserWriter::write($users);
 							require('view/manage_content.php');
 						?>
 						<input type="hidden" name="dbt" value="login"/>

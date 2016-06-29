@@ -5,12 +5,12 @@ class Pages extends Controller {
 	
 	public function index($params = null){
 		$pages = Content_Content::fetchAll('pages',0);
-		$action = '/admin/pages';
+		$action = ADMIN.'pages';
 		// Post requests need to be handled first! Then load the page, otherwise you will get the headers already sent error.
 		$this->UserActions('pages');
 		// view takes: page_title,[array of view files],params from the router,array of data from model
-		$view = ['search' => 'view/search-page.php','actions' => 'view/manage_content.php'];
-		$this->view('pages',['pages.php'],$params,[ 'pages' => $pages , 'action' => $action,'trashed' => 0,'js' => ['/admin/js/checkAll.js']]);
+		$view = ['search' => ADMIN.'view/search-page.php','actions' => ADMIN.'view/manage_content.php'];
+		$this->view('pages',['pages.php'],$params,[ 'pages' => $pages , 'action' => $action,'trashed' => 0,'js' => [JS.'checkAll.js']]);
 	}
 
 	public function AddPage($params = null){
@@ -25,10 +25,10 @@ class Pages extends Controller {
 	}
 
 	public function DeletedPages($params = null){
-		$action = '/admin/pages/deleted-pages';
+		$action = ADMIN.'pages/deleted-pages';
 		$delete = $this->UserActions('pages');
 		$pages = Content_Content::fetchAll('pages',1);
-		$this->view('Deleted Pages',['pages.php'],$params,[ 'pages' => $pages , 'action' => $action,'trashed' => 1,'messages' => $delete['messages'],'js' => ['/admin/js/checkAll.js']]);
+		$this->view('Deleted Pages',['pages.php'],$params,[ 'pages' => $pages , 'action' => $action,'trashed' => 1,'messages' => $delete['messages'],'js' => [JS.'checkAll.js']]);
 
 	}
 

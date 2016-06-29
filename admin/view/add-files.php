@@ -8,7 +8,7 @@
 		}
 		
 	?>
-	<form class="small" enctype="multipart/form-data" method="post" action="<?php (!isset($params[0])) ? "/admin/file" : "/admin/file/albums/".$params[0].'/'.$params[1];?>">
+	<form class="small" enctype="multipart/form-data" method="post" action="<?php (!isset($params[0])) ? ADMIN."file" : ADMIN."file/albums/".$params[0].'/'.$params[1];?>">
 	<input type="hidden" name="MAX_FILE_SIZE" value="43500000" />
 	<label for="files[]">Choose File(max size: 3.5 MB): </label><br />
 	<input type="file" name="files[]" multiple/><br />

@@ -7,18 +7,18 @@
 		echo '</div>';
 	if (in_array($type, $img)){
 		if($secured == 0){
-			echo '<div class="center"><a class="image_link" href="/admin/'.$path.'">'.'<img class="files" src="/admin/'.$thumb_path.'"/>'.'</a></div>';
+			echo '<div class="center"><a class="image_link" href="'.ADMIN.$path.'">'.'<img class="ADMIN" src="'.ADMIN.$thumb_path.'"/></a></div>';
 		}
 		if($secured == 1){
-			echo '<a href="/files/secured/'.$album_name.'/'.$file_name.'">'.'<img class="files" src="'.'/files/secured/thumbs/'.$album_name.'/'.$thumb_name.'"/>'.'</a>';
+			echo '<a href="'.ADMIN.'secured/'.$album_name.'/'.$file_name.'">'.'<img class="ADMIN" src="'.ADMIN.'secured/thumbs/'.$album_name.'/'.$thumb_name.'"/>'.'</a>';
 		}
 	}
 	if (in_array($type, $doc)){
-		echo '<a href="'.$path.'">'.'<img class="files" src="/images/word.png"/>'.'</a>';
+		echo '<a href="'.$path.'">'.'<img class="ADMIN" src="'.IMG.'word.png"/>'.'</a>';
 	}
 	if ($type == 'pdf'){
-		echo '<a class="link-btn" href="'.$path.'">'.'<img class="files" src="/images/pdf.png"/>'.'</a>';
+		echo '<a class="link-btn" href="'.$path.'">'.'<img class="ADMIN" src="/images/pdf.png"/>'.'</a>';
 	}
-	echo '<a class="downloadLink left meta" href="/admin/'.$path.'" download="'.$name.'"><img class="glyph-small" src="/images/download.png" /></a>';
+	echo '<a class="downloadLink left meta" href="/'.ADMIN.$path.'" download="'.$name.'"><img class="glyph-small" src="'.IMG.'download.png" /></a>';
 	echo '</div>';
 ?>

@@ -28,7 +28,7 @@
             <?php foreach($this->basket->all() as $product){ ?>
                 <tr>
                     <td class="td-title">
-                        <a href="<?php echo '/admin/products/info/'.$product->getID().'/'.$product->getName(); ?>"><?php echo $product->getName(); ?></a>
+                        <a href="<?php echo ADMIN.'products/info/'.$product->getID().'/'.$product->getName(); ?>"><?php echo $product->getName(); ?></a>
                     </td>
                     <td class="td-category">
                         <span><?php echo $product->getQuantity(); ?></span>

@@ -15,13 +15,13 @@
 					$writer = File_FileWriter::write($files,'view/singleFile.php',$doc,$img);
 				echo '<div class="left">';
 					echo '<button type="submit" name="delete" id="delete">Delete Selected</button>';
-					echo '<button type="submit" name="download_files" id="download_files" alt="Download File">Download files</button>';	
+					echo '<button type="submit" name="download_files" id="download_files">Download files</button>';
 				echo '</div>';
 			echo '</form>';
 		}
 	?>
 </div><br/>
 	<div class="container large">
-		<button id="check-all"><img class="glyph-small" src="/admin/images/check.png"/></button>
+		<button id="check-all"><img class="glyph-small" src="<?php echo IMG."check.png"; ?>"/></button>
 		<?php File_Folders::show_albums($album_id); ?>
 	</div>

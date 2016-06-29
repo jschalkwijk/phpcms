@@ -3,7 +3,7 @@
 	$dbc = new DBC;
 	$user = $data['user'];
 	
-	(isset($params[0]) && isset($params[1])) ? $action = '/admin/users/edit-users/'.$user->getID().'/'.$user->getUserName() : $action = '/admin/users/add-user';
+	(isset($params[0]) && isset($params[1])) ? $action = ADMIN.'users/edit-users/'.$user->getID().'/'.$user->getUserName() : $action = ADMIN.'users/add-user';
 	(isset($data['output_form'])) ? $output_form = $data['output_form'] : $output_form = true;
 	if (isset($_POST['submit'])) {
 		echo '<div class="container medium">';

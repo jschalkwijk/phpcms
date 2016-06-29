@@ -1,4 +1,4 @@
-<script type="text/javascript" src="/admin/js/tinymce/tinymce.min.js"></script>
+<script type="text/javascript" src="<?php echo JS."tinymce/tinymce.min.js"; ?>"></script>
 <script type="text/javascript">
 	tinymce.init({
 		selector: "textarea",
@@ -14,11 +14,11 @@
 		convert_urls: true
 	});
 </script>
-<script type="text/javascript" src="/admin/js/preview.js"></script>
+<script type="text/javascript" src="<?php echo JS."preview.js"; ?>"></script>
 <?php
 $page = $data['page'];
 
-(isset($params[0]) && isset($params[1])) ? $action = '/admin/pages/edit-page/'.$page->getID().'/'.$page->getTitle() : $action = '/admin/pages/add-page';
+(isset($params[0]) && isset($params[1])) ? $action = ADMIN.'pages/edit-page/'.$page->getID().'/'.$page->getTitle() : $action = ADMIN.'pages/add-page';
 (isset($data['output_form'])) ? $output_form = $data['output_form'] : $output_form = true;
 
 if (isset($_POST['submit'])) {

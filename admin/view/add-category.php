@@ -3,7 +3,7 @@
 </div>
 
 <?php if (isset($data['errors'])) { echo implode(",",$data['errors']); } ?>
-<form id="addpost-form" action="/admin/categories" method="post">
+<form id="addpost-form" action="<?php echo ADMIN."categories";?>" method="post">
 	<input type="text" name="category" placeholder="Category"><br />
 	<button type="submit" name="submit">Submit</button>
 </form>

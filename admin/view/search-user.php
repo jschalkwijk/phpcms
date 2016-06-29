@@ -1,4 +1,4 @@
-<form class="search"action="<?php echo "/admin/search";?>" method="post">
+<form class="search"action="<?php echo ADMIN."search";?>" method="post">
 	<input type="text" name="search" placeholder="Search for Users"/>
 	<button type="submit" name="search-user">Search</button>
 </form>
@@ -41,7 +41,7 @@
 	?>
 		<table class="backend-table title">
 			<tr><th>User</th><th>Rights</th>
-			<form class="backend-form" method="post" action="/admin/users">
+			<form class="backend-form" method="post" action="<?php echo ADMIN."users"; ?>">
 				<?php if ($_SESSION['rights'] == 'Admin') { ?> <th>Edit</th><th>View</th><!-- <th>Remove</th> --></tr> <?php } ?>
 		
 				<?php 

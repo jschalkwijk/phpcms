@@ -1,4 +1,4 @@
-<form class="search"action="<?php echo "/admin/search"; ?>" method="post">
+<form class="search"action="<?php echo ADMIN."search"; ?>" method="post">
 	<input type="text" name="search" placeholder="Search files"/>
 	<button type="submit" name="search-file">Search</button>
 </form>
@@ -19,9 +19,9 @@
 				$searchTermBits[] = "name LIKE '%$term%'";
 			}
 		}
-		echo '<form method="get" action="/admin/search">';
+		echo '<form method="get" action="'.ADMIN.'search">';
 					$files = files_File::fetchFilesBySearch($searchTermBits,0);
-					$writer = files_FileWriter::write($files,'view/singleFile.php',$doc,$img);
+					$writer = files_FileWriter::write($files,ADMIN.'view/singleFile.php',$doc,$img);
 				echo '<div class="left">';
 					echo '<button type="submit" name="delete" id="delete">Delete Selected</button>';
 					echo '<button type="submit" name="download_files" id="download_files" alt="Download File">Download files</button>';	
@@ -39,8 +39,8 @@
 		// It's as easy as this:
 		$data = mysqli_query($dbc->connect(), $query);
 		foreach ( $data as $delete) {
-			unlink(F_UPLOADPATH.$delete['album_name'].'/'.$delete['file_name']);
-			unlink(F_UPLOADPATH.'/thumbs/'.$delete['album_name'].'/'.'thumb_'.$delete['file_name']);
+			unlink(FILES.$delete['album_name'].'/'.$delete['file_name']);
+			unlink(FILES.'/thumbs/'.$delete['album_name'].'/'.'thumb_'.$delete['file_name']);
 		}
 		// This would do the job
 		mysqli_query ($dbc->connect(),"DELETE FROM files WHERE id IN({$multiple})" );

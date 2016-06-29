@@ -89,21 +89,21 @@ class File_Folders {
 			$query = "SELECT * FROM albums WHERE parent_id = 0 AND user_id = $user_id";
 			$data = mysqli_query($dbc->connect(),$query);
 			// start form
-			echo '<form method="get" action="/admin/file">';
+			echo '<form method="get" action="'.ADMIN.'"file">';
 
 		}
 		while($row = mysqli_fetch_array($data)){
 			echo '<div class="media">';
 			echo '<div class="meta">';
 						echo '<input class="checkbox left" type="checkbox" name="checkbox[]" value="'.$row['album_id'].'"/>';
-						echo '<div class="left"><a href="/admin/file/albums/'.$row['album_id'].'/'.$row['name'].'""> '.$row['name'].'</a></div>';
+						echo '<div class="left"><a href="'.ADMIN.'file/albums/'.$row['album_id'].'/'.$row['name'].'""> '.$row['name'].'</a></div>';
 			echo '</div>';
-			echo '<div class="center"><img class="files" src="/admin/images/files.png"/></div>';
+			echo '<div class="center"><img class="files" src="'.ADMIN.'images/files.png"/></div>';
 			echo '<input type="hidden" name="album_name" value="'.$row['name'].'"/>';
 			echo '</div>';
 		}
 		echo '<button type="submit" name="delete-albums" id="delete-albums">Delete Albums</button>';
-		echo '</form>';	
+		echo '</form>';
 		$dbc->disconnect();
 	}
 	

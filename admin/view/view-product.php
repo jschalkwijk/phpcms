@@ -1,7 +1,7 @@
 <?php
 $product = $data['product'];
 
-(isset($params[0]) && isset($params[1])) ? $action = '/admin/products/info/'.$product->getID().'/'.$product->getName() : $action = '/admin/products/add-product';
+(isset($params[0]) && isset($params[1])) ? $action = ADMIN.'products/info/'.$product->getID().'/'.$product->getName() : $action = ADMIN.'products/add-product';
 (isset($data['output_form'])) ? $output_form = $data['output_form'] : $output_form = true;
 ?>
 
@@ -28,24 +28,24 @@ $product = $data['product'];
 </div>
 
 <div class="container">
-	<form method="post" action="<?php echo '/admin/products/info/'.$product->getID().'/'.$product->getName(); ?>">
+	<form method="post" action="<?php echo ADMIN.'products/info/'.$product->getID().'/'.$product->getName(); ?>">
 		<input type="hidden" name="id" value="<?php echo $product->getID(); ?>"/>
 		<input type="hidden" name="name" value="<?php echo $product->getName(); ?>"/>
 		<?php
 		if ($product->getTrashed() == 1) { // show restore button in deleted items ?>
 			<button type="submit" name="restore">Restore</button>
-			<button type="submit" name="delete"><img class="glyph-small" src="<?php echo IMG_UPLOADPATH.'delete-post.png'?>"/></button>
+			<button type="submit" name="delete"><img class="glyph-small" src="<?php echo IMG.'delete-post.png'?>"/></button>
 		<?php   }
 		if ($product->getTrashed() == 0) { ?>
-			<button class="td-btn" type="submit" name="remove"><img class="glyph-small" src="<?php echo IMG_UPLOADPATH.'trash-post.png'?>"/></button>
-			<button><?php echo '<a href="/admin/products/edit-product/'.$product->getID().'/'.$product->getName().'">Edit</a>'?></button>
+			<button class="td-btn" type="submit" name="remove"><img class="glyph-small" src="<?php echo IMG.'trash-post.png'?>"/></button>
+			<button><?php echo '<a href="'.ADMIN.'/products/edit-product/'.$product->getID().'/'.$product->getName().'">Edit</a>'?></button>
 		<?php } ?>
 	</form>
 
 </div>
 
 <div class="container medium">
-	<form class="backend-form" method="post" action="<?php echo "/admin/cart/add/".$product->getID();?>">
+	<form class="backend-form" method="post" action="<?php echo ADMIN."cart/add/".$product->getID();?>">
 		<select name="quantity">
 			<?php
 			for($i = 0; $i < $product->getQuantity()+1; $i++){ ?>
@@ -69,7 +69,7 @@ $product = $data['product'];
 	</table>
 </div>
 <div class="container large">
-	<button id="check-all"><img class="glyph-small" src="/admin/images/check.png"/></button>
+	<button id="check-all"><img class="glyph-small" src="<?php echo IMG."check.png"; ?>/></button>
 	<?php File_Folders::show_albums($product->getAlbumID()); ?>
 </div>
 
@@ -79,7 +79,7 @@ $product = $data['product'];
 	$url = $_SERVER["REQUEST_URI"];
 	echo '<form method="get" action="'.$url.'">';
 	$files = File_File::fetchFilesByAlbum($product->getAlbumID(),0);
-	$writer = File_FileWriter::write($files,'view/singleFile.php',[],$img);
+	$writer = File_FileWriter::write($files,ADMIN.'view/singleFile.php',[],$img);
 	echo '<div class="left">';
 	echo '<button type="submit" name="delete" id="delete">Delete Selected</button>';
 	echo '<button type="submit" name="download_files" id="download_files" alt="Download File">Download files</button>';

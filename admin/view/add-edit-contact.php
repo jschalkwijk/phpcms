@@ -1,4 +1,4 @@
-<script type="text/javascript" src="/admin/js/tinymce/tinymce.min.js"></script>
+<script type="text/javascript" src="<?php echo JS."tinymce/tinymce.min.js";?>"></script>
 <script type="text/javascript">
 tinymce.init({
     selector: "textarea",
@@ -17,7 +17,7 @@ tinymce.init({
 	if (!isset($params[0]) || !isset($params[1])) { 
 		echo 'There is no contact selected.';
 	}
-	(isset($params[0]) && isset($params[1])) ? $action = '/admin/contacts/edit-contact/'.$contact->getID().'/'.$contact->getFirstName() : $action = '/admin/contacts/add-contact';
+	(isset($params[0]) && isset($params[1])) ? $action = ADMIN.'contacts/edit-contact/'.$contact->getID().'/'.$contact->getFirstName() : $action = ADMIN.'contacts/add-contact';
 	(isset($data['output_form'])) ? $output_form = $data['output_form'] : $output_form = true;
 	
 	if (isset($_POST['submit'])) {

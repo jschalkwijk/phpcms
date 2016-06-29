@@ -6,13 +6,13 @@ class Products extends Controller{
 	public function index($params = null){
 		$this->UserActions('products');
 		$products = Products_Product::fetchAll('products',0);
-		$this->view('Products',['products.php'],$params,['products' => $products['products'],'trashed' => 0,'js' => ['/admin/js/checkAll.js']]);
+		$this->view('Products',['products.php'],$params,['products' => $products['products'],'trashed' => 0,'js' => [JS.'checkAll.js']]);
 	}
 	
 	public function deletedProducts($params = null){
 		$this->UserActions('products');
 		$products = Products_Product::fetchAll('products',1);
-		$this->view('Products',['products.php'],$params,['products' => $products['products'],'trashed' => 1,'js' => ['/admin/js/checkAll.js']]);
+		$this->view('Products',['products.php'],$params,['products' => $products['products'],'trashed' => 1,'js' => [JS.'checkAll.js']]);
 	}
 	
 	public function addProduct($params = null){
@@ -55,7 +55,7 @@ class Products extends Controller{
 		}
 		
 		$product = Products_Product::fetchSingle($params[0]);
-		$this->view('Product '.$params[1],['view-product.php'],$params,['product' => $product,'js' => ['/admin/js/checkAll.js']]);
+		$this->view('Product '.$params[1],['view-product.php'],$params,['product' => $product,'js' => [JS.'checkAll.js']]);
 	}
 }
 

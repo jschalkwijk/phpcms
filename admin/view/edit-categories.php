@@ -14,7 +14,7 @@
 	}
 	if($output_form){
 ?>
-			<form id="edit-form" method="post" action="<?php echo "/admin/categories/edit-categories/".$category->getID()."/".$category->getTitle(); ?>">
+			<form id="edit-form" method="post" action="<?php echo ADMIN."categories/edit-categories/".$category->getID()."/".$category->getTitle(); ?>">
 			<input type="hidden" name="id" value="<?php echo $category->getID();?>"/>
 			<input type="text" name="title" value="<?php echo $category->getTitle();?>"/><br />
 			<!-- When page first loads, the hidden field will containe the set title, if the user edits the title. we can change the corresponding post categories. 			 -->

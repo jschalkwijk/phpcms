@@ -1,5 +1,5 @@
 <div class="container">
-	<a href="downloads/deleted-downloads"><button>Deleted Downloads</button></a>
+	<a href="<?php echo ADMIN."downloads/deleted-downloads"; ?>"><button>Deleted Downloads</button></a>
 </div>
 <?php
 	if(isset($_POST['submit_file'])){
