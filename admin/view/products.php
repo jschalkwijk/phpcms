@@ -6,7 +6,7 @@
 	<?php 
 		$products = $data['products'];
 	?>
-	<form class="backend-form" method="post" action="<?php echo ADMIN."products"; ?>>
+	<form class="backend-form" method="post" action="<?php echo ADMIN."products"; ?>">
 		<table class="backend-table title">
 			<tr><th>Name</th><th>Category</th><th>Price</th><th>In Stock</th><th>Edit</th><th>View</th><th><button type="button" id="check-all"><img class="glyph-small" src="<?php echo ADMIN."check.png"; ?>" alt="check-unheck-all-items"/></button></th></tr>
 			<?php foreach($products as $product){ ?>
