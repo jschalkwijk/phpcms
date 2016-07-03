@@ -1,29 +1,46 @@
 
-<div class="container large">
-    <div class="container large left">
-        <form id="addpost-form" method="post" action="#">
-            <div class="container small left">
+<?php
+if(!empty($data['customer'])) {
+    $customer = $data['customer'];
+}
+?>
+<div class="center">
+    <div class="large">
+        <form id="addpost-form" method="post" action="<?php echo ADMIN."order/details"; ?>">
+            <div class="small left">
                 <h2 class="container">Personal details</h2>
-                <input type="text" id="full-name" name="full-name" placeholder="Full Name"/>
-                <input type="email" id="email" name="email" placeholder="E-Mail"/>
-                <input type="tel" id="phone" name="phone" placeholder="Phone"/>
+                <input type="text" id="name" name="name" placeholder="Full Name (required)" value="<?php echo $customer->getName(); ?>"/>
+                <input type="email" id="email" name="email" placeholder="E-Mail (required)" value="<?php echo $customer->getMail(); ?>"/>
+                <input type="tel" id="phone" name="phone" placeholder="Phone (required)" value="<?php echo $customer->getPhone(); ?>"/>
             </div>
-            <div class="container small left">
+            <div class="small right">
                 <h2 class="container">Shipping Address</h2>
-                <input type="text" id="address1" name="address1" placeholder="Address line 1"/>
-                <input type="text" id="address2" name="address2" placeholder="Address line 2"/>
-                <input type="text" id="city" name="city" placeholder="City"/>
-                <input type="text" id="postal" name="postal" placeholder="Postal Code"/>
+                <input type="text" id="address1" name="address1" placeholder="Address line 1 (required)" value="<?php echo $customer->getAddress1(); ?>"/>
+                <input type="text" id="address2" name="address2" placeholder="Address line 2" value="<?php echo $customer->getAddress2(); ?>"/>
+                <input type="text" id="city" name="city" placeholder="City (required)" value="<?php echo $customer->getCity(); ?>"/>
+                <input type="text" id="postal" name="postal_code" placeholder="Postal Code (required)" value="<?php echo $customer->getPostalCode(); ?>"/>
 <!--                <input type="text" id="country" name="country" placeholder="Country"/>-->
             </div>
-            <div class="container clearfix">
+            <div class="center clearfix">
+                <?php
+                if(!empty($data['messages'])){
+                    foreach($data['messages'] as $messages){
+                        foreach($messages as $msg){
+                            echo "<p>".$msg."<br /></p>";
+                        }
+                    }
+                }
+                ?>
+            </div>
+            <div class="center clearfix">
                 <button type="submit" name="submit-order">Place Order</button>
             </div>
         </form>
     </div>
-    <div class="container medium">
-        <h2 class="container">Summary</h2>
-        <table class="backend-table title">
+
+    <div class="medium">
+        <h2 class="center">Summary</h2>
+        <table class="backend-table title center">
             <tr><th>Product</th><th>Quantity</th><th>€ Total</th></tr>
             <?php foreach($this->basket->all() as $product){ ?>
                 <tr>

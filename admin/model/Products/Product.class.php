@@ -120,7 +120,7 @@ class Products_Product {
 			$product->setID($row['product_id']);
 			$products[] = $product;
 		}
-
+		$dbc->disconnect();
 		return ['products' => $products];
 	}
 
@@ -146,7 +146,7 @@ class Products_Product {
 			$product->setID($row['product_id']);
 			$products[] = $product;
 		}
-
+		$dbc->disconnect();
 		return $products;
 	}
 
@@ -168,7 +168,7 @@ class Products_Product {
 			);
 			$product->setID($row['product_id']);
 		}
-
+		$dbc->disconnect();
 		return $product;
 	}
 
