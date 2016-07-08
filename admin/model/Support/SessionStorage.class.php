@@ -47,7 +47,7 @@ class Support_SessionStorage implements Store
         return $_SESSION[$this->basket];
     }
 
-    public function unsetProduct($index)
+    public function unsetIndex($index)
     {
         // Remove a product from the basket session by it's ID, if it exist
         if($this->exists($index)){

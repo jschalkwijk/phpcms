@@ -50,7 +50,7 @@ class Basket_Basket
     public function remove(Products_Product $product)
     {
         // remove item from the basket session
-        $this->storage->unsetProduct($product->getID());
+        $this->storage->unsetIndex($product->getID());
     }
 
     public function has(Products_Product $product)

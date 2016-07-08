@@ -33,7 +33,7 @@ class Order_Order{
         echo $this->getID();
         $dbc->disconnect();
 
-        return ['messages' => ["Order successful"]];
+        return ['messages' => ["Success"]];
 
     }
 

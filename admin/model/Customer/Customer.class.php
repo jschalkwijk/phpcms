@@ -12,6 +12,7 @@ class Customer_Customer
 
     public function __construct($name,$mail,$phone,$address1,$address2 = null,$city,$postal_code)
     {
+        $this->id = 0;
         $this->name = $name;
         $this->mail = $mail;
         $this->phone = $phone;
@@ -136,7 +137,7 @@ class Customer_Customer
                 mysqli_query($dbc->connect(), $query) or die('Error updating existing customer');
                 $dbc->disconnect();
 
-                $messages[] = "Customer updated";
+                $messages[] = "Please check if your personal details and address are correct before proceeding the payment.";
                 return ['customer_id' => $id,'messages' => $messages];
             }
         } else {

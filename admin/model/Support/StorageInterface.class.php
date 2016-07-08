@@ -10,7 +10,7 @@ interface Support_StorageInterface {
 
     public function exists($index);
 
-    public function unsetProduct($index);
+    public function unsetIndex($index);
 
     public function clear();
 

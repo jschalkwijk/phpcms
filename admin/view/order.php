@@ -33,6 +33,7 @@ if(!empty($data['customer'])) {
                 ?>
             </div>
             <div class="center clearfix">
+                <p class="alert alert-info">Please check if your personal details and address are correct before proceeding your order.</p>
                 <button type="submit" name="submit-order">Place Order</button>
             </div>
         </form>
