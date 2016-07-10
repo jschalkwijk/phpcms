@@ -19,8 +19,8 @@ class Order_Details{
     {
         // Standaard op nul zetten omdat we een nieuwe klant hebben, bij bestaande klanten
         // halen we het ID uit de DB.
-        $this->storage->set(0,[
-            'customer_id' => $customer->getID(),
+        $this->storage->set($customer->getID(),[
+            'customer_id' => (int) $customer->getID(),
             'name' => $customer->getName(),
             'email' => $customer->getMail(),
             'phone' => $customer->getPhone(),
@@ -43,10 +43,28 @@ class Order_Details{
         return $this->storage->exists($customer->getID());
     }
 
-    public function get()
+    public function get(Customer_Customer $customer)
     {
+        echo $customer->getID().'<br>';
         // get a customer from the basket session by ID
-        return $this->storage->get(0);
+        return $this->storage->get($customer->getID());
+    }
+
+    public function single(){
+        if(!empty($this->storage->all())) {
+            foreach ($this->storage->all() as $customer) {
+                $id = $customer['customer_id'];
+            }
+            // voordat de order geplaatst is kan ik ook alle info uit de customer session halen,
+            // dan hoef ik er nog geen echt aan te maken in de database. Pas als we naar betaling gaan.
+            // als ze al een account hebben dan heb ik alleen customerID nodig.
+            // If customer exist doe het onderstaande, anders maken we er een aan zonder ID, in de controller mpet dit worden aangepast
+            // bij de details functie en de payment functie. straks testen
+            $customer = Customer_Customer::fetchSingle($id);
+            echo $this->get($customer)['customer_id']."<br>";
+            return $customer;
+        }
+
     }
 
     public function clear() {

@@ -2,8 +2,8 @@
 -- version 4.4.10
 -- http://www.phpmyadmin.net
 --
--- Host: localhost:8889
--- Generation Time: Jan 06, 2016 at 10:10 AM
+-- Host: localhost:3306
+-- Generation Time: Jul 10, 2016 at 07:18 PM
 -- Server version: 5.5.42
 -- PHP Version: 5.6.10
 
@@ -13,6 +13,20 @@ SET time_zone = "+00:00";
 --
 -- Database: `nerdcms_db`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `addresses`
+--
+
+CREATE TABLE `addresses` (
+  `address_id` int(11) NOT NULL,
+  `address1` varchar(255) NOT NULL,
+  `address2` varchar(255) DEFAULT NULL,
+  `city` varchar(255) NOT NULL,
+  `postal_code` varchar(12) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -30,7 +44,7 @@ CREATE TABLE `albums` (
   `secured` tinyint(1) NOT NULL,
   `path` varchar(1000) NOT NULL,
   `user_id` int(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `albums`
@@ -40,12 +54,16 @@ INSERT INTO `albums` (`album_id`, `name`, `description`, `author`, `parent_id`, 
 (3, 'Contacts', '', 'admin', 0, '', 0, 'contacts', 26),
 (5, 'Users', '', 'admin', 0, '', 0, 'users', 26),
 (8, 'Products', '', 'admin', 0, '', 0, 'products', 26),
-(16, 'lotte', '', 'admin', 5, '', 0, 'users/lotte', 26),
 (22, 'admin''s Contacts', '', 'admin', 24, '', 0, 'users/admin/admin''s contacts', 26),
-(23, 'lotte''s Contacts', '', 'admin', 16, '', 0, 'users/lotte/lotte''s contacts', 26),
 (24, 'admin', '', 'admin', 5, '', 0, 'users/admin', 26),
-(25, 'Hamsters', '', 'admin', 8, '', 0, 'products/Hamsters', 26),
-(26, 'henkie', '', 'admin', 25, '', 0, 'products/Hamsters/henkie', 26);
+(29, 'test', '', 'admin', 5, '', 0, 'users/test', 26),
+(30, 'test''s Contacts', '', 'admin', 29, '', 0, 'users/test/test''s Contacts', 26),
+(34, 'henkie', '', 'admin', 5, '', 0, 'users/henkie', 26),
+(35, 'henkie''s Contacts', '', 'admin', 34, '', 0, 'users/henkie/henkie''s Contacts', 26),
+(55, 'sdgsd', '', 'admin', 8, '', 0, 'products/sdgsd', 26),
+(56, 'jorn', '', 'admin', 55, '', 0, 'products/sdgsd/jorn', 26),
+(57, 'jorn', '', 'admin', 8, '', 0, 'products/jorn', 26),
+(58, 'test', '', 'admin', 0, '', 0, 'test', 26);
 
 -- --------------------------------------------------------
 
@@ -63,16 +81,20 @@ CREATE TABLE `categories` (
   `author` varchar(30) NOT NULL,
   `type` varchar(15) NOT NULL,
   `date` date NOT NULL,
-  `parent_id` varchar(30) NOT NULL,
+  `parent_id` int(30) DEFAULT '0',
   `trashed` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `categories`
 --
 
 INSERT INTO `categories` (`categorie_id`, `title`, `description`, `content`, `keywords`, `approved`, `author`, `type`, `date`, `parent_id`, `trashed`) VALUES
-(1, 'Hamsters', '', '', '', 0, 'admin', 'product', '0000-00-00', '', 0);
+(11, 'Jorn', '', '', '', 0, 'admin', 'post', '0000-00-00', 0, 0),
+(12, 'Pietje', '', '', '', 0, 'admin', 'post', '0000-00-00', 0, 0),
+(13, 'snoepje', '', '', '', 0, 'admin', 'post', '0000-00-00', 0, 0),
+(14, 'Woody', '', '', '', 0, 'admin', 'post', '0000-00-00', 0, 0),
+(17, 'sdgsd', '', '', '', 0, 'admin', 'product', '0000-00-00', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -113,6 +135,33 @@ INSERT INTO `contacts` (`contact_id`, `first_name`, `last_name`, `phone_1`, `pho
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `customers`
+--
+
+CREATE TABLE `customers` (
+  `customer_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `phone` varchar(15) NOT NULL,
+  `address1` varchar(200) NOT NULL,
+  `address2` varchar(255) NOT NULL,
+  `city` varchar(200) NOT NULL,
+  `postal` varchar(12) NOT NULL,
+  `country_id` int(10) NOT NULL DEFAULT '0',
+  `user_id` int(16) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `customers`
+--
+
+INSERT INTO `customers` (`customer_id`, `name`, `email`, `phone`, `address1`, `address2`, `city`, `postal`, `country_id`, `user_id`) VALUES
+(4, 'Jorn Schalkwijk', 'jornschalkwijk@gmail.com', '620562039', 'Goudplevier 111', '', 'IJsselstein, Utrecht', '3403 AS', 0, 0),
+(5, 'Jorn Schalkwijk', 'ivoschalkwijk@gmail.com', '620562039', 'Goudplevier 111', '', 'IJsselstein, Utrecht', '3403 AS', 0, 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `downloads`
 --
 
@@ -149,36 +198,65 @@ CREATE TABLE `files` (
   `path` varchar(5000) NOT NULL,
   `thumb_path` varchar(5000) NOT NULL,
   `user_id` int(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=125 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=214 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `files`
 --
 
 INSERT INTO `files` (`file_id`, `name`, `type`, `file_name`, `thumb_name`, `album_id`, `date`, `secured`, `path`, `thumb_path`, `user_id`) VALUES
-(20, 'convicted.jpg', 'jpg', '56618150eb2832.88260990.jpg', 'convicted.jpg.thumb_56618150eb2832.88260990.jpg', 0, '2015-12-04', 0, 'files/contacts/56618150eb2832.88260990.jpg', 'files/thumbs/contacts/convicted.jpg.thumb_56618150eb2832.88260990.jpg', 26),
-(26, 'trax-radio.jpg', 'jpg', '567bfd89090c37.49394838.jpg', 'trax-radio.jpg.thumb_567bfd89090c37.49394838.jpg', 133, '2015-12-24', 0, 'files/products//Konijn/567bfd89090c37.49394838.jpg', 'files/thumbs/products//Konijn/trax-radio.jpg.thumb_567bfd89090c37.49394838.jpg', 26),
-(32, 'trax-radio.jpg', 'jpg', '568255372c5fd5.65571045.jpg', 'trax-radio.jpg.thumb_568255372c5fd5.65571045.jpg', 53, '2015-12-29', 0, 'files/products/Dieren//henkie/568255372c5fd5.65571045.jpg', 'files/thumbs/products/Dieren//henkie/trax-radio.jpg.thumb_568255372c5fd5.65571045.jpg', 26),
-(35, 'trax-radio.jpg', 'jpg', '568a3cc33bbbd3.48400054.jpg', 'trax-radio.jpg.thumb_568a3cc33bbbd3.48400054.jpg', 15, '2016-01-04', 0, 'files/products/Hamsters//Fez/568a3cc33bbbd3.48400054.jpg', 'files/thumbs/products/Hamsters//Fez/trax-radio.jpg.thumb_568a3cc33bbbd3.48400054.jpg', 26),
-(36, 'dj-jorn.jpg', 'jpg', '568a40791e0750.92574402.jpg', 'dj-jorn.jpg.thumb_568a40791e0750.92574402.jpg', 15, '2016-01-04', 0, 'files/products/Hamsters//Fez/568a40791e0750.92574402.jpg', 'files/thumbs/products/Hamsters//Fez/dj-jorn.jpg.thumb_568a40791e0750.92574402.jpg', 26),
-(44, 'dj-jorn.jpg', 'jpg', '568a666fabcf73.50407889.jpg', 'dj-jorn.jpg.thumb_568a666fabcf73.50407889.jpg', 17, '2016-01-04', 0, 'files/users/lotte//lotte''s Contacts/568a666fabcf73.50407889.jpg', 'files/thumbs/users/lotte//lotte''s Contacts/dj-jorn.jpg.thumb_568a666fabcf73.50407889.jpg', 29),
-(45, 'trax-radio.jpg', 'jpg', '568a669a73d1b3.13104750.jpg', 'trax-radio.jpg.thumb_568a669a73d1b3.13104750.jpg', 17, '2016-01-04', 0, 'files/users/lotte//lotte''s Contacts/568a669a73d1b3.13104750.jpg', 'files/thumbs/users/lotte//lotte''s Contacts/trax-radio.jpg.thumb_568a669a73d1b3.13104750.jpg', 29),
-(46, 'trax-radio.jpg', 'jpg', '568a66e6b139a7.37206604.jpg', 'trax-radio.jpg.thumb_568a66e6b139a7.37206604.jpg', 17, '2016-01-04', 0, 'files/users/lotte//lotte''s Contacts/568a66e6b139a7.37206604.jpg', 'files/thumbs/users/lotte//lotte''s Contacts/trax-radio.jpg.thumb_568a66e6b139a7.37206604.jpg', 29),
-(47, 'trax-radio.jpg', 'jpg', '568a67591e33b7.75478833.jpg', 'trax-radio.jpg.thumb_568a67591e33b7.75478833.jpg', 17, '2016-01-04', 0, 'files/users/lotte//lotte''s Contacts/568a67591e33b7.75478833.jpg', 'files/thumbs/users/lotte//lotte''s Contacts/trax-radio.jpg.thumb_568a67591e33b7.75478833.jpg', 29),
-(49, 'dj-jorn.jpg', 'jpg', '568a6ca5c096c5.69030086.jpg', 'dj-jorn.jpg.thumb_568a6ca5c096c5.69030086.jpg', 20, '2016-01-04', 0, 'files/DJ/Jaap/568a6ca5c096c5.69030086.jpg', 'files/thumbs/DJ/Jaap/dj-jorn.jpg.thumb_568a6ca5c096c5.69030086.jpg', 26),
-(52, 'flyer1.jpg', 'jpg', '568a6f0b93ad29.73314011.jpg', 'flyer1.jpg.thumb_568a6f0b93ad29.73314011.jpg', 16, '2016-01-04', 0, 'files/users//lotte/568a6f0b93ad29.73314011.jpg', 'files/thumbs/users//lotte/flyer1.jpg.thumb_568a6f0b93ad29.73314011.jpg', 29),
-(53, 'flyer1.jpg', 'jpg', '568a6f1b285001.66312326.jpg', 'flyer1.jpg.thumb_568a6f1b285001.66312326.jpg', 23, '2016-01-04', 0, 'files/users/lotte//lotte''s Contacts/568a6f1b285001.66312326.jpg', 'files/thumbs/users/lotte//lotte''s Contacts/flyer1.jpg.thumb_568a6f1b285001.66312326.jpg', 29),
-(55, 'flyer1.jpg', 'jpg', '568a9d799554f7.01877938.jpg', 'flyer1.jpg.thumb_568a9d799554f7.01877938.jpg', 22, '2016-01-04', 0, 'files/users/admin//admin''s Contacts/568a9d799554f7.01877938.jpg', 'files/thumbs/users/admin//admin''s Contacts/flyer1.jpg.thumb_568a9d799554f7.01877938.jpg', 26),
-(62, 'dj-jorn-s.JPG', 'jpg', '568aa07c96db33.23567636.jpg', 'dj-jorn-s.JPG.thumb_568aa07c96db33.23567636.jpg', 22, '2016-01-04', 0, 'files/users/admin//568aa07c96db33.23567636.jpg', 'files/thumbs/users/admin//dj-jorn-s.JPG.thumb_568aa07c96db33.23567636.jpg', 26),
-(64, 'dj-jorn.jpg', 'jpg', '568aa1b95f5a03.28385942.jpg', 'dj-jorn.jpg.thumb_568aa1b95f5a03.28385942.jpg', 0, '2016-01-04', 0, 'files//568aa1b95f5a03.28385942.jpg', 'files/thumbs//dj-jorn.jpg.thumb_568aa1b95f5a03.28385942.jpg', 26),
-(65, 'dj-jorn.jpg', 'jpg', '568aa1d91e73c7.01101026.jpg', 'dj-jorn.jpg.thumb_568aa1d91e73c7.01101026.jpg', 0, '2016-01-04', 0, 'files/test/568aa1d91e73c7.01101026.jpg', 'files/thumbs/test/dj-jorn.jpg.thumb_568aa1d91e73c7.01101026.jpg', 26),
-(66, 'dj-jorn.jpg', 'jpg', '568aa1e1034ad1.52890463.jpg', 'dj-jorn.jpg.thumb_568aa1e1034ad1.52890463.jpg', 0, '2016-01-04', 0, 'files/test/568aa1e1034ad1.52890463.jpg', 'files/thumbs/test/dj-jorn.jpg.thumb_568aa1e1034ad1.52890463.jpg', 26),
-(119, 'trax-radio.jpg', 'jpg', '568baabbf3e200.18481752.jpg', 'trax-radio.jpg.thumb_568baabbf3e200.18481752.jpg', 28, '2016-01-05', 0, 'files/products/Mensen/jantje/568baabbf3e200.18481752.jpg', 'files/thumbs/products/Mensen/jantje/trax-radio.jpg.thumb_568baabbf3e200.18481752.jpg', 26),
-(120, 'dj-jorn.jpg', 'jpg', '568baacf5ce9d9.89511302.jpg', 'dj-jorn.jpg.thumb_568baacf5ce9d9.89511302.jpg', 28, '2016-01-05', 0, 'files/products/Mensen/jantje/568baacf5ce9d9.89511302.jpg', 'files/thumbs/products/Mensen/jantje/dj-jorn.jpg.thumb_568baacf5ce9d9.89511302.jpg', 26),
-(121, 'dj-jorn.jpg', 'jpg', '568baae718ca65.25686792.jpg', 'dj-jorn.jpg.thumb_568baae718ca65.25686792.jpg', 0, '2016-01-05', 0, 'files//568baae718ca65.25686792.jpg', 'files/thumbs//dj-jorn.jpg.thumb_568baae718ca65.25686792.jpg', 26),
-(122, 'dj-jorn-s.JPG', 'jpg', '568bab78cbd4f7.27700952.jpg', 'dj-jorn-s.JPG.thumb_568bab78cbd4f7.27700952.jpg', 40, '2016-01-05', 0, 'files/Test/test5/568bab78cbd4f7.27700952.jpg', 'files/thumbs/Test/test5/dj-jorn-s.JPG.thumb_568bab78cbd4f7.27700952.jpg', 26),
-(123, 'dj-jorn-s.JPG', 'jpg', '568bac9bb1ef91.84988029.jpg', 'dj-jorn-s.JPG.thumb_568bac9bb1ef91.84988029.jpg', 28, '2016-01-05', 0, 'files/products/Mensen/jantje/568bac9bb1ef91.84988029.jpg', 'files/thumbs/products/Mensen/jantje/dj-jorn-s.JPG.thumb_568bac9bb1ef91.84988029.jpg', 26),
-(124, 'trax-radio.jpg', 'jpg', '568baca95e4211.84356577.jpg', 'trax-radio.jpg.thumb_568baca95e4211.84356577.jpg', 28, '2016-01-05', 0, 'files/products/Mensen/jantje/568baca95e4211.84356577.jpg', 'files/thumbs/products/Mensen/jantje/trax-radio.jpg.thumb_568baca95e4211.84356577.jpg', 26);
+(182, '2016-03-17 20.16.38.jpg', 'jpg', '574705b7b438f0.79904572.jpg', '2016-03-17 20.16.38.jpg.thumb_574705b7b438f0.79904572.jpg', 0, '2016-05-26', 0, 'files/Baileys/574705b7b438f0.79904572.jpg', 'files/thumbs/Baileys/2016-03-17 20.16.38.jpg.thumb_574705b7b438f0.79904572.jpg', 26),
+(186, '2016-03-17 20.16.38.jpg', 'jpg', '574709b4183e81.94233255.jpg', '2016-03-17 20.16.38.jpg.thumb_574709b4183e81.94233255.jpg', 0, '2016-05-26', 0, 'files/pietje/574709b4183e81.94233255.jpg', 'files/thumbs/pietje/2016-03-17 20.16.38.jpg.thumb_574709b4183e81.94233255.jpg', 26),
+(187, '2016-03-17 20.16.38.jpg', 'jpg', '57470b04351067.69753344.jpg', '2016-03-17 20.16.38.jpg.thumb_57470b04351067.69753344.jpg', 0, '2016-05-26', 0, 'files/kontneuken/57470b04351067.69753344.jpg', 'files/thumbs/kontneuken/2016-03-17 20.16.38.jpg.thumb_57470b04351067.69753344.jpg', 26),
+(188, '2016-03-17 20.16.38.jpg', 'jpg', '57470b0fa7d940.55057903.jpg', '2016-03-17 20.16.38.jpg.thumb_57470b0fa7d940.55057903.jpg', 0, '2016-05-26', 0, 'files/kontnaaiej/57470b0fa7d940.55057903.jpg', 'files/thumbs/kontnaaiej/2016-03-17 20.16.38.jpg.thumb_57470b0fa7d940.55057903.jpg', 26),
+(189, '2016-03-06 18.55.20.jpg', 'jpg', '57470be1c22f81.17845725.jpg', '2016-03-06 18.55.20.jpg.thumb_57470be1c22f81.17845725.jpg', 0, '2016-05-26', 0, 'files/pisvlek/57470be1c22f81.17845725.jpg', 'files/thumbs/pisvlek/2016-03-06 18.55.20.jpg.thumb_57470be1c22f81.17845725.jpg', 26),
+(190, '2016-03-06 18.55.20.jpg', 'jpg', '57470beb9c8ea2.60268495.jpg', '2016-03-06 18.55.20.jpg.thumb_57470beb9c8ea2.60268495.jpg', 0, '2016-05-26', 0, 'files/pisvlekje/57470beb9c8ea2.60268495.jpg', 'files/thumbs/pisvlekje/2016-03-06 18.55.20.jpg.thumb_57470beb9c8ea2.60268495.jpg', 26),
+(191, '2016-03-17 20.16.38.jpg', 'jpg', '57470d1ca6a712.60268855.jpg', '2016-03-17 20.16.38.jpg.thumb_57470d1ca6a712.60268855.jpg', 0, '2016-05-26', 0, 'files/spermama/57470d1ca6a712.60268855.jpg', 'files/thumbs/spermama/2016-03-17 20.16.38.jpg.thumb_57470d1ca6a712.60268855.jpg', 26),
+(192, '2016-03-17 20.16.38.jpg', 'jpg', '57470d261fc210.54073025.jpg', '2016-03-17 20.16.38.jpg.thumb_57470d261fc210.54073025.jpg', 0, '2016-05-26', 0, 'files/spermamak/57470d261fc210.54073025.jpg', 'files/thumbs/spermamak/2016-03-17 20.16.38.jpg.thumb_57470d261fc210.54073025.jpg', 26),
+(193, '2016-03-17 20.16.38.jpg', 'jpg', '57470d753f4ae2.30194807.jpg', '2016-03-17 20.16.38.jpg.thumb_57470d753f4ae2.30194807.jpg', 0, '2016-05-26', 0, 'files/rapist/57470d753f4ae2.30194807.jpg', 'files/thumbs/rapist/2016-03-17 20.16.38.jpg.thumb_57470d753f4ae2.30194807.jpg', 26),
+(194, '2016-03-06 18.55.20.jpg', 'jpg', '57470eec70caf4.07111711.jpg', '2016-03-06 18.55.20.jpg.thumb_57470eec70caf4.07111711.jpg', 0, '2016-05-26', 0, 'files/flookje/57470eec70caf4.07111711.jpg', 'files/thumbs/flookje/2016-03-06 18.55.20.jpg.thumb_57470eec70caf4.07111711.jpg', 26),
+(195, '2016-03-06 18.55.20.jpg', 'jpg', '57470fb7f0e5b9.67011113.jpg', '2016-03-06 18.55.20.jpg.thumb_57470fb7f0e5b9.67011113.jpg', 0, '2016-05-26', 0, 'files/flookjedfg/57470fb7f0e5b9.67011113.jpg', 'files/thumbs/flookjedfg/2016-03-06 18.55.20.jpg.thumb_57470fb7f0e5b9.67011113.jpg', 26),
+(196, '2016-03-17 20.16.38.jpg', 'jpg', '57471052473069.26768117.jpg', '2016-03-17 20.16.38.jpg.thumb_57471052473069.26768117.jpg', 0, '2016-05-26', 0, 'files/gvd/57471052473069.26768117.jpg', 'files/thumbs/gvd/2016-03-17 20.16.38.jpg.thumb_57471052473069.26768117.jpg', 26),
+(197, '2016-03-17 20.16.38.jpg', 'jpg', '574711577f5ee9.36130072.jpg', '2016-03-17 20.16.38.jpg.thumb_574711577f5ee9.36130072.jpg', 0, '2016-05-26', 0, 'files/gvdddd/574711577f5ee9.36130072.jpg', 'files/thumbs/gvdddd/2016-03-17 20.16.38.jpg.thumb_574711577f5ee9.36130072.jpg', 26),
+(198, '2016-03-17 20.16.38.jpg', 'jpg', '5747120bdcab52.66532961.jpg', '2016-03-17 20.16.38.jpg.thumb_5747120bdcab52.66532961.jpg', 0, '2016-05-26', 0, 'files/gvddddccc/5747120bdcab52.66532961.jpg', 'files/thumbs/gvddddccc/2016-03-17 20.16.38.jpg.thumb_5747120bdcab52.66532961.jpg', 26),
+(199, '2016-03-17 20.16.38.jpg', 'jpg', '5747122f331143.19555588.jpg', '2016-03-17 20.16.38.jpg.thumb_5747122f331143.19555588.jpg', 0, '2016-05-26', 0, 'files/gvddddcccqwqw/5747122f331143.19555588.jpg', 'files/thumbs/gvddddcccqwqw/2016-03-17 20.16.38.jpg.thumb_5747122f331143.19555588.jpg', 26),
+(200, '2016-03-17 20.16.38.jpg', 'jpg', '57471318e857e6.59079657.jpg', '2016-03-17 20.16.38.jpg.thumb_57471318e857e6.59079657.jpg', 0, '2016-05-26', 0, 'files/fezzzzz/57471318e857e6.59079657.jpg', 'files/thumbs/fezzzzz/2016-03-17 20.16.38.jpg.thumb_57471318e857e6.59079657.jpg', 26),
+(201, '2016-03-06 18.55.20.jpg', 'jpg', '574991fa2d9db8.30202439.jpg', '2016-03-06 18.55.20.jpg.thumb_574991fa2d9db8.30202439.jpg', 36, '2016-05-28', 0, 'files/products/yes/574991fa2d9db8.30202439.jpg', 'files/thumbs/products/yes/2016-03-06 18.55.20.jpg.thumb_574991fa2d9db8.30202439.jpg', 26),
+(206, 'anonymous-hat-wallpaper.png', 'png', '574993c758cc40.74737583.png', 'anonymous-hat-wallpaper.png.thumb_574993c758cc40.74737583.png', 0, '2016-05-28', 0, 'files/anoniem/574993c758cc40.74737583.png', 'files/thumbs/anoniem/anonymous-hat-wallpaper.png.thumb_574993c758cc40.74737583.png', 26),
+(207, 'anonymous-hat-wallpaper.png', 'png', '574993d70057f3.93882672.png', 'anonymous-hat-wallpaper.png.thumb_574993d70057f3.93882672.png', 0, '2016-05-28', 0, 'files/anoniem/574993d70057f3.93882672.png', 'files/thumbs/anoniem/anonymous-hat-wallpaper.png.thumb_574993d70057f3.93882672.png', 26),
+(208, '2016-03-06 18.55.20.jpg', 'jpg', '57499555c4fe16.55650903.jpg', '2016-03-06 18.55.20.jpg.thumb_57499555c4fe16.55650903.jpg', 0, '2016-05-28', 0, 'files/joden/57499555c4fe16.55650903.jpg', 'files/thumbs/joden/2016-03-06 18.55.20.jpg.thumb_57499555c4fe16.55650903.jpg', 26),
+(209, '2016-03-06 18.55.20.jpg', 'jpg', '5749956699cea2.39618495.jpg', '2016-03-06 18.55.20.jpg.thumb_5749956699cea2.39618495.jpg', 0, '2016-05-28', 0, 'files/kanker/5749956699cea2.39618495.jpg', 'files/thumbs/kanker/2016-03-06 18.55.20.jpg.thumb_5749956699cea2.39618495.jpg', 26),
+(210, '2016-03-06 18.55.20.jpg', 'jpg', '574995795ee857.92348446.jpg', '2016-03-06 18.55.20.jpg.thumb_574995795ee857.92348446.jpg', 0, '2016-05-28', 0, 'files/homo/574995795ee857.92348446.jpg', 'files/thumbs/homo/2016-03-06 18.55.20.jpg.thumb_574995795ee857.92348446.jpg', 26),
+(211, '2016-03-17 20.16.38.jpg', 'jpg', '5749968f1a4dc7.22251114.jpg', '2016-03-17 20.16.38.jpg.thumb_5749968f1a4dc7.22251114.jpg', 0, '2016-05-28', 0, 'files/spermoederss/5749968f1a4dc7.22251114.jpg', 'files/thumbs/spermoederss/2016-03-17 20.16.38.jpg.thumb_5749968f1a4dc7.22251114.jpg', 26),
+(212, 'achtergrond.png', 'png', '575539d90a0a64.84839769.png', 'achtergrond.png.thumb_575539d90a0a64.84839769.png', 29, '2016-06-06', 0, 'files/test/575539d90a0a64.84839769.png', 'files/thumbs/test/achtergrond.png.thumb_575539d90a0a64.84839769.png', 26),
+(213, 'ov.jpg', 'jpg', '57652a6ea76614.59633065.jpg', 'ov.jpg.thumb_57652a6ea76614.59633065.jpg', 58, '2016-06-18', 0, 'files/test/57652a6ea76614.59633065.jpg', 'files/thumbs/test/ov.jpg.thumb_57652a6ea76614.59633065.jpg', 26);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `order_id` int(11) NOT NULL,
+  `hash` varchar(255) NOT NULL,
+  `total` float NOT NULL DEFAULT '0',
+  `paid` tinyint(1) NOT NULL,
+  `customer_id` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders_products`
+--
+
+CREATE TABLE `orders_products` (
+  `id` int(11) NOT NULL,
+  `order_id` int(255) NOT NULL,
+  `product_id` int(255) NOT NULL,
+  `quantity` int(255) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -194,17 +272,33 @@ CREATE TABLE `pages` (
   `approved` tinyint(10) NOT NULL,
   `author` varchar(30) NOT NULL,
   `date` date NOT NULL,
-  `category_id` varchar(50) NOT NULL,
+  `category_id` int(50) NOT NULL,
+  `parent_id` int(50) NOT NULL,
   `trashed` tinyint(1) NOT NULL DEFAULT '0',
-  `url` varchar(100) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+  `path` varchar(300) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `pages`
 --
 
-INSERT INTO `pages` (`page_id`, `title`, `description`, `content`, `approved`, `author`, `date`, `category_id`, `trashed`, `url`) VALUES
-(1, 'Jorn', '', 'Hallo Lotte', 1, 'admin', '2015-09-14', '', 0, 'jorn.php');
+INSERT INTO `pages` (`page_id`, `title`, `description`, `content`, `approved`, `author`, `date`, `category_id`, `parent_id`, `trashed`, `path`) VALUES
+(69, 'Henkie', 'henkie', '<p>ss</p>', 1, 'admin', '2016-01-29', 0, 0, 0, 'Henkie'),
+(71, 'Penkie', 'sss', '<p>xxx</p>', 1, 'admin', '2016-01-29', 0, 69, 0, 'Henkie/Penkie'),
+(73, 'jaap', '', '<p>de aap</p>', 0, 'admin', '2016-05-06', 0, 0, 0, 'jaap');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payments`
+--
+
+CREATE TABLE `payments` (
+  `payment_id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `failed` tinyint(1) NOT NULL,
+  `transaction_id` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -223,15 +317,22 @@ CREATE TABLE `posts` (
   `date` date NOT NULL,
   `category_id` int(50) NOT NULL,
   `trashed` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=113 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `posts`
 --
 
 INSERT INTO `posts` (`post_id`, `title`, `description`, `content`, `keywords`, `approved`, `author`, `date`, `category_id`, `trashed`) VALUES
-(29, 'Test', '', '<p>twst</p>', '', 0, 'admin', '2015-12-17', 69, 0),
-(30, 'help', '', '<p>nu</p>', '', 0, 'admin', '2015-12-17', 2, 0);
+(101, 'Jorn', 'jorn', '<p>cd</p>', '', 0, 'admin', '2016-04-09', 11, 0),
+(102, 'JANTJE', 'kantje', '<p>ccc</p>', '', 0, 'admin', '2016-04-09', 13, 0),
+(103, 'woody', 'woody', '<p>ddd</p>', '', 0, 'admin', '2016-04-09', 14, 0),
+(107, 'afbeelding', '', '<p>Test</p>', '', 0, 'admin', '2016-04-18', 11, 0),
+(108, 'haha', '', '<p><a href="/admin/files/products/Mensen/Hankie/56c86b08d54ee8.10189694.jpg"><img src="/admin/files/thumbs/products/Mensen/Hankie/dj-jorn-s.JPG.thumb_56c86b08d54ee8.10189694.jpg" alt="" /></a>&nbsp;<a href="/admin/files/products/Mensen/Hankie/56c75426d833e4.72716555.jpg"><img src="/admin/files/thumbs/products/Mensen/Hankie/dj-jorn.jpg.thumb_56c75426d833e4.72716555.jpg" alt="" /></a>&nbsp;<a href="/admin/files/products/Mensen/Jorn/56c75262b8ae22.19695673.jpg"><img src="/admin/files/thumbs/products/Mensen/Jorn/dj-jorn.jpg.thumb_56c75262b8ae22.19695673.jpg" alt="" /></a>&nbsp;<a href="/admin/files/products/Mensen/Jorn/56a89d35e33a95.92016683.jpg"><img src="/admin/files/thumbs/products/Mensen/Jorn/dj-jorn-s.JPG.thumb_56a89d35e33a95.92016683.jpg" alt="" /></a></p>\r\n<p>&nbsp;</p>', '', 0, 'admin', '2016-04-18', 11, 0),
+(109, 'Ik ben baas!', '', '<p>jorn</p>\r\n<p><a href="/admin/files/products/Mensen/Jorn/56c75262b8ae22.19695673.jpg"><img src="/admin/files/products/Mensen/Jorn/56c75262b8ae22.19695673.jpg" alt="" /></a></p>', '', 0, 'admin', '2016-04-29', 11, 0),
+(110, 'leipe shit', '', '<p><a href="/admin/files/products/Mensen/Jorn/56c75262b8ae22.19695673.jpg"><img src="/admin/files/products/Mensen/Jorn/56c75262b8ae22.19695673.jpg" alt="" width="730px" /></a><a href="/admin/files/products/Mensen/Jorn/56a89d35e33a95.92016683.jpg"><img src="/admin/files/products/Mensen/Jorn/56a89d35e33a95.92016683.jpg" alt="" width="730px" /></a></p>', '', 0, 'admin', '2016-05-01', 11, 0),
+(111, 'eindelijke!', '', '<p><a href="/admin/files/products/Mensen/Jorn/56a89d35e33a95.92016683.jpg"><img src="/admin/files/products/Mensen/Jorn/56a89d35e33a95.92016683.jpg" alt="" width="100%" /></a></p>', '', 1, 'admin', '2016-05-01', 11, 0),
+(112, 'sdafgd', '', '<p><a href="/admin/files/users/test/56c87796f2f961.52113602.jpg"><img src="/admin/files/thumbs/users/test/dj-jorn.jpg.thumb_56c87796f2f961.52113602.jpg" alt="" /></a><a href="/admin/files/products/Mensen/Hankie/56c86b0936f251.64519462.jpg"><img src="/admin/files/thumbs/products/Mensen/Hankie/dj-jorn.jpg.thumb_56c86b0936f251.64519462.jpg" alt="" /></a><a href="/admin/files/products/Mensen/Hankie/56c86b08d54ee8.10189694.jpg"><img src="/admin/files/thumbs/products/Mensen/Hankie/dj-jorn-s.JPG.thumb_56c86b08d54ee8.10189694.jpg" alt="" /></a><a href="/admin/files/products/Mensen/Hankie/56c75426d833e4.72716555.jpg"><img src="/admin/files/thumbs/products/Mensen/Hankie/dj-jorn.jpg.thumb_56c75426d833e4.72716555.jpg" alt="" /></a><a href="/admin/files/products/Mensen/Hankie/56c75426827bf9.60135847.jpg"><img src="/admin/files/thumbs/products/Mensen/Hankie/dj-jorn-s.JPG.thumb_56c75426827bf9.60135847.jpg" alt="" /></a></p>\r\n<p><a href="/admin/files/products/Mensen/Jorn/56c75262b8ae22.19695673.jpg"><img src="/admin/files/thumbs/products/Mensen/Jorn/dj-jorn.jpg.thumb_56c75262b8ae22.19695673.jpg" alt="" /></a><a href="/admin/files/products/Mensen/Jorn/56a89d35e33a95.92016683.jpg"><img src="/admin/files/thumbs/products/Mensen/Jorn/dj-jorn-s.JPG.thumb_56a89d35e33a95.92016683.jpg" alt="" /></a><a href="/admin/files/products/Mensen/Jorn/56a89d217621f0.58404857.jpg"><img src="/admin/files/thumbs/products/Mensen/Jorn/dj-jorn.jpg.thumb_56a89d217621f0.58404857.jpg" alt="" /></a></p>\r\n<p>&nbsp;</p>', '', 1, 'admin', '2016-05-19', 14, 0);
 
 -- --------------------------------------------------------
 
@@ -257,14 +358,15 @@ CREATE TABLE `products` (
   `date` date NOT NULL,
   `author` varchar(100) NOT NULL,
   `quantity` int(255) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `products`
 --
 
 INSERT INTO `products` (`product_id`, `name`, `category_id`, `price`, `description`, `discount_price`, `savings`, `tax_percentage`, `tax`, `total`, `img_path`, `album_id`, `approved`, `trashed`, `date`, `author`, `quantity`) VALUES
-(1, 'henkie', 1, 10, '', 0, 0, 0, 0, 0, '', 26, 0, 0, '0000-00-00', '', 10);
+(3, 'jorn', 0, 10, '<p>ddd</p>', 0, 0, 0, 0, 0, '', 56, 0, 0, '0000-00-00', '', 6),
+(4, 'jorn2', 0, 10, '<p>ddd</p>', 0, 0, 0, 0, 0, '', 56, 0, 0, '0000-00-00', '', 6);
 
 -- --------------------------------------------------------
 
@@ -307,20 +409,29 @@ CREATE TABLE `users` (
   `album_id` int(55) NOT NULL,
   `token` varchar(100) NOT NULL,
   `trashed` tinyint(1) NOT NULL DEFAULT '0',
-  `approved` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=latin1;
+  `approved` tinyint(1) NOT NULL DEFAULT '0',
+  `customer_id` int(11) DEFAULT '0'
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `username`, `password`, `first_name`, `last_name`, `dob`, `email`, `function`, `rights`, `img_path`, `album_id`, `token`, `trashed`, `approved`) VALUES
-(26, 'admin', '$2y$10$MTc1YjI2OTE0ZmVjN2ZlM.srhqkbAPviVPYFMGYeXEGZlIrIaGoQK', 0x3734346565666535366364633666323939356639323936633762636134333534376266386237616636356466316634313437656665333431633764356332643535653036346532663837396239633537623135626562306231623032306238386562663866396232343031623138396235323839356161633435633633666662, 0x3736343865363732383238643839336162633032636335343238343135366135356263333435313364333165323862366130313461373236646631363039653235656533323866626330666164613134623030316635386335346430663437653062636332643239333134363437376636373231653737323961366531336132, '', 0x3363306262313833326262336236623730616233616539366535316432383430303139313131306632663736643264366330643530333038336537366238613964383563336666333863323732336433303033323234643234376532633133383033633130333939366331643838303966326362343265366665613538323635, 0x3037643435383264646561653830643430633962633961343737653765393331316463323036303132363131303764613032663030333737386530383735623233633833383062643464653337343363336531336436613131343462633664353531306161323264363833653930663162633635393363366436653933653137, 0x3439313136643139623462353165373265633164636239643361646438303761636161383437653465663764336638653866636439663839663935663966613563306238366433326433333633376138653763613662336539303363623561666335366531666234383033386436313633343635306439366538306563393735, '', 0, '5b0f9e9438eb4e165779bc76ad6ccf1a', 0, 0),
-(27, 'jorn', '$2y$10$NDE4MzVkMTA5ZDgwNWUzOOHy2kGM7kMymi.s4A5Eyo2XSklPbGv7G', 0x6336383264353736353739336637623034616635623930633936626462306136656433303938613530383066386233306330353235636639396163376664353261323338313065353439633837343634363233333562356663626461306264623330353661623832643336666636616633333838366334363862393239363237, 0x6566313337383835616166353561373932623530326535343732386263396361303365623233313234393738363234316332313263316332383832383739376636313238343430613135633164346665333964633239623439643932336563353136316163336435393166373238396561653635633732663765626464303532, '', 0x6437653131626632326264623635346332646132313565383338386431353664393765373031643937356266323735316132363138346435616563656235613566333861376338316533626237336130613836376561366331346139346365633162666566303263653532316363333465653035623765336266663834383432, 0x3234643039663862373333363330373437386432393938636631383565316431356564613237396536323166616564626135353936626634313635303639663734633936303766316232646139326430353037363463626636666561663465363966666162663739383561326633373538633063363935383134343961346137, 0x6137626638356637653762303166333033346166316363356161386337303065353363393634613731343133303366663461366430623238396464616436613863626239303764656466373662346539346562633565653437386534393365623539363066633536613365343934323364623735343963323132353733346233, 'files/thumbs//users/trax-radio.jpg.thumb_567ffa86f0fb08.51076893.jpg', 0, '32a1d472a8ffbde3855724b2f6a893ac', 0, 0);
+INSERT INTO `users` (`user_id`, `username`, `password`, `first_name`, `last_name`, `dob`, `email`, `function`, `rights`, `img_path`, `album_id`, `token`, `trashed`, `approved`, `customer_id`) VALUES
+(26, 'admin', '$2y$10$MTc1YjI2OTE0ZmVjN2ZlM.srhqkbAPviVPYFMGYeXEGZlIrIaGoQK', 0x3734346565666535366364633666323939356639323936633762636134333534376266386237616636356466316634313437656665333431633764356332643535653036346532663837396239633537623135626562306231623032306238386562663866396232343031623138396235323839356161633435633633666662, 0x3736343865363732383238643839336162633032636335343238343135366135356263333435313364333165323862366130313461373236646631363039653235656533323866626330666164613134623030316635386335346430663437653062636332643239333134363437376636373231653737323961366531336132, '', 0x3363306262313833326262336236623730616233616539366535316432383430303139313131306632663736643264366330643530333038336537366238613964383563336666333863323732336433303033323234643234376532633133383033633130333939366331643838303966326362343265366665613538323635, 0x3037643435383264646561653830643430633962633961343737653765393331316463323036303132363131303764613032663030333737386530383735623233633833383062643464653337343363336531336436613131343462633664353531306161323264363833653930663162633635393363366436653933653137, 0x3439313136643139623462353165373265633164636239643361646438303761636161383437653465663764336638653866636439663839663935663966613563306238366433326433333633376138653763613662336539303363623561666335366531666234383033386436313633343635306439366538306563393735, '', 0, 'b206cf72ccaec79c369246a777e915ad', 0, 0, 0),
+(27, 'jorn', '$2y$10$NDE4MzVkMTA5ZDgwNWUzOOHy2kGM7kMymi.s4A5Eyo2XSklPbGv7G', 0x6336383264353736353739336637623034616635623930633936626462306136656433303938613530383066386233306330353235636639396163376664353261323338313065353439633837343634363233333562356663626461306264623330353661623832643336666636616633333838366334363862393239363237, 0x6566313337383835616166353561373932623530326535343732386263396361303365623233313234393738363234316332313263316332383832383739376636313238343430613135633164346665333964633239623439643932336563353136316163336435393166373238396561653635633732663765626464303532, '', 0x6437653131626632326264623635346332646132313565383338386431353664393765373031643937356266323735316132363138346435616563656235613566333861376338316533626237336130613836376561366331346139346365633162666566303263653532316363333465653035623765336266663834383432, 0x3234643039663862373333363330373437386432393938636631383565316431356564613237396536323166616564626135353936626634313635303639663734633936303766316232646139326430353037363463626636666561663465363966666162663739383561326633373538633063363935383134343961346137, 0x6137626638356637653762303166333033346166316363356161386337303065353363393634613731343133303366663461366430623238396464616436613863626239303764656466373662346539346562633565653437386534393365623539363066633536613365343934323364623735343963323132353733346233, 'files/thumbs//users/trax-radio.jpg.thumb_567ffa86f0fb08.51076893.jpg', 0, 'fc3f5aa793194e07b9d2376779604e68', 0, 0, 0),
+(28, 'test', '$2y$10$NDAyMTRiYzhkNTQ5M2VjOO9hUbWxG.362aaQVoewFWSoxQlkSC0yS', 0x6664666139316461353162363538343766656539666439373562346636313035633266633734396561356362396633303435316137373564623739646236366135663738316662663435636536306532613633646566326530393262383433656238613439656362383062623438623766383336396363306537643638613539, 0x3539343734333736373430653738383739343531383730333432363961313032633337666432633230373934373336316636336137306564323066643464396133346262343434373137363334626161373336323161613466306666663639366238333937613437663765326366613337386665636536663963393734656637, '', 0x3532326234396264643163396462653438656462666564643235633064366635393438363461333736306431323737313239353364333464333732396132356137626538326236313936356330326536343935343839636535303232636332353336383930396239653634653933613334626466336562393064303765303763, 0x3465393639303531383064636563316438626239343262303066306661303863373732666333653439383738366466303736633865306365353535313635353834383366316661336531633633306231663465363164343534313534636163646234643262636664323263623636346266323534363739313930633530663239, 0x3039316530393261393866646631366133613533653063373133313463303865656466616231323235366366393065383236643164666431636337383865343565356666383737393538353438616539633063383832656631333338663532663934626532353630376561313561633862373937653065363063366130306162, 'files/thumbs/users/test/trax-radio.jpg.thumb_56c87759e19c02.78001730.jpg', 29, '974bb766c715d81b9d300ad5b3a87af2', 0, 0, 0),
+(29, 'henkie', '$2y$10$MWI1Mzg0ODkzMDZiMDlhMeDUk.smgARzYDKriR.PKP6KSkN38p/YK', 0x3839666161303665656633336563316337666135366261333261303539646262353231656566363232396364656433306261326464653338363637346139383461653839363461386164336330336138666233326130313331376630396366383333336633373339643733383534656464373261356133363238336635343936, 0x3535343164366262313035633937633163366139633436653661326633383133336163343932636533656163373836613539393461343834666161326230333230396336633230366165663737666332393462646437323931373432616433353838656364363062306164376566316265343563653762663066663332323763, '', 0x35623433336231666662616265633965316264366438393131383433326562666533313662363937613932643465326538393438613032643937643765316366326334633364386462646136353864303164393737323237633731643261396431626561356162376166663734353265623665346563323031323366386331313333623037326665646534323763313630323233386434383764363566376137, 0x35633134393635343438633936376666363965626666353236393330343330376636353763646335343936613066353039336638303536393465393537643238316335386130303139393637623361313164343063343133313865646536613138376136353662353061626166393666363432343234346534323738643133663439376432393236626666666130353332633638613263333566663831393965, 0x3061616537623134663034376361393037393864653061636234326666373636623161623137616166313963663266393135666434623061653364306165306264333766396533303435626261336330393163373235613039616430653064613134353264313764396566363032386334613962346436626464356533656561, 'files/thumbs/users/henkie/cute-bunny.jpg.thumb_5746df3d2509a7.52319415.jpg', 34, '64eb1bbbdd8b7c5bc844762376205cad', 0, 0, 0);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `addresses`
+--
+ALTER TABLE `addresses`
+  ADD PRIMARY KEY (`address_id`);
 
 --
 -- Indexes for table `albums`
@@ -342,6 +453,12 @@ ALTER TABLE `contacts`
   ADD UNIQUE KEY `contact_id` (`contact_id`);
 
 --
+-- Indexes for table `customers`
+--
+ALTER TABLE `customers`
+  ADD PRIMARY KEY (`customer_id`);
+
+--
 -- Indexes for table `downloads`
 --
 ALTER TABLE `downloads`
@@ -354,10 +471,28 @@ ALTER TABLE `files`
   ADD PRIMARY KEY (`file_id`);
 
 --
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`order_id`);
+
+--
+-- Indexes for table `orders_products`
+--
+ALTER TABLE `orders_products`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `pages`
 --
 ALTER TABLE `pages`
   ADD PRIMARY KEY (`page_id`);
+
+--
+-- Indexes for table `payments`
+--
+ALTER TABLE `payments`
+  ADD PRIMARY KEY (`payment_id`);
 
 --
 -- Indexes for table `posts`
@@ -388,20 +523,30 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `addresses`
+--
+ALTER TABLE `addresses`
+  MODIFY `address_id` int(11) NOT NULL AUTO_INCREMENT;
+--
 -- AUTO_INCREMENT for table `albums`
 --
 ALTER TABLE `albums`
-  MODIFY `album_id` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=27;
+  MODIFY `album_id` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=59;
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `categorie_id` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `categorie_id` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `contacts`
 --
 ALTER TABLE `contacts`
   MODIFY `contact_id` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
+--
+-- AUTO_INCREMENT for table `customers`
+--
+ALTER TABLE `customers`
+  MODIFY `customer_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `downloads`
 --
@@ -411,22 +556,37 @@ ALTER TABLE `downloads`
 -- AUTO_INCREMENT for table `files`
 --
 ALTER TABLE `files`
-  MODIFY `file_id` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=125;
+  MODIFY `file_id` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=214;
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=77;
+--
+-- AUTO_INCREMENT for table `orders_products`
+--
+ALTER TABLE `orders_products`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=77;
 --
 -- AUTO_INCREMENT for table `pages`
 --
 ALTER TABLE `pages`
-  MODIFY `page_id` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `page_id` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=74;
+--
+-- AUTO_INCREMENT for table `payments`
+--
+ALTER TABLE `payments`
+  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `post_id` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=31;
+  MODIFY `post_id` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=113;
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `product_id` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `profiles`
 --
@@ -436,4 +596,4 @@ ALTER TABLE `profiles`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(30) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=28;
+  MODIFY `user_id` int(30) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=30;

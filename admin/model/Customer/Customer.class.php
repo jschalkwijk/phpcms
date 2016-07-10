@@ -12,7 +12,6 @@ class Customer_Customer
 
     public function __construct($name,$mail,$phone,$address1,$address2 = null,$city,$postal_code)
     {
-        $this->id = 0;
         $this->name = $name;
         $this->mail = $mail;
         $this->phone = $phone;
@@ -99,7 +98,7 @@ class Customer_Customer
         $dbc = new DBC;
         $messages = [];
         if(!empty($this->getName()) && !empty($this->getMail()) && !empty($this->getAddress1()) && !empty($this->getCity()) && !empty($this->getPostalCode())) {
-            $exists = $this->exists();
+            $exists = $this->exists($this->getMail());
             if (!$exists) {
                 $name = mysqli_real_escape_string($dbc->connect(), trim($this->getName()));
                 $mail = mysqli_real_escape_string($dbc->connect(), trim($this->getMail()));
@@ -113,6 +112,8 @@ class Customer_Customer
                 mysqli_query($dbc->connect(), $query) or die('Error inserting new customer');
 
                 $last_id = mysqli_insert_id($dbc->connect());
+                echo $last_id.'<br>';
+                $this->setID($last_id);
                 $dbc->disconnect();
                 $messages[] = "Customer added";
 
@@ -145,7 +146,7 @@ class Customer_Customer
             return ['messages' => $messages];
         }
     }
-    public function fetchSingle($id){
+    public static function fetchSingle($id){
         $dbc = new DBC;
         $id = mysqli_real_escape_string($dbc->connect(), trim($id));
         $query = "SELECT * FROM customers WHERE customer_id = $id";
@@ -173,9 +174,9 @@ class Customer_Customer
 		// Returns an array wich contains all the contact objects. Which are then passed from the controller to the view.
 		return $customer;
     }
-    public function exists(){
+    public static function exists($mail){
         $dbc = new DBC;
-        $mail = mysqli_real_escape_string($dbc->connect(), trim($this->mail));
+        $mail = mysqli_real_escape_string($dbc->connect(), trim($mail));
         $query = "SELECT * FROM customers WHERE email = '$mail'";
         $data = mysqli_query($dbc->connect(),$query) or die ('Error checking for existings customer');
         if(mysqli_num_rows($data) == 1) {

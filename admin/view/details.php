@@ -4,7 +4,12 @@ if(!empty($data['customer'])) {
     $customer = $data['customer'];
 }
 ?>
-<div class="center">
+<div class="container center">
+    <a class ="link-btn" href="<?php echo ADMIN."order/"?>"><span>&larr;</span> Change Details</a>
+    <a class ="link-btn" href="<?php echo ADMIN."order/details"?>">Summary</a>
+    <a class ="link-btn" href="<?php echo ADMIN."order/payment"?>">Payment <span>&rarr;</span></a>
+</div>
+<div class="container center">
     <div class="large">
         <table class="backend-table center">
             <tbody>
@@ -21,7 +26,7 @@ if(!empty($data['customer'])) {
                 foreach($data['messages'] as $messages){
                     foreach($messages as $msg){
                         if($msg == "Success"){
-                            echo '<p class="alert alert-success">Order successfully placed</p>';
+                            echo '<p class="alert alert-success"><span class="center">Order successfully placed</span></p>';
                         } else {
                             echo '<p class="alert alert-warning">' . $msg . '</p>';
                         }
