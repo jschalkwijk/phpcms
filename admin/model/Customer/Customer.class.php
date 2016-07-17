@@ -111,16 +111,21 @@ class Customer_Customer
                 $query = "INSERT INTO customers(name,email,phone,address1,address2,city,postal) VALUES('$name','$mail','$phone','$address1','$address2','$city','$postal_code')";
                 mysqli_query($dbc->connect(), $query) or die('Error inserting new customer');
 
-                $last_id = mysqli_insert_id($dbc->connect());
-                echo $last_id.'<br>';
-                $this->setID($last_id);
+                $query = "SELECT customer_id FROM customers WHERE email = '$mail'";
+                echo $query;
+                $data = mysqli_query($dbc->connect(),$query) or die("Error fetching customer_id");
+                $row = mysqli_fetch_array($data);
+                $this->setID($row['customer_id']);
+                echo 'customer_id '.$this->getID().'<br>';
+
                 $dbc->disconnect();
                 $messages[] = "Customer added";
 
-                return ['customer_id' => $last_id,'messages' => $messages];
+                return ['customer_id' => $this->getID(),'messages' => $messages];
             } else {
                 $customer = $this->fetchSingle($exists['id']);
                 // TO DO: change the address, a existing customer with no account could be moved to another address
+                $customer->setName(mysqli_real_escape_string($dbc->connect(), trim($this->name)));
                 $customer->setPhone(mysqli_real_escape_string($dbc->connect(), trim($this->phone)));
                 $customer->setAddress1(mysqli_real_escape_string($dbc->connect(), trim($this->address1)));
                 $customer->setAddress2(mysqli_real_escape_string($dbc->connect(), trim($this->address2)));
@@ -128,13 +133,14 @@ class Customer_Customer
                 $customer->setPostalCode(mysqli_real_escape_string($dbc->connect(), trim($this->postal_code)));
 
                 $id = $customer->getID();
+                $name = $customer->getName();
                 $phone = $customer->getPhone();
                 $address1 = $this->getAddress1();
                 $address2 = $this->getAddress2();
                 $city = $this->getCity();
                 $postal_code = $this->getPostalCode();
 
-                $query = "UPDATE customers SET phone = '$phone',address1 = '$address1',address2 = '$address2',city = '$city',postal = '$postal_code' WHERE customer_id = $id";
+                $query = "UPDATE customers SET name = '$name',phone = '$phone',address1 = '$address1',address2 = '$address2',city = '$city',postal = '$postal_code' WHERE customer_id = $id";
                 mysqli_query($dbc->connect(), $query) or die('Error updating existing customer');
                 $dbc->disconnect();
 
@@ -148,7 +154,7 @@ class Customer_Customer
     }
     public static function fetchSingle($id){
         $dbc = new DBC;
-        $id = mysqli_real_escape_string($dbc->connect(), trim($id));
+        $id = mysqli_real_escape_string($dbc->connect(), trim((int)$id));
         $query = "SELECT * FROM customers WHERE customer_id = $id";
         $data = mysqli_query($dbc->connect(),$query) or die ('Error checking for existing customer');
         $row = mysqli_fetch_array($data);

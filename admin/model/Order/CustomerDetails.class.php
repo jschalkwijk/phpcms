@@ -1,6 +1,6 @@
 <?php
 
-class Order_Details{
+class Order_CustomerDetails{
     protected $storage;
     protected $customer;
 
@@ -18,8 +18,9 @@ class Order_Details{
     public function update(Customer_Customer $customer)
     {
         // Standaard op nul zetten omdat we een nieuwe klant hebben, bij bestaande klanten
-        // halen we het ID uit de DB.
-        $this->storage->set($customer->getID(),[
+        // halen we het ID uit de DB. OOk bij het aanpassen van de email moeten we geen nieuwe klant toevoegen
+        // maar de bestaande aanpassen.
+        $this->storage->set(0,[
             'customer_id' => (int) $customer->getID(),
             'name' => $customer->getName(),
             'email' => $customer->getMail(),
@@ -34,7 +35,7 @@ class Order_Details{
     public function remove(Customer_Customer $customer)
     {
         // remove item from the basket session
-        $this->storage->unsetcustomer($customer->getID());
+        $this->storage->unsetIndex($customer->getID());
     }
 
     public function has(Customer_Customer $customer)
@@ -45,7 +46,6 @@ class Order_Details{
 
     public function get(Customer_Customer $customer)
     {
-        echo $customer->getID().'<br>';
         // get a customer from the basket session by ID
         return $this->storage->get($customer->getID());
     }
@@ -61,7 +61,6 @@ class Order_Details{
             // If customer exist doe het onderstaande, anders maken we er een aan zonder ID, in de controller mpet dit worden aangepast
             // bij de details functie en de payment functie. straks testen
             $customer = Customer_Customer::fetchSingle($id);
-            echo $this->get($customer)['customer_id']."<br>";
             return $customer;
         }
 
