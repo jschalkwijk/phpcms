@@ -239,8 +239,8 @@ class Users_Users{
 			}
 
 			# Create Folder
-			$album_id = files_Folders::auto_create_folder($username,$this->file_path.$username,$this->thumb_path.$username,'Users');
-			$contacts = files_Folders::auto_create_folder("$username"."\'s ".'Contacts',$this->file_path.$username.'/'.$username.'\'s '.'Contacts',$this->thumb_path.$username.'/'.$username.'\'s '.'Contacts','Users',$username);
+			$album_id = File_Folders::auto_create_folder($username,$this->file_path.$username,$this->thumb_path.$username,'Users');
+			$contacts = File_Folders::auto_create_folder("$username"."\'s ".'Contacts',$this->file_path.$username.'/'.$username.'\'s '.'Contacts',$this->thumb_path.$username.'/'.$username.'\'s '.'Contacts','Users',$username);
 
 			if(!empty($username) && !empty($password) && !empty($password_again)) {
 				if($password === $password_again) {
@@ -342,7 +342,7 @@ class Users_Users{
 	}
 
 	public static function addProfileIMG($file_dest,$thumb_dest,$params){
-		$upload = new files_FileUpload($file_dest,$thumb_dest,$params,true);
+		$upload = new File_FileUpload($file_dest,$thumb_dest,$params,true);
 		$img_path = $upload->getImgPath();
 		$thumb_path = $upload->getThumbPath();
 		$dbc = new DBC;

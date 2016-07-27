@@ -216,7 +216,7 @@ class Products_Product {
 			if(!file_exists($this->file_path.$category_name)) {
 				$this->file_path = $this->file_path.$category_name.'/';
 				$this->thumb_path = $this->thumb_path.$category_name.'/';
-				files_Folders::auto_create_folder($category_name,$this->file_path,$this->thumb_path,'Products');
+				File_Folders::auto_create_folder($category_name,$this->file_path,$this->thumb_path,'Products');
 			}
 		} else {
 			$category_id = mysqli_real_escape_string($dbc->connect(),trim((int)$_POST['cat_name']));
@@ -239,7 +239,7 @@ class Products_Product {
         */
 		//create new product file folder inside Products folder.
 		if(!file_exists($this->file_path.$name)) {
-			$album_id = files_Folders::auto_create_folder($name,$this->file_path.$name,$this->thumb_path.$name,'Products',$category_name);
+			$album_id = File_Folders::auto_create_folder($name,$this->file_path.$name,$this->thumb_path.$name,'Products',$category_name);
 		}
 
 

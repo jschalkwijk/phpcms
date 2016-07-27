@@ -1,6 +1,6 @@
 <?php
-class meta_MetaTag {
-	function create_meta($dbt,$page_title){
+class Meta_MetaTag {
+	public static function create_meta($dbt,$page_title){
 		$dbc = mysqli_connect(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME) or die('Error connecting to server');
 		if($dbt === 'posts'){
 			$page_title = mysqli_real_escape_string($dbc,trim($_GET['title']));
@@ -16,9 +16,9 @@ class meta_MetaTag {
 		}
 		$data = mysqli_query($dbc,$query);
 		$row = mysqli_fetch_array($data);
-		echo '<meta name="title" content="'.$row['title'].'">'
-		echo '<meta name="description" content="'.$row['description'].'">'
-		echo '<title>'.$page_title.'</title>'
+		echo '<meta name="title" content="'.$row['title'].'">';
+		echo '<meta name="description" content="'.$row['description'].'">';
+		echo '<title>'.$page_title.'</title>';
 	}
-} 
+}
 ?>

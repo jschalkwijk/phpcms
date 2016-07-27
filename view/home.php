@@ -2,7 +2,7 @@
 	<div class="display top-marginr">
 		<div class="row">
 			<div class="center">
-				<button id="learn-more" class="center"><a>Learn more</a></button>
+				<button id="learn-more" class="center"><a href="i-learn-more">Learn more</a></button>
 			</div>
 		</div>
 		<div class="row">

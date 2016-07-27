@@ -1,7 +1,7 @@
 <?php
-// Used by files_File and files_Folders
+// Used by files_File and File_Folders
 trait File_FileActions{
-	// used in files_Folders:
+	// used in File_Folders:
 	public static function removeRows($id){
 		$dbc = new DBC;
 		$query = "SELECT album_id FROM albums WHERE parent_id = $id";
@@ -106,7 +106,7 @@ trait File_FileActions{
 		$dbc->disconnect();
 	}
 
-	/* used in files_Folders:
+	/* used in File_Folders:
 	 * Recursively delete folders from the server.
 	*/
 	public static function removeDir($path) {

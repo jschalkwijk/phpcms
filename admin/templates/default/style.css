@@ -149,7 +149,7 @@ table {
 }
 
 .backend-table button {
-	background-color: none;
+	background-color: transparent;
 }
 
 .td-title, .td-author, .td-category, .td-date {

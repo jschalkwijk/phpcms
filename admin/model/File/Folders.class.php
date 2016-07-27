@@ -60,12 +60,12 @@ class File_Folders {
 		$data = mysqli_query($dbc->connect(), $query) or die('error connecting to database');
 		foreach ($data as $delete) {
 			// recursive deleting function. Deletes al folders/files and subfolders/files from server.
-			files_Folders::removeDir('./././files/'.$delete['path']);
-			files_Folders::removeDir('./././files/'.'thumbs/'.$delete['path']);	
+			File_Folders::removeDir('./././files/'.$delete['path']);
+			File_Folders::removeDir('./././files/'.'thumbs/'.$delete['path']);
 		}
 		foreach ($data as $row){
 			$id = $row['album_id'];
-			files_Folders::removeRows($id);
+			File_Folders::removeRows($id);
 		}
 		$dbc->disconnect();
 	}
@@ -136,7 +136,7 @@ class File_Folders {
 		}
 
 		
-		$path = files_Folders::auto_create_path($album_name,$parent_id);
+		$path = File_Folders::auto_create_path($album_name,$parent_id);
 	
 		if(!file_exists($file_dest)){
 			$query = "INSERT INTO albums(name,author,parent_id,path,user_id) VALUES('$album_name','$author',$parent_id,'$path',$user_id)";

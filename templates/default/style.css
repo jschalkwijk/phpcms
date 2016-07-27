@@ -206,41 +206,40 @@ button:hover  {
 
 /* Navigation Basic Styling */
 
-#nav nav {
+nav {
 	text-align: center;
 	list-style-type:none;
-	width: 100%;
+	width: max-content;
+	background: #CCC;
 	margin: 0px;
 	height: 50px;
 	background-color: #333333;
 	z-index: 9999;
 }
 
-#nav nav ul{
-	line-height: 50px;
-	text-align: center;
-	margin: 0px;
-	background-color: #333333;
-}
-#nav nav li {
+nav li {
 	list-style-type:none;
+	display: inline;
 	padding: 0px;
 }
-#nav nav li a {
+
+nav li a:hover {
+	text-decoration: none;
+	background-color: #000000;
 	color: #999;
-	font-size: large;
+}
+
+nav li a {
+	color: #999;
+	font-size: medium;
 	font-family: Helvetica;
 	height: 100%;
 	padding: 0px 10px 0px 10px;
+	display: inline-table;
 	-webkit-box-sizing: border-box;
 	-o-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
-}
-
-#nav nav li a:hover {
-	height: 50px;
-	background-color: #000000;
 }
 
 
@@ -268,104 +267,112 @@ button:hover  {
 	line-height: 42px;
 }
 
-/* Responsive */
+
 
 /* Responsive, screen width smaller then 700px; */
- 
+
 /* Javascript Disabled - These are always visibile */
-@media only screen and (max-width: 700px) { 
+@media only screen and (max-width: 700px) {
 
-#nav nav li:nth-child(even) { background: #333; color: #999;  }
-#nav nav li:nth-child(odd) { background: #474747; color: #999;  }
+	nav li:nth-child(even) { background: #333; color: #999;  }
+	nav li:nth-child(odd) { background: #474747; color: #999;  }
 
-/* Jasvascript disabled*/
+	/* Jasvascript disabled*/
 
-#nav nav {
-	list-style-type:none;
-	background: #BBB;
-	position: static;
-	padding-top: 0px;
-	width: 100%;
-	height: auto;
-}
+	nav {
+		list-style-type:none;
+		background: #BBB;
+		position: static;
+		padding-top: 0px;
+		width: 100%;
+		height: auto;
+	}
 
-#nav nav ul {
-	margin-top: 0px;
-	width: 100%;
-}
+	nav ul {
+		margin-top: 0px;
+		width: 100%;
+	}
 
-#nav nav li {
-	display: block;
-	margin: 0px;
-	width: 100%;
-}
+	nav li {
+		display: block;
+		margin: 0px;
+		width: 100%;
+	}
 
-#nav nav li a{
-	padding: 10px 0px 10px 0px;
-}
-#nav nav li a:hover {
-	background:none;
-	padding: 20px 0px 20px 0px;
-}
+	nav li a{
+		padding: 10px 0px 10px 0px;
+		font-size: small;
+	}
+	nav li a:hover {
+		background:none;
+		padding: 20px 0px 20px 0px;
+	}
 
-/* Javascript Enabled */
+	/* Javascript Enabled */
 
-#nav .js-hidden {
-	display: none;
-	margin: 0px;
-}
+	.js-hidden {
+		display: none;
+		margin: 0px;
+	}
 
-#nav .show {
-	display: block;
-	margin: 0px;
-	width: 100%;
-}
+	.show {
+		display: block;
+		margin: 0px;
+		width: 100%;
+	}
 
-#nav .js-nav {
-	position: fixed !important;
-}
+	.js-nav {
+		position: fixed !important;
+	}
 
-#nav .js-ul {
-	position: absolute !important;
-	margin-top: 50px;
-}
+	.js-ul {
+		position: absolute !important;
+		margin-top: 50px;
+	}
 
-#menu {
-	display: block;
-	margin: 0px;
-	max-width: 700px;
-	position: fixed; 
-}
+	#menu {
+		display: block;
+		margin: 0px;
+		max-width: 700px;
+		position: fixed;
+	}
 
 }
 /* Responsive, screen width bigger then 700px; */
 
 /* Javascript Disabled - These are always visibile */
-@media only screen and (min-width: 700px) { 
-#nav nav {
-	max-height: 50px;
-	margin: 0px;
-	width: 100%;
-	position: fixed;
-}
+@media only screen and (min-width: 700px) {
+	nav {
+		max-height: 50px;
+		margin: 0px;
+		width: 100%;
+		position: fixed;
+	}
 
-#nav nav ul {
-	margin-top: 0px;
-	line-height: 50px;
-}
+	nav ul {
+		margin-top: 0px;
+		line-height: 50px;
+	}
 
-#nav nav li {
-	display: inline;
-}
+	nav li {
+		display: inline;
+	}
 
-/* Jasvascript Enabled */
-.show {
-	display: inline;
-}
 
-#menu {
-	display: none;
-}
+	/* Jasvascript Enabled */
+
+	.js-hidden {
+		display: inline;
+		margin: 0px;
+	}
+
+	.show {
+		display: inline;
+	}
+
+	#menu {
+		display: none;
+	}
 
 }
 
