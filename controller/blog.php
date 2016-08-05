@@ -8,7 +8,7 @@ class Blog extends Controller {
 		//$posts = $blog->displayPosts();	
 		//or directly with the autoloader.
 		// the fetchAll method return an object array with DB data.
-		$posts = posts_Post::fetchAll('posts');
+		$posts = posts_Post::fetchAll('posts',0);
 		// view takes: page_title,[array of (optional: multiple)view files],params from the router,array of data from model
 		$this->view('Blog',['blog.php'],$params,['posts' => $posts]);	
 	}

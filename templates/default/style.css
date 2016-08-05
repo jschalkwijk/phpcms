@@ -38,8 +38,12 @@ li {
 a {
 	text-decoration: none;
 }
-
-h1, h2, h3, h4, h5, h6, h7, h8 {
+p {
+	margin-bottom: 10px;
+	width: 100%;
+ }
+h1, h2, h3, h4, h5, h6 {
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 	color: #333333;
 }
 
@@ -128,12 +132,23 @@ h1, h2, h3, h4, h5, h6, h7, h8 {
 .top-margin {
 	margin-top: 50px;
 }
-
+.top-padding {
+	padding-top: 50px;
+}
 .center {
-	width: max-content;
+	text-align: center;
+	/*Met max-content krijg je het probleem dat de content niet repsonsive wordt, een tekst blijft op de max width staan.
+	mat text align center is dit niet het geval en wordt de content wel responsive*/
+	/*width: max-content;*/
 	height: auto;
 	padding: 5px;
-	margin: auto;
+	margin: 0 auto;
+}
+
+/* Bootstrap Row fix*/
+.row {
+	margin-left: 0;
+	margin-right: 0;
 }
 
 /* Button Styling */
@@ -197,6 +212,8 @@ button:hover  {
   margin-bottom: 15px;
   font-size: 21px;
   font-weight: 200;
+  width:100%;
+
 }
 
 .display h1 {
@@ -390,14 +407,14 @@ nav li a {
 }
 
 #article-wrapper {
-	max-width: 740px;
+	width: 740px;
 	height: auto;	
 	float: left;
 	margin:0px 10px 5px 0px;
 }
 
 article {
-	min-width: 750px;
+	width: 100%;
 	height: auto;
 	float: left;
 }
@@ -412,7 +429,7 @@ article {
 
 .article-content p {
 	padding: 0px 5px 10px 5px;
-	background-color: none;	
+	background-color: transparent;
 }
 
 /*TILT*/
@@ -438,7 +455,6 @@ article {
 	width: 100%;
 	height: auto;
 	font-family: 'Raleway', Arial, Helvetica;
-	background-color:none;
 	color: #f85c37;
 	margin: 0px;
 	padding: 5px;
@@ -469,7 +485,6 @@ article {
 	list-style-type:none;
 	padding: 3px;
 	margin: 0px 0% 5px 0%;
-	background-color:none;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
@@ -508,12 +523,15 @@ article {
 	height: auto;
 	margin-bottom:  5px;
 }
+.progress-bars{
+	width: max-content;
+}
   
 /*Image Holders*/
 
 #main-icon-wrapper {
 	width: max-content;
-	height: auto;
+	height: 100%;
 	margin: auto;
 
 }
@@ -527,15 +545,16 @@ article {
 }
 
 .img-title {
-	width: min-max-content;
+	width: 100%;
 	margin: auto;
 	text-align: center;
 }
 .image-holder {
 	margin-bottom: 20px;
+	height: 156px;
 }
 .image-holder img {
-	max-width: auto;
+	max-width: 130px;
 	max-height: 150px;
 	background: none;
 	list-style: none;
@@ -562,7 +581,6 @@ article {
 	color: #2d2520;
 	width: 100%;
 	height: auto;
-	background-color: none;
 	margin: 0px;
 	padding: 11px 5px 11px 5px;
 	border-bottom: 1px dotted #d2d2d2;
@@ -571,7 +589,6 @@ article {
 .widget-content {
 	width: 100%;
 	height: auto;
-	background-color: none;
 	margin: 0px;
 	padding: 3px;
 	/* wordt in WP widget wrpper ul*/
@@ -651,7 +668,7 @@ footer img {
 
 /* Flexible Images/Video etc. */
 
-img, video, canvas, url {
+img, video, canvas {
   max-width: 100%;
 }
 
@@ -683,18 +700,13 @@ img, video, canvas, url {
 
 
 @media only screen and (max-width: 700px) {
-	.image-holder {
-		max-height: 150px;
-		max-width: 150px;
+	#main-icon-wrapper{
+		min-height: 250px;
 	}
-	#icon-left {
-		float: none;
-		}	
-
-	#icon-right {
-		float: left;
-		}
-	
+	.image-holder, .image-holder img {
+		max-height: 120px;
+		max-width: 120px;
+	}
 	#downloads button {
 		text-decoration: none;
 		border-radius: 5px;
@@ -706,30 +718,41 @@ img, video, canvas, url {
 	}
 }
 
-
-/* Phone Portrait (320px) */
-@media only screen and (max-width: 320px) {
- .image-holder {
+/* Phone Portrait (400px) */
+@media only screen and (max-width: 400px) {
+	.display {
+		min-height: 150px;
+	}
+	.img-title{
+		font-size: 1.5em;
+	}
+	#hammer {
+		display: none;
+	}
+	.image-holder, .image-holder img {
 		max-height: 100px;
 		max-width: 100px;
 	}
+}
+
+/* Phone Portrait (320px) */
+@media only screen and (max-width: 320px) {
+	h1 {
+		font-size: 2em;
+	}
+	.display h1 {
+		font-size: 40px;
+	}
+	.image-holder, .image-holder img {
+		max-height: 80px;
+		max-width: 80px;
+	}
+
 	#icon-left {
 		float: none;
-		}	
+	}
 
 	#icon-right {
 		float: left;
-		}
-	
-	#downloads button {
-		text-decoration: none;
-		border-radius: 5px;
-		font-size: 16px;
 	}
-
-	#downloads table {
-		font-size: 16px;
-	}
-
 }
-

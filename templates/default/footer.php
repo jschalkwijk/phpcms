@@ -1,7 +1,7 @@
 
 <!-- <?php ob_end_flush();?> -->
 <footer class="container-fluid">
-	<p class="center"><img src="/images/atom-white.png"/><span> CRAFT Admin MVC: Some may say it's simple,<br /> we call it minimal. </span><img src="/images/atom-white.png"/></p>
+	<p class="center"><span> Jorn Schalkwijk&copy; 2016-<?php echo date("Y") ?></span></p>
 </footer>
 
 </div><!-- End Wrapper-->
@@ -11,6 +11,6 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
-<script src="/rs-nav/rs-nav.js"></script>
+<script src="<?php echo HOST."/rs-nav/rs-nav.js"; ?>"></script>
 </body>
-</html>git
+</html>

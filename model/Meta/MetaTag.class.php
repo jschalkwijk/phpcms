@@ -20,5 +20,5 @@ class Meta_MetaTag {
 		echo '<meta name="description" content="'.$row['description'].'">';
 		echo '<title>'.$page_title.'</title>';
 	}
-}
+} 
 ?>

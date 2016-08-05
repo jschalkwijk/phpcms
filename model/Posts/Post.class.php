@@ -3,6 +3,7 @@ class posts_Post {
 	private $id = 0;
 	protected $title;
 	protected $description;
+	protected $category_id;
 	protected $category;
 	protected $content;
 	protected $author;
@@ -10,9 +11,10 @@ class posts_Post {
 
 	// To create a new post, $post = new Post(enter variables). Vars with null are not required.
 	// This is like a template for child classes to use.
-	public function __construct($title,$description,$category,$content,$author,$date) {
+	public function __construct($title,$description,$category_id,$category,$content,$author,$date) {
 		$this->title = $title;
 		$this->description = $description;
+		$this->category_id = $category_id;
 		$this->category = $category;
 		$this->content = $content;
 		$this->author = $author;
@@ -27,6 +29,9 @@ class posts_Post {
 	}
 	public function getDescription(){
 		return $this->description;
+	}
+	public function getCategoryID(){
+		return $this->category_id;
 	}
 	public function getCategory(){
 		return $this->category;
@@ -53,83 +58,111 @@ class posts_Post {
 	// row that is getting fetched. We add the row data to the Post class.
 	// At last the ID is set in the Object and the Post object is pushed into an Array.
 	// This array will be used to write out the single or all posts.
-	public static function fetchAll($dbt) {
+	public static function fetchAll($dbt,$trashed) {
 		// static classes can be accessed directly.
 		//the method does not use properties or methods in the class.
 		//you dont have to instantiate an object just to get a simple function.
 		$dbc = new DBC;
 		$id_row = substr($dbt, 0, -1).'_id';
-		$query = "SELECT * FROM ".$dbt." WHERE trashed = 0 AND approved = 1 ORDER BY ".$id_row." DESC";
+		if($dbt != 'categories'){
+			$query = "SELECT ".$dbt.".*, categories.title as category FROM ".$dbt." LEFT JOIN categories ON ".$dbt.".category_id = categories.categorie_id  WHERE ".$dbt.".trashed = ".$trashed." ORDER BY ".$id_row." DESC";
+		} else {
+			$query = "SELECT * FROM ".$dbt." WHERE ".$dbt.".trashed = ".$trashed." ORDER BY ".$id_row." DESC";
+		}
+		$data = mysqli_query($dbc->connect(),$query)or die ("Error connecting to server");
+		$posts = array();
+		while($row = mysqli_fetch_array($data)){
+			$post = new posts_Post(
+				$row['title'],
+				$row['description'],
+				$row['category_id'],
+				$row['category'],
+				$row['content'],
+				$row['author'],
+				$dbt,
+				$row['date'],
+				$row['approved'],
+				$row['trashed']
+			);
+			// Because creating a new object in the controller doesn't allow us to insert an ID, we have to set the id
+			// ourselves. It's fetched from the database.
+			$post->setID($row[$id_row]);
+			// adds every object to the posts array. We can acces each object and its methods seperatly.
+			$posts[] = $post;
+		}
+		// We return an array which contains value that can be passed from the controller to the view.
+		// If the form needs to be outputted, errors or success messages.
+		return $posts;
+		$dbc->disconnect();
+	}
 
-		$data = mysqli_query($dbc->connect(),$query)or die ("Error connecting to server");
-		$posts = array();
-		while($row = mysqli_fetch_array($data)){
-			$post = new posts_Post(
-				$row['title'],
-				$row['description'],
-				$row['category'],
-				null,
-				$row['author'],
-				$row['date']
-			);
-			$post->setID($row[$id_row]);
-			// adds every object to the posts array. We can acces each object and its methods seperatly.
-			$posts[] = $post;
-		}
-		return $posts;
-		$dbc->disconnect();
-	}
-	
-	public static function fetchByCategory($dbt,$category) {
-		// static classes can be accessed directly.
-		//the method does not use properties or methods in the class.
-		//you dont have to instantiate an object just to get a simple function.
-		$dbc = new DBC;
-		$id_row = substr($dbt, 0, -1).'_id';
-		$id = mysqli_real_escape_string($dbc->connect(),trim($category));
-		$query = "SELECT * FROM ".$dbt." WHERE trashed = 0 AND approved = 1 AND category = '".$category."' ORDER BY ".$id_row." DESC";
-		$data = mysqli_query($dbc->connect(),$query)or die ("Error connecting to server");
-		$posts = array();
-		while($row = mysqli_fetch_array($data)){
-			$post = new posts_Post(
-				$row['title'],
-				$row['description'],
-				$row['category'],
-				null,
-				$row['author'],
-				$row['date']
-			);
-			$post->setID($row[$id_row]);
-			// adds every object to the posts array. We can acces each object and its methods seperatly.
-			$posts[] = $post;
-		}
-		return $posts;
-		$dbc->disconnect();
-	}
-	
+	// Fetches a single post or page.
+	// It take the DB table name and the id of the content we want to see.
+	// Creates an object which will be returned to the controller.
 	public static function fetchSingle($dbt,$id) {
-		// static classes can be accessed directly.
-		//the method does not use properties or methods in the class.
-		//you dont have to instantiate an object just to get a simple function.
 		$dbc = new DBC;
 		$id = mysqli_real_escape_string($dbc->connect(),trim((int)$id));
 		$id_row = substr($dbt, 0, -1).'_id';
-		$query = "SELECT * FROM ".$dbt." WHERE ".$id_row." = $id";
+		if($dbt != 'categories'){
+			$query = "SELECT ".$dbt.".*, categories.title as category FROM ".$dbt." LEFT JOIN categories ON ".$dbt.".category_id = categories.categorie_id WHERE ".$id_row." = $id";
+		} else {
+			$query = "SELECT * FROM ".$dbt." WHERE ".$id_row." = $id";
+		}
+
 		$data = mysqli_query($dbc->connect(),$query) or die ("Error connecting to server");
 		while($row = mysqli_fetch_array($data)){
 			$post = new posts_Post(
 				$row['title'],
-				null,
+				$row['description'],
+				$row['category_id'],
 				$row['category'],
 				$row['content'],
+				$row['author'],
+				$dbt,
+				$row['date'],
+				$row['approved'],
+				$row['trashed']
+			);
+			// Because creating a new object in the controller doesn't allow us to insert an ID, we have to set the id
+			// ourselves. It's fetched from the database.
+			$post->setID($row[$id_row]);
+			// adds every object to the posts array. We can acces each object and its methods seperatly.
+		}
+		$dbc->disconnect();
+		// We return an array which contains value that can be passed from the controller to the view.
+		// If the form needs to be outputted, errors or success messages.
+		return $post;
+	}
+	
+	public static function fetchByCategory($dbt,$category_id) {
+		// static classes can be accessed directly.
+		//the method does not use properties or methods in the class.
+		//you dont have to instantiate an object just to get a simple function.
+		$dbc = new DBC;
+		$id_row = substr($dbt, 0, -1).'_id';
+		$id = mysqli_real_escape_string($dbc->connect(),trim((int)$category_id));
+		$query = "SELECT ".$dbt.".*, categories.title as category FROM ".$dbt." LEFT JOIN categories ON ".$dbt.".category_id = categories.categorie_id WHERE category_id = $category_id ORDER BY ".$id_row." DESC ";
+
+//		$query = "SELECT * FROM ".$dbt." WHERE approved = 1 AND category_id = '".$category_id."' ORDER BY ".$id_row." DESC";
+		echo $query;
+		$data = mysqli_query($dbc->connect(),$query)or die ("Error connecting to server");
+		$posts = array();
+		while($row = mysqli_fetch_array($data)){
+			$post = new posts_Post(
+				$row['title'],
+				$row['description'],
+				$row['category_id'],
+				$row['category'],
+				null,
 				$row['author'],
 				$row['date']
 			);
 			$post->setID($row[$id_row]);
 			// adds every object to the posts array. We can acces each object and its methods seperatly.
+			$posts[] = $post;
 		}
+		return $posts;
 		$dbc->disconnect();
-		return $post;
 	}
 }
 ?>
