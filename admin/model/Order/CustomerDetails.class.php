@@ -63,7 +63,6 @@ class Order_CustomerDetails{
             $customer = Customer_Customer::fetchSingle($id);
             return $customer;
         }
-
     }
 
     public function clear() {

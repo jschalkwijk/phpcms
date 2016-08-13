@@ -9,22 +9,21 @@ class Order extends Controller{
     private $orderDetails;
 
     public function __construct(){
+        // Start all the needed sessions.
+        // For different uses we set updifferent session arrays with specific names.
+        // Then we can access all the session information per topic
 
+        // Cart Session
         $this->cart = new Support_SessionStorage('cart');
         $this->basket = new Basket_Basket($this->cart);
-// Session test
         // Customer Session
         $this->customerSession = new Support_SessionStorage('customer');
         $this->customerDetails = new Order_CustomerDetails($this->customerSession);
         //Order Session
         $this->orderSession = new Support_SessionStorage('order');
         $this->orderDetails = new Order_OrderDetails($this->orderSession);
-//        check if the session is set correctly.
-        echo '<br>';
-        print_r($this->customerDetails->single());
-// end session test
 
-        // imemediatly run the basket->all() method so that every page from this controller has
+        // immediately run the basket->all() method so that every page from this controller has
         // instant access to this basket class.
         // if not instantiated here,you have to call the basket all method in the methods of this cntroller to get access, otherwise
         // the basket class is not.
@@ -32,8 +31,7 @@ class Order extends Controller{
     }
 
     public function index($params = null){
-        // !!!!!!!!! Bij het aanpassen van een email, wordt een nieuwe klant aangemaakt en dus toegveoegd aan de sessie, dit moet een update zijn van de sessie,
-        // dus de email aanpassen geen nieuwe customer aanmaken!.
+
         if(!empty($this->customerDetails->single())) {
             $this->customer = $this->customerDetails->single();
         } else {
@@ -51,22 +49,69 @@ class Order extends Controller{
         );
     }
 
-    public function details($params = null){
+    public function payment($params = null){
         /* When a new customer is created and inserted to the DB , the $customer var doesn't hold the new ID yet.
          This is set after the customer is added, so we need to fetch it again with the customers->fetshSingle method in order
          to gain the new ID. Then we can pass it to the session and get the correct data.
         */
-
-        $this->customer = new Customer_Customer($_POST['name'],$_POST['email'],$_POST['phone'],$_POST['address1'],$_POST['address2'],$_POST['city'],$_POST['postal_code']);
+        // If post is not set, the user probably refreshed the page or used rthe back button,
+        // we can then just use the stored customer details from the session. if post is set,
+        // the details could have been changed so we should update them.
+        if(!$_POST) {
+            $this->customer = $this->customerDetails->single();
+        } else {
+            $this->customer = new Customer_Customer($_POST['name'], $_POST['email'], $_POST['phone'], $_POST['address1'], $_POST['address2'], $_POST['city'], $_POST['postal_code']);
+        }
         $add = $this->customer->add();
         $this->customer = $this->customer->fetchSingle($add['customer_id']);
         $this->customerDetails->add($this->customer);
 
         if(isset($add['customer_id'])) {
+        // Twijfel nog of ik de order in de database moet zetten bij deze stap of de volgende stap?
+//            $total = $this->basket->subTotal();
+//            if($this->orderDetails->single() == null){
+//                $this->order = new Order_Order($add['customer_id'], $total);
+//                $addOrder = $this->order->add();
+//                $this->order = $this->order->fetchSingle($addOrder['order_id']);
+//                $this->orderDetails->add($this->order);
+//                $this->order->addProducts($this->basket->all());
+//            } else {
+//                $this->order = $this->orderDetails->single();
+//                $this->order->setTotal($this->basket->subTotal());
+//                $addOrder = $this->order->add();
+//                $this->order = $this->order->fetchSingle($addOrder['order_id']);
+//                $this->orderDetails->add($this->order);
+//                $this->order->updateProducts($this->basket->all());
+//            }
+
+            $this->view(
+                "Order details",
+                ["details.php"],
+                $params,
+                [
+                    'customer' => $this->customer,
+                    'messages' => [$add['messages']],
+                    'js' => [JS."checkAll.js"]
+                ]
+            );
+        }
+
+    }
+
+    public function confirm($params = null){
+//        /* When a new customer is created and inserted to the DB , the $customer var doesn't hold the new ID yet.
+//          This is set after the customer is added, so we need to fetch it again with the customers->fetshSingle method in order
+//          to gain the new ID. Then we can pass it to the session and get the correct data.
+//         */
+//        $add = $this->customer->add();
+//        $this->customer = $this->customer->fetchSingle($add['customer_id']);
+//        $this->customerDetails->add($this->customer);
+        $this->customer = $this->customerDetails->single();
+        if($this->customer->getID() != null || $this->customer->getID() != 0) {
 
             $total = $this->basket->subTotal();
-            if($this->orderDetails->single() == null){
-                $this->order = new Order_Order($add['customer_id'], $total);
+            if($this->orderDetails->single() == null || $this->orderDetails->single()->getCustomerId() != $this->customer->getID()){
+                $this->order = new Order_Order($this->customer->getID(), $total);
                 $addOrder = $this->order->add();
                 $this->order = $this->order->fetchSingle($addOrder['order_id']);
                 $this->orderDetails->add($this->order);
@@ -86,37 +131,7 @@ class Order extends Controller{
                 $params,
                 [
                     'customer' => $this->customer,
-                    'messages' => [$add['messages'],$addOrder['messages']],
-                    'js' => [JS."checkAll.js"]
-                ]
-            );
-        }
-
-    }
-
-    public function payment($params = null){
-        /* When a new customer is created and inserted to the DB , the $customer var doesn't hold the new ID yet.
-          This is set after the customer is added, so we need to fetch it again with the customers->fetshSingle method in order
-          to gain the new ID. Then we can pass it to the session and get the correct data.
-         */
-        $add = $this->customer->add();
-        $this->customer = $this->customer->fetchSingle($add['customer_id']);
-
-        $this->customerDetails->add($this->customer);
-
-        if(isset($add['customer_id'])) {
-            $total = $this->basket->subTotal();
-            $order = new Order_Order($add['customer_id'],$total);
-            $addOrder = $order->add();
-            $addOrderProducts = $order->addProducts($this->basket->all());
-
-            $this->view(
-                "Order details",
-                ["details.php"],
-                $params,
-                [
-                    'customer' => $this->customer,
-                    'messages' => [$add['messages'],$addOrder['messages']],
+                    'messages' => [$addOrder['messages']],
                     'js' => [JS."checkAll.js"]
                 ]
             );

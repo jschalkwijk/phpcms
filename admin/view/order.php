@@ -6,7 +6,7 @@ if(!empty($data['customer'])) {
 ?>
 <div class="center">
     <div class="large">
-        <form id="addpost-form" method="post" action="<?php echo ADMIN."order/details"; ?>">
+        <form id="addpost-form" method="post" action="<?php echo ADMIN."order/payment"; ?>">
             <div class="small left">
                 <h2 class="container">Personal details</h2>
                 <input type="text" id="name" name="name" placeholder="Full Name (required)" value="<?php echo $customer->getName(); ?>"/>
@@ -34,7 +34,9 @@ if(!empty($data['customer'])) {
             </div>
             <div class="center clearfix">
                 <p class="alert alert-info">Please check if your personal details and address are correct before proceeding your order.</p>
-                <button type="submit" name="submit-order">Place Order</button>
+                <input type="checkbox" id="agree" name="agree"/><label for="agree">I agree to the <a href="#">Terms and Service Agreement</a> of this shop</label>
+                <input type="checkbox" id="details" name="details"/><label for="details">I have filled in the correct personal details</label>
+                <button type="submit" name="submit-order">Payment method</button>
             </div>
         </form>
     </div>
