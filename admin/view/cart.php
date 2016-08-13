@@ -37,6 +37,6 @@ $products = $data['products'];
             <tr><td><strong>Shipping</strong></td><td></td><td></td><td></td><td></td></tr>
             <tr><td><strong>Total</strong></td><td></td><td><span><?php echo $this->basket->totalQuantity(); ?></span></td><td><strong>€ </strong><span><?php echo $this->basket->subTotal(); ?></span></td> <td></td> </tr>
         </table>
-        <div class="container"><a href="/admin/order" class="link-btn">Checkout</a></div>
+        <div class="container"><a href="<?php echo ADMIN."order";?>" class="link-btn">Checkout</a></div>
     </div>
 <?php } ?>

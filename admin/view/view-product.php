@@ -69,7 +69,7 @@ $product = $data['product'];
 	</table>
 </div>
 <div class="container large">
-	<button id="check-all"><img class="glyph-small" src="<?php echo IMG."check.png"; ?>/></button>
+	<button id="check-all"><img class="glyph-small" src="<?php echo IMG."check.png"; ?>"/></button>
 	<?php File_Folders::show_albums($product->getAlbumID()); ?>
 </div>
 
