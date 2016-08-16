@@ -11,7 +11,7 @@ function mce(){
     check();
 }
 
-function insertImages(path,thumb) {
+function insertImages(path,thumb = null) {
     if(thumb == null) {
         tinyMCE.execCommand('mceInsertRawHTML', false, '<a href='+ path +'><img src=' + path + ' width=100%></a>');
     } else {

@@ -9,18 +9,16 @@
       <change type="DELETED" beforePath="C:\wamp\www\cms\admin\files\users\henkie\henkie's Contacts\570b8496c6b2e0.93350907.jpg" afterPath="" />
       <change type="DELETED" beforePath="C:\wamp\www\cms\admin\files\users\henkie\henkie's Contacts\570b84bd3fc698.96724473.jpg" afterPath="" />
       <change type="DELETED" beforePath="C:\wamp\www\cms\admin\files\users\henkie\henkie's Contacts\570b86cfa10ac6.30779151.jpg" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\keys\User\henkie.txt" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\keys\User\mr_jorn.txt" afterPath="" />
+      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\keys\User\test.txt" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.htaccess" afterPath="$PROJECT_DIR$/.htaccess" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/.htaccess" afterPath="$PROJECT_DIR$/admin/.htaccess" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/model/Order/CustomerDetails.class.php" afterPath="$PROJECT_DIR$/admin/model/Order/CustomerDetails.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/view/add-edit-post.php" afterPath="$PROJECT_DIR$/admin/view/add-edit-post.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config.php" afterPath="$PROJECT_DIR$/config.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/config.php" afterPath="$PROJECT_DIR$/admin/config.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/view/details.php" afterPath="$PROJECT_DIR$/admin/view/details.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/blocks/include-files-tinymce.php" afterPath="$PROJECT_DIR$/admin/blocks/include-files-tinymce.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/templates/default/footer.php" afterPath="$PROJECT_DIR$/admin/templates/default/footer.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/js/mceAddons.js" afterPath="$PROJECT_DIR$/admin/js/mceAddons.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/controller/order.php" afterPath="$PROJECT_DIR$/admin/controller/order.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/view/order.php" afterPath="$PROJECT_DIR$/admin/view/order.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/view/products.php" afterPath="$PROJECT_DIR$/admin/view/products.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="craft_server.iws" />
@@ -50,48 +48,18 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="config.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.576923">
-              <caret line="7" column="31" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="order.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="order.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/admin/controller/order.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="18.961538">
+            <state vertical-scroll-proportion="-0.9479167">
               <caret line="58" column="72" selection-start-line="58" selection-start-column="72" selection-end-line="58" selection-end-column="72" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="details.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/view/details.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-9.153846">
-              <caret line="14" column="17" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="config.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/config.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.8846154">
-              <caret line="9" column="59" selection-start-line="9" selection-start-column="59" selection-end-line="9" selection-end-column="59" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ajax.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/view/ajax.php">
+      <file leaf-file-name="manage_content.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin/view/manage_content.php">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-0.0">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -100,30 +68,33 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="include-files-tinymce.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/blocks/include-files-tinymce.php">
+      <file leaf-file-name="details.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin/view/details.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-17.653847">
-              <caret line="27" column="20" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
-              <folding>
-                <marker date="1471099393535" expanded="true" signature="834:860" placeholder="SELECT * FRO..files..." />
-                <marker date="1471099393535" expanded="true" signature="1028:1322" placeholder="..." />
-                <marker date="1471099393535" expanded="true" signature="1201:1322" placeholder="..." />
-                <marker date="1471099393535" expanded="true" signature="1224:1322" placeholder="..." />
-                <marker date="1471099393535" expanded="true" signature="1467:1557" placeholder="..." />
-                <marker date="1471099393535" expanded="true" signature="1504:1557" placeholder="..." />
-              </folding>
+            <state vertical-scroll-proportion="-0.0">
+              <caret line="14" column="17" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mceAddons.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/admin/js/mceAddons.js">
+      <file leaf-file-name="products.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin/view/products.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.30779943">
-              <caret line="13" column="32" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="32" />
+            <state vertical-scroll-proportion="-6.5384617">
+              <caret line="10" column="189" selection-start-line="10" selection-start-column="189" selection-end-line="10" selection-end-column="189" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="include-files-tinymce.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin/blocks/include-files-tinymce.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-20.26923">
+              <caret line="31" column="101" selection-start-line="31" selection-start-column="101" selection-end-line="31" selection-end-column="107" />
               <folding>
-                <element signature="n#!!doc" expanded="true" />
+                <marker date="1471099393535" expanded="true" signature="834:860" placeholder="SELECT * FRO..files..." />
               </folding>
             </state>
           </provider>
@@ -132,9 +103,15 @@
       <file leaf-file-name="Customer.class.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/model/Customer/Customer.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.5">
+            <state vertical-scroll-proportion="-54.923077">
               <caret line="100" column="24" selection-start-line="100" selection-start-column="24" selection-end-line="100" selection-end-column="24" />
-              <folding />
+              <folding>
+                <marker date="1468933171861" expanded="true" signature="2794:2943" placeholder="INSERT INTO ..." />
+                <marker date="1468933171861" expanded="true" signature="3067:3122" placeholder="SELECT custo..customers..." />
+                <marker date="1468933171861" expanded="true" signature="4767:4925" placeholder="UPDATE custo..." />
+                <marker date="1468933171861" expanded="true" signature="5589:5633" placeholder="SELECT * FRO..customers..." />
+                <marker date="1468933171861" expanded="true" signature="6598:6643" placeholder="SELECT * FRO..customers..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -154,7 +131,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/admin/templates/default/nav.php" />
         <option value="$PROJECT_DIR$/admin/view/pages.php" />
         <option value="$PROJECT_DIR$/admin/view/posts.php" />
         <option value="$PROJECT_DIR$/admin/view/users.php" />
@@ -172,7 +148,6 @@
         <option value="$PROJECT_DIR$/admin/controller/products.php" />
         <option value="$PROJECT_DIR$/admin/controller/users.php" />
         <option value="$PROJECT_DIR$/admin/view/view-product.php" />
-        <option value="$PROJECT_DIR$/admin/view/products.php" />
         <option value="$PROJECT_DIR$/admin/model/Products/Product.class.php" />
         <option value="$PROJECT_DIR$/admin/model/DBC.class.php" />
         <option value="$PROJECT_DIR$/admin/model/Support/StorageInterface.class.php" />
@@ -197,7 +172,6 @@
         <option value="$PROJECT_DIR$/.htaccess" />
         <option value="$PROJECT_DIR$/config.php" />
         <option value="$PROJECT_DIR$/admin/.htaccess" />
-        <option value="$PROJECT_DIR$/admin/config.php" />
         <option value="$PROJECT_DIR$/admin/model/Order/CustomerDetails.class.php" />
         <option value="$PROJECT_DIR$/admin/view/order.php" />
         <option value="$PROJECT_DIR$/admin/view/details.php" />
@@ -205,6 +179,9 @@
         <option value="$PROJECT_DIR$/admin/view/add-edit-post.php" />
         <option value="$PROJECT_DIR$/admin/blocks/include-files-tinymce.php" />
         <option value="$PROJECT_DIR$/admin/js/mceAddons.js" />
+        <option value="$PROJECT_DIR$/admin/view/products.php" />
+        <option value="$PROJECT_DIR$/admin/config.php" />
+        <option value="$PROJECT_DIR$/admin/templates/default/footer.php" />
       </list>
     </option>
   </component>
@@ -249,6 +226,9 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scratches">
+        <subPane />
+      </pane>
       <pane id="Scope">
         <subPane subId="Problems" />
         <subPane subId="Project Files">
@@ -279,60 +259,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cms" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cms" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="admin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cms" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cms" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="admin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cms" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cms" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="admin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="files" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
-      </pane>
-      <pane id="Scratches">
-        <subPane />
       </pane>
     </panes>
   </component>
@@ -429,17 +356,17 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1616" height="876" extended-state="7" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25899744" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2622108" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32988626" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2841823" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28322148" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -494,7 +421,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -544,13 +470,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.8237037">
           <caret line="57" column="106" selection-start-line="57" selection-start-column="106" selection-end-line="57" selection-end-column="106" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/view/products.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.1762963">
-          <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
         </state>
       </provider>
     </entry>
@@ -712,7 +631,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="2" column="16" selection-start-line="2" selection-start-column="16" selection-end-line="2" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -760,15 +678,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-35.96154">
           <caret line="58" column="25" selection-start-line="58" selection-start-column="25" selection-end-line="58" selection-end-column="25" />
-          <folding>
-            <marker date="1468933171868" expanded="true" signature="-1:-1" placeholder="UPDATE order..." />
-            <marker date="1468933171868" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1468933171868" expanded="true" signature="-1:-1" placeholder="SELECT order..orders..." />
-            <marker date="1468933171868" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
-            <marker date="1468933171868" expanded="true" signature="-1:-1" placeholder="DELETE FROM ..." />
-            <marker date="1468933171868" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..orders..." />
-            <marker date="1468933171868" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..customers..." />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -776,15 +686,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-23.538462">
           <caret line="36" column="49" selection-start-line="36" selection-start-column="49" selection-end-line="36" selection-end-column="49" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/model/Customer/Customer.class.php">
+    <entry file="file://$PROJECT_DIR$/admin/js/tinyMCEsettings.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.5">
-          <caret line="100" column="24" selection-start-line="100" selection-start-column="24" selection-end-line="100" selection-end-column="24" />
-          <folding />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/view/add-edit-post.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.3511561">
+          <caret line="55" column="11" selection-start-line="55" selection-start-column="11" selection-end-line="55" selection-end-column="11" />
         </state>
       </provider>
     </entry>
@@ -796,15 +711,81 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/admin/view/details.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="17" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/js/mceAddons.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/model/Customer/Customer.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-54.923077">
+          <caret line="100" column="24" selection-start-line="100" selection-start-column="24" selection-end-line="100" selection-end-column="24" />
+          <folding>
+            <marker date="1468933171861" expanded="true" signature="2794:2943" placeholder="INSERT INTO ..." />
+            <marker date="1468933171861" expanded="true" signature="3067:3122" placeholder="SELECT custo..customers..." />
+            <marker date="1468933171861" expanded="true" signature="4767:4925" placeholder="UPDATE custo..." />
+            <marker date="1468933171861" expanded="true" signature="5589:5633" placeholder="SELECT * FRO..customers..." />
+            <marker date="1468933171861" expanded="true" signature="6598:6643" placeholder="SELECT * FRO..customers..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/blocks/include-files-tinymce.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-20.26923">
+          <caret line="31" column="101" selection-start-line="31" selection-start-column="101" selection-end-line="31" selection-end-column="107" />
+          <folding>
+            <marker date="1471099393535" expanded="true" signature="834:860" placeholder="SELECT * FRO..files..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/config.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.576923">
+        <state vertical-scroll-proportion="0.17196532">
           <caret line="7" column="31" selection-start-line="7" selection-start-column="31" selection-end-line="7" selection-end-column="31" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/js/tinyMCEsettings.js">
+    <entry file="file://$PROJECT_DIR$/admin/config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.576923">
+          <caret line="7" column="21" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/templates/default/footer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="33" selection-start-line="0" selection-start-column="33" selection-end-line="0" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/view/products.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.5384617">
+          <caret line="10" column="189" selection-start-line="10" selection-start-column="189" selection-end-line="10" selection-end-column="189" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/view/manage_content.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -812,60 +793,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/view/details.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.153846">
-          <caret line="14" column="17" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/config.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.8846154">
-          <caret line="9" column="59" selection-start-line="9" selection-start-column="59" selection-end-line="9" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/blocks/include-files-tinymce.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-17.653847">
-          <caret line="27" column="20" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
-          <folding>
-            <marker date="1471099393535" expanded="true" signature="834:860" placeholder="SELECT * FRO..files..." />
-            <marker date="1471099393535" expanded="true" signature="1028:1322" placeholder="..." />
-            <marker date="1471099393535" expanded="true" signature="1201:1322" placeholder="..." />
-            <marker date="1471099393535" expanded="true" signature="1224:1322" placeholder="..." />
-            <marker date="1471099393535" expanded="true" signature="1467:1557" placeholder="..." />
-            <marker date="1471099393535" expanded="true" signature="1504:1557" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/view/add-edit-post.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.3511561">
-          <caret line="55" column="11" selection-start-line="55" selection-start-column="11" selection-end-line="55" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/admin/controller/order.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="18.961538">
+        <state vertical-scroll-proportion="-0.9479167">
           <caret line="58" column="72" selection-start-line="58" selection-start-column="72" selection-end-line="58" selection-end-column="72" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/js/mceAddons.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30779943">
-          <caret line="13" column="32" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="32" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>

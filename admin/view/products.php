@@ -8,7 +8,7 @@
 	?>
 	<form class="backend-form" method="post" action="<?php echo ADMIN."products"; ?>">
 		<table class="backend-table title">
-			<tr><th>Name</th><th>Category</th><th>Price</th><th>In Stock</th><th>Edit</th><th>View</th><th><button type="button" id="check-all"><img class="glyph-small" src="<?php echo ADMIN."check.png"; ?>" alt="check-unheck-all-items"/></button></th></tr>
+			<tr><th>Name</th><th>Category</th><th>Price</th><th>In Stock</th><th>Edit</th><th>View</th><th><button type="button" id="check-all"><img class="glyph-small" src="<?php echo IMG."check.png"; ?>" alt="check-unheck-all-items"/></button></th></tr>
 			<?php foreach($products as $product){ ?>
 				<tr>
 					<td class="td-title"><a href="<?php echo ADMIN.'products/info/'.$product->getID().'/'.$product->getName(); ?>"><?php echo $product->getName(); ?></a></td>
