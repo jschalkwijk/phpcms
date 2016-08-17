@@ -1,14 +1,16 @@
-<?php ob_start(); ?>
+<?php
+	ob_start();
+	require_once('config.php');
+?>
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Login</title>
-	<link type="text/ccs" rel="stylesheet" href="/admin/templates/default/style.css"/>
+	<link type="text/ccs" rel="stylesheet" href="<?php echo ADMIN."templates/default/style.css";?>"/>
 </head>
 <body>
 
 <?php
-	require_once('config.php');
 	// for some reason the autoloader does not work on this page for the crypto class..
 	require_once 'model/Encryption/Crypto.php';
 	$output_form = False;
@@ -69,7 +71,7 @@
 							setcookie('t',$new_token, time() + 60*60*10,'/', null, null, true); // httponly=  ,/ ,null, null, true
 							setcookie('u',md5($username.$new_token),time() + 60*60*10,'/', null, null, true);
 						}
-						header('Location: '.'/admin');
+						header('Location: '.ADMIN);
 					}
 				} else {
 					echo '<div class="container">Enter a valid email and/or password</div>';

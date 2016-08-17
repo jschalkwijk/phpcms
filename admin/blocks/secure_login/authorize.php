@@ -41,7 +41,7 @@
 	}
 	// if user is not authorized, redirect to the login page and exit the script.
 	if (!$authorize) {
-		header('Location: /admin/login.php');
+		header('Location: '.ADMIN.'login.php');
 		exit();
 	}
 ?>
