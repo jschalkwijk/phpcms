@@ -1,4 +1,5 @@
 <?php
+
 class DBC {
 	/*
 	 * Simple DataBase Connection Class
@@ -11,13 +12,27 @@ class DBC {
 	private $dbc;
 
 	// Connects to your database
+//	public function connect(){
+//		$this->dbc = mysqli_connect($this->host, $this->user, $this->password, $this->name) or die('Error connecting to server');
+//		return $this->dbc;
+//	}
 	public function connect(){
-		$this->dbc = mysqli_connect($this->host, $this->user, $this->password, $this->name) or die('Error connecting to server');
+		// Create connection
+		$this->dbc = new mysqli($this->host, $this->user, $this->password, $this->name);
+
+		// Check connection
+		if ($this->dbc->connect_error) {
+			echo "Failed to connect to MySQL: (" . $this->dbc->connect_errno . ") " . $this->dbc->connect_error;
+		}
 		return $this->dbc;
 	}
 	// Disconnects from your database.
 	public function disconnect(){
 		mysqli_close($this->dbc);
+	}
+
+	public function err($query){
+		echo "There is an error in your sql query (" . $this->dbc->errno . ") " . $this->dbc->error;
 	}
 }
 

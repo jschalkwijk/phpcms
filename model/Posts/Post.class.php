@@ -62,16 +62,30 @@ class posts_Post {
 		// static classes can be accessed directly.
 		//the method does not use properties or methods in the class.
 		//you dont have to instantiate an object just to get a simple function.
-		$dbc = new DBC;
+		$dbc = new mysqli(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
 		$id_row = substr($dbt, 0, -1).'_id';
-		if($dbt != 'categories'){
-			$query = "SELECT ".$dbt.".*, categories.title as category FROM ".$dbt." LEFT JOIN categories ON ".$dbt.".category_id = categories.categorie_id  WHERE ".$dbt.".trashed = ".$trashed." ORDER BY ".$id_row." DESC";
-		} else {
-			$query = "SELECT * FROM ".$dbt." WHERE ".$dbt.".trashed = ".$trashed." ORDER BY ".$id_row." DESC";
+
+		$dbc = new mysqli(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
+
+		// Check connection
+		if ($dbc->connect_error) {
+			echo "Failed to connect to MySQL: (" . $dbc->connect_errno . ") " . $dbc->connect_error;
 		}
-		$data = mysqli_query($dbc->connect(),$query)or die ("Error connecting to server");
+		if($dbt != 'categories'){
+			$query = $dbc->prepare("SELECT ".$dbt.".*, categories.title as category FROM ".$dbt." LEFT JOIN categories ON ".$dbt.".category_id = categories.categorie_id WHERE ".$dbt.".trashed = ? ORDER BY ".$id_row." DESC");
+			$query->bind_param("i",$trashed);
+		} else {
+			$query = $dbc->prepare("SELECT * FROM ".$dbt." WHERE ".$dbt.".trashed = ? ORDER BY ".$id_row." DESC");
+			$query->bind_param("i",$trashed);
+		}
+
+		$query->execute();
+		$data = $query->get_result();
+		$query->close();
+
+//		$data = mysqli_query($dbc->connect(),$query)or die ("Error connecting to server");
 		$posts = array();
-		while($row = mysqli_fetch_array($data)){
+		while($row = $data->fetch_array()){
 			$post = new posts_Post(
 				$row['title'],
 				$row['description'],
@@ -92,8 +106,8 @@ class posts_Post {
 		}
 		// We return an array which contains value that can be passed from the controller to the view.
 		// If the form needs to be outputted, errors or success messages.
+		$dbc->close();
 		return $posts;
-		$dbc->disconnect();
 	}
 
 	// Fetches a single post or page.

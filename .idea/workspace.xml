@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3e9ca70d-5c86-4b1b-a819-366949c8fc81" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\contactform.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\easypagination.php" afterPath="" />
       <change type="DELETED" beforePath="C:\wamp\www\cms\admin\files\users\henkie\henkie's Contacts\570a5938713c86.46907338.jpg" afterPath="" />
       <change type="DELETED" beforePath="C:\wamp\www\cms\admin\files\users\henkie\henkie's Contacts\570a597cf216d7.56129411.jpg" afterPath="" />
       <change type="DELETED" beforePath="C:\wamp\www\cms\admin\files\users\henkie\henkie's Contacts\570a5b211cb274.79742103.jpg" afterPath="" />
@@ -11,12 +9,12 @@
       <change type="DELETED" beforePath="C:\wamp\www\cms\admin\files\users\henkie\henkie's Contacts\570b8496c6b2e0.93350907.jpg" afterPath="" />
       <change type="DELETED" beforePath="C:\wamp\www\cms\admin\files\users\henkie\henkie's Contacts\570b84bd3fc698.96724473.jpg" afterPath="" />
       <change type="DELETED" beforePath="C:\wamp\www\cms\admin\files\users\henkie\henkie's Contacts\570b86cfa10ac6.30779151.jpg" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\join.php" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.htaccess" afterPath="$PROJECT_DIR$/.htaccess" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/.htaccess" afterPath="$PROJECT_DIR$/admin/.htaccess" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/blocks/secure_login/authorize.php" afterPath="$PROJECT_DIR$/admin/blocks/secure_login/authorize.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/model/DBC.class.php" afterPath="$PROJECT_DIR$/admin/model/DBC.class.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model/DBC.class.php" afterPath="$PROJECT_DIR$/model/DBC.class.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/model/Posts/Post.class.php" afterPath="$PROJECT_DIR$/model/Posts/Post.class.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/config.php" afterPath="$PROJECT_DIR$/admin/config.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/login.php" afterPath="$PROJECT_DIR$/admin/login.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="craft_server.iws" />
@@ -49,8 +47,18 @@
       <file leaf-file-name="order.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/controller/order.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-21.576923">
-              <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+            <state vertical-scroll-proportion="-11.115385">
+              <caret line="17" column="55" selection-start-line="17" selection-start-column="55" selection-end-line="17" selection-end-column="55" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="blog.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/view/blog.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-4.576923">
+              <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -59,21 +67,31 @@
       <file leaf-file-name="Post.class.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/model/Posts/Post.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="64.07692">
-              <caret line="28" column="5" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
+            <state vertical-scroll-proportion="-2.5660377">
+              <caret line="119" column="33" selection-start-line="119" selection-start-column="33" selection-end-line="119" selection-end-column="33" />
               <folding>
-                <marker date="1471017081061" expanded="true" signature="2444:2530" placeholder="SELECT * FRO..." />
-                <marker date="1471017081061" expanded="true" signature="4007:4050" placeholder="SELECT * FRO..." />
+                <marker date="1471457137328" expanded="true" signature="2745:2820" placeholder="SELECT * FRO..." />
+                <marker date="1471457137328" expanded="true" signature="4401:4444" placeholder="SELECT * FRO..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="blog.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/view/blog.php">
+      <file leaf-file-name="DBC.class.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin/model/DBC.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.24791667">
-              <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+            <state vertical-scroll-proportion="-11.769231">
+              <caret line="33" column="24" selection-start-line="33" selection-start-column="24" selection-end-line="33" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DBC.class.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/model/DBC.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.46875">
+              <caret line="29" column="33" selection-start-line="29" selection-start-column="33" selection-end-line="29" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -121,6 +139,18 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="Content.class.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin/model/Content/Content.class.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-11.115385">
+              <caret line="84" column="90" selection-start-line="79" selection-start-column="8" selection-end-line="84" selection-end-column="90" />
+              <folding>
+                <marker date="1471443000201" expanded="true" signature="4392:4435" placeholder="SELECT * FRO..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -136,9 +166,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/admin/view/users.php" />
-        <option value="$PROJECT_DIR$/admin/view/contacts.php" />
-        <option value="$PROJECT_DIR$/admin/view/admin.php" />
         <option value="$PROJECT_DIR$/admin/view/add-edit-product.php" />
         <option value="$PROJECT_DIR$/admin/model/File/Folders.class.php" />
         <option value="$PROJECT_DIR$/admin/controller/file.php" />
@@ -152,7 +179,6 @@
         <option value="$PROJECT_DIR$/admin/controller/users.php" />
         <option value="$PROJECT_DIR$/admin/view/view-product.php" />
         <option value="$PROJECT_DIR$/admin/model/Products/Product.class.php" />
-        <option value="$PROJECT_DIR$/admin/model/DBC.class.php" />
         <option value="$PROJECT_DIR$/admin/model/Support/StorageInterface.class.php" />
         <option value="$PROJECT_DIR$/admin/model/Basket/Basket.class.php" />
         <option value="$PROJECT_DIR$/admin/nerdcms_db.sql" />
@@ -187,6 +213,10 @@
         <option value="$PROJECT_DIR$/admin/blocks/include-files-tinymce.php" />
         <option value="$PROJECT_DIR$/admin/blocks/secure_login/authorize.php" />
         <option value="$PROJECT_DIR$/admin/login.php" />
+        <option value="$PROJECT_DIR$/admin/model/Content/Content.class.php" />
+        <option value="$PROJECT_DIR$/model/DBC.class.php" />
+        <option value="$PROJECT_DIR$/admin/model/DBC.class.php" />
+        <option value="$PROJECT_DIR$/model/Posts/Post.class.php" />
       </list>
     </option>
   </component>
@@ -261,34 +291,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="cms" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cms" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cms" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="view" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cms" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cms" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="admin" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -390,9 +392,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2622108" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2622108" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32988626" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -450,27 +452,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/admin/view/view-product.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-20.26923">
-          <caret line="82" column="30" selection-start-line="82" selection-start-column="30" selection-end-line="82" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/controller/products.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8237037">
-          <caret line="57" column="106" selection-start-line="57" selection-start-column="106" selection-end-line="57" selection-end-column="106" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/controller/posts.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.04">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/admin/view/admin.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.8203125">
@@ -510,13 +491,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.09375">
           <caret line="288" column="9" selection-start-line="288" selection-start-column="9" selection-end-line="288" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/model/DBC.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.25">
-          <caret line="18" column="38" selection-start-line="18" selection-start-column="38" selection-end-line="18" selection-end-column="38" />
         </state>
       </provider>
     </entry>
@@ -824,27 +798,63 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/controller/order.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-21.576923">
-          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+        <state vertical-scroll-proportion="-11.115385">
+          <caret line="17" column="55" selection-start-line="17" selection-start-column="55" selection-end-line="17" selection-end-column="55" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/model/Posts/Post.class.php">
+    <entry file="file://$PROJECT_DIR$/admin/model/Content/posts/Post.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="64.07692">
-          <caret line="28" column="5" selection-start-line="28" selection-start-column="5" selection-end-line="28" selection-end-column="5" />
+        <state vertical-scroll-proportion="-0.24791667">
+          <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
           <folding>
-            <marker date="1471017081061" expanded="true" signature="2444:2530" placeholder="SELECT * FRO..." />
-            <marker date="1471017081061" expanded="true" signature="4007:4050" placeholder="SELECT * FRO..." />
+            <marker date="1466513629444" expanded="true" signature="-1:-1" placeholder="INSERT INTO ..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/view/blog.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.24791667">
+        <state vertical-scroll-proportion="-4.576923">
           <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/model/Content/Content.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.115385">
+          <caret line="84" column="90" selection-start-line="79" selection-start-column="8" selection-end-line="84" selection-end-column="90" />
+          <folding>
+            <marker date="1471443000201" expanded="true" signature="4392:4435" placeholder="SELECT * FRO..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/model/DBC.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.769231">
+          <caret line="33" column="24" selection-start-line="33" selection-start-column="24" selection-end-line="33" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/Posts/Post.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.5660377">
+          <caret line="119" column="33" selection-start-line="119" selection-start-column="33" selection-end-line="119" selection-end-column="33" />
+          <folding>
+            <marker date="1471457137328" expanded="true" signature="2745:2820" placeholder="SELECT * FRO..." />
+            <marker date="1471457137328" expanded="true" signature="4401:4444" placeholder="SELECT * FRO..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/model/DBC.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.46875">
+          <caret line="29" column="33" selection-start-line="29" selection-start-column="33" selection-end-line="29" selection-end-column="33" />
           <folding />
         </state>
       </provider>
