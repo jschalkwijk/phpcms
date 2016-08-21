@@ -94,7 +94,9 @@ class Contacts_Contact {
 	// This function uses AES 128 encryption to encrypt contacts. (DEFUSE library github.com)
 	// If a user is created it also has a encryption key created which will be used here.
 	public function addContact(){
-		$dbc = new DBC;
+		$db = new DBC;
+		$dbc = $db->connect();
+
 		$errors = array();
 		$messages = array();
 		$output_form = false;
@@ -107,7 +109,6 @@ class Contacts_Contact {
 		} else {
 			$errors[] = "Encryption key could not be found!";
 			return['output_form' => $output_form,'messages' => $messages,'errors' => $errors];
-			exit();
 		}
 
 		// Working from the inside out:
@@ -115,18 +116,18 @@ class Contacts_Contact {
 		// To store data in the database we need to convert the binary to hexadecimal.
 		//the database row must be set to VARBINARY in order to contain the data.
 		try {
-			$first_name = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc->connect(),trim($this->first_name)),$user_key ));
-			$last_name = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc->connect(),trim($this->last_name)),$user_key ));
-			$phone_1 = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc->connect(),trim($this->phone_1)),$user_key ));
-			$phone_2 = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc->connect(),trim($this->phone_2)),$user_key ));
-			$email_1 = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc->connect(),trim($this->email_1)),$user_key ));
-			$email_2 = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc->connect(),trim($this->email_2)),$user_key ));
-			$dob = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc->connect(),trim($this->dob)),$user_key ));
-			$street = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc->connect(),trim($this->street)),$user_key ));
-			$street_num = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc->connect(),trim($this->street_num)),$user_key ));
-			$street_num_add = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc->connect(),trim($this->street_num_add)),$user_key ));
-			$zip = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc->connect(),trim($this->zip)),$user_key ));
-			$notes = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc->connect(),trim($this->notes)),$user_key ));
+			$first_name = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->first_name)),$user_key ));
+			$last_name = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->last_name)),$user_key ));
+			$phone_1 = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->phone_1)),$user_key ));
+			$phone_2 = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->phone_2)),$user_key ));
+			$email_1 = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->email_1)),$user_key ));
+			$email_2 = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->email_2)),$user_key ));
+			$dob = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->dob)),$user_key ));
+			$street = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->street)),$user_key ));
+			$street_num = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->street_num)),$user_key ));
+			$street_num_add = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->street_num_add)),$user_key ));
+			$zip = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->zip)),$user_key ));
+			$notes = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->notes)),$user_key ));
 		} catch (Ex\CryptoTestFailedException $ex) {
 		    die('Cannot safely perform encryption');
 		} catch (Ex\CannotPerformOperationException $ex) {
@@ -134,13 +135,21 @@ class Contacts_Contact {
 		}
 		// Adding the encrypted data to the database.
 		if(!empty($first_name) && (!empty($email_1)) || !empty($phone_1)){
-			$query = "INSERT INTO contacts(first_name,last_name,phone_1,phone_2,email_1,email_2,dob,street,street_num,street_num_add,zip,notes,user_id) VALUES ('$first_name','$last_name','$phone_1','$phone_2','$email_1','$email_2','$dob','$street','$street_num','$street_num_add','$zip','$notes',$user_id)";
-			mysqli_query($dbc->connect(),$query) or die('Error connecting to database');
+			$query = $dbc->prepare("INSERT INTO contacts(first_name,last_name,phone_1,phone_2,email_1,email_2,dob,street,street_num,street_num_add,zip,notes,user_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
+			if($query) {
+				$query->bind_param("ssssssssssssi", $first_name, $last_name, $phone_1, $phone_2, $email_1, $email_2, $dob, $street, $street_num, $street_num_add, $zip, $notes, $user_id);
+				$query->execute();
+				$id = $query->insert_id;
+				$query->close();
+			} else {
+				$db->sqlERROR();
+			}
 			$messages[] = 'The new contact '.'<a href="/admin/contacts/info/'.$id.'/'.$first_name.'">'.$first_name.'</a>'.' is successfully created.';
 		} else {
 			$errors[] = 'You have to at least fill in a first name and </br> a email or phone number to add a new contact.';
 			$output_form = true;
 		}
+		$dbc->close();
 		// We return an array which contains value that can be passed from the controller to the view.
 		// If the form needs to be outputted, errors or success messages.
 		return['output_form' => $output_form,'messages' => $messages,'errors' => $errors];
@@ -151,7 +160,9 @@ class Contacts_Contact {
 	// to call this function. As you can see, it is using the objects data. The objects data is formed
 	// by Post values passed to the object inside the controller.
 	public function editContact($id){
-		$dbc = new DBC;
+		$db = new DBC;
+		$dbc = $db->connect();
+
 		$errors = array();
 		$messages = array();
 		$output_form = false;
@@ -170,29 +181,36 @@ class Contacts_Contact {
 		// We call the Crypto function to encrypt the message to binary data using the Users key.
 		// To store data in the database we need to convert the binary to hexadecimal.
 		//the database row must be set to VARBINARY in order to contain the data.
-		$id = mysqli_real_escape_string($dbc->connect(),trim((int)$this->getID()));
-		$first_name = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc->connect(),trim($this->first_name)),$user_key ));
-		$last_name = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc->connect(),trim($this->last_name)),$user_key ));
-		$phone_1 = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc->connect(),trim($this->phone_1)),$user_key ));
-		$phone_2 = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc->connect(),trim($this->phone_2)),$user_key ));
-		$email_1 = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc->connect(),trim($this->email_1)),$user_key ));
-		$email_2 = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc->connect(),trim($this->email_2)),$user_key ));
-		$dob = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc->connect(),trim($this->dob)),$user_key ));
-		$street = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc->connect(),trim($this->street)),$user_key ));
-		$street_num = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc->connect(),trim($this->street_num)),$user_key ));
-		$street_num_add = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc->connect(),trim($this->street_num_add)),$user_key ));
-		$zip = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc->connect(),trim($this->zip)),$user_key ));
-		$notes = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc->connect(),trim($this->notes)),$user_key ));
+		$id = mysqli_real_escape_string($dbc,trim((int)$this->getID()));
+		$first_name = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->first_name)),$user_key ));
+		$last_name = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->last_name)),$user_key ));
+		$phone_1 = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->phone_1)),$user_key ));
+		$phone_2 = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->phone_2)),$user_key ));
+		$email_1 = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->email_1)),$user_key ));
+		$email_2 = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->email_2)),$user_key ));
+		$dob = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->dob)),$user_key ));
+		$street = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->street)),$user_key ));
+		$street_num = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->street_num)),$user_key ));
+		$street_num_add = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->street_num_add)),$user_key ));
+		$zip = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->zip)),$user_key ));
+		$notes = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->notes)),$user_key ));
 		// Adding the updated data to the DB.
 		if(!empty($first_name) && (!empty($email_1)) || !empty($phone_1)){
-			$query = "UPDATE contacts SET first_name = '$first_name',last_name = '$last_name',phone_1 = '$phone_1',phone_2 = '$phone_2',
-			email_1 = '$email_1',email_2 = '$email_2',dob = '$dob' ,street = '$street',street_num = '$street_num',street_num_add = '$street_num_add',zip = '$zip',notes = '$notes' WHERE contact_id = $id";
-			mysqli_query($dbc->connect(),$query) or die('Error connecting to database');
-			$messages[] = 'The new contact '.'<a href="/admin/contacts/info/'.$id.'/'.$first_name.'">'.$first_name.'</a>'.' is successfully edited.';
+			$query = $dbc->prepare("UPDATE contacts SET first_name = ?,last_name = ?,phone_1 = ?,phone_2 = ?,
+			email_1 = ?,email_2 = ?,dob = ? ,street = ?,street_num = ?,street_num_add = ?,zip = ?,notes = ? WHERE contact_id = ?");
+			if($query) {
+				$query->bind_param("ssssssssssssi", $first_name, $last_name, $phone_1, $phone_2, $email_1, $email_2, $dob, $street, $street_num, $street_num_add, $zip, $notes, $id);
+				$query->execute();
+				$query->close();
+			} else {
+				$db->sqlERROR();
+			}
+			$messages[] = 'The contact '.'<a href="/admin/contacts/info/'.$id.'/'.$first_name.'">'.$first_name.'</a>'.' is successfully edited.';
 		} else {
 			$errors[] = 'You have to at least fill in a first name and </br> a email or phone number to edit a contact.';
 			$output_form = true;
 		}
+		$dbc->close();
 		// We return an array which contains value that can be passed from the controller to the view.
 		// If the form needs to be outputted, errors or success messages.
 		return['output_form' => $output_form,'messages' => $messages,'errors' => $errors];
@@ -202,10 +220,13 @@ class Contacts_Contact {
 		$upload = new files_FileUpload($file_dest,$thumb_dest,$params);
 		$img_path = $upload->getImgPath();
 		$thumb_path = $upload->getThumbPath();
-		$dbc = new DBC;
-		$query = "UPDATE contacts SET img_path = '$thumb_path' WHERE contact_id = $params[0]";
-		mysqli_query($dbc->connect(),$query) or die ('Error updating contact profile image');
-		$dbc->disconnect();	
+		$db = new DBC;
+		$dbc = $db->connect();
+		$query = $dbc->prepare("UPDATE contacts SET img_path = '$thumb_path' WHERE contact_id = ?");
+		$query->bind_param("si",$thumb_path,$params[0]);
+		$query->execute();
+		$query->close();
+		$dbc->close();
 	}
 
 	// Fetches all contacts from the current user logged in.
@@ -214,10 +235,20 @@ class Contacts_Contact {
 	// For each contact a new object is created an pushed to the contact arry which will be returned to the controller.
 	public static function fetchAll($dbt,$trashed) {
 
-		$dbc = new DBC;
+		$db = new DBC;
+		$dbc = $db->connect();
+
 		$user_id = $_SESSION['user_id'];
-		$query = "SELECT * FROM ".$dbt." WHERE trashed = ".$trashed." AND user_id = ".$user_id." ORDER BY contact_id DESC";
-		$data = mysqli_query($dbc->connect(),$query) or die ("Error connecting to contacts");
+		$query = $dbc->prepare("SELECT * FROM ".$dbt." WHERE trashed = ? AND user_id = ? ORDER BY contact_id DESC");
+
+		if($query) {
+			$query->bind_param("ii", $trashed, $user_id);
+			$query->execute();
+			$data = $query->get_result();
+			$query->close();
+		} else {
+			$db->sqlERROR();
+		}
 		$contacts = array();
 		
 		$user_key  = file_get_contents('././keys/User/'.$_SESSION['username'].'.txt');
@@ -226,7 +257,7 @@ class Contacts_Contact {
 		// To decrypt data from the database we need to convert the hexadecimal to binary.
 		// We call the Crypto function to decrypt the message to readable data using the Users key.
 
-		while($row = mysqli_fetch_array($data)){
+		while($row = $data->fetch_array()){
 			$first_name = Crypto::decrypt(Crypto::hexTobin($row['first_name']),$user_key );
 			$last_name = Crypto::decrypt(Crypto::hexTobin($row['last_name']),$user_key );
 			$phone_1 = Crypto::decrypt(Crypto::hexTobin($row['phone_1']),$user_key );
@@ -260,7 +291,7 @@ class Contacts_Contact {
 			// adds every object to the posts array. We can access each object and its methods seperatly.
 			$contacts[] = $contact;
 		}
-		$dbc->disconnect();
+		$dbc->close();
 
 		// Returns an array wich contains all the contact objects. Which are then passed from the controller to the view.
 		return $contacts;
@@ -274,18 +305,24 @@ class Contacts_Contact {
 		// static classes can be accessed directly.
 		//the method does not use properties or methods in the class.
 		//you dont have to instantiate an object just to get a simple function.
-		$dbc = new DBC;
-		$query = "SELECT * FROM ".$dbt." WHERE contact_id = $id";
-		$data = mysqli_query($dbc->connect(),$query) or die ("Error connecting to server");
-		
+		$db = new DBC;
+		$dbc = $db->connect();
+
+		$query = $dbc->prepare("SELECT * FROM ".$dbt." WHERE contact_id = ?");
+		if($query) {
+			$query->bind_param("i", $id);
+			$query->execute();
+			$data = $query->get_result();
+			$query->close();
+		} else {
+			$db->sqlERROR();
+		}
 		$user_key  = file_get_contents('././keys/User/'.$_SESSION['username'].'.txt');
-
-
 		// Working from the inside out
 		// To decrypt data from the database we need to convert the hexadecimal to binary.
 		// We call the Crypto function to decrypt the message to readable data using the Users key.
 
-		while($row = mysqli_fetch_array($data)){
+		while($row = $data->fetch_array()){
 			$first_name = Crypto::decrypt(Crypto::hexTobin($row['first_name']),$user_key );
 			$last_name = Crypto::decrypt(Crypto::hexTobin($row['last_name']),$user_key );
 			$phone_1 = Crypto::decrypt(Crypto::hexTobin($row['phone_1']),$user_key );
@@ -320,7 +357,7 @@ class Contacts_Contact {
 			$contact->setID($row['contact_id']);
 			// adds every object to the posts array. We can acces each object and its methods seperatly.
 		}
-		$dbc->disconnect();
+		$dbc->close();
 		// Returns an array wich contains all the contact objects. Which are then passed from the controller to the view.
 		return $contact;
 	}

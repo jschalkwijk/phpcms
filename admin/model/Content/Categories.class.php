@@ -37,8 +37,9 @@ class Content_Categories extends Content_Content{
 	// by Post values passed to the object inside the controller.
 
 	public function editCategory($id,$old_title,$confirm){
-		$dbc = new DBC;
-		
+		$db = new DBC();
+		$dbc = $db->connect();
+
 		$messages = array();
 		$errors = array();
 		$output_form = false;
@@ -47,17 +48,30 @@ class Content_Categories extends Content_Content{
 		
 		if ($confirm === 'Yes') {
 
-			$id = mysqli_real_escape_string($dbc->connect(),trim((int)$this->getID()));
-			$category = mysqli_real_escape_string($dbc->connect(),trim($this->getCategory()));
-			$old_title = mysqli_real_escape_string($dbc->connect(),trim($old_title));
-			$cat_desc = mysqli_real_escape_string($dbc->connect(),trim($this->getDescription()));
-			$author = mysqli_real_escape_string($dbc->connect(),trim($this->getAuthor()));
+			$id = mysqli_real_escape_string($dbc,trim((int)$this->getID()));
+			$category = mysqli_real_escape_string($dbc,trim($this->getCategory()));
+			$old_title = mysqli_real_escape_string($dbc,trim($old_title));
+			$cat_desc = mysqli_real_escape_string($dbc,trim($this->getDescription()));
+			$author = mysqli_real_escape_string($dbc,trim($this->getAuthor()));
 			// Edit the post data from the database
-			$query = "UPDATE categories SET title = '$category',description = '$cat_desc',author = '$author' WHERE categories.id = $id";
-			mysqli_query($dbc->connect(), $query) or die('Error connecting to database.');
-			$query2 = "UPDATE posts SET category = '$category' WHERE category = '$old_title'";
-			mysqli_query($dbc->connect(), $query2) or die('Error connecting to database.');
-			$dbc->disconnect();
+			$query = $dbc->prepare("UPDATE categories SET title = ?,description = ?,author = ? WHERE categories.categorie_id = ?");
+			if ($query) {
+				$query->bind_param("sssi",$category,$cat_desc,$author,$id);
+				$query->execute();
+				$query->close();
+			} else {
+				$db->sqlERROR();
+			}
+			$query2 = $dbc->prepare("UPDATE posts SET category = ? WHERE category = ?");
+			if ($query2) {
+				$query->bind_param("ss",$category,$old_title);
+				$query->execute();
+				$query->close();
+			} else {
+				$db->sqlERROR();
+			}
+
+			$dbc->close();
 
 			// Confirm success with the user
 			$messages[] = '<p>The category with title ' . $category . ' was successfully edited.';
@@ -79,19 +93,35 @@ class Content_Categories extends Content_Content{
 	public static function addCategory($category,$type) {
 		$errors = array();
 		if(!empty($category)) {
-			$dbc = new DBC;
+			$db = new DBC();
+			$dbc = $db->connect();
+
 			$author = $_SESSION['username'];
-			$category = mysqli_real_escape_string($dbc->connect(),trim(htmlentities($category)));
-			$query = "INSERT INTO categories(title,author,type) VALUES('$category','$author','$type')";
-			mysqli_query($dbc->connect(),$query) or die('Error connecting to database');
-			
-			$query = "SELECT categorie_id,title FROM categories WHERE title = '$category'";
-			
-			$data = mysqli_query($dbc->connect(),$query) or die('Error connecting to database...');
-			$row = mysqli_fetch_array($data);
-			$category_id = $row['categorie_id'];
-			$category = $row['title'];
-			$dbc->disconnect();
+			$category = mysqli_real_escape_string($dbc,trim(htmlentities($category)));
+			$query = $dbc->prepare("INSERT INTO categories(title,author,type) VALUES(?,?,?)");
+			if($query){
+				$query->bind_param("sss",$category,$author,$type);
+				$query->execute();
+				$query->close();
+			} else {
+				$db->sqlERROR();
+			}
+
+			$query = $dbc->prepare("SELECT categorie_id,title FROM categories WHERE title = ?");
+			if($query){
+				$query->bind_param("s",$category);
+				$query->execute();
+				$data = $query->get_result();
+				$query->close();
+
+				$row = $data->fetch_array();
+				$category_id = $row['categorie_id'];
+				$category = $row['title'];
+			} else {
+				$db->sqlERROR();
+			}
+
+			$dbc->close();
 		} else {
 			$errors[] = 'You forgot to type in a category name.';
 		}
@@ -111,18 +141,27 @@ class Content_Categories extends Content_Content{
 	*/
 
 	public static function getSelected($selected_cat,$type) {
-		$dbc = new DBC;
+		$db = new DBC;
+		$dbc = $db->connect();
 		$categories = array();
-		$query = "SELECT * FROM categories WHERE trashed = 0 AND type = '$type'";
-		$data = mysqli_query($dbc->connect(),$query) or die("Error connecting to database");
-		
-		while($row = mysqli_fetch_array($data)) {
-			if($selected_cat == $row['title'] ) {
-					echo '<option value="'.$row['categorie_id'].'" selected="selected">'.$row['title'].'</option>';
-			} else {
-				echo '<option value="'.$row['categorie_id'].'">'.$row['title'].'</option>';
+
+		$query = $dbc->prepare("SELECT * FROM categories WHERE trashed = 0 AND type = ?");
+		if ($query) {
+			$query->bind_param("s",$type);
+			$query->execute();
+			$data = $query->get_result();
+
+			while ($row = $data->fetch_array()) {
+				if ($selected_cat == $row['title']) {
+					echo '<option value="' . $row['categorie_id'] . '" selected="selected">' . $row['title'] . '</option>';
+				} else {
+					echo '<option value="' . $row['categorie_id'] . '">' . $row['title'] . '</option>';
+				}
 			}
+		} else {
+			$db->sqlERROR();
 		}
+		$dbc->close();
 	}
 	//
 }

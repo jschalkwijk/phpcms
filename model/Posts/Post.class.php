@@ -62,47 +62,45 @@ class posts_Post {
 		// static classes can be accessed directly.
 		//the method does not use properties or methods in the class.
 		//you dont have to instantiate an object just to get a simple function.
-		$dbc = new mysqli(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
+		$db = new DBC();
+		$dbc = $db->connect();
 		$id_row = substr($dbt, 0, -1).'_id';
 
-		$dbc = new mysqli(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
-
-		// Check connection
-		if ($dbc->connect_error) {
-			echo "Failed to connect to MySQL: (" . $dbc->connect_errno . ") " . $dbc->connect_error;
-		}
 		if($dbt != 'categories'){
 			$query = $dbc->prepare("SELECT ".$dbt.".*, categories.title as category FROM ".$dbt." LEFT JOIN categories ON ".$dbt.".category_id = categories.categorie_id WHERE ".$dbt.".trashed = ? ORDER BY ".$id_row." DESC");
-			$query->bind_param("i",$trashed);
+			(!$query) ? $db->sqlERROR() : $query->bind_param("i",$trashed);
+
 		} else {
 			$query = $dbc->prepare("SELECT * FROM ".$dbt." WHERE ".$dbt.".trashed = ? ORDER BY ".$id_row." DESC");
 			$query->bind_param("i",$trashed);
 		}
 
-		$query->execute();
-		$data = $query->get_result();
-		$query->close();
-
-//		$data = mysqli_query($dbc->connect(),$query)or die ("Error connecting to server");
 		$posts = array();
-		while($row = $data->fetch_array()){
-			$post = new posts_Post(
-				$row['title'],
-				$row['description'],
-				$row['category_id'],
-				$row['category'],
-				$row['content'],
-				$row['author'],
-				$dbt,
-				$row['date'],
-				$row['approved'],
-				$row['trashed']
-			);
-			// Because creating a new object in the controller doesn't allow us to insert an ID, we have to set the id
-			// ourselves. It's fetched from the database.
-			$post->setID($row[$id_row]);
-			// adds every object to the posts array. We can acces each object and its methods seperatly.
-			$posts[] = $post;
+
+		if ($query) {
+			$query->execute();
+			$data = $query->get_result();
+			$query->close();
+			//		$data = mysqli_query($dbc->connect(),$query)or die ("Error connecting to server");
+			while($row = $data->fetch_array()){
+				$post = new posts_Post(
+					$row['title'],
+					$row['description'],
+					$row['category_id'],
+					$row['category'],
+					$row['content'],
+					$row['author'],
+					$dbt,
+					$row['date'],
+					$row['approved'],
+					$row['trashed']
+				);
+				// Because creating a new object in the controller doesn't allow us to insert an ID, we have to set the id
+				// ourselves. It's fetched from the database.
+				$post->setID($row[$id_row]);
+				// adds every object to the posts array. We can acces each object and its methods seperatly.
+				$posts[] = $post;
+			}
 		}
 		// We return an array which contains value that can be passed from the controller to the view.
 		// If the form needs to be outputted, errors or success messages.

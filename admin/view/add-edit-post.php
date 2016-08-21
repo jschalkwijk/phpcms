@@ -54,7 +54,7 @@
 		</form>
 <div id="return" class="container medium left">
 	<?php }
-		require_once(ADMIN.'blocks/include-files-tinymce.php');
+		require_once('blocks/include-files-tinymce.php');
 	?>
 </div>
 

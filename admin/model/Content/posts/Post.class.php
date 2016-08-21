@@ -18,18 +18,20 @@ class Content_Posts_Post extends Content_Content{
 	// The type of the category is set above as an extra object item
 	public function addPost($id = null,$cat_name = null,$confirm = null){
 		
-		$dbc = new DBC;
+		$db = new DBC;
+		$dbc = $db->connect();
+
 		$output_form = false;
 		$errors = array();
 		$messages = array();
 		
 		$this->setID($id);
 		
-		$id = mysqli_real_escape_string($dbc->connect(),trim((int)$this->getID()));
-		$title = mysqli_real_escape_string($dbc->connect(),trim($this->title));
-		$category = mysqli_real_escape_string($dbc->connect(),trim($this->category));
-		$post_desc = mysqli_real_escape_string($dbc->connect(),trim($this->description));
-		$content = mysqli_real_escape_string($dbc->connect(),trim($this->content));
+		$id = mysqli_real_escape_string($dbc,trim((int)$this->getID()));
+		$title = mysqli_real_escape_string($dbc,trim($this->title));
+		$category = mysqli_real_escape_string($dbc,trim($this->category));
+		$post_desc = mysqli_real_escape_string($dbc,trim($this->description));
+		$content = mysqli_real_escape_string($dbc,trim($this->content));
 		$author = $this->author;
 		
 		$dbt = $this->dbt;
@@ -38,23 +40,27 @@ class Content_Posts_Post extends Content_Content{
 			$category = content_Categories::addCategory($category,'post');
 			$category_id = $category['category_id'];
 		} else if(isset($_POST['cat_name'])) {
-			$category_id = mysqli_real_escape_string($dbc->connect(),trim($_POST['cat_name']));
+			$category_id = mysqli_real_escape_string($dbc,trim($_POST['cat_name']));
 		}
 
 		if (!empty($title) && !empty($content)) {
 			if($confirm == "Yes"){
-				$query = "UPDATE ".$dbt." SET title = '$title',description = '$post_desc',content = '$content',category_id = $category_id WHERE post_id = $id";
+				$query = $dbc->prepare("UPDATE ".$dbt." SET title = ?,description = ?,content = ?,category_id = ? WHERE post_id = ?");
+				$query->bind_param("sssii",$title,$post_desc,$content,$category_id,$id);
 			} else {
-				$query = "INSERT INTO ".$dbt."(title,description,content,author,category_id,date) VALUES('$title','$post_desc','$content','$author',$category_id,NOW())";
+				$query = $dbc->prepare("INSERT INTO ".$dbt."(title,description,content,author,category_id,date) VALUES(?,?,?,?,?,NOW())");
+				$query->bind_param("ssssi",$title,$post_desc,$content,$author,$category_id);
 			}
-			echo $query;
-			mysqli_query($dbc->connect(),$query) or die('Error connecting to database');
+
+			$query->execute();
+			$query->close();
+
 			$messages[] = 'Your post has been added/edited.<br />';
 		} else if (empty($title) || empty($content)) {
 				$errors[] = "You forgot to fill in one or more of the required fields (title,content).<br />";
 				$output_form = true;
 		}
-		$dbc->disconnect();
+		$dbc->close();
 
 		return ['output_form' => $output_form, 'errors' => $errors, 'messages' => $messages];
 	}

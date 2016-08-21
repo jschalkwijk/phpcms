@@ -65,7 +65,7 @@ function handleImagesAdding(){
                 mce();
             };
 
-            xhttp.open("POST", "/cms/admin/blocks/include-files-tinymce.php", true);
+            xhttp.open("POST", "/admin/blocks/include-files-tinymce.php", true);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhttp.send("search-file=submit&search=" + searchTerm);
         });

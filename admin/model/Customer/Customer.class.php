@@ -95,42 +95,57 @@ class Customer_Customer
         return $this->postal_code;
     }
     public function add(){
-        $dbc = new DBC;
+        $db = new DBC;
+        $dbc = $db->connect();
+
         $messages = [];
         if(!empty($this->getName()) && !empty($this->getMail()) && !empty($this->getAddress1()) && !empty($this->getCity()) && !empty($this->getPostalCode())) {
             $exists = $this->exists($this->getMail());
             if (!$exists) {
-                $name = mysqli_real_escape_string($dbc->connect(), trim($this->getName()));
-                $mail = mysqli_real_escape_string($dbc->connect(), trim($this->getMail()));
-                $phone = mysqli_real_escape_string($dbc->connect(), trim($this->getPhone()));
-                $address1 = mysqli_real_escape_string($dbc->connect(), trim($this->getAddress1()));
-                $address2 = mysqli_real_escape_string($dbc->connect(), trim($this->getAddress2()));
-                $city = mysqli_real_escape_string($dbc->connect(), trim($this->getCity()));
-                $postal_code = mysqli_real_escape_string($dbc->connect(), trim($this->getPostalCode()));
+                $name = mysqli_real_escape_string($dbc, trim($this->getName()));
+                $mail = mysqli_real_escape_string($dbc, trim($this->getMail()));
+                $phone = mysqli_real_escape_string($dbc, trim($this->getPhone()));
+                $address1 = mysqli_real_escape_string($dbc, trim($this->getAddress1()));
+                $address2 = mysqli_real_escape_string($dbc, trim($this->getAddress2()));
+                $city = mysqli_real_escape_string($dbc, trim($this->getCity()));
+                $postal_code = mysqli_real_escape_string($dbc, trim($this->getPostalCode()));
 
-                $query = "INSERT INTO customers(name,email,phone,address1,address2,city,postal) VALUES('$name','$mail','$phone','$address1','$address2','$city','$postal_code')";
-                mysqli_query($dbc->connect(), $query) or die('Error inserting new customer');
+                $query = $dbc->prepare("INSERT INTO customers(name,email,phone,address1,address2,city,postal) VALUES(?,?,?,?,?,?,?)");
+                if($query) {
+                    $query->bind_param("sssssss", $name, $mail, $phone, $address1, $address2, $city, $postal_code);
+                    $query->execute();
+                    $query->close();
+                } else {
+                    $db->sqlERROR();
+                }
 
-                $query = "SELECT customer_id FROM customers WHERE email = '$mail'";
-                echo $query;
-                $data = mysqli_query($dbc->connect(),$query) or die("Error fetching customer_id");
-                $row = mysqli_fetch_array($data);
+                $query = $dbc->prepare("SELECT customer_id FROM customers WHERE email = ?");
+                if($query) {
+                    $query->bind_param("s", $mail);
+                    $query->execute();
+                    $data = $query->get_result();
+                    $query->close();
+                    $row = $data->fetch_array();
+                } else {
+                    $db->sqlERROR();
+                }
+
                 $this->setID($row['customer_id']);
                 echo 'customer_id '.$this->getID().'<br>';
 
-                $dbc->disconnect();
+                $dbc->close();
                 $messages[] = "Customer added";
 
                 return ['customer_id' => $this->getID(),'messages' => $messages];
             } else {
                 $customer = $this->fetchSingle($exists['id']);
                 // TO DO: change the address, a existing customer with no account could be moved to another address
-                $customer->setName(mysqli_real_escape_string($dbc->connect(), trim($this->name)));
-                $customer->setPhone(mysqli_real_escape_string($dbc->connect(), trim($this->phone)));
-                $customer->setAddress1(mysqli_real_escape_string($dbc->connect(), trim($this->address1)));
-                $customer->setAddress2(mysqli_real_escape_string($dbc->connect(), trim($this->address2)));
-                $customer->setCity(mysqli_real_escape_string($dbc->connect(), trim($this->city)));
-                $customer->setPostalCode(mysqli_real_escape_string($dbc->connect(), trim($this->postal_code)));
+                $customer->setName(mysqli_real_escape_string($dbc, trim($this->name)));
+                $customer->setPhone(mysqli_real_escape_string($dbc, trim($this->phone)));
+                $customer->setAddress1(mysqli_real_escape_string($dbc, trim($this->address1)));
+                $customer->setAddress2(mysqli_real_escape_string($dbc, trim($this->address2)));
+                $customer->setCity(mysqli_real_escape_string($dbc, trim($this->city)));
+                $customer->setPostalCode(mysqli_real_escape_string($dbc, trim($this->postal_code)));
 
                 $id = $customer->getID();
                 $name = $customer->getName();
@@ -140,9 +155,15 @@ class Customer_Customer
                 $city = $this->getCity();
                 $postal_code = $this->getPostalCode();
 
-                $query = "UPDATE customers SET name = '$name',phone = '$phone',address1 = '$address1',address2 = '$address2',city = '$city',postal = '$postal_code' WHERE customer_id = $id";
-                mysqli_query($dbc->connect(), $query) or die('Error updating existing customer');
-                $dbc->disconnect();
+                $query = $dbc->prepare("UPDATE customers SET name = ?,phone = ?,address1 = ?,address2 = ?,city = ?,postal = ? WHERE customer_id = ?");
+                if($query) {
+                    $query->bind_param("ssssssi", $name, $phone, $address1, $address2, $city, $postal_code, $id);
+                    $query->execute();
+                    $query->close();
+                } else {
+                    $db->sqlERROR();
+                }
+                $dbc->close();
 
                 $messages[] = "Please check if your personal details and address are correct before proceeding the payment.";
                 return ['customer_id' => $id,'messages' => $messages];
@@ -153,30 +174,39 @@ class Customer_Customer
         }
     }
     public static function fetchSingle($id){
-        $dbc = new DBC;
-        $id = mysqli_real_escape_string($dbc->connect(), trim((int)$id));
-        $query = "SELECT * FROM customers WHERE customer_id = $id";
-        $data = mysqli_query($dbc->connect(),$query) or die ('Error checking for existing customer');
-        $row = mysqli_fetch_array($data);
-        $name = $row['name'];
-        $mail = $row['email'];
-        $phone = $row['phone'];
-        $address1 = $row['address1'];
-        $address2 = $row['address2'];
-        $city = $row['city'];
-        $postal_code = $row['postal'];
+        $db = new DBC;
+        $dbc = $db->connect();
 
-        $customer = new Customer_Customer(
-            $name,
-            $mail,
-            $phone,
-            $address1,
-            $address2,
-            $city,
-            $postal_code
-        );
-        $customer->setID($row['customer_id']);
-        $dbc->disconnect();
+        $id = mysqli_real_escape_string($dbc, trim((int)$id));
+        $query = $dbc->prepare("SELECT * FROM customers WHERE customer_id = ?");
+        if($query) {
+            $query->bind_param("i",$id);
+            $query->execute();
+            $data = $query->get_result();
+            $row = $data->fetch_array();
+            $name = $row['name'];
+            $mail = $row['email'];
+            $phone = $row['phone'];
+            $address1 = $row['address1'];
+            $address2 = $row['address2'];
+            $city = $row['city'];
+            $postal_code = $row['postal'];
+
+            $customer = new Customer_Customer(
+                $name,
+                $mail,
+                $phone,
+                $address1,
+                $address2,
+                $city,
+                $postal_code
+            );
+            $customer->setID($row['customer_id']);
+        } else {
+            $db->sqlERROR();
+        }
+
+        $dbc->close();
 		// Returns an array wich contains all the contact objects. Which are then passed from the controller to the view.
 		return $customer;
     }

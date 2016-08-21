@@ -11,10 +11,11 @@ trait Actions_UserActions {
 	private $checkbox;
 	
 	private function UserActions($dbt) {
-		$dbc = new DBC;
+		$db = new DBC;
+		$dbc = $db->connect();
 		
-		(isset($_POST['id'])) ? $this->id = mysqli_real_escape_string($dbc->connect(),trim((int)$_POST['id'])) : '';
-		(isset($_POST['name'])) ? $this->name = mysqli_real_escape_string($dbc->connect(),trim($_POST['name'])) : '';
+		(isset($_POST['id'])) ? $this->id = mysqli_real_escape_string($dbc,trim((int)$_POST['id'])) : '';
+		(isset($_POST['name'])) ? $this->name = mysqli_real_escape_string($dbc,trim($_POST['name'])) : '';
 		(isset($_POST['checkbox'])) ? $this->checkbox = $_POST['checkbox'] : '';
 		
 		if (isset($_POST['remove'])) {

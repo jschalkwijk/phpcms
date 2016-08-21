@@ -3,6 +3,7 @@
 class DBC {
 	/*
 	 * Simple DataBase Connection Class
+	 * Using mysqli OOP approach
 	 * Uses the constants defined in the config.php file
 	*/
 	private $host = DB_HOST;
@@ -31,8 +32,12 @@ class DBC {
 		mysqli_close($this->dbc);
 	}
 
-	public function err($query){
-		echo "There is an error in your sql query (" . $this->dbc->errno . ") " . $this->dbc->error;
+	public function sqlERROR(){
+		echo "Oops, we are very sorry! An error occurred while trying to get the results from the database. Please contact the site owner";
+	}
+
+	public function  connectERROR(){
+		echo "Oops, we are very sorry! Failed to connect to the database. Please contact the site owner";
 	}
 }
 

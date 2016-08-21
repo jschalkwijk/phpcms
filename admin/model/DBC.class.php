@@ -22,7 +22,7 @@ class DBC {
 
 		// Check connection
 		if ($this->dbc->connect_error) {
-				echo "Failed to connect to MySQL: (" . $this->dbc->connect_errno . ") " . $this->dbc->connect_error;
+			$this->connectERROR();
 		}
 		return $this->dbc;
 	}
@@ -31,8 +31,12 @@ class DBC {
 		mysqli_close($this->dbc);
 	}
 
-	public function err(){
+	public function sqlERROR(){
 		echo "There is an error in your sql query (" . $this->dbc->errno . ") " . $this->dbc->error;
+	}
+
+	public function  connectERROR(){
+		echo "Failed to connect to MySQL: (" . $this->dbc->connect_errno . ") " . $this->dbc->connect_error;
 	}
 }
 

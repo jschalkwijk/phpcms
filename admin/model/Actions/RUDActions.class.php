@@ -15,7 +15,9 @@ class Actions_RUDActions{
 		header('Location: '.ADMIN.$dbt);
 	}
 	public static function delete_selected($dbt,$checkbox){
-		$dbc = new DBC;
+		$db = new DBC;
+		$dbc = $db->connect();
+
 		$id_row = substr($dbt, 0, -1).'_id';
 		$multiple = implode(",",$checkbox);
 		$flag = false;
@@ -30,9 +32,8 @@ class Actions_RUDActions{
 		}
 
 		if($flag) {
-			$query = "DELETE FROM " . $dbt . " WHERE " . $id_row . " IN({$multiple})";
-			mysqli_query($dbc->connect(), $query) or die('error connecting');
-			$dbc->disconnect();
+			$query = $dbc->query("DELETE FROM " . $dbt . " WHERE " . $id_row . " IN({$multiple})");
+			$dbc->close();
 
 		}
 		// ALLEEN ALS ER ERRORS ZIJN MOET IK DIE RETURNEN. ANDERS MOET IK DE HEADER LOCATION DOEN,
@@ -44,31 +45,34 @@ class Actions_RUDActions{
 		}
 	}
 	public static function approve_selected($dbt,$checkbox){
-		$dbc = new DBC; 
+		$db = new DBC;
+		$dbc = $db->connect();
 		$id_row = substr($dbt, 0, -1).'_id';
 		$multiple = implode(",",$checkbox);
-		$query = "UPDATE ".$dbt." SET approved = 1 WHERE ".$id_row." IN({$multiple})";
-		mysqli_query($dbc->connect(),$query) or die('error connecting');
-		$dbc->disconnect();
+		$query = $dbc->query("UPDATE ".$dbt." SET approved = 1 WHERE ".$id_row." IN({$multiple})");
+		$dbc->close();
 		header('Location: '.ADMIN.$dbt);
 	}
 	public static function restore_selected($dbt,$checkbox){
-		$dbc = new DBC;
+		$db = new DBC;
+		$dbc = $db->connect();
+
 		$id_row = substr($dbt, 0, -1).'_id';
 		$multiple = implode(",",$checkbox);
-		$query = "UPDATE ".$dbt." SET trashed = 0 WHERE ".$id_row." IN({$multiple})";
-		mysqli_query($dbc->connect(),$query) or die('error connecting');
-		$dbc->disconnect();
+		$query = $dbc->query("UPDATE ".$dbt." SET trashed = 0 WHERE ".$id_row." IN({$multiple})");
+		$dbc->close();
+
 		header('Location: '.ADMIN.$dbt.'/deleted-'.$dbt);
 	}
 	public static function hide_selected($dbt,$checkbox){
 		// Approve the score by setting the approved column in the database
-		$dbc = new DBC;
+		$db = new DBC;
+		$dbc = $db->connect();
+
 		$id_row = substr($dbt, 0, -1).'_id';
 		$multiple = implode(",",$checkbox);
-		$query = "UPDATE ".$dbt."  SET approved = 0 WHERE ".$id_row." IN({$multiple})";
-		mysqli_query($dbc->connect(),$query) or die('error connecting');
-		$dbc->disconnect();
+		$query = $dbc->query("UPDATE ".$dbt."  SET approved = 0 WHERE ".$id_row." IN({$multiple})");
+		$dbc->close();
 		header('Location: '.ADMIN.$dbt);
 	}
 
