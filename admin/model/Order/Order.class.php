@@ -54,7 +54,9 @@ class Order_Order{
     }
 
     public function add(){
-        $dbc = new DBC;
+        $db = new DBC;
+        $dbc = $db->connect();
+
         $newHash = $this->newHash();
         $hash = $newHash;
         $total = $this->getTotal();
@@ -63,27 +65,43 @@ class Order_Order{
 
         if(!empty($this->getID())){
             $order_id = $this->getID();
-            $query = "UPDATE orders SET total = $total,paid = '$paid',customer_id = $customer_id WHERE order_id = $order_id";
-            echo $query;
-            mysqli_query($dbc->connect(),$query) or die("Error updating existing order!");
+            $sql = "UPDATE orders SET total = ?,paid = ?,customer_id = ? WHERE order_id = ?";
+            $query = $dbc->prepare($sql);
+            echo $sql." params ".$total,$paid,$customer_id,$order_id;
+            if($query){
+                $query->bind_param("diii",$total,$paid,$customer_id,$order_id);
+                $query->execute();
+                $query->close();
+            } else {
+                $db->sqlERROR();
+            }
         } else {
-            $query = "INSERT INTO orders(hash,total,paid,customer_id) VALUES('$hash',$total,'$paid',$customer_id)";
-            mysqli_query($dbc->connect(),$query) or die("Error inserting new order!");
-            echo $query.'<br>';
-            $query = "SELECT order_id FROM orders WHERE hash = '$hash'";
-            echo $query.'<br>';
-            $data = mysqli_query($dbc->connect(),$query) or die("Error fetching order_id");
-            $row = mysqli_fetch_array($data);
-            $this->setID($row['order_id']);
-            echo 'order_id '.$this->getID();
+            $query = $dbc->prepare("INSERT INTO orders(hash,total,paid,customer_id) VALUES(?,?,?,?)");
+            if($query){
+                $query->bind_param("sdii",$hash,$total,$paid,$customer_id);
+                $query->execute();
+                $last_id = $query->insert_id;
+                $query->close();
+                $this->setID($last_id);
+                echo 'order_id '.$this->getID();
+            } else {
+                $db->sqlERROR();
+            }
+//            $query = "SELECT order_id FROM orders WHERE hash = '$hash'";
+//            echo $query.'<br>';
+//            $data = mysqli_query($dbc->connect(),$query) or die("Error fetching order_id");
+//            $row = mysqli_fetch_array($data);
+//            $this->setID($row['order_id']);
         }
-        $dbc->disconnect();
+        $dbc->close();
 
         return ['order_id' => $this->getID(),'messages' => ["Success"]];
     }
 
     public function addProducts($products){;
-        $dbc = new DBC;
+        $db = new DBC;
+        $dbc = $db->connect();
+
         $order_id = $this->getID();
 
         $queryRows = [];
@@ -93,59 +111,88 @@ class Order_Order{
             $quantity = $product->getQuantity();
             $queryRows[] = "(".$order_id.","."$product_id".",".$quantity.")";
         }
-        $query = "INSERT INTO orders_products(order_id,product_id,quantity) VALUES".implode(',', $queryRows);
-        echo $query;
-        mysqli_query($dbc->connect(),$query);
-        $dbc->disconnect();
+        $sql = "INSERT INTO orders_products(order_id,product_id,quantity) VALUES".implode(',', $queryRows);
+        echo $sql;
+        $query = $dbc->query($sql);
+        $dbc->close();
     }
 
     public function updateProducts($products){;
         // delete alle producten uit de database met order_id = int, Dan gewoon de nieuwe lijst weer invoegen onder dat order_id.
-        $dbc = new DBC;
+        $db = new DBC;
+        $dbc = $db->connect();
         $order_id = $this->getID();
 
-        $query = "DELETE FROM orders_products WHERE order_id = $order_id";
-        mysqli_query($dbc->connect(),$query) or die('Error deleting products for revised order');
+        $query = $dbc->prepare("DELETE FROM orders_products WHERE order_id = ?");
+        if($query){
+            $query->bind_param("i",$order_id);
+            $query->execute();
+            $query->close();
+        } else {
+            $db->sqlERROR();
+        }
 
         $this->addProducts($products);
 
-        $dbc->disconnect();
+        $dbc->close();
     }
 
     public static function fetchSingle($id){
-        $dbc = new DBC;
-        $id = mysqli_real_escape_string($dbc->connect(), trim((int)$id));
-        $query = "SELECT * FROM orders WHERE order_id = $id";
-        $data = mysqli_query($dbc->connect(),$query) or die ('Error checking for existing order');
-        $row = mysqli_fetch_array($data);
-        $hash = $row['hash'];
-        $total= $row['total'];
-        $paid = $row['paid'];
-        $customer_id = $row['customer_id'];
+        $db = new DBC;
+        $dbc = $db->connect();
 
-        $order = new Order_Order(
-            $customer_id,
-            $total,
-            $paid,
-            $hash
-        );
-        $order->setID($row['order_id']);
-        $dbc->disconnect();
+        $id = mysqli_real_escape_string($dbc, trim((int)$id));
+
+        $query = $dbc->prepare("SELECT * FROM orders WHERE order_id = ?");
+        if($query){
+            $query->bind_param("i",$id);
+            $query->execute();
+            $data = $query->get_result();
+            $query->close();
+            $row = $data->fetch_array();
+            $hash = $row['hash'];
+            $total= $row['total'];
+            $paid = $row['paid'];
+            $customer_id = $row['customer_id'];
+
+            $order = new Order_Order(
+                $customer_id,
+                $total,
+                $paid,
+                $hash
+            );
+            $order->setID($row['order_id']);
+        } else {
+            $db->sqlERROR();
+        }
+
+        $dbc->close();
         // Returns an array wich contains all the contact objects. Which are then passed from the controller to the view.
         return $order;
     }
 
     public static function exists($mail){
-        $dbc = new DBC;
-        $mail = mysqli_real_escape_string($dbc->connect(), trim($mail));
-        $query = "SELECT * FROM customers WHERE email = '$mail'";
-        $data = mysqli_query($dbc->connect(),$query) or die ('Error checking for existing customer');
-        if(mysqli_num_rows($data) == 1) {
-            $row = mysqli_fetch_array($data);
-            $dbc->disconnect();
-            return ['id' => $row['customer_id']];
+        $db = new DBC;
+        $dbc = $db->connect();
+
+        $mail = mysqli_real_escape_string($dbc, trim($mail));
+        $query = $dbc->prepare("SELECT * FROM customers WHERE email = ?");
+        if($query){
+            $query->bind_param("s",$mail);
+            $query->execute();
+            $data = $query->get_result();
+            $query->close();
+            if($data->num_rows == 1) {
+                $row = $data->fetch_row();
+                $dbc->close();
+                return ['id' => $row['customer_id']];
+            } else {
+                $dbc->close();
+                return false;
+            }
         } else {
-            $dbc->disconnect();
+            $db->sqlERROR();
+            $dbc->close();
             return false;
         }
     }

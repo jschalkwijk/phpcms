@@ -10,7 +10,7 @@
 			$doc = ['txt','doc','docx','odt'];
 			$img = ['jpg','jpeg','png'];
 			$url = $_SERVER["REQUEST_URI"];
-			echo '<form method="get" action="'.$url.'">';	
+			echo '<form method="get" action="'.$url.'">';
 					$files = File_File::fetchFilesByAlbum($album_id,0);
 					$writer = File_FileWriter::write($files,'view/singleFile.php',$doc,$img);
 				echo '<div class="left">';

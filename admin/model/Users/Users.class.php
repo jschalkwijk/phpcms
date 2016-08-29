@@ -103,9 +103,19 @@ class Users_Users{
 		 $this->dbt;
 	}
 	public static function fetchUsers($dbt,$trashed) {
-		$dbc = new DBC;
-		$query = "SELECT * FROM ".$dbt." WHERE trashed = ".$trashed." ORDER BY user_id DESC";
-		$data = mysqli_query($dbc->connect(),$query)or die ("Error connecting to server");
+		$db = new DBC;
+		$dbc = $db->connect();
+
+		$query = $dbc->prepare("SELECT * FROM ".$dbt." WHERE trashed = ? ORDER BY user_id DESC");
+		if($query){
+			$query->bind_param("i",$trashed);
+			$query->execute();
+			$data = $query->get_result();
+			$query->close();
+		} else {
+			$db->sqlERROR();
+			exit();
+		}
 		$users = array();
 
 		if(file_exists('././keys/Shared/shared.txt')){
@@ -113,10 +123,9 @@ class Users_Users{
 		} else {
 			$errors[] = "Shared Encryption key could not be found!";
 			return['output_form' => $output_form,'messages' => $messages,'errors' => $errors];
-			exit();
 		}
 
-		while($row = mysqli_fetch_array($data)){
+		while($row = $data->fetch_array()){
 			$username = $row['username'];
 			$first_name = Crypto::decrypt(Crypto::hexTobin($row['first_name']),$shared_key);
 			$last_name = Crypto::decrypt(Crypto::hexTobin($row['last_name']),$shared_key);
@@ -139,14 +148,25 @@ class Users_Users{
 			$user->setID($row['user_id']);
 			$users[] = $user;
 		}
+
+		$dbc->close();
 		return $users;
-		$dbc-disconnect();
 	}
 
 	public static function fetchSingle($dbt,$id) {
-		$dbc = new DBC;
-		$query = "SELECT * FROM ".$dbt." WHERE user_id = $id";
-		$data = mysqli_query($dbc->connect(),$query) or die("Error fetching single user");
+		$db = new DBC;
+		$dbc = $db->connect();
+
+		$query = $dbc->prepare("SELECT * FROM ".$dbt." WHERE user_id = ?");
+		if($query){
+			$query->bind_param("i",$id);
+			$query->execute();
+			$data = $query->get_result();
+			$query->close();
+		} else {
+			$db->sqlERROR();
+			exit();
+		}
 
 	/*
 	if(file_exists('././keys/User/'.$_SESSION['username'].'.txt')){
@@ -162,10 +182,9 @@ class Users_Users{
 		} else {
 			$errors[] = "Shared Encryption key could not be found!";
 			return['output_form' => $output_form,'messages' => $messages,'errors' => $errors];
-			exit();
 		}
 
-		while($row = mysqli_fetch_array($data)){
+		while($row = $data->fetch_array()){
 			$username = $row['username'];
 			$first_name = Crypto::decrypt(Crypto::hexTobin($row['first_name']),$shared_key);
 			$last_name = Crypto::decrypt(Crypto::hexTobin($row['last_name']),$shared_key);
@@ -191,16 +210,26 @@ class Users_Users{
 	}
 
 	public function addUser($password,$password_again){
-		$dbc = new DBC;
+		$db = new DBC;
+		$dbc = $db->connect();
+
 		$output_form = false;
 		$errors = array();
 		$messages = array();
 
-		$username = mysqli_real_escape_string($dbc->connect(),trim($this->username));
-		$query = "SELECT * FROM users WHERE username = '$username'";
-		$data = mysqli_query($dbc->connect(),$query) or die("Error connecting to database");
+		$username = mysqli_real_escape_string($dbc,trim($this->username));
+		$query = $dbc->prepare("SELECT * FROM users WHERE username = ?");
+		if($query){
+			$query->bind_param("s",$username);
+			$query->execute();
+			$data = $query->get_result();
+			$query->close();
+		} else {
+			$db->sqlERROR();
+			exit();
+		}
 
-		if(mysqli_num_rows($data) === 0){
+		if($data->num_rows === 0){
 			// Create user specific Encryption key.
 			try {
 			    $user_key = Crypto::createNewRandomKey();
@@ -219,18 +248,17 @@ class Users_Users{
 			} else {
 				$errors[] = "Shared Encryption key could not be found!";
 				return['output_form' => $output_form,'messages' => $messages,'errors' => $errors];
-				exit();
 			}
 
 			try {
-				$username = mysqli_real_escape_string($dbc->connect(),trim($this->username));
-				$password = mysqli_real_escape_string($dbc->connect(),trim($password));
-				$password_again = mysqli_real_escape_string($dbc->connect(),trim($password_again));
-				$first_name = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc->connect(),trim($this->first_name)),$key));
-				$last_name = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc->connect(),trim($this->last_name)),$key));
-				$email = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc->connect(),trim($this->email)),$key));
-				$function = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc->connect(),trim($this->email)),$key));
-				$rights = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc->connect(),trim($this->rights)),$key));
+				$username = mysqli_real_escape_string($dbc,trim($this->username));
+				$password = mysqli_real_escape_string($dbc,trim($password));
+				$password_again = mysqli_real_escape_string($dbc,trim($password_again));
+				$first_name = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->first_name)),$key));
+				$last_name = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->last_name)),$key));
+				$email = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->email)),$key));
+				$function = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->email)),$key));
+				$rights = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->rights)),$key));
 				$token = md5(uniqid(mt_rand(),true));
 			} catch (Ex\CryptoTestFailedException $ex) {
 			    die('Cannot safely perform encryption');
@@ -246,8 +274,15 @@ class Users_Users{
 				if($password === $password_again) {
 					$encrypt = new Encrypt;
 					$encrypted_password = $encrypt->password_encrypt($password);
-					$query = "INSERT into users(username,password,first_name,last_name,email,function,rights,album_id,token) VALUES('$username','$encrypted_password','$first_name','$last_name','$email','$function','$rights',$album_id,'$token')";
-					mysqli_query($dbc->connect(),$query) or die('Error connecting to database');
+					$query = $dbc->prepare("INSERT into users(username,password,first_name,last_name,email,function,rights,album_id,token) VALUES(?,?,?,?,?,?,?,?,?)");
+					if($query){
+						$query->bind_param("sssssssis",$username,$encrypted_password,$first_name,$last_name,$email,$function,$rights,$album_id,$token);
+						$query->execute();
+						$query->close();
+					} else {
+						$db->sqlERROR();
+						exit();
+					}
 					$messages[] = '<p class="container">New user <strong>'.$username.'</strong> has been successfully added.';
 				} else {
 					$errors[] = 'Passwords do not match, please retype your password correctly.';
@@ -258,7 +293,7 @@ class Users_Users{
 				$output_form = true;
 			}
 
-			$dbc->disconnect();
+			$dbc->close();
 
 			return ['output_form' => $output_form,'errors' => $errors,'messages' => $messages];
 		} else {
@@ -269,7 +304,9 @@ class Users_Users{
 	}
 
 	public function editUser($id,$old_username,$new_password = null,$new_password_again = null){
-		$dbc = new DBC;
+		$db = new DBC;
+		$dbc = $db->connect();
+
 		$output_form = false;
 		$errors = array();
 		$messages = array();
@@ -288,44 +325,66 @@ class Users_Users{
 		} else {
 			$errors[] = "Shared Encryption key could not be found!";
 			return['output_form' => $output_form,'messages' => $messages,'errors' => $errors];
+		}
+
+		$username = mysqli_real_escape_string($dbc,trim($this->getUserName()));
+		$query = $dbc->prepare("SELECT * FROM users WHERE username = ?");
+		if($query){
+			$query->bind_param("s",$username);
+			$query->execute();
+			$data = $query->get_result();
+			$query->close();
+		} else {
+			$db->sqlERROR();
 			exit();
 		}
 
-		$username = mysqli_real_escape_string($dbc->connect(),trim($this->getUserName()));
-		$query = "SELECT * FROM users WHERE username = '$username'";
-		$data = mysqli_query($dbc->connect(),$query) or die("Error connecting to database");
-
-		if(mysqli_num_rows($data) === 0 || (mysqli_num_rows($data) === 1 && ($username === $old_username))){
+		if($data->num_rows === 0 || ($data->num_rows) === 1 && ($username === $old_username)){
 			$this->setID($id);
 			$user_id = $this->getID();
-			$id = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc->connect(),trim((int)$this->getID())),$shared_key));
-			$username = mysqli_real_escape_string($dbc->connect(),trim($this->getUserName()));
-			$first_name = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc->connect(),trim($this->getFirstName())),$shared_key));
-			$last_name = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc->connect(),trim($this->getLastName())),$shared_key));
-			$email = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc->connect(),trim($this->getMail())),$shared_key));
-			$function = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc->connect(),trim($this->getFunction())),$shared_key));
-			$rights = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc->connect(),trim($this->getRights())),$shared_key));
-			$new_password = mysqli_real_escape_string($dbc->connect(),trim($new_password));
-			$new_password_again = mysqli_real_escape_string($dbc->connect(),trim($new_password_again));
+			$id = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim((int)$this->getID())),$shared_key));
+			$username = mysqli_real_escape_string($dbc,trim($this->getUserName()));
+			$first_name = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->getFirstName())),$shared_key));
+			$last_name = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->getLastName())),$shared_key));
+			$email = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->getMail())),$shared_key));
+			$function = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->getFunction())),$shared_key));
+			$rights = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->getRights())),$shared_key));
+			$new_password = mysqli_real_escape_string($dbc,trim($new_password));
+			$new_password_again = mysqli_real_escape_string($dbc,trim($new_password_again));
 
 			// save edited object to database
 			if ($_POST['confirm'] == 'Yes') {
-				$query1 = "UPDATE users SET username = '$username',first_name = '$first_name',last_name = '$last_name',".
+				$sql1 = "UPDATE users SET username = '$username',first_name = '$first_name',last_name = '$last_name',".
 				"email = '$email',function = '$function',rights = '$rights' WHERE users.user_id = '$user_id'";
-				echo $query1;
-				mysqli_query($dbc->connect(), $query1) or die('Error connecting to database.');
+				echo $sql1;
+				$query = $dbc->prepare("UPDATE users SET username = ?,first_name = ?,last_name = ?,email = ?,function = ?,rights = ? WHERE users.user_id = ?");
+				if($query){
+					$query->bind_param("ssssssi",$username,$first_name,$last_name,$email,$function,$rights,$user_id);
+					$query->execute();
+					$query->close();
+				} else {
+					$db->sqlERROR();
+					exit();
+				}
 				if(!empty($new_password) && !empty($new_password_again) )
 					if($new_password === $new_password_again) {
 						$encrypt = new Encrypt;
 						$encrypted_password = $encrypt->password_encrypt($new_password);
-						$query2 = "UPDATE users SET password = '$encrypted_password' WHERE users.user_id = '$id'";
-						mysqli_query($dbc->connect(), $query2) or die('Error connecting to database.');
+						$query2 = $dbc->prepare("UPDATE users SET password = ? WHERE users.user_id = ?");
+						if($query2){
+							$query2->bind_param("si",$encrypted_password,$id);
+							$query2->execute();
+							$query2->close();
+						} else {
+							$db->sqlERROR();
+							exit();
+						}
 						$messages[] = 'You password has been successfully changed.';
 					} else {
 					$errors[] = 'Passwords do not match, please retype your password correctly.';
 					$output_form = true;
 				}
-				$dbc->disconnect();
+				$dbc->close();
 				// Confirm success with the user
 				$messages[] =  '<p>The user <strong>' . $username. '</strong> was successfully edited.';
 			}
@@ -345,10 +404,20 @@ class Users_Users{
 		$upload = new File_FileUpload($file_dest,$thumb_dest,$params,true);
 		$img_path = $upload->getImgPath();
 		$thumb_path = $upload->getThumbPath();
-		$dbc = new DBC;
-		$query = "UPDATE users SET img_path = '$thumb_path' WHERE user_id = $params[0]";
-		mysqli_query($dbc->connect(),$query) or die ('Error updating user profile image');
-		$dbc->disconnect();
+		$db = new DBC;
+		$dbc = $db->connect();
+
+		$query = $dbc->prepare("UPDATE users SET img_path = ? WHERE user_id = ?");
+		if($query){
+			$query->bind_param("si",$thumb_path,$params[0]);
+			$query->execute();
+			$query->close();
+		} else {
+			$db->sqlERROR();
+			exit();
+		}
+
+		$dbc->close();
 	}
 }
 ?>

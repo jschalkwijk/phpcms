@@ -12,7 +12,9 @@ class File_FileUpload{
 	private $album_name;
 
 	public function __construct($file_dest,$thumb_dest,$params,$empty_path = false){
-		$this->dbc = new DBC;
+		$db = new DBC;
+		$dbc = $db->connect();
+
 		$this->file_dest = $file_dest;
 		$this->thumb_dest = $thumb_dest;
 		$this->params = $params;
@@ -46,10 +48,10 @@ class File_FileUpload{
 			// uit menu dan komt hij wel in die folder terrecht. ligt aan if not empty album_id
 
 			if(isset($_POST['album_id'])){
-				$album_id = mysqli_real_escape_string($this->dbc->connect(),trim((int)$_POST['album_id']));
+				$album_id = mysqli_real_escape_string($dbc,trim((int)$_POST['album_id']));
 				echo 'album_id : '.$album_id;
 				if(isset($_POST['new_album_name'])) {
-					$new_album_name = mysqli_real_escape_string($this->dbc->connect(),trim(htmlentities($_POST['new_album_name'])));
+					$new_album_name = mysqli_real_escape_string($dbc,trim(htmlentities($_POST['new_album_name'])));
 					if(strlen($new_album_name) > 60){
 						$errors[] = 'Album name can only be 60 characters long.';
 					} else {
@@ -125,13 +127,15 @@ class File_FileUpload{
 		if(!empty($errors)) {
 			echo implode(",",$errors);
 		}
-		$this->dbc->disconnect();
+		$dbc->close();
 	}
 	
 	protected function uploadFile($file_tmp,$file_name,$file_ext,$file_name_new,$thumb_name,$position,$album_id){
 		// Ik moet naar boven werken met de id's om het nieuwe pad te creeeren,met een loop die checked of de parent_id
 		// != 0,dan moet de naam van dat album in de file_dest.
 		// Deze loop MOET in de create_album en create RThumb functie, die hebben dit pad ook nodig!!!
+		$db = new DBC;
+		$dbc = $db->connect();
 
 		$path = $this->path;
 		$id = $album_id;
@@ -163,10 +167,18 @@ class File_FileUpload{
 				// add to uploade array, we dont use the new filename because thats all numbers,
 				// we use the original file name, we store both the original and new file name to the DB.
 				$uploaded[$position] = $file_name;
-				$query = "INSERT INTO files(name,type,file_name,thumb_name,album_id,date,path,thumb_path,user_id) VALUES('$file_name','$file_ext','$file_name_new','$thumb_name','$id',NOW(),'$file_dest','$thumb_path',$user_id)";
-				echo $query;
-				mysqli_query($this->dbc->connect(), $query) or die("Error connecting to database Uploadfile");
-				return true;
+				$sql = "INSERT INTO files(name,type,file_name,thumb_name,album_id,date,path,thumb_path,user_id) VALUES(?,?,?,?,?,NOW(),?,?,?)";
+				echo $sql;
+				$query = $dbc->prepare($sql);
+				if($query) {
+					$query->bind_param("ssssissi", $file_name, $file_ext, $file_name_new, $thumb_name, $id, $file_dest, $thumb_path, $user_id);
+					$query->execute();
+					$query->close();
+					return true;
+				} else {
+					$db->sqlERROR();
+					return false;
+				}
 			}
 		} else {
 			return false;
@@ -174,6 +186,7 @@ class File_FileUpload{
 	}
 
 	protected function createThumb($file_dest,$file_name_new,$thumb_name,$thumb_dest,$album_name){
+
 		$path = str_replace("\\", "", $this->path);
 		$file_dest = $file_dest.$path.'/'.$file_name_new;
 		//echo $file_dest;
@@ -205,43 +218,62 @@ class File_FileUpload{
 	}
 
 	protected function create_album($album_name,$album_id) {
+		$db = new DBC;
+		$dbc = $db->connect();
 		// the album_name and dest can be the same if you create a main folder!
 		// else when creating a sub folder to a main folder, the album_dest is different.
 		// see create_sub_folder() for details.
 		// IF A ALBUM NAME ALREADY EXISTS, DON'T CREATE THE ALBUM.
 		$author = $_SESSION['username'];
 		$user_id = $_SESSION['user_id'];
-		(!empty($album_id)) ? $parent_id = mysqli_real_escape_string($this->dbc->connect(),trim((int)$album_id)) : $parent_id = 0;
+		(!empty($album_id)) ? $parent_id = mysqli_real_escape_string($dbc,trim((int)$album_id)) : $parent_id = 0;
 		$file_dest = $this->file_dest.$this->path;
 		$thumb_dest = $this->thumb_dest.$this->path;
 		
 		$path = $this->path;
 		
 		if(!file_exists($file_dest)){
-			$query = "INSERT INTO albums(name,author,parent_id,path,user_id) VALUES('$album_name','$author',$parent_id,'$path',$user_id)";
-			mysqli_query($this->dbc->connect(),$query) or die('Error connecting to database');
-			mkdir(str_replace("\\","",$file_dest),0744);
-			mkdir(str_replace("\\","",$thumb_dest),0744);
+			$query = $dbc->prepare("INSERT INTO albums(name,author,parent_id,path,user_id) VALUES(?,?,?,?,?)");
+			if($query) {
+				$query->bind_param("ssisi", $album_name, $author, $parent_id, $path, $user_id);
+				$query->execute();
 
-			$query = "SELECT album_id FROM albums WHERE name = '$album_name'";
-			echo $query.'<br />';
-			$data = mysqli_query($this->dbc->connect(), $query) or die('Error connecting to database');
-			$row = mysqli_fetch_assoc($data);
-			$parent_id = $row['album_id'];
+
+				mkdir(str_replace("\\", "", $file_dest), 0744);
+				mkdir(str_replace("\\", "", $thumb_dest), 0744);
+
+//			$query = "SELECT album_id FROM albums WHERE name = '$album_name'";
+//			echo $query.'<br />';
+//			$data = mysqli_query($dbc, $query) or die('Error connecting to database');
+//			$row = mysqli_fetch_assoc($data);
+				// get the new created id of the folder.
+				$parent_id = $query->insert_id;
+				$query->close();
+			} else {
+				$db->sqlERROR();
+			}
 		}
-
-		mysqli_close($this->dbc->connect());
+		$dbc->close();
 
 		return $parent_id;
 	}
 	
 	protected function create_path($album_id,$new_album_name = null){
-		$id = mysqli_real_escape_string($this->dbc->connect(),trim((int)$album_id));
-		$query = "SELECT name,path FROM albums WHERE album_id = $id";
-		$data = mysqli_query($this->dbc->connect(),$query) or die ("Error line: 266");
-		$row = mysqli_fetch_array($data);
+		$db = new DBC;
+		$dbc = $db->connect();
 
-		if(mysqli_num_rows($data) == 0){
+		$id = mysqli_real_escape_string($dbc,trim((int)$album_id));
+		$query = $dbc->prepare("SELECT name,path FROM albums WHERE album_id = ?");
+		if($query){
+			$query->bind_param("i",$id);
+			$query->execute();
+			$data = $query->get_result();
+			$query->close();
+			$row = $data->fetch_array();
+		}
+
+//		if(mysqli_num_rows($data) == 0){
+		if($data->num_rows == 0){
 			$path = $new_album_name;
 		} else {
 			if($new_album_name == null){
@@ -252,7 +284,7 @@ class File_FileUpload{
 				$path = $row['path'].'/'.$new_album_name;
 			}
 		}
-
+		$dbc->close();
 		return $path;
 	}
 

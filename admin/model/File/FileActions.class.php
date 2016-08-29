@@ -3,11 +3,21 @@
 trait File_FileActions{
 	// used in File_Folders:
 	public static function removeRows($id){
-		$dbc = new DBC;
-		$query = "SELECT album_id FROM albums WHERE parent_id = $id";
-		$data = mysqli_query($dbc->connect(),$query);
-		$row = mysqli_fetch_array($data);
+		$db = new DBC;
+		$dbc = $db->connect();
+
+		$query = $dbc->prepare("SELECT album_id FROM albums WHERE parent_id = ?");
+		if($query) {
+			$query->bind_param("i", $id);
+			$query->execute();
+			$data = $query->get_result();
+			$query->close();
+			$row = $data->fetch_array();
+		} else {
+			$db->sqlERROR();
+		}
 		$folders_id = array();
+
 		(!empty($row['album_id']))? $folders_id = [$id,$row['album_id']] : $folders_id = [$id];
 		// checks if the row from the db is not empty,
 		// if not, selects the id to the parent id,row[id], so we can get,
@@ -23,63 +33,77 @@ trait File_FileActions{
 		*/
 		while(!empty($row['album_id'])){
 			$id = $row['album_id'];
-			$query = "SELECT album_id FROM albums WHERE parent_id = $id";
-			$data = mysqli_query($dbc->connect(),$query);
-			$row = mysqli_fetch_array($data);
-			// because we now have a new row[album_id], we need to check again if its empty,
-			// if it is not, push it to the array.
-			//if it is, don't push it, en the loop will end with the while clause.
-			if(!empty($row['album_id'])){
-				$folders_id[] = $row['album_id'];
-			}	
+			$query = $dbc->prepare("SELECT album_id FROM albums WHERE parent_id = ?");
+			if($query) {
+				$query->bind_param("i", $id);
+				$query->execute();
+				$data = $query->get_result();
+				$query->close();
+				$row = $data->fetch_array();
+				// because we now have a new row[album_id], we need to check again if its empty,
+				// if it is not, push it to the array.
+				//if it is, don't push it, en the loop will end with the while clause.
+				if(!empty($row['album_id'])){
+					$folders_id[] = $row['album_id'];
+				}
+			} else {
+				$db->sqlERROR();
+			}
 		}
 
 		// Create s string with all the album id's.
 		$multiple = implode(",",$folders_id);
 		// deleting rows from database.
-		$del_albums = "DELETE FROM albums WHERE album_id IN({$multiple})";
-		$del_files = "DELETE FROM files WHERE album_id IN({$multiple})";
-		mysqli_query ($dbc->connect(),$del_albums) or die('Error connecting to database');
-		mysqli_query ($dbc->connect(),$del_files) or die('Error connecting to database');
-		$dbc->disconnect();
+		$del_albums = $dbc->query("DELETE FROM albums WHERE album_id IN({$multiple})");
+		$del_files = $dbc->query("DELETE FROM files WHERE album_id IN({$multiple})");
+
+		$dbc->close();
 	}
 
 	/* used in files_Files:
 	 * Receives checkbox input with file_id's
 	*/
 	static public function delete_files($checkbox){
-		$dbc = new DBC;
+		$db = new DBC;
+		$dbc = $db->connect();
+
 		$multiple = implode(",",$checkbox);
 		/*
 		 * The part where we delete the files
 		 * REMEMBER! This part always has to come before the actual record deletion because if you delete the records first,
 		 * there is a risk that the query doesn't know what records to select simply because they are not there anymore
 		*/
-		$query = "SELECT file_id,path,thumb_path FROM files WHERE file_id IN({$multiple})";
+		$query = $dbc->query("SELECT file_id,path,thumb_path FROM files WHERE file_id IN({$multiple})");
+		if(!$query){ $db->sqlERROR(); };
 		// It's as easy as this:
-		$data = mysqli_query($dbc->connect(), $query) or die('Error connecting to database.');
+
 		// Deleting files.
-		foreach ($data as $delete) {
+		// You cant us aforeach with the mysqli oop approach: http://stackoverflow.com/questions/20190760/error-illegal-string-offset-in-php
+		while ($delete = $query->fetch_array()) {
 			unlink($delete['path']);
 			unlink($delete['thumb_path']);
 		}
 		// Deleting records
-		mysqli_query ($dbc->connect(),"DELETE FROM files WHERE file_id IN({$multiple})" );
-		$dbc->disconnect();
-		header('Location: '.$_SERVER['PHP_SELF'].'?id='.$_GET['id'].'&album='.$_GET['album']);
+		mysqli_query ($dbc,"DELETE FROM files WHERE file_id IN({$multiple})" );
+		$dbc->close();
+//		header('Location: '.$_SERVER['PHP_SELF'].'?id='.$_GET['id'].'&album='.$_GET['album']);
 	}
 
 	// used in files_Files:
 	public static function downloadFiles(){
-		$dbc = new DBC;
+		$db = new DBC;
+		$dbc = $db->connect();
+
 		$checkbox = $_GET['checkbox'];
 		$multiple = implode(",",$checkbox);
-		$query = "SELECT path FROM files WHERE file_id IN({$multiple})";
+		$query = $dbc->query("SELECT path FROM files WHERE file_id IN({$multiple})");
+		if(!$query){ $db->sqlERROR(); };
 		// It's as easy as this:
-		$data = mysqli_query($dbc->connect(), $query) or die('Error connecting to database.');
+		$data = $query->fetch_array();
+
 		$file_download = array();
 		$zip = new ZipArchive();
-		$zip_name = 'Craft-files-'.time().".zip";
+		$zip_name = 'files-'.time().".zip";
 		$zip->open($zip_name,ZipArchive::CREATE);
 		foreach ($data as $file) {
 			if(file_exists($file['path'])){	
@@ -103,7 +127,7 @@ trait File_FileActions{
 			unlink($zip_name);
 		}
 		
-		$dbc->disconnect();
+		$dbc->close();
 	}
 
 	/* used in File_Folders:

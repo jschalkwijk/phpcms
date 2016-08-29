@@ -19,10 +19,19 @@ class File_Folders {
 	 * If the album_id != empty we search for it's child folders and put them in the form to select.
 	 * */
 	public static function get_albums($album_id,$album_name) {
-		$dbc = new DBC;
-		($album_id != null) ? $id = mysqli_real_escape_string($dbc->connect(),trim((int)$album_id)) : $id = 0;
-		$album_query = "SELECT album_id,name FROM albums WHERE parent_id = $id OR album_id = $id";
-		$albums_data = mysqli_query($dbc->connect(),$album_query) or die("Error connecting to database");
+		$db = new DBC;
+		$dbc = $db->connect();
+
+		($album_id != null) ? $id = mysqli_real_escape_string($dbc,trim((int)$album_id)) : $id = 0;
+		$album_query = $dbc->prepare("SELECT album_id,name FROM albums WHERE parent_id = ? OR album_id = ?");
+		if($album_query) {
+			$album_query->bind_param("ii", $id, $id);
+			$album_query->execute();
+			$albums_data = $album_query->get_result();
+			$album_query->close();
+		} else {
+			$db->sqlERROR();
+		}
 		echo '<select id="albums" name="album_id">';
 		if(!isset($album_name)){
 			echo '<option value="0">None</option>';
@@ -47,27 +56,28 @@ class File_Folders {
 
 		echo '</select>';
 		echo '<label for="select">Albums</label>';
-		$dbc->disconnect();
+		$dbc->close();
 	}
 
 	// Deletes the albums selected. Makes use of the removeDir and removeRows Traits.
 	public static function delete_album($checkbox){
-		$dbc = new DBC;
+		$db = new DBC;
+		$dbc = $db->connect();
+
 		// get values from the checkboxes, these are the ID's of the Albums or subfolders.
 		$multiple = implode(",",$checkbox);
-		$query = "SELECT album_id,path,name FROM albums WHERE album_id IN({$multiple})";
+		$query = $dbc->query("SELECT album_id,path,name FROM albums WHERE album_id IN({$multiple})");
+		if(!$query){ $db->sqlERROR(); };
 		// It's as easy as this:
-		$data = mysqli_query($dbc->connect(), $query) or die('error connecting to database');
-		foreach ($data as $delete) {
+
+		while ($row = $query->fetch_array()) {
 			// recursive deleting function. Deletes al folders/files and subfolders/files from server.
-			File_Folders::removeDir('./././files/'.$delete['path']);
-			File_Folders::removeDir('./././files/'.'thumbs/'.$delete['path']);
+			File_Folders::removeDir('./././files/'.$row['path']);
+			File_Folders::removeDir('./././files/'.'thumbs/'.$row['path']);
+			File_Folders::removeRows($row['album_id']);
 		}
-		foreach ($data as $row){
-			$id = $row['album_id'];
-			File_Folders::removeRows($id);
-		}
-		$dbc->disconnect();
+		$query->close();
+		$dbc->close();
 	}
 
 	/*
@@ -77,22 +87,35 @@ class File_Folders {
 	 * created yourself.
 	*/
 	public static function show_albums($album_id){
-		$dbc = new DBC;
+		$db = new DBC;
+		$dbc = $db->connect();
+// Uncomment the below comments and comment the current if statement to only show folders the currentuser created. Update this
+// so the user can specify if the folder is personal or had to be used system wide for every user.
 		$user_id = $_SESSION['user_id'];
-		if(!empty($album_id)){
+//		if(!empty($album_id)){
 //			$query = "SELECT album_id,name FROM albums WHERE parent_id = $album_id AND user_id = $user_id";
-			$query = "SELECT album_id,name FROM albums WHERE parent_id = $album_id";
-			$data = mysqli_query($dbc->connect(),$query);
+		if (empty($album_id)) { $album_id = 0; };
+			$query = $dbc->prepare("SELECT album_id,name FROM albums WHERE parent_id = ?");
+			if($query) {
+				$query->bind_param("i", $album_id);
+				$query->execute();
+				$data = $query->get_result();
+				$query->close();
+			} else {
+				$db->sqlERROR();
+			}
 			//start form
 			echo '<form id="files-form" method="get" action="/admin/file">';
-		} else {
-			$query = "SELECT * FROM albums WHERE parent_id = 0 AND user_id = $user_id";
-			$data = mysqli_query($dbc->connect(),$query);
-			// start form
-			echo '<form method="get" action="'.ADMIN.'"file">';
-
-		}
-		while($row = mysqli_fetch_array($data)){
+//		} else {
+//			$query = $dbc->prepare("SELECT * FROM albums WHERE parent_id = 0 AND user_id = ?");
+//			$query->bind_param("i",$user_id);
+//			$query->execute();
+//			$data = $query->get_result();
+//			$query->close();
+//			// start form
+//			echo '<form method="get" action="'.$_SERVER["REQUEST_URI"].'" file">';
+//		}
+		while($row = $data->fetch_array()){
 			echo '<div class="media">';
 			echo '<div class="meta">';
 						echo '<input class="checkbox left" type="checkbox" name="checkbox[]" value="'.$row['album_id'].'"/>';
@@ -104,7 +127,7 @@ class File_Folders {
 		}
 		echo '<button type="submit" name="delete-albums" id="delete-albums">Delete Albums</button>';
 		echo '</form>';
-		$dbc->disconnect();
+		$dbc->close();
 	}
 	
 	/*
@@ -112,7 +135,9 @@ class File_Folders {
 	 *	make use of the GET params here since we are not in the main folder structure but in the product creation.
 	*/
 	public static function auto_create_folder($album_name,$file_dest,$thumb_dest,$main_folder,$category_name = null) {
-		$dbc = new DBC;
+		$db = new DBC;
+		$dbc = $db->connect();
+
 		$author = $_SESSION['username'];
 		$user_id = $_SESSION['user_id'];
 		
@@ -123,52 +148,89 @@ class File_Folders {
 		*/
 		
 		if($category_name === null){
-			$query = "SELECT album_id FROM albums WHERE name = '$main_folder'";
-			$data = mysqli_query($dbc->connect(), $query) or die('Error connecting to database');
-			$row = mysqli_fetch_assoc($data);
-			$parent_id = $row['album_id'];
+			$query = $dbc->prepare("SELECT album_id FROM albums WHERE name = ?");
+			if($query) {
+				$query->bind_param("s", $main_folder);
+				$query->execute();
+				$data = $query->get_result();
+				$query->close();
+				$row = $data->fetch_array();
+				$parent_id = $row['album_id'];
+			} else {
+				$db->sqlERROR();
+			}
 		} else {
-			$query = "SELECT album_id FROM albums WHERE name = '$category_name'";
-			echo $query.'<br />';
-			$data = mysqli_query($dbc->connect(), $query) or die('Error connecting to database');
-			$row = mysqli_fetch_assoc($data);
-			$parent_id = $row['album_id'];
+			$sql = "SELECT album_id FROM albums WHERE name = ?";
+			echo $sql.'<br />';
+			$query = $dbc->prepare($sql);
+			if($query) {
+				$query->bind_param("s", $category_name);
+				$query->execute();
+				$data = $query->get_result();
+				$query->close();
+				$row = $data->fetch_array();
+				$parent_id = $row['album_id'];
+			} else {
+				$db->sqlERROR();
+			}
 		}
 
-		
 		$path = File_Folders::auto_create_path($album_name,$parent_id);
 	
 		if(!file_exists($file_dest)){
-			$query = "INSERT INTO albums(name,author,parent_id,path,user_id) VALUES('$album_name','$author',$parent_id,'$path',$user_id)";
-			echo 'Create album: '.$query.'<br />';
-			mysqli_query($dbc->connect(),$query) or die('Error connecting to database product folder');
-			mkdir($file_dest,0744);
-			mkdir($thumb_dest,0744);
-		}		
+			$sql = "INSERT INTO albums(name,author,parent_id,path,user_id) VALUES(?,?,?,?,?)";
+			echo 'Create album: '.$sql.'<br />';
+			$query = $dbc->prepare($sql);
+			if($query){
+				$query->bind_param("ssisi",$album_name,$author,$parent_id,$path,$user_id);
+				$query->execute();
+				$query->close();
+				mkdir($file_dest,0744);
+				mkdir($thumb_dest,0744);
+			} else {
+				$db->sqlERROR();
+			}
+		}
 		
-		mysqli_close($dbc->connect());
-		
-		$query = "SELECT album_id FROM albums WHERE name = '$album_name'";
-		$data = mysqli_query($dbc->connect(), $query);
-		$row = mysqli_fetch_array($data);
-		$album_id = $row['album_id'];
-				
+		$query = $dbc->prepare("SELECT album_id FROM albums WHERE name = ?");
+		if($query) {
+			$query->bind_param("s", $album_name);
+			$query->execute();
+			$data = $query->get_result();
+			$query->close();
+			$row = $data->fetch_array();
+			$album_id = $row['album_id'];
+		} else {
+			$db->sqlERROR();
+		}
+
+		$dbc->close();
 		return $album_id;
 	}
 	
 	// we use this function in a slightly different way then in the file_upload class because we cant
 	// make use of the GET params here since we are not in the main folder structure but in the product/user creation.
 	public static function auto_create_path($album_name,$parent_id){
-		$dbc = new DBC;
-		$query = "SELECT path FROM albums WHERE album_id = $parent_id";
-		$data = mysqli_query($dbc->connect(),$query);
-		$row = mysqli_fetch_array($data);
-		if($row['path'] === $album_name){
-			$path = $album_name;
+		$db = new DBC;
+		$dbc = $db->connect();
+
+		$query = $dbc->prepare("SELECT path FROM albums WHERE album_id = ?");
+		if($query){
+			$query->bind_param("i",$parent_id);
+			$query->execute();
+			$data = $query->get_result();
+			$query->close();
+			$row = $data->fetch_array();
+			if($row['path'] === $album_name){
+				$path = $album_name;
+			} else {
+				$path = $row['path'].'/'.$album_name;
+			}
+			return $path;
 		} else {
-			$path = $row['path'].'/'.$album_name;
+			$db->sqlERROR();
+			return false;
 		}
-		return $path;
 	}
 //
 }

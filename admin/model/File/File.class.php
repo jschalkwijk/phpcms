@@ -66,11 +66,20 @@ class File_File{
 	*/
 	public static function fetchFilesByAlbum($album_id,$trashed) {
 
-		$dbc = new DBC;
-		$query = "SELECT * FROM files WHERE album_id = $album_id";
-		$data = mysqli_query($dbc->connect(),$query)or die ("Error connecting to server");
+		$db = new DBC;
+		$dbc = $db->connect();
+
+		$query = $dbc->prepare("SELECT * FROM files WHERE album_id = ?");
+		if($query) {
+			$query->bind_param("i", $album_id);
+			$query->execute();
+			$data = $query->get_result();
+			$query->close();
+		} else {
+			$db->sqlERROR();
+		}
 		$files= array();
-		while($row = mysqli_fetch_array($data)){
+		while($row = $data->fetch_array()){
 			$file = new File_File(
 				$row['name'],
 				$row['type'],
@@ -86,16 +95,18 @@ class File_File{
 			// adds every object to the files array. We can access each object and its methods separately.
 			$files[] = $file;
 		}
+		$dbc->close();
 		return $files;
-		$dbc->disconnect();
 	}
 	
 	public static function fetchFilesBySearch($searchTermBits){
-		$dbc = new DBC;
-		$query = "SELECT * FROM files WHERE ".implode(' AND ', $searchTermBits);
-		$data = mysqli_query($dbc->connect(),$query)or die ("Error connecting to server");
+		$db = new DBC;
+		$dbc = $db->connect();
+
+		$query = $dbc->query("SELECT * FROM files WHERE ".implode(' AND ', $searchTermBits));
+		if(!$query) { $db->sqlERROR(); };
 		$files= array();
-		while($row = mysqli_fetch_array($data)){
+		while($row = $query->fetch_array()){
 			$file = new File_File(
 				$row['name'],
 				$row['type'],
@@ -111,8 +122,8 @@ class File_File{
 			// adds every object to the files array. We can acces each object and its methods seperatly.
 			$files[] = $file;
 		}
+		$dbc->close();
 		return $files;
-		$dbc->disconnect();
 	}
 	
 	//get the trait file for the user actions.

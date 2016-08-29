@@ -100,13 +100,22 @@ class Products_Product {
 	}
 
 	public static function fetchAll($dbt,$trashed){
-		$dbc = new DBC;
-		$query = "SELECT ".$dbt.".*, categories.title as category FROM ".$dbt." LEFT JOIN categories ON ".$dbt.".category_id = categories.categorie_id  WHERE ".$dbt.".trashed = ".$trashed." ORDER BY product_id DESC";
-		$data = mysqli_query($dbc->connect(),$query) or die ('Error connecting to server');
+		$db = new DBC;
+		$dbc = $db->connect();
+
+		$query = $dbc->prepare("SELECT ".$dbt.".*, categories.title as category FROM ".$dbt." LEFT JOIN categories ON ".$dbt.".category_id = categories.categorie_id  WHERE ".$dbt.".trashed = ? ORDER BY product_id DESC");
+		if($query){
+			$query->bind_param("i",$trashed);
+			$query->execute();
+			$data = $query->get_result();
+			$query->close();
+		} else {
+			$db->sqlERROR();
+		}
 
 		$products = array();
 
-		while($row = mysqli_fetch_array($data)){
+		while($row = $data->fetch_array()){
 			$product = new products_Product(
 				$row['name'],
 				$row['category'],
@@ -120,19 +129,21 @@ class Products_Product {
 			$product->setID($row['product_id']);
 			$products[] = $product;
 		}
-		$dbc->disconnect();
+		$dbc->close();
 		return ['products' => $products];
 	}
 
 	public static function fetchAllByID($ids){
-		$dbc = new DBC;
+		$db = new DBC;
+		$dbc = $db->connect();
+
 		$multiple = implode(",",$ids);
-		$query = "SELECT products.*, categories.title as category FROM products LEFT JOIN categories ON products.category_id = categories.categorie_id WHERE product_id IN({$multiple})";
-		$data = mysqli_query($dbc->connect(), $query) or die('Error connecting to database. Fetchallbyid');
+		$query = $dbc->query("SELECT products.*, categories.title as category FROM products LEFT JOIN categories ON products.category_id = categories.categorie_id WHERE product_id IN({$multiple})");
+		if(!$query){ $db->sqlERROR(); };
 
 		$products = array();
 
-		while($row = mysqli_fetch_array($data)){
+		while($row = $query->fetch_array()){
 			$product = new products_Product(
 				$row['name'],
 				$row['category'],
@@ -146,16 +157,25 @@ class Products_Product {
 			$product->setID($row['product_id']);
 			$products[] = $product;
 		}
-		$dbc->disconnect();
+		$dbc->close();
 		return $products;
 	}
 
 	public static function fetchSingle($id){
-		$dbc = new DBC;
-		$query = "SELECT products.*, categories.title as category FROM products LEFT JOIN categories ON products.category_id = categories.categorie_id WHERE product_id = $id ORDER BY product_id DESC";
-		$data = mysqli_query($dbc->connect(),$query) or die ('Error connecting to server');
+		$db = new DBC;
+		$dbc = $db->connect();
 
-		while($row = mysqli_fetch_array($data)){
+		$query = $dbc->prepare("SELECT products.*, categories.title as category FROM products LEFT JOIN categories ON products.category_id = categories.categorie_id WHERE product_id = ? ORDER BY product_id DESC");
+		if($query){
+			$query->bind_param("i",$id);
+			$query->execute();
+			$data = $query->get_result();
+			$query->close();
+		} else {
+			$db->sqlERROR();
+		}
+
+		while($row = $data->fetch_array()){
 			$product = new products_Product(
 				$row['name'],
 				$row['category'],
@@ -168,23 +188,34 @@ class Products_Product {
 			);
 			$product->setID($row['product_id']);
 		}
-		$dbc->disconnect();
+		$dbc->close();
 		return $product;
 	}
 
 	public static function addProductIMG($file_dest,$thumb_dest,$params){
-		$dbc = new DBC;
+		$db = new DBC;
+		$dbc = $db->connect();
+
 		$upload = new files_FileUpload($file_dest,$thumb_dest,$params,true);
 		$img_path = $upload->getImgPath();
 		$thumb_path = $upload->getThumbPath();
-		$query = "UPDATE products SET img_path = '$thumb_path' WHERE product_id = $params[0]";
-		mysqli_query($dbc->connect(),$query) or die ('Error updating product image');
 
-		$dbc->disconnect();
+		$query = $dbc->prepare("UPDATE products SET img_path = '$thumb_path' WHERE product_id = ?");
+
+		if($query){
+			$query->bind_param("i",$params[0]);
+			$query->execute();
+			$query->close();
+		} else {
+			$db->sqlERROR();
+		}
+
+		$dbc->close();
 	}
 
 	public function addProduct($id = null,$confirm = null){
-		$dbc = new DBC();
+		$db = new DBC;
+		$dbc = $db->connect();
 
 		$output_form = true;
 		$errors = [];
@@ -198,14 +229,14 @@ class Products_Product {
 
 		if($id != null){
 			$this->setID($id);
-			$id = mysqli_real_escape_string($dbc->connect(),trim((int)$this->getID()));
+			$id = mysqli_real_escape_string($dbc,trim((int)$this->getID()));
 		};
 
-		$name = mysqli_real_escape_string($dbc->connect(), trim($this->name));
-		$category = mysqli_real_escape_string($dbc->connect(), trim($this->category));
-		$description = mysqli_real_escape_string($dbc->connect(), trim($this->description));
-		$price = mysqli_real_escape_string($dbc->connect(), trim((float)($this->price)));
-		$quantity = mysqli_real_escape_string($dbc->connect(), trim((int)$this->quantity));
+		$name = mysqli_real_escape_string($dbc, trim($this->name));
+		$category = mysqli_real_escape_string($dbc, trim($this->category));
+		$description = mysqli_real_escape_string($dbc, trim($this->description));
+		$price = mysqli_real_escape_string($dbc, trim((float)($this->price)));
+		$quantity = mysqli_real_escape_string($dbc, trim((int)$this->quantity));
 
 		# create product category, set type of category group
 		# create product category file folder.
@@ -219,13 +250,21 @@ class Products_Product {
 				File_Folders::auto_create_folder($category_name,$this->file_path,$this->thumb_path,'Products');
 			}
 		} else {
-			$category_id = mysqli_real_escape_string($dbc->connect(),trim((int)$_POST['cat_name']));
-			$query = "SELECT title FROM categories WHERE categorie_id = $category_id";
-			$cat_name = mysqli_query($dbc->connect(), $query) or die('Error connecting to database, select categorie name');
-			$row = mysqli_fetch_array($cat_name);
-			$category_name = $row['title'];
-			$this->file_path = $this->file_path.$category_name.'/';
-			$this->thumb_path = $this->thumb_path.$category_name.'/';
+			$category_id = mysqli_real_escape_string($dbc,trim((int)$_POST['cat_name']));
+			$query = $dbc->prepare("SELECT title FROM categories WHERE categorie_id = ?");
+			if($query){
+				$query->bind_param("i",$category_id);
+				$query->execute();
+				$cat_name = $query->get_result();
+				$query->close();
+				$row = $cat_name->fetch_array();
+				$category_name = $row['title'];
+				$this->file_path = $this->file_path.$category_name.'/';
+				$this->thumb_path = $this->thumb_path.$category_name.'/';
+			} else {
+				$db->sqlERROR();
+			}
+
 			// CATEGORIE ID WORDT DOORGEGEVEN MAAR IK MOET HET ALBUYM ID HEBBEN VAN DIE CATEGORIE..
 			echo $this->file_path;
 			echo $this->thumb_path;
@@ -242,24 +281,36 @@ class Products_Product {
 			$album_id = File_Folders::auto_create_folder($name,$this->file_path.$name,$this->thumb_path.$name,'Products',$category_name);
 		}
 
-
-
 		if(!empty($name) && !empty($price)){
 
 			if($confirm == 'Yes'){
-				$query = "UPDATE products SET name = '$name', category_id = $category_id, description = '$description', price = $price, quantity = $quantity WHERE product_id = $id";
+				$query = $dbc->prepare("UPDATE products SET name = ?, category_id = ?, description = ?, price = ?, quantity = ? WHERE product_id = ?");
+				if($query){
+					$query->bind_param("sisdii",$name,$category_id,$description,$price,$quantity,$id);
+					$query->execute();
+					$query->close();
+				} else {
+					$db->sqlERROR();
+				}
+
 			} else {
-				$query = "INSERT into products (name,category_id,description,price,album_id,quantity) VALUES('$name',$category_id,'$description',$price,$album_id,$quantity)";
+				$query = $dbc->prepare("INSERT into products (name,category_id,description,price,album_id,quantity) VALUES(?,?,?,?,?,?)");
+				if($query){
+					$query->bind_param("sisdii",$name,$category_id,$description,$price,$album_id,$quantity);
+					$query->execute();
+					$query->close();
+				} else {
+					$db->sqlERROR();
+				}
 			}
-			echo $query;
-			mysqli_query($dbc->connect(), $query) or die("Error adding product");
+
 			$output_form = false;
 			$messages[] = "Product {$name} successfully added/edited.";
 		} else {
 			$errors[] = "You forgot to fill in one or more of the required fields (name,price,quantity).";
 		}
 
-		$dbc->disconnect();
+		$dbc->close();
 
 		return ['output_form' => $output_form,'messages' => $messages, 'errors' => $errors];
 	}
