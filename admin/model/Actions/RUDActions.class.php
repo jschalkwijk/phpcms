@@ -6,12 +6,25 @@
 class Actions_RUDActions{
 
 	public static function trash_selected($dbt,$checkbox){
-		$dbc = new DBC;
+		Actions_RUDActions::update($dbt,$checkbox, "trashed",1);
+	}
+	public static function approve_selected($dbt,$checkbox){
+		Actions_RUDActions::update($dbt,$checkbox, "approved",1);
+	}
+	public static function restore_selected($dbt,$checkbox){
+		Actions_RUDActions::update($dbt,$checkbox, "trashed",0);
+	}
+	public static function hide_selected($dbt,$checkbox){
+		Actions_RUDActions::update($dbt,$checkbox, "approved",0);
+	}
+
+	protected static function update($dbt,$checkbox,$row,$value){
+		$db = new DBC;
+		$dbc = $db->connect();
 		$id_row = substr($dbt, 0, -1).'_id';
 		$multiple = implode(",",$checkbox);
-		$query = "UPDATE ".$dbt." SET trashed = 1,approved = 0 WHERE ".$id_row." IN({$multiple})";
-		mysqli_query ($dbc->connect(),$query) or die('error connecting because of the id name, for contacts it\'s contact_id, fox it!');
-		$dbc->disconnect();
+		$dbc->query("UPDATE ".$dbt." SET ".$row." = ".$value." WHERE ".$id_row." IN({$multiple})");
+		$dbc->close();
 		header('Location: '.ADMIN.$dbt);
 	}
 	public static function delete_selected($dbt,$checkbox){
@@ -43,37 +56,6 @@ class Actions_RUDActions{
 		} else {
 			header('Location: ' . ADMIN . $dbt . '/deleted-' . $dbt);
 		}
-	}
-	public static function approve_selected($dbt,$checkbox){
-		$db = new DBC;
-		$dbc = $db->connect();
-		$id_row = substr($dbt, 0, -1).'_id';
-		$multiple = implode(",",$checkbox);
-		$query = $dbc->query("UPDATE ".$dbt." SET approved = 1 WHERE ".$id_row." IN({$multiple})");
-		$dbc->close();
-		header('Location: '.ADMIN.$dbt);
-	}
-	public static function restore_selected($dbt,$checkbox){
-		$db = new DBC;
-		$dbc = $db->connect();
-
-		$id_row = substr($dbt, 0, -1).'_id';
-		$multiple = implode(",",$checkbox);
-		$query = $dbc->query("UPDATE ".$dbt." SET trashed = 0 WHERE ".$id_row." IN({$multiple})");
-		$dbc->close();
-
-		header('Location: '.ADMIN.$dbt.'/deleted-'.$dbt);
-	}
-	public static function hide_selected($dbt,$checkbox){
-		// Approve the score by setting the approved column in the database
-		$db = new DBC;
-		$dbc = $db->connect();
-
-		$id_row = substr($dbt, 0, -1).'_id';
-		$multiple = implode(",",$checkbox);
-		$query = $dbc->query("UPDATE ".$dbt."  SET approved = 0 WHERE ".$id_row." IN({$multiple})");
-		$dbc->close();
-		header('Location: '.ADMIN.$dbt);
 	}
 
 	/*// used by Main:Content, Sub(Post,Page),Main: User.
