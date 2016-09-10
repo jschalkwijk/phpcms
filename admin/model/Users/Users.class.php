@@ -1,6 +1,6 @@
 <?php
 
-//namespace model\users;
+namespace Jorn\model\users;
 //// Get User key for encryption
 //use \Defuse\Crypto\Crypto;
 //use \Defuse\Crypto\Exception as Ex;
@@ -11,7 +11,7 @@
 use \Defuse\Crypto\Crypto;
 use \Defuse\Crypto\Exception as Ex;
 
-class Users_Users{
+class Users{
 
 	private $id = 0;
 	private $username;
@@ -43,28 +43,28 @@ class Users_Users{
 	}
 	// setter function that set the assingned variables. Can only be accessed with these fynctions, vars themselfs are private.
 	public function getUserName(){
-		 return $this->username;
+		return $this->username;
 	}
 	public function getFirstName(){
-		 return $this->first_name;
+		return $this->first_name;
 	}
 	public function getLastName(){
-		 return $this->last_name;
+		return $this->last_name;
 	}
 	public function getMail(){
-		 return $this->email;
+		return $this->email;
 	}
 	public function getFunction(){
-		 return $this->function;
+		return $this->function;
 	}
 	public function getRights(){
-		 return $this->rights;
+		return $this->rights;
 	}
 	public function getApproved(){
-		 return $this->approved;
+		return $this->approved;
 	}
 	public function getTrashed(){
-		 return $this->trashed;
+		return $this->trashed;
 	}
 	public function getID(){
 		return $this->id;
@@ -88,19 +88,19 @@ class Users_Users{
 		$this->last_name = $last_name;
 	}
 	public function setEmail($email){
-		 $this->email = $email;
+		$this->email = $email;
 	}
 	public function setFunction($function){
-		 $this->function = $function;
+		$this->function = $function;
 	}
 	public function setRights($rights){
-		 $this->rights = $rights;
+		$this->rights = $rights;
 	}
 	public function setID($id){
-		 $this->id = $id;
+		$this->id = $id;
 	}
 	public function setDbt(){
-		 $this->dbt;
+		$this->dbt;
 	}
 	public static function fetchUsers($dbt,$trashed) {
 		$db = new DBC;
@@ -119,7 +119,7 @@ class Users_Users{
 		$users = array();
 
 		if(file_exists('././keys/Shared/shared.txt')){
-				$shared_key = file_get_contents('././keys/Shared/shared.txt');
+			$shared_key = file_get_contents('././keys/Shared/shared.txt');
 		} else {
 			$errors[] = "Shared Encryption key could not be found!";
 			return['output_form' => $output_form,'messages' => $messages,'errors' => $errors];
@@ -168,17 +168,17 @@ class Users_Users{
 			exit();
 		}
 
-	/*
-	if(file_exists('././keys/User/'.$_SESSION['username'].'.txt')){
-				$user_key = file_get_contents('././keys/User/'.$_SESSION['username'].'.txt');
-	} else {../../../../craft_server
-		$errors[] = "Encryption key could not be found!";
-		return['output_form' => $output_form,'messages' => $messages,'errors' => $errors];
-		exit();
-	}
-*/
+		/*
+        if(file_exists('././keys/User/'.$_SESSION['username'].'.txt')){
+                    $user_key = file_get_contents('././keys/User/'.$_SESSION['username'].'.txt');
+        } else {../../../../craft_server
+            $errors[] = "Encryption key could not be found!";
+            return['output_form' => $output_form,'messages' => $messages,'errors' => $errors];
+            exit();
+        }
+    */
 		if(file_exists('././keys/Shared/shared.txt')){
-				$shared_key = file_get_contents('././keys/Shared/shared.txt');
+			$shared_key = file_get_contents('././keys/Shared/shared.txt');
 		} else {
 			$errors[] = "Shared Encryption key could not be found!";
 			return['output_form' => $output_form,'messages' => $messages,'errors' => $errors];
@@ -206,7 +206,7 @@ class Users_Users{
 			);
 			$user->setID($row['user_id']);
 		}
-		 return $user;
+		return $user;
 	}
 
 	public function addUser($password,$password_again){
@@ -232,14 +232,14 @@ class Users_Users{
 		if($data->num_rows === 0){
 			// Create user specific Encryption key.
 			try {
-			    $user_key = Crypto::createNewRandomKey();
-			    $file = fopen('././keys/User/'.$username.'.txt','w');
-			    fwrite($file, $user_key);
-			    fclose($file);
+				$user_key = Crypto::createNewRandomKey();
+				$file = fopen('././keys/User/'.$username.'.txt','w');
+				fwrite($file, $user_key);
+				fclose($file);
 			} catch (Ex\CryptoTestFailedException $ex) {
-			    die('Cannot safely create a key');
+				die('Cannot safely create a key');
 			} catch (Ex\CannotPerformOperationException $ex) {
-			    die('Cannot safely create a key');
+				die('Cannot safely create a key');
 			}
 			// Get shared encryption key. This key is used to encrypt the user data that admins and backend users
 			// need to see from one another. So the data is protected in the database, but accessible for the backend users.
@@ -261,9 +261,9 @@ class Users_Users{
 				$rights = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->rights)),$key));
 				$token = md5(uniqid(mt_rand(),true));
 			} catch (Ex\CryptoTestFailedException $ex) {
-			    die('Cannot safely perform encryption');
+				die('Cannot safely perform encryption');
 			} catch (Ex\CannotPerformOperationException $ex) {
-			    die('Cannot safely perform encryption');
+				die('Cannot safely perform encryption');
 			}
 
 			# Create Folder
@@ -311,17 +311,17 @@ class Users_Users{
 		$errors = array();
 		$messages = array();
 
-			/*
-	if(file_exists('././keys/User/'.$_SESSION['username'].'.txt')){
-				$user_key = file_get_contents('././keys/User/'.$_SESSION['username'].'.txt'); 
-	} else {
-		$errors[] = "Encryption key could not be found!";
-		return['output_form' => $output_form,'messages' => $messages,'errors' => $errors];
-		exit();
-	}
+		/*
+if(file_exists('././keys/User/'.$_SESSION['username'].'.txt')){
+            $user_key = file_get_contents('././keys/User/'.$_SESSION['username'].'.txt');
+} else {
+    $errors[] = "Encryption key could not be found!";
+    return['output_form' => $output_form,'messages' => $messages,'errors' => $errors];
+    exit();
+}
 */
 		if(file_exists('././keys/Shared/shared.txt')){
-				$shared_key = file_get_contents('././keys/Shared/shared.txt');
+			$shared_key = file_get_contents('././keys/Shared/shared.txt');
 		} else {
 			$errors[] = "Shared Encryption key could not be found!";
 			return['output_form' => $output_form,'messages' => $messages,'errors' => $errors];
@@ -355,7 +355,7 @@ class Users_Users{
 			// save edited object to database
 			if ($_POST['confirm'] == 'Yes') {
 				$sql1 = "UPDATE users SET username = '$username',first_name = '$first_name',last_name = '$last_name',".
-				"email = '$email',function = '$function',rights = '$rights' WHERE users.user_id = '$user_id'";
+					"email = '$email',function = '$function',rights = '$rights' WHERE users.user_id = '$user_id'";
 				echo $sql1;
 				$query = $dbc->prepare("UPDATE users SET username = ?,first_name = ?,last_name = ?,email = ?,function = ?,rights = ? WHERE users.user_id = ?");
 				if($query){
@@ -381,16 +381,16 @@ class Users_Users{
 						}
 						$messages[] = 'You password has been successfully changed.';
 					} else {
-					$errors[] = 'Passwords do not match, please retype your password correctly.';
-					$output_form = true;
-				}
+						$errors[] = 'Passwords do not match, please retype your password correctly.';
+						$output_form = true;
+					}
 				$dbc->close();
 				// Confirm success with the user
 				$messages[] =  '<p>The user <strong>' . $username. '</strong> was successfully edited.';
 			}
 			else {
-			 	$errors[] = '<p class="error">The user was not edited.</p>';
-			 	$output_form = true;
+				$errors[] = '<p class="error">The user was not edited.</p>';
+				$output_form = true;
 			}
 			return ['output_form' => $output_form,'errors' => $errors,'messages' => $messages];
 		} else {

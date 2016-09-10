@@ -2,55 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3e9ca70d-5c86-4b1b-a819-366949c8fc81" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/plugins/php-encryption-master-2.0/test/unit/File/wat-gigantic-duck.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/plugins/php-encryption-master-2.0/.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/plugins/php-encryption-master-2.0/.php_cs" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/plugins/php-encryption-master-2.0/LICENSE" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/plugins/php-encryption-master-2.0/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/plugins/php-encryption-master-2.0/composer.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/plugins/php-encryption-master-2.0/dist/Makefile" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/plugins/php-encryption-master-2.0/dist/box.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/plugins/php-encryption-master-2.0/dist/signingkey.asc" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/plugins/php-encryption-master-2.0/docs/CryptoDetails.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/plugins/php-encryption-master-2.0/docs/FAQ.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/plugins/php-encryption-master-2.0/docs/InstallingAndVerifying.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/plugins/php-encryption-master-2.0/docs/InternalDeveloperDocs.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/plugins/php-encryption-master-2.0/docs/Tutorial.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/plugins/php-encryption-master-2.0/docs/UpgradingFromV1.2.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/plugins/php-encryption-master-2.0/docs/classes/Crypto.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/plugins/php-encryption-master-2.0/docs/classes/File.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/plugins/php-encryption-master-2.0/docs/classes/Key.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/plugins/php-encryption-master-2.0/docs/classes/KeyProtectedByPassword.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/plugins/php-encryption-master-2.0/src/Core.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/plugins/php-encryption-master-2.0/src/Crypto.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/plugins/php-encryption-master-2.0/src/DerivedKeys.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/plugins/php-encryption-master-2.0/src/Encoding.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/plugins/php-encryption-master-2.0/src/Exception/BadFormatException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/plugins/php-encryption-master-2.0/src/Exception/CryptoException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/plugins/php-encryption-master-2.0/src/Exception/EnvironmentIsBrokenException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/plugins/php-encryption-master-2.0/src/Exception/IOException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/plugins/php-encryption-master-2.0/src/Exception/WrongKeyOrModifiedCiphertextException.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/plugins/php-encryption-master-2.0/src/File.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/plugins/php-encryption-master-2.0/src/Key.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/plugins/php-encryption-master-2.0/src/KeyOrPassword.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/plugins/php-encryption-master-2.0/src/KeyProtectedByPassword.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/plugins/php-encryption-master-2.0/src/RuntimeTests.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/plugins/php-encryption-master-2.0/test.sh" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/plugins/php-encryption-master-2.0/test/phpunit-pubkey.asc" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/plugins/php-encryption-master-2.0/test/phpunit.sh" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/plugins/php-encryption-master-2.0/test/unit/BackwardsCompatibilityTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/plugins/php-encryption-master-2.0/test/unit/CoreTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/plugins/php-encryption-master-2.0/test/unit/CryptoTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/plugins/php-encryption-master-2.0/test/unit/CtrModeTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/plugins/php-encryption-master-2.0/test/unit/EncodingTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/plugins/php-encryption-master-2.0/test/unit/File/empty-file.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/plugins/php-encryption-master-2.0/test/unit/FileTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/plugins/php-encryption-master-2.0/test/unit/KeyTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/plugins/php-encryption-master-2.0/test/unit/LegacyDecryptTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/plugins/php-encryption-master-2.0/test/unit/PasswordTest.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/plugins/php-encryption-master-2.0/test/unit/RuntimeTestTest.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/nerdcms_db.sql" afterPath="$PROJECT_DIR$/admin/nerdcms_db.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/config.php" afterPath="$PROJECT_DIR$/admin/config.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/controller/users.php" afterPath="$PROJECT_DIR$/admin/controller/users.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/model/Users/Users.class.php" afterPath="$PROJECT_DIR$/admin/model/Users/Users.class.php" />
     </list>
     <ignored path="craft_server.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -79,70 +34,43 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Users.class.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Users.class.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/admin/model/Users/Users.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.625">
-              <caret line="9" column="30" selection-start-line="9" selection-start-column="30" selection-end-line="9" selection-end-column="30" />
+            <state vertical-scroll-proportion="0.9546142">
+              <caret line="422" column="2" selection-start-line="422" selection-start-column="2" selection-end-line="422" selection-end-column="2" />
               <folding>
-                <element signature="e#7#31#0#PHP" expanded="true" />
-                <element signature="e#182#208#0#PHP" expanded="true" />
-                <marker date="1473499561000" expanded="true" signature="2567:2629" placeholder="SELECT * FRO... ${$dbt}" />
-                <marker date="1473499561000" expanded="true" signature="4004:4017" placeholder="SELECT * FRO... " />
-                <marker date="1473499561000" expanded="true" signature="4004:4043" placeholder="SELECT * FRO... ${$dbt}" />
-                <marker date="1473499561000" expanded="true" signature="4004:4044" placeholder="SELECT * FRO... ${$dbt}" />
-                <marker date="1473499561000" expanded="true" signature="4004:4046" placeholder="SELECT * FRO... ${$dbt}" />
-                <marker date="1473499561000" expanded="true" signature="5836:5873" placeholder="SELECT * FRO... users" />
-                <marker date="1473499561000" expanded="true" signature="5836:5874" placeholder="SELECT * FRO... users" />
-                <marker date="1473499561000" expanded="true" signature="8601:8721" placeholder="INSERT into users... " />
-                <marker date="1473499561000" expanded="true" signature="10525:10562" placeholder="SELECT * FRO... users" />
-                <marker date="1473499561000" expanded="true" signature="10525:10563" placeholder="SELECT * FRO... users" />
-                <marker date="1473499561000" expanded="true" signature="11919:12110" placeholder="UPDATE users... " />
-                <marker date="1473499561000" expanded="true" signature="12157:12272" placeholder="UPDATE users... " />
-                <marker date="1473499561000" expanded="true" signature="12157:12273" placeholder="UPDATE users... " />
-                <marker date="1473499561000" expanded="true" signature="12739:12791" placeholder="UPDATE users... " />
-                <marker date="1473499561000" expanded="true" signature="12739:12792" placeholder="UPDATE users... " />
-                <marker date="1473499561000" expanded="true" signature="14021:14067" placeholder="UPDATE users... " />
-                <marker date="1473499561000" expanded="true" signature="14021:14068" placeholder="UPDATE users... " />
+                <element signature="e#185#211#0#PHP" expanded="true" />
+                <marker date="1473519841000" expanded="true" signature="2551:2613" placeholder="SELECT * FRO... ${$dbt}" />
+                <marker date="1473519841000" expanded="true" signature="3987:4027" placeholder="SELECT * FRO... ${$dbt}" />
+                <marker date="1473519841000" expanded="true" signature="5889:5927" placeholder="SELECT * FRO... users" />
+                <marker date="1473519841000" expanded="true" signature="8630:8750" placeholder="INSERT into users... " />
+                <marker date="1473519841000" expanded="true" signature="10562:10600" placeholder="SELECT * FRO... users" />
+                <marker date="1473519841000" expanded="true" signature="11956:12148" placeholder="UPDATE users... " />
+                <marker date="1473519841000" expanded="true" signature="12195:12311" placeholder="UPDATE users... " />
+                <marker date="1473519841000" expanded="true" signature="12777:12830" placeholder="UPDATE users... " />
+                <marker date="1473519841000" expanded="true" signature="14060:14107" placeholder="UPDATE users... " />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="config.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="config.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/config.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.68078667">
-              <caret line="30" column="2" selection-start-line="30" selection-start-column="2" selection-end-line="30" selection-end-column="2" />
+            <state vertical-scroll-proportion="-24.375">
+              <caret line="39" column="2" selection-start-line="39" selection-start-column="2" selection-end-line="39" selection-end-column="2" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="albums.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/view/albums.php">
+      <file leaf-file-name="users.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin/controller/users.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.625">
-              <caret line="9" column="46" selection-start-line="9" selection-start-column="46" selection-end-line="9" selection-end-column="46" />
+            <state vertical-scroll-proportion="-13.791667">
+              <caret line="37" column="143" selection-start-line="37" selection-start-column="143" selection-end-line="37" selection-end-column="143" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FileActions.class.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/model/File/FileActions.class.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.625">
-              <caret line="80" column="64" selection-start-line="80" selection-start-column="64" selection-end-line="80" selection-end-column="64" />
-              <folding>
-                <marker date="1472400447000" expanded="true" signature="205:252" placeholder="SELECT album... albums" />
-                <marker date="1472400447000" expanded="true" signature="1257:1304" placeholder="SELECT album... albums" />
-                <marker date="1472400447000" expanded="true" signature="1943:1992" placeholder="DELETE FROM " />
-                <marker date="1472400447000" expanded="true" signature="2024:2072" placeholder="DELETE FROM " />
-                <marker date="1472400447000" expanded="true" signature="2607:2678" placeholder="SELECT file_... files" />
-                <marker date="1472400447000" expanded="true" signature="3055:3102" placeholder="DELETE FROM " />
-                <marker date="1472400447000" expanded="true" signature="3423:3475" placeholder="SELECT path files" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -162,7 +90,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/admin/model/Order/Order_OrderDetails.php" />
         <option value="$PROJECT_DIR$/admin/model/Order/OrderDetails.class.php" />
         <option value="$PROJECT_DIR$/admin/model/Encryption/src/ExceptionHandler.php" />
         <option value="$PROJECT_DIR$/admin/model/Support/SessionStorage.class.php" />
@@ -211,8 +138,9 @@
         <option value="$PROJECT_DIR$/admin/nerdcms_db.sql" />
         <option value="$PROJECT_DIR$/admin/model/Encryption/src/Core.php" />
         <option value="$PROJECT_DIR$/admin/model/Encryption/src/Key.php" />
-        <option value="$PROJECT_DIR$/admin/model/Users/Users.class.php" />
+        <option value="$PROJECT_DIR$/admin/controller/users.php" />
         <option value="$PROJECT_DIR$/admin/config.php" />
+        <option value="$PROJECT_DIR$/admin/model/Users/Users.class.php" />
       </list>
     </option>
   </component>
@@ -306,10 +234,25 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="cms" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CMS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="admin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controller" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
-      </pane>
-      <pane id="Scratches">
-        <subPane />
       </pane>
       <pane id="Scope">
         <subPane subId="Problems" />
@@ -322,6 +265,9 @@
           </PATH>
         </subPane>
         <subPane subId="Tests" />
+      </pane>
+      <pane id="Scratches">
+        <subPane />
       </pane>
     </panes>
   </component>
@@ -417,14 +363,13 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="68" y="23" width="1852" height="1057" extended-state="6" />
+    <frame x="68" y="23" width="1852" height="1057" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16298343" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16629834" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32988626" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32678387" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26266804" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -436,6 +381,7 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32678387" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
@@ -478,6 +424,92 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/admin/model/Users/Users.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#185#211#0#PHP" expanded="true" />
+            <marker date="1473519841000" expanded="true" signature="2551:2613" placeholder="SELECT * FRO... ${$dbt}" />
+            <marker date="1473519841000" expanded="true" signature="3987:4027" placeholder="SELECT * FRO... ${$dbt}" />
+            <marker date="1473519841000" expanded="true" signature="5889:5927" placeholder="SELECT * FRO... users" />
+            <marker date="1473519841000" expanded="true" signature="8630:8750" placeholder="INSERT into users... " />
+            <marker date="1473519841000" expanded="true" signature="10562:10600" placeholder="SELECT * FRO... users" />
+            <marker date="1473519841000" expanded="true" signature="11956:12148" placeholder="UPDATE users... " />
+            <marker date="1473519841000" expanded="true" signature="12195:12311" placeholder="UPDATE users... " />
+            <marker date="1473519841000" expanded="true" signature="12777:12830" placeholder="UPDATE users... " />
+            <marker date="1473519841000" expanded="true" signature="14060:14107" placeholder="UPDATE users... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="22" column="51" selection-start-line="22" selection-start-column="12" selection-end-line="22" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/controller/users.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="35" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/model/Users/Users.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="30" selection-start-line="9" selection-start-column="30" selection-end-line="9" selection-end-column="30" />
+          <folding>
+            <element signature="e#185#211#0#PHP" expanded="true" />
+            <marker date="1473519841000" expanded="true" signature="2551:2613" placeholder="SELECT * FRO... ${$dbt}" />
+            <marker date="1473519841000" expanded="true" signature="3987:4027" placeholder="SELECT * FRO... ${$dbt}" />
+            <marker date="1473519841000" expanded="true" signature="5889:5927" placeholder="SELECT * FRO... users" />
+            <marker date="1473519841000" expanded="true" signature="8630:8750" placeholder="INSERT into users... " />
+            <marker date="1473519841000" expanded="true" signature="10562:10600" placeholder="SELECT * FRO... users" />
+            <marker date="1473519841000" expanded="true" signature="11956:12148" placeholder="UPDATE users... " />
+            <marker date="1473519841000" expanded="true" signature="12195:12311" placeholder="UPDATE users... " />
+            <marker date="1473519841000" expanded="true" signature="12777:12830" placeholder="UPDATE users... " />
+            <marker date="1473519841000" expanded="true" signature="14060:14107" placeholder="UPDATE users... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/view/albums.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="46" selection-start-line="9" selection-start-column="46" selection-end-line="9" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/model/File/FileActions.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="80" column="64" selection-start-line="80" selection-start-column="64" selection-end-line="80" selection-end-column="64" />
+          <folding>
+            <marker date="1472400447000" expanded="true" signature="205:252" placeholder="SELECT album... albums" />
+            <marker date="1472400447000" expanded="true" signature="1257:1304" placeholder="SELECT album... albums" />
+            <marker date="1472400447000" expanded="true" signature="1943:1992" placeholder="DELETE FROM " />
+            <marker date="1472400447000" expanded="true" signature="2024:2072" placeholder="DELETE FROM " />
+            <marker date="1472400447000" expanded="true" signature="2607:2678" placeholder="SELECT file_... files" />
+            <marker date="1472400447000" expanded="true" signature="3055:3102" placeholder="DELETE FROM " />
+            <marker date="1472400447000" expanded="true" signature="3423:3475" placeholder="SELECT path files" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/admin/view/add-edit-post.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.3504673">
@@ -695,7 +727,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-10.625">
           <caret line="17" column="55" selection-start-line="17" selection-start-column="55" selection-end-line="17" selection-end-column="55" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -769,21 +800,27 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/nerdcms_db.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4863222">
+          <caret line="414" column="32" selection-start-line="414" selection-start-column="32" selection-end-line="414" selection-end-column="32" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/view/albums.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.625">
-          <caret line="9" column="46" selection-start-line="9" selection-start-column="46" selection-end-line="9" selection-end-column="46" />
+        <state vertical-scroll-proportion="0.090771556">
+          <caret line="4" column="30" selection-start-line="4" selection-start-column="30" selection-end-line="4" selection-end-column="30" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/model/File/FileActions.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.625">
+        <state vertical-scroll-proportion="-0.5885023">
           <caret line="80" column="64" selection-start-line="80" selection-start-column="64" selection-end-line="80" selection-end-column="64" />
           <folding>
             <marker date="1472400447000" expanded="true" signature="205:252" placeholder="SELECT album... albums" />
@@ -797,47 +834,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/nerdcms_db.sql">
+    <entry file="file://$PROJECT_DIR$/admin/controller/users.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4224924">
-          <caret line="412" column="35" selection-start-line="411" selection-start-column="35" selection-end-line="412" selection-end-column="35" />
+        <state vertical-scroll-proportion="-13.791667">
+          <caret line="37" column="143" selection-start-line="37" selection-start-column="143" selection-end-line="37" selection-end-column="143" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-24.375">
+          <caret line="39" column="2" selection-start-line="39" selection-start-column="2" selection-end-line="39" selection-end-column="2" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/model/Users/Users.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.625">
-          <caret line="9" column="30" selection-start-line="9" selection-start-column="30" selection-end-line="9" selection-end-column="30" />
+        <state vertical-scroll-proportion="0.9546142">
+          <caret line="422" column="2" selection-start-line="422" selection-start-column="2" selection-end-line="422" selection-end-column="2" />
           <folding>
-            <element signature="e#7#31#0#PHP" expanded="true" />
-            <element signature="e#182#208#0#PHP" expanded="true" />
-            <marker date="1473499561000" expanded="true" signature="2567:2629" placeholder="SELECT * FRO... ${$dbt}" />
-            <marker date="1473499561000" expanded="true" signature="4004:4017" placeholder="SELECT * FRO... " />
-            <marker date="1473499561000" expanded="true" signature="4004:4043" placeholder="SELECT * FRO... ${$dbt}" />
-            <marker date="1473499561000" expanded="true" signature="4004:4044" placeholder="SELECT * FRO... ${$dbt}" />
-            <marker date="1473499561000" expanded="true" signature="4004:4046" placeholder="SELECT * FRO... ${$dbt}" />
-            <marker date="1473499561000" expanded="true" signature="5836:5873" placeholder="SELECT * FRO... users" />
-            <marker date="1473499561000" expanded="true" signature="5836:5874" placeholder="SELECT * FRO... users" />
-            <marker date="1473499561000" expanded="true" signature="8601:8721" placeholder="INSERT into users... " />
-            <marker date="1473499561000" expanded="true" signature="10525:10562" placeholder="SELECT * FRO... users" />
-            <marker date="1473499561000" expanded="true" signature="10525:10563" placeholder="SELECT * FRO... users" />
-            <marker date="1473499561000" expanded="true" signature="11919:12110" placeholder="UPDATE users... " />
-            <marker date="1473499561000" expanded="true" signature="12157:12272" placeholder="UPDATE users... " />
-            <marker date="1473499561000" expanded="true" signature="12157:12273" placeholder="UPDATE users... " />
-            <marker date="1473499561000" expanded="true" signature="12739:12791" placeholder="UPDATE users... " />
-            <marker date="1473499561000" expanded="true" signature="12739:12792" placeholder="UPDATE users... " />
-            <marker date="1473499561000" expanded="true" signature="14021:14067" placeholder="UPDATE users... " />
-            <marker date="1473499561000" expanded="true" signature="14021:14068" placeholder="UPDATE users... " />
+            <element signature="e#185#211#0#PHP" expanded="true" />
+            <marker date="1473519841000" expanded="true" signature="2551:2613" placeholder="SELECT * FRO... ${$dbt}" />
+            <marker date="1473519841000" expanded="true" signature="3987:4027" placeholder="SELECT * FRO... ${$dbt}" />
+            <marker date="1473519841000" expanded="true" signature="5889:5927" placeholder="SELECT * FRO... users" />
+            <marker date="1473519841000" expanded="true" signature="8630:8750" placeholder="INSERT into users... " />
+            <marker date="1473519841000" expanded="true" signature="10562:10600" placeholder="SELECT * FRO... users" />
+            <marker date="1473519841000" expanded="true" signature="11956:12148" placeholder="UPDATE users... " />
+            <marker date="1473519841000" expanded="true" signature="12195:12311" placeholder="UPDATE users... " />
+            <marker date="1473519841000" expanded="true" signature="12777:12830" placeholder="UPDATE users... " />
+            <marker date="1473519841000" expanded="true" signature="14060:14107" placeholder="UPDATE users... " />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/config.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.68078667">
-          <caret line="30" column="2" selection-start-line="30" selection-start-column="2" selection-end-line="30" selection-end-column="2" />
-          <folding />
         </state>
       </provider>
     </entry>
