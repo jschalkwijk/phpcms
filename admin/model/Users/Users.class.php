@@ -1,6 +1,6 @@
 <?php
 
- namespace Jorn\model\users;
+//namespace model\users;
 //// Get User key for encryption
 //use \Defuse\Crypto\Crypto;
 //use \Defuse\Crypto\Exception as Ex;
@@ -11,7 +11,7 @@
 use \Defuse\Crypto\Crypto;
 use \Defuse\Crypto\Exception as Ex;
 
-class Users{
+class Users_Users{
 
 	private $id = 0;
 	private $username;
