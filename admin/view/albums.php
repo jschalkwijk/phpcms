@@ -1,3 +1,9 @@
+<?php
+	use Jorn\admin\model\File\File;
+	use Jorn\admin\model\File\FileWriter;
+	use Jorn\admin\model\File\Folders;
+	use Jorn\admin\model\DBC\DBC;
+?>
 <div class="container large">
 	<?php
 		$dbc = new DBC;
@@ -11,8 +17,8 @@
 			$img = ['jpg','jpeg','png'];
 			$url = $_SERVER["REQUEST_URI"];
 			echo '<form method="get" action="'.$url.'">';
-					$files = File_File::fetchFilesByAlbum($album_id,0);
-					$writer = File_FileWriter::write($files,'view/singleFile.php',$doc,$img);
+					$files = File::fetchFilesByAlbum($album_id,0);
+					FileWriter::write($files,'view/singleFile.php',$doc,$img);
 				echo '<div class="left">';
 					echo '<button type="submit" name="delete" id="delete">Delete Selected</button>';
 					echo '<button type="submit" name="download_files" id="download_files">Download files</button>';
@@ -23,5 +29,5 @@
 </div><br/>
 	<div class="container large">
 		<button id="check-all"><img class="glyph-small" src="<?php echo IMG."check.png"; ?>"/></button>
-		<?php File_Folders::show_albums($album_id); ?>
+		<?php Folders::show_albums($album_id); ?>
 	</div>

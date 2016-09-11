@@ -1,6 +1,9 @@
 <?php
+namespace Jorn\admin\model\Content;
+
+use Jorn\admin\model\DBC\DBC;
 // content management/user management/file management/product management/client management.
-class Content_Content{
+class Content{
 	// will get the TRAIT actions that the user can perform like edit,delete,approve
 	
 	private $id = 0;
@@ -94,7 +97,7 @@ class Content_Content{
 			$data = $query->get_result();
 			$query->close();
 			while ($row = $data->fetch_array()) {
-				$post = new content_Content(
+				$post = new Content(
 					$row['title'],
 					$row['description'],
 					$row['category'],
@@ -142,7 +145,7 @@ class Content_Content{
 			$query->close();
 			//		$data = mysqli_query($dbc->connect(),$query)or die ("Error connecting to server");
 			while ($row = $data->fetch_array()) {
-				$post = new content_Content(
+				$post = new Content(
 					$row['title'],
 					$row['description'],
 					$row['category'],
@@ -173,7 +176,7 @@ class Content_Content{
 		$posts = array();
 		$id_row = substr($dbt, 0, -1).'_id';
 		while($row = mysqli_fetch_array($data)){
-			$post = new content_Content(
+			$post = new Content(
 				$row['title'],
 				$row['description'],
 				$row['category'],

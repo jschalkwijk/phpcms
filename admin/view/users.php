@@ -1,3 +1,4 @@
+<?php use Jorn\admin\model\Users\UserWriter; ?>
 <p>De backend users moeten een shared encryptie key gebruiken voor de contactinformatie die zij
 	onderling moeten kunnen delen. Daarnaast moeten ze een eigen apparte key hebben voor persoonlijke notities etc.
 	Hoer goed over nadenken! de scheiding van admins en normale gebruikers moet echt goed in elkaar zitten.
@@ -13,7 +14,7 @@
 					<tr><th>User</th><th>Rights</th><?php if ($_SESSION['rights'] == 'Admin') { ?> <th>Edit</th><th>View</th><th><button type="button" id="check-all"><img class="glyph-small" src="<?php echo IMG."check.png";?>" alt="check-uncheck-all-items"/></button></th></tr> <?php } ?>
 					<?php
 					$users = $data['users'];
-					$writer = users_UserWriter::write($users);
+					UserWriter::write($users);
 					?>
 				</table>
 				<?php

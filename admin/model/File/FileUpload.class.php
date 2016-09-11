@@ -1,6 +1,10 @@
 <?php
+namespace Jorn\admin\model\File;
 
-class File_FileUpload{
+use Jorn\admin\model\DBC\DBC;
+use ZipArchive;
+
+class FileUpload{
 	private $dbc;
 	private $file_dest;
 	private $thumb_dest;
@@ -28,11 +32,11 @@ class File_FileUpload{
 		// Als we een empty_path flag toevoegen kunnen we controlleren of we een pad moeten creeeren op basis van het huidige zichtbare album,
 		// of een leeg pad moeten hebben wanneer je een bestand toevoegd vanuit een product/user weergave.
 		$this->empty_path = $empty_path;
-		
+
 		if (!empty($_FILES['files']['name'][0])) {
 			$files = $_FILES['files'];
-			/* for each file name in the array we store the key of the array and the corresponding value as 
-			position and name like [0] = file1.png, [1] = file2.png 
+			/* for each file name in the array we store the key of the array and the corresponding value as
+			position and name like [0] = file1.png, [1] = file2.png
 			this loop will run 5 times, if 5 files are selected, 7 times is 7 etc.
 			*/
 			$uploaded = array();
@@ -83,7 +87,7 @@ class File_FileUpload{
 				$file_ext = strtolower(end($file_ext));
 				// if the extension is in the allowed array continue else error.
 				if(in_array($file_ext, $allowed)){
-					// if there is no error (0 stands for no error, 1 is a error) 
+					// if there is no error (0 stands for no error, 1 is a error)
 					if ($file_error === 0){
 						if($file_size <= 43500000){
 							// create unique id so there will be no overwriting files on the server
@@ -92,7 +96,7 @@ class File_FileUpload{
 
 							// move uploaded file to destination folder
 							if(isset($_POST['public'])) {
-								
+
 								if($this->uploadFile($file_tmp,$file_name,$file_ext,$file_name_new,$thumb_name,$position,$album_id)){
 									$uploaded[] = $file_name;
 									if(!$this->createThumb($file_dest,$file_name_new,$thumb_name,$thumb_dest,$this->album_name)){
@@ -100,9 +104,9 @@ class File_FileUpload{
 										}
 								} else {
 									// add to failed array if it cant upload, etc.
-									$failed[$position] = "{$file_name} failed to upload."; 
+									$failed[$position] = "{$file_name} failed to upload.";
 								}
-								
+
 							}
 						} else {
 							$failed[$position] = "{$file_name} is too large.";
@@ -129,7 +133,7 @@ class File_FileUpload{
 		}
 		$dbc->close();
 	}
-	
+
 	protected function uploadFile($file_tmp,$file_name,$file_ext,$file_name_new,$thumb_name,$position,$album_id){
 		// Ik moet naar boven werken met de id's om het nieuwe pad te creeeren,met een loop die checked of de parent_id
 		// != 0,dan moet de naam van dat album in de file_dest.
@@ -151,7 +155,7 @@ class File_FileUpload{
 		$id = $row['album_id'];*/
 
 		$thumb_path = $this->thumb_dest.$path.'/'.$thumb_name;
-		
+
 		// If upload paths contains 's etc we have to remove the \ (backslash) which is created automaticly.
 		// To insert the path in the Database we have to keep the \ (backslash) otherwise the query will fail.
 		$path = str_replace("\\","",$file_dest);
@@ -201,7 +205,7 @@ class File_FileUpload{
 			$new_size = ($original_width+$original_height)/($original_width*($original_height/45));
 			$new_width = $original_width * $new_size;
 			$new_height = $original_height * $new_size;
-			
+
 			$new_image = imagecreatetruecolor($new_width,$new_height);
 			// check image type and set the right thumb creation. 1 is g.gif, 2 is .jpeg, 3 is png.
 			if ($image_size[2] == 1) { $old_image = imagecreatefromgif($image); }
@@ -229,9 +233,9 @@ class File_FileUpload{
 		(!empty($album_id)) ? $parent_id = mysqli_real_escape_string($dbc,trim((int)$album_id)) : $parent_id = 0;
 		$file_dest = $this->file_dest.$this->path;
 		$thumb_dest = $this->thumb_dest.$this->path;
-		
+
 		$path = $this->path;
-		
+
 		if(!file_exists($file_dest)){
 			$query = $dbc->prepare("INSERT INTO albums(name,author,parent_id,path,user_id) VALUES(?,?,?,?,?)");
 			if($query) {
@@ -292,8 +296,8 @@ class File_FileUpload{
 		$zip = new ZipArchive;
 		$res = $zip->open('file.zip');
 		if($res){
-			$zip-extractTo('location');
-			$zip-close();
+			$zip->extractTo('location');
+			$zip->close();
 			echo 'files extracted';
 		} else {
 			echo 'file failed to extract';

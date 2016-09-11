@@ -1,18 +1,22 @@
 <?php
+namespace Jorn\admin\model\Basket;
 
-class Basket_Basket
+use Jorn\admin\model\Products\Product;
+use Jorn\admin\model\Support\StorageInterface;
+
+class Basket
 {
     protected $storage;
     protected $product;
     protected $subTotal;
     protected $totalQuantity;
 
-    public function __construct(Support_StorageInterface $storage)
+    public function __construct(StorageInterface $storage)
     {
         $this->storage = $storage;
     }
 
-    public function add(Products_Product $product, $quantity)
+    public function add(Product $product, $quantity)
     {
         // Takes a product class which holds all the information.
         $this->product = $product;
@@ -27,12 +31,12 @@ class Basket_Basket
         $this->update($product,$quantity);
     }
 
-    public function update(Products_Product $product, $quantity)
+    public function update(Product $product, $quantity)
     {
         // Check is the Product has enough stock for the desired amount given by user
         if(!$product->hasStock($quantity)) {
 
-            throw new Basket_QuantityExc;
+            throw new QuantityExc;
         }
         // if the quantity is set to 0 remove the product from the basket session
         if ($quantity == 0) {
@@ -47,19 +51,19 @@ class Basket_Basket
         ]);
     }
 
-    public function remove(Products_Product $product)
+    public function remove(Product $product)
     {
         // remove item from the basket session
         $this->storage->unsetIndex($product->getID());
     }
 
-    public function has(Products_Product $product)
+    public function has(Product $product)
     {
         // Check if the product is already in the basket.
         return $this->storage->exists($product->getID());
     }
 
-    public function get(Products_Product $product)
+    public function get(Product $product)
     {
         // get a product from the basket session by ID
         return $this->storage->get($product->getID());
@@ -81,7 +85,7 @@ class Basket_Basket
                 $ids[] = $product['product_id'];
             }
 
-            $products = Products_Product::fetchAllByID($ids);
+            $products = Product::fetchAllByID($ids);
 
             foreach ($products as $product) {
                 // The current stock is the max stock, this is not the quantity that a user wants to order perse,

@@ -17,13 +17,12 @@ spl_autoload_register(function ($class) {
 	if (file_exists('model/'.$path.'.class.php')) {
 		include_once 'model/'.$path.'.class.php';
 	} else {
-		echo "hello";
 
 		$parts = explode('\\', $class);
 		unset($parts[0]);
+		unset($parts[1]);
 		$file = implode("/",$parts).'.class.php';
-		if (file_exists($file)) {
-			echo "doei";
+		if (file_exists($file)) {;
 			require_once $file;
 		}
 	}

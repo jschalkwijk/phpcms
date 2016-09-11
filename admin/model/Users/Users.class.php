@@ -1,6 +1,6 @@
 <?php
 
-namespace Jorn\model\users;
+namespace Jorn\admin\model\Users;
 //// Get User key for encryption
 //use \Defuse\Crypto\Crypto;
 //use \Defuse\Crypto\Exception as Ex;
@@ -10,6 +10,7 @@ namespace Jorn\model\users;
 // Get User key for encryption
 use \Defuse\Crypto\Crypto;
 use \Defuse\Crypto\Exception as Ex;
+use \Jorn\admin\model\DBC\DBC;
 
 class Users{
 
@@ -132,7 +133,7 @@ class Users{
 			$email = Crypto::decrypt(Crypto::hexTobin($row['email']),$shared_key);
 			$function = Crypto::decrypt(Crypto::hexTobin($row['function']),$shared_key);
 			$rights = Crypto::decrypt(Crypto::hexTobin($row['rights']),$shared_key);
-			$user = new users_Users(
+			$user = new Users(
 				$username,
 				$first_name,
 				$last_name,
@@ -191,7 +192,7 @@ class Users{
 			$email = Crypto::decrypt(Crypto::hexTobin($row['email']),$shared_key);
 			$function = Crypto::decrypt(Crypto::hexTobin($row['function']),$shared_key);
 			$rights = Crypto::decrypt(Crypto::hexTobin($row['rights']),$shared_key);
-			$user = new users_Users(
+			$user = new Users(
 				$username,
 				$first_name,
 				$last_name,

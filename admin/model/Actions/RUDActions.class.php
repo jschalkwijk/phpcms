@@ -1,21 +1,25 @@
 <?php
+namespace Jorn\admin\model\Actions;
+
+use Jorn\admin\model\DBC\DBC;
+
 // This are the  update,delete and approve functions which regards post,pages, users and products.
 // these will only remove rows, not files etc.
 // Import the UserActions trait inside the controller and enter the database name insid ethe function
 // to alter the DB rows.  UserActions handles the Post requests and calls these functions
-class Actions_RUDActions{
+class RUDActions{
 
 	public static function trash_selected($dbt,$checkbox){
-		Actions_RUDActions::update($dbt,$checkbox, "trashed",1);
+		RUDActions::update($dbt,$checkbox, "trashed",1);
 	}
 	public static function approve_selected($dbt,$checkbox){
-		Actions_RUDActions::update($dbt,$checkbox, "approved",1);
+		RUDActions::update($dbt,$checkbox, "approved",1);
 	}
 	public static function restore_selected($dbt,$checkbox){
-		Actions_RUDActions::update($dbt,$checkbox, "trashed",0);
+		RUDActions::update($dbt,$checkbox, "trashed",0);
 	}
 	public static function hide_selected($dbt,$checkbox){
-		Actions_RUDActions::update($dbt,$checkbox, "approved",0);
+		RUDActions::update($dbt,$checkbox, "approved",0);
 	}
 
 	protected static function update($dbt,$checkbox,$row,$value){
@@ -45,7 +49,7 @@ class Actions_RUDActions{
 		}
 
 		if($flag) {
-			$query = $dbc->query("DELETE FROM " . $dbt . " WHERE " . $id_row . " IN({$multiple})");
+			$dbc->query("DELETE FROM " . $dbt . " WHERE " . $id_row . " IN({$multiple})");
 			$dbc->close();
 
 		}

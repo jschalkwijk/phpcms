@@ -1,5 +1,7 @@
 <?php
-class Content_ContentWriter{
+namespace Jorn\admin\model\Content;
+
+class ContentWriter{
 	// When the Objects are created and added to the array and is returned to the variable that holds the object
 	// the writer takes that object and writes out each Post object.
 	// With a foreach looping over every object we can access its methods and add the content to variables.

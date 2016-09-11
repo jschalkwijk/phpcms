@@ -1,3 +1,7 @@
+<?php
+	use Jorn\admin\model\Content\Posts\Post;
+	use Jorn\admin\model\Users\UserWriter;
+?>
 <form class="search"action="<?php echo ADMIN."search";?>" method="post">
 	<input type="text" name="search" placeholder="Search for Users"/>
 	<button type="submit" name="search-user">Search</button>
@@ -45,8 +49,8 @@
 				<?php if ($_SESSION['rights'] == 'Admin') { ?> <th>Edit</th><th>View</th><!-- <th>Remove</th> --></tr> <?php } ?>
 		
 				<?php 
-					$users = content_posts_Post::searchContent('users',$data);
-					$writer = users_UserWriter::write($users);
+					$users = Post::searchContent('users',$data);
+					$writer = UserWriter::write($users);
 				
 				?>
 			</form>

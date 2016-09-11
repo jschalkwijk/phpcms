@@ -1,4 +1,8 @@
 <?php
+
+use Jorn\admin\model\Support\SessionStorage;
+use Jorn\admin\model\Basket\Basket;
+
 class Controller {
 	private $errors;
 	private $tpl_name = 'default';
@@ -20,8 +24,8 @@ class Controller {
 		$tpl_name = $this->tpl_name;
 
 		if(empty($this->cart)){
-			$this->cart = new Support_SessionStorage('cart');
-			$this->basket = new Basket_Basket($this->cart);
+			$this->cart = new SessionStorage('cart');
+			$this->basket = new Basket($this->cart);
 		}
 
 		require_once('templates/'.$tpl_name.'/header.php');
@@ -43,7 +47,7 @@ class Controller {
 	}
 
 	public function err($params = null){
-		$content = new template_Template('Sorry, page doesn\'t exist.',['404.php'],$params,['error' => $this->error]);
+		$this->view('Sorry, page doesn\'t exist.',['404.php'],$params,['error' => $this->error]);
 	}
 
 }

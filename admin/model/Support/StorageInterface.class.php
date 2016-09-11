@@ -1,6 +1,8 @@
 <?php
+namespace Jorn\admin\model\Support;
+
 // abstract class to set mandatory methods.
-interface Support_StorageInterface {
+interface StorageInterface {
 
     public function get($index);
 

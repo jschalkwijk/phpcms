@@ -11,6 +11,8 @@
 // package index.php
 //ROUTING
 require_once('config.php');
+use \Jorn\admin\model\DBC\DBC;
+
 login_authenticate();
 ob_start();
 

@@ -1,9 +1,12 @@
 <?php
+namespace Jorn\admin\model\Contacts;
+
 // Get User key for encryption
 use \Defuse\Crypto\Crypto;
 use \Defuse\Crypto\Exception as Ex;
+use Jorn\admin\model\DBC\DBC;
 
-class Contacts_Contact {
+class Contact {
 	private $id;
 	private $first_name;
 	private $last_name;
@@ -172,7 +175,6 @@ class Contacts_Contact {
 		} else {
 			$errors[] = "Encryption key could not be found!";
 			return['output_form' => $output_form,'messages' => $messages,'errors' => $errors];
-			exit();
 		}
 		// Because creating a new object in the controller doesn't allow us to insert an ID, we have to set the id
 		// corresponding to the contact. This is passed by the controller.

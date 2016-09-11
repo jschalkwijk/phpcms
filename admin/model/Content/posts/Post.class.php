@@ -1,5 +1,11 @@
 <?php
-class Content_Posts_Post extends Content_Content{
+namespace Jorn\admin\model\Content\Posts;
+
+use Jorn\admin\model\Content\Content;
+use Jorn\admin\model\DBC\DBC;
+use Jorn\admin\model\Content\Categories;
+
+class Post extends Content{
 	public $category_type;
 	
 	public function __construct($title,$description,$category,$content,$author,$dbt = null,$date = null,$approved = null,$trashed = null){
@@ -37,7 +43,7 @@ class Content_Posts_Post extends Content_Content{
 		$dbt = $this->dbt;
 		
 		if(!empty($category)) {
-			$category = content_Categories::addCategory($category,'post');
+			$category = Categories::addCategory($category,'post');
 			$category_id = $category['category_id'];
 		} else if(isset($_POST['cat_name'])) {
 			$category_id = mysqli_real_escape_string($dbc,trim($_POST['cat_name']));

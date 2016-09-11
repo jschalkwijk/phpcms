@@ -1,6 +1,12 @@
 <?php
+namespace Jorn\admin\model\Products;
 
-class Products_Product {
+use Jorn\admin\model\DBC\DBC;
+use Jorn\admin\model\File\FileUpload;
+use Jorn\admin\model\File\Folders;
+use Jorn\admin\model\Content\Categories;
+
+class Product {
 	// will get the TRAIT actions that the user can perform like edit,delete,approve
 	private $id;
 	private $name;
@@ -116,7 +122,7 @@ class Products_Product {
 		$products = array();
 
 		while($row = $data->fetch_array()){
-			$product = new products_Product(
+			$product = new Product(
 				$row['name'],
 				$row['category'],
 				$row['description'],
@@ -144,7 +150,7 @@ class Products_Product {
 		$products = array();
 
 		while($row = $query->fetch_array()){
-			$product = new products_Product(
+			$product = new Product(
 				$row['name'],
 				$row['category'],
 				$row['description'],
@@ -176,7 +182,7 @@ class Products_Product {
 		}
 
 		while($row = $data->fetch_array()){
-			$product = new products_Product(
+			$product = new Product(
 				$row['name'],
 				$row['category'],
 				$row['description'],
@@ -196,7 +202,7 @@ class Products_Product {
 		$db = new DBC;
 		$dbc = $db->connect();
 
-		$upload = new files_FileUpload($file_dest,$thumb_dest,$params,true);
+		$upload = new FileUpload($file_dest,$thumb_dest,$params,true);
 		$img_path = $upload->getImgPath();
 		$thumb_path = $upload->getThumbPath();
 
@@ -241,13 +247,13 @@ class Products_Product {
 		# create product category, set type of category group
 		# create product category file folder.
 		if(!empty($category)) {
-			$category = content_Categories::addCategory($category,'product');
+			$category = Categories::addCategory($category,'product');
 			$category_name = $category['category_name'];
 			$category_id = $category['category_id'];
 			if(!file_exists($this->file_path.$category_name)) {
 				$this->file_path = $this->file_path.$category_name.'/';
 				$this->thumb_path = $this->thumb_path.$category_name.'/';
-				File_Folders::auto_create_folder($category_name,$this->file_path,$this->thumb_path,'Products');
+				Folders::auto_create_folder($category_name,$this->file_path,$this->thumb_path,'Products');
 			}
 		} else {
 			$category_id = mysqli_real_escape_string($dbc,trim((int)$_POST['cat_name']));
@@ -278,7 +284,7 @@ class Products_Product {
         */
 		//create new product file folder inside Products folder.
 		if(!file_exists($this->file_path.$name)) {
-			$album_id = File_Folders::auto_create_folder($name,$this->file_path.$name,$this->thumb_path.$name,'Products',$category_name);
+			$album_id = Folders::auto_create_folder($name,$this->file_path.$name,$this->thumb_path.$name,'Products',$category_name);
 		}
 
 		if(!empty($name) && !empty($price)){

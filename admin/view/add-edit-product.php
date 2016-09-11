@@ -1,3 +1,4 @@
+<?php use Jorn\admin\model\Content\Categories; ?>
 <script type="text/javascript" src="<?php echo JS."tinymce/tinymce.min.js"; ?>"></script>
 <script type="text/javascript">
 tinymce.init({
@@ -35,7 +36,7 @@ tinymce.init({
 			
 			<select id="categories" name="cat_name">
 				<option name="none" value="None">None</option>'
-				<?php $category = content_Categories::getSelected($product->getCategory(),'product'); ?>
+				<?php $category = Categories::getSelected($product->getCategory(),'product'); ?>
 			</select>
 			
 			<input type="text" name="category" placeholder="Category"/><br />

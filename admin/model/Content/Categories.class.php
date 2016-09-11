@@ -1,6 +1,10 @@
 <?php
+namespace Jorn\admin\model\Content;
 
-class Content_Categories extends Content_Content{
+use Jorn\admin\model\DBC\DBC;
+
+
+class Categories extends Content{
 	private $id;
 	protected $category;
 	protected $description;

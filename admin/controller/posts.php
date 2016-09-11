@@ -1,10 +1,14 @@
 <?php
+
+use Jorn\admin\model\Content\Content;
+use Jorn\admin\model\Content\Posts\Post;
+
 class Posts extends Controller {
 	// import useractions trait
-	use Actions_UserActions;
+	use \Jorn\admin\model\Actions\UserActions;
 	
 	public function index($params = null){
-		$posts = Content_Content::fetchAll('posts',0);
+		$posts = Content::fetchAll('posts',0);
 		// Post requests need to be handled first! Then load the page, otherwise you will get the headers already sent error.
 		$this->UserActions('posts');
 		// view takes: page_title,[array of view files],params from the router,array of data from model
@@ -19,7 +23,7 @@ class Posts extends Controller {
 		];
 
 		if (!isset($_POST['submit'])){
-			$post = new Content_Posts_Post(null,null,null,null,null,'posts');
+			$post = new Post(null,null,null,null,null,'posts');
 			$this->view(
 				'Add Post',
 				['add-edit-post.php'],
@@ -30,7 +34,7 @@ class Posts extends Controller {
 				]
 			);
 		} else {
-			$post = new Content_Posts_Post($_POST['title'],$_POST['post_desc'],$_POST['category'],$_POST['content'],$_SESSION['username'],'posts');
+			$post = new Post($_POST['title'],$_POST['post_desc'],$_POST['category'],$_POST['content'],$_SESSION['username'],'posts');
 			$add = $post->addPost();
 			$this->view(
 				'Add Post',
@@ -47,7 +51,7 @@ class Posts extends Controller {
 	}
 	//
 	public function DeletedPosts($params = null){
-		$posts = Content_Content::fetchAll('posts',1);
+		$posts = Content::fetchAll('posts',1);
 		$this->UserActions('posts');
 		$view = ['search' => 'view/search-post.php','actions' => 'view/manage_content.php'];
 		$this->view('Deleted Posts',['posts.php'],$params,[ 'posts' => $posts , 'view' => $view,'trashed' => 1,'js' => [JS.'checkAll.js']]);
@@ -62,7 +66,7 @@ class Posts extends Controller {
 		];
 
 		if(!isset($_POST['submit'])){
-			$post = Content_Content::fetchSingle('posts',$params[0]);
+			$post = Content::fetchSingle('posts',$params[0]);
 			$this->view(
 				'Edit Post',
 				['add-edit-post.php'],
@@ -74,7 +78,7 @@ class Posts extends Controller {
 				]
 			);
 		} else {
-			$post = new Content_Posts_Post($_POST['title'],$_POST['post_desc'],$_POST['category'],$_POST['content'],$_SESSION['username'],'posts');
+			$post = new Post($_POST['title'],$_POST['post_desc'],$_POST['category'],$_POST['content'],$_SESSION['username'],'posts');
 			$edit = $post->addPost($_POST['id'],$_POST['cat_name'],$_POST['confirm']);
 			$this->view(
 				'Edit Post',

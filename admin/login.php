@@ -1,6 +1,7 @@
 <?php
 	ob_start();
 	require_once('config.php');
+	use Jorn\admin\model\DBC\DBC;
 ?>
 <!DOCTYPE html>
 <html>
