@@ -37,6 +37,7 @@ class Post extends Content{
 		$title = mysqli_real_escape_string($dbc,trim($this->title));
 		$category = mysqli_real_escape_string($dbc,trim($this->category));
 		$post_desc = mysqli_real_escape_string($dbc,trim($this->description));
+		// !!! We cant use the contentiwth the Prepare statement, otherwise allhtml chars will be escaped an cant be used for inserted media etc.
 		$content = mysqli_real_escape_string($dbc,trim($this->content));
 		$author = $this->author;
 		
@@ -51,11 +52,21 @@ class Post extends Content{
 
 		if (!empty($title) && !empty($content)) {
 			if($confirm == "Yes"){
-				$query = $dbc->prepare("UPDATE ".$dbt." SET title = ?,description = ?,content = ?,category_id = ? WHERE post_id = ?");
-				$query->bind_param("sssii",$title,$post_desc,$content,$category_id,$id);
+				// !!! We cant use the contentiwth the Prepare statement, otherwise allhtml chars will be escaped an cant be used for inserted media etc.
+				$query = $dbc->prepare("UPDATE ".$dbt." SET title = ?,description = ?,content = '".$content."',category_id = ? WHERE post_id = ?");
+				if($query) {
+					$query->bind_param("ssii", $title, $post_desc, $category_id, $id);
+				} else {
+					$db->sqlERROR();
+				}
 			} else {
-				$query = $dbc->prepare("INSERT INTO ".$dbt."(title,description,content,author,category_id,date) VALUES(?,?,?,?,?,NOW())");
-				$query->bind_param("ssssi",$title,$post_desc,$content,$author,$category_id);
+				// !!! We cant use the contentiwth the Prepare statement, otherwise allhtml chars will be escaped an cant be used for inserted media etc.
+				$query = $dbc->prepare("INSERT INTO " . $dbt . "(title,description,content,author,category_id,date) VALUES(?,?,'" . $content . "',?,?,NOW())");
+				if($query) {
+					$query->bind_param("sssi", $title, $post_desc, $author, $category_id);
+				} else {
+					$db->sqlERROR();
+				}
 			}
 
 			$query->execute();
