@@ -1,6 +1,10 @@
 <?php
 
-class Customer_Customer
+namespace Jorn\admin\model\Customer;
+
+use Jorn\admin\model\DBC\DBC;
+
+class Customer
 {
     private $id;
     private $name;
@@ -192,7 +196,7 @@ class Customer_Customer
             $city = $row['city'];
             $postal_code = $row['postal'];
 
-            $customer = new Customer_Customer(
+            $customer = new Customer(
                 $name,
                 $mail,
                 $phone,

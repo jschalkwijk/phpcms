@@ -1,9 +1,10 @@
 <?php
 // implements abstract class StorageInterface
+namespace Jorn\admin\model\Support;
 
-use Support_StorageInterface as Store;
+use Jorn\admin\model\Support\StorageInterface as Store;
 
-class Support_SessionStorage implements Store
+class SessionStorage implements Store
 {
     protected $basket;
 

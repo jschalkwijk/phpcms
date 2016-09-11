@@ -1,3 +1,8 @@
+<?php
+	use Jorn\admin\model\File\File;
+	use Jorn\admin\model\File\FileWriter;
+?>
+
 <form class="search"action="<?php echo ADMIN."search"; ?>" method="post">
 	<input type="text" name="search" placeholder="Search files"/>
 	<button type="submit" name="search-file">Search</button>
@@ -20,8 +25,8 @@
 			}
 		}
 		echo '<form method="get" action="'.ADMIN.'search">';
-					$files = files_File::fetchFilesBySearch($searchTermBits,0);
-					$writer = files_FileWriter::write($files,ADMIN.'view/singleFile.php',$doc,$img);
+					$files = File::fetchFilesBySearch($searchTermBits,0);
+					FileWriter::write($files,ADMIN.'view/singleFile.php',$doc,$img);
 				echo '<div class="left">';
 					echo '<button type="submit" name="delete" id="delete">Delete Selected</button>';
 					echo '<button type="submit" name="download_files" id="download_files" alt="Download File">Download files</button>';	

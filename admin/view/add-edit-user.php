@@ -1,6 +1,7 @@
 <?php
 
-	$dbc = new DBC;
+	$dbc = new \Jorn\admin\model\DBC\DBC;
+
 	$user = $data['user'];
 	
 	(isset($params[0]) && isset($params[1])) ? $action = ADMIN.'users/edit-users/'.$user->getID().'/'.$user->getUserName() : $action = ADMIN.'users/add-user';

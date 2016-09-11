@@ -1,3 +1,5 @@
+<?php use Jorn\admin\model\DBC\DBC; ?>
+
 <script type="text/javascript" src="<?php echo JS."tinymce/tinymce.min.js"; ?>"></script>
 <script type="text/javascript">
 tinymce.init({

@@ -1,6 +1,10 @@
 <?php
 
-class Order_Order{
+namespace Jorn\admin\model\Order;
+
+use Jorn\admin\model\DBC\DBC;
+
+class Order{
     private $id;
     private $hash;
     private $total;
@@ -155,7 +159,7 @@ class Order_Order{
             $paid = $row['paid'];
             $customer_id = $row['customer_id'];
 
-            $order = new Order_Order(
+            $order = new Order(
                 $customer_id,
                 $total,
                 $paid,

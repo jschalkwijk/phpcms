@@ -1,5 +1,7 @@
 <?php
-class Users_UserWriter{
+namespace Jorn\admin\model\Users;
+
+class UserWriter{
 	// When the Objects are created and added to the array and is returned to the cariable that holds the object
 	// the writer takes that object and writes out each Post object.
 	// With a foreach looping over every object we can access its methods and add the content to variables.

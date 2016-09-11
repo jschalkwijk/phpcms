@@ -1,6 +1,8 @@
 <?php
+namespace Jorn\admin\model\File;
+
 // Used by view/albums.php
-class File_FileWriter{
+class FileWriter{
 	// When the Objects are created and added to the array and is returned to the cariable that holds the object
 	// the writer takes that object and writes out each Post object.
 	// With a foreach looping over every object we can access its methods and add the content to variables.

@@ -1,5 +1,8 @@
 <?php
+namespace Jorn\admin\model\File;
 
+use Jorn\admin\model\DBC\DBC;
+use Jorn\admin\model\Actions\FileActions;
 /*
  *
  * IMPORTANT
@@ -9,9 +12,9 @@
  *
  *
  * */
-class File_Folders {
+class Folders {
 	# Create a construct becaus we can then separate the html from the model.
-	use File_FileActions;
+	use FileActions;
 
 	/* used by view/add-files.php to get the selected folder and optional folders to
 	 * upload files to.
@@ -72,9 +75,9 @@ class File_Folders {
 
 		while ($row = $query->fetch_array()) {
 			// recursive deleting function. Deletes al folders/files and subfolders/files from server.
-			File_Folders::removeDir('./././files/'.$row['path']);
-			File_Folders::removeDir('./././files/'.'thumbs/'.$row['path']);
-			File_Folders::removeRows($row['album_id']);
+			Folders::removeDir('./././files/'.$row['path']);
+			Folders::removeDir('./././files/'.'thumbs/'.$row['path']);
+			Folders::removeRows($row['album_id']);
 		}
 		$query->close();
 		$dbc->close();
@@ -175,7 +178,7 @@ class File_Folders {
 			}
 		}
 
-		$path = File_Folders::auto_create_path($album_name,$parent_id);
+		$path = Folders::auto_create_path($album_name,$parent_id);
 	
 		if(!file_exists($file_dest)){
 			$sql = "INSERT INTO albums(name,author,parent_id,path,user_id) VALUES(?,?,?,?,?)";

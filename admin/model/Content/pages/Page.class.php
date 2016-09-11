@@ -1,5 +1,10 @@
-<?php 
-class Content_Pages_Page extends Content_Content{
+<?php
+namespace Jorn\admin\model\Content\Pages;
+
+use Jorn\admin\model\Content\Content;
+use Jorn\admin\model\DBC\DBC;
+
+class Page extends Content{
 	private $url;
 	
 	public function __construct($title,$description,$category = null,$content,$author,$dbt = null,$date = null,$approved = null,$trashed = null){

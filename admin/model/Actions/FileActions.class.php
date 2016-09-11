@@ -1,6 +1,10 @@
 <?php
+namespace Jorn\admin\model\Actions;
+
+use Jorn\admin\model\DBC\DBC;
+use ZipArchive;
 // Used by files_File and File_Folders
-trait File_FileActions{
+trait FileActions{
 	// used in File_Folders:
 	public static function removeRows($id){
 		$db = new DBC;

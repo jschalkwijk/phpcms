@@ -31,7 +31,7 @@ if(!empty($data['customer'])) {
     </div>
 </div>
 <div class="medium">
-    <h2 clpass="center">Summary</h2>
+    <h2 class="center">Summary</h2>
     <table class="backend-table title center">
         <tr><th>Product</th><th>Quantity</th><th>€ Total</th></tr>
         <?php foreach($this->basket->all() as $product){ ?>

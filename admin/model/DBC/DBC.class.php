@@ -1,4 +1,6 @@
 <?php
+namespace Jorn\admin\model\DBC;
+use mysqli;
 
 class DBC {
 	/*

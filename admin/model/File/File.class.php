@@ -1,10 +1,13 @@
 <?php
+namespace Jorn\admin\model\File;
 
-class File_File{
+use Jorn\admin\model\DBC\DBC;
+use Jorn\admin\model\Actions\FileActions;
+
+class File{
 	private $id = 0;
 	protected $name;
 	protected $type;
-	protected $file_name;
 	protected $thumb_name;
 	protected $album_id;
 	private $date;
@@ -14,10 +17,10 @@ class File_File{
 
 	/* File object, the variable names speak for themselves */
 
-	public function __construct($name,$type,$file_name,$thumb_name,$album_id,$date = null,$secured,$path,$thumb_path) {
+	public function __construct($name,$type,$name,$thumb_name,$album_id,$date = null,$secured,$path,$thumb_path) {
 		$this->name = $name;
 		$this->type = $type;
-		$this->file_name = $file_name;
+		$this->name = $name;
 		$this->thumb_name = $thumb_name;
 		$this->album_id = $album_id;
 		$this->date = $date;
@@ -34,7 +37,7 @@ class File_File{
 		return $this->type;
 	}
 	public function getFileName(){
-		return $this->file_name;
+		return $this->name;
 	}
 	public function getAlbumID(){
 		return $this->album_id;
@@ -80,10 +83,10 @@ class File_File{
 		}
 		$files= array();
 		while($row = $data->fetch_array()){
-			$file = new File_File(
+			$file = new File(
 				$row['name'],
 				$row['type'],
-				$row['file_name'],
+				$row['name'],
 				$row['thumb_name'],
 				$row['album_id'],
 				$row['date'],
@@ -107,10 +110,10 @@ class File_File{
 		if(!$query) { $db->sqlERROR(); };
 		$files= array();
 		while($row = $query->fetch_array()){
-			$file = new File_File(
+			$file = new File(
 				$row['name'],
 				$row['type'],
-				$row['file_name'],
+				$row['name'],
 				$row['thumb_name'],
 				$row['album_id'],
 				$row['date'],
@@ -127,7 +130,7 @@ class File_File{
 	}
 	
 	//get the trait file for the user actions.
-	use File_FileActions;
+	use FileActions;
 }
 
 ?>

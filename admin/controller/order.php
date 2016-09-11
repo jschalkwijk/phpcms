@@ -1,5 +1,12 @@
 <?php
 
+use Jorn\admin\model\Support\SessionStorage;
+use Jorn\admin\model\Basket\Basket;
+use Jorn\admin\model\Customer\Customer;
+use Jorn\admin\model\Order\CustomerDetails;
+use Jorn\admin\model\Order\OrderDetails;
+use Jorn\admin\model\Order\Order as Ordr;
+
 class Order extends Controller{
     private $customer;
     private $customerSession;
@@ -14,14 +21,14 @@ class Order extends Controller{
         // Then we can access all the session information per topic
 
         // Cart Session
-        $this->cart = new Support_SessionStorage('cart');
-        $this->basket = new Basket_Basket($this->cart);
+        $this->cart = new SessionStorage('cart');
+        $this->basket = new Basket($this->cart);
         // Customer Session
-        $this->customerSession = new Support_SessionStorage('customer');
-        $this->customerDetails = new Order_CustomerDetails($this->customerSession);
+        $this->customerSession = new SessionStorage('customer');
+        $this->customerDetails = new CustomerDetails($this->customerSession);
         //Order Session
-        $this->orderSession = new Support_SessionStorage('order');
-        $this->orderDetails = new Order_OrderDetails($this->orderSession);
+        $this->orderSession = new SessionStorage('order');
+        $this->orderDetails = new OrderDetails($this->orderSession);
 
         // immediately run the basket->all() method so that every page from this controller has
         // instant access to this basket class.
@@ -35,7 +42,7 @@ class Order extends Controller{
         if(!empty($this->customerDetails->single())) {
             $this->customer = $this->customerDetails->single();
         } else {
-            $this->customer = new Customer_Customer(null,null,null,null,null,null,null);
+            $this->customer = new Customer(null,null,null,null,null,null,null);
         }
 
         $this->view(
@@ -60,7 +67,7 @@ class Order extends Controller{
         if(!$_POST) {
             $this->customer = $this->customerDetails->single();
         } else {
-            $this->customer = new Customer_Customer($_POST['name'], $_POST['email'], $_POST['phone'], $_POST['address1'], $_POST['address2'], $_POST['city'], $_POST['postal_code']);
+            $this->customer = new Customer($_POST['name'], $_POST['email'], $_POST['phone'], $_POST['address1'], $_POST['address2'], $_POST['city'], $_POST['postal_code']);
         }
         $add = $this->customer->add();
         $this->customer = $this->customer->fetchSingle($add['customer_id']);
@@ -111,7 +118,7 @@ class Order extends Controller{
 
             $total = $this->basket->subTotal();
             if($this->orderDetails->single() == null || $this->orderDetails->single()->getCustomerId() != $this->customer->getID()){
-                $this->order = new Order_Order($this->customer->getID(), $total);
+                $this->order = new Ordr($this->customer->getID(), $total);
                 $addOrder = $this->order->add();
                 $this->order = $this->order->fetchSingle($addOrder['order_id']);
                 $this->orderDetails->add($this->order);

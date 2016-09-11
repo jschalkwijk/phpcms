@@ -1,3 +1,7 @@
+<?php
+	use Jorn\admin\model\Content\ContentWriter;
+	use Jorn\admin\model\Users\UserWriter;
+?>
 <div class="container-fluid">
 	<div class="row">
 		<div class="center-block col-sm-8 col-md-8 col-lg-8">
@@ -29,7 +33,7 @@
 							$posts = $data['posts'];
 							// thisis a write function, it just writes out the data,
 							// the information is supplied by the model
-							$writer = Content_ContentWriter::write($posts);
+							ContentWriter::write($posts);
 							require($data['view']['actions']);
 						?>
 						<input type="hidden" name="dbt" value="posts"/>
@@ -46,7 +50,7 @@
 					<form class="backend-form" method="post" action="<?php echo ADMIN ;?>">
 						<?php
 							$pages = $data['pages'];
-							$writer = Content_ContentWriter::write($pages);
+							ContentWriter::write($pages);
 							require($data['view']['actions']);
 						?>
 						<input type="hidden" name="dbt" value="pages"/>
@@ -67,7 +71,7 @@
 
 						<?php
 							$users = $data['users'];
-							$writer = Users_UserWriter::write($users);
+							$writer = UserWriter::write($users);
 							require('view/manage_content.php');
 						?>
 						<input type="hidden" name="dbt" value="login"/>
