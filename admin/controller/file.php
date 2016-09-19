@@ -1,6 +1,6 @@
 <?php
-use Jorn\admin\model\Files\Folders;
-use Jorn\admin\model\Files\File as F;
+use Jorn\admin\model\File\Folders;
+use Jorn\admin\model\File\File as F;
 
 class File extends Controller {
 
