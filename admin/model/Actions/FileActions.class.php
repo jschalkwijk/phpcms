@@ -47,6 +47,15 @@ trait FileActions{
 				// because we now have a new row[album_id], we need to check again if its empty,
 				// if it is not, push it to the array.
 				//if it is, don't push it, en the loop will end with the while clause.
+				
+				/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+				if(!empty($row['album_id'])){
+					// if there are more then one child,tehre are more rows, with more album_id's to add
+					while ($row = $data->fetch_array()) {
+						$folders_id[] = $row['album_id'];
+					}
+				}
+				*/
 				if(!empty($row['album_id'])){
 					$folders_id[] = $row['album_id'];
 				}
