@@ -77,8 +77,8 @@ class Folders {
 			// recursive deleting function. Deletes al folders/files and subfolders/files from server.
 			Folders::removeDir('./././files/'.$row['path']);
 			Folders::removeDir('./././files/'.'thumbs/'.$row['path']);
-			Folders::removeRows($row['album_id']);
 		}
+		Folders::removeRows($checkbox);
 		$query->close();
 		$dbc->close();
 	}
