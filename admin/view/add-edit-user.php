@@ -1,5 +1,5 @@
 <?php
-
+	use Jorn\admin\model\File\Folders;
 	$dbc = new \Jorn\admin\model\DBC\DBC;
 
 	$user = $data['user'];
@@ -22,7 +22,7 @@
 		<label for='public'>Public</label>
 		<input type="checkbox" name="secure" value="secure"/>
 		<label for='secure'>Secure</label>
-		<?php (!empty($params)) ? File_Folders::get_albums($user->getAlbumID(),$params[1]) : File_Folders::get_albums(null,null) ;?>
+		<?php (!empty($params)) ? Folders::get_albums($user->getAlbumID(),$params[1]) : File_Folders::get_albums(null,null) ;?>
 		<button type="submit" name="submit_file">Add File('s)</button>
 		</form>
 	</div>

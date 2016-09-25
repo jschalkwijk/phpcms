@@ -5,6 +5,7 @@ namespace Jorn\admin\model\Contacts;
 use \Defuse\Crypto\Crypto;
 use \Defuse\Crypto\Exception as Ex;
 use Jorn\admin\model\DBC\DBC;
+use Jorn\admin\File\FileUpload;
 
 class Contact {
 	private $id;
@@ -219,7 +220,7 @@ class Contact {
 	}
 
 	public static function addProfileIMG($file_dest,$thumb_dest,$params){
-		$upload = new files_FileUpload($file_dest,$thumb_dest,$params);
+		$upload = new FileUpload($file_dest,$thumb_dest,$params);
 		$img_path = $upload->getImgPath();
 		$thumb_path = $upload->getThumbPath();
 		$db = new DBC;
@@ -273,7 +274,7 @@ class Contact {
 			$zip = Crypto::decrypt(Crypto::hexTobin($row['zip']),$user_key );
 			$notes = Crypto::decrypt(Crypto::hexTobin($row['notes']),$user_key );
 			
-			$contact = new contacts_Contact(
+			$contact = new Contact(
 				$first_name,
 				$last_name,
 				$phone_1,
@@ -338,7 +339,7 @@ class Contact {
 			$zip = Crypto::decrypt(Crypto::hexTobin($row['zip']),$user_key );
 			$notes = Crypto::decrypt(Crypto::hexTobin($row['notes']),$user_key );
 			
-			$contact = new contacts_Contact(
+			$contact = new Contact(
 				$first_name,
 				$last_name,
 				$phone_1,
