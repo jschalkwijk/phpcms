@@ -171,7 +171,7 @@ class Order{
         }
 
         $dbc->close();
-        // Returns an array wich contains all the contact objects. Which are then passed from the controller to the view.
+        // Returns an array which contains all the contact objects. Which are then passed from the controller to the view.
         return $order;
     }
 

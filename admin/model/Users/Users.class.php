@@ -11,6 +11,8 @@ namespace Jorn\admin\model\Users;
 use \Defuse\Crypto\Crypto;
 use \Defuse\Crypto\Exception as Ex;
 use \Jorn\admin\model\DBC\DBC;
+use Jorn\admin\model\File\Folders;
+use Jorn\admin\model\File\FileUpload;
 
 class Users{
 
@@ -268,16 +270,15 @@ class Users{
 			}
 
 			# Create Folder
-			$album_id = File_Folders::auto_create_folder($username,$this->file_path.$username,$this->thumb_path.$username,'Users');
-			$contacts = File_Folders::auto_create_folder("$username"."\'s ".'Contacts',$this->file_path.$username.'/'.$username.'\'s '.'Contacts',$this->thumb_path.$username.'/'.$username.'\'s '.'Contacts','Users',$username);
+			$album_id = Folders::auto_create_folder($username,$this->file_path.$username,$this->thumb_path.$username,'Users');
+			$contacts = Folders::auto_create_folder("$username"."\'s ".'Contacts',$this->file_path.$username.'/'.$username.'\'s '.'Contacts',$this->thumb_path.$username.'/'.$username.'\'s '.'Contacts','Users',$username);
 
 			if(!empty($username) && !empty($password) && !empty($password_again)) {
 				if($password === $password_again) {
-					$encrypt = new Encrypt;
-					$encrypted_password = $encrypt->password_encrypt($password);
+					$hash = password_hash($password, PASSWORD_BCRYPT);
 					$query = $dbc->prepare("INSERT into users(username,password,first_name,last_name,email,function,rights,album_id,token) VALUES(?,?,?,?,?,?,?,?,?)");
 					if($query){
-						$query->bind_param("sssssssis",$username,$encrypted_password,$first_name,$last_name,$email,$function,$rights,$album_id,$token);
+						$query->bind_param("sssssssis",$username,$hash,$first_name,$last_name,$email,$function,$rights,$album_id,$token);
 						$query->execute();
 						$query->close();
 					} else {
@@ -356,9 +357,9 @@ if(file_exists('././keys/User/'.$_SESSION['username'].'.txt')){
 			// save edited object to database
 			if ($_POST['confirm'] == 'Yes') {
 				$sql1 = "UPDATE users SET username = '$username',first_name = '$first_name',last_name = '$last_name',".
-					"email = '$email',function = '$function',rights = '$rights' WHERE users.user_id = '$user_id'";
+					"email = '$email',function = '$function',rights = '$rights' WHERE user_id = '$user_id'";
 				echo $sql1;
-				$query = $dbc->prepare("UPDATE users SET username = ?,first_name = ?,last_name = ?,email = ?,function = ?,rights = ? WHERE users.user_id = ?");
+				$query = $dbc->prepare("UPDATE users SET username = ?,first_name = ?,last_name = ?,email = ?,function = ?,rights = ? WHERE user_id = ?");
 				if($query){
 					$query->bind_param("ssssssi",$username,$first_name,$last_name,$email,$function,$rights,$user_id);
 					$query->execute();
@@ -369,11 +370,10 @@ if(file_exists('././keys/User/'.$_SESSION['username'].'.txt')){
 				}
 				if(!empty($new_password) && !empty($new_password_again) )
 					if($new_password === $new_password_again) {
-						$encrypt = new Encrypt;
-						$encrypted_password = $encrypt->password_encrypt($new_password);
-						$query2 = $dbc->prepare("UPDATE users SET password = ? WHERE users.user_id = ?");
+						$hash = password_hash($new_password, PASSWORD_BCRYPT);
+						$query2 = $dbc->prepare("UPDATE users SET password = ? WHERE user_id = ?");
 						if($query2){
-							$query2->bind_param("si",$encrypted_password,$id);
+							$query2->bind_param("si",$hash,$id);
 							$query2->execute();
 							$query2->close();
 						} else {
@@ -402,7 +402,7 @@ if(file_exists('././keys/User/'.$_SESSION['username'].'.txt')){
 	}
 
 	public static function addProfileIMG($file_dest,$thumb_dest,$params){
-		$upload = new File_FileUpload($file_dest,$thumb_dest,$params,true);
+		$upload = new FileUpload($file_dest,$thumb_dest,$params,true);
 		$img_path = $upload->getImgPath();
 		$thumb_path = $upload->getThumbPath();
 		$db = new DBC;

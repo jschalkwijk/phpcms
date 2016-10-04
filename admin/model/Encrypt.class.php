@@ -1,4 +1,6 @@
 <?php
+namespace Encrypt;
+
 class Encrypt {
 	
 	public function password_encrypt($password){

@@ -7,7 +7,7 @@
 <html>
 <head>
 	<title>Login</title>
-	<link type="text/ccs" rel="stylesheet" href="<?php echo ADMIN."templates/default/style.css";?>"/>
+	<link type="text/css" rel="stylesheet" href="<?php echo ADMIN."templates/default/style.css";?>"/>
 </head>
 <body>
 
@@ -56,10 +56,10 @@
 				
 				if(mysqli_num_rows($data) == 1) {
 					$row = mysqli_fetch_array($data);
-					$set_password = $row['password'];
+					$hash = $row['password'];
 					// decrypt password
-					$input_password = crypt($password,$set_password);
-					if($set_password === $input_password){
+					$passwordCheck = password_verify($password, $hash);
+					if($passwordCheck){
 						$user_id = (int)$row['user_id'];
 						$_SESSION['user_id'] = (int)$row['user_id'];
 						$_SESSION['username'] = $row['username'];
