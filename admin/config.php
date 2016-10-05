@@ -14,10 +14,11 @@ define ('HOST','http://'.$_SERVER['HTTP_HOST']);
 //class autoloader using PEAR naming convention
 spl_autoload_register(function ($class) {
 	$path = str_replace('_', DIRECTORY_SEPARATOR, $class );
+	// loading non namespaced files.
 	if (file_exists('model/'.$path.'.class.php')) {
 		include_once 'model/'.$path.'.class.php';
 	} else {
-
+		// loading namespaces
 		$parts = explode('\\', $class);
 		unset($parts[0]);
 		unset($parts[1]);
@@ -31,6 +32,9 @@ spl_autoload_register(function ($class) {
 		require_once 'model/Encryption/autoload.php';
 	}
 });
+
+// Composer autoloader;
+require '../vendor/autoload.php';
 
 function login_authenticate() {
 	require_once('blocks/secure_login/authorize.php');

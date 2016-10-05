@@ -1,6 +1,6 @@
 <?php use Jorn\admin\model\Content\Pages\Page; ?>
 
-<script type="text/javascript" src="<?php echo JS."tinymce/tinymce.min.js"; ?>"></script>
+<script type="text/javascript" src="<?php echo "/vendor/tinymce/tinymce/tinymce.min.js"; ?>"></script>
 <script type="text/javascript">
 	tinymce.init({
 		selector: "textarea",

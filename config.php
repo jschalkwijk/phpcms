@@ -14,8 +14,12 @@
 		$path = str_replace('_', DIRECTORY_SEPARATOR, $class );
 		if (file_exists('model/'.$path.'.class.php')) {
 			include_once 'model/'.$path.'.class.php';
+		} else if (file_exists(__DIR__.'/vendor/autoload.php')) {
+			require __DIR__.'/vendor/autoload.php';
 		} else {
-			echo 'Class not found in model folder!';
-		} 	
+			echo 'Class not found in Models or Vendor folder!';
+		}
 	});
+
+
 ?>

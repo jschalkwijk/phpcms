@@ -1,0 +1,9 @@
+{
+    "name": "jorn/phpcms",
+    "description": "A short description of what your package does",
+
+    "require": {
+        "swiftmailer/swiftmailer": "^5.4",
+        "tinymce/tinymce": "= 4.1.7"
+    }
+}

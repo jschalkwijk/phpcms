@@ -2,17 +2,433 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0a43c896-b199-4fd3-a7cd-831809ebb533" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/codeStyleSettings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/craft_server.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/deployment.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/.name" afterPath="$PROJECT_DIR$/.idea/.name" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/langs/readme.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/license.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/advlist/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/anchor/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/autolink/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/autoresize/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/autosave/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/bbcode/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/charmap/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/code/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/colorpicker/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/contextmenu/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/directionality/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/emoticons/img/smiley-cool.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/emoticons/img/smiley-cry.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/emoticons/img/smiley-embarassed.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/emoticons/img/smiley-foot-in-mouth.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/emoticons/img/smiley-frown.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/emoticons/img/smiley-innocent.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/emoticons/img/smiley-kiss.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/emoticons/img/smiley-laughing.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/emoticons/img/smiley-money-mouth.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/emoticons/img/smiley-sealed.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/emoticons/img/smiley-smile.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/emoticons/img/smiley-surprised.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/emoticons/img/smiley-tongue-out.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/emoticons/img/smiley-undecided.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/emoticons/img/smiley-wink.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/emoticons/img/smiley-yell.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/emoticons/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/example/dialog.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/example/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/example_dependency/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/fullpage/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/fullscreen/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/hr/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/image/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/importcss/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/insertdatetime/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/layer/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/legacyoutput/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/link/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/lists/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/media/moxieplayer.swf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/media/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/nonbreaking/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/noneditable/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/pagebreak/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/paste/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/preview/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/print/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/save/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/searchreplace/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/spellchecker/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/tabfocus/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/table/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/template/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/textcolor/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/textpattern/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/visualblocks/css/visualblocks.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/visualblocks/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/visualchars/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/plugins/wordcount/plugin.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/skins/lightgray/content.inline.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/skins/lightgray/content.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/skins/lightgray/fonts/tinymce-small.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/skins/lightgray/fonts/tinymce-small.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/skins/lightgray/fonts/tinymce-small.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/skins/lightgray/fonts/tinymce-small.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/skins/lightgray/fonts/tinymce.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/skins/lightgray/fonts/tinymce.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/skins/lightgray/fonts/tinymce.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/skins/lightgray/fonts/tinymce.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/skins/lightgray/img/anchor.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/skins/lightgray/img/loader.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/skins/lightgray/img/object.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/skins/lightgray/img/trans.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/skins/lightgray/skin.ie7.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/skins/lightgray/skin.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/themes/modern/theme.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/js/tinymce/tinymce.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/CHANGES" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/LICENSE" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/README" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/VERSION" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/composer.json" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/doc/headers.rst" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/doc/help-resources.rst" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/doc/including-the-files.rst" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/doc/index.rst" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/doc/installing.rst" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/doc/introduction.rst" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/doc/japanese.rst" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/doc/messages.rst" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/doc/overview.rst" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/doc/plugins.rst" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/doc/sending.rst" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/doc/uml/Encoders.graffle" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/doc/uml/Mime.graffle" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/doc/uml/Transports.graffle" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/index.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Attachment.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/ByteStream/AbstractFilterableInputStream.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/ByteStream/ArrayByteStream.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/ByteStream/FileByteStream.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/ByteStream/TemporaryFileByteStream.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/CharacterReader.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/CharacterReader/GenericFixedWidthReader.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/CharacterReader/UsAsciiReader.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/CharacterReader/Utf8Reader.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/CharacterReaderFactory.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/CharacterReaderFactory/SimpleCharacterReaderFactory.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/CharacterStream.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/CharacterStream/ArrayCharacterStream.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/CharacterStream/NgCharacterStream.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/ConfigurableSpool.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/DependencyContainer.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/DependencyException.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/EmbeddedFile.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Encoder.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Encoder/Base64Encoder.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Encoder/QpEncoder.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Encoder/Rfc2231Encoder.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Encoding.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Events/CommandEvent.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Events/CommandListener.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Events/Event.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Events/EventDispatcher.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Events/EventListener.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Events/EventObject.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Events/ResponseEvent.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Events/ResponseListener.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Events/SendEvent.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Events/SendListener.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Events/SimpleEventDispatcher.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Events/TransportChangeEvent.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Events/TransportChangeListener.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Events/TransportExceptionEvent.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Events/TransportExceptionListener.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/FailoverTransport.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/FileSpool.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/FileStream.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Filterable.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Image.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/InputByteStream.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/IoException.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/KeyCache.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/KeyCache/ArrayKeyCache.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/KeyCache/DiskKeyCache.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/KeyCache/KeyCacheInputStream.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/KeyCache/NullKeyCache.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/KeyCache/SimpleKeyCacheInputStream.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/LoadBalancedTransport.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/MailTransport.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Mailer.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Mailer/ArrayRecipientIterator.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Mailer/RecipientIterator.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/MemorySpool.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Message.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Mime/Attachment.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Mime/CharsetObserver.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Mime/ContentEncoder.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Mime/ContentEncoder/Base64ContentEncoder.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Mime/ContentEncoder/NativeQpContentEncoder.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Mime/ContentEncoder/PlainContentEncoder.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Mime/ContentEncoder/QpContentEncoder.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Mime/ContentEncoder/QpContentEncoderProxy.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Mime/ContentEncoder/RawContentEncoder.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Mime/EmbeddedFile.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Mime/EncodingObserver.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Mime/Grammar.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Mime/Header.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Mime/HeaderEncoder.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Mime/HeaderEncoder/Base64HeaderEncoder.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Mime/HeaderEncoder/QpHeaderEncoder.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Mime/HeaderFactory.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Mime/HeaderSet.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Mime/Headers/AbstractHeader.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Mime/Headers/DateHeader.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Mime/Headers/IdentificationHeader.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Mime/Headers/MailboxHeader.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Mime/Headers/OpenDKIMHeader.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Mime/Headers/ParameterizedHeader.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Mime/Headers/PathHeader.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Mime/Headers/UnstructuredHeader.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Mime/Message.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Mime/MimeEntity.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Mime/MimePart.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Mime/ParameterizedHeader.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Mime/SimpleHeaderFactory.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Mime/SimpleHeaderSet.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Mime/SimpleMessage.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Mime/SimpleMimeEntity.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/MimePart.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/NullTransport.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/OutputByteStream.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Plugins/AntiFloodPlugin.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Plugins/BandwidthMonitorPlugin.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Plugins/Decorator/Replacements.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Plugins/DecoratorPlugin.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Plugins/ImpersonatePlugin.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Plugins/Logger.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Plugins/LoggerPlugin.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Plugins/Loggers/ArrayLogger.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Plugins/Loggers/EchoLogger.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Plugins/MessageLogger.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Plugins/Pop/Pop3Connection.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Plugins/Pop/Pop3Exception.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Plugins/PopBeforeSmtpPlugin.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Plugins/RedirectingPlugin.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Plugins/Reporter.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Plugins/ReporterPlugin.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Plugins/Reporters/HitReporter.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Plugins/Reporters/HtmlReporter.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Plugins/Sleeper.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Plugins/ThrottlerPlugin.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Plugins/Timer.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Preferences.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/ReplacementFilterFactory.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/RfcComplianceException.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/SendmailTransport.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/SignedMessage.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Signer.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Signers/BodySigner.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Signers/DKIMSigner.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Signers/DomainKeySigner.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Signers/HeaderSigner.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Signers/OpenDKIMSigner.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Signers/SMimeSigner.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/SmtpTransport.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Spool.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/SpoolTransport.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/StreamFilter.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/StreamFilters/ByteArrayReplacementFilter.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/StreamFilters/StringReplacementFilter.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/StreamFilters/StringReplacementFilterFactory.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/SwiftException.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Transport.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Transport/AbstractSmtpTransport.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Transport/Esmtp/Auth/CramMd5Authenticator.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Transport/Esmtp/Auth/LoginAuthenticator.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Transport/Esmtp/Auth/NTLMAuthenticator.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Transport/Esmtp/Auth/PlainAuthenticator.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Transport/Esmtp/Auth/XOAuth2Authenticator.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Transport/Esmtp/AuthHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Transport/Esmtp/Authenticator.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Transport/EsmtpHandler.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Transport/EsmtpTransport.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Transport/FailoverTransport.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Transport/IoBuffer.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Transport/LoadBalancedTransport.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Transport/MailInvoker.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Transport/MailTransport.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Transport/NullTransport.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Transport/SendmailTransport.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Transport/SimpleMailInvoker.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Transport/SmtpAgent.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Transport/SpoolTransport.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Transport/StreamBuffer.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/TransportException.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/classes/Swift/Validate.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/dependency_maps/cache_deps.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/dependency_maps/message_deps.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/dependency_maps/mime_deps.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/dependency_maps/transport_deps.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/mime_types.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/preferences.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/swift_init.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/swift_required.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/swift_required_pear.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/lib/swiftmailer_generate_mimes_config.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/phpunit.xml.dist" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/IdenticalBinaryConstraint.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/StreamCollector.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/SwiftMailerSmokeTestCase.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/SwiftMailerTestCase.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/_samples/charsets/iso-2022-jp/one.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/_samples/charsets/iso-8859-1/one.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/_samples/charsets/utf-8/one.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/_samples/charsets/utf-8/three.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/_samples/charsets/utf-8/two.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/_samples/dkim/dkim.test.priv" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/_samples/dkim/dkim.test.pub" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/_samples/files/data.txt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/_samples/files/swiftmailer.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/_samples/files/textfile.zip" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/_samples/smime/CA.srl" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/_samples/smime/ca.crt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/_samples/smime/ca.key" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/_samples/smime/create-cert.sh" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/_samples/smime/encrypt.crt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/_samples/smime/encrypt.key" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/_samples/smime/encrypt2.crt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/_samples/smime/encrypt2.key" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/_samples/smime/sign.crt" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/_samples/smime/sign.key" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/acceptance.conf.php.default" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/acceptance/Swift/AttachmentAcceptanceTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/acceptance/Swift/ByteStream/FileByteStreamAcceptanceTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/acceptance/Swift/CharacterReaderFactory/SimpleCharacterReaderFactoryAcceptanceTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/acceptance/Swift/DependencyContainerAcceptanceTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/acceptance/Swift/EmbeddedFileAcceptanceTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/acceptance/Swift/Encoder/Base64EncoderAcceptanceTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/acceptance/Swift/Encoder/QpEncoderAcceptanceTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/acceptance/Swift/Encoder/Rfc2231EncoderAcceptanceTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/acceptance/Swift/EncodingAcceptanceTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/acceptance/Swift/KeyCache/ArrayKeyCacheAcceptanceTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/acceptance/Swift/KeyCache/DiskKeyCacheAcceptanceTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/acceptance/Swift/MessageAcceptanceTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/acceptance/Swift/Mime/AttachmentAcceptanceTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/acceptance/Swift/Mime/ContentEncoder/Base64ContentEncoderAcceptanceTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/acceptance/Swift/Mime/ContentEncoder/NativeQpContentEncoderAcceptanceTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/acceptance/Swift/Mime/ContentEncoder/PlainContentEncoderAcceptanceTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/acceptance/Swift/Mime/ContentEncoder/QpContentEncoderAcceptanceTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/acceptance/Swift/Mime/EmbeddedFileAcceptanceTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/acceptance/Swift/Mime/HeaderEncoder/Base64HeaderEncoderAcceptanceTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/acceptance/Swift/Mime/MimePartAcceptanceTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/acceptance/Swift/Mime/SimpleMessageAcceptanceTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/acceptance/Swift/MimePartAcceptanceTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/acceptance/Swift/Transport/StreamBuffer/AbstractStreamBufferAcceptanceTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/acceptance/Swift/Transport/StreamBuffer/BasicSocketAcceptanceTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/acceptance/Swift/Transport/StreamBuffer/ProcessAcceptanceTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/acceptance/Swift/Transport/StreamBuffer/SocketTimeoutTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/acceptance/Swift/Transport/StreamBuffer/SslSocketAcceptanceTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/acceptance/Swift/Transport/StreamBuffer/TlsSocketAcceptanceTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/bootstrap.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/bug/Swift/Bug111Test.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/bug/Swift/Bug118Test.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/bug/Swift/Bug206Test.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/bug/Swift/Bug274Test.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/bug/Swift/Bug34Test.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/bug/Swift/Bug35Test.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/bug/Swift/Bug38Test.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/bug/Swift/Bug518Test.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/bug/Swift/Bug51Test.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/bug/Swift/Bug534Test.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/bug/Swift/Bug71Test.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/bug/Swift/Bug76Test.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/fixtures/EsmtpTransportFixture.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/fixtures/MimeEntityFixture.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/smoke.conf.php.default" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/smoke/Swift/Smoke/AttachmentSmokeTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/smoke/Swift/Smoke/BasicSmokeTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/smoke/Swift/Smoke/HtmlWithAttachmentSmokeTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/smoke/Swift/Smoke/InternationalSmokeTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/ByteStream/ArrayByteStreamTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/CharacterReader/GenericFixedWidthReaderTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/CharacterReader/UsAsciiReaderTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/CharacterReader/Utf8ReaderTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/CharacterStream/ArrayCharacterStreamTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/DependencyContainerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Encoder/Base64EncoderTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Encoder/QpEncoderTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Encoder/Rfc2231EncoderTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Events/CommandEventTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Events/EventObjectTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Events/ResponseEventTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Events/SendEventTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Events/SimpleEventDispatcherTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Events/TransportChangeEventTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Events/TransportExceptionEventTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/KeyCache/ArrayKeyCacheTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/KeyCache/SimpleKeyCacheInputStreamTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Mailer/ArrayRecipientIteratorTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/MailerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/MessageTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Mime/AbstractMimeEntityTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Mime/AttachmentTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Mime/ContentEncoder/Base64ContentEncoderTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Mime/ContentEncoder/PlainContentEncoderTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Mime/ContentEncoder/QpContentEncoderTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Mime/EmbeddedFileTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Mime/HeaderEncoder/Base64HeaderEncoderTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Mime/HeaderEncoder/QpHeaderEncoderTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Mime/Headers/DateHeaderTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Mime/Headers/IdentificationHeaderTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Mime/Headers/MailboxHeaderTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Mime/Headers/ParameterizedHeaderTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Mime/Headers/PathHeaderTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Mime/Headers/UnstructuredHeaderTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Mime/MimePartTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Mime/SimpleHeaderFactoryTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Mime/SimpleHeaderSetTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Mime/SimpleMessageTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Mime/SimpleMimeEntityTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Plugins/AntiFloodPluginTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Plugins/BandwidthMonitorPluginTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Plugins/DecoratorPluginTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Plugins/LoggerPluginTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Plugins/Loggers/ArrayLoggerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Plugins/Loggers/EchoLoggerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Plugins/PopBeforeSmtpPluginTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Plugins/RedirectingPluginTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Plugins/ReporterPluginTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Plugins/Reporters/HitReporterTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Plugins/Reporters/HtmlReporterTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Plugins/ThrottlerPluginTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Signers/DKIMSignerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Signers/OpenDKIMSignerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Signers/SMimeSignerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/StreamFilters/ByteArrayReplacementFilterTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/StreamFilters/StringReplacementFilterFactoryTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/StreamFilters/StringReplacementFilterTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Transport/AbstractSmtpEventSupportTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Transport/AbstractSmtpTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Transport/Esmtp/Auth/CramMd5AuthenticatorTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Transport/Esmtp/Auth/LoginAuthenticatorTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Transport/Esmtp/Auth/NTLMAuthenticatorTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Transport/Esmtp/Auth/PlainAuthenticatorTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Transport/Esmtp/AuthHandlerTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Transport/EsmtpTransport/ExtensionSupportTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Transport/EsmtpTransportTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Transport/FailoverTransportTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Transport/LoadBalancedTransportTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Transport/MailTransportTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Transport/SendmailTransportTest.php" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/swift/tests/unit/Swift/Transport/StreamBufferTest.php" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/login.php" afterPath="$PROJECT_DIR$/admin/login.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/model/Encrypt.class.php" afterPath="$PROJECT_DIR$/admin/model/Encrypt.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/model/Order/Order.class.php" afterPath="$PROJECT_DIR$/admin/model/Order/Order.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/model/Users/Users.class.php" afterPath="$PROJECT_DIR$/admin/model/Users/Users.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/view/add-edit-user.php" afterPath="$PROJECT_DIR$/admin/view/add-edit-user.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/config.php" afterPath="$PROJECT_DIR$/admin/config.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/view/add-edit-contact.php" afterPath="$PROJECT_DIR$/admin/view/add-edit-contact.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/view/add-edit-page.php" afterPath="$PROJECT_DIR$/admin/view/add-edit-page.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/view/add-edit-post.php" afterPath="$PROJECT_DIR$/admin/view/add-edit-post.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/view/add-edit-product.php" afterPath="$PROJECT_DIR$/admin/view/add-edit-product.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config.php" afterPath="$PROJECT_DIR$/config.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/view/contact.php" afterPath="$PROJECT_DIR$/view/contact.php" />
     </list>
     <ignored path="CMS.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -34,62 +450,74 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Order.class.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/model/Order/Order.class.php">
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="138" column="38" selection-start-line="138" selection-start-column="38" selection-end-line="138" selection-end-column="38" />
+              <caret line="23" column="6" selection-start-line="23" selection-start-column="6" selection-end-line="23" selection-end-column="6" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="composer.lock" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/composer.lock">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="composer.json" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/composer.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-5.625">
+              <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="blog.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/view/blog.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-13.75">
+              <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="contact.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/view/contact.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-15.625">
+              <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
               <folding>
-                <marker date="1475416985000" expanded="true" signature="1415:1486" placeholder="UPDATE order... " />
-                <marker date="1475416985000" expanded="true" signature="1894:1957" placeholder="INSERT INTO orders... " />
-                <marker date="1475416985000" expanded="true" signature="3192:3256" placeholder="INSERT INTO orders_products... " />
-                <marker date="1475416985000" expanded="true" signature="3670:3716" placeholder="DELETE FROM " />
-                <marker date="1475416985000" expanded="true" signature="4170:4209" placeholder="SELECT * FRO... orders" />
-                <marker date="1475416985000" expanded="true" signature="5184:5223" placeholder="SELECT * FRO... customers" />
+                <marker date="1475657121000" expanded="true" signature="627:646" placeholder="..." />
+                <marker date="1475657121000" expanded="true" signature="694:711" placeholder="..." />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Users.class.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/model/Users/Users.class.php">
+      <file leaf-file-name="config.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/admin/config.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="369" column="17" selection-start-line="369" selection-start-column="17" selection-end-line="369" selection-end-column="17" />
-              <folding>
-                <element signature="e#191#217#0#PHP" expanded="true" />
-                <marker date="1475513623000" expanded="true" signature="2661:2723" placeholder="SELECT * FRO... ${$dbt}" />
-                <marker date="1475513623000" expanded="true" signature="4091:4131" placeholder="SELECT * FRO... ${$dbt}" />
-                <marker date="1475513623000" expanded="true" signature="5987:6025" placeholder="SELECT * FRO... users" />
-                <marker date="1475513623000" expanded="true" signature="8679:8799" placeholder="INSERT into users... " />
-                <marker date="1475513623000" expanded="true" signature="10597:10635" placeholder="SELECT * FRO... users" />
-                <marker date="1475513623000" expanded="true" signature="11991:12177" placeholder="UPDATE users... " />
-                <marker date="1475513623000" expanded="true" signature="12224:12334" placeholder="UPDATE users... " />
-                <marker date="1475513623000" expanded="true" signature="12760:12807" placeholder="UPDATE users... " />
-                <marker date="1475513623000" expanded="true" signature="14018:14065" placeholder="UPDATE users... " />
-              </folding>
+            <state vertical-scroll-proportion="0.37751678">
+              <caret line="21" column="39" selection-start-line="21" selection-start-column="39" selection-end-line="21" selection-end-column="39" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="login.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/login.php">
+      <file leaf-file-name="config.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="17" column="20" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
-              <folding>
-                <marker date="1475513658000" expanded="true" signature="1714:1761" placeholder="SELECT * FRO... users" />
-                <marker date="1475513658000" expanded="true" signature="2421:2483" placeholder="UPDATE users... " />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="add-edit-user.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/admin/view/add-edit-user.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.70469797">
-              <caret line="28" column="6" selection-start-line="28" selection-start-column="6" selection-end-line="28" selection-end-column="6" />
+            <state vertical-scroll-proportion="-12.5">
+              <caret line="20" column="9" selection-start-line="16" selection-start-column="8" selection-end-line="20" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -108,6 +536,16 @@
         <option value="$PROJECT_DIR$/admin/model/Users/Users.class.php" />
         <option value="$PROJECT_DIR$/admin/login.php" />
         <option value="$PROJECT_DIR$/admin/view/add-edit-user.php" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/composer.lock" />
+        <option value="$PROJECT_DIR$/admin/view/add-edit-post.php" />
+        <option value="$PROJECT_DIR$/composer.json" />
+        <option value="$PROJECT_DIR$/admin/view/add-edit-page.php" />
+        <option value="$PROJECT_DIR$/admin/view/add-edit-product.php" />
+        <option value="$PROJECT_DIR$/admin/view/add-edit-contact.php" />
+        <option value="$PROJECT_DIR$/view/contact.php" />
+        <option value="$PROJECT_DIR$/config.php" />
+        <option value="$PROJECT_DIR$/admin/config.php" />
       </list>
     </option>
   </component>
@@ -121,8 +559,8 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="69" />
-    <option name="y" value="23" />
+    <option name="x" value="68" />
+    <option name="y" value="25" />
     <option name="width" value="1852" />
     <option name="height" value="1057" />
   </component>
@@ -152,7 +590,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -173,7 +610,59 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/admin" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
+      <module name="" />
+      <working_directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <kind value="FILE" />
+      <method />
+    </configuration>
+    <configuration default="true" type="GoRunFileConfiguration" factoryName="Go Single File">
+      <module name="" />
+      <working_directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <method />
+    </configuration>
+    <configuration default="true" type="GoTestRunConfiguration" factoryName="Go Test">
+      <module name="" />
+      <working_directory value="$PROJECT_DIR$" />
+      <framework value="gotest" />
+      <kind value="DIRECTORY" />
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
+      <command value="run-script" />
+      <scripts />
+      <envs />
+      <method />
+    </configuration>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
   <component name="SvnConfiguration">
@@ -189,16 +678,16 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="69" y="23" width="1852" height="1057" extended-state="6" />
-    <editor active="false" />
+    <frame x="68" y="25" width="1852" height="1057" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25801104" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26353592" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32988626" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32988626" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -227,18 +716,38 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/admin/login.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="17" column="20" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
+          <folding>
+            <marker date="1475598955000" expanded="true" signature="1714:1761" placeholder="SELECT * FRO... users" />
+            <marker date="1475598955000" expanded="true" signature="2421:2483" placeholder="UPDATE users... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/view/add-edit-user.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="2" selection-start-line="14" selection-start-column="2" selection-end-line="14" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/admin/model/Order/Order.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="138" column="38" selection-start-line="138" selection-start-column="38" selection-end-line="138" selection-end-column="38" />
-          <folding>
-            <marker date="1475416985000" expanded="true" signature="1415:1486" placeholder="UPDATE order... " />
-            <marker date="1475416985000" expanded="true" signature="1894:1957" placeholder="INSERT INTO orders... " />
-            <marker date="1475416985000" expanded="true" signature="3192:3256" placeholder="INSERT INTO orders_products... " />
-            <marker date="1475416985000" expanded="true" signature="3670:3716" placeholder="DELETE FROM " />
-            <marker date="1475416985000" expanded="true" signature="4170:4209" placeholder="SELECT * FRO... orders" />
-            <marker date="1475416985000" expanded="true" signature="5184:5223" placeholder="SELECT * FRO... customers" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -248,15 +757,6 @@
           <caret line="369" column="17" selection-start-line="369" selection-start-column="17" selection-end-line="369" selection-end-column="17" />
           <folding>
             <element signature="e#191#217#0#PHP" expanded="true" />
-            <marker date="1475513623000" expanded="true" signature="2661:2723" placeholder="SELECT * FRO... ${$dbt}" />
-            <marker date="1475513623000" expanded="true" signature="4091:4131" placeholder="SELECT * FRO... ${$dbt}" />
-            <marker date="1475513623000" expanded="true" signature="5987:6025" placeholder="SELECT * FRO... users" />
-            <marker date="1475513623000" expanded="true" signature="8679:8799" placeholder="INSERT into users... " />
-            <marker date="1475513623000" expanded="true" signature="10597:10635" placeholder="SELECT * FRO... users" />
-            <marker date="1475513623000" expanded="true" signature="11991:12177" placeholder="UPDATE users... " />
-            <marker date="1475513623000" expanded="true" signature="12224:12334" placeholder="UPDATE users... " />
-            <marker date="1475513623000" expanded="true" signature="12760:12807" placeholder="UPDATE users... " />
-            <marker date="1475513623000" expanded="true" signature="14018:14065" placeholder="UPDATE users... " />
           </folding>
         </state>
       </provider>
@@ -266,8 +766,45 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="17" column="20" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
           <folding>
-            <marker date="1475513658000" expanded="true" signature="1714:1761" placeholder="SELECT * FRO... users" />
-            <marker date="1475513658000" expanded="true" signature="2421:2483" placeholder="UPDATE users... " />
+            <marker date="1475598955000" expanded="true" signature="1714:1761" placeholder="SELECT * FRO... users" />
+            <marker date="1475598955000" expanded="true" signature="2421:2483" placeholder="UPDATE users... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/view/add-edit-user.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/model/Order/Order.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="138" column="38" selection-start-line="138" selection-start-column="38" selection-end-line="138" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/model/Users/Users.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="369" column="17" selection-start-line="369" selection-start-column="17" selection-end-line="369" selection-end-column="17" />
+          <folding>
+            <element signature="e#191#217#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/login.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="17" column="20" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
+          <folding>
+            <marker date="1475598955000" expanded="true" signature="1714:1761" placeholder="SELECT * FRO... users" />
+            <marker date="1475598955000" expanded="true" signature="2421:2483" placeholder="UPDATE users... " />
           </folding>
         </state>
       </provider>
@@ -284,14 +821,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <marker date="1475416985000" expanded="true" signature="1415:1486" placeholder="UPDATE order... " />
-            <marker date="1475416985000" expanded="true" signature="1894:1957" placeholder="INSERT INTO orders... " />
-            <marker date="1475416985000" expanded="true" signature="3192:3256" placeholder="INSERT INTO orders_products... " />
-            <marker date="1475416985000" expanded="true" signature="3670:3716" placeholder="DELETE FROM " />
-            <marker date="1475416985000" expanded="true" signature="4170:4209" placeholder="SELECT * FRO... orders" />
-            <marker date="1475416985000" expanded="true" signature="5184:5223" placeholder="SELECT * FRO... customers" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -301,15 +831,6 @@
           <caret line="17" column="12" selection-start-line="17" selection-start-column="12" selection-end-line="17" selection-end-column="12" />
           <folding>
             <element signature="e#191#217#0#PHP" expanded="true" />
-            <marker date="1475513623000" expanded="true" signature="2661:2723" placeholder="SELECT * FRO... ${$dbt}" />
-            <marker date="1475513623000" expanded="true" signature="4091:4131" placeholder="SELECT * FRO... ${$dbt}" />
-            <marker date="1475513623000" expanded="true" signature="5987:6025" placeholder="SELECT * FRO... users" />
-            <marker date="1475513623000" expanded="true" signature="8679:8799" placeholder="INSERT into users... " />
-            <marker date="1475513623000" expanded="true" signature="10597:10635" placeholder="SELECT * FRO... users" />
-            <marker date="1475513623000" expanded="true" signature="11991:12177" placeholder="UPDATE users... " />
-            <marker date="1475513623000" expanded="true" signature="12224:12334" placeholder="UPDATE users... " />
-            <marker date="1475513623000" expanded="true" signature="12760:12807" placeholder="UPDATE users... " />
-            <marker date="1475513623000" expanded="true" signature="14018:14065" placeholder="UPDATE users... " />
           </folding>
         </state>
       </provider>
@@ -323,16 +844,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/model/Order/Order.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="-86.25">
           <caret line="138" column="38" selection-start-line="138" selection-start-column="38" selection-end-line="138" selection-end-column="38" />
-          <folding>
-            <marker date="1475416985000" expanded="true" signature="1415:1486" placeholder="UPDATE order... " />
-            <marker date="1475416985000" expanded="true" signature="1894:1957" placeholder="INSERT INTO orders... " />
-            <marker date="1475416985000" expanded="true" signature="3192:3256" placeholder="INSERT INTO orders_products... " />
-            <marker date="1475416985000" expanded="true" signature="3670:3716" placeholder="DELETE FROM " />
-            <marker date="1475416985000" expanded="true" signature="4170:4209" placeholder="SELECT * FRO... orders" />
-            <marker date="1475416985000" expanded="true" signature="5184:5223" placeholder="SELECT * FRO... customers" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -342,26 +856,6 @@
           <caret line="369" column="17" selection-start-line="369" selection-start-column="17" selection-end-line="369" selection-end-column="17" />
           <folding>
             <element signature="e#191#217#0#PHP" expanded="true" />
-            <marker date="1475513623000" expanded="true" signature="2661:2723" placeholder="SELECT * FRO... ${$dbt}" />
-            <marker date="1475513623000" expanded="true" signature="4091:4131" placeholder="SELECT * FRO... ${$dbt}" />
-            <marker date="1475513623000" expanded="true" signature="5987:6025" placeholder="SELECT * FRO... users" />
-            <marker date="1475513623000" expanded="true" signature="8679:8799" placeholder="INSERT into users... " />
-            <marker date="1475513623000" expanded="true" signature="10597:10635" placeholder="SELECT * FRO... users" />
-            <marker date="1475513623000" expanded="true" signature="11991:12177" placeholder="UPDATE users... " />
-            <marker date="1475513623000" expanded="true" signature="12224:12334" placeholder="UPDATE users... " />
-            <marker date="1475513623000" expanded="true" signature="12760:12807" placeholder="UPDATE users... " />
-            <marker date="1475513623000" expanded="true" signature="14018:14065" placeholder="UPDATE users... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/login.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="20" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
-          <folding>
-            <marker date="1475513658000" expanded="true" signature="1714:1761" placeholder="SELECT * FRO... users" />
-            <marker date="1475513658000" expanded="true" signature="2421:2483" placeholder="UPDATE users... " />
           </folding>
         </state>
       </provider>
@@ -373,10 +867,256 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/admin/login.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.625">
+          <caret line="17" column="20" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
+          <folding>
+            <marker date="1475598955000" expanded="true" signature="1714:1761" placeholder="SELECT * FRO... users" />
+            <marker date="1475598955000" expanded="true" signature="2421:2483" placeholder="UPDATE users... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="23" column="6" selection-start-line="23" selection-start-column="6" selection-end-line="23" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/tinymce/tinymce/skins/lightgray/fonts/tinymce.svg">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/tinymce/tinymce/skins/lightgray/img/object.gif">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/tinymce/tinymce/skins/lightgray/img/loader.gif">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/tinymce/tinymce/skins/lightgray/img/anchor.gif">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/tinymce/tinymce/skins/lightgray/img/trans.gif">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/composer/autoload_psr4.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/composer/autoload_real.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.025167786">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/autoload.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.17617449">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/tinymce/tinymce/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/view/add-edit-post.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.5">
+          <caret line="4" column="36" selection-start-line="4" selection-start-column="36" selection-end-line="4" selection-end-column="91" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/view/add-edit-page.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.5">
+          <caret line="4" column="18" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/view/add-edit-product.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.625">
+          <caret line="1" column="91" selection-start-line="1" selection-start-column="91" selection-end-line="1" selection-end-column="91" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/view/add-edit-contact.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="91" selection-start-line="0" selection-start-column="91" selection-end-line="0" selection-end-column="91" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/admin/view/add-edit-user.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.70469797">
-          <caret line="28" column="6" selection-start-line="28" selection-start-column="6" selection-end-line="28" selection-end-column="6" />
+        <state vertical-scroll-proportion="0.025167786">
+          <caret line="14" column="2" selection-start-line="14" selection-start-column="2" selection-end-line="14" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/view/posts.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controller/contact.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.22651006">
+          <caret line="9" column="2" selection-start-line="9" selection-start-column="2" selection-end-line="9" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/blog.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.75">
+          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/swiftmailer/swiftmailer/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/swiftmailer/swiftmailer/lib/classes/Swift/Transport/SendmailTransport.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.05033557">
+          <caret line="2" column="2" selection-start-line="2" selection-start-column="2" selection-end-line="2" selection-end-column="2" />
+          <folding>
+            <element signature="e#7#210#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/swiftmailer/swiftmailer/lib/classes/Swift.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.55369127">
+          <caret line="2" column="2" selection-start-line="2" selection-start-column="2" selection-end-line="2" selection-end-column="2" />
+          <folding>
+            <element signature="e#7#210#0#PHP" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/swiftmailer/swiftmailer/lib/swift_required.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.30201343">
+          <caret line="18" column="27" selection-start-line="18" selection-start-column="27" selection-end-line="18" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/swiftmailer/swiftmailer/README">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-5.625">
+          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.lock">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/swiftmailer/swiftmailer/doc/installing.rst">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/swiftmailer/swiftmailer/doc/including-the-files.rst">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/swiftmailer/swiftmailer/doc/help-resources.rst">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.19354838">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/view/contact.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-15.625">
+          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding>
+            <marker date="1475657121000" expanded="true" signature="627:646" placeholder="..." />
+            <marker date="1475657121000" expanded="true" signature="694:711" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.5">
+          <caret line="20" column="9" selection-start-line="16" selection-start-column="8" selection-end-line="20" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/config.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.37751678">
+          <caret line="21" column="39" selection-start-line="21" selection-start-column="39" selection-end-line="21" selection-end-column="39" />
           <folding />
         </state>
       </provider>

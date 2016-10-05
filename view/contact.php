@@ -1,6 +1,7 @@
 <?php
+
 if(isset($_POST['submit'])) {
-	require_once('packages/swiftmailer5/lib/swift_required.php');
+//	require_once('packages/swiftmailer5/lib/swift_required.php');
 
 	$dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
