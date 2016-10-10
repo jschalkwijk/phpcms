@@ -1,4 +1,6 @@
 <?php
+
+use Jorn\admin\model\Controller\Controller;
 use Jorn\admin\model\Content\Content;
 use Jorn\admin\model\Content\Pages\Page;
 use Jorn\admin\model\Content\Posts\Post;

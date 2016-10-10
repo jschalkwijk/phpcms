@@ -2,6 +2,7 @@
 
 use Jorn\admin\model\Content\Content;
 use Jorn\admin\model\Content\Posts\Post;
+use Jorn\admin\model\Controller\Controller;
 
 class Posts extends Controller {
 	// import useractions trait

@@ -1,5 +1,7 @@
 <?php
 
+use Jorn\admin\model\Controller\Controller;
+
 class Profile extends Controller{
 	public function index(){
 		$params = [$_SESSION['user_id'],$_SESSION['username']];

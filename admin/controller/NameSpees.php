@@ -1,5 +1,7 @@
 <?php
 
+use Jorn\admin\model\Controller\Controller;
+
 class NameSpees extends Controller {
     public function index($params = null){
         $params[] = 76;

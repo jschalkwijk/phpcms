@@ -1,5 +1,6 @@
 <?php
 
+use Jorn\admin\model\Controller\Controller;
 use \Jorn\admin\model\Contacts\Contact;
 
 class Contacts extends Controller {

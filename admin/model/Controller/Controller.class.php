@@ -1,5 +1,5 @@
 <?php
-namespace Jorn\admin\model;
+namespace Jorn\admin\model\Controller;
 
 use Jorn\admin\model\Support\SessionStorage;
 use Jorn\admin\model\Basket\Basket;

@@ -10,9 +10,56 @@ class ComposerStaticInit6a7b91ece681d4a9388290eac1d825c8
         '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
     );
 
+    public static $prefixLengthsPsr4 = array (
+        'J' => 
+        array (
+            'Jorn\\' => 5,
+        ),
+    );
+
+    public static $prefixDirsPsr4 = array (
+        'Jorn\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/admin',
+        ),
+    );
+
+    public static $classMap = array (
+        'Jorn\\admin\\model\\Actions\\FileActions' => __DIR__ . '/../..' . '/admin/model/Actions/FileActions.class.php',
+        'Jorn\\admin\\model\\Actions\\RUDActions' => __DIR__ . '/../..' . '/admin/model/Actions/RUDActions.class.php',
+        'Jorn\\admin\\model\\Actions\\UserActions' => __DIR__ . '/../..' . '/admin/model/Actions/UserActions.class.php',
+        'Jorn\\admin\\model\\Basket\\Basket' => __DIR__ . '/../..' . '/admin/model/Basket/Basket.class.php',
+        'Jorn\\admin\\model\\Basket\\QuantityExc' => __DIR__ . '/../..' . '/admin/model/Basket/QuantityExc.class.php',
+        'Jorn\\admin\\model\\Contacts\\Contact' => __DIR__ . '/../..' . '/admin/model/Contacts/Contact.class.php',
+        'Jorn\\admin\\model\\Content\\Categories' => __DIR__ . '/../..' . '/admin/model/Content/Categories.class.php',
+        'Jorn\\admin\\model\\Content\\Content' => __DIR__ . '/../..' . '/admin/model/Content/Content.class.php',
+        'Jorn\\admin\\model\\Content\\ContentWriter' => __DIR__ . '/../..' . '/admin/model/Content/ContentWriter.class.php',
+        'Jorn\\admin\\model\\Content\\Pages\\Page' => __DIR__ . '/../..' . '/admin/model/Content/Pages/Page.class.php',
+        'Jorn\\admin\\model\\Content\\Posts\\Post' => __DIR__ . '/../..' . '/admin/model/Content/Posts/Post.class.php',
+        'Jorn\\admin\\model\\Controller' => __DIR__ . '/../..' . '/admin/model/Controller.class.php',
+        'Jorn\\admin\\model\\Controller\\Controller' => __DIR__ . '/../..' . '/admin/model/Controller/Controller.class.php',
+        'Jorn\\admin\\model\\Customer\\Customer' => __DIR__ . '/../..' . '/admin/model/Customer/Customer.class.php',
+        'Jorn\\admin\\model\\DBC\\DBC' => __DIR__ . '/../..' . '/admin/model/DBC/DBC.class.php',
+        'Jorn\\admin\\model\\File\\File' => __DIR__ . '/../..' . '/admin/model/File/File.class.php',
+        'Jorn\\admin\\model\\File\\FileUpload' => __DIR__ . '/../..' . '/admin/model/File/FileUpload.class.php',
+        'Jorn\\admin\\model\\File\\FileWriter' => __DIR__ . '/../..' . '/admin/model/File/FileWriter.class.php',
+        'Jorn\\admin\\model\\File\\Folders' => __DIR__ . '/../..' . '/admin/model/File/Folders.class.php',
+        'Jorn\\admin\\model\\Order\\CustomerDetails' => __DIR__ . '/../..' . '/admin/model/Order/CustomerDetails.class.php',
+        'Jorn\\admin\\model\\Order\\Order' => __DIR__ . '/../..' . '/admin/model/Order/Order.class.php',
+        'Jorn\\admin\\model\\Order\\OrderDetails' => __DIR__ . '/../..' . '/admin/model/Order/OrderDetails.class.php',
+        'Jorn\\admin\\model\\Products\\Product' => __DIR__ . '/../..' . '/admin/model/Products/Product.class.php',
+        'Jorn\\admin\\model\\Support\\SessionStorage' => __DIR__ . '/../..' . '/admin/model/Support/SessionStorage.class.php',
+        'Jorn\\admin\\model\\Support\\StorageInterface' => __DIR__ . '/../..' . '/admin/model/Support/StorageInterface.class.php',
+        'Jorn\\admin\\model\\Users\\UserWriter' => __DIR__ . '/../..' . '/admin/model/Users/UserWriter.class.php',
+        'Jorn\\admin\\model\\Users\\Users' => __DIR__ . '/../..' . '/admin/model/Users/Users.class.php',
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
+            $loader->prefixLengthsPsr4 = ComposerStaticInit6a7b91ece681d4a9388290eac1d825c8::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit6a7b91ece681d4a9388290eac1d825c8::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit6a7b91ece681d4a9388290eac1d825c8::$classMap;
 
         }, null, ClassLoader::class);
     }

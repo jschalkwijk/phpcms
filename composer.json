@@ -5,5 +5,12 @@
     "require": {
         "swiftmailer/swiftmailer": "^5.4",
         "tinymce/tinymce": "= 4.1.7"
+    },
+
+    "autoload" : {
+        "psr-4" : {
+            "Jorn\\": "admin"
+        }
     }
+
 }

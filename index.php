@@ -10,7 +10,7 @@
 # Routing
 
 require_once('config.php');
-
+use \Jorn\admin\model\DBC\DBC;
 ob_start();
 
 class APP {

@@ -1,5 +1,6 @@
 <?php
 
+use Jorn\admin\model\Controller\Controller;
 use Jorn\admin\model\DBC\DBC;
 use Jorn\admin\model\Products\Product;
 use Jorn\admin\model\Basket\Basket;

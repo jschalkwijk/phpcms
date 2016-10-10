@@ -21,7 +21,6 @@ class DBC {
 	public function connect(){
 		// Create connection
 		$this->dbc = new mysqli($this->host, $this->user, $this->password, $this->name);
-
 		// Check connection
 		if ($this->dbc->connect_error) {
 			$this->connectERROR();

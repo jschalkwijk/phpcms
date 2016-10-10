@@ -1,6 +1,7 @@
 <?php
 
-use \Jorn\admin\model\users\Users as Usr;
+use Jorn\admin\model\Controller\Controller;
+use \Jorn\admin\model\Users\Users as Usr;
 use \Jorn\admin\model\DBC;
 
 class Users extends Controller {

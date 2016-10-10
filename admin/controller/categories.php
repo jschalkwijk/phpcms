@@ -1,5 +1,6 @@
 <?php
 
+use Jorn\admin\model\Controller\Controller;
 use Jorn\admin\model\Actions\UserActions;
 use \Jorn\admin\model\Content\Categories as Cat;
 
