@@ -2,71 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0a43c896-b199-4fd3-a7cd-831809ebb533" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/model/Controller/Controller.class.php" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/images/Word.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/images/account_male-128.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/images/add-post.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/images/atom-white.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/images/category.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/images/check.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/images/dec.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/images/delete-post.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/images/download.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/images/edit.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/images/files.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/images/fullscreen.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/images/help.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/images/hide.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/images/inc.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/images/logout-1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/images/logout.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/images/media.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/images/mute.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/images/next.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/images/pause.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/images/pdf.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/images/play.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/images/portfolio.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/images/previous.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/images/search-1.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/images/search-icon-white-one-hi.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/images/search-icon-white-one-md.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/images/sendmail.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/images/share.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/images/show.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/images/stop.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/images/trash-post.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/images/uncheck.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/rs-nav/menu-white.png" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/config.php" afterPath="$PROJECT_DIR$/admin/config.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/controller/NameSpees.php" afterPath="$PROJECT_DIR$/admin/controller/NameSpees.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/controller/albums.php" afterPath="$PROJECT_DIR$/admin/controller/albums.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/controller/cart.php" afterPath="$PROJECT_DIR$/admin/controller/cart.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/controller/categories.php" afterPath="$PROJECT_DIR$/admin/controller/categories.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/controller/contacts.php" afterPath="$PROJECT_DIR$/admin/controller/contacts.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/controller/dashboard.php" afterPath="$PROJECT_DIR$/admin/controller/dashboard.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/controller/downloads.php" afterPath="$PROJECT_DIR$/admin/controller/downloads.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/controller/example.php" afterPath="$PROJECT_DIR$/admin/controller/example.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/controller/file.php" afterPath="$PROJECT_DIR$/admin/controller/file.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/controller/login.php" afterPath="$PROJECT_DIR$/admin/controller/login.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/controller/order.php" afterPath="$PROJECT_DIR$/admin/controller/order.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/controller/pages.php" afterPath="$PROJECT_DIR$/admin/controller/pages.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/controller/posts.php" afterPath="$PROJECT_DIR$/admin/controller/posts.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/controller/products.php" afterPath="$PROJECT_DIR$/admin/controller/products.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/controller/profile.php" afterPath="$PROJECT_DIR$/admin/controller/profile.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/controller/search.php" afterPath="$PROJECT_DIR$/admin/controller/search.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/controller/users.php" afterPath="$PROJECT_DIR$/admin/controller/users.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/empty-controller.php" afterPath="$PROJECT_DIR$/admin/empty-controller.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/index.php" afterPath="$PROJECT_DIR$/admin/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/model/Controller.class.php" afterPath="$PROJECT_DIR$/admin/model/Controller.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/model/DBC/DBC.class.php" afterPath="$PROJECT_DIR$/admin/model/DBC/DBC.class.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.json" afterPath="$PROJECT_DIR$/composer.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config.php" afterPath="$PROJECT_DIR$/config.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.php" afterPath="$PROJECT_DIR$/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" afterPath="$PROJECT_DIR$/vendor/composer/autoload_classmap.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" afterPath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" />
     </list>
     <ignored path="CMS.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -88,86 +25,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="search.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/controller/search.php">
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.875">
-              <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.75728154">
+              <caret line="47" column="1" selection-start-line="47" selection-start-column="1" selection-end-line="47" selection-end-column="1" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="users.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/controller/users.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.75">
-              <caret line="14" column="5" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
-              <folding>
-                <element signature="e#7#50#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="config.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="config.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/config.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7070707">
-              <caret line="28" column="2" selection-start-line="28" selection-start-column="2" selection-end-line="28" selection-end-column="2" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="posts.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/controller/posts.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0">
-              <caret line="0" column="5" selection-start-line="0" selection-start-column="5" selection-end-line="0" selection-end-column="5" />
-              <folding>
-                <element signature="e#7#44#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Users.class.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/model/Users/Users.class.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.25">
-              <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
-              <folding>
-                <element signature="e#191#217#0#PHP" expanded="true" />
-                <marker date="1475598955000" expanded="true" signature="2661:2723" placeholder="SELECT * FRO... ${$dbt}" />
-                <marker date="1475598955000" expanded="true" signature="4091:4131" placeholder="SELECT * FRO... ${$dbt}" />
-                <marker date="1475598955000" expanded="true" signature="5987:6025" placeholder="SELECT * FRO... users" />
-                <marker date="1475598955000" expanded="true" signature="8679:8799" placeholder="INSERT into users... " />
-                <marker date="1475598955000" expanded="true" signature="10597:10635" placeholder="SELECT * FRO... users" />
-                <marker date="1475598955000" expanded="true" signature="11991:12177" placeholder="UPDATE users... " />
-                <marker date="1475598955000" expanded="true" signature="12224:12334" placeholder="UPDATE users... " />
-                <marker date="1475598955000" expanded="true" signature="12760:12807" placeholder="UPDATE users... " />
-                <marker date="1475598955000" expanded="true" signature="14018:14065" placeholder="UPDATE users... " />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="empty-controller.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/empty-controller.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.875">
-              <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="empty-method.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/empty-method.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.75">
-              <caret line="6" column="2" selection-start-line="6" selection-start-column="2" selection-end-line="6" selection-end-column="2" />
+            <state vertical-scroll-proportion="-10.0">
+              <caret line="16" column="46" selection-start-line="16" selection-start-column="46" selection-end-line="16" selection-end-column="46" />
               <folding />
             </state>
           </provider>
@@ -186,7 +58,6 @@
         <option value="$PROJECT_DIR$/admin/model/Users/Users.class.php" />
         <option value="$PROJECT_DIR$/admin/login.php" />
         <option value="$PROJECT_DIR$/admin/view/add-edit-user.php" />
-        <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/composer.lock" />
         <option value="$PROJECT_DIR$/admin/view/add-edit-post.php" />
         <option value="$PROJECT_DIR$/admin/view/add-edit-page.php" />
@@ -221,6 +92,7 @@
         <option value="$PROJECT_DIR$/admin/empty-controller.php" />
         <option value="$PROJECT_DIR$/admin/controller/users.php" />
         <option value="$PROJECT_DIR$/admin/config.php" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -295,24 +167,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="admin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CMS" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CMS" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="admin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controller" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -428,13 +282,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/vendor/swiftmailer/swiftmailer/lib/swift_required.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30201343">
-          <caret line="18" column="27" selection-start-line="18" selection-start-column="27" selection-end-line="18" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/swiftmailer/swiftmailer/README">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -790,7 +637,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/controller/search.php">
+    <entry file="file://$PROJECT_DIR$/admin/empty-controller.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.875">
           <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
@@ -798,9 +645,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/admin/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.5252526">
+          <caret line="100" column="1" selection-start-line="100" selection-start-column="1" selection-end-line="100" selection-end-column="1" />
+          <folding>
+            <element signature="e#7#186#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/empty-method.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.15151516">
+          <caret line="6" column="2" selection-start-line="6" selection-start-column="2" selection-end-line="6" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/admin/model/Users/Users.class.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.25">
+        <state vertical-scroll-proportion="0.25252524">
           <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
           <folding>
             <element signature="e#191#217#0#PHP" expanded="true" />
@@ -817,22 +682,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/empty-controller.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.875">
-          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/empty-method.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.75">
-          <caret line="6" column="2" selection-start-line="6" selection-start-column="2" selection-end-line="6" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/admin/controller/posts.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -843,19 +692,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.5252526">
-          <caret line="100" column="1" selection-start-line="100" selection-start-column="1" selection-end-line="100" selection-end-column="1" />
-          <folding>
-            <element signature="e#7#186#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/admin/controller/users.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.75">
+        <state vertical-scroll-proportion="0.35353535">
           <caret line="14" column="5" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
           <folding>
             <element signature="e#7#50#0#PHP" expanded="true" />
@@ -863,10 +702,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/admin/controller/search.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.07575758">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/admin/config.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7070707">
-          <caret line="28" column="2" selection-start-line="28" selection-start-column="2" selection-end-line="28" selection-end-column="2" />
+        <state vertical-scroll-proportion="-10.0">
+          <caret line="16" column="46" selection-start-line="16" selection-start-column="46" selection-end-line="16" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.75728154">
+          <caret line="47" column="1" selection-start-line="47" selection-start-column="1" selection-end-line="47" selection-end-column="1" />
           <folding />
         </state>
       </provider>
