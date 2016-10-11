@@ -12,6 +12,7 @@ define ('HOME','http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']));
 define ('HOST','http://'.$_SERVER['HTTP_HOST']);
 
 //class autoloader using PEAR naming convention
+// will be removed shortly
 spl_autoload_register(function ($class) {
 	if(file_exists('model/Encryption/Crypto.php') && file_exists('model/Encryption/autoload.php')){
 		// then use the encryption autoloader.
