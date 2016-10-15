@@ -13,7 +13,24 @@ define ('HOST','http://'.$_SERVER['HTTP_HOST']);
 
 //class autoloader using PEAR naming convention
 // will be removed shortly
+### !!!!!Waarom werkt mijn persoonlijke autoload in de composer.json file niet??? !!!!
 spl_autoload_register(function ($class) {
+	$path = str_replace('_', DIRECTORY_SEPARATOR, $class );
+	echo $path;
+	// loading non namespaced files.
+	if (file_exists('model/'.$path.'.class.php')) {
+		include_once 'model/'.$path.'.class.php';
+	} else {
+		// loading namespaces
+		$parts = explode('\\', $class);
+		unset($parts[0]);
+		unset($parts[1]);
+		$file = implode("/",$parts).'.class.php';
+		if (file_exists($file)) {;
+			require_once $file;
+		}
+ 	}
+
 	if(file_exists('model/Encryption/Crypto.php') && file_exists('model/Encryption/autoload.php')){
 		// then use the encryption autoloader.
 		require_once 'model/Encryption/autoload.php';
@@ -21,7 +38,10 @@ spl_autoload_register(function ($class) {
 });
 
 // Composer autoloader;
-require '../vendor/autoload.php';
+### !!!!Waarom werkt mijn persoonlijke autoload in de composer.json file niet??? !!!!!
+
+// deze moet nog even uit ivm de encryptie library;
+//require '../vendor/autoload.php';
 
 function login_authenticate() {
 	require_once('blocks/secure_login/authorize.php');

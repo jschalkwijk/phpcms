@@ -1,5 +1,5 @@
 <?php
-
+namespace Jorn\admin\model\DBC;
 class DBC {
 	/*
 	 * Simple DataBase Connection Class

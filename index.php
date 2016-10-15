@@ -11,6 +11,7 @@
 
 require_once('config.php');
 use \Jorn\admin\model\DBC\DBC;
+
 ob_start();
 
 class APP {
@@ -23,7 +24,6 @@ class APP {
 	// This method will deal with the controllers needed specified in the URL.
 	// The URL gets parsed by the url method
 	public function router(){
-		$dbc = new DBC;
 		// call URL metod to split the URL and add it to the class $this->routes.
 		$this->url();
 

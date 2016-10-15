@@ -19,7 +19,7 @@ spl_autoload_register(function ($class) {
 		// loading namespaces
 		$parts = explode('\\', $class);
 		unset($parts[0]);
-		unset($parts[1]);
+//		unset($parts[1]);
 		$file = implode("/",$parts).'.class.php';
 		if (file_exists($file)) {;
 			require_once $file;
