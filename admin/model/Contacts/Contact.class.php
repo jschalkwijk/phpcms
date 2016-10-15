@@ -5,7 +5,7 @@ namespace Jorn\admin\model\Contacts;
 use \Defuse\Crypto\Crypto;
 use \Defuse\Crypto\Exception as Ex;
 use Jorn\admin\model\DBC\DBC;
-use Jorn\admin\File\FileUpload;
+use Jorn\admin\model\File\FileUpload;
 
 class Contact {
 	private $id;
