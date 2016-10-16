@@ -1,4 +1,6 @@
 <?php
+
+use Jorn\model\DBC;
 class posts_Post {
 	private $id = 0;
 	protected $title;

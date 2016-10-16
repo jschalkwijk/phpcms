@@ -24,7 +24,7 @@ spl_autoload_register(function ($class) {
 		// loading namespaces
 		$parts = explode('\\', $class);
 		unset($parts[0]);
-		unset($parts[1]);
+//		unset($parts[1]);
 		$file = implode("/",$parts).'.class.php';
 		if (file_exists($file)) {;
 			require_once $file;
@@ -39,6 +39,10 @@ spl_autoload_register(function ($class) {
 
 // Composer autoloader;
 ### !!!!Waarom werkt mijn persoonlijke autoload in de composer.json file niet??? !!!!!
+### omdat ik twee verschillende index files heb voor de home en admin area
+### werkt de autloader niet goed. moet ik alleen de admin folder een composer dir hebben?
+## en die in de front nd verwijderen? of een index file hebben?
+
 
 // deze moet nog even uit ivm de encryptie library;
 //require '../vendor/autoload.php';

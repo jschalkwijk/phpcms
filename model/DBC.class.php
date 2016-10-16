@@ -1,5 +1,7 @@
 <?php
-namespace Jorn\admin\model\DBC;
+namespace Jorn\model;
+
+use mysqli;
 class DBC {
 	/*
 	 * Simple DataBase Connection Class
