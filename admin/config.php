@@ -30,9 +30,9 @@ spl_autoload_register(function ($class) {
 //		}
 // 	}
 
-	if(file_exists('model/Encryption/Crypto.php') && file_exists('model/Encryption/autoload.php')){
+	if(file_exists('CMS/model/Encryption/Crypto.php') && file_exists('CMS/model/Encryption/autoload.php')){
 		// then use the encryption autoloader.
-		require_once 'model/Encryption/autoload.php';
+		require_once 'CMS/model/Encryption/autoload.php';
 	}
 });
 
