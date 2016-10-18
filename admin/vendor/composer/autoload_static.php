@@ -4,27 +4,32 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitb36a8aedab6043519d1ae28e73a81f7a
+class ComposerStaticInit100ac0b7a95ecbde2545476f174db83f
 {
+    public static $files = array (
+        '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
+        '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
-        'J' => 
+        'C' => 
         array (
-            'Jorn\\' => 5,
+            'CMS\\' => 4,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Jorn\\' => 
+        'CMS\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/app/Jorn',
+            0 => __DIR__ . '/../..' . '/CMS',
         ),
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitb36a8aedab6043519d1ae28e73a81f7a::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitb36a8aedab6043519d1ae28e73a81f7a::$prefixDirsPsr4;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit100ac0b7a95ecbde2545476f174db83f::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit100ac0b7a95ecbde2545476f174db83f::$prefixDirsPsr4;
 
         }, null, ClassLoader::class);
     }

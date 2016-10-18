@@ -1,6 +1,6 @@
 <?php
-	use Jorn\admin\model\Content\Posts\Post;
-	use Jorn\admin\model\Users\UserWriter;
+	use CMS\model\Content\Posts\Post;
+	use CMS\model\Users\UserWriter;
 ?>
 <form class="search"action="<?php echo ADMIN."search";?>" method="post">
 	<input type="text" name="search" placeholder="Search for Users"/>

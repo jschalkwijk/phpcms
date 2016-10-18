@@ -1,4 +1,4 @@
-<?php use Jorn\admin\model\Users\UserWriter; ?>
+<?php use CMS\model\Users\UserWriter; ?>
 <p>De backend users moeten een shared encryptie key gebruiken voor de contactinformatie die zij
 	onderling moeten kunnen delen. Daarnaast moeten ze een eigen apparte key hebben voor persoonlijke notities etc.
 	Hoer goed over nadenken! de scheiding van admins en normale gebruikers moet echt goed in elkaar zitten.

@@ -1,12 +1,12 @@
 <?php
 
-use Jorn\admin\model\Content\Content;
-use Jorn\admin\model\Content\Posts\Post;
-use Jorn\admin\model\Controller\Controller;
+use CMS\model\Content\Content;
+use CMS\model\Content\Posts\Post;
+use CMS\model\Controller\Controller;
 
 class Posts extends Controller {
 	// import useractions trait
-	use \Jorn\admin\model\Actions\UserActions;
+	use \CMS\model\Actions\UserActions;
 	
 	public function index($params = null){
 		$posts = Content::fetchAll('posts',0);

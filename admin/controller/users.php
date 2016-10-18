@@ -1,12 +1,12 @@
 <?php
 
-use Jorn\admin\model\Controller\Controller;
-use \Jorn\admin\model\Users\Users as Usr;
-use \Jorn\admin\model\DBC;
+use CMS\model\Controller\Controller;
+use \CMS\model\Users\Users as Usr;
+use \CMS\model\DBC;
 
 class Users extends Controller {
 
-	use \Jorn\admin\model\Actions\UserActions;
+	use \CMS\model\Actions\UserActions;
 
 	public function index($params = null){
 		$users = Usr::fetchUsers('users',0);

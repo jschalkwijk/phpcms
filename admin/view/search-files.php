@@ -1,6 +1,6 @@
 <?php
-	use Jorn\admin\model\File\File;
-	use Jorn\admin\model\File\FileWriter;
+	use CMS\model\File\File;
+	use CMS\model\File\FileWriter;
 ?>
 
 <form class="search"action="<?php echo ADMIN."search"; ?>" method="post">

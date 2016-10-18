@@ -1,5 +1,5 @@
 <?php
-	use Jorn\admin\model\DBC\DBC;
+	use CMS\model\DBC\DBC;
 	$dbc = new DBC;
 	if(isset($_POST['search-post'])){
 		$keywords = mysqli_real_escape_string($dbc->connect(),htmlentities(trim($_POST['search'])));

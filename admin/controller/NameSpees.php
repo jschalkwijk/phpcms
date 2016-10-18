@@ -1,6 +1,6 @@
 <?php
 
-use Jorn\admin\model\Controller\Controller;
+use CMS\model\Controller\Controller;
 
 class NameSpees extends Controller {
     public function index($params = null){

@@ -1,11 +1,11 @@
 <?php
 
-use Jorn\admin\model\Controller\Controller;
-use Jorn\admin\model\DBC\DBC;
-use Jorn\admin\model\Products\Product;
-use Jorn\admin\model\Basket\Basket;
-use Jorn\admin\model\Basket\QuantityExc;
-use Jorn\admin\model\Support\SessionStorage;
+use CMS\model\Controller\Controller;
+use CMS\model\DBC\DBC;
+use CMS\model\Products\Product;
+use CMS\model\Basket\Basket;
+use CMS\model\Basket\QuantityExc;
+use CMS\model\Support\SessionStorage;
 
 class Cart extends Controller {
 

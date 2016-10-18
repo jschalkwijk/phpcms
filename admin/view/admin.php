@@ -1,6 +1,14 @@
 <?php
-	use Jorn\admin\model\Content\ContentWriter;
-	use Jorn\admin\model\Users\UserWriter;
+	use CMS\model\Content\ContentWriter;
+	use CMS\model\Users\UserWriter;
+	use CMS\models\Test\Test;
+use CMS\models\Testing\Testing;
+use CMS\models\Beta\Beta;
+ 
+
+$test = new Test;
+$testing = new Testing;
+$beta = new Beta;
 ?>
 <div class="container-fluid">
 	<div class="row">

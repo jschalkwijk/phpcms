@@ -1,6 +1,6 @@
 <?php
-use Jorn\admin\model\File\FileUpload;
-use Jorn\admin\model\File\Folders;
+use CMS\model\File\FileUpload;
+use CMS\model\File\Folders;
 
 	$file_dest = 'files/';
 	$thumb_dest= 'files/thumbs/';

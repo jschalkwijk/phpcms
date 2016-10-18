@@ -1,6 +1,6 @@
 <?php
 
-use Jorn\admin\model\Controller\Controller;
+use CMS\model\Controller\Controller;
 
 class Profile extends Controller{
 	public function index(){

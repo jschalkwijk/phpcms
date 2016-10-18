@@ -1,6 +1,6 @@
 <?php
 
-use Jorn\admin\model\Controller\Controller;
+use CMS\model\Controller\Controller;
 
 class Downloads {
 	public function Index($params = null){
