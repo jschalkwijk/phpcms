@@ -7,6 +7,6 @@
 	
 	"require": {
         "swiftmailer/swiftmailer": "^5.4",
-        "tinymce/tinymce": "= 4.1.7"
+		"tinymce/tinymce": "^4.4"
     }
-}	
+}

@@ -1,8 +1,8 @@
 <?php 
 	// define application constants
 
-	define ('IMG_PATH','/images/');
-	define ('FILE_PATH', '/files/');
+	define ('IMG_PATH','/cms/images/');
+	define ('FILE_PATH', '/cms/files/');
 	define ('DB_HOST','localhost');
 	define ('DB_USER','root');
 	define ('DB_PASSWORD', '');

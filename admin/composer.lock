@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ad5eb2ceeff24c737ef5222834d50304",
-    "content-hash": "6513da78f4d10fa762e155df5bf57b85",
+    "hash": "ee9ada9f9f7493e2ebe0c6d2ad4f44bd",
+    "content-hash": "5dca77a3d6690abeb431755ba1dc3019",
     "packages": [
         {
             "name": "paragonie/random_compat",
@@ -110,19 +110,34 @@
         },
         {
             "name": "tinymce/tinymce",
-            "version": "4.1.7",
+            "version": "4.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tinymce/tinymce-dist.git",
-                "reference": "555fcfa1a09e93732a51950ba3d731050f31d39a"
+                "reference": "5d763d8b00bf7bb0f5020b5e9a6e7a602fefa8ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tinymce/tinymce-dist/zipball/555fcfa1a09e93732a51950ba3d731050f31d39a",
-                "reference": "555fcfa1a09e93732a51950ba3d731050f31d39a",
+                "url": "https://api.github.com/repos/tinymce/tinymce-dist/zipball/5d763d8b00bf7bb0f5020b5e9a6e7a602fefa8ac",
+                "reference": "5d763d8b00bf7bb0f5020b5e9a6e7a602fefa8ac",
                 "shasum": ""
             },
-            "type": "library",
+            "type": "component",
+            "extra": {
+                "component": {
+                    "scripts": [
+                        "tinymce.js",
+                        "plugins/*/plugin.js",
+                        "themes/*/theme.js"
+                    ],
+                    "files": [
+                        "tinymce.min.js",
+                        "plugins/*/plugin.min.js",
+                        "themes/*/theme.min.js",
+                        "skins/**"
+                    ]
+                }
+            },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "LGPL-2.1"
@@ -137,7 +152,7 @@
                 "tinymce",
                 "wysiwyg"
             ],
-            "time": "2014-11-27 13:24:16"
+            "time": "2016-09-01 11:11:25"
         }
     ],
     "packages-dev": [],

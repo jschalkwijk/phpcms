@@ -60,7 +60,6 @@ class Posts extends Controller {
 	//
 	public function EditPosts($params = null){
 		$scripts = [
-			JS.'tinymce/tinymce.min.js',
 			JS.'tinyMCEsettings.js',
 			JS.'mceAddons.js',
 			JS.'checkAll.js'
