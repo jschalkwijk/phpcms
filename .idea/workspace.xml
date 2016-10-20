@@ -2,185 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0a43c896-b199-4fd3-a7cd-831809ebb533" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Actions\FileActions.class.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Actions\RUDActions.class.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Actions\UserActions.class.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Actions\index.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Basket\Basket.class.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Basket\QuantityExc.class.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Basket\index.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Contacts\Contact.class.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Contacts\index.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Content\Categories.class.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Content\Content.class.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Content\ContentWriter.class.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Content\index.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Content\pages\Page.class.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Content\pages\index.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Content\posts\Post.class.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Content\posts\index.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Controller.class.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Controller\Controller.class.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Customer\Customer.class.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\DBC\DBC.class.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Encrypt.class.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Encryption\.travis.yml" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Encryption\Crypto.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Encryption\README.md" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Encryption\autoload.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Encryption\benchmark.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Encryption\composer.json" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Encryption\example.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Encryption\index.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Encryption\new_key.txt" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Encryption\src\Crypto.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Encryption\src\ExceptionHandler.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Encryption\src\Exception\CannotPerformOperationException.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Encryption\src\Exception\CryptoException.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Encryption\src\Exception\CryptoTestFailedException.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Encryption\src\Exception\InvalidCiphertextException.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Encryption\src\index.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Encryption\test.sh" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Encryption\tests\empty.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Encryption\tests\encode.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Encryption\tests\index.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Encryption\tests\runtime.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\File\File.class.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\File\FileUpload.class.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\File\FileWriter.class.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\File\Folders.class.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\File\index.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Login\Login.class.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Login\index.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Order\CustomerDetails.class.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Order\Order.class.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Order\OrderDetails.class.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Products\Product.class.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Products\index.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Support\SessionStorage.class.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Support\StorageInterface.class.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Support\index.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Users.class.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Users\UserWriter.class.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Users\Users.class.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\Users\index.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\index.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\rmdir.func.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\template\Template.class.php" afterPath="" />
-      <change type="DELETED" beforePath="C:\wamp\www\cms\admin\model\template\index.php" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/media/moxieplayer.swf" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/media/moxieplayer.swf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/skins/lightgray/fonts/tinymce-small.eot" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/skins/lightgray/fonts/tinymce-small.eot" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/skins/lightgray/fonts/tinymce-small.ttf" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/skins/lightgray/fonts/tinymce-small.ttf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/skins/lightgray/fonts/tinymce-small.woff" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/skins/lightgray/fonts/tinymce-small.woff" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/skins/lightgray/fonts/tinymce.eot" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/skins/lightgray/fonts/tinymce.eot" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/skins/lightgray/fonts/tinymce.ttf" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/skins/lightgray/fonts/tinymce.ttf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/skins/lightgray/fonts/tinymce.woff" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/skins/lightgray/fonts/tinymce.woff" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/.npmignore" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/.npmignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/view/add-edit-post.php" afterPath="$PROJECT_DIR$/admin/view/add-edit-post.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/bower.json" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/bower.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/changelog.txt" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/changelog.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/composer.json" afterPath="$PROJECT_DIR$/admin/composer.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/composer.json" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/composer.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/composer.lock" afterPath="$PROJECT_DIR$/admin/composer.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config.php" afterPath="$PROJECT_DIR$/config.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/skins/lightgray/content.inline.min.css" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/skins/lightgray/content.inline.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/skins/lightgray/content.min.css" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/skins/lightgray/content.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/composer/installed.json" afterPath="$PROJECT_DIR$/admin/vendor/composer/installed.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/jquery.tinymce.min.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/jquery.tinymce.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/package.json" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/advlist/plugin.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/advlist/plugin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/anchor/plugin.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/anchor/plugin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/autolink/plugin.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/autolink/plugin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/autoresize/plugin.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/autoresize/plugin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/autosave/plugin.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/autosave/plugin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/bbcode/plugin.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/bbcode/plugin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/charmap/plugin.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/charmap/plugin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/code/plugin.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/code/plugin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/colorpicker/plugin.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/colorpicker/plugin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/contextmenu/plugin.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/contextmenu/plugin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/directionality/plugin.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/directionality/plugin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/emoticons/plugin.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/emoticons/plugin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/fullpage/plugin.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/fullpage/plugin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/fullscreen/plugin.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/fullscreen/plugin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/hr/plugin.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/hr/plugin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/image/plugin.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/image/plugin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/importcss/plugin.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/importcss/plugin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/insertdatetime/plugin.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/insertdatetime/plugin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/layer/plugin.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/layer/plugin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/legacyoutput/plugin.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/legacyoutput/plugin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/link/plugin.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/link/plugin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/lists/plugin.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/lists/plugin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/media/plugin.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/media/plugin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/nonbreaking/plugin.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/nonbreaking/plugin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/noneditable/plugin.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/noneditable/plugin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/pagebreak/plugin.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/pagebreak/plugin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/paste/plugin.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/paste/plugin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/preview/plugin.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/preview/plugin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/print/plugin.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/print/plugin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/save/plugin.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/save/plugin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/searchreplace/plugin.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/searchreplace/plugin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/spellchecker/plugin.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/spellchecker/plugin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/tabfocus/plugin.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/tabfocus/plugin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/table/plugin.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/table/plugin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/template/plugin.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/template/plugin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/textcolor/plugin.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/textcolor/plugin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/textpattern/plugin.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/textpattern/plugin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/visualblocks/plugin.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/visualblocks/plugin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/visualchars/plugin.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/visualchars/plugin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/wordcount/plugin.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/wordcount/plugin.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/advlist/plugin.min.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/advlist/plugin.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/anchor/plugin.min.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/anchor/plugin.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/autolink/plugin.min.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/autolink/plugin.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/autoresize/plugin.min.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/autoresize/plugin.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/autosave/plugin.min.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/autosave/plugin.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/bbcode/plugin.min.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/bbcode/plugin.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/charmap/plugin.min.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/charmap/plugin.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/code/plugin.min.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/code/plugin.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/colorpicker/plugin.min.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/colorpicker/plugin.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/contextmenu/plugin.min.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/contextmenu/plugin.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/directionality/plugin.min.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/directionality/plugin.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/emoticons/plugin.min.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/emoticons/plugin.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/fullpage/plugin.min.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/fullpage/plugin.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/fullscreen/plugin.min.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/fullscreen/plugin.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/hr/plugin.min.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/hr/plugin.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/image/plugin.min.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/image/plugin.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/importcss/plugin.min.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/importcss/plugin.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/insertdatetime/plugin.min.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/insertdatetime/plugin.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/layer/plugin.min.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/layer/plugin.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/legacyoutput/plugin.min.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/legacyoutput/plugin.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/link/plugin.min.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/link/plugin.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/lists/plugin.min.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/lists/plugin.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/media/plugin.min.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/media/plugin.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/nonbreaking/plugin.min.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/nonbreaking/plugin.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/noneditable/plugin.min.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/noneditable/plugin.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/pagebreak/plugin.min.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/pagebreak/plugin.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/paste/plugin.min.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/paste/plugin.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/preview/plugin.min.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/preview/plugin.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/print/plugin.min.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/print/plugin.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/save/plugin.min.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/save/plugin.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/searchreplace/plugin.min.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/searchreplace/plugin.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/spellchecker/plugin.min.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/spellchecker/plugin.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/tabfocus/plugin.min.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/tabfocus/plugin.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/table/plugin.min.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/table/plugin.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/template/plugin.min.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/template/plugin.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/textcolor/plugin.min.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/textcolor/plugin.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/textpattern/plugin.min.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/textpattern/plugin.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/visualblocks/plugin.min.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/visualblocks/plugin.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/visualchars/plugin.min.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/visualchars/plugin.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/wordcount/plugin.min.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/wordcount/plugin.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/controller/posts.php" afterPath="$PROJECT_DIR$/admin/controller/posts.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/readme.md" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/readme.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/skins/lightgray/skin.ie7.min.css" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/skins/lightgray/skin.ie7.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/skins/lightgray/skin.min.css" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/skins/lightgray/skin.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/themes/modern/theme.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/themes/modern/theme.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/themes/modern/theme.min.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/themes/modern/theme.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/skins/lightgray/fonts/tinymce-small.svg" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/skins/lightgray/fonts/tinymce-small.svg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/tinymce.jquery.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/tinymce.jquery.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/tinymce.jquery.min.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/tinymce.jquery.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/tinymce.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/tinymce.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/tinymce.min.js" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/tinymce.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/skins/lightgray/fonts/tinymce.svg" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/skins/lightgray/fonts/tinymce.svg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/visualblocks/css/visualblocks.css" afterPath="$PROJECT_DIR$/admin/vendor/tinymce/tinymce/plugins/visualblocks/css/visualblocks.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="CMS.iws" />
@@ -206,7 +27,7 @@
       <file leaf-file-name="blog.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/view/blog.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.1923075">
+            <state vertical-scroll-proportion="0.0">
               <caret line="11" column="83" selection-start-line="11" selection-start-column="83" selection-end-line="11" selection-end-column="83" />
               <folding />
             </state>
@@ -216,7 +37,7 @@
       <file leaf-file-name="config.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/config.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.15246637">
+            <state vertical-scroll-proportion="0.098265894">
               <caret line="4" column="31" selection-start-line="4" selection-start-column="31" selection-end-line="4" selection-end-column="31" />
               <folding />
             </state>
@@ -326,6 +147,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -346,7 +168,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -433,14 +254,14 @@
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30912596" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.312982" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32885906" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32885906" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -473,10 +294,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="11" column="6" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
-          <folding>
-            <marker date="1476812720989" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..users..." />
-            <marker date="1476812720989" expanded="true" signature="-1:-1" placeholder="UPDATE users..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -484,18 +301,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
-          <folding>
-            <element signature="e#184#210#0#PHP" expanded="true" />
-            <marker date="1476796337307" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..." />
-            <marker date="1476796337307" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..." />
-            <marker date="1476796337307" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..users..." />
-            <marker date="1476796337307" expanded="true" signature="-1:-1" placeholder="INSERT into ..." />
-            <marker date="1476796337307" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..users..." />
-            <marker date="1476796337307" expanded="true" signature="-1:-1" placeholder="UPDATE users..." />
-            <marker date="1476796337307" expanded="true" signature="-1:-1" placeholder="UPDATE users..." />
-            <marker date="1476796337307" expanded="true" signature="-1:-1" placeholder="UPDATE users..." />
-            <marker date="1476796337307" expanded="true" signature="-1:-1" placeholder="UPDATE users..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -503,9 +308,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="94" column="22" selection-start-line="94" selection-start-column="19" selection-end-line="94" selection-end-column="22" />
-          <folding>
-            <element signature="e#7#163#0#PHP" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -562,7 +364,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.3076923">
           <caret line="2" column="43" selection-start-line="2" selection-start-column="43" selection-end-line="2" selection-end-column="43" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -570,7 +371,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.65384614">
           <caret line="2" column="43" selection-start-line="2" selection-start-column="43" selection-end-line="2" selection-end-column="43" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -578,9 +378,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-3.9230769">
           <caret line="7" column="46" selection-start-line="7" selection-start-column="46" selection-end-line="7" selection-end-column="46" />
-          <folding>
-            <element signature="e#7#43#0#PHP" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -588,7 +385,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -596,7 +392,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.3076923">
           <caret line="2" column="4" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -618,9 +413,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.04920405">
           <caret line="2" column="4" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="8" />
-          <folding>
-            <element signature="e#7#43#0#PHP" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -656,9 +448,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.17221418">
           <caret line="7" column="20" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
-          <folding>
-            <element signature="e#39#76#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -673,7 +462,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.5499276">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -688,7 +476,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.6415094">
           <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -696,7 +483,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.3076923">
           <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -704,7 +490,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.3076923">
           <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -712,7 +497,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.3076923">
           <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -720,7 +504,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.8867924">
           <caret line="9" column="2" selection-start-line="9" selection-start-column="2" selection-end-line="9" selection-end-column="2" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -728,7 +511,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.24602026">
           <caret line="10" column="2" selection-start-line="10" selection-start-column="2" selection-end-line="10" selection-end-column="2" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -736,7 +518,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.04920405">
           <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -751,9 +532,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="94" column="22" selection-start-line="94" selection-start-column="19" selection-end-line="94" selection-end-column="22" />
-          <folding>
-            <element signature="e#7#163#0#PHP" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -761,9 +539,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="14" column="5" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
-          <folding>
-            <element signature="e#6#42#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -771,10 +546,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="11" column="6" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
-          <folding>
-            <marker date="1476812720989" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..users..." />
-            <marker date="1476812720989" expanded="true" signature="-1:-1" placeholder="UPDATE users..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -782,18 +553,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="10" column="4" selection-start-line="10" selection-start-column="4" selection-end-line="10" selection-end-column="4" />
-          <folding>
-            <element signature="e#184#210#0#PHP" expanded="true" />
-            <marker date="1476796337307" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..." />
-            <marker date="1476796337307" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..." />
-            <marker date="1476796337307" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..users..." />
-            <marker date="1476796337307" expanded="true" signature="-1:-1" placeholder="INSERT into ..." />
-            <marker date="1476796337307" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..users..." />
-            <marker date="1476796337307" expanded="true" signature="-1:-1" placeholder="UPDATE users..." />
-            <marker date="1476796337307" expanded="true" signature="-1:-1" placeholder="UPDATE users..." />
-            <marker date="1476796337307" expanded="true" signature="-1:-1" placeholder="UPDATE users..." />
-            <marker date="1476796337307" expanded="true" signature="-1:-1" placeholder="UPDATE users..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -801,24 +560,22 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-11.115385">
           <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/composer.lock">
-      <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
+      </provider>
+      <provider editor-type-id="com.intellij.database.editor.CsvTableFileEditorProvider">
+        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/view/blog.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.1923075">
+        <state vertical-scroll-proportion="0.0">
           <caret line="11" column="83" selection-start-line="11" selection-start-column="83" selection-end-line="11" selection-end-column="83" />
           <folding />
         </state>
@@ -848,7 +605,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.4573991">
           <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -856,7 +612,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-3.2692308">
           <caret line="5" column="29" selection-start-line="5" selection-start-column="29" selection-end-line="5" selection-end-column="29" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -864,7 +619,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.15246637">
           <caret line="4" column="55" selection-start-line="4" selection-start-column="55" selection-end-line="4" selection-end-column="55" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -872,7 +626,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.2286996">
           <caret line="61" column="20" selection-start-line="61" selection-start-column="20" selection-end-line="61" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -880,13 +633,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6786517">
           <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/config.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.15246637">
+        <state vertical-scroll-proportion="0.098265894">
           <caret line="4" column="31" selection-start-line="4" selection-start-column="31" selection-end-line="4" selection-end-column="31" />
           <folding />
         </state>

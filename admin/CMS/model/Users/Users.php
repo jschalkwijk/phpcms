@@ -373,7 +373,7 @@ if(file_exists('././keys/User/'.$_SESSION['username'].'.txt')){
 						$hash = password_hash($new_password, PASSWORD_BCRYPT);
 						$query2 = $dbc->prepare("UPDATE users SET password = ? WHERE user_id = ?");
 						if($query2){
-							$query2->bind_param("si",$hash,$id);
+							$query2->bind_param("si",$hash,$user_id);
 							$query2->execute();
 							$query2->close();
 						} else {
