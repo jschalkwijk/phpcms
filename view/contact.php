@@ -1,8 +1,6 @@
 <?php
 
 if(isset($_POST['submit'])) {
-//	require_once('packages/swiftmailer5/lib/swift_required.php');
-
 	$dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 
 	// mail to admin
@@ -24,12 +22,12 @@ if(isset($_POST['submit'])) {
 	$message1 .= '</table>';
 	$message1 .= '</body></html>';
 
-	$transport = Swift_MailTransport::newInstance();
-	$mailer = Swift_Mailer::newInstance($transport);
-	$message1 = Swift_Message::newInstance()
+	$transport = \Swift_MailTransport::newInstance();
+	$mailer = \Swift_Mailer::newInstance($transport);
+	$message1 = \Swift_Message::newInstance()
 		->setFrom(array($from,))
 		->setTo(array($to))
-		->setEncoder(Swift_Encoding::get7BitEncoding())
+		->setEncoder(\Swift_Encoding::get7BitEncoding())
 		->setSubject($subject)
 		->setBody($message1, 'text/html')
 		->addPart($message1, 'text/html')//	->attach(Swift_Attachment::fromPath($pdf,$type))

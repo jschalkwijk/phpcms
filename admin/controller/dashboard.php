@@ -1,9 +1,9 @@
 <?php
 
-use Jorn\admin\model\Controller\Controller;
-use Jorn\admin\model\Content\Content;
-use Jorn\admin\model\Actions\UserActions;
-use Jorn\admin\model\Users\Users;
+use CMS\model\Controller\Controller;
+use CMS\model\Content\Content;
+use CMS\model\Actions\UserActions;
+use CMS\model\Users\Users;
 
 class Dashboard extends Controller {
 	/*

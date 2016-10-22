@@ -1,6 +1,6 @@
 <?php
 
-use Jorn\admin\model\Controller\Controller;
+use CMS\model\Controller\Controller;
 
 class Search extends Controller {
 	public function Index($params = null){

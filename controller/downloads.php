@@ -1,4 +1,5 @@
 <?php
+use CMS\model\Controller\Controller;
 
 class Downloads extends Controller {
 

@@ -1,4 +1,5 @@
 <?php
+	use CMS\model\Controller\Controller;
 	class iLearnMore extends Controller {
 
 	public function index($params = null){

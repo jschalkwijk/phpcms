@@ -1,9 +1,9 @@
 <?php
 
-use Jorn\admin\model\Controller\Controller;
-use Jorn\admin\model\Actions\UserActions;
-use Jorn\admin\model\Products\Product;
-use Jorn\admin\model\File\File;
+use CMS\model\Controller\Controller;
+use CMS\model\Actions\UserActions;
+use CMS\model\Products\Product;
+use CMS\model\File\File;
 
 class Products extends Controller{
 	use UserActions;

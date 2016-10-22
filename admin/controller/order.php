@@ -1,12 +1,12 @@
 <?php
 
-use Jorn\admin\model\Controller\Controller;
-use Jorn\admin\model\Support\SessionStorage;
-use Jorn\admin\model\Basket\Basket;
-use Jorn\admin\model\Customer\Customer;
-use Jorn\admin\model\Order\CustomerDetails;
-use Jorn\admin\model\Order\OrderDetails;
-use Jorn\admin\model\Order\Order as Ordr;
+use CMS\model\Controller\Controller;
+use CMS\model\Support\SessionStorage;
+use CMS\model\Basket\Basket;
+use CMS\model\Customer\Customer;
+use CMS\model\Order\CustomerDetails;
+use CMS\model\Order\OrderDetails;
+use CMS\model\Order\Order as Ordr;
 
 class Order extends Controller{
     private $customer;

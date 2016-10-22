@@ -1,4 +1,4 @@
-<?php use Jorn\admin\model\Content\ContentWriter; ?>
+<?php use CMS\model\Content\ContentWriter; ?>
 
 <div class="container">
 	<table class="backend-table title">

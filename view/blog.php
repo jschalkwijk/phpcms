@@ -10,7 +10,7 @@ foreach($posts as $post){
 		<p class="article-meta"><img class="glyph-small" src="<?php echo IMG_PATH.'author.png' ?>"/>
 			<span><?php echo $post->getAuthor(); ?></span> <img class="glyph-small" src="<?php echo IMG_PATH.'time.png'; ?>"/>
 			<img class="glyph-small" src="<?php echo IMG_PATH.'category.png'; ?>"/>
-			<span><a a href="<?php echo HOST.'/blog/category/'.$post->getCategoryID().'/'.$post->getCategory(); ?>"><?php echo $post->getCategory(); ?></a></span>
+			<span><a a href="<?php echo HOST.'/blog/category/'.$post->getCategory().'/'.$post->getCategory(); ?>"><?php echo $post->getCategory(); ?></a></span>
 			<img class="glyph-small" src="<?php echo IMG_PATH.'comments.png'; ?>"/>
 			<span> 5 </span>
 		</p>

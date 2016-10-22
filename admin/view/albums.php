@@ -1,8 +1,8 @@
 <?php
-	use Jorn\admin\model\File\File;
-	use Jorn\admin\model\File\FileWriter;
-	use Jorn\admin\model\File\Folders;
-	use Jorn\admin\model\DBC\DBC;
+	use CMS\model\File\File;
+	use CMS\model\File\FileWriter;
+	use CMS\model\File\Folders;
+	use CMS\model\DBC\DBC;
 ?>
 <div class="container large">
 	<?php

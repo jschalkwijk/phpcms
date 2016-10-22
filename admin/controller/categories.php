@@ -1,8 +1,8 @@
 <?php
 
-use Jorn\admin\model\Controller\Controller;
-use Jorn\admin\model\Actions\UserActions;
-use \Jorn\admin\model\Content\Categories as Cat;
+use CMS\model\Controller\Controller;
+use CMS\model\Actions\UserActions;
+use \CMS\model\Content\Categories as Cat;
 
 class Categories extends Controller{
 	

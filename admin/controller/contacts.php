@@ -1,11 +1,11 @@
 <?php
 
-use Jorn\admin\model\Controller\Controller;
-use \Jorn\admin\model\Contacts\Contact;
+use CMS\model\Controller\Controller;
+use \CMS\model\Contacts\Contact;
 
 class Contacts extends Controller {
 	// import the remove/update/
-	use \Jorn\admin\model\Actions\UserActions;
+	use \CMS\model\Actions\UserActions;
 	
 	public function index($params = null){
 		$this->UserActions('contacts');

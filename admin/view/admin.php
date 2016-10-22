@@ -1,6 +1,6 @@
 <?php
-	use Jorn\admin\model\Content\ContentWriter;
-	use Jorn\admin\model\Users\UserWriter;
+	use CMS\model\Content\ContentWriter;
+	use CMS\model\Users\UserWriter;
 ?>
 <div class="container-fluid">
 	<div class="row">

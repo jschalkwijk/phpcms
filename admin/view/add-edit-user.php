@@ -1,6 +1,6 @@
 <?php
-	use Jorn\admin\model\File\Folders;
-	$dbc = new \Jorn\admin\model\DBC\DBC;
+	use CMS\model\File\Folders;
+	$dbc = new \CMS\model\DBC\DBC;
 
 	$user = $data['user'];
 	

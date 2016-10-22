@@ -1,7 +1,7 @@
 <?php
 	ob_start();
 	require_once('config.php');
-	use Jorn\admin\model\DBC\DBC;
+	use CMS\model\DBC\DBC;
 ?>
 <!DOCTYPE html>
 <html>
@@ -13,7 +13,7 @@
 
 <?php
 	// for some reason the autoloader does not work on this page for the crypto class..
-	require_once 'model/Encryption/Crypto.php';
+	require_once 'CMS/model/Encryption/Crypto.php';
 	$output_form = False;
 	session_start();
 	// prevent session hijacking
