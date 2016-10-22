@@ -28,6 +28,6 @@
 	?>
 </div><br/>
 	<div class="container large">
-		<button id="check-all"><img class="glyph-small" src="<?php echo IMG."check.png"; ?>"/></button>
+		<button id="check-all"><img class="glyph-small" src="<?= IMG."check.png"; ?>"/></button>
 		<?php Folders::show_albums($album_id); ?>
 	</div>

@@ -81,7 +81,7 @@
 	// if there is no user logged in and if the form isnt submitted yet, or if output_form is true, show form.
 	if ($output_form) { ?>
 		<div class="container">
-			<form id="login" action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" enctype="mulipart/form-data">
+			<form id="login" action="<?= $_SERVER['PHP_SELF'];?>" method="post" enctype="mulipart/form-data">
 				<input type="text" name="username" placeholder="Username"/><br />
 				<input type="password" name="password" placeholder="Password"/><br />
 				<input type="checkbox" name="remember"/><span> Remember me today.</span><br />

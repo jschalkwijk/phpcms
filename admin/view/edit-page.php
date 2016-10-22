@@ -1,6 +1,6 @@
 <?php use CMS\model\DBC\DBC; ?>
 
-<script type="text/javascript" src="<?php echo JS."tinymce/tinymce.min.js"; ?>"></script>
+<script type="text/javascript" src="<?= JS."tinymce/tinymce.min.js"; ?>"></script>
 <script type="text/javascript">
 tinymce.init({
     selector: "textarea",
@@ -48,11 +48,11 @@ if (isset($id) && isset($title)) {
 	$query = "SELECT * FROM pages WHERE id = $id";
 	$data = mysqli_query($dbc->connect(),$query);
 	while($row = mysqli_fetch_array($data)) { ?>
-	<form id="edit-form"method="post" action="<?php echo ADMIN."edit-pages.php"; ?>">
-		<input type="hidden" name="id" value="<?php echo $row['id'];?>"/>
-	<input type="text" name="title" value="<?php echo $row['title'];?>"/><br />
+	<form id="edit-form"method="post" action="<?= ADMIN."edit-pages.php"; ?>">
+		<input type="hidden" name="id" value="<?= $row['id'];?>"/>
+	<input type="text" name="title" value="<?= $row['title'];?>"/><br />
 	<input type="text" name="page_desc" placeholder="Page Description (max 160 characters)" value="<?php if(!empty($row['description'])){ echo $row['description']; }?>"/><br />
-	<textarea type="text" name="content"><?php echo $row['content']?></textarea><br />
+	<textarea type="text" name="content"><?= $row['content']?></textarea><br />
 	<p>Are you sure you want to edit the following page?</p>
 	<input type="radio" name="confirm" value="Yes" /> Yes
 	<input type="radio" name="confirm" value="No" checked="checked" /> No <br />

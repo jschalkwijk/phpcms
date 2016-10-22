@@ -3,7 +3,7 @@
 	use CMS\model\File\FileWriter;
 ?>
 
-<form class="search"action="<?php echo ADMIN."search"; ?>" method="post">
+<form class="search"action="<?= ADMIN."search"; ?>" method="post">
 	<input type="text" name="search" placeholder="Search files"/>
 	<button type="submit" name="search-file">Search</button>
 </form>

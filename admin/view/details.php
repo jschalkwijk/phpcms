@@ -5,9 +5,9 @@ if(!empty($data['customer'])) {
 }
 ?>
 <div class="container center">
-    <a class ="link-btn" href="<?php echo ADMIN."order/"?>"><span>&larr;</span> Change Details</a>
-    <a class ="link-btn" href="<?php echo ADMIN."order/details"?>">Summary</a>
-    <a class ="link-btn" href="<?php echo ADMIN."order/payment"?>">Payment <span>&rarr;</span></a>
+    <a class ="link-btn" href="<?= ADMIN."order/"?>"><span>&larr;</span> Change Details</a>
+    <a class ="link-btn" href="<?= ADMIN."order/details"?>">Summary</a>
+    <a class ="link-btn" href="<?= ADMIN."order/payment"?>">Payment <span>&rarr;</span></a>
 </div>
 <div class="container center">
     <div class="row">
@@ -37,18 +37,18 @@ if(!empty($data['customer'])) {
         <?php foreach($this->basket->all() as $product){ ?>
             <tr>
                 <td class="td-title">
-                    <a href="<?php echo ADMIN.'products/info/'.$product->getID().'/'.$product->getName(); ?>"><?php echo $product->getName(); ?></a>
+                    <a href="<?= ADMIN.'products/info/'.$product->getID().'/'.$product->getName(); ?>"><?= $product->getName(); ?></a>
                 </td>
                 <td class="td-category">
-                    <span><?php echo $product->getQuantity(); ?></span>
+                    <span><?= $product->getQuantity(); ?></span>
                 </td>
                 <td class="td-category">
-                    <span><?php echo $product->productTotal(); ?></span>
+                    <span><?= $product->productTotal(); ?></span>
                 </td>
             </tr>
         <?php } ?>
-        <tr><td>Total QTY </td><td><span><?php echo $this->basket->totalQuantity(); ?><span></td></tr>
-        <tr><td>Total  € </td><td></td><td><span><?php echo $this->basket->subTotal(); ?><span></td></tr>
+        <tr><td>Total QTY </td><td><span><?= $this->basket->totalQuantity(); ?><span></td></tr>
+        <tr><td>Total  € </td><td></td><td><span><?= $this->basket->subTotal(); ?><span></td></tr>
     </table>
 </div>
 <div class="container center">
@@ -56,10 +56,10 @@ if(!empty($data['customer'])) {
         <table class="backend-table center">
             <tbody>
                 <thead><th>Personal Details</th><th></th><th>Address</th><th></th></thead>
-                <tr><td class="td-title">Full Name</td><td><?php echo $customer->getName(); ?></td><td>Address Line 1</td><td><?php echo $customer->getAddress1(); ?><td></tr>
-                <tr><td>E-Mail</td><td><?php echo $customer->getMail(); ?></td><td>Address Line 2</td><td><?php echo $customer->getAddress2(); ?></td></tr>
-                <tr><td>Phone</td><td><?php echo $customer->getPhone(); ?></td><td>City</td><td><?php echo $customer->getCity(); ?></td></tr>
-                <tr><td></td><td></td><td>Postal</td><td><?php echo $customer->getPostalCode(); ?></td></tr>
+                <tr><td class="td-title">Full Name</td><td><?= $customer->getName(); ?></td><td>Address Line 1</td><td><?= $customer->getAddress1(); ?><td></tr>
+                <tr><td>E-Mail</td><td><?= $customer->getMail(); ?></td><td>Address Line 2</td><td><?= $customer->getAddress2(); ?></td></tr>
+                <tr><td>Phone</td><td><?= $customer->getPhone(); ?></td><td>City</td><td><?= $customer->getCity(); ?></td></tr>
+                <tr><td></td><td></td><td>Postal</td><td><?= $customer->getPostalCode(); ?></td></tr>
             </tbody>
         </table>
         <div class="center clearfix">
@@ -78,7 +78,7 @@ if(!empty($data['customer'])) {
             ?>
         </div>
         <div class="center clearfix">
-            <a href="<?php echo ADMIN."order/confirm"; ?>" id="payment" class="link-btn">To Payment</a>
+            <a href="<?= ADMIN."order/confirm"; ?>" id="payment" class="link-btn">To Payment</a>
         </div>
     </div>
 </div>

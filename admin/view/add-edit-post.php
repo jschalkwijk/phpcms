@@ -2,7 +2,7 @@
 	use CMS\model\Content\Categories;
 ?>
 
-<script type="text/javascript" src="<?php echo ADMIN."/vendor/tinymce/tinymce/tinymce.min.js"; ?>"></script>
+<script type="text/javascript" src="<?= ADMIN."/vendor/tinymce/tinymce/tinymce.min.js"; ?>"></script>
 <script type="text/javascript">
 	tinymce.init({
 		selector: "textarea",
@@ -18,7 +18,7 @@
 		convert_urls: true
 	});
 </script>
-<script type="text/javascript" src="<?php echo JS."preview.js";?>"></script>
+<script type="text/javascript" src="<?= JS."preview.js";?>"></script>
 
 <?php
 
@@ -34,9 +34,9 @@
 		echo '</div>';
 	}
 	if ($output_form){ ?>
-		<form id="addpost-form" class="container large left" action="<?php echo $action; ?>" method="post">
-			<input type="hidden" name="id" value="<?php echo $post->getID();?>"/>
-			<input type="text" name="title" placeholder="Title" value="<?php echo $post->getTitle(); ?>"><br />
+		<form id="addpost-form" class="container large left" action="<?= $action; ?>" method="post">
+			<input type="hidden" name="id" value="<?= $post->getID();?>"/>
+			<input type="text" name="title" placeholder="Title" value="<?= $post->getTitle(); ?>"><br />
 			<input type="text" name="post_desc" placeholder="Post Description (max 160 characters)" value="<?php  echo $post->getDescription();?>"/><br />
 			<label for="select">Category</label>
 			<select id="categories" name="cat_name">
@@ -46,7 +46,7 @@
 			
 			<input type="text" name="category" placeholder="Category"/><br />
 			<input type="hidden" name="cat_type" value="post"/><br />
-			<textarea type="text" name="content" placeholder="Content"><?php echo $post->getContent(); ?></textarea><br />
+			<textarea type="text" name="content" placeholder="Content"><?= $post->getContent(); ?></textarea><br />
 			
 			<?php if (isset($params[0]) && isset($params[1])) { ?>
 				<p>Are you sure you want to edit the following product?</p>

@@ -35,7 +35,7 @@
 	?>	
 		<table class="backend-table title">
 		<tr><th>Title</th><th>Author</th><th>Category</th><th>Date</th><th>Edit</th><th>Approve</th><th>Remove</th></tr>
-		<form class="backend-form" method="post" action="<?php echo ADMIN."search"; ?>">
+		<form class="backend-form" method="post" action="<?= ADMIN."search"; ?>">
 			<?php 	
 				$posts = content_posts_Post::searchContent('posts',$data);
 				$writer = content_ContentWriter::write($posts);
@@ -51,7 +51,7 @@
 	}
 ?>
 
-<form class="search" action="<?php echo ADMIN."search"; ?>" method="post">
+<form class="search" action="<?= ADMIN."search"; ?>" method="post">
 	<input type="text" name="search" placeholder="Search for posts"/>
 	<button type="submit" name="search-post">Search</button>
 </form>

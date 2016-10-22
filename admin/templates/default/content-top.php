@@ -1,2 +1,2 @@
 <div id="main">
-	<div id="main-content" class="xlarge">
+	<div id="main-content" class="container-fluid">

@@ -5,9 +5,9 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="center-block col-sm-8 col-md-8 col-lg-8">
-			<p class="logged">Hello <?php echo $_SESSION['username']; ?></p>
-			<a href="<?php echo ADMIN."add-post";?>"><button>+ Post</button></a>
-			<a href="<?php echo ADMIN."add-page"; ?>"><button>+ Page</button></a>
+			<p class="logged">Hello <?= $_SESSION['username']; ?></p>
+			<a href="<?= ADMIN."add-post";?>"><button>+ Post</button></a>
+			<a href="<?= ADMIN."add-page"; ?>"><button>+ Page</button></a>
 			<?php if($_SESSION['rights'] == 'Admin') { echo '<a href="'.ADMIN."add-user".'><button>+ User</button></a>'; } ?>
 			<a href="#"><button>+ Client</button></a>
 			<a href="#"><button>+ Project</button></a>
@@ -22,7 +22,6 @@
 	<div class="center">
 		<div class="row">
 			<div class="col-sm-6 col-md-6">
-
 				<table class="backend-table title">
 					<h2>Posts</h2>
 					<tbody>
@@ -47,7 +46,7 @@
 				<table class="backend-table title">
 					<tr><th class="td-title">Title</th><th class="td-author">Author</th><th class="td-category">Category</th><th class="td-date">Date</th><th>Edit</th><th>View</th><!-- <th>Remove</th> --></tr>
 
-					<form class="backend-form" method="post" action="<?php echo ADMIN ;?>">
+					<form class="backend-form" method="post" action="<?= ADMIN ;?>">
 						<?php
 							$pages = $data['pages'];
 							ContentWriter::write($pages);
@@ -66,7 +65,7 @@
 			<h2>New Users</h2>
 			<table class="backend-table title">
 				<tr><th>User</th><th>Rights</th>
-					<form class="backend-form" method="post" action="<?php echo ADMIN; ?>">
+					<form class="backend-form" method="post" action="<?= ADMIN; ?>">
 						<?php if ($_SESSION['rights'] == 'Admin') { ?> <th>Edit</th><th>View</th><!-- <th>Remove</th> --></tr> <?php } ?>
 
 						<?php

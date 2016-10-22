@@ -14,7 +14,7 @@
 	}
 ?>
 	<div class="container small">
-		<form class="small" enctype="multipart/form-data" method="post" action="<?php echo $action; ?>">
+		<form class="small" enctype="multipart/form-data" method="post" action="<?= $action; ?>">
 		<input type="hidden" name="MAX_FILE_SIZE" value="43500000" />
 		<label for="files[]">Choose File(max size: 3.5 MB): </label><br />
 		<input type="file" name="files[]" multiple/><br />
@@ -29,15 +29,15 @@
 <?php 
 	if($output_form){
 ?>
-		<form id="add-user" class="container" method="post" action="<?php echo $action ;?>">
-			<input type="hidden" name="id" value="<?php echo $user->getID(); ?>"/>
-			<input type="text" name="username" placeholder="Username" value="<?php echo $user->getUserName(); ?>"/><br />
+		<form id="add-user" class="container" method="post" action="<?= $action ;?>">
+			<input type="hidden" name="id" value="<?= $user->getID(); ?>"/>
+			<input type="text" name="username" placeholder="Username" value="<?= $user->getUserName(); ?>"/><br />
 			<input type="password" name="new_password" placeholder="New Password"/><br />
 			<input type="password" name="new_password_again" placeholder="New Password Again"/><br />
-			<input type="text" name="first_name" placeholder="First name" value="<?php  echo $user->getFirstName(); ?>"/> <br />
-			<input type="text" name="last_name" placeholder="Last name" value="<?php echo $user->getLastName(); ?>"/> <br />
-			<input type="text" name="email" placeholder="Email" value="<?php echo $user->getMail(); ?>"/> <br />
-			<input type="text" name="function" placeholder="Function" value="<?php  echo $user->getFunction(); ?>"/> <br />
+			<input type="text" name="first_name" placeholder="First name" value="<?= $user->getFirstName(); ?>"/> <br />
+			<input type="text" name="last_name" placeholder="Last name" value="<?= $user->getLastName(); ?>"/> <br />
+			<input type="text" name="email" placeholder="Email" value="<?= $user->getMail(); ?>"/> <br />
+			<input type="text" name="function" placeholder="Function" value="<?= $user->getFunction(); ?>"/> <br />
 			<p>Rights</p>
 			<input type="radio" name="rights" value="Admin" <?php if($user->getRights() == 'Admin') { echo 'checked="checked"';}?>/>
 			<span> Admin | Can add new vacancies, approve and change them. Add/delete/change users and changes user rights/passwords.</span><br />

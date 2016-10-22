@@ -1,5 +1,5 @@
 <div class="container">
-	<a href="<?php echo ADMIN."downloads/deleted-downloads"; ?>"><button>Deleted Downloads</button></a>
+	<a href="<?= ADMIN."downloads/deleted-downloads"; ?>"><button>Deleted Downloads</button></a>
 </div>
 <?php
 	if(isset($_POST['submit_file'])){
@@ -48,7 +48,7 @@
 			echo implode('<br />',$errors);
 		}
 	?>
-	<form class="large" enctype="multipart/form-data" method="post" action="<?php echo $_SERVER['PHP_SELF']?>">
+	<form class="large" enctype="multipart/form-data" method="post" action="<?= $_SERVER['PHP_SELF']?>">
 	<input type="text" name="title" placeholder="title"/><br />
 	<input type="text" name="category" placeholder="category"/><br />
 	<input type="text" name="description" placeholder="description"/><br />

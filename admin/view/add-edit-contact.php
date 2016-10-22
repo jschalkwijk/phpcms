@@ -1,4 +1,4 @@
-<script type="text/javascript" src="<?php echo ADMIN."/vendor/tinymce/tinymce/tinymce.min.js"; ?>"></script>
+<script type="text/javascript" src="<?= ADMIN."/vendor/tinymce/tinymce/tinymce.min.js"; ?>"></script>
 <script type="text/javascript">
 tinymce.init({
     selector: "textarea",
@@ -28,7 +28,7 @@ tinymce.init({
 	}
 ?>
 	<div class="container small">
-		<form class="small" enctype="multipart/form-data" method="post" action="<?php echo $action; ?>">
+		<form class="small" enctype="multipart/form-data" method="post" action="<?= $action; ?>">
 		<input type="hidden" name="MAX_FILE_SIZE" value="43500000" />
 		<label for="files[]">Choose File(max size: 3.5 MB): </label><br />
 		<input type="file" name="files[]" multiple/><br />
@@ -36,28 +36,28 @@ tinymce.init({
 		<label for='public'>Public</label>
 		<input type="checkbox" name="secure" value="secure"/>
 		<label for='secure'>Secure</label>
-		<input type="hidden" name="album_name" value="<?php echo $_SESSION['username']."'s Contacts";?>"/>
+		<input type="hidden" name="album_name" value="<?= $_SESSION['username']."'s Contacts";?>"/>
 		<button type="submit" name="submit_file">Add File('s)</button>
 		</form>
 	</div>
 <?php
 	if ($output_form){ ?>
 		<div class="container large">
-			<form class="backend-form"method="post" action="<?php echo $action; ?>">
-				<input type="hidden" name="id" value="<?php echo $contact->getID();?>"/>
-				<input type="text" name="first_name" placeholder="First Name" value="<?php echo $contact->getFirstName(); ?>"/><br />
-				<input type="text" name="last_name" placeholder="Last Name" value="<?php echo $contact->getLastName(); ?>"/><br />
-				<input type="tel" name="phone_1" placeholder="Phone 1" value="<?php echo $contact->getPhone1(); ?>"/><br />
-				<input type="tel" name="phone_2" placeholder="Phone 2" value="<?php echo $contact->getPhone2(); ?>"/><br />
-				<input type="email" name="email_1" placeholder="E-mail 1" value="<?php echo $contact->getMail1(); ?>"/><br />
-				<input type="email" name="email_2" placeholder="E-mail 2" value="<?php echo $contact->getMail2(); ?>"/><br />
-				<input type="date" name="dob" placeholder="dob" value="<?php echo $contact->getDOB(); ?>"/><br />
-				<input type="text" name="street" placeholder="Street" value="<?php echo $contact->getStreet(); ?>"/><br />
-				<input type="number" name="street_num" placeholder="Street Num" value="<?php echo $contact->getStreetNum(); ?>"/>
-				<input type="number" name="street_num_add" placeholder="Add" value="<?php echo $contact->getStreetNumAdd(); ?>"/><br />
-				<input type="" name="zip" placeholder="Zip/Postal" value="<?php echo $contact->getZip(); ?>"/><br />
+			<form class="backend-form"method="post" action="<?= $action; ?>">
+				<input type="hidden" name="id" value="<?= $contact->getID();?>"/>
+				<input type="text" name="first_name" placeholder="First Name" value="<?= $contact->getFirstName(); ?>"/><br />
+				<input type="text" name="last_name" placeholder="Last Name" value="<?= $contact->getLastName(); ?>"/><br />
+				<input type="tel" name="phone_1" placeholder="Phone 1" value="<?= $contact->getPhone1(); ?>"/><br />
+				<input type="tel" name="phone_2" placeholder="Phone 2" value="<?= $contact->getPhone2(); ?>"/><br />
+				<input type="email" name="email_1" placeholder="E-mail 1" value="<?= $contact->getMail1(); ?>"/><br />
+				<input type="email" name="email_2" placeholder="E-mail 2" value="<?= $contact->getMail2(); ?>"/><br />
+				<input type="date" name="dob" placeholder="dob" value="<?= $contact->getDOB(); ?>"/><br />
+				<input type="text" name="street" placeholder="Street" value="<?= $contact->getStreet(); ?>"/><br />
+				<input type="number" name="street_num" placeholder="Street Num" value="<?= $contact->getStreetNum(); ?>"/>
+				<input type="number" name="street_num_add" placeholder="Add" value="<?= $contact->getStreetNumAdd(); ?>"/><br />
+				<input type="" name="zip" placeholder="Zip/Postal" value="<?= $contact->getZip(); ?>"/><br />
 				<p>Personal Notes</p>
-				<textarea name="notes" placeholder="Notes"><?php echo $contact->getNotes(); ?></textarea>		
+				<textarea name="notes" placeholder="Notes"><?= $contact->getNotes(); ?></textarea>
 				<button type="submit" name="submit">Submit</button><br />
 			</form>	
 		</div>

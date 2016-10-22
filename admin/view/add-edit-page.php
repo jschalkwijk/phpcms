@@ -1,6 +1,6 @@
 <?php use CMS\model\Content\Pages\Page; ?>
 
-<script type="text/javascript" src="<?php echo ADMIN."/vendor/tinymce/tinymce/tinymce.min.js"; ?>"></script>
+<script type="text/javascript" src="<?= ADMIN."/vendor/tinymce/tinymce/tinymce.min.js"; ?>"></script>
 <script type="text/javascript">
 	tinymce.init({
 		selector: "textarea",
@@ -16,7 +16,7 @@
 		convert_urls: true
 	});
 </script>
-<script type="text/javascript" src="<?php echo JS."preview.js"; ?>"></script>
+<script type="text/javascript" src="<?= JS."preview.js"; ?>"></script>
 <?php
 $page = $data['page'];
 
@@ -31,7 +31,7 @@ if (isset($_POST['submit'])) {
 
 if($output_form) { ?>
 	<iframe id="target">hello</iframe>
-	<form id="create-form" action="<?php echo $action; ?>" method="post">
+	<form id="create-form" action="<?= $action; ?>" method="post">
 		<input type="checkbox" name="front-end"/>
 		<label for="front-end">Front-End Page</label>
 		<input type="checkbox" name="back-end"/>
@@ -40,10 +40,10 @@ if($output_form) { ?>
 			<option name="none" value="None">None</option>
 			<?php $options = Page::getSelection('none'); ?>
 		</select>
-		<input type="hidden" name="id" value="<?php echo $page->getID();?>"/>
-		<input type="text" name="page_title" placeholder="Page Title" value="<?php echo $page->getTitle(); ?>"/><br />
-		<input type="text" name="page_desc" placeholder="Page Description (max 160 characters)" value="<?php echo $page->getDescription(); ?>"/><br />
-		<textarea type="text" name="page_content" placeholder="Content"><?php echo $page->getContent(); ?></textarea><br />
+		<input type="hidden" name="id" value="<?= $page->getID();?>"/>
+		<input type="text" name="page_title" placeholder="Page Title" value="<?= $page->getTitle(); ?>"/><br />
+		<input type="text" name="page_desc" placeholder="Page Description (max 160 characters)" value="<?= $page->getDescription(); ?>"/><br />
+		<textarea type="text" name="page_content" placeholder="Content"><?= $page->getContent(); ?></textarea><br />
 		<input type="text" name="page_url" placeholder="URL" value=""/><br />
 		<input type="text" name="template" placeholder="Template URL" value=""/><br />
 		<button type="submit" name="submit">Create Page</button>
