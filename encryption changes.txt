@@ -1,0 +1,31 @@
+ // Get User key for encryption
+use \Defuse\Crypto\Crypto;
+use \Defuse\Crypto\Key;
+use \Defuse\Crypto\Exception as Ex;
+
+$shared_key = file_get_contents('././keys/Shared/shared.txt');
+$shared_key = Key::loadFromAsciiSafeString($shared_key);
+$key = Key::createNewRandomKey();
+
+
+
+while($row = $data->fetch_array()){
+	$username = $row['username'];
+	$first_name = Crypto::decrypt($row['first_name'],$shared_key);
+	$last_name = Crypto::decrypt($row['last_name'],$shared_key);
+	$email = Crypto::decrypt($row['email'],$shared_key);
+	$function = Crypto::decrypt($row['function'],$shared_key);
+	$rights = Crypto::decrypt($row['rights'],$shared_key);
+	
+	
+	$first_name = Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->first_name)),$key);
+	$last_name = Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->last_name)),$key);
+	$email = Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->email)),$key);
+	$function = Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->email)),$key);
+	$rights = Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->rights)),$key);
+	
+	$first_name = Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->getFirstName())),$shared_key);
+	$last_name = Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->getLastName())),$shared_key);
+	$email = Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->getMail())),$shared_key);
+	$function = Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->getFunction())),$shared_key);
+	$rights = Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->getRights())),$shared_key);
