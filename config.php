@@ -6,7 +6,8 @@
 //	define ('DB_HOST','localhost');
 //	define ('DB_USER','jorn');
 //	define ('DB_PASSWORD', 'root123');
-//	define ('DB_NAME', 'cms');
+//	//define ('DB_NAME', 'cms');
+//	define ('DB_NAME', 'nerdcms_db');
 //	define ('HOST','http://'.$_SERVER['HTTP_HOST']);
 	// Mac
 	 define ('IMG_PATH','/images/');

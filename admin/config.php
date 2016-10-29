@@ -14,7 +14,8 @@
 //define ('DB_HOST','localhost');
 //define ('DB_USER','jorn');
 //define ('DB_PASSWORD', 'root123');
-//define ('DB_NAME', 'cms');
+////define ('DB_NAME', 'cms');
+//define ('DB_NAME', 'nerdcms_db');
 //define ('IMG','/admin/images/');
 //define ('FILES', $_SERVER['HTTP_HOST'].'/admin/files/');
 //define('JS','http://'.$_SERVER['HTTP_HOST'].'/admin/js/');
