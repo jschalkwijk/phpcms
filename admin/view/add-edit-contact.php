@@ -13,37 +13,42 @@ tinymce.init({
 <?php
 
 	$contact = $data['contact'];
-	
-	if (!isset($params[0]) || !isset($params[1])) { 
-		echo 'There is no contact selected.';
-	}
 	(isset($params[0]) && isset($params[1])) ? $action = ADMIN.'contacts/edit-contact/'.$contact->getID().'/'.$contact->getFirstName() : $action = ADMIN.'contacts/add-contact';
 	(isset($data['output_form'])) ? $output_form = $data['output_form'] : $output_form = true;
-	
-	if (isset($_POST['submit'])) {
-		echo '<div class="container medium">';
-			echo implode(",",$data['errors']);
-			echo implode(",",$data['messages']);
-		echo '</div>';
-	}
 ?>
-	<div class="container small">
-		<form class="small" enctype="multipart/form-data" method="post" action="<?= $action; ?>">
-		<input type="hidden" name="MAX_FILE_SIZE" value="43500000" />
-		<label for="files[]">Choose File(max size: 3.5 MB): </label><br />
-		<input type="file" name="files[]" multiple/><br />
-		<input type="checkbox" name="public" value="public"/>
-		<label for='public'>Public</label>
-		<input type="checkbox" name="secure" value="secure"/>
-		<label for='secure'>Secure</label>
-		<input type="hidden" name="album_name" value="<?= $_SESSION['username']."'s Contacts";?>"/>
-		<button type="submit" name="submit_file">Add File('s)</button>
-		</form>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3">
+			<?php
+			if (isset($_POST['submit'])) {
+				echo '<div class="container medium">';
+					echo implode(",",$data['errors']);
+					echo implode(",",$data['messages']);
+				echo '</div>';
+			}
+			?>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3">
+			<form class="small" enctype="multipart/form-data" method="post" action="<?= $action; ?>">
+			<input type="hidden" name="MAX_FILE_SIZE" value="43500000" />
+			<label for="files[]">Choose File(max size: 3.5 MB): </label><br />
+			<input type="file" name="files[]" multiple/><br />
+			<input type="checkbox" name="public" value="public"/>
+			<label for='public'>Public</label>
+			<input type="checkbox" name="secure" value="secure"/>
+			<label for='secure'>Secure</label>
+			<input type="hidden" name="album_name" value="<?= $_SESSION['username']."'s Contacts";?>"/>
+			<button type="submit" name="submit_file">Add File('s)</button>
+			</form>
+		</div>
 	</div>
 <?php
 	if ($output_form){ ?>
-		<div class="container large">
-			<form class="backend-form"method="post" action="<?= $action; ?>">
+	<div class="row">
+		<div class="col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3">
+			<form id="create-form" large"method="post" action="<?= $action; ?>">
 				<input type="hidden" name="id" value="<?= $contact->getID();?>"/>
 				<input type="text" name="first_name" placeholder="First Name" value="<?= $contact->getFirstName(); ?>"/><br />
 				<input type="text" name="last_name" placeholder="Last Name" value="<?= $contact->getLastName(); ?>"/><br />
@@ -61,5 +66,7 @@ tinymce.init({
 				<button type="submit" name="submit">Submit</button><br />
 			</form>	
 		</div>
+	</div>
 
 <?php } ?>
+</div>

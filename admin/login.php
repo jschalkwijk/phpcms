@@ -2,18 +2,20 @@
 	ob_start();
 	require_once('config.php');
 	use CMS\model\DBC\DBC;
+	use Defuse\Crypto\Crypto;
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Login</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 	<link type="text/css" rel="stylesheet" href="<?php echo ADMIN."templates/default/style.css";?>"/>
 </head>
 <body>
 
 <?php
 	// for some reason the autoloader does not work on this page for the crypto class..
-	require_once 'CMS/model/Encryption/Crypto.php';
+	// require_once 'CMS/model/Encryption/Crypto.php';
 	$output_form = False;
 	session_start();
 	// prevent session hijacking
@@ -97,12 +99,18 @@
 	// if there is no user logged in and if the form isnt submitted yet, or if output_form is true, show form.
 	if ($output_form) { ?>
 		<div class="container">
-			<form id="login" action="<?php echo $_SERVER['PHP_SELF'];?>" method="post" enctype="mulipart/form-data">
-				<input type="text" name="username" placeholder="Username"/><br />
-				<input type="password" name="password" placeholder="Password"/><br />
-				<input type="checkbox" name="remember"/><span> Remember me today.</span><br />
-				<button type="submit" name="submit">Login</button>
-			</form>
+			<div class="row">
+				<div class="col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3">
+					<div class="center">
+						<form id="login" action="<?= $_SERVER['PHP_SELF'];?>" method="post" enctype="mulipart/form-data">
+							<input type="text" name="username" placeholder="Username"/><br />
+							<input type="password" name="password" placeholder="Password"/><br />
+							<input type="checkbox" name="remember"/><span> Remember me today.</span><br />
+							<button type="submit" name="submit">Login</button>
+						</form>
+					</div>
+				</div>
+			</div>
 		</div>
 <?php
 	} 

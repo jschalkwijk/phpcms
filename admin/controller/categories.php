@@ -15,11 +15,11 @@ class Categories extends Controller{
 			$add = Cat::addCategory($_POST['category'],'post');
 			$categories = Cat::fetchAll('categories',0);
 			$view = ['actions' => 'view/manage_content.php'];
-			$this->view('Categories',['add-category.php','categories.php'],$params,['errors' => $add['errors'],'categories' => $categories, 'view' => $view,'trashed' => 0]);
+			$this->view('Categories',['categories.php'],$params,['errors' => $add['errors'],'categories' => $categories, 'view' => $view,'trashed' => 0]);
 		} else {
 			$categories = Cat::fetchAll('categories',0);
 			$view = ['actions' => 'view/manage_content.php'];
-			$this->view('Categories',['add-category.php','categories.php'],$params,['categories' => $categories,'view' => $view,'trashed' => 0]);
+			$this->view('Categories',['categories.php'],$params,['categories' => $categories,'view' => $view,'trashed' => 0]);
 		}
 	}
 	//
@@ -30,11 +30,11 @@ class Categories extends Controller{
 			$add = Cat::addCategory($_POST['category']);
 			$categories = Cat::fetchAll('categories',1);
 			$view = ['actions' => 'view/manage_content.php'];
-			$this->view('Categories',['add-category.php','categories.php'],$params,['errors' => $add['errors'],'categories' => $categories, 'view' => $view,'trashed' => 1]);
+			$this->view('Categories',['categories.php'],$params,['errors' => $add['errors'],'categories' => $categories, 'view' => $view,'trashed' => 1]);
 		} else {
 			$categories = Cat::fetchAll('categories',1);
 			$view = ['actions' => 'view/manage_content.php'];
-			$this->view('Categories',['add-category.php','categories.php'],$params,['categories' => $categories,'view' => $view,'trashed' => 1]);
+			$this->view('Categories',['categories.php'],$params,['categories' => $categories,'view' => $view,'trashed' => 1]);
 		}
 	}
 	//
