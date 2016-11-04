@@ -2,68 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0a43c896-b199-4fd3-a7cd-831809ebb533" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/view/contacts/add-edit-contact.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/view/contacts/contacts.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/view/pages/add-edit-page.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/view/pages/pages.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin/view/search/search.php" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/controller/NameSpees.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/controller/downloads.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/view/.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/view/add-download.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/view/add-edit-contact.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/view/add-edit-page.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/view/contacts.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/view/pages.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/view/search.php" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/admin/view/add-category.php" afterPath="$PROJECT_DIR$/admin/view/categories/add-category.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/admin/view/add-edit-post.php" afterPath="$PROJECT_DIR$/admin/view/posts/add-edit-post.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/admin/view/add-edit-product.php" afterPath="$PROJECT_DIR$/admin/view/products/add-edit-product.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/admin/view/add-edit-user.php" afterPath="$PROJECT_DIR$/admin/view/users/add-edit-user.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/admin/view/add-files.php" afterPath="$PROJECT_DIR$/admin/view/files/add-files.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/admin/view/albums.php" afterPath="$PROJECT_DIR$/admin/view/files/albums.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/admin/view/cart.php" afterPath="$PROJECT_DIR$/admin/view/cart/cart.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/admin/view/categories.php" afterPath="$PROJECT_DIR$/admin/view/categories/categories.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/admin/view/content_table.php" afterPath="$PROJECT_DIR$/admin/view/shared/content-table.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/admin/view/details.php" afterPath="$PROJECT_DIR$/admin/view/order/details.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/admin/view/edit-categories.php" afterPath="$PROJECT_DIR$/admin/view/categories/edit-categories.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/admin/view/edit-page.php" afterPath="$PROJECT_DIR$/admin/view/pages/edit-page.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/admin/view/include-files-tinymce.php" afterPath="$PROJECT_DIR$/admin/view/shared/include-files-tinymce.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/admin/view/manage_content.php" afterPath="$PROJECT_DIR$/admin/view/shared/manage-content.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/admin/view/order.php" afterPath="$PROJECT_DIR$/admin/view/order/order.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/admin/view/payment.php" afterPath="$PROJECT_DIR$/admin/view/order/payment.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/admin/view/posts-nav.php" afterPath="$PROJECT_DIR$/admin/view/posts/posts-nav.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/admin/view/posts.php" afterPath="$PROJECT_DIR$/admin/view/posts/posts.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/admin/view/products.php" afterPath="$PROJECT_DIR$/admin/view/products/products.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/admin/view/profile.php" afterPath="$PROJECT_DIR$/admin/view/users/profile.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/admin/view/search-files.php" afterPath="$PROJECT_DIR$/admin/view/search/search-files.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/admin/view/search-post.php" afterPath="$PROJECT_DIR$/admin/view/search/search-post.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/admin/view/search-user.php" afterPath="$PROJECT_DIR$/admin/view/search/search-user.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/admin/view/single-page.php" afterPath="$PROJECT_DIR$/admin/view/pages/single-page.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/admin/view/singleFile.php" afterPath="$PROJECT_DIR$/admin/view/files/single-file.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/admin/view/user_table.php" afterPath="$PROJECT_DIR$/admin/view/users/user_table.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/admin/view/users.php" afterPath="$PROJECT_DIR$/admin/view/users/users.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/admin/view/view-contact.php" afterPath="$PROJECT_DIR$/admin/view/contacts/view-contact.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/admin/view/view-product.php" afterPath="$PROJECT_DIR$/admin/view/products/view-product.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/CMS/model/Actions/RUDActions.php" afterPath="$PROJECT_DIR$/admin/CMS/model/Actions/RUDActions.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/CMS/model/Content/ContentWriter.php" afterPath="$PROJECT_DIR$/admin/CMS/model/Content/ContentWriter.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/CMS/model/Controller/Controller.php" afterPath="$PROJECT_DIR$/admin/CMS/model/Controller/Controller.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/CMS/model/Users/UserWriter.php" afterPath="$PROJECT_DIR$/admin/CMS/model/Users/UserWriter.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/controller/cart.php" afterPath="$PROJECT_DIR$/admin/controller/cart.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/controller/categories.php" afterPath="$PROJECT_DIR$/admin/controller/categories.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/controller/contacts.php" afterPath="$PROJECT_DIR$/admin/controller/contacts.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/controller/dashboard.php" afterPath="$PROJECT_DIR$/admin/controller/dashboard.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/controller/file.php" afterPath="$PROJECT_DIR$/admin/controller/file.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/controller/order.php" afterPath="$PROJECT_DIR$/admin/controller/order.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/controller/pages.php" afterPath="$PROJECT_DIR$/admin/controller/pages.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/controller/posts.php" afterPath="$PROJECT_DIR$/admin/controller/posts.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/controller/products.php" afterPath="$PROJECT_DIR$/admin/controller/products.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/controller/profile.php" afterPath="$PROJECT_DIR$/admin/controller/profile.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/controller/search.php" afterPath="$PROJECT_DIR$/admin/controller/search.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/controller/users.php" afterPath="$PROJECT_DIR$/admin/controller/users.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/empty-controller.php" afterPath="$PROJECT_DIR$/admin/empty-controller.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/js/mceAddons.js" afterPath="$PROJECT_DIR$/admin/js/mceAddons.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/view/admin.php" afterPath="$PROJECT_DIR$/admin/view/admin.php" />
     </list>
     <ignored path="CMS.iws" />
@@ -86,14 +26,36 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="mceAddons.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="dashboard.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/admin/controller/dashboard.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.050167225">
+              <caret line="2" column="4" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
+              <folding>
+                <element signature="e#7#43#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mceAddons.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/js/mceAddons.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.20811099">
-              <caret line="13" column="32" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="32" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="31" column="13" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="admin.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin/view/admin.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-53.125">
+              <caret line="86" column="39" selection-start-line="86" selection-start-column="39" selection-end-line="86" selection-end-column="39" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -106,8 +68,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/admin/view/add-files.php" />
-        <option value="$PROJECT_DIR$/admin/view/cart.php" />
         <option value="$PROJECT_DIR$/admin/view/add-category.php" />
         <option value="$PROJECT_DIR$/admin/view/categories.php" />
         <option value="$PROJECT_DIR$/admin/view/add-edit-contact.php" />
@@ -157,6 +117,8 @@
         <option value="$PROJECT_DIR$/admin/view/search/search-files.php" />
         <option value="$PROJECT_DIR$/admin/controller/profile.php" />
         <option value="$PROJECT_DIR$/admin/js/mceAddons.js" />
+        <option value="$PROJECT_DIR$/admin/view/admin.php" />
+        <option value="$PROJECT_DIR$/admin/controller/dashboard.php" />
       </list>
     </option>
   </component>
@@ -263,7 +225,25 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
+              <option name="myItemId" value="view" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CMS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CMS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="admin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controller" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -366,7 +346,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32642487" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32642487" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -422,24 +402,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/admin/controller/pages.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7968397">
-          <caret line="81" column="5" selection-start-line="81" selection-start-column="5" selection-end-line="81" selection-end-column="5" />
-          <folding>
-            <element signature="e#7#43#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/CMS/model/Users/UserWriter.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37787515">
-          <caret line="23" column="2" selection-start-line="23" selection-start-column="2" selection-end-line="23" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/admin/controller/users.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7699891">
@@ -865,10 +827,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/js/mceAddons.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.20811099">
-          <caret line="13" column="32" selection-start-line="13" selection-start-column="32" selection-end-line="13" selection-end-column="32" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="31" column="13" selection-start-line="31" selection-start-column="13" selection-end-line="31" selection-end-column="13" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/view/admin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-53.125">
+          <caret line="86" column="39" selection-start-line="86" selection-start-column="39" selection-end-line="86" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/controller/dashboard.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.050167225">
+          <caret line="2" column="4" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
+          <folding>
+            <element signature="e#7#43#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>

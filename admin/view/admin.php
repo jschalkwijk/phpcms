@@ -80,7 +80,7 @@
 		</div>
 		<div class="col-sm-6 col-md-6">
 			<h2>Add Files</h2>
-			<?php require('view/add-files.php'); ?>
+			<?php require('view/files/add-files.php'); ?>
 		</div>
 	</div>
 	<div class="row"
