@@ -1,4 +1,4 @@
-<?php include_once "../config.php" ; ?>
+<?php include_once "../config.php"; ?>
 <div class="xsmall">
 	<div class="container search">
 		<input type="text" id="search" name="search" placeholder="Search files"/>

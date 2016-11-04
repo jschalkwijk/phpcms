@@ -71,7 +71,7 @@
 						<?php
 							$users = $data['users'];
 							$writer = UserWriter::write($users);
-							require('view/manage_content.php');
+							require('view/shared/manage-content.php');
 						?>
 						<input type="hidden" name="dbt" value="login"/>
 					</form>
@@ -86,7 +86,7 @@
 	<div class="row"
 		<div class="col-sm-3 col-md-3">
 			<h2>Search Posts</h2>
-			<?php require_once('view/search-post.php'); ?>
+			<?php require_once('view/search/search-post.php'); ?>
 		</div>
 		<div class="col-sm-3 col-md-3">
 			<h2>Contact Forms</h2>

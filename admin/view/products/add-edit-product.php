@@ -62,7 +62,7 @@ tinymce.init({
 			</div>
 		<div class="col-sm-6 col-md-6">
 			<?php }
-				require_once('include-files-tinymce.php');
+				require_once('view/shared/include-files-tinymce.php');
 			?>
 		</div>
 	</div>

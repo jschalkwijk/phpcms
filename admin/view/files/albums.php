@@ -19,7 +19,6 @@
 					$img = ['jpg', 'jpeg', 'png'];
 					$url = $_SERVER["REQUEST_URI"];
 					echo '<form method="get" action="' . $url . '">';
-				}
 			?>
 			<form id="check-files" method="post" action="<?= $url; ?>">
 				<table class="files-table">
@@ -27,13 +26,14 @@
 					<tbody>
 						<?php
 						$files = File::fetchFilesByAlbum($album_id,0);
-						FileWriter::write($files,'view/singleFile.php',$doc,$img);
+						FileWriter::write($files,'view/files/single-file.php',$doc,$img);
 						?>
 					</tbody>
 				</table>
 				<button type="submit" name="delete" id="delete">Delete Selected</button>
 				<button type="submit" name="download_files" id="download_files">Download files</button>
 			</form>
+			<?php } ?>
 		</div>
 	</div>
 	<div class="row">

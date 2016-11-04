@@ -16,7 +16,7 @@
                             // the information is supplied by the model
                             foreach($posts as $single){
                                 // write out in the content_table format.
-                                require('view/content_table.php');
+                                require('view/shared/content-table.php');
                             }
                         ?>
                     </table>

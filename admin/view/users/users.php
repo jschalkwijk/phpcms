@@ -18,7 +18,7 @@
                         ?>
                     </table>
                     <?php
-                        require('view/manage_content.php');
+                        require('view/shared/manage-content.php');
                     ?>
                 </form>
             </div>

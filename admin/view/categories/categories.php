@@ -21,7 +21,7 @@
 						// thisis a write function, it just writes out the data,
 						// the information is supplied by the model
 						ContentWriter::write($categories);
-						require('view/manage_content.php');
+						require('view/shared/manage-content.php');
 					?>
 				</form>
 			</table>
