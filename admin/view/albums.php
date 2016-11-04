@@ -11,31 +11,43 @@
 				$dbc = new DBC;
 				$album_id = null;
 				if(isset($params[1])) {
-					$album_id = mysqli_real_escape_string($dbc->connect(),trim((int)$params[0]));
-					$album_name = mysqli_real_escape_string($dbc->connect(),trim($params[1]));
+					$album_id = mysqli_real_escape_string($dbc->connect(), trim((int)$params[0]));
+					$album_name = mysqli_real_escape_string($dbc->connect(), trim($params[1]));
 
-					echo '<h1>'.$album_name.'</h1>';
-					$doc = ['txt','doc','docx','odt'];
-					$img = ['jpg','jpeg','png'];
+					echo '<h1>' . $album_name . '</h1>';
+					$doc = ['txt', 'doc', 'docx', 'odt'];
+					$img = ['jpg', 'jpeg', 'png'];
 					$url = $_SERVER["REQUEST_URI"];
-					echo '<form method="get" action="'.$url.'">';
-							$files = File::fetchFilesByAlbum($album_id,0);
-							FileWriter::write($files,'view/singleFile.php',$doc,$img);
-						echo '<div class="left">';
-							echo '<button type="submit" name="delete" id="delete">Delete Selected</button>';
-							echo '<button type="submit" name="download_files" id="download_files">Download files</button>';
-						echo '</div>';
-					echo '</form>';
+					echo '<form method="get" action="' . $url . '">';
 				}
 			?>
+			<form id="check-files" method="post" action="<?= $url; ?>">
+				<table class="files-table">
+					<thead><th></th><th>Name</th><th>Type</th><th>Size</th></thead>
+					<tbody>
+						<?php
+						$files = File::fetchFilesByAlbum($album_id,0);
+						FileWriter::write($files,'view/singleFile.php',$doc,$img);
+						?>
+					</tbody>
+				</table>
+				<button type="submit" name="delete" id="delete">Delete Selected</button>
+				<button type="submit" name="download_files" id="download_files">Download files</button>
+			</form>
 		</div>
 	</div>
-
-<br/>
 	<div class="row">
 		<div class="col-md-6 col-lg-6 col-md-offset-3 col-lg-offset-3">
-			<button id="check-all"><img class="glyph-small" src="<?= IMG."check.png"; ?>"/></button>
-			<?php Folders::show_albums($album_id); ?>
+			<form id="check-folders" method="post" action="/admin/file">
+				<button type="button" id="check-all"><img class="glyph-small" src="<?= IMG."check.png"; ?>"/></button>
+				<table class="files-table">
+					<thead></thead><th></th><th>Name</th><th>Size(MB)</th></thead>
+					<tbody>
+					<?php Folders::show_albums($album_id); ?>
+					</tbody>
+				</table>
+				<button type="submit" name="delete-albums" id="delete-albums">Delete Albums</button>
+			</form>
 		</div>
 	</div>
 </div>

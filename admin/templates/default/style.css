@@ -87,7 +87,6 @@ The CSS, XHTML and design is released under GPL: http://www.opensource.org/licen
 .post {
 	font-family: Helvetica,Arial,Sans Serif;
 	font-size: 12px;
-	background-color: none;
 	color:black;
 	width: 100%;
 	padding:0px;
@@ -430,7 +429,7 @@ button:hover  {
 }
 
 .link-btn img{
-	vertical-align:none;
+
 }
 
 .link-btn:hover {
@@ -678,7 +677,6 @@ article {
 
 .article-content p {
 	padding: 0px 5px 10px 5px;
-	background-color: none;
 }
 
 /* Article Title/Meta */
@@ -712,19 +710,19 @@ article {
 .meta {
 	width: 100%;
 	height: auto;
-	float: left;
-	display: inline;
-	list-style-type:none;
 	padding: 3px;
-	margin: 0px 0% 5px 0%;
+	margin: 0px;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
-	border-bottom: 1px solid #d2d2d2;
 }
 
 .meta a {
 	color:#ea6a1b;
+}
+
+.files-table td {
+	border-bottom: 2px solid #d2d2d2;
 }
 
 .checkbox {
@@ -783,7 +781,7 @@ footer img {
 
 /* Flexible Images/Video etc. */
 
-img, video, canvas, url {
+img, video, canvas {
 	max-width: 100%;
 	height: auto;
 }
@@ -833,12 +831,12 @@ img, video, canvas, url {
 #slider {
 	margin: 0px;
 	position: relative;
-};
+}
 
 #img {
 	margin: 0px;
 	position: relative;
-};
+}
 
 .transition {
 	-o-transition:1.0s;

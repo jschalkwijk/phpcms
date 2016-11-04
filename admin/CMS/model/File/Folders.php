@@ -107,8 +107,6 @@ class Folders {
 			} else {
 				$db->sqlERROR();
 			}
-			//start form
-			echo '<form id="files-form" method="get" action="/admin/file">';
 //		} else {
 //			$query = $dbc->prepare("SELECT * FROM albums WHERE parent_id = 0 AND user_id = ?");
 //			$query->bind_param("i",$user_id);
@@ -119,17 +117,14 @@ class Folders {
 //			echo '<form method="get" action="'.$_SERVER["REQUEST_URI"].'" file">';
 //		}
 		while($row = $data->fetch_array()){
-			echo '<div class="media">';
-			echo '<div class="meta">';
-						echo '<input class="checkbox left" type="checkbox" name="checkbox[]" value="'.$row['album_id'].'"/>';
-						echo '<div class="left"><a href="'.ADMIN.'file/albums/'.$row['album_id'].'/'.$row['name'].'""> '.$row['name'].'</a></div>';
-			echo '</div>';
-			echo '<div class="center"><img class="files" src="'.ADMIN.'images/files.png"/></div>';
+			echo '<tr class="meta">';
+			echo '<td><img class="glyph-medium" src="'.ADMIN.'images/files.png"/></td>';
+			echo '<td><a href="'.ADMIN.'file/albums/'.$row['album_id'].'/'.$row['name'].'""> '.$row['name'].'</a></td>';
+			echo '<td>Size</td>';
 			echo '<input type="hidden" name="album_name" value="'.$row['name'].'"/>';
-			echo '</div>';
+			echo '<td><input class="checkbox" type="checkbox" name="checkbox[]" value="'.$row['album_id'].'"/></td>';
+			echo '</tr>';
 		}
-		echo '<button type="submit" name="delete-albums" id="delete-albums">Delete Albums</button>';
-		echo '</form>';
 		$dbc->close();
 	}
 	
