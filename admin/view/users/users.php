@@ -1,4 +1,4 @@
-<?php use CMS\model\Users\UserWriter; ?>
+<?php use CMS\Models\Users\UserWriter; ?>
 <div class="container">
     <div class="center">
         <a class="link-btn" href="<?= ADMIN."users/add-user"; ?>">+ User</a>

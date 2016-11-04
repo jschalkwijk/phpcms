@@ -1,7 +1,7 @@
 <?php
-	use CMS\model\File\File;
-	use CMS\model\File\FileWriter;
-	use CMS\model\DBC\DBC;
+	use CMS\Models\File\File;
+	use CMS\Models\File\FileWriter;
+	use CMS\Models\DBC\DBC;
 ?>
 
 <form class="search"action="<?= ADMIN."search"; ?>" method="post">

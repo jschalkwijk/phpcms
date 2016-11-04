@@ -1,12 +1,12 @@
 <?php
 
-use CMS\model\Controller\Controller;
-use \CMS\model\Users\Users as Usr;
-use \CMS\model\DBC;
+use CMS\Models\Controller\Controller;
+use \CMS\Models\Users\Users as Usr;
+use \CMS\Models\DBC;
 
 class Users extends Controller {
 
-	use \CMS\model\Actions\UserActions;
+	use \CMS\Models\Actions\UserActions;
 
 	public function index($params = null){
 		$users = Usr::fetchUsers('users',0);

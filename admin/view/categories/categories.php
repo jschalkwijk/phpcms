@@ -1,4 +1,4 @@
-<?php use CMS\model\Content\ContentWriter; ?>
+<?php use CMS\Models\Content\ContentWriter; ?>
 
 <div class="container">
 	<div class="row">

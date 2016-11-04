@@ -1,6 +1,6 @@
 <?php
-	use CMS\model\Content\Posts\Post;
-	use CMS\model\Users\UserWriter;
+	use CMS\Models\Content\Posts\Post;
+	use CMS\Models\Users\UserWriter;
 ?>
 <form class="search"action="<?= ADMIN."search";?>" method="post">
 	<input type="text" name="search" placeholder="Search for Users"/>

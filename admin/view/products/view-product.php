@@ -1,7 +1,7 @@
 <?php
-use CMS\model\File\Folders;
-use CMS\model\File\File;
-use CMS\model\File\FileWriter;
+use CMS\Models\File\Folders;
+use CMS\Models\File\File;
+use CMS\Models\File\FileWriter;
 
 $product = $data['product'];
 

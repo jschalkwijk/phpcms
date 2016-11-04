@@ -1,7 +1,7 @@
 <?php
 
-use CMS\model\Controller\Controller;
-use CMS\model\Users\Users;
+use CMS\Models\Controller\Controller;
+use CMS\Models\Users\Users;
 class Profile extends Controller{
 	public function index(){
 		$params = [$_SESSION['user_id'],$_SESSION['username']];

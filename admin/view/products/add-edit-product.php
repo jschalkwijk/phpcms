@@ -1,4 +1,4 @@
-<?php use CMS\model\Content\Categories; ?>
+<?php use CMS\Models\Content\Categories; ?>
 <script type="text/javascript" src="<?= ADMIN."/vendor/tinymce/tinymce/tinymce.min.js"; ?>"></script>
 <script type="text/javascript">
 tinymce.init({

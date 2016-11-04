@@ -1,6 +1,6 @@
 <?php
 
-use CMS\model\Controller\Controller;
+use CMS\Models\Controller\Controller;
 
 class Example extends Controller {
 	public function index($params = null){

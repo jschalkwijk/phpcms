@@ -1,5 +1,5 @@
 <?php
-use CMS\model\Controller\Controller;
+use CMS\Models\Controller\Controller;
 
 class Contact extends Controller {
 

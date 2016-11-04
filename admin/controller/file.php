@@ -1,8 +1,8 @@
 <?php
 
-use CMS\model\Controller\Controller;
-use CMS\model\File\Folders;
-use CMS\model\File\File as F;
+use CMS\Models\Controller\Controller;
+use CMS\Models\File\Folders;
+use CMS\Models\File\File as F;
 
 class File extends Controller
 {

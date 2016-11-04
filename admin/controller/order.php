@@ -1,12 +1,12 @@
 <?php
 
-use CMS\model\Controller\Controller;
-use CMS\model\Support\SessionStorage;
-use CMS\model\Basket\Basket;
-use CMS\model\Customer\Customer;
-use CMS\model\Order\CustomerDetails;
-use CMS\model\Order\OrderDetails;
-use CMS\model\Order\Order as Ordr;
+use CMS\Models\Controller\Controller;
+use CMS\Models\Support\SessionStorage;
+use CMS\Models\Basket\Basket;
+use CMS\Models\Customer\Customer;
+use CMS\Models\Order\CustomerDetails;
+use CMS\Models\Order\OrderDetails;
+use CMS\Models\Order\Order as Ordr;
 
 class Order extends Controller
 {

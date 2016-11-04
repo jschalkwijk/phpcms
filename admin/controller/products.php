@@ -1,9 +1,9 @@
 <?php
 
-use CMS\model\Controller\Controller;
-use CMS\model\Actions\UserActions;
-use CMS\model\Products\Product;
-use CMS\model\File\File;
+use CMS\Models\Controller\Controller;
+use CMS\Models\Actions\UserActions;
+use CMS\Models\Products\Product;
+use CMS\Models\File\File;
 
 class Products extends Controller
 {

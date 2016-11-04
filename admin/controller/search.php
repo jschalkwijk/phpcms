@@ -1,6 +1,6 @@
 <?php
 
-use CMS\model\Controller\Controller;
+use CMS\Models\Controller\Controller;
 
 class Search extends Controller {
 	public function Index($params = null){

@@ -3,7 +3,7 @@
 use \Defuse\Crypto\Crypto;
 use \Defuse\Crypto\Exception as Ex;
 // !! autoloader must be requterd inside the existing autoloader function inside the config.php
-//require_once 'model/Encryption/autoload.php';
+//require_once 'Models/Encryption/autoload.php';
 try {
 /*
     $key = Crypto::createNewRandomKey();

@@ -1,6 +1,6 @@
 <?php
-use CMS\model\Controller\Controller;
-use CMS\model\Content\Content;
+use CMS\Models\Controller\Controller;
+use CMS\Models\Content\Content;
 class Blog extends Controller {
 
 	public function index($params = null){

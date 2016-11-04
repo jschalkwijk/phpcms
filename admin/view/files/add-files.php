@@ -1,6 +1,6 @@
 <?php
-use CMS\model\File\FileUpload;
-use CMS\model\File\Folders;
+use CMS\Models\File\FileUpload;
+use CMS\Models\File\Folders;
 
 	$file_dest = 'files/';
 	$thumb_dest= 'files/thumbs/';

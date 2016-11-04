@@ -1,11 +1,11 @@
 <?php
 
-use CMS\model\Controller\Controller;
-use CMS\model\DBC\DBC;
-use CMS\model\Products\Product;
-use CMS\model\Basket\Basket;
-use CMS\model\Basket\QuantityExc;
-use CMS\model\Support\SessionStorage;
+use CMS\Models\Controller\Controller;
+use CMS\Models\DBC\DBC;
+use CMS\Models\Products\Product;
+use CMS\Models\Basket\Basket;
+use CMS\Models\Basket\QuantityExc;
+use CMS\Models\Support\SessionStorage;
 
 class Cart extends Controller
 {

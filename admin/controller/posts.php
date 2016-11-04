@@ -1,13 +1,13 @@
 <?php
 
-use CMS\model\Content\Content;
-use CMS\model\Content\Posts\Post;
-use CMS\model\Controller\Controller;
+use CMS\Models\Content\Content;
+use CMS\Models\Content\Posts\Post;
+use CMS\Models\Controller\Controller;
 
 class Posts extends Controller
 {
     // import useractions trait
-    use \CMS\model\Actions\UserActions;
+    use \CMS\Models\Actions\UserActions;
 
     public function index($params = null)
     {

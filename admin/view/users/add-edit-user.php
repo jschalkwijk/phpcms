@@ -1,6 +1,6 @@
 <?php
-	use CMS\model\File\Folders;
-	$dbc = new \CMS\model\DBC\DBC;
+	use CMS\Models\File\Folders;
+	$dbc = new \CMS\Models\DBC\DBC;
 
 	$user = $data['user'];
 	

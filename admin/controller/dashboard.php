@@ -1,9 +1,9 @@
 <?php
 
-use CMS\model\Controller\Controller;
-use CMS\model\Content\Content;
-use CMS\model\Actions\UserActions;
-use CMS\model\Users\Users;
+use CMS\Models\Controller\Controller;
+use CMS\Models\Content\Content;
+use CMS\Models\Actions\UserActions;
+use CMS\Models\Users\Users;
 
 class Dashboard extends Controller {
 	use UserActions;

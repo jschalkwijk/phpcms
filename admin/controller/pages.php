@@ -1,10 +1,10 @@
 <?php
 
-use CMS\model\Controller\Controller;
-use CMS\model\Content\Content;
-use CMS\model\Content\Pages\Page;
-use CMS\model\Content\Posts\Post;
-use CMS\model\Actions\UserActions;
+use CMS\Models\Controller\Controller;
+use CMS\Models\Content\Content;
+use CMS\Models\Content\Pages\Page;
+use CMS\Models\Content\Posts\Post;
+use CMS\Models\Actions\UserActions;
 
 class Pages extends Controller
 {

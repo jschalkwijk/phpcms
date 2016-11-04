@@ -1,4 +1,4 @@
-<?php use CMS\model\Content\Pages\Page; ?>
+<?php use CMS\Models\Content\Pages\Page; ?>
 
 <script type="text/javascript" src="<?= ADMIN . "/vendor/tinymce/tinymce/tinymce.min.js"; ?>"></script>
 <script type="text/javascript">

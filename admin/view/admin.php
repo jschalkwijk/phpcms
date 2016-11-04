@@ -1,6 +1,6 @@
 <?php
-	use CMS\model\Content\ContentWriter;
-	use CMS\model\Users\UserWriter;
+	use CMS\Models\Content\ContentWriter;
+	use CMS\Models\Users\UserWriter;
 ?>
 <div class="container-fluid">
 	<div class="row">

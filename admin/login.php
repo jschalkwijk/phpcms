@@ -1,7 +1,7 @@
 <?php
 	ob_start();
 	require_once('config.php');
-	use CMS\model\DBC\DBC;
+	use CMS\Models\DBC\DBC;
 	use Defuse\Crypto\Crypto;
 ?>
 <!DOCTYPE html>
@@ -15,7 +15,7 @@
 
 <?php
 	// for some reason the autoloader does not work on this page for the crypto class..
-	// require_once 'CMS/model/Encryption/Crypto.php';
+	// require_once 'CMS/Models/Encryption/Crypto.php';
 	$output_form = False;
 	session_start();
 	// prevent session hijacking

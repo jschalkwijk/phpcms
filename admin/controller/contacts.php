@@ -1,12 +1,12 @@
 <?php
 
-use CMS\model\Controller\Controller;
-use \CMS\model\Contacts\Contact;
+use CMS\Models\Controller\Controller;
+use \CMS\Models\Contacts\Contact;
 
 class Contacts extends Controller
 {
     // import the remove/update/
-    use \CMS\model\Actions\UserActions;
+    use \CMS\Models\Actions\UserActions;
 
     public function index($params = null)
     {

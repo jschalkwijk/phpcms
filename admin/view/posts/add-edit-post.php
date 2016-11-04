@@ -1,5 +1,5 @@
 <?php
-	use CMS\model\Content\Categories;
+	use CMS\Models\Content\Categories;
 ?>
 
 <script type="text/javascript" src="<?= ADMIN."/vendor/tinymce/tinymce/tinymce.min.js"; ?>"></script>

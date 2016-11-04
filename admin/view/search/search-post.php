@@ -1,5 +1,5 @@
 <?php
-	use CMS\model\DBC\DBC;
+	use CMS\Models\DBC\DBC;
 	$dbc = new DBC;
 	if(isset($_POST['search-post'])){
 		$keywords = mysqli_real_escape_string($dbc->connect(),htmlentities(trim($_POST['search'])));

@@ -10,7 +10,7 @@
 # Routing
 
 require_once('config.php');
-use \CMS\model\DBC\DBC;
+use \CMS\Models\DBC\DBC;
 
 ob_start();
 

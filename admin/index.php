@@ -11,9 +11,11 @@
 // package index.php
 //ROUTING
 require_once('config.php');
-use CMS\model\DBC\DBC;
+use CMS\Models\DBC\DBC;
+use CMS\Core\Auth\Auth;
 
-login_authenticate();
+Auth::authenticate();
+
 ob_start();
 
 class APP {

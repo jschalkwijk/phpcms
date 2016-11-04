@@ -1,4 +1,4 @@
-<?php use CMS\model\DBC\DBC; ?>
+<?php use CMS\Models\DBC\DBC; ?>
 
 <script type="text/javascript" src="<?= JS."tinymce/tinymce.min.js"; ?>"></script>
 <script type="text/javascript">

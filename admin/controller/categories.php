@@ -1,8 +1,8 @@
 <?php
 
-use CMS\model\Controller\Controller;
-use CMS\model\Actions\UserActions;
-use \CMS\model\Content\Categories as Cat;
+use CMS\Models\Controller\Controller;
+use CMS\Models\Actions\UserActions;
+use \CMS\Models\Content\Categories as Cat;
 
 class Categories extends Controller
 {
