@@ -2,7 +2,7 @@
 namespace CMS\model\Actions;
 
 use CMS\model\DBC\DBC;
-
+use CMS\model\Content\Pages\Page;
 // This are the  update,delete and approve functions which regards post,pages, users and products.
 // these will only remove rows, not files etc.
 // Import the UserActions trait inside the controller and enter the database name insid ethe function
@@ -41,7 +41,7 @@ class RUDActions{
 		$messages = [];
 
 		if($dbt === "pages"){
-			$deleted = content_Pages_Page::deletePage($multiple);
+			$deleted = Page::deletePage($multiple);
 			$flag = $deleted['flag'];
 			if(isset($deleted['message']) || $deleted['error']) { $messages[] = $deleted['message']; }
 		} else {

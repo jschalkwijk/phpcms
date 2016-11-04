@@ -8,7 +8,8 @@ use CMS\model\Order\CustomerDetails;
 use CMS\model\Order\OrderDetails;
 use CMS\model\Order\Order as Ordr;
 
-class Order extends Controller{
+class Order extends Controller
+{
     private $customer;
     private $customerSession;
     private $customerDetails;
@@ -16,7 +17,8 @@ class Order extends Controller{
     private $orderSession;
     private $orderDetails;
 
-    public function __construct(){
+    public function __construct()
+    {
         // Start all the needed sessions.
         // For different uses we set updifferent session arrays with specific names.
         // Then we can access all the session information per topic
@@ -38,26 +40,28 @@ class Order extends Controller{
         $this->basket->all();
     }
 
-    public function index($params = null){
+    public function index($params = null)
+    {
 
-        if(!empty($this->customerDetails->single())) {
+        if (!empty($this->customerDetails->single())) {
             $this->customer = $this->customerDetails->single();
         } else {
-            $this->customer = new Customer(null,null,null,null,null,null,null);
+            $this->customer = new Customer(null, null, null, null, null, null, null);
         }
 
         $this->view(
             "Cart",
-            ["order.php"],
+            ["order/order.php"],
             $params,
             [
                 'customer' => $this->customer,
-                'js' => [JS."checkAll.js"]
+                'js' => [JS . "checkAll.js"]
             ]
         );
     }
 
-    public function payment($params = null){
+    public function payment($params = null)
+    {
         /* When a new customer is created and inserted to the DB , the $customer var doesn't hold the new ID yet.
          This is set after the customer is added, so we need to fetch it again with the customers->fetshSingle method in order
          to gain the new ID. Then we can pass it to the session and get the correct data.
@@ -65,7 +69,7 @@ class Order extends Controller{
         // If post is not set, the user probably refreshed the page or used rthe back button,
         // we can then just use the stored customer details from the session. if post is set,
         // the details could have been changed so we should update them.
-        if(!$_POST) {
+        if (!$_POST) {
             $this->customer = $this->customerDetails->single();
         } else {
             $this->customer = new Customer($_POST['name'], $_POST['email'], $_POST['phone'], $_POST['address1'], $_POST['address2'], $_POST['city'], $_POST['postal_code']);
@@ -74,8 +78,8 @@ class Order extends Controller{
         $this->customer = $this->customer->fetchSingle($add['customer_id']);
         $this->customerDetails->add($this->customer);
 
-        if(isset($add['customer_id'])) {
-        // Twijfel nog of ik de order in de database moet zetten bij deze stap of de volgende stap?
+        if (isset($add['customer_id'])) {
+            // Twijfel nog of ik de order in de database moet zetten bij deze stap of de volgende stap?
 //            $total = $this->basket->subTotal();
 //            if($this->orderDetails->single() == null){
 //                $this->order = new Order_Order($add['customer_id'], $total);
@@ -94,19 +98,20 @@ class Order extends Controller{
 
             $this->view(
                 "Order details",
-                ["details.php"],
+                ["order/details.php"],
                 $params,
                 [
                     'customer' => $this->customer,
                     'messages' => [$add['messages']],
-                    'js' => [JS."checkAll.js"]
+                    'js' => [JS . "checkAll.js"]
                 ]
             );
         }
 
     }
 
-    public function confirm($params = null){
+    public function confirm($params = null)
+    {
 //        /* When a new customer is created and inserted to the DB , the $customer var doesn't hold the new ID yet.
 //          This is set after the customer is added, so we need to fetch it again with the customers->fetshSingle method in order
 //          to gain the new ID. Then we can pass it to the session and get the correct data.
@@ -115,10 +120,10 @@ class Order extends Controller{
 //        $this->customer = $this->customer->fetchSingle($add['customer_id']);
 //        $this->customerDetails->add($this->customer);
         $this->customer = $this->customerDetails->single();
-        if($this->customer->getID() != null || $this->customer->getID() != 0) {
+        if ($this->customer->getID() != null || $this->customer->getID() != 0) {
 
             $total = $this->basket->subTotal();
-            if($this->orderDetails->single() == null || $this->orderDetails->single()->getCustomerId() != $this->customer->getID()){
+            if ($this->orderDetails->single() == null || $this->orderDetails->single()->getCustomerId() != $this->customer->getID()) {
                 $this->order = new Ordr($this->customer->getID(), $total);
                 $addOrder = $this->order->add();
                 $this->order = $this->order->fetchSingle($addOrder['order_id']);
@@ -135,15 +140,16 @@ class Order extends Controller{
 
             $this->view(
                 "Order details",
-                ["details.php"],
+                ["order/details.php"],
                 $params,
                 [
                     'customer' => $this->customer,
                     'messages' => [$addOrder['messages']],
-                    'js' => [JS."checkAll.js"]
+                    'js' => [JS . "checkAll.js"]
                 ]
             );
         }
     }
 }
+
 ?>

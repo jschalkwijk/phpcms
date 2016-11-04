@@ -22,7 +22,7 @@ public function index($params = null){
 		$posts = Content::fetchAll('posts',0);
 		$pages = Content::fetchAll('pages',0);
 		$users = Users::fetchUsers('users',0);
-		$views = ['actions' => 'view/manage_content.php'];
+		$views = ['actions' => 'manage_content.php'];
 		if(!empty($_POST)) {
 			$this->UserActions($_POST['dbt']);
 		}

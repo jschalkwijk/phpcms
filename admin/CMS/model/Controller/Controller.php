@@ -14,7 +14,7 @@ class Controller {
 	public $error = '';
 
 	public function model($model){
-		require('../admin/model/'.$model.'.model.php');
+		require('../'.$model);
 		return new $model();
 	}
 

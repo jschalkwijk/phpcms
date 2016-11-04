@@ -1,6 +1,7 @@
 <?php
 	use CMS\model\File\File;
 	use CMS\model\File\FileWriter;
+	use CMS\model\DBC\DBC;
 ?>
 
 <form class="search"action="<?= ADMIN."search"; ?>" method="post">
@@ -26,7 +27,7 @@
 		}
 		echo '<form method="get" action="'.ADMIN.'search">';
 					$files = File::fetchFilesBySearch($searchTermBits,0);
-					FileWriter::write($files,ADMIN.'view/singleFile.php',$doc,$img);
+					FileWriter::write($files,'view/files/single-file.php',$doc,$img);
 				echo '<div class="left">';
 					echo '<button type="submit" name="delete" id="delete">Delete Selected</button>';
 					echo '<button type="submit" name="download_files" id="download_files" alt="Download File">Download files</button>';	

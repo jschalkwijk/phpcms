@@ -11,7 +11,7 @@ function mce(){
     check();
 }
 
-function insertImages(path,thumb = null) {
+function insertImages(path,thumb) {
     if(thumb == null) {
         tinyMCE.execCommand('mceInsertRawHTML', false, '<a href='+ path +'><img src=' + path + ' width=100%></a>');
     } else {
@@ -65,7 +65,7 @@ function handleImagesAdding(){
                 mce();
             };
 
-            xhttp.open("POST", "/admin/blocks/include-files-tinymce.php", true);
+            xhttp.open("POST", "/admin/view/shared/include-files-tinymce.php", true);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhttp.send("search-file=submit&search=" + searchTerm);
         });

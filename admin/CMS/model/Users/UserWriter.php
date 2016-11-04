@@ -17,7 +17,7 @@ class UserWriter{
 			$rights = $single->getRights();
 			$approved = $single->getApproved();
 			$dbt = $single->getDbt();
-			require('view/user_table.php');
+			require('view/users/user_table.php');
 		}
 	}
 }

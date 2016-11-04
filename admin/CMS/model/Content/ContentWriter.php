@@ -21,7 +21,7 @@ class ContentWriter{
 			$date = $single->getDate();
 			$approved = $single->getApproved();
 			$dbt = $single->getDbt();
-			require('view/content_table.php');
+			require('view/shared/content-table.php');
 		}
 	}
 }
