@@ -2,7 +2,7 @@
 namespace CMS\Models\Content;
 
 use CMS\Models\DBC\DBC;
-// content management/user management/file management/product management/client management.
+
 class Content{
 	// will get the TRAIT actions that the user can perform like edit,delete,approve
 	

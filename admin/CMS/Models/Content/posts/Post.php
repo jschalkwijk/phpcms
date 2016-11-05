@@ -4,15 +4,33 @@ namespace CMS\Models\Content\Posts;
 use CMS\Models\Content\Content;
 use CMS\Models\DBC\DBC;
 use CMS\Models\Content\Categories;
+use CMS\Core\Model\Model;
 
-class Post extends Content{
-	public $category_type;
+class Post extends Model{
 
-	public function __construct($title,$description,$category,$content,$author,$dbt = null,$date = null,$approved = null,$trashed = null){
-		parent::__construct($title,$description,$category,$content,$author,$dbt,$date = null,$approved = null,$trashed = null);
-		$this->category_type = 'post';
+	protected $id = 'post_id';
+
+	public $table = 'posts';
+	//	public function __construct($title,$description,$category,$content,$author,$dbt = null,$date = null,$approved = null,$trashed = null){
+//		parent::__construct($title,$description,$category,$content,$author,$dbt,$date = null,$approved = null,$trashed = null);
+//		$this->category_type = 'post';
+//	}
+	public function __construct()
+	{
+
 	}
-	
+
+	public function getlink(){
+		return preg_replace("/[\s-]+/", "-", $this->title);
+	}
+
+	public function getpost_id(){
+		return $this->post_id;
+	}
+//	public function getDbt(){
+//		return $this->table;
+//	}
+
 	public function getCatType(){
 		return $this->category_type;
 	}

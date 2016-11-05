@@ -11,14 +11,16 @@ class Posts extends Controller
 
     public function index($params = null)
     {
-        $posts = Content::fetchAll('posts', 0);
+        $posts = Content::fetchAll('posts',0);
+//        $model = new Post;
+//        $posts = $model->where([['*'],'trashed'], 0);
+//        $posts = Post::all();
         // Post requests need to be handled first! Then load the page, otherwise you will get the headers already sent error.
         $this->UserActions('posts');
         // view takes: page_title,[array of view files],params from the router,array of data from model
         $view = ['search' => 'view/search/search-post.php', 'actions' => 'view/shared/manage-content.php'];
         $this->view('Posts', ['posts/posts-nav.php', 'posts/posts.php'], $params, ['posts' => $posts, 'view' => $view, 'trashed' => 0, 'js' => [JS . 'checkAll.js']]);
     }
-
     //
     public function AddPost($params = null)
     {
@@ -28,7 +30,7 @@ class Posts extends Controller
         ];
 
         if (!isset($_POST['submit'])) {
-            $post = new Post(null, null, null, null, null, 'posts');
+            $post = new Post();
             $this->view(
                 'Add Post',
                 ['posts/add-edit-post.php'],
@@ -58,7 +60,12 @@ class Posts extends Controller
     //
     public function DeletedPosts($params = null)
     {
-        $posts = Content::fetchAll('posts', 1);
+        $posts = Content::fetchAll('posts',1);
+//        $model = new Post;
+//        $posts = $model->where([['*'],'trashed'], 1);
+//        $model = new Post;
+//        $posts = $model->all([['*'],['trashed' => 0]]);
+//        print_r($posts);
         $this->UserActions('posts');
         $view = ['search' => 'view/search/search-post.php', 'actions' => 'view/shared/manage-content.php'];
         $this->view('Deleted Posts', ['posts/posts.php'], $params, ['posts' => $posts, 'view' => $view, 'trashed' => 1, 'js' => [JS . 'checkAll.js']]);
@@ -74,7 +81,8 @@ class Posts extends Controller
         ];
 
         if (!isset($_POST['submit'])) {
-            $post = Content::fetchSingle('posts', $params[0]);
+            // $post = Post::single($params[0]);
+            $post = Post::single($params[0]);
             $this->view(
                 'Edit Post',
                 ['posts/add-edit-post.php'],
