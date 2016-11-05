@@ -6,8 +6,12 @@ use CMS\Models\Controller\Controller;
 
 class Posts extends Controller
 {
-    // import useractions trait
+
     use \CMS\Models\Actions\UserActions;
+    protected $join = [
+        'categories' => ['title','description','keywords'],
+        'users' => ['username']
+    ];
 
     public function index($params = null)
     {
@@ -82,7 +86,8 @@ class Posts extends Controller
 
         if (!isset($_POST['submit'])) {
             // $post = Post::single($params[0]);
-            $post = Post::single($params[0]);
+
+            $post = Post::single($params[0],$this->join);
             $this->view(
                 'Edit Post',
                 ['posts/add-edit-post.php'],

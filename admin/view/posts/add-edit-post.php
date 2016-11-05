@@ -51,9 +51,8 @@
 					<label for="select">Category</label>
 					<select id="categories" name="cat_name">
 						<option name="none" value="None">None</option>
-						<?php $category = Categories::getSelected($post->category,'post'); ?>
+						<?php $category = Categories::getSelected($post->categories_title,'post'); ?>
 					</select>
-
 					<input type="text" name="category" placeholder="Category"/><br />
 					<input type="hidden" name="cat_type" value="post"/><br />
 					<textarea type="text" name="content" placeholder="Content"><?= $post->content; ?></textarea><br />

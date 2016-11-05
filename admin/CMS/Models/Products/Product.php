@@ -109,7 +109,7 @@ class Product {
 		$db = new DBC;
 		$dbc = $db->connect();
 
-		$query = $dbc->prepare("SELECT ".$dbt.".*, categories.title as category FROM ".$dbt." LEFT JOIN categories ON ".$dbt.".category_id = categories.categorie_id  WHERE ".$dbt.".trashed = ? ORDER BY product_id DESC");
+		$query = $dbc->prepare("SELECT ".$dbt.".*, categories.title as category FROM ".$dbt." LEFT JOIN categories ON ".$dbt.".category_id = categories.category_id  WHERE ".$dbt.".trashed = ? ORDER BY product_id DESC");
 		if($query){
 			$query->bind_param("i",$trashed);
 			$query->execute();
@@ -144,7 +144,7 @@ class Product {
 		$dbc = $db->connect();
 
 		$multiple = implode(",",$ids);
-		$query = $dbc->query("SELECT products.*, categories.title as category FROM products LEFT JOIN categories ON products.category_id = categories.categorie_id WHERE product_id IN({$multiple})");
+		$query = $dbc->query("SELECT products.*, categories.title as category FROM products LEFT JOIN categories ON products.category_id = categories.category_id WHERE product_id IN({$multiple})");
 		if(!$query){ $db->sqlERROR(); };
 
 		$products = array();
@@ -171,7 +171,7 @@ class Product {
 		$db = new DBC;
 		$dbc = $db->connect();
 
-		$query = $dbc->prepare("SELECT products.*, categories.title as category FROM products LEFT JOIN categories ON products.category_id = categories.categorie_id WHERE product_id = ? ORDER BY product_id DESC");
+		$query = $dbc->prepare("SELECT products.*, categories.title as category FROM products LEFT JOIN categories ON products.category_id = categories.category_id WHERE product_id = ? ORDER BY product_id DESC");
 		if($query){
 			$query->bind_param("i",$id);
 			$query->execute();
@@ -257,7 +257,7 @@ class Product {
 			}
 		} else {
 			$category_id = mysqli_real_escape_string($dbc,trim((int)$_POST['cat_name']));
-			$query = $dbc->prepare("SELECT title FROM categories WHERE categorie_id = ?");
+			$query = $dbc->prepare("SELECT title FROM categories WHERE category_id = ?");
 			if($query){
 				$query->bind_param("i",$category_id);
 				$query->execute();

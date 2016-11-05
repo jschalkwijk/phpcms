@@ -8,9 +8,13 @@ use CMS\Core\Model\Model;
 
 class Post extends Model{
 
-	protected $id = 'post_id';
+	protected $primaryKey = 'post_id';
 
-	public $table = 'posts';
+	protected $table = 'posts';
+    protected $relations = [
+        'categories' => 'category_id',
+        'users' => 'user_id'
+    ];
 	//	public function __construct($title,$description,$category,$content,$author,$dbt = null,$date = null,$approved = null,$trashed = null){
 //		parent::__construct($title,$description,$category,$content,$author,$dbt,$date = null,$approved = null,$trashed = null);
 //		$this->category_type = 'post';

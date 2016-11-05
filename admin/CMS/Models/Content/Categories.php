@@ -58,7 +58,7 @@ class Categories extends Content{
 			$cat_desc = mysqli_real_escape_string($dbc,trim($this->getDescription()));
 			$author = mysqli_real_escape_string($dbc,trim($this->getAuthor()));
 			// Edit the post data from the database
-			$query = $dbc->prepare("UPDATE categories SET title = ?,description = ?,author = ? WHERE categories.categorie_id = ?");
+			$query = $dbc->prepare("UPDATE categories SET title = ?,description = ?,author = ? WHERE categories.category_id = ?");
 			if ($query) {
 				$query->bind_param("sssi",$category,$cat_desc,$author,$id);
 				$query->execute();
@@ -111,7 +111,7 @@ class Categories extends Content{
 				$db->sqlERROR();
 			}
 
-			$query = $dbc->prepare("SELECT categorie_id,title FROM categories WHERE title = ?");
+			$query = $dbc->prepare("SELECT category_id,title FROM categories WHERE title = ?");
 			if($query){
 				$query->bind_param("s",$category);
 				$query->execute();
@@ -119,7 +119,7 @@ class Categories extends Content{
 				$query->close();
 
 				$row = $data->fetch_array();
-				$category_id = $row['categorie_id'];
+				$category_id = $row['category_id'];
 				$category = $row['title'];
 			} else {
 				$db->sqlERROR();
@@ -157,9 +157,9 @@ class Categories extends Content{
 
 			while ($row = $data->fetch_array()) {
 				if ($selected_cat == $row['title']) {
-					echo '<option value="' . $row['categorie_id'] . '" selected="selected">' . $row['title'] . '</option>';
+					echo '<option value="' . $row['category_id'] . '" selected="selected">' . $row['title'] . '</option>';
 				} else {
-					echo '<option value="' . $row['categorie_id'] . '">' . $row['title'] . '</option>';
+					echo '<option value="' . $row['category_id'] . '">' . $row['title'] . '</option>';
 				}
 			}
 		} else {

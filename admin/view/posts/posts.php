@@ -18,7 +18,7 @@
                                 // write out in the content_table format.
                                 require('view/shared/content-table.php');
                             }
-//                        ?>
+                        ?>
 <!--                        --><?php // foreach($posts as $single){ ?>
 <!--                        <tr><td class="td-title"><p>--><?//= $single->title; ?><!--</p></td>-->
 <!--                            <td class="td-author"><p>--><?//= $single->author; ?><!--</p></td>-->
@@ -35,7 +35,7 @@
 <!--                                <td class="td-btn"><p><input type="checkbox" name="checkbox[]" value="--><?//= $single->getpost_id(); ?><!--"/></p></td>-->
 <!--                            --><?php //}
 //                            }?>
-                        </tr>
+<!--                        </tr>-->
                     </table>
                     <?php
                         require($data['view']['actions']);

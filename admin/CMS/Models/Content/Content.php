@@ -83,7 +83,7 @@ class Content{
 		$id_row = substr($dbt, 0, -1).'_id';
 
 		if($dbt != 'categories'){
-			$query = $dbc->prepare("SELECT ".$dbt.".*, categories.title as category FROM ".$dbt." LEFT JOIN categories ON ".$dbt.".category_id = categories.categorie_id WHERE ".$dbt.".trashed = ? ORDER BY ".$id_row." DESC");
+			$query = $dbc->prepare("SELECT ".$dbt.".*, categories.title as category FROM ".$dbt." LEFT JOIN categories ON ".$dbt.".category_id = categories.category_id WHERE ".$dbt.".trashed = ? ORDER BY ".$id_row." DESC");
 			(!$query) ? $db->sqlERROR() : $query->bind_param("i",$trashed);
 
 		} else {
@@ -131,7 +131,7 @@ class Content{
 		$id_row = substr($dbt, 0, -1).'_id';
 
 		if($dbt != 'categories'){
-			$query = $dbc->prepare("SELECT ".$dbt.".*, categories.title as category FROM ".$dbt." LEFT JOIN categories ON ".$dbt.".category_id = categories.categorie_id WHERE ".$id_row." = ?");
+			$query = $dbc->prepare("SELECT ".$dbt.".*, categories.title as category FROM ".$dbt." LEFT JOIN categories ON ".$dbt.".category_id = categories.category_id WHERE ".$id_row." = ?");
 			(!$query) ? $db->sqlERROR() : $query->bind_param("i",$id);
 
 		} else {
