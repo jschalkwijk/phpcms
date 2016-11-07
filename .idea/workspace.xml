@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0a43c896-b199-4fd3-a7cd-831809ebb533" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/CMS/Models/Content/Categories.php" afterPath="$PROJECT_DIR$/admin/CMS/Models/Content/Categories.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/CMS/Models/Content/Content.php" afterPath="$PROJECT_DIR$/admin/CMS/Models/Content/Content.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/CMS/Models/DBC/DBC.php" afterPath="$PROJECT_DIR$/admin/CMS/Models/DBC/DBC.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/CMS/Core/Model/Model.php" afterPath="$PROJECT_DIR$/admin/CMS/Core/Model/Model.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/CMS/Models/Content/pages/Page.php" afterPath="$PROJECT_DIR$/admin/CMS/Models/Content/pages/Page.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/CMS/Models/Content/posts/Post.php" afterPath="$PROJECT_DIR$/admin/CMS/Models/Content/posts/Post.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/index.php" afterPath="$PROJECT_DIR$/admin/index.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/controller/pages.php" afterPath="$PROJECT_DIR$/admin/controller/pages.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/controller/posts.php" afterPath="$PROJECT_DIR$/admin/controller/posts.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="0a43c896-b199-4fd3-a7cd-831809ebb533" name="Default" comment="" />
     <ignored path="CMS.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
