@@ -2,83 +2,87 @@
 
 namespace CMS\Core\Model;
 use CMS\Models\DBC\DBC;
+
 abstract class Model
 {
-    protected $select;
-    protected $from;
-    protected $where;
-    protected $orderBy;
-    protected $join;
+
+    /**
+     * The query which is generated for the model.
+     *
+     * @var array
+     */
     protected $query = "";
+
+    protected $primaryKey = 'id';
+
+    protected $table = '';
+
+    protected $relations = [];
+
+    protected $joins = [];
 
     function __get($property) {
         $method = "get$property";
-        echo $method."<br>";
         if(method_exists($this, $method)) return $this->$method;
     }
-    public static function all($columns = ['*'])
+    /**
+     * Returns all objects linked to the called model.
+     *
+     * @param Array $joins
+     * @return Object Array
+     *
+     */
+    public static function all($joins = null)
     {
-        //$columns = is_array($columns) ? $columns : func_get_args();
-
         $model = new static;
-        $db = new DBC;
-        $dbc = $db->connect();
-        $result = mysqli_query($dbc,"SELECT ".implode($columns)." FROM ".$model->table);
-        return $model->fetch($result);
+        $joins = $model->join($joins);
+        $query = $model->select().$joins['as'].$model->from().$joins['on'].$model->orderBy($model->primaryKey,'DESC');
+        //echo $query;
+        return $model->newQuery($query);
     }
-//    public static function all($columns = ['*'])
-//    {
-//        //$columns = is_array($columns) ? $columns : func_get_args();
-//
-//        $model = new static;
-//        print_r($model);
-//        $query = $model->select()." FROM ".$model->table." ".$model->where1($columns[1]).$model->orderBy($model->id);
-//        echo $query;
-//        return $model->newQuery($query);
-//
-//    }
-    public static function single($id,$relations = null)
+    /**
+     * Returns all objects linked to the called model.
+     *
+     * @param Int $id
+     * @param Array $joins
+     * @return Object Array
+     *
+     */
+    public static function single($id,$joins = null)
     {
         $model = new static;
-        $joins = $model->join($relations);
+        $joins = $model->join($joins);
 
-        $query = $model->select().$joins['which'].$model->from().$joins['join'].$model->where1([$model->primaryKey => $id]);
+        $query = $model->select().$joins['as'].$model->from().$joins['on'].$model->where([$model->primaryKey => $id]);
         //echo $query;
         return $model->newQuery($query);
     }
 
+    /**
+     * Executes mysql Query
+     * Returns an array with the rows as objects
+     *
+     * @param String $query
+     * @return Object Array
+     *
+     */
     public function newQuery($query)
     {
-        $db = new DBC;
-        $dbc = $db->connect();
-        $result = mysqli_query($dbc,$query);
-        return $this->fetch($result);
-
-//        $builder = $this->newQueryWithoutScopes();
-//
-//        foreach ($this->getGlobalScopes() as $identifier => $scope) {
-//            $builder->withGlobalScope($identifier, $scope);
-//        }
-//
-//        return $builder;
-        //return $this;
-    }
-
-    public function where($columns,$value)
-    {
-        $db = new DBC;
-        $dbc = $db->connect();
-        //$query = "SELECT ".$this->table.".".implode($columns[0])." FROM ".$this->table." WHERE ".$columns[1]." = ".$value;
-        //$query = "SELECT ".$this->table.".".implode($columns[0]).", categories.title as category FROM ".$this->table." JOIN categories ON ".$this->table.".category_id = categories.category_id WHERE posts.".$columns[1]." = ".$value;
-        $query = "SELECT ".$this->table.".".implode($columns[0]).", categories.title as category FROM ".$this->table." JOIN categories ON ".$this->table.".category_id = categories.category_id WHERE posts.".$columns[1]." = ".$value;
-        (isset($columns[2])) ? $query .= " ".implode($columns[2]) : "";
-        //$sql ="SELECT posts.*, categories.title as category FROM posts LEFT JOIN categories ON posts.category_id = categories.category_id WHERE posts.trashed = ? ORDER BY post_id DESC"."<br>";
-        //echo $sql;
+        $this->query = $query;
         echo $query;
+        $db = new DBC;
+        $dbc = $db->connect();
         $result = mysqli_query($dbc,$query);
         return $this->fetch($result);
     }
 
+    /**
+     * Returns an array with the rows as objects
+     *
+     * @param \mysqli_result $result
+     * @return Object Array
+     *
+     */
     public function fetch($result)
     {
         $data = [];
@@ -90,21 +94,40 @@ abstract class Model
             }
             $data[] = $model;
         }
-        // print_r($data);
         return $data;
     }
 
+    /**
+     * Returns SELECT part of an sql statement.
+     *
+     * @param Array $columns
+     * @return String
+     *
+     */
     public function select($columns = ['*'])
     {
         return "SELECT ".$this->table.".".implode($columns);
     }
 
+    /**
+     * Returns FROM part of an sql statement.
+     *
+     * @return String
+     *
+     */
     public function from()
     {
         return " FROM ".$this->table." ";
     }
 
-    public function where1($columns = ['post_id' => 111,'title' => 'Jorn'])
+    /**
+     * Returns WHERE part of an sql statement.
+     *
+     * @param Array $columns
+     * @return String
+     *
+     */
+    public function where($columns = [])
     {
         $values = array();
         foreach($columns as $k => $v){
@@ -113,66 +136,51 @@ abstract class Model
         $where = implode(' AND ', $values);
         return " WHERE ".$where;
     }
-
-    public function orderBy($column = 'post_id',$order = 'DESC')
+    /**
+     * Returns Order By part of an sql statement.
+     *
+     * @param String $column
+     * @param String $order
+     * @return String
+     *
+     */
+    public function orderBy($column = '',$order = '')
     {
         return " ORDER BY ".$column." ".$order;
     }
-
-    public function join($columns)
+    /**
+     * Returns array with the joined relations from the Model.
+     *
+     * @param Array $joins
+     * @return String Array
+     *
+     */
+    public function join($joins = null)
     {
-        if($columns == null){
+        if($joins == null && !empty($this->joins)){
+           $joins = $this->joins;
+        } else if($joins == null && empty($this->joins)){
             return [
-                "which" => "",
-                "join" => "",
+                "as" => "",
+                "on" => "",
             ];
         }
-        $which = "";
-        $join = "";
-        foreach($this->relations as $k => $v){
-            $table = $k;
-            $foreignKey = $v;
-            if(array_key_exists($table,$columns)){
-                for ($i = 0; $i < count($columns[$table]); $i++) {
-                    $name = $columns[$table][$i];
-                    $which .= ", $table.$name AS $table" . "_" . "$name";
+        $as = "";
+        $on = "";
+        // Creating a $as and $on string for every relation
+        foreach($this->relations as $table => $foreignKey){
+            // If relation is defined and is added as a join, create the needed string
+            if(array_key_exists($table,$joins)){
+                $columns = $joins[$table];
+                foreach($columns as $name) {
+                    $as .= ", $table.$name AS $table" . "_" . "$name";
                 }
-                $join .= " JOIN $table ON " . $this->table . ".$foreignKey  = $table.$foreignKey ";
+                $on .= " JOIN $table ON " . $this->table . ".$foreignKey  = $table.$foreignKey ";
             }
         }
-
-        if(!empty($table) && !empty($foreignKey)) {
-            return [
-                //"which" => ", $table.$column AS $table" . "_" . "$column",
-                "which" => $which,
-                "join" => $join,
-            ];
-        } else {
-            return [
-                "which" => "",
-                "join" => "",
-            ];
-        }
-
+        return [
+            "as" => $as,
+            "on" => $on,
+        ];
     }
-
-    public function get()
-    {
-        return $this->query;
-    }
-//    public function newQueryWithoutScopes()
-//    {
-//        $builder = $this->newEloquentBuilder(
-//            $this->newBaseQueryBuilder()
-//        );
-//
-//        // Once we have the query builders, we will set the model models so the
-//        // builder can easily access any information it may need from the model
-//        // while it is constructing and executing various queries against it.
-//        return $builder->setModel($this)->with($this->with);
-//    }
-//    public function newEloquentBuilder($query)
-//    {
-//        return new Builder($query);
-//    }
 }

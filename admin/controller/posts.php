@@ -8,17 +8,19 @@ class Posts extends Controller
 {
 
     use \CMS\Models\Actions\UserActions;
-    protected $join = [
-        'categories' => ['title','description','keywords'],
-        'users' => ['username']
-    ];
+    //Put this in controller or Model, or both? Model as standard setup, if a controller needs an other
+    // relatoinship we can change that.
+//    protected $join = [
+//        'categories' => ['title','description','keywords'],
+//        'users' => ['username']
+//    ];
 
     public function index($params = null)
     {
-        $posts = Content::fetchAll('posts',0);
+//        $posts = Content::fetchAll('posts',0);
 //        $model = new Post;
 //        $posts = $model->where([['*'],'trashed'], 0);
-//        $posts = Post::all();
+        $posts = Post::all();
         // Post requests need to be handled first! Then load the page, otherwise you will get the headers already sent error.
         $this->UserActions('posts');
         // view takes: page_title,[array of view files],params from the router,array of data from model
@@ -85,9 +87,7 @@ class Posts extends Controller
         ];
 
         if (!isset($_POST['submit'])) {
-            // $post = Post::single($params[0]);
-
-            $post = Post::single($params[0],$this->join);
+            $post = Post::single($params[0]);
             $this->view(
                 'Edit Post',
                 ['posts/add-edit-post.php'],

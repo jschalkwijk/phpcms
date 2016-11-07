@@ -1,7 +1,6 @@
 <?php
 namespace CMS\Models\Content\Posts;
 
-use CMS\Models\Content\Content;
 use CMS\Models\DBC\DBC;
 use CMS\Models\Content\Categories;
 use CMS\Core\Model\Model;
@@ -10,30 +9,28 @@ class Post extends Model{
 
 	protected $primaryKey = 'post_id';
 
-	protected $table = 'posts';
+	public $table = 'posts';
+
     protected $relations = [
         'categories' => 'category_id',
         'users' => 'user_id'
     ];
-	//	public function __construct($title,$description,$category,$content,$author,$dbt = null,$date = null,$approved = null,$trashed = null){
-//		parent::__construct($title,$description,$category,$content,$author,$dbt,$date = null,$approved = null,$trashed = null);
-//		$this->category_type = 'post';
-//	}
-	public function __construct()
-	{
 
-	}
+    protected $joins = [
+        'categories' => ['title','description'],
+        'users' => ['username']
+    ];
 
 	public function getlink(){
 		return preg_replace("/[\s-]+/", "-", $this->title);
 	}
 
-	public function getpost_id(){
+	public function get_id(){
 		return $this->post_id;
 	}
-//	public function getDbt(){
-//		return $this->table;
-//	}
+	public function getTable(){
+		return $this->table;
+	}
 
 	public function getCatType(){
 		return $this->category_type;
