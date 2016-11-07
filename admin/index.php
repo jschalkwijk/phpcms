@@ -86,7 +86,7 @@ class APP {
 		if(isset($_GET['url'])){
 			// get the URL from the base defined in the.htaccess file.
 			// filter url
-			$url = filter_var(mysqli_real_escape_string($dbc->connect(),trim($_GET['url'])),FILTER_SANITIZE_URL);
+			$url = filter_var(trim($_GET['url']),FILTER_SANITIZE_URL);
 			// delete last / if it is there.
 			$url = rtrim($url,'/');
 			// Remove the - (dash) in the url : EX. admin/add-user. Classnames can't have the - (dash) so class is written as AddUser.

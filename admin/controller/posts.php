@@ -47,7 +47,7 @@ class Posts extends Controller
                 ]
             );
         } else {
-            $post = new Post($_POST['title'], $_POST['post_desc'], $_POST['category'], $_POST['content'], $_SESSION['username'], 'posts');
+            $post = new Post;
             $add = $post->addPost();
             $this->view(
                 'Add Post',
@@ -66,12 +66,7 @@ class Posts extends Controller
     //
     public function DeletedPosts($params = null)
     {
-        $posts = Content::fetchAll('posts',1);
-//        $model = new Post;
-//        $posts = $model->where([['*'],'trashed'], 1);
-//        $model = new Post;
-//        $posts = $model->all([['*'],['trashed' => 0]]);
-//        print_r($posts);
+        $posts = Post::all(1);
         $this->UserActions('posts');
         $view = ['search' => 'view/search/search-post.php', 'actions' => 'view/shared/manage-content.php'];
         $this->view('Deleted Posts', ['posts/posts.php'], $params, ['posts' => $posts, 'view' => $view, 'trashed' => 1, 'js' => [JS . 'checkAll.js']]);
@@ -99,7 +94,13 @@ class Posts extends Controller
                 ]
             );
         } else {
-            $post = new Post($_POST['title'], $_POST['post_desc'], $_POST['category'], $_POST['content'], $_SESSION['username'], 'posts');
+           // $post = new Post($_POST['title'], $_POST['post_desc'], $_POST['category'], $_POST['content'], $_SESSION['username'], 'posts');
+            $post = new Post;
+            $post->title = $_POST['title'];
+            $post->description = $_POST['post_desc'];
+            $post->category = $_POST['category'];
+            $post->content = $_POST['content'];
+            $post->username = $_SESSION['username'];
             $edit = $post->addPost($_POST['id'], $_POST['cat_name'], $_POST['confirm']);
             $this->view(
                 'Edit Post',

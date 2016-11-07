@@ -21,6 +21,11 @@ class Post extends Model{
         'users' => ['username']
     ];
 
+    protected $allowed =[
+        'title',
+        'content'
+    ];
+
 	public function getlink(){
 		return preg_replace("/[\s-]+/", "-", $this->title);
 	}
@@ -28,6 +33,9 @@ class Post extends Model{
 	public function get_id(){
 		return $this->post_id;
 	}
+    public function setID($id){
+        $this->post_id = $id;
+    }
 	public function getTable(){
 		return $this->table;
 	}
@@ -42,64 +50,69 @@ class Post extends Model{
 	// by Post values passed to the object inside the controller.
 	// The type of the category is set above as an extra object item
 	public function addPost($id = null,$cat_name = null,$confirm = null){
-		
+
 		$db = new DBC;
 		$dbc = $db->connect();
 
 		$output_form = false;
 		$errors = array();
 		$messages = array();
-		
+
 		$this->setID($id);
-		
-		$id = mysqli_real_escape_string($dbc,trim((int)$this->getID()));
-		$title = mysqli_real_escape_string($dbc,trim($this->title));
-		$category = mysqli_real_escape_string($dbc,trim($this->category));
-		$post_desc = mysqli_real_escape_string($dbc,trim($this->description));
-		// !!! We cant use the contentiwth the Prepare statement, otherwise allhtml chars will be escaped an cant be used for inserted media etc.
-		$content = mysqli_real_escape_string($dbc,trim($this->content));
+
+		$id = trim((int)$this->post_id);
+		$title = trim($this->title);
+		$category = trim($this->category);
+		$post_desc = trim($this->description);
+		// !!! We cant use the content with the Prepare statement, otherwise allhtml chars will be escaped an cant be used for inserted media etc.
+		$content = trim($this->content);
 		$author = $this->author;
-		
-		$dbt = $this->dbt;
-		
+
+		$table = $this->table;
+
 		if(!empty($category)) {
 			$category = Categories::addCategory($category,'post');
 			$category_id = $category['category_id'];
 		} else if(isset($_POST['cat_name'])) {
-			$category_id = mysqli_real_escape_string($dbc,trim($_POST['cat_name']));
+			$category_id = trim($_POST['cat_name']);
 		}
 
 		if (!empty($title) && !empty($content)) {
 			if($confirm == "Yes"){
 				// !!! We cant use the contentiwth the Prepare statement, otherwise allhtml chars will be escaped an cant be used for inserted media etc.
-				$query = $dbc->prepare("UPDATE ".$dbt." SET title = ?,description = ?,content = '".$content."',category_id = ? WHERE post_id = ?");
-				if($query) {
-					$query->bind_param("ssii", $title, $post_desc, $category_id, $id);
-				} else {
-					$db->sqlERROR();
-				}
+                try {
+                    $query = $dbc->prepare("UPDATE ".$table." SET title = ?,description = ?,content = ?,category_id = ? WHERE post_id = ?");
+                    $query->execute([$title,$post_desc,$content,$category_id,$id]);
+                } catch(\PDOException $e){
+                    echo $e->getMessage();
+                }
 			} else {
 				// !!! We cant use the contentiwth the Prepare statement, otherwise allhtml chars will be escaped an cant be used for inserted media etc.
-				$query = $dbc->prepare("INSERT INTO " . $dbt . "(title,description,content,author,category_id,date) VALUES(?,?,'" . $content . "',?,?,NOW())");
-				if($query) {
-					$query->bind_param("sssi", $title, $post_desc, $author, $category_id);
-				} else {
-					$db->sqlERROR();
-				}
+                try {
+                    $query = $dbc->prepare("INSERT INTO " . $table . "(title,description,content,author,category_id,date) VALUES(?,?,?,?,?,NOW())");
+                    $query->execute([$title,$post_desc,$content,$author,$category_id]);
+                } catch(\PDOException $e){
+                    echo $e->getMessage();
+                }
 			}
-
-			$query->execute();
-			$query->close();
-
 			$messages[] = 'Your post has been added/edited.<br />';
 		} else if (empty($title) || empty($content)) {
 				$errors[] = "You forgot to fill in one or more of the required fields (title,content).<br />";
 				$output_form = true;
 		}
-		$dbc->close();
+        $db->close();
 
 		return ['output_form' => $output_form, 'errors' => $errors, 'messages' => $messages];
 	}
-	
+//    public function addPost($id = null,$cat_name = null,$confirm = null)
+//    {
+//        if(!empty($_POST['category'])) {
+//            $category = Categories::addCategory($_POST['category'],'post');
+//            $_POST['category_id'] = $category['category_id'];
+//        } else if(isset($_POST['cat_name'])) {
+//            $_POST['category_id']  = trim($_POST['cat_name']);
+//        }
+//        $this->add($_POST);
+//    }
 }
 ?>

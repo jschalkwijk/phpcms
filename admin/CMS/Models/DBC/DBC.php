@@ -1,6 +1,7 @@
 <?php
 namespace CMS\Models\DBC;
-use mysqli;
+use PDO;
+use PDOException;
 
 class DBC {
 	/*
@@ -13,31 +14,22 @@ class DBC {
 	private $name = DB_NAME;
 	private $dbc;
 
-	// Connects to your database
-//	public function connect(){
-//		$this->dbc = mysqli_connect($this->host, $this->user, $this->password, $this->name) or die('Error connecting to server');
-//		return $this->dbc;
-//	}
 	public function connect(){
-		// Create connection
-		$this->dbc = new mysqli($this->host, $this->user, $this->password, $this->name);
-		// Check connection
-		if ($this->dbc->connect_error) {
-			$this->connectERROR();
-		}
+        try
+        {
+            $this->dbc = new PDO("mysql:host=$this->host;dbname=$this->name", $this->user, $this->password);
+            // set the PDO error mode to exception
+            $this->dbc->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        }
+        catch(PDOException $e)
+        {
+            echo "Connection failed: " . $e->getMessage();
+        }
 		return $this->dbc;
 	}
 	// Disconnects from your database.
-	public function disconnect(){
-		mysqli_close($this->dbc);
-	}
-
-	public function sqlERROR(){
-		echo "There is an error in your sql query (" . $this->dbc->errno . ") " . $this->dbc->error;
-	}
-
-	public function  connectERROR(){
-		echo "Failed to connect to MySQL: (" . $this->dbc->connect_errno . ") " . $this->dbc->connect_error;
+	public function close(){
+		$this->dbc = null;
 	}
 }
 

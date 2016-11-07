@@ -139,9 +139,8 @@ class Page extends Content{
 		$categories = array();
 
 		$query = $dbc->query("SELECT * FROM pages WHERE trashed = 0");
-		(!$query) ? $db->sqlERROR() : "";
 
-		while($row = $query->fetch_array()) {
+		while($row = $query->fetch()) {
 			if($selected_cat == $row['title'] ) {
 				echo '<option value="'.$row['page_id'].'" selected="selected">'.$row['title'].'</option>';
 			} else {
@@ -174,27 +173,22 @@ class Page extends Content{
 	public static function deletePage($multiple){
 		$db = new DBC;
 		$dbc = $db->connect();
-		$query = $dbc->prepare("SELECT p1.*,p2.title as pname FROM pages p1 INNER JOIN pages p2 ON p1.parent_id = p2.page_id WHERE p1.page_id IN({$multiple})");
-		if($query) {
-			$query->execute();
-			$data = $query->get_result();
-			$query->close();
-			if($data->num_rows == 0){
+		try {
+            $query = $dbc->query("SELECT p1.*,p2.title as pname FROM pages p1 INNER JOIN pages p2 ON p1.parent_id = p2.page_id WHERE p1.page_id IN({$multiple})");
+			if($query->rowCount() == 0){
 				// if num rows is zero, do normal query to the page to delete the title. because otherwise we wont get it.
-				$query = $dbc->prepare("SELECT * FROM pages WHERE page_id IN({$multiple})");
-				if($query) {
-					$query->execute();
-					$data = $query->get_result();
-					$query->close();
-				} else {
-					$db->sqlERROR();
-				}
+				try {
+                    $query = $dbc->query("SELECT * FROM pages WHERE page_id IN({$multiple})");
+				} catch (\PDOException $e) {
+                    echo $e->getMessage();
+                }
 			}
-		} else {
-			$db->sqlERROR();
-		}
+            $result = $query->fetchAll();
+		} catch (\PDOException $e) {
+            echo $e->getMessage();
+        }
 
-		while ($row = $data->fetch_array()) {
+		foreach($result as $row) {
 			if ($row['parent_id'] != 0 && $row['parent_id'] != $row['page_id']) {
 				print_r($row['pname']);
 				//read controller
@@ -215,18 +209,16 @@ class Page extends Content{
 				$flag = true;
 			} else {
 				if (unlink('./././controller/'.$row['title'].'.php')) {
-					if ($row['parent_id'] == 0) {
-						$page_id = $row['page_id'];
-						$query = $dbc->prepare("DELETE FROM pages WHERE parent_id = ?");
-						if($query) {
-							$query->bind_param("i", $page_id);
-							$query->execute();
-							print_r($query);
-							$query->close();
-						} else {
-							$db->sqlERROR();
-						}
-					}
+                    if ($row['parent_id'] == 0) {
+                        $page_id = $row['page_id'];
+                        try {
+                            $query = $dbc->prepare("DELETE FROM pages WHERE parent_id = ?");
+                            $query->execute([$page_id]);
+                            print_r($query);
+                        } catch (\PDOException $e) {
+                            echo $e->getMessage();
+                        }
+                    }
 					$message = 'The main page with title: '.$row['title'].' is deleted permanently';
 					$flag = true;
 				} else {
@@ -234,8 +226,8 @@ class Page extends Content{
 					$flag = false;
 				}
 			}
-		}
-		$dbc->close();
+	    }
+		$db->close();
 		return ['message' => $message, 'flag' => $flag];
 	}
 }

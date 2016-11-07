@@ -2,6 +2,7 @@
 
 namespace CMS\Core\Model;
 use CMS\Models\DBC\DBC;
+use PDOException;
 
 abstract class Model
 {
@@ -21,22 +22,29 @@ abstract class Model
 
     protected $joins = [];
 
+    protected $allowed = [];
+
     function __get($property) {
         $method = "get$property";
         if(method_exists($this, $method)) return $this->$method;
     }
+    public function __set($key,$value)
+    {
+        $this->$key = $value;
+    }
     /**
      * Returns all objects linked to the called model.
      *
+     * @param Int $trashed
      * @param Array $joins
      * @return Object Array
      *
      */
-    public static function all($joins = null)
+    public static function all($trashed = 0,$joins = null)
     {
         $model = new static;
         $joins = $model->join($joins);
-        $query = $model->select().$joins['as'].$model->from().$joins['on'].$model->orderBy($model->primaryKey,'DESC');
+        $query = $model->select().$joins['as'].$model->from().$joins['on'].$model->where(['trashed' => $trashed]).$model->orderBy($model->primaryKey,'DESC');
         //echo $query;
         return $model->newQuery($query);
     }
@@ -58,6 +66,10 @@ abstract class Model
         return $model->newQuery($query);
     }
 
+    public function add($request)
+    {
+
+    }
     /**
      * Executes mysql Query
      * Returns an array with the rows as objects
@@ -72,21 +84,28 @@ abstract class Model
         echo $query;
         $db = new DBC;
         $dbc = $db->connect();
-        $result = mysqli_query($dbc,$query);
-        return $this->fetch($result);
+        try {
+            $query = $dbc->query($query);
+            $query->setFetchMode(\PDO::FETCH_ASSOC);
+            $results = $query->fetchAll();
+        } catch(\PDOException $e){
+           echo $e->getMessage();
+        }
+        $db->close();
+        return $this->fetch($results);
     }
 
     /**
      * Returns an array with the rows as objects
      *
-     * @param \mysqli_result $result
+     * @param Array $results
      * @return Object Array
      *
      */
-    public function fetch($result)
+    public function fetch($results)
     {
         $data = [];
-        while ($row = $result->fetch_assoc()) {
+        foreach($results as $row) {
             $model = new static();
             foreach ($row as $k => $v){
                 //echo $model->$k,$v;
@@ -131,7 +150,7 @@ abstract class Model
     {
         $values = array();
         foreach($columns as $k => $v){
-            $values[] = $k." = ".$v;
+            $values[] = $this->table.".".$k." = ".$v;
         }
         $where = implode(' AND ', $values);
         return " WHERE ".$where;
@@ -182,5 +201,41 @@ abstract class Model
             "as" => $as,
             "on" => $on,
         ];
+    }
+    /**
+     * Returns array with placeholders,column names that must be filledm and the values belonging to them.
+     *
+     * @param Array $request
+     * @return Array
+     *
+     */
+    public function insert()
+    {
+        $db = new DBC;
+        $dbc = $db->connect();
+        $post = self::placeholders($_POST);
+        $query = "INSERT INTO $this->table(".implode(',',$post['columns'])." VALUES(".implode(',',$post['placeholders']).")";
+        echo $query;
+        try {
+            $query = $dbc->prepare($query);
+            $query->execute($post['values']);
+        } catch(\PDOException $e){
+            echo $e->getMessage();
+        }
+        $db->close();
+    }
+    public function placeholders($request)
+    {
+        $placeholders = [];
+        $columns = [];
+        $values = [];
+        foreach($request as $column => $value){
+            if(in_array($column,$this->allowed)){
+                $placeholders[] = '?';
+                $columns[] = $column;
+                $values[] = $value;
+            }
+        }
+        return ['placeholders' => $placeholders,'columns' =>$columns,'values' => $values];
     }
 }

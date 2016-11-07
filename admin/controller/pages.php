@@ -48,7 +48,7 @@ class Pages extends Controller
                 ]
             );
         } else {
-            $page = new Post(null, null, null, null, null, 'pages');
+            $page = new Page(null, null, null, null, null, 'pages');
             $this->view(
                 'Add Page',
                 ['pages/add-edit-page.php'],

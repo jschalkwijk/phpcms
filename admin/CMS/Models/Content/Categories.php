@@ -52,28 +52,24 @@ class Categories extends Content{
 		
 		if ($confirm === 'Yes') {
 
-			$id = mysqli_real_escape_string($dbc,trim((int)$this->getID()));
-			$category = mysqli_real_escape_string($dbc,trim($this->getCategory()));
-			$old_title = mysqli_real_escape_string($dbc,trim($old_title));
-			$cat_desc = mysqli_real_escape_string($dbc,trim($this->getDescription()));
-			$author = mysqli_real_escape_string($dbc,trim($this->getAuthor()));
+			$id = trim((int)$this->getID());
+			$category = trim($this->getCategory());
+			$old_title = trim($old_title);
+			$cat_desc = trim($this->getDescription());
+			$author = trim($this->getAuthor());
 			// Edit the post data from the database
-			$query = $dbc->prepare("UPDATE categories SET title = ?,description = ?,author = ? WHERE categories.category_id = ?");
-			if ($query) {
-				$query->bind_param("sssi",$category,$cat_desc,$author,$id);
-				$query->execute();
-				$query->close();
-			} else {
-				$db->sqlERROR();
-			}
-			$query2 = $dbc->prepare("UPDATE posts SET category = ? WHERE category = ?");
-			if ($query2) {
-				$query->bind_param("ss",$category,$old_title);
-				$query->execute();
-				$query->close();
-			} else {
-				$db->sqlERROR();
-			}
+            try {
+                $query = $dbc->prepare("UPDATE categories SET title = ?,description = ?,author = ? WHERE categories.category_id = ?");
+                $query->execute([$category,$cat_desc,$author,$id]);
+            } catch(\PDOException $e){
+                echo $e->getMessage();
+            }
+            try {
+                $query2 = $dbc->prepare("UPDATE posts SET category = ? WHERE category = ?");
+                $query2->execute([$category,$old_title]);
+            } catch(\PDOException $e){
+                echo $e->getMessage();
+            }
 
 			$dbc->close();
 
@@ -101,31 +97,25 @@ class Categories extends Content{
 			$dbc = $db->connect();
 
 			$author = $_SESSION['username'];
-			$category = mysqli_real_escape_string($dbc,trim(htmlentities($category)));
-			$query = $dbc->prepare("INSERT INTO categories(title,author,type) VALUES(?,?,?)");
-			if($query){
-				$query->bind_param("sss",$category,$author,$type);
-				$query->execute();
-				$query->close();
-			} else {
-				$db->sqlERROR();
-			}
+			$category = trim(htmlentities($category));
 
-			$query = $dbc->prepare("SELECT category_id,title FROM categories WHERE title = ?");
-			if($query){
-				$query->bind_param("s",$category);
-				$query->execute();
-				$data = $query->get_result();
-				$query->close();
-
-				$row = $data->fetch_array();
+			try {
+                $query = $dbc->prepare("INSERT INTO categories(title,author,type) VALUES(?,?,?)");
+				$query->execute([$category,$author,$type]);
+            } catch (\PDOException $e) {
+                echo $e->getMessage();
+            }
+			try {
+                $query = $dbc->prepare("SELECT category_id,title FROM categories WHERE title = ?");
+				$query->execute([$category]);
+				$row = $query->fetch();
 				$category_id = $row['category_id'];
 				$category = $row['title'];
-			} else {
-				$db->sqlERROR();
+			} catch (\PDOException $e) {
+				echo $e->getMessage();
 			}
 
-			$dbc->close();
+			$db->close();
 		} else {
 			$errors[] = 'You forgot to type in a category name.';
 		}
@@ -149,23 +139,22 @@ class Categories extends Content{
 		$dbc = $db->connect();
 		$categories = array();
 
-		$query = $dbc->prepare("SELECT * FROM categories WHERE trashed = 0 AND type = ?");
-		if ($query) {
-			$query->bind_param("s",$type);
-			$query->execute();
-			$data = $query->get_result();
+		try {
+            $query = $dbc->prepare("SELECT * FROM categories WHERE trashed = 0 AND type = ?");
+			$query->execute([$type]);
 
-			while ($row = $data->fetch_array()) {
+			while ($row = $query->fetch()) {
 				if ($selected_cat == $row['title']) {
 					echo '<option value="' . $row['category_id'] . '" selected="selected">' . $row['title'] . '</option>';
 				} else {
 					echo '<option value="' . $row['category_id'] . '">' . $row['title'] . '</option>';
 				}
 			}
-		} else {
-			$db->sqlERROR();
+		} catch (\PDOException $e) {
+			echo $e->getMessage();
+            exit();
 		}
-		$dbc->close();
+		$db->close();
 	}
 	//
 }

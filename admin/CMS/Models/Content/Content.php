@@ -82,40 +82,38 @@ class Content{
 		$dbc = $db->connect();
 		$id_row = substr($dbt, 0, -1).'_id';
 
-		if($dbt != 'categories'){
-			$query = $dbc->prepare("SELECT ".$dbt.".*, categories.title as category FROM ".$dbt." LEFT JOIN categories ON ".$dbt.".category_id = categories.category_id WHERE ".$dbt.".trashed = ? ORDER BY ".$id_row." DESC");
-			(!$query) ? $db->sqlERROR() : $query->bind_param("i",$trashed);
-
-		} else {
-			$query = $dbc->prepare("SELECT * FROM ".$dbt." WHERE ".$dbt.".trashed = ? ORDER BY ".$id_row." DESC");
-			$query->bind_param("i",$trashed);
-		}
+        try {
+            if ($dbt != 'categories') {
+                $query = $dbc->prepare("SELECT " . $dbt . ".*, categories.title as category FROM " . $dbt . " LEFT JOIN categories ON " . $dbt . ".category_id = categories.category_id WHERE " . $dbt . ".trashed = ? ORDER BY " . $id_row . " DESC");
+            } else {
+                $query = $dbc->prepare("SELECT * FROM " . $dbt . " WHERE " . $dbt . ".trashed = ? ORDER BY " . $id_row . " DESC");
+            }
+            $query->execute([$trashed]);
+        } catch (\PDOException $e){
+            echo $e->getMessage();
+        }
 
 		$posts = array();
-		if ($query) {
-			$query->execute();
-			$data = $query->get_result();
-			$query->close();
-			while ($row = $data->fetch_array()) {
-				$post = new Content(
-					$row['title'],
-					$row['description'],
-					$row['category'],
-					$row['content'],
-					$row['author'],
-					$dbt,
-					$row['date'],
-					$row['approved'],
-					$row['trashed']
-				);
-				// Because creating a new object in the controller doesn't allow us to insert an ID, we have to set the id
-				// ourselves. It's fetched from the database.
-				$post->setID($row[$id_row]);
-				// adds every object to the posts array. We can acces each object and its methods seperatly.
-				$posts[] = $post;
-			}
-		}
-		$dbc->close();
+        $result =  $query->fetchAll();
+        foreach($result as $row) {
+            $post = new Content(
+                $row['title'],
+                $row['description'],
+                $row['category'],
+                $row['content'],
+                $row['author'],
+                $dbt,
+                $row['date'],
+                $row['approved'],
+                $row['trashed']
+            );
+            // Because creating a new object in the controller doesn't allow us to insert an ID, we have to set the id
+            // ourselves. It's fetched from the database.
+            $post->setID($row[$id_row]);
+            // adds every object to the posts array. We can acces each object and its methods seperatly.
+            $posts[] = $post;
+        }
+		$db->close();
 		// We return an array which contains value that can be passed from the controller to the view.
 		// If the form needs to be outputted, errors or success messages.
 		return $posts;
@@ -127,43 +125,43 @@ class Content{
 	public static function fetchSingle($dbt,$id) {
 		$db = new DBC();
 		$dbc = $db->connect();
-		$id = mysqli_real_escape_string($dbc,trim((int)$id));
+		$id = trim((int)$id);
 		$id_row = substr($dbt, 0, -1).'_id';
 
-		if($dbt != 'categories'){
-			$query = $dbc->prepare("SELECT ".$dbt.".*, categories.title as category FROM ".$dbt." LEFT JOIN categories ON ".$dbt.".category_id = categories.category_id WHERE ".$id_row." = ?");
-			(!$query) ? $db->sqlERROR() : $query->bind_param("i",$id);
+		try {
+            if ($dbt != 'categories') {
+                $query = $dbc->prepare("SELECT " . $dbt . ".*, categories.title as category FROM " . $dbt . " LEFT JOIN categories ON " . $dbt . ".category_id = categories.category_id WHERE " . $id_row . " = ?");
+            } else {
+                $query = $dbc->prepare("SELECT * FROM " . $dbt . " WHERE " . $id_row . " = ?");
+            }
+            $query->setFetchMode(\PDO::FETCH_ASSOC);
+            $query->execute([$id]);
+            $result = $query->fetchAll();
+        } catch (\PDOException $e){
+            echo $e->getMessage();
+        }
 
-		} else {
-			$query = $dbc->prepare("SELECT * FROM ".$dbt." WHERE ".$id_row." = ?");
-			$query->bind_param("i",$id);
-		}
+        //		$data = mysqli_query($dbc->connect(),$query)or die ("Error connecting to server");
+        foreach ($result as $row){
+            $post = new Content(
+                $row['title'],
+                $row['description'],
+                $row['category'],
+                $row['content'],
+                $row['author'],
+                $dbt,
+                $row['date'],
+                $row['approved'],
+                $row['trashed']
+            );
+            // Because creating a new object in the controller doesn't allow us to insert an ID, we have to set the id
+            // ourselves. It's fetched from the database.
+            $post->setID($row[$id_row]);
+            // adds every object to the posts array. We can acces each object and its methods seperatly.
+        }
 
-		if ($query) {
-			$query->execute();
-			$data = $query->get_result();
-			$query->close();
-			//		$data = mysqli_query($dbc->connect(),$query)or die ("Error connecting to server");
-			while ($row = $data->fetch_array()) {
-				$post = new Content(
-					$row['title'],
-					$row['description'],
-					$row['category'],
-					$row['content'],
-					$row['author'],
-					$dbt,
-					$row['date'],
-					$row['approved'],
-					$row['trashed']
-				);
-				// Because creating a new object in the controller doesn't allow us to insert an ID, we have to set the id
-				// ourselves. It's fetched from the database.
-				$post->setID($row[$id_row]);
-				// adds every object to the posts array. We can acces each object and its methods seperatly.
-			}
-		}
 
-		$dbc->close();
+		$db->close();
 		// We return an array which contains value that can be passed from the controller to the view.
 		// If the form needs to be outputted, errors or success messages.
 		return $post;
