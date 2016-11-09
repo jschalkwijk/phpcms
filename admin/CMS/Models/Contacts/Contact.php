@@ -120,18 +120,18 @@ class Contact {
 		// To store data in the database we need to convert the binary to hexadecimal.
 		//the database row must be set to VARBINARY in order to contain the data.
 		try {
-			$first_name = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->first_name)),$user_key ));
-			$last_name = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->last_name)),$user_key ));
-			$phone_1 = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->phone_1)),$user_key ));
-			$phone_2 = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->phone_2)),$user_key ));
-			$email_1 = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->email_1)),$user_key ));
-			$email_2 = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->email_2)),$user_key ));
-			$dob = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->dob)),$user_key ));
-			$street = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->street)),$user_key ));
-			$street_num = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->street_num)),$user_key ));
-			$street_num_add = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->street_num_add)),$user_key ));
-			$zip = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->zip)),$user_key ));
-			$notes = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->notes)),$user_key ));
+			$first_name = Crypto::binTohex(Crypto::encrypt(trim($this->first_name),$user_key ));
+			$last_name = Crypto::binTohex(Crypto::encrypt(trim($this->last_name),$user_key ));
+			$phone_1 = Crypto::binTohex(Crypto::encrypt(trim($this->phone_1),$user_key ));
+			$phone_2 = Crypto::binTohex(Crypto::encrypt(trim($this->phone_2),$user_key ));
+			$email_1 = Crypto::binTohex(Crypto::encrypt(trim($this->email_1),$user_key ));
+			$email_2 = Crypto::binTohex(Crypto::encrypt(trim($this->email_2),$user_key ));
+			$dob = Crypto::binTohex(Crypto::encrypt(trim($this->dob),$user_key ));
+			$street = Crypto::binTohex(Crypto::encrypt(trim($this->street),$user_key ));
+			$street_num = Crypto::binTohex(Crypto::encrypt(trim($this->street_num),$user_key ));
+			$street_num_add = Crypto::binTohex(Crypto::encrypt(trim($this->street_num_add),$user_key ));
+			$zip = Crypto::binTohex(Crypto::encrypt(trim($this->zip),$user_key ));
+			$notes = Crypto::binTohex(Crypto::encrypt(trim($this->notes),$user_key ));
 		} catch (Ex\CryptoTestFailedException $ex) {
 		    die('Cannot safely perform encryption');
 		} catch (Ex\CannotPerformOperationException $ex) {
@@ -139,21 +139,19 @@ class Contact {
 		}
 		// Adding the encrypted data to the database.
 		if(!empty($first_name) && (!empty($email_1)) || !empty($phone_1)){
-			$query = $dbc->prepare("INSERT INTO contacts(first_name,last_name,phone_1,phone_2,email_1,email_2,dob,street,street_num,street_num_add,zip,notes,user_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
-			if($query) {
-				$query->bind_param("ssssssssssssi", $first_name, $last_name, $phone_1, $phone_2, $email_1, $email_2, $dob, $street, $street_num, $street_num_add, $zip, $notes, $user_id);
-				$query->execute();
-				$id = $query->insert_id;
-				$query->close();
-			} else {
-				$db->sqlERROR();
-			}
+			try {
+                $query = $dbc->prepare("INSERT INTO contacts(first_name,last_name,phone_1,phone_2,email_1,email_2,dob,street,street_num,street_num_add,zip,notes,user_id) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                $query->execute([$first_name, $last_name, $phone_1, $phone_2, $email_1, $email_2, $dob, $street, $street_num, $street_num_add, $zip, $notes, $user_id]);
+				$id = $dbc->lastInsertId();
+            } catch (\PDOException $e) {
+                echo $e->getMessage();
+            }
 			$messages[] = 'The new contact '.'<a href="/admin/contacts/info/'.$id.'/'.$first_name.'">'.$first_name.'</a>'.' is successfully created.';
 		} else {
 			$errors[] = 'You have to at least fill in a first name and </br> a email or phone number to add a new contact.';
 			$output_form = true;
 		}
-		$dbc->close();
+		$db->close();
 		// We return an array which contains value that can be passed from the controller to the view.
 		// If the form needs to be outputted, errors or success messages.
 		return['output_form' => $output_form,'messages' => $messages,'errors' => $errors];
@@ -184,36 +182,34 @@ class Contact {
 		// We call the Crypto function to encrypt the message to binary data using the Users key.
 		// To store data in the database we need to convert the binary to hexadecimal.
 		//the database row must be set to VARBINARY in order to contain the data.
-		$id = mysqli_real_escape_string($dbc,trim((int)$this->getID()));
-		$first_name = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->first_name)),$user_key ));
-		$last_name = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->last_name)),$user_key ));
-		$phone_1 = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->phone_1)),$user_key ));
-		$phone_2 = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->phone_2)),$user_key ));
-		$email_1 = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->email_1)),$user_key ));
-		$email_2 = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->email_2)),$user_key ));
-		$dob = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->dob)),$user_key ));
-		$street = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->street)),$user_key ));
-		$street_num = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->street_num)),$user_key ));
-		$street_num_add = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->street_num_add)),$user_key ));
-		$zip = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->zip)),$user_key ));
-		$notes = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->notes)),$user_key ));
+		$id = trim((int)$this->getID());
+		$first_name = Crypto::binTohex(Crypto::encrypt(trim($this->first_name),$user_key ));
+		$last_name = Crypto::binTohex(Crypto::encrypt(trim($this->last_name),$user_key ));
+		$phone_1 = Crypto::binTohex(Crypto::encrypt(trim($this->phone_1),$user_key ));
+		$phone_2 = Crypto::binTohex(Crypto::encrypt(trim($this->phone_2),$user_key ));
+		$email_1 = Crypto::binTohex(Crypto::encrypt(trim($this->email_1),$user_key ));
+		$email_2 = Crypto::binTohex(Crypto::encrypt(trim($this->email_2),$user_key ));
+		$dob = Crypto::binTohex(Crypto::encrypt(trim($this->dob),$user_key ));
+		$street = Crypto::binTohex(Crypto::encrypt(trim($this->street),$user_key ));
+		$street_num = Crypto::binTohex(Crypto::encrypt(trim($this->street_num),$user_key ));
+		$street_num_add = Crypto::binTohex(Crypto::encrypt(trim($this->street_num_add),$user_key ));
+		$zip = Crypto::binTohex(Crypto::encrypt(trim($this->zip),$user_key ));
+		$notes = Crypto::binTohex(Crypto::encrypt(trim($this->notes),$user_key ));
 		// Adding the updated data to the DB.
 		if(!empty($first_name) && (!empty($email_1)) || !empty($phone_1)){
-			$query = $dbc->prepare("UPDATE contacts SET first_name = ?,last_name = ?,phone_1 = ?,phone_2 = ?,
+			try {
+                $query = $dbc->prepare("UPDATE contacts SET first_name = ?,last_name = ?,phone_1 = ?,phone_2 = ?,
 			email_1 = ?,email_2 = ?,dob = ? ,street = ?,street_num = ?,street_num_add = ?,zip = ?,notes = ? WHERE contact_id = ?");
-			if($query) {
-				$query->bind_param("ssssssssssssi", $first_name, $last_name, $phone_1, $phone_2, $email_1, $email_2, $dob, $street, $street_num, $street_num_add, $zip, $notes, $id);
-				$query->execute();
-				$query->close();
-			} else {
-				$db->sqlERROR();
-			}
+                $query->execute([$first_name, $last_name, $phone_1, $phone_2, $email_1, $email_2, $dob, $street, $street_num, $street_num_add, $zip, $notes, $id]);
+            } catch (\PDOException $e) {
+                echo $e->getMessage();
+            }
 			$messages[] = 'The contact '.'<a href="/admin/contacts/info/'.$id.'/'.$first_name.'">'.$first_name.'</a>'.' is successfully edited.';
 		} else {
 			$errors[] = 'You have to at least fill in a first name and </br> a email or phone number to edit a contact.';
 			$output_form = true;
 		}
-		$dbc->close();
+		$db->close();
 		// We return an array which contains value that can be passed from the controller to the view.
 		// If the form needs to be outputted, errors or success messages.
 		return['output_form' => $output_form,'messages' => $messages,'errors' => $errors];
@@ -225,11 +221,12 @@ class Contact {
 		$thumb_path = $upload->getThumbPath();
 		$db = new DBC;
 		$dbc = $db->connect();
-		$query = $dbc->prepare("UPDATE contacts SET img_path = '$thumb_path' WHERE contact_id = ?");
-		$query->bind_param("si",$thumb_path,$params[0]);
-		$query->execute();
-		$query->close();
-		$dbc->close();
+		try {
+            $query = $dbc->prepare("UPDATE contacts SET img_path = '$thumb_path' WHERE contact_id = ?");
+		    $query->execute([$thumb_path,$params[0]]);;
+        } catch (\PDOException $e) {
+            echo $e->getMessage();
+        }
 	}
 
 	// Fetches all contacts from the current user logged in.
@@ -242,16 +239,14 @@ class Contact {
 		$dbc = $db->connect();
 
 		$user_id = $_SESSION['user_id'];
-		$query = $dbc->prepare("SELECT * FROM ".$dbt." WHERE trashed = ? AND user_id = ? ORDER BY contact_id DESC");
 
-		if($query) {
-			$query->bind_param("ii", $trashed, $user_id);
-			$query->execute();
-			$data = $query->get_result();
-			$query->close();
-		} else {
-			$db->sqlERROR();
-		}
+		try {
+            $query = $dbc->prepare("SELECT * FROM ".$dbt." WHERE trashed = ? AND user_id = ? ORDER BY contact_id DESC");
+			$query->execute([$trashed, $user_id]);
+			$data = $query->fetchAll();
+        } catch (\PDOException $e) {
+            echo $e->getMessage();
+        }
 		$contacts = array();
 		
 		$user_key  = file_get_contents('././keys/User/'.$_SESSION['username'].'.txt');
@@ -260,7 +255,7 @@ class Contact {
 		// To decrypt data from the database we need to convert the hexadecimal to binary.
 		// We call the Crypto function to decrypt the message to readable data using the Users key.
 
-		while($row = $data->fetch_array()){
+		foreach ($data as $row){
 			$first_name = Crypto::decrypt(Crypto::hexTobin($row['first_name']),$user_key );
 			$last_name = Crypto::decrypt(Crypto::hexTobin($row['last_name']),$user_key );
 			$phone_1 = Crypto::decrypt(Crypto::hexTobin($row['phone_1']),$user_key );
@@ -294,7 +289,7 @@ class Contact {
 			// adds every object to the posts array. We can access each object and its methods seperatly.
 			$contacts[] = $contact;
 		}
-		$dbc->close();
+		$db->close();
 
 		// Returns an array wich contains all the contact objects. Which are then passed from the controller to the view.
 		return $contacts;
@@ -311,21 +306,19 @@ class Contact {
 		$db = new DBC;
 		$dbc = $db->connect();
 
-		$query = $dbc->prepare("SELECT * FROM ".$dbt." WHERE contact_id = ?");
-		if($query) {
-			$query->bind_param("i", $id);
-			$query->execute();
-			$data = $query->get_result();
-			$query->close();
-		} else {
-			$db->sqlERROR();
-		}
+
+		try {
+            $query = $dbc->prepare("SELECT * FROM ".$dbt." WHERE contact_id = ?");
+			$query->execute([$id]);;
+        } catch (\PDOException $e) {
+            echo $e->getMessage();
+        }
 		$user_key  = file_get_contents('././keys/User/'.$_SESSION['username'].'.txt');
 		// Working from the inside out
 		// To decrypt data from the database we need to convert the hexadecimal to binary.
 		// We call the Crypto function to decrypt the message to readable data using the Users key.
 
-		while($row = $data->fetch_array()){
+		while($row = $query->fetch()){
 			$first_name = Crypto::decrypt(Crypto::hexTobin($row['first_name']),$user_key );
 			$last_name = Crypto::decrypt(Crypto::hexTobin($row['last_name']),$user_key );
 			$phone_1 = Crypto::decrypt(Crypto::hexTobin($row['phone_1']),$user_key );
@@ -360,7 +353,7 @@ class Contact {
 			$contact->setID($row['contact_id']);
 			// adds every object to the posts array. We can acces each object and its methods seperatly.
 		}
-		$dbc->close();
+		$db->close();
 		// Returns an array wich contains all the contact objects. Which are then passed from the controller to the view.
 		return $contact;
 	}

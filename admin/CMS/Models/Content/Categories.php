@@ -71,7 +71,7 @@ class Categories extends Content{
                 echo $e->getMessage();
             }
 
-			$dbc->close();
+			$db->close();
 
 			// Confirm success with the user
 			$messages[] = '<p>The category with title ' . $category . ' was successfully edited.';
@@ -137,8 +137,6 @@ class Categories extends Content{
 	public static function getSelected($selected_cat,$type) {
 		$db = new DBC;
 		$dbc = $db->connect();
-		$categories = array();
-
 		try {
             $query = $dbc->prepare("SELECT * FROM categories WHERE trashed = 0 AND type = ?");
 			$query->execute([$type]);

@@ -52,10 +52,10 @@ class FileUpload{
 			// uit menu dan komt hij wel in die folder terrecht. ligt aan if not empty album_id
 
 			if(isset($_POST['album_id'])){
-				$album_id = mysqli_real_escape_string($dbc,trim((int)$_POST['album_id']));
+				$album_id = trim((int)$_POST['album_id']);
 				echo 'album_id : '.$album_id;
 				if(isset($_POST['new_album_name'])) {
-					$new_album_name = mysqli_real_escape_string($dbc,trim(htmlentities($_POST['new_album_name'])));
+					$new_album_name = trim(htmlentities($_POST['new_album_name']));
 					if(strlen($new_album_name) > 60){
 						$errors[] = 'Album name can only be 60 characters long.';
 					} else {
@@ -131,7 +131,7 @@ class FileUpload{
 		if(!empty($errors)) {
 			echo implode(",",$errors);
 		}
-		$dbc->close();
+		$db->close();
 	}
 
 	protected function uploadFile($file_tmp,$file_name,$file_ext,$file_name_new,$thumb_name,$position,$album_id){
@@ -171,19 +171,18 @@ class FileUpload{
 				// add to uploade array, we dont use the new filename because thats all numbers,
 				// we use the original file name, we store both the original and new file name to the DB.
 				$uploaded[$position] = $file_name;
-				$sql = "INSERT INTO files(name,type,file_name,thumb_name,album_id,date,path,thumb_path,user_id) VALUES(?,?,?,?,?,NOW(),?,?,?)";
-				echo $sql;
-				$query = $dbc->prepare($sql);
-				if($query) {
-					$query->bind_param("ssssissi", $file_name, $file_ext, $file_name_new, $thumb_name, $id, $file_dest, $thumb_path, $user_id);
-					$query->execute();
-					$query->close();
+				try {
+                    $sql = "INSERT INTO files(name,type,file_name,thumb_name,album_id,date,path,thumb_path,user_id) VALUES(?,?,?,?,?,NOW(),?,?,?)";
+                    echo $sql;
+                    $query = $dbc->prepare($sql);
+					$query->execute([$file_name, $file_ext, $file_name_new, $thumb_name, $id, $file_dest, $thumb_path, $user_id]);;
 					return true;
-				} else {
-					$db->sqlERROR();
-					return false;
-				}
-			}
+                } catch (\PDOException $e){
+                        echo $e->getMessage();
+                }
+			} else {
+                return false;
+            }
 		} else {
 			return false;
 		}
@@ -230,18 +229,16 @@ class FileUpload{
 		// IF A ALBUM NAME ALREADY EXISTS, DON'T CREATE THE ALBUM.
 		$author = $_SESSION['username'];
 		$user_id = $_SESSION['user_id'];
-		(!empty($album_id)) ? $parent_id = mysqli_real_escape_string($dbc,trim((int)$album_id)) : $parent_id = 0;
+		(!empty($album_id)) ? $parent_id = trim((int)$album_id) : $parent_id = 0;
 		$file_dest = $this->file_dest.$this->path;
 		$thumb_dest = $this->thumb_dest.$this->path;
 
 		$path = $this->path;
 
 		if(!file_exists($file_dest)){
-			$query = $dbc->prepare("INSERT INTO albums(name,author,parent_id,path,user_id) VALUES(?,?,?,?,?)");
-			if($query) {
-				$query->bind_param("ssisi", $album_name, $author, $parent_id, $path, $user_id);
-				$query->execute();
-
+			try {
+                $query = $dbc->prepare("INSERT INTO albums(name,author,parent_id,path,user_id) VALUES(?,?,?,?,?)");
+				$query->execute([$album_name, $author, $parent_id, $path, $user_id]);
 
 				mkdir(str_replace("\\", "", $file_dest), 0744);
 				mkdir(str_replace("\\", "", $thumb_dest), 0744);
@@ -251,13 +248,13 @@ class FileUpload{
 //			$data = mysqli_query($dbc, $query) or die('Error connecting to database');
 //			$row = mysqli_fetch_assoc($data);
 				// get the new created id of the folder.
-				$parent_id = $query->insert_id;
-				$query->close();
-			} else {
-				$db->sqlERROR();
-			}
-		}
-		$dbc->close();
+				$parent_id = $dbc->lastInsertId();
+            } catch (\PDOException $e){
+                echo $e->getMessage();
+            }
+        }
+
+		$db->close();
 
 		return $parent_id;
 	}
@@ -266,18 +263,18 @@ class FileUpload{
 		$db = new DBC;
 		$dbc = $db->connect();
 
-		$id = mysqli_real_escape_string($dbc,trim((int)$album_id));
-		$query = $dbc->prepare("SELECT name,path FROM albums WHERE album_id = ?");
-		if($query){
-			$query->bind_param("i",$id);
-			$query->execute();
-			$data = $query->get_result();
-			$query->close();
-			$row = $data->fetch_array();
-		}
+		$id = trim((int)$album_id);
+		try {
+            $query = $dbc->prepare("SELECT name,path FROM albums WHERE album_id = ?");
+
+			$query->execute([$id]);
+			$row = $query->fetch();
+        } catch (\PDOException $e){
+            echo $e->getMessage();
+        }
 
 //		if(mysqli_num_rows($data) == 0){
-		if($data->num_rows == 0){
+		if($query->rowCount() == 0){
 			$path = $new_album_name;
 		} else {
 			if($new_album_name == null){
@@ -288,7 +285,7 @@ class FileUpload{
 				$path = $row['path'].'/'.$new_album_name;
 			}
 		}
-		$dbc->close();
+		$db->close();
 		return $path;
 	}
 

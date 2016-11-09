@@ -25,21 +25,19 @@ class Folders {
 		$db = new DBC;
 		$dbc = $db->connect();
 
-		($album_id != null) ? $id = mysqli_real_escape_string($dbc,trim((int)$album_id)) : $id = 0;
-		$album_query = $dbc->prepare("SELECT album_id,name FROM albums WHERE parent_id = ? OR album_id = ?");
-		if($album_query) {
-			$album_query->bind_param("ii", $id, $id);
-			$album_query->execute();
-			$albums_data = $album_query->get_result();
-			$album_query->close();
-		} else {
-			$db->sqlERROR();
-		}
+		($album_id != null) ? $id = trim((int)$album_id) : $id = 0;
+		try {
+            $album_query = $dbc->prepare("SELECT album_id,name FROM albums WHERE parent_id = ? OR album_id = ?");
+            $album_query->execute([$id, $id]);
+			$albums_data = $album_query->fetchAll();
+        } catch (\PDOException $e){
+            echo $e->getMessage();
+        }
 		echo '<select id="albums" name="album_id">';
 		if(!isset($album_name)){
 			echo '<option value="0">None</option>';
 		}
-		while ($row = mysqli_fetch_array($albums_data)) {
+		foreach($albums_data as $row){
 			echo '<option value="' . $row['album_id'] . '">' . $row['name'] . '</option>';
 		}
 
@@ -59,7 +57,7 @@ class Folders {
 
 		echo '</select>';
 		echo '<label for="select">Albums</label>';
-		$dbc->close();
+		$db->close();
 	}
 
 	// Deletes the albums selected. Makes use of the removeDir and removeRows Traits.
@@ -69,18 +67,20 @@ class Folders {
 
 		// get values from the checkboxes, these are the ID's of the Albums or subfolders.
 		$multiple = implode(",",$checkbox);
-		$query = $dbc->query("SELECT album_id,path,name FROM albums WHERE album_id IN({$multiple})");
-		if(!$query){ $db->sqlERROR(); };
-		// It's as easy as this:
+		try {
+        $query = $dbc->query("SELECT album_id,path,name FROM albums WHERE album_id IN({$multiple})");
+        $data = $query->fetchAll();
+        } catch (\PDOException $e){
+            echo $e->getMessage();
+        }
 
-		while ($row = $query->fetch_array()) {
+		foreach($data as $row) {
 			// recursive deleting function. Deletes al folders/files and subfolders/files from server.
 			Folders::removeDir('./././files/'.$row['path']);
 			Folders::removeDir('./././files/'.'thumbs/'.$row['path']);
 		}
 		Folders::removeRows($checkbox);
-		$query->close();
-		$dbc->close();
+		$db->close();
 	}
 
 	/*
@@ -98,15 +98,13 @@ class Folders {
 //		if(!empty($album_id)){
 //			$query = "SELECT album_id,name FROM albums WHERE parent_id = $album_id AND user_id = $user_id";
 		if (empty($album_id)) { $album_id = 0; };
-			$query = $dbc->prepare("SELECT album_id,name FROM albums WHERE parent_id = ?");
-			if($query) {
-				$query->bind_param("i", $album_id);
-				$query->execute();
-				$data = $query->get_result();
-				$query->close();
-			} else {
-				$db->sqlERROR();
-			}
+			try {
+                $query = $dbc->prepare("SELECT album_id,name FROM albums WHERE parent_id = ?");
+                $query->execute([$album_id]);
+				$data = $query->fetchAll();
+            } catch (\PDOException $e){
+                echo $e->getMessage();
+            }
 //		} else {
 //			$query = $dbc->prepare("SELECT * FROM albums WHERE parent_id = 0 AND user_id = ?");
 //			$query->bind_param("i",$user_id);
@@ -116,7 +114,7 @@ class Folders {
 //			// start form
 //			echo '<form method="get" action="'.$_SERVER["REQUEST_URI"].'" file">';
 //		}
-		while($row = $data->fetch_array()){
+        foreach($data as $row) {
 			echo '<tr class="meta">';
 			echo '<td><img class="glyph-medium" src="'.ADMIN.'images/files.png"/></td>';
 			echo '<td><a href="'.ADMIN.'file/albums/'.$row['album_id'].'/'.$row['name'].'""> '.$row['name'].'</a></td>';
@@ -125,7 +123,7 @@ class Folders {
 			echo '<td><input class="checkbox" type="checkbox" name="checkbox[]" value="'.$row['album_id'].'"/></td>';
 			echo '</tr>';
 		}
-		$dbc->close();
+		$db->close();
 	}
 	
 	/*
@@ -146,63 +144,54 @@ class Folders {
 		*/
 		
 		if($category_name === null){
-			$query = $dbc->prepare("SELECT album_id FROM albums WHERE name = ?");
-			if($query) {
-				$query->bind_param("s", $main_folder);
-				$query->execute();
-				$data = $query->get_result();
-				$query->close();
-				$row = $data->fetch_array();
+
+			try {
+                $query = $dbc->prepare("SELECT album_id FROM albums WHERE name = ?");
+				$query->execute([$main_folder]);
+				$row = $query->fetch();
 				$parent_id = $row['album_id'];
-			} else {
-				$db->sqlERROR();
-			}
+            } catch (\PDOException $e){
+                echo $e->getMessage();
+            }
 		} else {
 			$sql = "SELECT album_id FROM albums WHERE name = ?";
 			echo $sql.'<br />';
-			$query = $dbc->prepare($sql);
-			if($query) {
-				$query->bind_param("s", $category_name);
-				$query->execute();
-				$data = $query->get_result();
-				$query->close();
-				$row = $data->fetch_array();
+			try {
+                $query = $dbc->prepare($sql);
+                $query->execute([$category_name]);
+				$row = $query->fetch();
 				$parent_id = $row['album_id'];
-			} else {
-				$db->sqlERROR();
-			}
+            } catch (\PDOException $e){
+                echo $e->getMessage();
+            }
 		}
 
 		$path = Folders::auto_create_path($album_name,$parent_id);
 	
 		if(!file_exists($file_dest)){
-			$sql = "INSERT INTO albums(name,author,parent_id,path,user_id) VALUES(?,?,?,?,?)";
-			echo 'Create album: '.$sql.'<br />';
-			$query = $dbc->prepare($sql);
-			if($query){
-				$query->bind_param("ssisi",$album_name,$author,$parent_id,$path,$user_id);
+			try {
+                $sql = "INSERT INTO albums(name,author,parent_id,path,user_id) VALUES(?,?,?,?,?)";
+                echo 'Create album: '.$sql.'<br />';
+                $query = $dbc->prepare($sql);
+                $query->execute([$album_name,$author,$parent_id,$path,$user_id]);
 				$query->execute();
-				$query->close();
 				mkdir($file_dest,0744);
 				mkdir($thumb_dest,0744);
-			} else {
-				$db->sqlERROR();
-			}
+            } catch (\PDOException $e){
+                echo $e->getMessage();
+            }
 		}
 		
-		$query = $dbc->prepare("SELECT album_id FROM albums WHERE name = ?");
-		if($query) {
-			$query->bind_param("s", $album_name);
-			$query->execute();
-			$data = $query->get_result();
-			$query->close();
-			$row = $data->fetch_array();
+		try {
+            $query = $dbc->prepare("SELECT album_id FROM albums WHERE name = ?");
+            $query->execute([$album_name]);
+			$row = $query->fetch();
 			$album_id = $row['album_id'];
-		} else {
-			$db->sqlERROR();
-		}
+        } catch (\PDOException $e){
+            echo $e->getMessage();
+        }
 
-		$dbc->close();
+		$db->close();
 		return $album_id;
 	}
 	
@@ -212,23 +201,22 @@ class Folders {
 		$db = new DBC;
 		$dbc = $db->connect();
 
-		$query = $dbc->prepare("SELECT path FROM albums WHERE album_id = ?");
-		if($query){
-			$query->bind_param("i",$parent_id);
-			$query->execute();
-			$data = $query->get_result();
-			$query->close();
-			$row = $data->fetch_array();
+        try {
+		    $query = $dbc->prepare("SELECT path FROM albums WHERE album_id = ?");
+			$query->execute([$parent_id]);
+			$row = $query->fetch();
 			if($row['path'] === $album_name){
 				$path = $album_name;
 			} else {
 				$path = $row['path'].'/'.$album_name;
 			}
+            $db->close();
 			return $path;
-		} else {
-			$db->sqlERROR();
-			return false;
-		}
+        } catch (\PDOException $e){
+            $db->close();
+            echo $e->getMessage();
+            return false;
+        }
 	}
 //
 }

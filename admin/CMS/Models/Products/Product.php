@@ -109,19 +109,17 @@ class Product {
 		$db = new DBC;
 		$dbc = $db->connect();
 
-		$query = $dbc->prepare("SELECT ".$dbt.".*, categories.title as category FROM ".$dbt." LEFT JOIN categories ON ".$dbt.".category_id = categories.category_id  WHERE ".$dbt.".trashed = ? ORDER BY product_id DESC");
-		if($query){
-			$query->bind_param("i",$trashed);
-			$query->execute();
-			$data = $query->get_result();
-			$query->close();
-		} else {
-			$db->sqlERROR();
-		}
+		try {
+            $query = $dbc->prepare("SELECT ".$dbt.".*, categories.title as category FROM ".$dbt." LEFT JOIN categories ON ".$dbt.".category_id = categories.category_id  WHERE ".$dbt.".trashed = ? ORDER BY product_id DESC");
+            $query->execute([$trashed]);
+			$data = $query->fetchAll();
+        } catch (\PDOException $e){
+            echo $e->getMessage();
+        }
 
 		$products = array();
 
-		while($row = $data->fetch_array()){
+		foreach ($data as $row){
 			$product = new Product(
 				$row['name'],
 				$row['category'],
@@ -135,7 +133,7 @@ class Product {
 			$product->setID($row['product_id']);
 			$products[] = $product;
 		}
-		$dbc->close();
+		$db->close();
 		return ['products' => $products];
 	}
 
@@ -144,12 +142,15 @@ class Product {
 		$dbc = $db->connect();
 
 		$multiple = implode(",",$ids);
-		$query = $dbc->query("SELECT products.*, categories.title as category FROM products LEFT JOIN categories ON products.category_id = categories.category_id WHERE product_id IN({$multiple})");
-		if(!$query){ $db->sqlERROR(); };
+        try{
+		    $query = $dbc->query("SELECT products.*, categories.title as category FROM products LEFT JOIN categories ON products.category_id = categories.category_id WHERE product_id IN({$multiple})");
+        } catch (\PDOException $e){
+            echo $e->getMessage();
+        }
 
 		$products = array();
 
-		while($row = $query->fetch_array()){
+		foreach($query->fetchAll() as $row){
 			$product = new Product(
 				$row['name'],
 				$row['category'],
@@ -163,7 +164,7 @@ class Product {
 			$product->setID($row['product_id']);
 			$products[] = $product;
 		}
-		$dbc->close();
+		$db->close();
 		return $products;
 	}
 
@@ -171,17 +172,15 @@ class Product {
 		$db = new DBC;
 		$dbc = $db->connect();
 
-		$query = $dbc->prepare("SELECT products.*, categories.title as category FROM products LEFT JOIN categories ON products.category_id = categories.category_id WHERE product_id = ? ORDER BY product_id DESC");
-		if($query){
-			$query->bind_param("i",$id);
-			$query->execute();
-			$data = $query->get_result();
-			$query->close();
-		} else {
-			$db->sqlERROR();
-		}
+		try {
+            $query = $dbc->prepare("SELECT products.*, categories.title as category FROM products LEFT JOIN categories ON products.category_id = categories.category_id WHERE product_id = ? ORDER BY product_id DESC");
+            $query->execute([$id]);
+            $data = $query->fetchAll();
+        } catch (\PDOException $e){
+            echo $e->getMessage();
+        }
 
-		while($row = $data->fetch_array()){
+		foreach ($data as $row){
 			$product = new Product(
 				$row['name'],
 				$row['category'],
@@ -194,7 +193,7 @@ class Product {
 			);
 			$product->setID($row['product_id']);
 		}
-		$dbc->close();
+		$db->close();
 		return $product;
 	}
 
@@ -205,18 +204,14 @@ class Product {
 		$upload = new FileUpload($file_dest,$thumb_dest,$params,true);
 		$img_path = $upload->getImgPath();
 		$thumb_path = $upload->getThumbPath();
-
-		$query = $dbc->prepare("UPDATE products SET img_path = '$thumb_path' WHERE product_id = ?");
-
-		if($query){
-			$query->bind_param("i",$params[0]);
-			$query->execute();
-			$query->close();
-		} else {
-			$db->sqlERROR();
-		}
-
-		$dbc->close();
+        
+        try {
+		    $query = $dbc->prepare("UPDATE products SET img_path = '$thumb_path' WHERE product_id = ?");
+			$query->execute([$params[0]]);;
+        } catch (\PDOException $e){
+            echo $e->getMessage();
+        }
+		$db->close();
 	}
 
 	public function addProduct($id = null,$confirm = null){
@@ -235,14 +230,14 @@ class Product {
 
 		if($id != null){
 			$this->setID($id);
-			$id = mysqli_real_escape_string($dbc,trim((int)$this->getID()));
+			$id = trim((int)$this->getID());
 		};
 
-		$name = mysqli_real_escape_string($dbc, trim($this->name));
-		$category = mysqli_real_escape_string($dbc, trim($this->category));
-		$description = mysqli_real_escape_string($dbc, trim($this->description));
-		$price = mysqli_real_escape_string($dbc, trim((float)($this->price)));
-		$quantity = mysqli_real_escape_string($dbc, trim((int)$this->quantity));
+		$name =  trim($this->name);
+		$category =  trim($this->category);
+		$description =  trim($this->description);
+		$price =  trim((float)($this->price));
+		$quantity =  trim((int)$this->quantity);
 
 		# create product category, set type of category group
 		# create product category file folder.
@@ -256,20 +251,17 @@ class Product {
 				Folders::auto_create_folder($category_name,$this->file_path,$this->thumb_path,'Products');
 			}
 		} else {
-			$category_id = mysqli_real_escape_string($dbc,trim((int)$_POST['cat_name']));
-			$query = $dbc->prepare("SELECT title FROM categories WHERE category_id = ?");
-			if($query){
-				$query->bind_param("i",$category_id);
-				$query->execute();
-				$cat_name = $query->get_result();
-				$query->close();
-				$row = $cat_name->fetch_array();
+			$category_id = trim((int)$_POST['cat_name']);
+			try {			
+                $query = $dbc->prepare("SELECT title FROM categories WHERE category_id = ?");
+                $query->execute([$category_id]);
+				$row = $query->fetch();
 				$category_name = $row['title'];
 				$this->file_path = $this->file_path.$category_name.'/';
 				$this->thumb_path = $this->thumb_path.$category_name.'/';
-			} else {
-				$db->sqlERROR();
-			}
+            } catch (\PDOException $e){
+                echo $e->getMessage();
+            }
 
 			// CATEGORIE ID WORDT DOORGEGEVEN MAAR IK MOET HET ALBUYM ID HEBBEN VAN DIE CATEGORIE..
 			echo $this->file_path;
@@ -290,24 +282,20 @@ class Product {
 		if(!empty($name) && !empty($price)){
 
 			if($confirm == 'Yes'){
-				$query = $dbc->prepare("UPDATE products SET name = ?, category_id = ?, description = ?, price = ?, quantity = ? WHERE product_id = ?");
-				if($query){
-					$query->bind_param("sisdii",$name,$category_id,$description,$price,$quantity,$id);
-					$query->execute();
-					$query->close();
-				} else {
-					$db->sqlERROR();
-				}
+				try {
+                    $query = $dbc->prepare("UPDATE products SET name = ?, category_id = ?, description = ?, price = ?, quantity = ? WHERE product_id = ?");
+					$query->execute([$name,$category_id,$description,$price,$quantity,$id]);
+                } catch (\PDOException $e){
+                    echo $e->getMessage();
+                }
 
 			} else {
-				$query = $dbc->prepare("INSERT into products (name,category_id,description,price,album_id,quantity) VALUES(?,?,?,?,?,?)");
-				if($query){
-					$query->bind_param("sisdii",$name,$category_id,$description,$price,$album_id,$quantity);
-					$query->execute();
-					$query->close();
-				} else {
-					$db->sqlERROR();
-				}
+                try {
+				    $query = $dbc->prepare("INSERT into products (name,category_id,description,price,album_id,quantity) VALUES(?,?,?,?,?,?)");
+					$query->execute([$name,$category_id,$description,$price,$album_id,$quantity]);
+                } catch (\PDOException $e){
+                    echo $e->getMessage();
+                }
 			}
 
 			$output_form = false;
@@ -316,7 +304,7 @@ class Product {
 			$errors[] = "You forgot to fill in one or more of the required fields (name,price,quantity).";
 		}
 
-		$dbc->close();
+		$db->close();
 
 		return ['output_form' => $output_form,'messages' => $messages, 'errors' => $errors];
 	}

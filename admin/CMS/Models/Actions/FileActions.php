@@ -3,7 +3,7 @@ namespace CMS\Models\Actions;
 
 use CMS\Models\DBC\DBC;
 use ZipArchive;
-use ReflectionClass;
+
 // Used by files_File and File_Folders
 trait FileActions{
 	// used in File_Folders:
@@ -30,50 +30,35 @@ trait FileActions{
 		}
 		
 		while(sizeof($parents) > 0){
-			$placeholders = substr(str_repeat("?, ",count($parents)),0,-2); 
-			$sql = "SELECT album_id FROM albums WHERE parent_id IN ({$placeholders})";	
-			echo $sql."<br />";
-			$query = $dbc->prepare($sql);
-			if($query) {
-				//foreach($parents as $parent){
-				//	$query->bind_param(, $parent);
-				//}
-				$type = array(str_repeat("i",count($parents)));
-				$parents = array_merge($type,$parents);
-				// WHat are refrences? what is happening here?
-				$refs = array();
-				foreach($parents as $key => $value){
-					$refs[$key] = &$parents[$key];
-				}
-				print_r($refs);
-				$ref = new ReflectionClass('mysqli_stmt'); 
-				$method = $ref->getMethod("bind_param");
-				$method->invokeArgs($query,$refs); 
-				$query->execute();
-				$data = $query->get_result();
-				$query->close();
+			$placeholders = substr(str_repeat("?, ",count($parents)),0,-2);
+			try{
+                $sql = "SELECT album_id FROM albums WHERE parent_id IN ({$placeholders})";
+                echo $sql."<br />";
+                $query = $dbc->prepare($sql);
+				$query->execute($parents);
+				$data = $query->fetchAll();
 				// because we now have a new row[album_id], we need to check again if its empty,
 				// if it is not, push it to the array.
 				//if it is, don't push it, en the loop will end with the while clause.
 				$parents = array();
-				while($row = $data->fetch_array()){
+				foreach($data as $row){
 						// For each rows doen! multiple albims ids might be returned
 						$folders[] = $row['album_id'];
 						$parents[] = $row['album_id'];
 				}
 				$placeholders = substr(str_repeat("?, ",count($parents)),0,-2);
-			} else {
-				$db->sqlERROR();
-			}
+            } catch (\PDOException $e){
+                echo $e->getMessage();
+            }
 		}
 
 		// Create s string with all the album id's.
 		$multiple = implode(",",$folders);
 		// deleting rows from database.
-		$del_albums = $dbc->query("DELETE FROM albums WHERE album_id IN({$multiple})");
-		$del_files = $dbc->query("DELETE FROM files WHERE album_id IN({$multiple})");
+		$dbc->query("DELETE FROM albums WHERE album_id IN({$multiple})");
+		$dbc->query("DELETE FROM files WHERE album_id IN({$multiple})");
 
-		$dbc->close();
+		$db->close();
 	}
 
 	/* used in files_Files:
@@ -89,19 +74,24 @@ trait FileActions{
 		 * REMEMBER! This part always has to come before the actual record deletion because if you delete the records first,
 		 * there is a risk that the query doesn't know what records to select simply because they are not there anymore
 		*/
-		$query = $dbc->query("SELECT file_id,path,thumb_path FROM files WHERE file_id IN({$multiple})");
-		if(!$query){ $db->sqlERROR(); };
+        try {
+		    $query = $dbc->query("SELECT file_id,path,thumb_path FROM files WHERE file_id IN({$multiple})");
+            $query->setFetchMode(\PDO::FETCH_ASSOC);
+            $result = $query->fetchAll();
+        } catch (\PDOException $e){
+            echo $e->getMessage();
+        }
 		// It's as easy as this:
 
 		// Deleting files.
 		// You cant us aforeach with the mysqli oop approach: http://stackoverflow.com/questions/20190760/error-illegal-string-offset-in-php
-		while ($delete = $query->fetch_array()) {
+		foreach($result as $delete) {
 			unlink($delete['path']);
 			unlink($delete['thumb_path']);
 		}
 		// Deleting records
-		mysqli_query ($dbc,"DELETE FROM files WHERE file_id IN({$multiple})" );
-		$dbc->close();
+		$dbc->query("DELETE FROM files WHERE file_id IN({$multiple})");
+		$db->close();
 //		header('Location: '.$_SERVER['PHP_SELF'].'?id='.$_GET['id'].'&album='.$_GET['album']);
 	}
 
@@ -112,16 +102,18 @@ trait FileActions{
 
 		$checkbox = $_GET['checkbox'];
 		$multiple = implode(",",$checkbox);
-		$query = $dbc->query("SELECT path FROM files WHERE file_id IN({$multiple})");
-		if(!$query){ $db->sqlERROR(); };
-		// It's as easy as this:
-		$data = $query->fetch_array();
-
+		try {
+            $query = $dbc->query("SELECT path FROM files WHERE file_id IN({$multiple})");
+            $data = $query->fetchAll();
+        } catch (\PDOException $e){
+            echo $e->getMessage();
+        }
 		$file_download = array();
 		$zip = new ZipArchive();
 		$zip_name = 'files-'.time().".zip";
 		$zip->open($zip_name,ZipArchive::CREATE);
-		foreach ($data as $file) {
+
+        foreach ($data as $file) {
 			if(file_exists($file['path'])){	
 				//$zip->addFile($file['path'],$file['path']);
 				$zip->addFromString(basename($file['path']), file_get_contents($file['path']));
@@ -143,7 +135,7 @@ trait FileActions{
 			unlink($zip_name);
 		}
 		
-		$dbc->close();
+		$db->close();
 	}
 
 	/* used in File_Folders:

@@ -4,6 +4,7 @@ use CMS\Models\Controller\Controller;
 use CMS\Models\Content\Content;
 use CMS\Models\Actions\UserActions;
 use CMS\Models\Users\Users;
+use CMS\Models\Content\Posts\Post;
 
 class Dashboard extends Controller {
 	use UserActions;
@@ -15,7 +16,7 @@ class Dashboard extends Controller {
 		//or directly with the autoloader.
 		// the fetchAll method return an object array with DB data.
 		
-		$posts = Content::fetchAll('posts',0);
+		$posts = Post::all(0);
 		$pages = Content::fetchAll('pages',0);
 		$users = Users::fetchUsers('users',0);
 		$views = ['actions' => 'shared/manage-content.php'];

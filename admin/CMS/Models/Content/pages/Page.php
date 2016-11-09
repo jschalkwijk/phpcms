@@ -21,12 +21,12 @@ class Page extends Content{
 
 		$this->setID($id);
 
-		$id = mysqli_real_escape_string($dbc,trim((int)$this->getID()));
-		$page_title = mysqli_real_escape_string($dbc,trim($this->title));
-		$page_desc = mysqli_real_escape_string($dbc,trim($this->description));
-		$page_content = mysqli_real_escape_string($dbc,trim($this->content));
+		$id = trim((int)$this->getID());
+		$page_title = trim($this->title);
+		$page_desc = trim($this->description);
+		$page_content = trim($this->content);
 		$author = $this->author;
-		$tpl_URL = mysqli_real_escape_string($dbc,trim($_POST['template']));
+		$tpl_URL = trim($_POST['template']);
 		$author = $_SESSION['username'];
 
 		if(empty($page_content)) {
@@ -48,26 +48,21 @@ class Page extends Content{
 
 		if (!empty($page_title) && !empty($page_content) && (!empty($front) || !empty($back) )) {
 
-			$query = $dbc->prepare("INSERT INTO pages(title,description,content,author,date) VALUES(?,?,?,?,NOW())");
-			if ($query) {
-				$query->bind_param("ssss",$page_title,$page_desc,$page_content,$author);
-				$query->execute();
-				$query->close();
+			try {
+                $query = $dbc->prepare("INSERT INTO pages(title,description,content,author,date) VALUES(?,?,?,?,NOW())");
+				$query->execute([$page_title,$page_desc,$page_content,$author]);
 				//save content to database, and then call back the data to display on the new page
-			} else {
-				$db->sqlERROR();
-			}
-			$query2 = $dbc->prepare("SELECT page_id FROM pages WHERE title = ?");
-			if($query2){
-				$query2->bind_param("s",$page_title);
-				$query2->execute();
-				$page = $query2->get_result();
-				$query2->close();
-			} else {
-				$db->sqlERROR();
-			}
+            } catch (\PDOException $e) {
+                echo $e->getMessage();
+            }
+			try {
+                $query2 = $dbc->prepare("SELECT page_id FROM pages WHERE title = ?");
+				$query2->execute([$page_title]);
+            } catch (\PDOException $e) {
+                echo $e->getMessage();
+            }
 
-			while ($row = $page->fetch_array()) {
+			while ($row = $query2->fetch()) {
 				$pageID = $row['page_id'];
 				// This placeholder needs to be placed in the template so we can replace it.
 
@@ -115,29 +110,25 @@ class Page extends Content{
 				}
 
 				// add link to page table for the menu
-				$query3 = $dbc->prepare("UPDATE pages SET path = ?,parent_id = ? WHERE pages.page_id = ?");
-				if($query3) {
-					$query3->bind_param("sii", $path, $parent_id, $pageID);
-					$query3->execute();
-					print_r($query3);
-				} else {
-					$db->sqlERROR();
-				}
+
+				try {
+                    $query3 = $dbc->prepare("UPDATE pages SET path = ?,parent_id = ? WHERE pages.page_id = ?");
+					$query3->execute([$path, $parent_id, $pageID]);
+                } catch (\PDOException $e) {
+                    echo $e->getMessage();
+                }
 
 				$messages[] = 'The new page had been created, please approve the page before displaying it';
 			}
 		}
 
-		$dbc->close();
+		$db->close();
 
 		return ['output_form' => $output_form,'messages' => $messages];
 	}
 	public static function getSelection($selected_cat) {
 		$db = new DBC;
 		$dbc = $db->connect();
-
-		$categories = array();
-
 		$query = $dbc->query("SELECT * FROM pages WHERE trashed = 0");
 
 		while($row = $query->fetch()) {
@@ -152,20 +143,18 @@ class Page extends Content{
 	public static function create_path($page_id,$page_title){
 		$db = new DBC;
 		$dbc = $db->connect();
-		$query = $dbc->prepare("SELECT title,page_id,path FROM pages WHERE page_id = ?");
-		if($query) {
-			$query->bind_param("i", $page_id);
-			$query->execute();
-			$data = $query->get_result();
-			$query->close();
-			$row = $data->fetch_row();
+
+		try {
+            $query = $dbc->prepare("SELECT title,page_id,path FROM pages WHERE page_id = ?");
+			$query->execute([$page_id]);
+			$row = $query->fetch();
 			$parent_title = $row['title'];
 			$page_id = $row['page_id'];
 			$path = $row['path'] . '/' . $page_title;
-		} else {
-			$db->sqlERROR();
-		}
-		$dbc->close();
+        } catch (\PDOException $e) {
+            echo $e->getMessage();
+        }
+		$db->close();
 
 		return ['controller' => $parent_title,'parent_id' => $page_id,'path' => $path];
 	}

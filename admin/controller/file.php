@@ -9,16 +9,15 @@ class File extends Controller
 
     public function index($params = null)
     {
-        if (isset($_GET['delete-albums'])) {
-            Folders::delete_album($_GET['checkbox']);
+        if (isset($_POST['delete-albums'])) {
+            Folders::delete_album($_POST['checkbox']);
         }
-        if (isset($_GET['delete'])) {
-            F::delete_files($_GET['checkbox']);
+        if (isset($_POST['delete'])) {
+            F::delete_files($_POST['checkbox']);
         }
         $this->view(
             'Albums',
             [
-                'files/add-files.php',
                 'files/albums.php'
             ],
             $params
@@ -27,11 +26,11 @@ class File extends Controller
 
     public function albums($params = null)
     {
-        if (isset($_GET['delete-albums'])) {
-            Folders::delete_album($_GET['checkbox']);
+        if (isset($_POST['delete-albums'])) {
+            Folders::delete_album($_POST['checkbox']);
         }
-        if (isset($_GET['delete'])) {
-            F::delete_files($_GET['checkbox']);
+        if (isset($_POST['delete'])) {
+            F::delete_files($_POST['checkbox']);
         }
         if (isset($_GET['download_files'])) {
             F::downloadFiles();
@@ -39,7 +38,6 @@ class File extends Controller
         $this->view(
             'Albums',
             [
-                'files/add-files.php',
                 'files/albums.php'
             ],
             $params,

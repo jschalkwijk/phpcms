@@ -83,6 +83,7 @@ class Content{
 		$id_row = substr($dbt, 0, -1).'_id';
 
         try {
+
             if ($dbt != 'categories') {
                 $query = $dbc->prepare("SELECT " . $dbt . ".*, categories.title as category FROM " . $dbt . " LEFT JOIN categories ON " . $dbt . ".category_id = categories.category_id WHERE " . $dbt . ".trashed = ? ORDER BY " . $id_row . " DESC");
             } else {
@@ -95,6 +96,7 @@ class Content{
 
 		$posts = array();
         $result =  $query->fetchAll();
+
         foreach($result as $row) {
             $post = new Content(
                 $row['title'],
@@ -129,14 +131,16 @@ class Content{
 		$id_row = substr($dbt, 0, -1).'_id';
 
 		try {
+
             if ($dbt != 'categories') {
-                $query = $dbc->prepare("SELECT " . $dbt . ".*, categories.title as category FROM " . $dbt . " LEFT JOIN categories ON " . $dbt . ".category_id = categories.category_id WHERE " . $id_row . " = ?");
+                $query = $dbc->prepare("SELECT " . $dbt . ".*, categories.title as category FROM " . $dbt . " LEFT JOIN categories ON " . $dbt . ".category_id = categories.category_id WHERE ".$dbt.".". $id_row . " = ?");
             } else {
                 $query = $dbc->prepare("SELECT * FROM " . $dbt . " WHERE " . $id_row . " = ?");
             }
             $query->setFetchMode(\PDO::FETCH_ASSOC);
             $query->execute([$id]);
             $result = $query->fetchAll();
+
         } catch (\PDOException $e){
             echo $e->getMessage();
         }

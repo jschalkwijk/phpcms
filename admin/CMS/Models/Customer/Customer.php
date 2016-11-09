@@ -106,50 +106,45 @@ class Customer
         if(!empty($this->getName()) && !empty($this->getMail()) && !empty($this->getAddress1()) && !empty($this->getCity()) && !empty($this->getPostalCode())) {
             $exists = $this->exists($this->getMail());
             if (!$exists) {
-                $name = mysqli_real_escape_string($dbc, trim($this->getName()));
-                $mail = mysqli_real_escape_string($dbc, trim($this->getMail()));
-                $phone = mysqli_real_escape_string($dbc, trim($this->getPhone()));
-                $address1 = mysqli_real_escape_string($dbc, trim($this->getAddress1()));
-                $address2 = mysqli_real_escape_string($dbc, trim($this->getAddress2()));
-                $city = mysqli_real_escape_string($dbc, trim($this->getCity()));
-                $postal_code = mysqli_real_escape_string($dbc, trim($this->getPostalCode()));
+                $name = trim($this->getName());
+                $mail = trim($this->getMail());
+                $phone = trim($this->getPhone());
+                $address1 = trim($this->getAddress1());
+                $address2 = trim($this->getAddress2());
+                $city = trim($this->getCity());
+                $postal_code = trim($this->getPostalCode());
 
-                $query = $dbc->prepare("INSERT INTO customers(name,email,phone,address1,address2,city,postal) VALUES(?,?,?,?,?,?,?)");
-                if($query) {
-                    $query->bind_param("sssssss", $name, $mail, $phone, $address1, $address2, $city, $postal_code);
-                    $query->execute();
-                    $query->close();
-                } else {
-                    $db->sqlERROR();
+                try {
+                    $query = $dbc->prepare("INSERT INTO customers(name,email,phone,address1,address2,city,postal) VALUES(?,?,?,?,?,?,?)");
+                    $query->execute([$name, $mail, $phone, $address1, $address2, $city, $postal_code]);
+                } catch (\PDOException $e){
+                    echo $e->getMessage();
                 }
 
-                $query = $dbc->prepare("SELECT customer_id FROM customers WHERE email = ?");
-                if($query) {
-                    $query->bind_param("s", $mail);
-                    $query->execute();
-                    $data = $query->get_result();
-                    $query->close();
-                    $row = $data->fetch_array();
-                } else {
-                    $db->sqlERROR();
+                try {
+                    $query = $dbc->prepare("SELECT customer_id FROM customers WHERE email = ?");
+                    $query->execute([$mail]);
+                    $row = $query->fetch();
+                } catch (\PDOException $e){
+                    echo $e->getMessage();
                 }
 
                 $this->setID($row['customer_id']);
                 echo 'customer_id '.$this->getID().'<br>';
 
-                $dbc->close();
+                $db->close();
                 $messages[] = "Customer added";
 
                 return ['customer_id' => $this->getID(),'messages' => $messages];
             } else {
                 $customer = $this->fetchSingle($exists['id']);
                 // TO DO: change the address, a existing customer with no account could be moved to another address
-                $customer->setName(mysqli_real_escape_string($dbc, trim($this->name)));
-                $customer->setPhone(mysqli_real_escape_string($dbc, trim($this->phone)));
-                $customer->setAddress1(mysqli_real_escape_string($dbc, trim($this->address1)));
-                $customer->setAddress2(mysqli_real_escape_string($dbc, trim($this->address2)));
-                $customer->setCity(mysqli_real_escape_string($dbc, trim($this->city)));
-                $customer->setPostalCode(mysqli_real_escape_string($dbc, trim($this->postal_code)));
+                $customer->setName(trim($this->name));
+                $customer->setPhone(trim($this->phone));
+                $customer->setAddress1(trim($this->address1));
+                $customer->setAddress2(trim($this->address2));
+                $customer->setCity(trim($this->city));
+                $customer->setPostalCode(trim($this->postal_code));
 
                 $id = $customer->getID();
                 $name = $customer->getName();
@@ -159,15 +154,13 @@ class Customer
                 $city = $this->getCity();
                 $postal_code = $this->getPostalCode();
 
-                $query = $dbc->prepare("UPDATE customers SET name = ?,phone = ?,address1 = ?,address2 = ?,city = ?,postal = ? WHERE customer_id = ?");
-                if($query) {
-                    $query->bind_param("ssssssi", $name, $phone, $address1, $address2, $city, $postal_code, $id);
-                    $query->execute();
-                    $query->close();
-                } else {
-                    $db->sqlERROR();
+                try {
+                    $query = $dbc->prepare("UPDATE customers SET name = ?,phone = ?,address1 = ?,address2 = ?,city = ?,postal = ? WHERE customer_id = ?");
+                    $query->execute([$name, $phone, $address1, $address2, $city, $postal_code, $id]);
+                } catch (\PDOException $e){
+                    echo $e->getMessage();
                 }
-                $dbc->close();
+                $db->close();
 
                 $messages[] = "Please check if your personal details and address are correct before proceeding the payment.";
                 return ['customer_id' => $id,'messages' => $messages];
@@ -181,13 +174,11 @@ class Customer
         $db = new DBC;
         $dbc = $db->connect();
 
-        $id = mysqli_real_escape_string($dbc, trim((int)$id));
-        $query = $dbc->prepare("SELECT * FROM customers WHERE customer_id = ?");
-        if($query) {
-            $query->bind_param("i",$id);
-            $query->execute();
-            $data = $query->get_result();
-            $row = $data->fetch_array();
+        $id = trim((int)$id);
+        try {
+            $query = $dbc->prepare("SELECT * FROM customers WHERE customer_id = ?");
+            $query->execute([$id]);
+            $row = $query->fetch();
             $name = $row['name'];
             $mail = $row['email'];
             $phone = $row['phone'];
@@ -206,25 +197,29 @@ class Customer
                 $postal_code
             );
             $customer->setID($row['customer_id']);
-        } else {
-            $db->sqlERROR();
+        } catch (\PDOException $e){
+            echo $e->getMessage();
         }
 
-        $dbc->close();
+        $db->close();
 		// Returns an array wich contains all the contact objects. Which are then passed from the controller to the view.
 		return $customer;
     }
     public static function exists($mail){
-        $dbc = new DBC;
-        $mail = mysqli_real_escape_string($dbc->connect(), trim($mail));
-        $query = "SELECT * FROM customers WHERE email = '$mail'";
-        $data = mysqli_query($dbc->connect(),$query) or die ('Error checking for existings customer');
-        if(mysqli_num_rows($data) == 1) {
-            $row = mysqli_fetch_array($data);
-            $dbc->disconnect();
+        $db = new DBC;
+        $dbc = $db->connect();
+        $mail = trim($mail);
+        try {
+            $query = $dbc->query("SELECT * FROM customers WHERE email = '$mail'");
+        } catch (\PDOException $e){
+            echo $e->getMessage();
+        }
+        if($query->rowCount() == 1) {
+            $row = $query->fetch();
+            $db->close();
             return ['id' => $row['customer_id']];
         } else {
-            $dbc->disconnect();
+            $db->close();
             return false;
         }
     }

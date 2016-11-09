@@ -27,8 +27,12 @@ class RUDActions{
 		$dbc = $db->connect();
 		$id_row = substr($dbt, 0, -1).'_id';
 		$multiple = implode(",",$checkbox);
-		$dbc->query("UPDATE ".$dbt." SET ".$row." = ".$value." WHERE ".$id_row." IN({$multiple})");
-		$dbc->close();
+		try{
+            $dbc->query("UPDATE ".$dbt." SET ".$row." = ".$value." WHERE ".$id_row." IN({$multiple})");
+        } catch (\PDOException $e){
+            echo $e->getMessage();
+        }
+        $db->close();
 		header('Location: '.ADMIN.$dbt);
 	}
 	public static function delete_selected($dbt,$checkbox){
@@ -49,9 +53,12 @@ class RUDActions{
 		}
 
 		if($flag) {
-			$dbc->query("DELETE FROM " . $dbt . " WHERE " . $id_row . " IN({$multiple})");
-			$dbc->close();
-
+            try{
+			    $dbc->query("DELETE FROM " . $dbt . " WHERE " . $id_row . " IN({$multiple})");
+            } catch (\PDOException $e){
+                echo $e->getMessage();
+            }
+            $db->close();
 		}
 		// ALLEEN ALS ER ERRORS ZIJN MOET IK DIE RETURNEN. ANDERS MOET IK DE HEADER LOCATION DOEN,
 		// ANDERS WORDT DE PAGINA NIET VERVERST :-)

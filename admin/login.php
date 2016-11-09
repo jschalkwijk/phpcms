@@ -49,39 +49,47 @@
 	if(!isset($_SESSION['user_id'])) {
 		// if the form is submitted we start a session and create the cookies.
 		if(isset($_POST['submit'])) {
-			$dbc = new DBC;
-			if(isset($_POST['username']) && isset($_POST['password'])) {	
-				$username = $_POST['username'];
-				$password = $_POST['password'];
-				$query = "SELECT * FROM users WHERE username ='$username'";
-				$data = mysqli_query($dbc->connect(),$query);
-				
-				if(mysqli_num_rows($data) == 1) {
-					$row = mysqli_fetch_array($data);
-					$hash = $row['password'];
-					// decrypt password
-					$passwordCheck = password_verify($password, $hash);
-					if($passwordCheck){
-						$user_id = (int)$row['user_id'];
-						$_SESSION['user_id'] = (int)$row['user_id'];
-						$_SESSION['username'] = $row['username'];
-						$shared_key = file_get_contents('keys/Shared/shared.txt');
-						$_SESSION['rights'] = Crypto::decrypt(Crypto::hexTobin($row['rights']),$shared_key);
-						$new_token = md5($row['username'].$_SESSION['rights'].$row['token']);
-						$query2 = "UPDATE users SET token = '$new_token' WHERE user_id='$user_id'";
-						mysqli_query($dbc->connect(),$query2) or die('Error connecting to database.');
-						if(isset($_POST['remember'])) {
-							setcookie('t',$new_token, time() + 60*60*10,'/', null, null, true); // httponly=  ,/ ,null, null, true
-							setcookie('u',md5($username.$new_token),time() + 60*60*10,'/', null, null, true);
-						}
-						header('Location: '.ADMIN);
-					}
-				} else {
-					echo '<div class="container">Enter a valid email and/or password</div>';
-					$output_form = True; 
-				}
-			}
-			$dbc->disconnect(); 
+			$db = new DBC;
+            $dbc = $db->connect();
+			if(isset($_POST['username']) && isset($_POST['password'])) {
+                $username = $_POST['username'];
+                $password = $_POST['password'];
+                try {
+                    $query = $dbc->prepare("SELECT * FROM users WHERE username = ?");
+                    $query->execute([$username]);
+                    if ($query->rowCount() == 1) {
+                        $row = $query->fetch();
+                        $hash = $row['password'];
+                        // decrypt password
+                        $passwordCheck = password_verify($password, $hash);
+                        if ($passwordCheck) {
+                            $user_id = (int)$row['user_id'];
+                            $_SESSION['user_id'] = (int)$row['user_id'];
+                            $_SESSION['username'] = $row['username'];
+                            $shared_key = file_get_contents('keys/Shared/shared.txt');
+                            $_SESSION['rights'] = Crypto::decrypt(Crypto::hexTobin($row['rights']), $shared_key);
+                            $new_token = md5($row['username'] . $_SESSION['rights'] . $row['token']);
+                            try {
+                                $query = $dbc->prepare("UPDATE users SET token = '$new_token' WHERE user_id = ? ");
+                                $query->execute([$user_id]);
+                                if (isset($_POST['remember'])) {
+                                    setcookie('t', $new_token, time() + 60 * 60 * 10, '/', null, null, true); // httponly=  ,/ ,null, null, true
+                                    setcookie('u', md5($username . $new_token), time() + 60 * 60 * 10, '/', null, null, true);
+                                }
+                                header('Location: ' . ADMIN);
+                            } catch(\PDOException $e){
+                                echo $e->getMessage();
+                            }
+                        }
+                    } else {
+                        echo '<div class="container">Enter a valid email and/or password</div>';
+                        $output_form = True;
+                    }
+                } catch (\PDOException $e) {
+                    echo $e->getMessage();
+                }
+            }
+			$db->close();
 		} else {
 			// if there is no user logged in, and no post is submitted, show this, and the form.
 			$output_form = True; 

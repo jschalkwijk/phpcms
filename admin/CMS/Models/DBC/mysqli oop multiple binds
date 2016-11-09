@@ -1,0 +1,17 @@
+ $sql = "SELECT album_id FROM albums WHERE parent_id IN ({$placeholders})";
+                echo $sql."<br />";
+                $query = $dbc->prepare($sql);
+				$type = array(str_repeat("i",count($parents)));
+				$parents = array_merge($type,$parents);
+				// WHat are refrences? what is happening here?
+				$refs = array();
+				foreach($parents as $key => $value){
+					$refs[$key] = &$parents[$key];
+				}
+				print_r($refs);
+				$ref = new ReflectionClass('mysqli_stmt');
+				$method = $ref->getMethod("bind_param");
+				$method->invokeArgs($query,$refs);
+				$query->execute();
+				$data = $query->get_result();
+				$query->close();

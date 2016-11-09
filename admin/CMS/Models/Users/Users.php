@@ -108,17 +108,14 @@ class Users{
 	public static function fetchUsers($dbt,$trashed) {
 		$db = new DBC;
 		$dbc = $db->connect();
-
-		$query = $dbc->prepare("SELECT * FROM ".$dbt." WHERE trashed = ? ORDER BY user_id DESC");
-		if($query){
-			$query->bind_param("i",$trashed);
-			$query->execute();
-			$data = $query->get_result();
-			$query->close();
-		} else {
-			$db->sqlERROR();
-			exit();
-		}
+        try {
+		    $query = $dbc->prepare("SELECT * FROM ".$dbt." WHERE trashed = ? ORDER BY user_id DESC");
+			$query->execute([$trashed]);
+			$data = $query->fetchAll();
+        } catch (\PDOException $e){
+            echo $e->getMessage();
+            exit();
+        }
 		$users = array();
 
 		if(file_exists('././keys/Shared/shared.txt')){
@@ -128,7 +125,7 @@ class Users{
 			return['output_form' => $output_form,'messages' => $messages,'errors' => $errors];
 		}
 
-		while($row = $data->fetch_array()){
+		foreach($data as $row){
 			$username = $row['username'];
 			$first_name = Crypto::decrypt(Crypto::hexTobin($row['first_name']),$shared_key);
 			$last_name = Crypto::decrypt(Crypto::hexTobin($row['last_name']),$shared_key);
@@ -152,7 +149,7 @@ class Users{
 			$users[] = $user;
 		}
 
-		$dbc->close();
+		$db->close();
 		return $users;
 	}
 
@@ -160,16 +157,14 @@ class Users{
 		$db = new DBC;
 		$dbc = $db->connect();
 
-		$query = $dbc->prepare("SELECT * FROM ".$dbt." WHERE user_id = ?");
-		if($query){
-			$query->bind_param("i",$id);
-			$query->execute();
-			$data = $query->get_result();
-			$query->close();
-		} else {
-			$db->sqlERROR();
-			exit();
-		}
+        try {
+		    $query = $dbc->prepare("SELECT * FROM ".$dbt." WHERE user_id = ?");
+			$query->execute([$id]);
+			$data = $query->fetchAll();
+        } catch (\PDOException $e){
+            echo $e->getMessage();
+            exit();
+        }
 
 		/*
         if(file_exists('././keys/User/'.$_SESSION['username'].'.txt')){
@@ -187,7 +182,7 @@ class Users{
 			return['output_form' => $output_form,'messages' => $messages,'errors' => $errors];
 		}
 
-		while($row = $data->fetch_array()){
+		foreach($data as $row){
 			$username = $row['username'];
 			$first_name = Crypto::decrypt(Crypto::hexTobin($row['first_name']),$shared_key);
 			$last_name = Crypto::decrypt(Crypto::hexTobin($row['last_name']),$shared_key);
@@ -220,19 +215,16 @@ class Users{
 		$errors = array();
 		$messages = array();
 
-		$username = mysqli_real_escape_string($dbc,trim($this->username));
-		$query = $dbc->prepare("SELECT * FROM users WHERE username = ?");
-		if($query){
-			$query->bind_param("s",$username);
-			$query->execute();
-			$data = $query->get_result();
-			$query->close();
-		} else {
-			$db->sqlERROR();
-			exit();
-		}
+		$username = trim($this->username);
+		try {
+            $query = $dbc->prepare("SELECT * FROM users WHERE username = ?");
+			$query->execute([$username]);
+        } catch (\PDOException $e){
+            echo $e->getMessage();
+            exit();
+        }
 
-		if($data->num_rows === 0){
+		if($query->rowCount() === 0){
 			// Create user specific Encryption key.
 			try {
 				$user_key = Crypto::createNewRandomKey();
@@ -254,14 +246,14 @@ class Users{
 			}
 
 			try {
-				$username = mysqli_real_escape_string($dbc,trim($this->username));
-				$password = mysqli_real_escape_string($dbc,trim($password));
-				$password_again = mysqli_real_escape_string($dbc,trim($password_again));
-				$first_name = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->first_name)),$key));
-				$last_name = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->last_name)),$key));
-				$email = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->email)),$key));
-				$function = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->email)),$key));
-				$rights = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->rights)),$key));
+				$username = trim($this->username);
+				$password = trim($password);
+				$password_again = trim($password_again);
+				$first_name = Crypto::binTohex(Crypto::encrypt(trim($this->first_name),$key));
+				$last_name = Crypto::binTohex(Crypto::encrypt(trim($this->last_name),$key));
+				$email = Crypto::binTohex(Crypto::encrypt(trim($this->email),$key));
+				$function = Crypto::binTohex(Crypto::encrypt(trim($this->email),$key));
+				$rights = Crypto::binTohex(Crypto::encrypt(trim($this->rights),$key));
 				$token = md5(uniqid(mt_rand(),true));
 			} catch (Ex\CryptoTestFailedException $ex) {
 				die('Cannot safely perform encryption');
@@ -276,15 +268,13 @@ class Users{
 			if(!empty($username) && !empty($password) && !empty($password_again)) {
 				if($password === $password_again) {
 					$hash = password_hash($password, PASSWORD_BCRYPT);
-					$query = $dbc->prepare("INSERT into users(username,password,first_name,last_name,email,function,rights,album_id,token) VALUES(?,?,?,?,?,?,?,?,?)");
-					if($query){
-						$query->bind_param("sssssssis",$username,$hash,$first_name,$last_name,$email,$function,$rights,$album_id,$token);
-						$query->execute();
-						$query->close();
-					} else {
-						$db->sqlERROR();
-						exit();
-					}
+					try {
+                        $query = $dbc->prepare("INSERT into users(username,password,first_name,last_name,email,function,rights,album_id,token) VALUES(?,?,?,?,?,?,?,?,?)");
+                        $query->execute([$username,$hash,$first_name,$last_name,$email,$function,$rights,$album_id,$token]);
+                    } catch (\PDOException $e){
+                        echo $e->getMessage();
+                        exit();
+                    }
 					$messages[] = '<p class="container">New user <strong>'.$username.'</strong> has been successfully added.';
 				} else {
 					$errors[] = 'Passwords do not match, please retype your password correctly.';
@@ -295,8 +285,7 @@ class Users{
 				$output_form = true;
 			}
 
-			$dbc->close();
-
+			$db->close();
 			return ['output_form' => $output_form,'errors' => $errors,'messages' => $messages];
 		} else {
 			$output_form = true;
@@ -329,67 +318,60 @@ if(file_exists('././keys/User/'.$_SESSION['username'].'.txt')){
 			return['output_form' => $output_form,'messages' => $messages,'errors' => $errors];
 		}
 
-		$username = mysqli_real_escape_string($dbc,trim($this->getUserName()));
-		$query = $dbc->prepare("SELECT * FROM users WHERE username = ?");
-		if($query){
-			$query->bind_param("s",$username);
-			$query->execute();
-			$data = $query->get_result();
-			$query->close();
-		} else {
-			$db->sqlERROR();
-			exit();
-		}
+		$username = trim($this->getUserName());
+		try {
+            $query = $dbc->prepare("SELECT * FROM users WHERE username = ?");
+			$query->execute([$username]);
+        } catch (\PDOException $e){
+            echo $e->getMessage();
+            exit();
+        }
 
-		if($data->num_rows === 0 || ($data->num_rows) === 1 && ($username === $old_username)){
+		if($query->rowCount() === 0 || ($query->rowCount() === 1 && ($username === $old_username))){
 			$this->setID($id);
 			$user_id = $this->getID();
-			$id = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim((int)$this->getID())),$shared_key));
-			$username = mysqli_real_escape_string($dbc,trim($this->getUserName()));
-			$first_name = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->getFirstName())),$shared_key));
-			$last_name = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->getLastName())),$shared_key));
-			$email = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->getMail())),$shared_key));
-			$function = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->getFunction())),$shared_key));
-			$rights = Crypto::binTohex(Crypto::encrypt(mysqli_real_escape_string($dbc,trim($this->getRights())),$shared_key));
-			$new_password = mysqli_real_escape_string($dbc,trim($new_password));
-			$new_password_again = mysqli_real_escape_string($dbc,trim($new_password_again));
+			$id = Crypto::binTohex(Crypto::encrypt(trim((int)$this->getID()),$shared_key));
+			$username = trim($this->getUserName());
+			$first_name = Crypto::binTohex(Crypto::encrypt(trim($this->getFirstName()),$shared_key));
+			$last_name = Crypto::binTohex(Crypto::encrypt(trim($this->getLastName()),$shared_key));
+			$email = Crypto::binTohex(Crypto::encrypt(trim($this->getMail()),$shared_key));
+			$function = Crypto::binTohex(Crypto::encrypt(trim($this->getFunction()),$shared_key));
+			$rights = Crypto::binTohex(Crypto::encrypt(trim($this->getRights()),$shared_key));
+			$new_password = trim($new_password);
+			$new_password_again = trim($new_password_again);
 
 			// save edited object to database
 			if ($_POST['confirm'] == 'Yes') {
-				$sql1 = "UPDATE users SET username = '$username',first_name = '$first_name',last_name = '$last_name',".
+
+                try{
+                    $sql1 = "UPDATE users SET username = '$username',first_name = '$first_name',last_name = '$last_name',".
 					"email = '$email',function = '$function',rights = '$rights' WHERE user_id = '$user_id'";
-				echo $sql1;
-				$query = $dbc->prepare("UPDATE users SET username = ?,first_name = ?,last_name = ?,email = ?,function = ?,rights = ? WHERE user_id = ?");
-				if($query){
-					$query->bind_param("ssssssi",$username,$first_name,$last_name,$email,$function,$rights,$user_id);
-					$query->execute();
-					$query->close();
-				} else {
-					$db->sqlERROR();
-					exit();
-				}
+				    echo $sql1;
+				    $query = $dbc->prepare("UPDATE users SET username = ?,first_name = ?,last_name = ?,email = ?,function = ?,rights = ? WHERE user_id = ?");
+					$query->execute([$username,$first_name,$last_name,$email,$function,$rights,$user_id]);
+                } catch (\PDOException $e){
+                    echo $e->getMessage();
+                    exit();
+                }
 				if(!empty($new_password) && !empty($new_password_again) )
 					if($new_password === $new_password_again) {
 						$hash = password_hash($new_password, PASSWORD_BCRYPT);
-						$query2 = $dbc->prepare("UPDATE users SET password = ? WHERE user_id = ?");
-						if($query2){
-							$query2->bind_param("si",$hash,$user_id);
-							$query2->execute();
-							$query2->close();
-						} else {
-							$db->sqlERROR();
-							exit();
-						}
+						try {
+                            $query2 = $dbc->prepare("UPDATE users SET password = ? WHERE user_id = ?");
+							$query2->execute([$hash,$user_id]);
+                        } catch (\PDOException $e){
+                            echo $e->getMessage();
+                            exit();
+                        }
 						$messages[] = 'You password has been successfully changed.';
 					} else {
 						$errors[] = 'Passwords do not match, please retype your password correctly.';
 						$output_form = true;
 					}
-				$dbc->close();
+				$db->close();
 				// Confirm success with the user
 				$messages[] =  '<p>The user <strong>' . $username. '</strong> was successfully edited.';
-			}
-			else {
+			} else {
 				$errors[] = '<p class="error">The user was not edited.</p>';
 				$output_form = true;
 			}
@@ -407,18 +389,15 @@ if(file_exists('././keys/User/'.$_SESSION['username'].'.txt')){
 		$thumb_path = $upload->getThumbPath();
 		$db = new DBC;
 		$dbc = $db->connect();
+        try {
+		    $query = $dbc->prepare("UPDATE users SET img_path = ? WHERE user_id = ?");
+			$query->execute([$thumb_path,$params[0]]);
+        } catch (\PDOException $e){
+            echo $e->getMessage();
+            exit();
+        }
 
-		$query = $dbc->prepare("UPDATE users SET img_path = ? WHERE user_id = ?");
-		if($query){
-			$query->bind_param("si",$thumb_path,$params[0]);
-			$query->execute();
-			$query->close();
-		} else {
-			$db->sqlERROR();
-			exit();
-		}
-
-		$dbc->close();
+		$db->close();
 	}
 }
 ?>

@@ -48,8 +48,7 @@ $contact = $data['contact'];
     if ($output_form) { ?>
         <div class="row">
             <div class="col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3">
-                <form id="create-form" large
-                "method="post" action="<?= $action; ?>">
+                <form id="create-form" method="post" action="<?= $action; ?>">
                 <input type="hidden" name="id" value="<?= $contact->getID(); ?>"/>
                 <input type="text" name="first_name" placeholder="First Name" value="<?= $contact->getFirstName(); ?>"/><br/>
                 <input type="text" name="last_name" placeholder="Last Name"

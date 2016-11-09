@@ -72,17 +72,15 @@ class File{
 		$db = new DBC;
 		$dbc = $db->connect();
 
-		$query = $dbc->prepare("SELECT * FROM files WHERE album_id = ?");
-		if($query) {
-			$query->bind_param("i", $album_id);
-			$query->execute();
-			$data = $query->get_result();
-			$query->close();
-		} else {
-			$db->sqlERROR();
-		}
+		try {
+            $query = $dbc->prepare("SELECT * FROM files WHERE album_id = ?");
+            $query->execute([$album_id]);
+			$data = $query->fetchAll();
+        } catch (\PDOException $e){
+            echo $e->getMessage();
+        }
 		$files= array();
-		while($row = $data->fetch_array()){
+		foreach($data as $row){
 			$file = new File(
 				$row['name'],
 				$row['type'],
@@ -98,18 +96,21 @@ class File{
 			// adds every object to the files array. We can access each object and its methods separately.
 			$files[] = $file;
 		}
-		$dbc->close();
+		$db->close();
 		return $files;
 	}
 	
 	public static function fetchFilesBySearch($searchTermBits){
 		$db = new DBC;
 		$dbc = $db->connect();
-
-		$query = $dbc->query("SELECT * FROM files WHERE ".implode(' AND ', $searchTermBits));
-		if(!$query) { $db->sqlERROR(); };
+        try {
+		    $query = $dbc->query("SELECT * FROM files WHERE ".implode(' AND ', $searchTermBits));
+            $data = $query->fetchAll();
+        } catch (\PDOException $e){
+            echo $e->getMessage();
+        }
 		$files= array();
-		while($row = $query->fetch_array()){
+        foreach($data as $row){
 			$file = new File(
 				$row['name'],
 				$row['type'],
@@ -125,7 +126,7 @@ class File{
 			// adds every object to the files array. We can acces each object and its methods seperatly.
 			$files[] = $file;
 		}
-		$dbc->close();
+		$db->close();
 		return $files;
 	}
 	

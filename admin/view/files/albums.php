@@ -5,14 +5,19 @@
 	use CMS\Models\DBC\DBC;
 ?>
 <div class="container">
+    	<div class="row">
+    		<div class="col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3">
+                <?php require_once 'view/files/add-files.php'; ?>
+    		</div>
+    	</div>
 	<div class="row">
 		<div class="col-md-6 col-lg-6 col-md-offset-3 col-lg-offset-3">
 			<?php
 				$dbc = new DBC;
 				$album_id = null;
 				if(isset($params[1])) {
-					$album_id = mysqli_real_escape_string($dbc->connect(), trim((int)$params[0]));
-					$album_name = mysqli_real_escape_string($dbc->connect(), trim($params[1]));
+					$album_id = trim((int)$params[0]);
+					$album_name = trim($params[1]);
 
 					echo '<h1>' . $album_name . '</h1>';
 					$doc = ['txt', 'doc', 'docx', 'odt'];
@@ -38,7 +43,7 @@
 	</div>
 	<div class="row">
 		<div class="col-md-6 col-lg-6 col-md-offset-3 col-lg-offset-3">
-			<form id="check-folders" method="post" action="/admin/file">
+			<form id="check-folders" method="post" action="<?= ADMIN.'file' ?>">
 				<button type="button" id="check-all"><img class="glyph-small" src="<?= IMG."check.png"; ?>"/></button>
 				<table class="files-table">
 					<thead></thead><th></th><th>Name</th><th>Size(MB)</th></thead>

@@ -14,6 +14,7 @@ class Pages extends Controller
     public function index($params = null)
     {
         $pages = Content::fetchAll('pages', 0);
+        print_r($pages);
         $action = ADMIN . 'pages';
         // Post requests need to be handled first! Then load the page, otherwise you will get the headers already sent error.
         $this->UserActions('pages');

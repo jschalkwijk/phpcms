@@ -41,7 +41,7 @@ class Cart extends Controller
     {
         $dbc = new DBC;
         $id = $params[0];
-        $quantity = mysqli_real_escape_string($dbc->connect(), trim((int)$_POST['quantity']));
+        $quantity = trim((int)$_POST['quantity']);
 
         // TO DO: create exists function to only check if it exists.
         $product = Product::fetchSingle($id);
@@ -63,7 +63,7 @@ class Cart extends Controller
     {
         $dbc = new DBC;
         $id = $params[0];
-        $quantity = mysqli_real_escape_string($dbc->connect(), trim((int)$_POST['quantity']));
+        $quantity = trim((int)$_POST['quantity']);
         $product = Product::fetchSingle($id);
 
         $this->basket->update($product, $quantity);
