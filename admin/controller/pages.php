@@ -1,9 +1,7 @@
 <?php
 
 use CMS\Models\Controller\Controller;
-use CMS\Models\Content\Content;
 use CMS\Models\Content\Pages\Page;
-use CMS\Models\Content\Posts\Post;
 use CMS\Models\Actions\UserActions;
 
 class Pages extends Controller
@@ -13,8 +11,7 @@ class Pages extends Controller
 
     public function index($params = null)
     {
-        $pages = Content::fetchAll('pages', 0);
-        print_r($pages);
+        $pages = Page::all();
         $action = ADMIN . 'pages';
         // Post requests need to be handled first! Then load the page, otherwise you will get the headers already sent error.
         $this->UserActions('pages');
@@ -63,7 +60,7 @@ class Pages extends Controller
     {
         $action = ADMIN . 'pages/deleted-pages';
         $delete = $this->UserActions('pages');
-        $pages = Content::fetchAll('pages', 1);
+        $pages = Page::all(1);
         $this->view(
             'Deleted Pages',
             ['pages/pages.php'],
@@ -82,8 +79,12 @@ class Pages extends Controller
     public function EditPages($params = null)
     {
         if (isset($_POST['submit'])) {
-            $page = new Page($_POST['page_title'], $_POST['page_desc'], null, $_POST['page_content'], $_SESSION['username'], 'pages');
-            $edit = $page->addPage($_POST['back-end'], $_POST['front-end'], $_POST['sub_page'], $_POST['id']);
+            $page = new Page;
+            $page->title = $_POST['title'];
+            $page->description = $_POST['description'];
+            $page->content = $_POST['content'];
+            $page->username = $_SESSION['username'];
+            $edit = $page->addPage($_POST['back-end'], $_POST['front-end'], $_POST['sub-page'], $_POST['id']);
             $this->view(
                 'Edit Page',
                 ['pages/add-edit-post.php'],
@@ -95,7 +96,7 @@ class Pages extends Controller
                 ]
             );
         } else {
-            $page = Content::fetchSingle('pages', $params[0]);
+            $page = Page::single($params[0]);
             $this->view(
                 'Edit Page',
                 ['pages/add-edit-page.php'],

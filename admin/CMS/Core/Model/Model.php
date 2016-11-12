@@ -2,17 +2,15 @@
 
 namespace CMS\Core\Model;
 use CMS\Models\DBC\DBC;
+use PDO;
 use PDOException;
 
+/**
+ * Class Model
+ * @package CMS\Core\Model
+ */
 abstract class Model
 {
-
-    /**
-     * The query which is generated for the model.
-     *
-     * @var array
-     */
-    protected $query = "";
 
     protected $primaryKey = 'id';
 
@@ -24,19 +22,62 @@ abstract class Model
 
     protected $allowed = [];
 
+    protected $hidden = [];
+
+    /**
+     * The query which is generated for the model.
+     *
+     * @var array
+     */
+    protected $statement = '';
+
+    protected $query = "";
+
+    protected $values = [];
+
+    protected $request = [];
+
+    /**
+     * Model constructor.
+     * @param array $attributes
+     */
+    public function __construct($attributes = [])
+    {
+        $this->request = $attributes;
+        // Create attributes for every request value
+        // The request will be validated when trying to perform the save method for example.
+        // But we might need some of the request values for returning values to the user etc.
+        //
+        if(!empty($attributes)) {
+            foreach ($attributes as $key => $value) {
+                $this->$key = $value;
+            }
+        }
+    }
+
+    /**
+     * @param $property
+     * @return mixed
+     */
     function __get($property) {
-        $method = "get$property";
+        $method = "get_$property";
         if(method_exists($this, $method)) return $this->$method;
     }
-    public function __set($key,$value)
+
+    /**
+     * @param $key
+     * @param $value
+     */
+    public function __set($key, $value)
     {
         $this->$key = $value;
     }
+
     /**
      * Returns all objects linked to the called model.
      *
-     * @param Int $trashed
-     * @param Array $joins
+     * @param int $trashed
+     * @param array $joins
      * @return Object Array
      *
      */
@@ -51,8 +92,8 @@ abstract class Model
     /**
      * Returns all objects linked to the called model.
      *
-     * @param Int $id
-     * @param Array $joins
+     * @param int $id
+     * @param array $joins
      * @return Object Array
      *
      */
@@ -66,15 +107,11 @@ abstract class Model
         return $model->newQuery($query);
     }
 
-    public function add($request)
-    {
-
-    }
     /**
      * Executes mysql Query
      * Returns an array with the rows as objects
      *
-     * @param String $query
+     * @param string $query
      * @return Object Array
      *
      */
@@ -82,23 +119,35 @@ abstract class Model
     {
         $this->query = $query;
         echo $query;
+        print_r($this->values);
         $db = new DBC;
-        $dbc = $db->connect();
         try {
-            $query = $dbc->query($query);
-            $query->setFetchMode(\PDO::FETCH_ASSOC);
-            $results = $query->fetchAll();
+            $dbc = $db->connect();
+            if(!empty($this->values)) {
+                $query = $dbc->prepare($query);
+                $query->execute($this->values);
+            } else {
+                $query = $dbc->query($query);
+            }
+            if($this->statement == "SELECT") {
+                $query->setFetchMode(PDO::FETCH_ASSOC);
+                $results = $query->fetchAll();
+                $db->close();
+                return $this->fetch($results);
+            } else {
+                $db->close();
+                return true;
+            }
         } catch(\PDOException $e){
-           echo $e->getMessage();
+            echo $e->getMessage();
+            return false;
         }
-        $db->close();
-        return $this->fetch($results);
     }
 
     /**
      * Returns an array with the rows as objects
      *
-     * @param Array $results
+     * @param array $results
      * @return Object Array
      *
      */
@@ -108,7 +157,6 @@ abstract class Model
         foreach($results as $row) {
             $model = new static();
             foreach ($row as $k => $v){
-                //echo $model->$k,$v;
                 $model->$k = $v;
             }
             $data[] = $model;
@@ -119,19 +167,20 @@ abstract class Model
     /**
      * Returns SELECT part of an sql statement.
      *
-     * @param Array $columns
-     * @return String
+     * @param array $columns
+     * @return string
      *
      */
     public function select($columns = ['*'])
     {
+        $this->statement = "SELECT";
         return "SELECT ".$this->table.".".implode($columns);
     }
 
     /**
      * Returns FROM part of an sql statement.
      *
-     * @return String
+     * @return string
      *
      */
     public function from()
@@ -142,25 +191,28 @@ abstract class Model
     /**
      * Returns WHERE part of an sql statement.
      *
-     * @param Array $columns
+     * @param array $columns
      * @return String
      *
      */
     public function where($columns = [])
     {
-        $values = array();
-        foreach($columns as $k => $v){
-            $values[] = $this->table.".".$k." = ".$v;
+        $string = array();
+        foreach($columns as $column => $value){
+            // Set column to ? for prepared statement
+            $string[] = $this->table.".".$column." = ?";
+            // Set values array for PDO prepared statement
+            $this->values[] = $value;
         }
-        $where = implode(' AND ', $values);
+        $where = implode(' AND ', $string);
         return " WHERE ".$where;
     }
     /**
      * Returns Order By part of an sql statement.
      *
-     * @param String $column
-     * @param String $order
-     * @return String
+     * @param string $column
+     * @param string $order
+     * @return string
      *
      */
     public function orderBy($column = '',$order = '')
@@ -170,7 +222,7 @@ abstract class Model
     /**
      * Returns array with the joined relations from the Model.
      *
-     * @param Array $joins
+     * @param array $joins
      * @return String Array
      *
      */
@@ -202,40 +254,96 @@ abstract class Model
             "on" => $on,
         ];
     }
+
+    /**
+     * @param $prep
+     * @return string
+     */
+    public function insert($prep)
+    {
+        return "INSERT INTO $this->table (".implode(',',$prep['columns']).",date) VALUES(".implode(',',$prep['placeholders']).",NOW())";
+
+    }
+
+    /**
+     * @param $prep
+     * @return string
+     */
+    public function update($prep)
+    {
+        $string = array();
+        foreach($prep['columns'] as $column){
+            // Set column to ? for prepared statement
+            $string[] = $column." = ?";
+        }
+        $set = implode(',', $string);
+        return "UPDATE $this->table SET ".$set;
+    }
+
+    /**
+     * @return bool
+     */
+    public function save()
+    {
+        $query = $this->insert($this->prepareQuery());
+//        if($this->newQuery($query)) {
+//            return true;
+//        } else {
+//            return false;
+//        }
+        return $this->newQuery($query);
+    }
+
+    public function change()
+    {
+        $query = $this->update($this->prepareQuery()).$this->where([$this->primaryKey => $this->id]);
+        return $this->newQuery($query);
+//        return $query;
+    }
+
+
     /**
      * Returns array with placeholders,column names that must be filledm and the values belonging to them.
      *
-     * @param Array $request
-     * @return Array
+     * @param array $hidden
+     * @return array
      *
      */
-    public function insert()
-    {
-        $db = new DBC;
-        $dbc = $db->connect();
-        $post = self::placeholders($_POST);
-        $query = "INSERT INTO $this->table(".implode(',',$post['columns'])." VALUES(".implode(',',$post['placeholders']).")";
-        echo $query;
-        try {
-            $query = $dbc->prepare($query);
-            $query->execute($post['values']);
-        } catch(\PDOException $e){
-            echo $e->getMessage();
-        }
-        $db->close();
-    }
-    public function placeholders($request)
+    public function prepareQuery()
     {
         $placeholders = [];
         $columns = [];
-        $values = [];
-        foreach($request as $column => $value){
+        // Voor nu reset ik de array. Bij het aanmaken van de Model worden de waardes
+        // gcreerd als er input is. Ik moet even goed kijken of dit goed gaat
+        // als ik de request waardes daar instel. Nu doe ik dat nog even hier.
+        //$this->values = [];
+        // Checks if request value is allowed to be inserted by user and then inserts it.
+        foreach($this->request as $column => $value){
             if(in_array($column,$this->allowed)){
                 $placeholders[] = '?';
                 $columns[] = $column;
-                $values[] = $value;
+                $this->values[] = $value;
             }
         }
-        return ['placeholders' => $placeholders,'columns' =>$columns,'values' => $values];
+        // Checks if the hidden properties are allowed. Example: current user_id etc.
+        foreach($this->hidden as $column => $value){
+                $placeholders[] = '?';
+                $columns[] = $column;
+                $this->values[] = $value;
+        }
+        return ['placeholders' => $placeholders,'columns' => $columns];
+    }
+
+    /**
+     * @param $value
+     * @return mixed
+     */
+    public function keep($value)
+    {
+        if(isset($value)) {
+           return $value;
+        } else {
+            return false;
+        }
     }
 }

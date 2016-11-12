@@ -3,14 +3,39 @@ namespace CMS\Models\Content\Pages;
 
 use CMS\Models\Content\Content;
 use CMS\Models\DBC\DBC;
+use CMS\Core\Model\Model;
 
-class Page extends Content{
-	private $url;
-	
-	public function __construct($title,$description,$category = null,$content,$author,$dbt = null,$date = null,$approved = null,$trashed = null){
-		parent::__construct($title,$description,$category,$content,$author,$dbt = null,$date = null,$approved = null,$trashed = null);
-		// add own variables.
-		//$this->url = $url;
+class Page extends Model{
+	protected $primaryKey = 'page_id';
+
+	public $table = 'pages';
+
+	protected $relations = [
+		'categories' => 'category_id',
+		'users' => 'user_id'
+	];
+
+	protected $joins = [
+//		'categories' => ['title'],
+		'users' => ['username']
+	];
+
+	public function getlink(){
+		return preg_replace("/[\s-]+/", "-", $this->title);
+	}
+
+	public function get_id(){
+		return $this->page_id;
+	}
+	public function setID($id){
+		$this->page_id = $id;
+	}
+	public function getTable(){
+		return $this->table;
+	}
+
+	public function getCatType(){
+		return $this->category_type;
 	}
 
 	public function addPage($back,$front,$sub_page,$id = null){
@@ -21,7 +46,7 @@ class Page extends Content{
 
 		$this->setID($id);
 
-		$id = trim((int)$this->getID());
+		$id = trim((int)$this->get_id());
 		$page_title = trim($this->title);
 		$page_desc = trim($this->description);
 		$page_content = trim($this->content);

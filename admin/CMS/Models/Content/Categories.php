@@ -142,7 +142,7 @@ class Categories extends Content{
 			$query->execute([$type]);
 
 			while ($row = $query->fetch()) {
-				if ($selected_cat == $row['title']) {
+				if ($selected_cat == $row['category_id']) {
 					echo '<option value="' . $row['category_id'] . '" selected="selected">' . $row['title'] . '</option>';
 				} else {
 					echo '<option value="' . $row['category_id'] . '">' . $row['title'] . '</option>';

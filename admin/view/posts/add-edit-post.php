@@ -23,6 +23,7 @@
 <?php
 
 	$posts = $data['post'];
+print_r($posts);
 	(isset($data['output_form'])) ? $output_form = $data['output_form'] : $output_form = true;
 ?>
 <div class="container">
@@ -44,24 +45,24 @@
 				foreach($posts as $post) {
 					(isset($params[0]) && isset($params[1])) ? $action = ADMIN.'posts/edit-posts/'.$post->post_id.'/'.$post->title : $action = ADMIN.'posts/add-post';
 				?>
-				<form id="addpost-form" class="large" action="<?= $action; ?>" method="post">
-					<input type="hidden" name="id" value="<?= $post->post_id;?>"/>
-					<input type="text" name="title" placeholder="Title" value="<?= $post->title; ?>"><br />
-					<input type="text" name="post_desc" placeholder="Post Description (max 160 characters)" value="<?php  echo $post->description ;?>"/><br />
-					<label for="select">Category</label>
-					<select id="categories" name="cat_name">
-						<option name="none" value="None">None</option>
-						<?php $category = Categories::getSelected($post->categories_title,'post'); ?>
-					</select>
-					<input type="text" name="category" placeholder="Category"/><br />
-					<input type="hidden" name="cat_type" value="post"/><br />
-					<textarea type="text" name="content" placeholder="Content"><?= $post->content; ?></textarea><br />
+					<form id="addpost-form" class="large" action="<?= $action; ?>" method="post">
+						<input type="hidden" name="id" value="<?= $post->post_id;?>"/>
+						<input type="text" name="title" placeholder="Title" value="<?= $post->keep($post->title); ?>"><br />
+						<input type="text" name="description" placeholder="Post Description (max 160 characters)" value="<?= $post->keep($post->description) ?>"/><br />
+						<label for="select">Category</label>
+						<select id="categories" name="category_id">
+							<option name="none" value="None">None</option>
+							<?php $category = Categories::getSelected($post->category_id,'post'); ?>
+						</select>
+						<input type="text" name="category" placeholder="Category" value="<?= $post->keep($post->category); ?>"/><br />
+						<input type="hidden" name="cat_type" value="post"/><br />
+						<textarea type="text" name="content" placeholder="Content"><?= $post->keep($post->content); ?></textarea><br />
 
-				<?php if (isset($params[0]) && isset($params[1])) { ?>
-						<p>Are you sure you want to edit the following product?</p>
-						<input type="radio" name="confirm" value="Yes" /> Yes
-						<input type="radio" name="confirm" value="No" checked="checked" /> No <br />
-				<?php }
+					<?php if (isset($params[0]) && isset($params[1])) { ?>
+							<p>Are you sure you want to edit the following product?</p>
+							<input type="radio" name="confirm" value="Yes" /> Yes
+							<input type="radio" name="confirm" value="No" checked="checked" /> No <br />
+					<?php }
 
 				} ?>
 

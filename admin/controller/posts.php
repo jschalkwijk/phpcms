@@ -1,6 +1,5 @@
 <?php
 
-use CMS\Models\Content\Content;
 use CMS\Models\Content\Posts\Post;
 use CMS\Models\Controller\Controller;
 
@@ -8,18 +7,9 @@ class Posts extends Controller
 {
 
     use \CMS\Models\Actions\UserActions;
-    //Put this in controller or Model, or both? Model as standard setup, if a controller needs an other
-    // relatoinship we can change that.
-//    protected $join = [
-//        'categories' => ['title','description','keywords'],
-//        'users' => ['username']
-//    ];
 
     public function index($params = null)
     {
-//        $posts = Content::fetchAll('posts',0);
-//        $model = new Post;
-//        $posts = $model->where([['*'],'trashed'], 0);
         $posts = Post::all();
         // Post requests need to be handled first! Then load the page, otherwise you will get the headers already sent error.
         $this->UserActions('posts');
@@ -42,20 +32,26 @@ class Posts extends Controller
                 ['posts/add-edit-post.php'],
                 $params,
                 [
-                    'post' => $post,
+                    'post' => [$post],
                     'js' => $scripts
                 ]
             );
         } else {
-            $post = new Post;
-            $add = $post->addPost();
+            $post = new Post($_POST);
+//            $post->setTitle('Jorn');
+//            $post->description = $_POST['description'];
+//            $post->category = $_POST['category'];
+//            $post->content = $_POST['content'];
+//            $post->username = $_SESSION['username'];
+
+            $add = $post->add();
             $this->view(
                 'Add Post',
                 ['posts/add-edit-post.php'],
                 $params,
                 [
                     'output_form' => $add['output_form'],
-                    'post' => $post, 'errors' => $add['errors'],
+                    'post' => [$post], 'errors' => $add['errors'],
                     'messages' => $add['messages'],
                     'js' => $scripts
                 ]
@@ -83,6 +79,7 @@ class Posts extends Controller
 
         if (!isset($_POST['submit'])) {
             $post = Post::single($params[0]);
+
             $this->view(
                 'Edit Post',
                 ['posts/add-edit-post.php'],
@@ -95,13 +92,14 @@ class Posts extends Controller
             );
         } else {
            // $post = new Post($_POST['title'], $_POST['post_desc'], $_POST['category'], $_POST['content'], $_SESSION['username'], 'posts');
-            $post = new Post;
-            $post->title = $_POST['title'];
-            $post->description = $_POST['post_desc'];
-            $post->category = $_POST['category'];
-            $post->content = $_POST['content'];
-            $post->username = $_SESSION['username'];
-            $edit = $post->addPost($_POST['id'], $_POST['cat_name'], $_POST['confirm']);
+            $post = new Post($_POST);
+//            $post->setTitle($_POST['title']);
+//            $post->description = $_POST['description'];
+//            $post->category = $_POST['category'];
+//            $post->content = $_POST['content'];
+            $post->user_id = $_SESSION['user_id'];
+            //$edit = $post->edit($_POST['id'], $_POST['cat_name'], $_POST['confirm']);
+            $edit = $post->edit();
             $this->view(
                 'Edit Post',
                 ['posts/add-edit-post.php'],
