@@ -80,7 +80,7 @@ class Post extends Model {
 		if(!empty($this->category)) {
 			$category = Categories::addCategory($this->category,'post');
 			$this->category_id = $category['category_id'];
-			// add value to the request to be run by the prepareQuery
+			// replace the current value to the request to be run by the prepareQuery
 			// otherwise it won't be seen added when save() is called.
 			$this->request['category_id'] = $this->category_id;
 		}

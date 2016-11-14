@@ -12,33 +12,74 @@ use PDOException;
 abstract class Model
 {
 
+    /**
+     * Holds the Primary Key of the related table
+     * Default set to 'id'. Change in extending class if needed.
+     * @var string
+     */
     protected $primaryKey = 'id';
 
+    /**
+     * Set table name of the related table
+     * @var string
+     */
     protected $table = '';
 
+    /**
+     * If the table has relations, specify them in an associative array as foreign table => foreign key
+     * @var array
+     */
     protected $relations = [];
 
+    /**
+     * If you want to join columns from related tables specify them in an associative array.
+     * @var array
+     */
     protected $joins = [];
 
+    /**
+     * Columns that are specified in the allowed array are allowed to be filled with data
+     * in the related table. Columns that are not in this array can't be filled by the user.
+     * @var array
+     */
     protected $allowed = [];
 
+    /**
+     * Columns that are specified in the hidden array are allowed to be filled with data
+     * in the related table. Columns that are in this array can't be filled by the user.
+     * These can only be specified inside the extending class object or the controller.
+     * For example, the current user_id.
+     * @var array
+     */
     protected $hidden = [];
+
+    /**
+     * @var string
+     */
+    protected $statement = '';
 
     /**
      * The query which is generated for the model.
      *
      * @var array
      */
-    protected $statement = '';
-
     protected $query = "";
 
+    /**
+     * @var array
+     */
     protected $values = [];
 
+    /**
+     * Holds the request values which are set to attributes when a new object class is created.
+     * @var array
+     */
     protected $request = [];
 
     /**
      * Model constructor.
+     * Takes an optional associative array, preferably a $_POST request. This
+     * will set the model attributes.
      * @param array $attributes
      */
     public function __construct($attributes = [])
@@ -74,7 +115,7 @@ abstract class Model
     }
 
     /**
-     * Returns all objects linked to the called model.
+     * Returns all class objects linked to the called model.
      *
      * @param int $trashed
      * @param array $joins
@@ -90,7 +131,7 @@ abstract class Model
         return $model->newQuery($query);
     }
     /**
-     * Returns all objects linked to the called model.
+     * Returns all class objects linked to the called model.
      *
      * @param int $id
      * @param array $joins
@@ -109,8 +150,8 @@ abstract class Model
 
     /**
      * Executes mysql Query
-     * Returns an array with the rows as objects
-     *
+     * Returns an array with the rows as a class object if statement is select.
+     * Else it will perform a query which returns true if successful.
      * @param string $query
      * @return Object Array
      *
@@ -146,7 +187,7 @@ abstract class Model
 
     /**
      * Returns an array with the rows as objects
-     *
+     * For every ro of data a new class object is created for the current model.
      * @param array $results
      * @return Object Array
      *
@@ -266,6 +307,7 @@ abstract class Model
     }
 
     /**
+     * Returns update part of a sql statement
      * @param $prep
      * @return string
      */
@@ -281,6 +323,7 @@ abstract class Model
     }
 
     /**
+     * Saves the object to the database
      * @return bool
      */
     public function save()
@@ -294,6 +337,10 @@ abstract class Model
         return $this->newQuery($query);
     }
 
+    /**
+     * Changes a existing data row or set
+     * @return Object
+     */
     public function change()
     {
         $query = $this->update($this->prepareQuery()).$this->where([$this->primaryKey => $this->id]);
@@ -303,9 +350,8 @@ abstract class Model
 
 
     /**
-     * Returns array with placeholders,column names that must be filledm and the values belonging to them.
+     * Returns array with placeholders,column names that must be filled and the values belonging to them.
      *
-     * @param array $hidden
      * @return array
      *
      */
