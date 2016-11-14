@@ -46,7 +46,7 @@ print_r($posts);
 					(isset($params[0]) && isset($params[1])) ? $action = ADMIN.'posts/edit-posts/'.$post->post_id.'/'.$post->title : $action = ADMIN.'posts/add-post';
 				?>
 					<form id="addpost-form" class="large" action="<?= $action; ?>" method="post">
-						<input type="hidden" name="id" value="<?= $post->post_id;?>"/>
+						<input type="hidden" name="post_id" value="<?= $post->post_id;?>"/>
 						<input type="text" name="title" placeholder="Title" value="<?= $post->keep($post->title); ?>"><br />
 						<input type="text" name="description" placeholder="Post Description (max 160 characters)" value="<?= $post->keep($post->description) ?>"/><br />
 						<label for="select">Category</label>

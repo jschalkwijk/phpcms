@@ -11,7 +11,7 @@ class Pages extends Controller
 
     public function index($params = null)
     {
-        $pages = Page::all();
+        $pages = Page::all(0);
         $action = ADMIN . 'pages';
         // Post requests need to be handled first! Then load the page, otherwise you will get the headers already sent error.
         $this->UserActions('pages');
@@ -32,26 +32,26 @@ class Pages extends Controller
 
     public function AddPage($params = null)
     {
-        if (isset($_POST['submit'])) {
-            $page = new Page($_POST['page_title'], $_POST['page_desc'], null, $_POST['page_content'], $_SESSION['username'], 'pages');
-            $add = $page->addPage($_POST['back-end'], $_POST['front-end'], $_POST['sub_page']);
+        if (!isset($_POST['submit'])) {
+            $page = new Page();
+            $this->view(
+                'Add Page',
+                ['pages/add-edit-page.php'],
+                $params,
+                ['page' => [$page]]
+            );
+        } else {
+            $page = new Page($_POST);
+            $add = $page->add();
             $this->view(
                 'Add Page',
                 ['pages/add-edit-page.php'],
                 $params,
                 [
                     'output_form' => $add['output_form'],
-                    'page' => $page,
+                    'page' => [$page],
                     'messages' => $add['messages']
                 ]
-            );
-        } else {
-            $page = new Page(null, null, null, null, null, 'pages');
-            $this->view(
-                'Add Page',
-                ['pages/add-edit-page.php'],
-                $params,
-                ['page' => $page]
             );
         }
     }
@@ -66,7 +66,7 @@ class Pages extends Controller
             ['pages/pages.php'],
             $params,
             [
-                'pages' => $pages,
+                'pages' => [$pages],
                 'action' => $action,
                 'trashed' => 1,
                 'messages' => $delete['messages'],
@@ -78,25 +78,8 @@ class Pages extends Controller
 
     public function EditPages($params = null)
     {
-        if (isset($_POST['submit'])) {
-            $page = new Page;
-            $page->title = $_POST['title'];
-            $page->description = $_POST['description'];
-            $page->content = $_POST['content'];
-            $page->username = $_SESSION['username'];
-            $edit = $page->addPage($_POST['back-end'], $_POST['front-end'], $_POST['sub-page'], $_POST['id']);
-            $this->view(
-                'Edit Page',
-                ['pages/add-edit-post.php'],
-                $params,
-                [
-                    'page' => $page,
-                    'output_form' => $edit['output_form'],
-                    'messages' => $edit['messages']
-                ]
-            );
-        } else {
-            $page = Page::single($params[0]);
+        $page = Page::single($params[0]);
+        if (!isset($_POST['submit'])) {
             $this->view(
                 'Edit Page',
                 ['pages/add-edit-page.php'],
@@ -104,6 +87,22 @@ class Pages extends Controller
                 [
                     'page' => $page,
                     'output_form' => true
+                ]
+            );
+        } else {
+//            $page = new Page($_POST);
+//            $page->page_id = $params[0];
+            $page = $page[0];
+            $page->request = $_POST;
+            $edit = $page->add();
+            $this->view(
+                'Edit Page',
+                ['pages/add-edit-page.php'],
+                $params,
+                [
+                    'page' => [$page],
+                    'output_form' => $edit['output_form'],
+                    'messages' => $edit['messages']
                 ]
             );
         }

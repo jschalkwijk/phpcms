@@ -38,12 +38,6 @@ class Posts extends Controller
             );
         } else {
             $post = new Post($_POST);
-//            $post->setTitle('Jorn');
-//            $post->description = $_POST['description'];
-//            $post->category = $_POST['category'];
-//            $post->content = $_POST['content'];
-//            $post->username = $_SESSION['username'];
-
             $add = $post->add();
             $this->view(
                 'Add Post',
@@ -77,9 +71,9 @@ class Posts extends Controller
             JS . 'checkAll.js'
         ];
 
-        if (!isset($_POST['submit'])) {
-            $post = Post::single($params[0]);
+        $post = Post::single($params[0]);
 
+        if (!isset($_POST['submit'])) {
             $this->view(
                 'Edit Post',
                 ['posts/add-edit-post.php'],
@@ -91,21 +85,16 @@ class Posts extends Controller
                 ]
             );
         } else {
-           // $post = new Post($_POST['title'], $_POST['post_desc'], $_POST['category'], $_POST['content'], $_SESSION['username'], 'posts');
-            $post = new Post($_POST);
-//            $post->setTitle($_POST['title']);
-//            $post->description = $_POST['description'];
-//            $post->category = $_POST['category'];
-//            $post->content = $_POST['content'];
+            $post = $post[0];
+            $post->request = $_POST;
             $post->user_id = $_SESSION['user_id'];
-            //$edit = $post->edit($_POST['id'], $_POST['cat_name'], $_POST['confirm']);
             $edit = $post->edit();
             $this->view(
                 'Edit Post',
                 ['posts/add-edit-post.php'],
                 $params,
                 [
-                    'post' => $post,
+                    'post' => [$post],
                     'output_form' => $edit['output_form'],
                     'errors' => $edit['errors'],
                     'messages' => $edit['messages'],

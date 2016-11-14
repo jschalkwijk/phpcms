@@ -22,6 +22,7 @@
         <div class="col-xs-6 col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3">
             <?php
             $pages = $data['page'];
+                print_r($pages);
             (isset($data['output_form'])) ? $output_form = $data['output_form'] : $output_form = true;
             if (isset($_POST['submit'])) {
                 echo '<div class="medium">';
@@ -35,7 +36,7 @@
         <div class="col-xs-6 col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3">
             <?php if ($output_form) {
                 foreach($pages as $page){
-                    (isset($params[0]) && isset($params[1])) ? $action = ADMIN . 'pages/edit-page/' . $page->get_id() . '/' . $page->title : $action = ADMIN . 'pages/add-page';
+                    (isset($params[0]) && isset($params[1])) ? $action = ADMIN . 'pages/edit-pages/' . $page->get_id() . '/' . $page->title : $action = ADMIN . 'pages/add-page';
 
                 ?>
                     <iframe id="target">hello</iframe>
@@ -48,10 +49,9 @@
                             <option name="none" value="None">None</option>
                             <?php $options = Page::getSelection('none'); ?>
                         </select>
-                        <input type="hidden" name="id" value="<?= $page->get_id(); ?>"/>
-                        <input type="text" name="title" placeholder="Page Title" value="<?= $page->title; ?>"/><br/>
-                        <input type="text" name="description" placeholder="Page Description (max 160 characters)" value="<?= $page->description; ?>"/><br/>
-                        <textarea type="text" name="content" placeholder="Content"><?= $page->content; ?></textarea><br/>
+                        <input type="text" name="title" placeholder="Page Title" value="<?= $page->keep($page->title); ?>"/><br/>
+                        <input type="text" name="description" placeholder="Page Description (max 160 characters)" value="<?= $page->keep($page->description); ?>"/><br/>
+                        <textarea type="text" name="content" placeholder="Content"><?= $page->keep($page->content); ?></textarea><br/>
                         <input type="text" name="url" placeholder="URL" value=""/><br/>
                         <input type="text" name="template" placeholder="Template URL" value=""/><br/>
                         <button type="submit" name="submit">Create Page</button>

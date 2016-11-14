@@ -1,7 +1,6 @@
 <?php
 namespace CMS\Models\Content\Pages;
 
-use CMS\Models\Content\Content;
 use CMS\Models\DBC\DBC;
 use CMS\Core\Model\Model;
 
@@ -16,9 +15,17 @@ class Page extends Model{
 	];
 
 	protected $joins = [
-//		'categories' => ['title'],
+		'categories' => ['title'],
 		'users' => ['username']
 	];
+
+	protected $allowed = [
+		'title','description','content','path','parent_id',
+	];
+
+//	protected $hidden = [
+//		'user_id'
+//	];
 
 	public function getlink(){
 		return preg_replace("/[\s-]+/", "-", $this->title);
@@ -38,21 +45,18 @@ class Page extends Model{
 		return $this->category_type;
 	}
 
-	public function addPage($back,$front,$sub_page,$id = null){
-		$db = new DBC;
-		$dbc = $db->connect();
+	public function add(){
+		$this->connection = $this->database->connect();
+		$dbc = $this->connection;
+
 		$output_form = false;
 		$messages = array();
-
-		$this->setID($id);
 
 		$id = trim((int)$this->get_id());
 		$page_title = trim($this->title);
 		$page_desc = trim($this->description);
 		$page_content = trim($this->content);
-		$author = $this->author;
 		$tpl_URL = trim($_POST['template']);
-		$author = $_SESSION['username'];
 
 		if(empty($page_content)) {
 			$messages[] = 'Add content';
@@ -66,29 +70,29 @@ class Page extends Model{
 			$messages[] =  'Add a title and content';
 			$output_form = true;
 		}
-		if(empty($front) && empty($back)){
+		if(empty($this->request['front-end']) && empty($this->request['back-end'])){
 			$messages[] = "You have to specify if it's a front- or back-end page";
 			$output_form = true;
 		}
 
-		if (!empty($page_title) && !empty($page_content) && (!empty($front) || !empty($back) )) {
+		if (!empty($page_title) && !empty($page_content) && (!empty($this->request['front-end']) || !empty($this->request['back-end']) )) {
+			$this->hidden['user_id'] = $_SESSION['user_id'];
+			if(!isset($this->page_id)) {
+				echo '<h1>New page</h1>';
+				$this->save();
+			} else {
+				echo '<h1>Updated page</h1>';
+				$this->change();
+			}
 
-			try {
-                $query = $dbc->prepare("INSERT INTO pages(title,description,content,author,date) VALUES(?,?,?,?,NOW())");
-				$query->execute([$page_title,$page_desc,$page_content,$author]);
-				//save content to database, and then call back the data to display on the new page
-            } catch (\PDOException $e) {
-                echo $e->getMessage();
-            }
-			try {
-                $query2 = $dbc->prepare("SELECT page_id FROM pages WHERE title = ?");
-				$query2->execute([$page_title]);
-            } catch (\PDOException $e) {
-                echo $e->getMessage();
-            }
+			$messages[] = 'Your page has been added/edited.<br />';
+			$output_form = true;
+			$lastID = $dbc->lastInsertId();
+			$this->page_id = $dbc->lastInsertId();
 
-			while ($row = $query2->fetch()) {
-				$pageID = $row['page_id'];
+			if (!empty($lastID)) {
+				echo $lastID;
+				$pageID = $lastID;
 				// This placeholder needs to be placed in the template so we can replace it.
 
 				$placeholder1 = "{title}";
@@ -100,16 +104,16 @@ class Page extends Model{
 					$template = file_get_contents('view/custom/'.$tpl_URL);
 				}
 
-				if(!empty($front)){
+				if(!empty($this->request['front-end'])){
 					$ctrlPath = "../controller/";
 				}
-				if(!empty($back)){
+				if(!empty($this->request['back-end'])){
 					$ctrlPath = "controller/";
 				}
 
 
-				if($sub_page != 'None'){
-					$create_path = $this->create_path($sub_page,$page_title);
+				if($this->request['sub-page']!= 'None'){
+					$create_path = $this->create_path($this->request['sub-page'],$page_title);
 					$path = $create_path['path'];
 					$parent_id = $create_path['parent_id'];
 					$fh = fopen($ctrlPath.$create_path['controller'].'.php', 'r+');
@@ -136,18 +140,13 @@ class Page extends Model{
 
 				// add link to page table for the menu
 
-				try {
-                    $query3 = $dbc->prepare("UPDATE pages SET path = ?,parent_id = ? WHERE pages.page_id = ?");
-					$query3->execute([$path, $parent_id, $pageID]);
-                } catch (\PDOException $e) {
-                    echo $e->getMessage();
-                }
-
+				echo '<br>'.$pageID.' PAGE ID <br>';
+				$this->patch(['path' => $path, 'parent_id' => $parent_id]);
+//				$query = $this->update(['path' => $path, 'parent_id' => $parent_id]).$this->where([$this->primaryKey => $this->get_id()]);
+//				$this->newQuery($query);
 				$messages[] = 'The new page had been created, please approve the page before displaying it';
 			}
 		}
-
-		$db->close();
 
 		return ['output_form' => $output_form,'messages' => $messages];
 	}
