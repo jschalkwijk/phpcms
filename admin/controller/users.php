@@ -9,7 +9,7 @@ class Users extends Controller {
 	use \CMS\Models\Actions\UserActions;
 
 	public function index($params = null){
-		$users = Usr::fetchUsers('users',0);
+		$users = Usr::all();
 		$this->UserActions('users');
 		$this->view(
 			'Users',
@@ -23,8 +23,16 @@ class Users extends Controller {
 		);
 	}
 	public function AddUser($params = null){
-		if(isset($_POST['submit'])){
-			$user = new Usr($_POST['username'],$_POST['first_name'],$_POST['last_name'],$_POST['email'],$_POST['function'],$_POST['rights']);
+		if(!isset($_POST['submit'])){
+			$user = new Usr();
+			$this->view(
+				'Add User',
+				['users/add-edit-user.php'],
+				$params,
+				['user' => [$user]]
+			);
+		} else {
+			$user = new Usr($_POST);
 			$add = $user->addUser($_POST['new_password'],$_POST['new_password_again']);
 			$this->view(
 				'Add User',
@@ -36,14 +44,6 @@ class Users extends Controller {
 					'errors' => $add['errors'],
 					'messages' => $add['messages']
 				]
-			);
-		} else {
-			$user = new Usr(null,null,null,null,null,null,null,null);
-			$this->view(
-				'Add User',
-				['users/add-edit-user.php'],
-				$params,
-				['user' => $user]
 			);
 		}
 	}
@@ -68,26 +68,9 @@ class Users extends Controller {
 			Usr::addProfileIMG($file_dest,$thumb_dest,$params);
 		}
 
-		if(isset($_POST['submit'])){
-			$user = new Usr($_POST['username'],$_POST['first_name'],$_POST['last_name'],$_POST['email'],$_POST['function'],$_POST['rights']);
-			if(isset($_POST['new_password']) && isset($_POST['new_password_again'])){
-				$edit = $user->editUser($_POST['id'],$_POST['username'],$_POST['new_password'],$_POST['new_password_again']);
-			} else {
-				$edit = $user->editUser($_POST['id'],$_POST['username']);
-			}
-			$this->view(
-				'Edit User',
-				['users/add-edit-user.php'],
-				$params,
-				[
-					'user' => $user,
-					'output_form' => $edit['output_form'],
-					'errors' => $edit['errors'],
-					'messages' => $edit['messages']
-				]
-			);
-		} else {
-			$user = Usr::fetchSingle('users',$params[0]);
+		$user = Usr::single($params[0]);
+
+		if(!isset($_POST['submit'])){
 			$this->view(
 				'Edit User',
 				['users/add-edit-user.php'],
@@ -95,6 +78,26 @@ class Users extends Controller {
 				[
 					'user' => $user,
 					'output_form' => true
+				]
+			);
+		} else {
+			$user = $user[0];
+			$user->request = $_POST;
+			$edit = $user->edit();
+			if(isset($_POST['new_password']) && isset($_POST['new_password_again'])){
+				$edit = $user->edit($_POST['id'],$_POST['username'],$_POST['new_password'],$_POST['new_password_again']);
+			} else {
+				$edit = $user->edit($_POST['id'],$_POST['username']);
+			}
+			$this->view(
+				'Edit User',
+				['users/add-edit-user.php'],
+				$params,
+				[
+					'user' => [$user],
+					'output_form' => $edit['output_form'],
+					'errors' => $edit['errors'],
+					'messages' => $edit['messages']
 				]
 			);
 		}

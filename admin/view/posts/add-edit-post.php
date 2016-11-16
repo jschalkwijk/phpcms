@@ -23,7 +23,6 @@
 <?php
 
 	$posts = $data['post'];
-print_r($posts);
 	(isset($data['output_form'])) ? $output_form = $data['output_form'] : $output_form = true;
 ?>
 <div class="container">

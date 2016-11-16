@@ -5,6 +5,12 @@ use CMS\Models\DBC\DBC;
 use PDO;
 use PDOException;
 
+/*
+ * Values array na elke query resetten? voorkomt mischien problemen die ik had met het updated van een model
+ * en het voorbereiden van statements.
+ * Het opnieuw instellen van de model variables n een apparte functie? of alleen in patch? of alleen in update?
+ * */
+
 /**
  * Class Model
  * @package CMS\Core\Model
@@ -106,7 +112,7 @@ abstract class Model
      */
     function __get($property) {
         $method = "get_$property";
-        if(method_exists($this, $method)) return $this->$method;
+        if(method_exists($this, $method)) echo $this->$method;
     }
 
     /**
@@ -435,10 +441,10 @@ abstract class Model
      */
     public function keep($value)
     {
-        if(isset($value)) {
+        if(!empty($value)) {
            return $value;
         } else {
-            return false;
+            return '';
         }
     }
 }

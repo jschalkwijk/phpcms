@@ -98,7 +98,7 @@ class APP {
 			// filter url
 			# Example: www.yourdomain.com/example-page/hello/1/title/
 
-			$url = filter_var(mysqli_real_escape_string($dbc->connect(),trim($_GET['url'])),FILTER_SANITIZE_URL);
+			$url = filter_var(trim($_GET['url']),FILTER_SANITIZE_URL);
 			// delete last / if it is there.
 			$url = rtrim($url,'/');
 			# Exampele change 1: $url = example-page/hello/1/title

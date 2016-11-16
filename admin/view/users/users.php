@@ -14,7 +14,9 @@
                         <tr><th>User</th><th>Rights</th><?php if ($_SESSION['rights'] == 'Admin') { ?> <th>Edit</th><th>View</th><th><button type="button" id="check-all"><img class="glyph-small" src="<?= IMG."check.png";?>" alt="check-uncheck-all-items"/></button></th></tr> <?php } ?>
                         <?php
                         $users = $data['users'];
-                        UserWriter::write($users);
+                        foreach ($users as $single) {
+                            require 'view/users/user_table.php';
+                        }
                         ?>
                     </table>
                     <?php
