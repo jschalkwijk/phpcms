@@ -46,8 +46,8 @@
 							<input type="hidden" name="old_username" value="<?= $user->username; ?>"/>
 							<input type="text" name="username" placeholder="Username"
 								   value="<?= $user->keep($user->username); ?>"/><br/>
-							<input type="password" name="new_password" placeholder="New Password"/><br/>
-							<input type="password" name="new_password_again" placeholder="New Password Again"/><br/>
+							<input type="password" name="password" placeholder="New Password"/><br/>
+							<input type="password" name="password_again" placeholder="New Password Again"/><br/>
 							<input type="text" name="first_name" placeholder="First name" value="<?= $user->keep($user->firstName()); ?>"/> <br/>
 							<input type="text" name="last_name" placeholder="Last name"
 								   value="<?= $user->keep($user->lastName()); ?>"/> <br/>

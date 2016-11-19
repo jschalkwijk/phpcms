@@ -69,7 +69,10 @@
                     <form class="backend-form" method="post" action="<?= ADMIN; ?>">
                             <?php
                                 $users = $data['users'];
-                                $writer = UserWriter::write($users);
+                                $users = $data['users'];
+                                foreach ($users as $single) {
+                                    require 'view/users/user_table.php';
+                                }
                                 require('view/shared/manage-content.php');
                             ?>
                             <input type="hidden" name="dbt" value="login"/>

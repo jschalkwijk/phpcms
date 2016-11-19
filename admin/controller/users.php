@@ -1,7 +1,7 @@
 <?php
 
 use CMS\Models\Controller\Controller;
-use \CMS\Models\Users\Users as Usr;
+use \CMS\Models\Users\Users as User;
 use \CMS\Models\DBC;
 
 class Users extends Controller {
@@ -9,7 +9,7 @@ class Users extends Controller {
 	use \CMS\Models\Actions\UserActions;
 
 	public function index($params = null){
-		$users = Usr::all();
+		$users = User::all();
 		$this->UserActions('users');
 		$this->view(
 			'Users',
@@ -24,7 +24,7 @@ class Users extends Controller {
 	}
 	public function AddUser($params = null){
 		if(!isset($_POST['submit'])){
-			$user = new Usr();
+			$user = new User();
 			$this->view(
 				'Add User',
 				['users/add-edit-user.php'],
@@ -32,8 +32,8 @@ class Users extends Controller {
 				['user' => [$user]]
 			);
 		} else {
-			$user = new Usr($_POST);
-			$add = $user->addUser($_POST['new_password'],$_POST['new_password_again']);
+			$user = new User($_POST);
+			$add = $user->add();
 			$this->view(
 				'Add User',
 				['users/add-edit-user.php'],
@@ -48,7 +48,7 @@ class Users extends Controller {
 		}
 	}
 	public function DeletedUsers($params = null){
-		$users = Usr::fetchUsers('users',1);
+		$users = User::single(1);
 		$this->UserActions('users');
 		$this->view(
 			'Deleted Users',
@@ -65,10 +65,10 @@ class Users extends Controller {
 		if (isset($_POST['submit_file']) || !empty($_FILES['files']['name'][0])) {
 			$file_dest = 'files/';
 			$thumb_dest= 'files/thumbs/';
-			Usr::addProfileIMG($file_dest,$thumb_dest,$params);
+			User::addProfileIMG($file_dest,$thumb_dest,$params);
 		}
 
-		$user = Usr::single($params[0]);
+		$user = User::single($params[0]);
 
 		if(!isset($_POST['submit'])){
 			$this->view(
@@ -84,11 +84,6 @@ class Users extends Controller {
 			$user = $user[0];
 			$user->request = $_POST;
 			$edit = $user->edit();
-			if(isset($_POST['new_password']) && isset($_POST['new_password_again'])){
-				$edit = $user->edit($_POST['id'],$_POST['username'],$_POST['new_password'],$_POST['new_password_again']);
-			} else {
-				$edit = $user->edit($_POST['id'],$_POST['username']);
-			}
 			$this->view(
 				'Edit User',
 				['users/add-edit-user.php'],
@@ -106,7 +101,7 @@ class Users extends Controller {
 		if(empty($params)){
 			$params = [$_SESSION['user_id'],$_SESSION['username']];
 		}
-		$user = Usr::fetchSingle('users',$params[0]);;
+		$user = User::single($params[0]);;
 		$this->view(
 			'User',
 			['users/profile.php'],

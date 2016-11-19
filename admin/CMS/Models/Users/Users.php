@@ -1,13 +1,7 @@
 <?php
 
 namespace CMS\Models\Users;
-//// Get User key for encryption
-//use \Defuse\Crypto\Crypto;
-//use \Defuse\Crypto\Exception as Ex;
-//
-//class Users{
 
-// Get User key for encryption
 use CMS\Core\Model\Model;
 use \Defuse\Crypto\Crypto;
 use \Defuse\Crypto\Exception as Ex;
@@ -38,6 +32,7 @@ class Users extends Model{
 		'email',
 		'function',
 		'rights',
+		'album_id',
 		'password',
 	];
 
@@ -49,11 +44,6 @@ class Users extends Model{
 		'rights',
 	];
 
-
-//	// setter function that set the assingned variables. Can only be accessed with these fynctions, vars themselfs are private.
-//	public function getUserName(){
-//		return $this->username;
-//	}
 	public function firstName(){
 		if(isset($this->first_name)) {
 			return $this->decrypt($this->first_name);
@@ -111,15 +101,15 @@ class Users extends Model{
 		}
 	}
 
-	public function add($password,$password_again){
+	public function add(){
 		$db = new DBC;
 		$dbc = $db->connect();
 
+		$username = trim($this->username);
 		$output_form = false;
 		$errors = array();
 		$messages = array();
 
-		$username = trim($this->username);
 		try {
             $query = $dbc->prepare("SELECT * FROM users WHERE username = ?");
 			$query->execute([$username]);
@@ -140,46 +130,29 @@ class Users extends Model{
 			} catch (Ex\CannotPerformOperationException $ex) {
 				die('Cannot safely create a key');
 			}
-			// Get shared encryption key. This key is used to encrypt the user data that admins and backend users
-			// need to see from one another. So the data is protected in the database, but accessible for the backend users.
-			if(file_exists('././keys/Shared/shared.txt')){
-				$key = file_get_contents('././keys/Shared/shared.txt');
-			} else {
-				$errors[] = "Shared Encryption key could not be found!";
-				return['output_form' => $output_form,'messages' => $messages,'errors' => $errors];
-			}
 
-			try {
-				$username = trim($this->username);
-				$password = trim($password);
-				$password_again = trim($password_again);
-				$first_name = Crypto::binTohex(Crypto::encrypt(trim($this->first_name),$key));
-				$last_name = Crypto::binTohex(Crypto::encrypt(trim($this->last_name),$key));
-				$email = Crypto::binTohex(Crypto::encrypt(trim($this->email),$key));
-				$function = Crypto::binTohex(Crypto::encrypt(trim($this->email),$key));
-				$rights = Crypto::binTohex(Crypto::encrypt(trim($this->rights),$key));
-				$token = md5(uniqid(mt_rand(),true));
-			} catch (Ex\CryptoTestFailedException $ex) {
-				die('Cannot safely perform encryption');
-			} catch (Ex\CannotPerformOperationException $ex) {
-				die('Cannot safely perform encryption');
-			}
 
+			$username = trim($this->username);
+			$password = trim($this->password);
+			$password_again = trim($this->password_again);
 			# Create Folder
 			$album_id = Folders::auto_create_folder($username,$this->file_path.$username,$this->thumb_path.$username,'Users');
-			$contacts = Folders::auto_create_folder("$username"."\'s ".'Contacts',$this->file_path.$username.'/'.$username.'\'s '.'Contacts',$this->thumb_path.$username.'/'.$username.'\'s '.'Contacts','Users',$username);
+			Folders::auto_create_folder("$username"."\\'s ".'Contacts',$this->file_path.$username.'/'.$username.'\'s '.'Contacts',$this->thumb_path.$username.'/'.$username.'\'s '.'Contacts','Users',$username);
 
 			if(!empty($username) && !empty($password) && !empty($password_again)) {
 				if($password === $password_again) {
-					$hash = password_hash($password, PASSWORD_BCRYPT);
-					try {
-                        $query = $dbc->prepare("INSERT into users(username,password,first_name,last_name,email,function,rights,album_id,token) VALUES(?,?,?,?,?,?,?,?,?)");
-                        $query->execute([$username,$hash,$first_name,$last_name,$email,$function,$rights,$album_id,$token]);
-                    } catch (\PDOException $e){
-                        echo $e->getMessage();
-                        exit();
-                    }
-					$messages[] = '<p class="container">New user <strong>'.$username.'</strong> has been successfully added.';
+					$this->request['new_password'] = password_hash($password, PASSWORD_BCRYPT);
+					$this->request['album_id'] = $album_id;
+					foreach($this->request as $k => $v) {
+						if(in_array($k,$this->encrypted)) {
+							$this->request[$k] = $this->encrypt($v);
+						}
+					}
+					if($this->save()){
+						$messages[] = '<p class="container">New user <strong>'.$username.'</strong> has been successfully added.';
+					} else {
+						$errors[] = $this->sqlError;
+					}
 				} else {
 					$errors[] = 'Passwords do not match, please retype your password correctly.';
 					$output_form = true;
@@ -198,7 +171,7 @@ class Users extends Model{
 		}
 	}
 
-	public function edit($id = null,$old_username = null,$new_password = null,$new_password_again = null){
+	public function edit(){
 		$db = new DBC;
 		$dbc = $db->connect();
 
@@ -207,6 +180,9 @@ class Users extends Model{
 		$messages = array();
 
 		$username = trim($this->request['username']);
+		$old_username = trim($this->request['old_username']);
+		$password = $this->request['password'];
+		$password_again = $this->request['password_again'];
 		try {
             $query = $dbc->prepare("SELECT * FROM users WHERE username = ?");
 			$query->execute([$username]);
@@ -216,9 +192,8 @@ class Users extends Model{
         }
 
 		if($query->rowCount() === 0 || ($query->rowCount() === 1 && ($username === $old_username))){
-			$user_id = $this->user_id;
-			$new_password = trim($new_password);
-			$new_password_again = trim($new_password_again);
+			$new_password = trim($password);
+			$new_password_again = trim($password_again);
 
 			// save edited object to database
 			if ($_POST['confirm'] == 'Yes') {

@@ -10,15 +10,9 @@ class Dashboard extends Controller {
 	use UserActions;
 
 	public function index($params = null){
-		// render the model like this:
-		//$model = $this->model('Test');
-		//$posts = $model->displayPosts();	
-		//or directly with the autoloader.
-		// the fetchAll method return an object array with DB data.
-		
 		$posts = Post::all();
 		$pages = Page::all();
-		$users = Users::fetchUsers('users',0);
+		$users = Users::all();
 		$views = ['actions' => 'shared/manage-content.php'];
 		if(!empty($_POST)) {
 			$this->UserActions($_POST['dbt']);

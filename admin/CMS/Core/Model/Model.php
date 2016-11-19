@@ -20,6 +20,8 @@ abstract class Model
     protected $database;
 
     protected $connection;
+
+    protected $sqlError;
     /**
      * Holds the Primary Key of the related table
      * Default set to 'id'. Change in extending class if needed.
@@ -203,7 +205,7 @@ abstract class Model
                 return true;
             }
         } catch(\PDOException $e){
-            echo $e->getMessage();
+            $this->sqlError = $e->getMessage();
             return false;
         }
     }
