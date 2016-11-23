@@ -23,10 +23,10 @@
                         </tr>
                         <?php foreach($products as $product){ ?>
                             <tr>
-                                <td class="td-title"><a href="<?= ADMIN.'products/info/'.$product->getID().'/'.$product->getName(); ?>"><?= $product->getName(); ?></a></td>
+                                <td class="td-title"><a href="<?= ADMIN.'products/info/'.$product->product_id.'/'.$product->name; ?>"><?= $product->name; ?></a></td>
                                 <td class="td-author"><?= $product->total();?></td>
                                 <td class="td-category">
-                                    <form class="backend-form" method="post" action="<?= ADMIN."cart/update/".$product->getID();?>">
+                                    <form class="backend-form" method="post" action="<?= ADMIN."cart/update/".$product->product_id;?>">
                                         <select name="quantity">
                                             <?php
                                             for($i = 0; $i < $product->maxStock()+1; $i++){
@@ -42,7 +42,7 @@
                                     </form>
                                 </td>
                                 <td class="td-category"><?= $product->productTotal(); ?></td>
-                                <td class="td-btn"><p><input type="checkbox" name="checkbox[]" value="<?= $product->getID(); ?>"/></p></td>
+                                <td class="td-btn"><p><input type="checkbox" name="checkbox[]" value="<?= $product->product_id; ?>"/></p></td>
                             </tr>
                         <?php } ?>
 

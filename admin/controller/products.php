@@ -115,7 +115,7 @@ class Products extends Controller
             File::downloadFiles();
         }
 
-        $product = Product::fetchSingle($params[0]);
+        $product = Product::Single($params[0]);
         $this->view(
             'Product ' . $params[1],
             ['products/view-product.php'],

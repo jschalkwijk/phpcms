@@ -44,14 +44,14 @@ class Cart extends Controller
         $quantity = trim((int)$_POST['quantity']);
 
         // TO DO: create exists function to only check if it exists.
-        $product = Product::fetchSingle($id);
+        $product = Product::single($id);
 
         if (!$product) {
             header('Location: ' . ADMIN . 'cart');
         }
 
         try {
-            $this->basket->add($product, $quantity);
+            $this->basket->add($product[0], $quantity);
             header('Location: ' . ADMIN . 'cart');
         } catch (QuantityExc $e) {
             echo "Sorry, we don't have more in stock!";
@@ -61,12 +61,12 @@ class Cart extends Controller
 
     public function update($params = null)
     {
-        $dbc = new DBC;
         $id = $params[0];
         $quantity = trim((int)$_POST['quantity']);
-        $product = Product::fetchSingle($id);
+        echo $quantity;
+        $product = Product::single($id);
 
-        $this->basket->update($product, $quantity);
+        $this->basket->update($product[0], $quantity);
         header('Location: ' . ADMIN . 'cart');
     }
 }

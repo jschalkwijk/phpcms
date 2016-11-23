@@ -54,6 +54,14 @@ class Product extends Model {
 		$this->savings = $this->price * $percentage;
 	}
 
+    public function getQuantity()
+    {
+        return $this->quantity;
+    }
+    public function setQuantity($value)
+    {
+        $this->quantity = $value;
+    }
 	public function total(){
 		return $this->price + $this->getTax();
 	}
@@ -73,16 +81,9 @@ class Product extends Model {
 
 		foreach($query->fetchAll() as $row){
 			$product = new Product(
-				$row['name'],
-				$row['category'],
-				$row['description'],
-				$row['price'],
-				$row['quantity'],
-				$row['img_path'],
-				$row['album_id'],
-				$row['approved']
+				$row
 			);
-			$product->setID($row['product_id']);
+			$product->product_id = $row['product_id'];
 			$products[] = $product;
 		}
 		$db->close();

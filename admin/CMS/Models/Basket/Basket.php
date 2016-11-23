@@ -41,12 +41,11 @@ class Basket
         // if the quantity is set to 0 remove the product from the basket session
         if ($quantity == 0) {
             $this->remove($product);
-
             return;
         }
         // set basket session to desired quantity $_SESSION['default']['10',[ 'product_id' => 10, 'quantity' => 3,]]
-        $this->storage->set($product->getID(),[
-            'product_id' => (int) $product->getID(),
+        $this->storage->set($product->product_id,[
+            'product_id' => (int) $product->product_id,
             'quantity' => (int) $quantity,
         ]);
     }
@@ -54,19 +53,19 @@ class Basket
     public function remove(Product $product)
     {
         // remove item from the basket session
-        $this->storage->unsetIndex($product->getID());
+        $this->storage->unsetIndex($product->product_id);
     }
 
     public function has(Product $product)
     {
         // Check if the product is already in the basket.
-        return $this->storage->exists($product->getID());
+        return $this->storage->exists($product->product_id);
     }
 
     public function get(Product $product)
     {
         // get a product from the basket session by ID
-        return $this->storage->get($product->getID());
+        return $this->storage->get($product->product_id);
     }
 
     public function clear() {
