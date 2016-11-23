@@ -190,30 +190,32 @@ class Users extends Model{
             echo $e->getMessage();
             exit();
         }
-
+        $this->patch();
 		if($query->rowCount() === 0 || ($query->rowCount() === 1 && ($username === $old_username))){
 			$new_password = trim($password);
 			$new_password_again = trim($password_again);
 
 			// save edited object to database
-			if ($_POST['confirm'] == 'Yes') {
-				foreach($this->request as $k => $v) {
-					if(in_array($k,$this->encrypted)) {
-						$this->request[$k] = $this->encrypt($v);
-					}
-				}
+			if ($this->request['confirm'] == 'Yes') {
+                foreach ($this->request as $k => $v) {
+                    if (in_array($k, $this->encrypted)) {
+                        $this->request[$k] = $this->encrypt($v);
+                    }
+                }
 
-                $this->patch();
+                $this->savePatch();
+                if (!empty($new_password) && !empty($new_password_again)) {
+                    if ($new_password === $new_password_again) {
+                        $hash = password_hash($new_password, PASSWORD_BCRYPT);
+                        $this->patch(['password' => $hash]);
+                        $this->savePatch();
+                        $messages[] = 'You password has been successfully changed.';
+                    } else {
+                        $errors[] = 'Passwords do not match, please retype your password correctly.';
+                        $output_form = true;
+                    }
+                }
 
-				if(!empty($new_password) && !empty($new_password_again) )
-					if($new_password === $new_password_again) {
-						$hash = password_hash($new_password, PASSWORD_BCRYPT);
-						$this->patch(['password' => $hash]);
-						$messages[] = 'You password has been successfully changed.';
-					} else {
-						$errors[] = 'Passwords do not match, please retype your password correctly.';
-						$output_form = true;
-					}
 				// Confirm success with the user
 				$messages[] =  '<p>The user <strong>' . $this->username. '</strong> was successfully edited.';
 			} else {

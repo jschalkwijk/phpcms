@@ -14,16 +14,15 @@ tinymce.init({
 
 <?php
 
-	$product = $data['product'];
+	$products = $data['product'];
 
-	(isset($params[0]) && isset($params[1])) ? $action = ADMIN.'products/edit-product/'.$product->getID().'/'.$product->getName() : $action = ADMIN.'products/add-product';
 	(isset($data['output_form'])) ? $output_form = $data['output_form'] : $output_form = true;
 ?>
 <div class="container">
 	<div class="row">
 		<div class="col-sm-6 col-md-6">
 		<?php
-			if (isset($_POST['submit_product'])) {
+			if (isset($_POST['submit'])) {
 				echo '<div class="container medium">';
 					echo implode(",",$data['errors']);
 					echo implode(",",$data['messages']);
@@ -35,33 +34,39 @@ tinymce.init({
 	<div class="row">
 		<div class="col-sm-6 col-md-6">
 			<?php
-				if ($output_form){ ?>
-				<form id="addpost-form" action="<?= $action; ?>" method="post">
-					<input type="hidden" name="id" value="<?= $product->getID();?>"/>
-					<input type="text" name="name" placeholder="Name" value="<?= $product->getName(); ?>" required="required" title="He daar, ik mis nog wat informatie!."/><br />
-					<input type="number" name="price" placeholder="Price" pattern="(^\d+(\.|\,)\d{2}$)" min="0" value="<?= $product->getPrice(); ?>">
-					<input type="number" name="quantity" placeholder="Quantity between 0 and 1000" min="0" max="1000" value="<?= $product->getQuantity(); ?>" required="required" title="He daar, ik mis nog wat informatie!."/>
+				if ($output_form){
+                    foreach($products as $product) {
+                        (isset($params[0]) && isset($params[1])) ? $action = ADMIN.'products/edit-product/'.$product->product_id.'/'.$product->name : $action = ADMIN.'products/add-product';
+            ?>
+                        <form id="addpost-form" action="<?= $action; ?>" method="post">
+                            <input type="hidden" name="id" value="<?= $product->product_id;?>"/>
+                            <input type="text" name="name" placeholder="Name" value="<?= $product->name; ?>"/><br />
+                            <input type="number" name="price" placeholder="Price" pattern="(^\d+(\.|\,)\d{2}$)" min="0" value="<?= $product->price; ?>">
+                            <input type="number" name="quantity" placeholder="Quantity between 0 and 1000" min="0" max="1000" value="<?= $product->quantity; ?>"/>
 
-					<select id="categories" name="cat_name">
-						<option name="none" value="None">None</option>'
-						<?php $category = Categories::getSelected($product->getCategory(),'product'); ?>
-					</select>
+                            <select id="categories" name="category_id">
+                                <option name="none" value="None">None</option>'
+                                <?php $category = Categories::getSelected($product->category_id,'product'); ?>
+                            </select>
 
-					<input type="text" name="category" placeholder="Category"/><br />
-					<input type="hidden" name="cat_type" value="product"/><br />
-					<textarea type="text" name="description" placeholder="Description" value="<?php  echo $product->getDescription();?>"><?= $product->getDescription(); ?></textarea><br />
+                            <input type="text" name="category" placeholder="Category"/><br />
+                            <input type="hidden" name="cat_type" value="product"/><br />
+                            <textarea type="text" name="description" placeholder="Description" value="<?php  echo $product->description;?>"><?= $product->description; ?></textarea><br />
 
-					<?php if (isset($params[0]) && isset($params[1])) { ?>
-						<p>Are you sure you want to edit the following product?</p>
-						<input type="radio" name="confirm" value="Yes" /> Yes
-						<input type="radio" name="confirm" value="No" checked="checked" /> No <br />
-					<?php } ?>
+                            <?php if (isset($params[0]) && isset($params[1])) { ?>
+                                <p>Are you sure you want to edit the following product?</p>
+                                <input type="radio" name="confirm" value="Yes" /> Yes
+                                <input type="radio" name="confirm" value="No" checked="checked" /> No <br />
+                            <?php } ?>
 
-					<button type="submit" name="submit_product">Submit</button>
-				</form>
-			</div>
+                            <button type="submit" name="submit">Submit</button>
+                        </form>
+                    <?php }
+                } ?>
+
+        </div>
 		<div class="col-sm-6 col-md-6">
-			<?php }
+			<?php
 				require_once('view/shared/include-files-tinymce.php');
 			?>
 		</div>

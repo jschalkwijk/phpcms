@@ -12,13 +12,13 @@ class Products extends Controller
     public function index($params = null)
     {
         $this->UserActions('products');
-        $products = Product::fetchAll('products', 0);
+        $products = Product::All(0);
         $this->view(
             'Products',
             ['products/products.php'],
             $params,
             [
-                'products' => $products['products'],
+                'products' => $products,
                 'trashed' => 0,
                 'js' => [JS . 'checkAll.js']
             ]
@@ -42,54 +42,57 @@ class Products extends Controller
 
     public function addProduct($params = null)
     {
-        if (isset($_POST['submit_product'])) {
-            $product = new Product($_POST['name'], $_POST['category'], $_POST['description'], $_POST['price'], $_POST['quantity'], null);
-            $add = $product->addProduct();
+        if (!isset($_POST['submit'])) {
+            $product = new Product();
+            $this->view(
+                'Add Product',
+                ['products/add-edit-product.php'],
+                $params,
+                ['product' => [$product]]
+            );
+        } else {
+            $product = new Product($_POST);
+            $add = $product->add();
             $this->view(
                 'Add Product',
                 ['products/add-edit-product.php'],
                 $params,
                 [
-                    'product' => $product,
+                    'product' => [$product],
                     'output_form' => $add['output_form'],
                     'errors' => $add['errors'],
                     'messages' => $add['messages']
                 ]
-            );
-        } else {
-            $product = new Product(null, null, null, null, null, null);
-            $this->view(
-                'Add Product',
-                ['products/add-edit-product.php'],
-                $params,
-                ['product' => $product]
             );
         }
     }
 
     public function editProduct($params = null)
     {
-        if (isset($_POST['submit_product'])) {
-            $product = new Product($_POST['name'], $_POST['category'], $_POST['description'], $_POST['price'], $_POST['quantity'], null);
-            $edit = $product->addProduct($params[0], $_POST['confirm']);
-            $this->view(
-                'Edit Product',
-                ['products/add-edit-product.php'],
-                $params,
-                [
-                    'product' => $product,
-                    'output_form' => $edit['output_form'],
-                    'errors' => $edit['errors'],
-                    'messages' => $edit['messages']
-                ]
-            );
-        } else {
-            $product = Product::fetchSingle($params[0]);
+        $product = Product::Single($params[0]);
+
+        if (!isset($_POST['submit'])) {
             $this->view(
                 'Edit Product',
                 ['products/add-edit-product.php'],
                 $params,
                 ['product' => $product]
+            );
+        } else {
+            $product = $product[0];
+            $product->request = $_POST;
+            $product->user_id = $_SESSION['user_id'];
+            $edit = $product->edit();
+            $this->view(
+                'Edit Product',
+                ['products/add-edit-product.php'],
+                $params,
+                [
+                    'product' => [$product],
+                    'output_form' => $edit['output_form'],
+                    'errors' => $edit['errors'],
+                    'messages' => $edit['messages']
+                ]
             );
         }
     }

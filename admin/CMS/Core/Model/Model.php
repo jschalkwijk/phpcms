@@ -394,7 +394,10 @@ abstract class Model
                 $this->$key = $value;
             }
         }
+    }
 
+    public function savePatch()
+    {
         $query = $this->update().$this->where([$this->primaryKey => $this->get_id()]);
         return $this->newQuery($query);
     }

@@ -5,66 +5,43 @@ use CMS\Models\DBC\DBC;
 use CMS\Models\File\FileUpload;
 use CMS\Models\File\Folders;
 use CMS\Models\Content\Categories;
+use CMS\Core\Model\Model;
 
-class Product {
+class Product extends Model {
 	// will get the TRAIT actions that the user can perform like edit,delete,approve
-	private $id;
-	private $name;
-	private $category;
-	private $price;
-	private $quantity;
-	private $description;
-	private $discount_price;
-	private $savings;
-	private $tax_percentage = 21;
-	private $tax;
+    protected $primaryKey = "product_id";
+    protected $table = "products";
+
+    protected $relations = [
+        'categories' => 'category_id',
+        'users' => 'user_id'
+    ];
+
+    protected $joins = [
+        'categories' => ['title','description'],
+        'users' => ['username']
+    ];
+
+    protected $allowed = [
+        'name',
+        'description',
+        'category_id',
+        'quantity',
+        'price',
+    ];
+
+    protected $discount_price;
+	protected $savings;
+	protected $tax_percentage = 21;
+	protected $tax;
 	private $total;
-	private $approved;
-	private $img_path;
-	private $album_id;
-	private $file_path = 'files/products/';
-	private $thumb_path = 'files/thumbs/products/';
+
+	protected $file_path = 'files/products/';
+	protected $thumb_path = 'files/thumbs/products/';
 	protected $maxStock;
 
-	public function __construct($name,$category,$description,$price,$quantity,$img_path,$album_id = null,$approved = null){
-		$this->name = $name;
-		$this->category = $category;
-		$this->price = $price;
-		$this->description = $description;
-		$this->quantity = $quantity;
-		$this->img_path = $img_path;
-		$this->album_id = $album_id;
-		$this->approved = $approved;
-	}
-
-	public function setID($id){
-		$this->id = (int)$id;
-	}
-	public function getID(){
-		return $this->id;
-	}
-	public function getName(){
-		return $this->name;
-	}
-
-	public function getCategory(){
-		return $this->category;
-	}
-
-	public function getPrice(){
-		return $this->price;
-	}
-
-	public function getQuantity(){
-		return $this->quantity;
-	}
-
-	public function setQuantity($num){
-		$this->quantity = $num;
-	}
-
-	public function getDescription(){
-		return $this->description;
+	public function get_id(){
+		return $this->product_id;
 	}
 
 	public function getTax(){
@@ -72,69 +49,13 @@ class Product {
 		return $this->tax;
 	}
 
-	public function getApproved(){
-		return $this->approved;
-	}
-
-	public function getTrashed(){
-		return $this->approved;
-	}
-
-	public function getProductImg(){
-		return $this->img_path;
-	}
-
-	public function getAlbumID(){
-		return $this->album_id;
-	}
-
 	protected function discount($percentage){
 		$this->discount_price = ($this->price / 100) * $percentage;
 		$this->savings = $this->price * $percentage;
 	}
 
-	public function getDiscount(){
-		return $this->discount_price;
-	}
-
-	public function getSavings(){
-		return $this->savings;
-	}
-
 	public function total(){
 		return $this->price + $this->getTax();
-	}
-
-	public static function fetchAll($dbt,$trashed){
-		$db = new DBC;
-		$dbc = $db->connect();
-
-		try {
-            $query = $dbc->prepare("SELECT ".$dbt.".*, categories.title as category FROM ".$dbt." LEFT JOIN categories ON ".$dbt.".category_id = categories.category_id  WHERE ".$dbt.".trashed = ? ORDER BY product_id DESC");
-            $query->execute([$trashed]);
-			$data = $query->fetchAll();
-        } catch (\PDOException $e){
-            echo $e->getMessage();
-        }
-
-		$products = array();
-
-		foreach ($data as $row){
-			$product = new Product(
-				$row['name'],
-				$row['category'],
-				$row['description'],
-				$row['price'],
-				$row['quantity'],
-				$row['img_path'],
-				$row['album_id'],
-				$row['approved']
-			);
-			$product->setID($row['product_id']);
-			$products[] = $product;
-		}
-		$db->close();
-		return ['products' => $products];
 	}
 
 	public static function fetchAllByID($ids){
@@ -167,37 +88,70 @@ class Product {
 		$db->close();
 		return $products;
 	}
+    public function edit(){
+        $output_form = true;
+        $errors = [];
+        $messages = [];
 
-	public static function fetchSingle($id){
-		$db = new DBC;
-		$dbc = $db->connect();
+        # create product category, set type of category group
+        # create product category file folder.
+        if(!empty($this->request['category'])) {
+            $category = Categories::addCategory($this->request['category'],'product');
+            $category_name = $category['category_name'];
+            $category_id = $category['category_id'];
+            if(!file_exists($this->file_path.$category_name)) {
+                $this->file_path = $this->file_path.$category_name.'/';
+                $this->thumb_path = $this->thumb_path.$category_name.'/';
+                Folders::auto_create_folder($category_name,$this->file_path,$this->thumb_path,'Products');
+            }
+        } else {
+            $this->category_id = trim((int)$this->request['category_id']);
+            try {
+                $db = new DBC;
+                $dbc = $db->connect();
+                $query = $dbc->prepare("SELECT title FROM categories WHERE category_id = ?");
+                $query->execute([$this->category_id]);
+                $row = $query->fetch();
+                $category_name = $row['title'];
+                $this->file_path = $this->file_path.$category_name.'/';
+                $this->thumb_path = $this->thumb_path.$category_name.'/';
+                $db->close();
+            } catch (\PDOException $e){
+                echo $e->getMessage();
+            }
 
-		try {
-            $query = $dbc->prepare("SELECT products.*, categories.title as category FROM products LEFT JOIN categories ON products.category_id = categories.category_id WHERE product_id = ? ORDER BY product_id DESC");
-            $query->execute([$id]);
-            $data = $query->fetchAll();
-        } catch (\PDOException $e){
-            echo $e->getMessage();
+            // CATEGORIE ID WORDT DOORGEGEVEN MAAR IK MOET HET ALBUYM ID HEBBEN VAN DIE CATEGORIE..
+            echo $this->file_path;
+            echo $this->thumb_path;
         }
 
-		foreach ($data as $row){
-			$product = new Product(
-				$row['name'],
-				$row['category'],
-				$row['description'],
-				$row['price'],
-				$row['quantity'],
-				$row['img_path'],
-				$row['album_id'],
-				$row['approved']
-			);
-			$product->setID($row['product_id']);
-		}
-		$db->close();
-		return $product;
-	}
+        /*
+                if(isset($_POST['cat_name'])) {
+                    $cat_name = mysqli_real_escape_string($dbc->connect(),trim($_POST['cat_name']));
+                    ($cat_name == 'None')? $category_id = mysqli_real_escape_string($dbc->connect(),trim($_POST['category'])) : $category_id = mysqli_real_escape_string($dbc->connect(),trim($cat_name));
+                }
+        */
+        //create new product file folder inside Products folder.
+//        if(!file_exists($this->file_path.$this->name)) {
+//            $album_id = Folders::auto_create_folder($this->name,$this->file_path.$this->name,$this->thumb_path.$this->name,'Products',$category_name);
+//        }
 
-	public static function addProductIMG($file_dest,$thumb_dest,$params){
+        $this->hidden['user_id'] = $this->user_id;
+        print_r($this->request);
+        $this->patch();
+        if(!empty($this->name) && !empty($this->description) && !empty($this->category_id)) {
+            $this->savePatch();
+            $messages[] = 'Your post has been added/edited.<br />';
+            $output_form = true;
+        } else {
+            $errors[] = "You forgot to fill in one or more of the required fields (title,content).<br />";
+            $output_form = true;
+        };
+
+        return ['output_form' => $output_form,'messages' => $messages, 'errors' => $errors];
+    }
+
+    public static function addProductIMG($file_dest,$thumb_dest,$params){
 		$db = new DBC;
 		$dbc = $db->connect();
 
@@ -214,24 +168,10 @@ class Product {
 		$db->close();
 	}
 
-	public function addProduct($id = null,$confirm = null){
-		$db = new DBC;
-		$dbc = $db->connect();
-
+	public function add(){
 		$output_form = true;
 		$errors = [];
 		$messages = [];
-
-		/*
-		 *	If we edit an existing product using this function we pass the id and the objects ID form the GET params through the controller.
-		 * 	Also a new object is created and we need to set the ID again to update the right product in the DB.
-		 *  else a new product will be created. See queries below.
-		*/
-
-		if($id != null){
-			$this->setID($id);
-			$id = trim((int)$this->getID());
-		};
 
 		$name =  trim($this->name);
 		$category =  trim($this->category);
@@ -244,21 +184,24 @@ class Product {
 		if(!empty($category)) {
 			$category = Categories::addCategory($category,'product');
 			$category_name = $category['category_name'];
-			$category_id = $category['category_id'];
+			$this->category_id = $category['category_id'];
+            $this->request['category_id'] = $this->category_id;
 			if(!file_exists($this->file_path.$category_name)) {
 				$this->file_path = $this->file_path.$category_name.'/';
 				$this->thumb_path = $this->thumb_path.$category_name.'/';
 				Folders::auto_create_folder($category_name,$this->file_path,$this->thumb_path,'Products');
 			}
 		} else {
-			$category_id = trim((int)$_POST['cat_name']);
-			try {			
+			try {
+                $db = new DBC;
+                $dbc = $db->connect();
                 $query = $dbc->prepare("SELECT title FROM categories WHERE category_id = ?");
-                $query->execute([$category_id]);
+                $query->execute([$this->category_id]);
 				$row = $query->fetch();
 				$category_name = $row['title'];
 				$this->file_path = $this->file_path.$category_name.'/';
 				$this->thumb_path = $this->thumb_path.$category_name.'/';
+                $db->close();
             } catch (\PDOException $e){
                 echo $e->getMessage();
             }
@@ -277,34 +220,17 @@ class Product {
 		//create new product file folder inside Products folder.
 		if(!file_exists($this->file_path.$name)) {
 			$album_id = Folders::auto_create_folder($name,$this->file_path.$name,$this->thumb_path.$name,'Products',$category_name);
-		}
+		    $this->request['album_id'] = $album_id;
+        }
 
 		if(!empty($name) && !empty($price)){
-
-			if($confirm == 'Yes'){
-				try {
-                    $query = $dbc->prepare("UPDATE products SET name = ?, category_id = ?, description = ?, price = ?, quantity = ? WHERE product_id = ?");
-					$query->execute([$name,$category_id,$description,$price,$quantity,$id]);
-                } catch (\PDOException $e){
-                    echo $e->getMessage();
-                }
-
-			} else {
-                try {
-				    $query = $dbc->prepare("INSERT into products (name,category_id,description,price,album_id,quantity) VALUES(?,?,?,?,?,?)");
-					$query->execute([$name,$category_id,$description,$price,$album_id,$quantity]);
-                } catch (\PDOException $e){
-                    echo $e->getMessage();
-                }
-			}
-
+            $this->hidden['user_id'] = $_SESSION['user_id'];
+            $this->save();
 			$output_form = false;
-			$messages[] = "Product {$name} successfully added/edited.";
+			$messages[] = "Product {$name} successfully added.";
 		} else {
 			$errors[] = "You forgot to fill in one or more of the required fields (name,price,quantity).";
 		}
-
-		$db->close();
 
 		return ['output_form' => $output_form,'messages' => $messages, 'errors' => $errors];
 	}

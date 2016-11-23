@@ -86,8 +86,10 @@ class Post extends Model {
 		}
 		$this->hidden['user_id'] = $this->user_id;
 		print_r($this->request);
+        //update modelbut do not save it yet before check.
+        $this->patch();
 		if(!empty($this->title) && !empty($this->content) && !empty($this->category_id)) {
-			$this->patch();
+            $this->savePatch();
 			$messages[] = 'Your post has been added/edited.<br />';
 			$output_form = true;
 		} else {
