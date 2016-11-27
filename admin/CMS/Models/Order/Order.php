@@ -107,7 +107,7 @@ class Order{
         $queryRows = [];
         //Create rows for multiple insert query
         foreach($products as $product) {
-            $product_id = $product->getID();
+            $product_id = $product->product_id;
             $quantity = $product->getQuantity();
             $queryRows[] = "(".$order_id.","."$product_id".",".$quantity.")";
         }

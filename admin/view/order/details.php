@@ -37,7 +37,7 @@ if(!empty($data['customer'])) {
         <?php foreach($this->basket->all() as $product){ ?>
             <tr>
                 <td class="td-title">
-                    <a href="<?= ADMIN.'products/info/'.$product->getID().'/'.$product->getName(); ?>"><?= $product->getName(); ?></a>
+                    <a href="<?= ADMIN.'products/info/'.$product->product_id.'/'.$product->name; ?>"><?= $product->name; ?></a>
                 </td>
                 <td class="td-category">
                     <span><?= $product->getQuantity(); ?></span>
