@@ -25,13 +25,13 @@
                         </tr>
                         <?php foreach ($data['contacts'] as $contact) { ?>
                             <tr>
-                                <td><?= '<a href="' . ADMIN . 'contacts/info/' . $contact->getID() . '/' . $contact->getFirstName() . '">' . $contact->getFirstName() . '</a>' ?></td>
-                                <td><?= $contact->getLastName(); ?></td>
-                                <td><?= $contact->getPhone1(); ?></td>
-                                <td><?= $contact->getMail1(); ?></td>
-                                <td><?= '<a href="' . ADMIN . 'contacts/edit-contact/' . $contact->getID() . '/' . $contact->getFirstName() . '">Edit</a>' ?></td>
+                                <td><?= '<a href="' . ADMIN . 'contacts/info/' . $contact->contact_id. '/' . $contact->firstName() . '">' . $contact->firstName() . '</a>' ?></td>
+                                <td><?= $contact->lastName(); ?></td>
+                                <td><?= $contact->phone1(); ?></td>
+                                <td><?= $contact->mail1(); ?></td>
+                                <td><?= '<a href="' . ADMIN . 'contacts/edit-contact/' . $contact->contact_id . '/' . $contact->firstName() . '">Edit</a>' ?></td>
                                 <td class="td-btn"><p><input type="checkbox" name="checkbox[]"
-                                                             value="<?= $contact->getID(); ?>"/></p></td>
+                                                             value="<?= $contact->contact_id; ?>"/></p></td>
                             </tr>
                         <?php } ?>
                         </tbody>
