@@ -11,6 +11,12 @@ use PDOException;
  * Het opnieuw instellen van de model variables n een apparte functie? of alleen in patch? of alleen in update?
  * */
 
+/*
+ * Relations:
+ * Zal ik dit blijven doen met Join statements, of ga ik voor een relatie een apparte query
+ * uitvoeren die meteen een heel object teruggeeft en die in bihvoorbeeld een post object zet.
+ * alles van user met id 26 die hoort bij de betreffende post.
+ * */
 /**
  * Class Model
  * @package CMS\Core\Model
@@ -142,6 +148,13 @@ abstract class Model
         $query = $model->select().$joins['as'].$model->from().$joins['on'].$model->where(['trashed' => $trashed]).$model->orderBy($model->primaryKey,'DESC');
         //echo $query;
         return $model->newQuery($query);
+
+//        $model = new static;
+//        $model->connection = $model->database->connect();
+//        $joins = $model->join($joins);
+//        $model->select()->join()->where(['trashed' => $trashed]);
+//        //echo $query;
+//        return $model->newQuery($model->query);
     }
     /**
      * Returns all class objects linked to the called model.
@@ -240,6 +253,8 @@ abstract class Model
     public function select($columns = ['*'])
     {
         $this->statement = "SELECT";
+//        $this->query ="SELECT ".$this->table.".".implode($columns);
+//        return $this;
         return "SELECT ".$this->table.".".implode($columns);
     }
 

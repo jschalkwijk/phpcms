@@ -86,7 +86,7 @@ class Post extends Model {
 		}
 		$this->hidden['user_id'] = $this->user_id;
 		print_r($this->request);
-        //update modelbut do not save it yet before check.
+        //update model but do not save it yet before check.
         $this->patch();
 		if(!empty($this->title) && !empty($this->content) && !empty($this->category_id)) {
             $this->savePatch();
