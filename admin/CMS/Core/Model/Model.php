@@ -186,8 +186,10 @@ abstract class Model
     public function newQuery($query)
     {
         $this->query = $query;
-        echo 'MODEL LINE 168: Query = '.$query.'<br>';
-        echo 'Values Array: ';
+        echo 'Query = '.$query.'<br>';
+        echo 'Values Array: <br>';
+        print_r($this->values);
+        echo 'Request Array: <br>';
         print_r($this->values);
         try {
             // the connection has to  be made elsewhere in the child class
@@ -212,7 +214,7 @@ abstract class Model
                 $query->setFetchMode(PDO::FETCH_ASSOC);
                 $results = $query->fetchAll();
                 $this->database->close();
-                return $this->fetch($results);
+                return $this->fetchObjects($results);
             } else {
                 $this->database->close();
                 return true;
@@ -230,7 +232,7 @@ abstract class Model
      * @return Object Array
      *
      */
-    public function fetch($results)
+    public function fetchObjects($results)
     {
         $data = [];
         foreach($results as $row) {
@@ -255,7 +257,7 @@ abstract class Model
         $this->statement = "SELECT";
 //        $this->query ="SELECT ".$this->table.".".implode($columns);
 //        return $this;
-        return "SELECT ".$this->table.".".implode($columns);
+        return "SELECT {$this->table}.".implode($columns);
     }
 
     /**
@@ -266,7 +268,7 @@ abstract class Model
      */
     public function from()
     {
-        return " FROM ".$this->table." ";
+        return " FROM {$this->table} ";
     }
 
     /**
@@ -279,14 +281,40 @@ abstract class Model
     public function where($columns = [])
     {
         $string = array();
-        foreach($columns as $column => $value){
+        foreach ($columns as $column => $value) {
+            // if the length is 1 and the value is an array we have to call WhereIN because
+            // the system has provided an Array. We use this for the Model functions so we don't
+            // have to make two distinct update queries for example.
+            // if ypu create your own query inside a controller you can use the whereIn directly.
+            if(count($columns) == 1 && is_array($value)) {
+                return $this->whereIN($columns);
+            }
             // Set column to ? for prepared statement
-            $string[] = $this->table.".".$column." = ?";
+            $string[] = $this->table . "." . $column . " = ?";
             // Set values array for PDO prepared statement
             $this->values[] = $value;
         }
         $where = implode(' AND ', $string);
-        return " WHERE ".$where;
+        return " WHERE {$where}";
+}
+
+    /**
+     * @param array $columns
+     * @return string
+     */
+    public function whereIN($columns = [])
+    {
+        $string = "";
+        foreach($columns as $column => $multiple) {
+            $placeholders = substr(str_repeat("?, ", count($multiple)), 0, -2);
+            // Set column to ? for prepared statement
+            $string = $this->table . "." . $column . " IN (" . $placeholders . ")";
+            // Set values array for PDO prepared statement
+            foreach ($multiple as $value) {
+                $this->values[] = $value;
+            }
+        }
+        return " WHERE ".$string;
     }
     /**
      * Returns Order By part of an sql statement.
@@ -298,7 +326,7 @@ abstract class Model
      */
     public function orderBy($column = '',$order = '')
     {
-        return " ORDER BY ".$column." ".$order;
+        return " ORDER BY {$column} {$order}";
     }
     /**
      * Returns array with the joined relations from the Model.
@@ -327,7 +355,7 @@ abstract class Model
                 foreach($columns as $name) {
                     $as .= ", $table.$name AS $table" . "_" . "$name";
                 }
-                $on .= " JOIN $table ON " . $this->table . ".$foreignKey  = $table.$foreignKey ";
+                $on .= " JOIN {$table} ON {$this->table}.{$foreignKey}  = {$table}.{$foreignKey} ";
             }
         }
         return [
@@ -374,7 +402,7 @@ abstract class Model
             $string[] = $column." = ?";
         }
         $set = implode(',', $string);
-        return "UPDATE $this->table SET ".$set;
+        return "UPDATE {$this->table} SET {$set}";
     }
 
     /**
@@ -429,7 +457,7 @@ abstract class Model
         $placeholders = [];
         $columns = [];
 
-        if($attributes!= null){
+        if($attributes != null){
             $this->request = $attributes;
             $this->values = [];
         }
