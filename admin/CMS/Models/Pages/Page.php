@@ -1,10 +1,14 @@
 <?php
-namespace CMS\Models\Content\Pages;
+namespace CMS\Models\Pages;
 
 use CMS\Models\DBC\DBC;
 use CMS\Core\Model\Model;
 
 class Page extends Model{
+    function __construct() {
+        parent::__construct();
+        print "In SubClass constructor\n";
+    }
 	protected $primaryKey = 'page_id';
 
 	public $table = 'pages';
@@ -20,7 +24,7 @@ class Page extends Model{
 	];
 
 	protected $allowed = [
-		'title','description','content','path','parent_id',
+		'title','description','content','path','parent_id','trashed','approved'
 	];
 
 //	protected $hidden = [

@@ -34,6 +34,8 @@ class Users extends Model{
 		'rights',
 		'album_id',
 		'password',
+        'trashed',
+        'approved'
 	];
 
 	protected $encrypted = [

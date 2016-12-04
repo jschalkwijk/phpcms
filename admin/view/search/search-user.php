@@ -1,5 +1,5 @@
 <?php
-	use CMS\Models\Content\Posts\Post;
+	use CMS\Models\Posts\Post;
 	use CMS\Models\Users\UserWriter;
 ?>
 <form class="search"action="<?= ADMIN."search";?>" method="post">

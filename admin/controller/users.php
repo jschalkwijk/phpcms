@@ -9,8 +9,8 @@ class Users extends Controller {
 	use \CMS\Models\Actions\UserActions;
 
 	public function index($params = null){
-		$users = User::all();
-		$this->UserActions('users');
+		$users = User::all(0);
+		$this->UserActions($users[0]);
 		$this->view(
 			'Users',
 			['users/users.php'],
@@ -48,8 +48,8 @@ class Users extends Controller {
 		}
 	}
 	public function DeletedUsers($params = null){
-		$users = User::single(1);
-		$this->UserActions('users');
+		$users = User::all(1);
+        $this->UserActions($users[0]);
 		$this->view(
 			'Deleted Users',
 			['users/users.php'],

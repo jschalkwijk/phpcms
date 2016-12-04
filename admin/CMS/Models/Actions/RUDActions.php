@@ -1,50 +1,47 @@
 <?php
 namespace CMS\Models\Actions;
 
+use CMS\Core\Model\Model;
 use CMS\Models\DBC\DBC;
-use CMS\Models\Content\Pages\Page;
+use CMS\Models\Pages\Page;
 // This are the  update,delete and approve functions which regards post,pages, users and products.
 // these will only remove rows, not files etc.
 // Import the UserActions trait inside the controller and enter the database name insid ethe function
 // to alter the DB rows.  UserActions handles the Post requests and calls these functions
 class RUDActions{
 
-	public static function trash_selected($dbt,$checkbox){
-		RUDActions::update($dbt,$checkbox, "trashed",1);
+	public static function trash_selected($model,$checkbox){
+		RUDActions::update($model,$checkbox, ["trashed" => 1]);
 	}
-	public static function approve_selected($dbt,$checkbox){
-		RUDActions::update($dbt,$checkbox, "approved",1);
+	public static function approve_selected($model,$checkbox){
+		RUDActions::update($model,$checkbox, ["approved" => 1]);
 	}
-	public static function restore_selected($dbt,$checkbox){
-		RUDActions::update($dbt,$checkbox, "trashed",0);
+	public static function restore_selected($model,$checkbox){
+		RUDActions::update($model,$checkbox, ["trashed" => 0]);
 	}
-	public static function hide_selected($dbt,$checkbox){
-		RUDActions::update($dbt,$checkbox, "approved",0);
+	public static function hide_selected($model,$checkbox){
+		RUDActions::update($model,$checkbox, ["approved" => 0]);
 	}
 
-	protected static function update($dbt,$checkbox,$row,$value){
-		$db = new DBC;
-		$dbc = $db->connect();
-		$id_row = substr($dbt, 0, -1).'_id';
-		$multiple = implode(",",$checkbox);
-		try{
-            $dbc->query("UPDATE ".$dbt." SET ".$row." = ".$value." WHERE ".$id_row." IN({$multiple})");
-        } catch (\PDOException $e){
-            echo $e->getMessage();
+	protected static function update(Model $model,$checkbox,$columns){
+        $primaryKey = substr($model->table, 0, -1).'_id';
+        if($model->table == 'categories'){
+            $primaryKey = 'category_id';
         }
-        $db->close();
-		header('Location: '.ADMIN.$dbt);
+        $query = $model->update($columns).$model->whereIN([$primaryKey => $checkbox]);
+        $model->newQuery($query);
+//		header('Location: '.ADMIN.$model->table);
 	}
-	public static function delete_selected($dbt,$checkbox){
+	public static function delete_selected($model,$checkbox){
 		$db = new DBC;
 		$dbc = $db->connect();
 
-		$id_row = substr($dbt, 0, -1).'_id';
+		$id_row = substr($model->table, 0, -1).'_id';
 		$multiple = implode(",",$checkbox);
 		$flag = false;
 		$messages = [];
 
-		if($dbt === "pages"){
+		if($model->table === "pages"){
 			$deleted = Page::deletePage($multiple);
 			$flag = $deleted['flag'];
 			if(isset($deleted['message']) || $deleted['error']) { $messages[] = $deleted['message']; }
@@ -54,7 +51,7 @@ class RUDActions{
 
 		if($flag) {
             try{
-			    $dbc->query("DELETE FROM " . $dbt . " WHERE " . $id_row . " IN({$multiple})");
+			    $dbc->query("DELETE FROM " . $model->table . " WHERE " . $id_row . " IN({$multiple})");
             } catch (\PDOException $e){
                 echo $e->getMessage();
             }
@@ -65,7 +62,7 @@ class RUDActions{
 		if(!empty($messages)) {
 			return ['messages' => $messages];
 		} else {
-			header('Location: ' . ADMIN . $dbt . '/deleted-' . $dbt);
+			header('Location: ' . ADMIN . $model->table . '/deleted-' . $model->table);
 		}
 	}
 

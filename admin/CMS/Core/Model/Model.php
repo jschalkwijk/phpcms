@@ -120,7 +120,13 @@ abstract class Model
      */
     function __get($property) {
         $method = "get_$property";
-        if(method_exists($this, $method)) echo $this->$method;
+//        print_r($method);
+        if(method_exists($this, $method)  && is_callable(array($this,$method))) {
+            call_user_func(
+                array($this,$method)
+            );
+//            echo $this->$method;
+        }
     }
 
     /**
@@ -190,7 +196,7 @@ abstract class Model
         echo 'Values Array: <br>';
         print_r($this->values);
         echo 'Request Array: <br>';
-        print_r($this->values);
+        print_r($this->request);
         try {
             // the connection has to  be made elsewhere in the child class
             // we need the connection to be tied to the class function
@@ -471,6 +477,8 @@ abstract class Model
                 $placeholders[] = '?';
                 $columns[] = $column;
                 $this->values[] = $value;
+            } else {
+                echo "<p style='color: red;'>{$column} not set as allowed attribute</p>";
             }
         }
         // Checks if the hidden properties are allowed. Example: current user_id etc.

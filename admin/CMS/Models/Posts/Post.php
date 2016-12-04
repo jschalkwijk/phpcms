@@ -1,12 +1,12 @@
 <?php
-namespace CMS\Models\Content\Posts;
+namespace CMS\Models\Posts;
 
-use CMS\Models\Content\Categories;
+use CMS\Models\Categories as Cat;
 use CMS\Core\Model\Model;
 
 class Post extends Model {
 
-	protected $primaryKey = 'post_id';
+	public $primaryKey = 'post_id';
 
 	public $table = 'posts';
 
@@ -25,6 +25,8 @@ class Post extends Model {
 		'description',
         'content',
 		'category_id',
+        'trashed',
+        'approved'
     ];
 
 //	protected  $hidden = [
@@ -55,21 +57,21 @@ class Post extends Model {
     public function add()
     {
         if(!empty($this->category)) {
-            $category = Categories::addCategory($this->category,'post');
-			$this->category_id = $category['category_id'];
+            $category = new Cat(['title' => $this->category,'type' => $this->cat_type]);
+            $add = $category->add();
 			// add value to the request to be run by the prepareQuery
 			// otherwise it won't be seen added when save() is called.
-			$this->request['category_id'] = $this->category_id;
+			$this->request['category_id'] = $add['category_id'];
         }
 		$this->hidden['user_id'] = $_SESSION['user_id'];
 		print_r($this->request);
-        if(!empty($this->title) && !empty($this->content) && !empty($this->category_id)) {
+        if(!empty($this->title) && !empty($this->content) && (!empty($this->category_id) || !empty($this->category) )) {
 			$this->save();
 			$messages[] = 'Your post has been added/edited.<br />';
 			$output_form = true;
 		} else {
 			$errors[] = "You forgot to fill in one or more of the required fields (title,content).<br />";
-			$output_form = true;
+			$output_form = false;
 		};
 
 		return ['output_form' => $output_form, 'errors' => $errors, 'messages' => $messages];
@@ -78,14 +80,14 @@ class Post extends Model {
 	public function edit()
 	{
 		if(!empty($this->category)) {
-			$category = Categories::addCategory($this->category,'post');
-			$this->category_id = $category['category_id'];
-			// replace the current value to the request to be run by the prepareQuery
-			// otherwise it won't be seen added when save() is called.
-			$this->request['category_id'] = $this->category_id;
+            $category = new Cat(['title' => $this->category,'type' => $this->cat_type]);
+            $add = $category->add();
+            // add value to the request to be run by the prepareQuery
+            // otherwise it won't be seen added when save() is called.
+            $this->request['category_id'] = $add['category_id'];
 		}
-		$this->hidden['user_id'] = $this->user_id;
-		print_r($this->request);
+        $this->hidden['user_id'] = $this->user_id;
+        print_r($this->request);
         //update model but do not save it yet before check.
         $this->patch();
 		if(!empty($this->title) && !empty($this->content) && !empty($this->category_id)) {

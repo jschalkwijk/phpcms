@@ -11,7 +11,7 @@ trait UserActions {
 	private $name;
 	private $checkbox;
 	
-	private function UserActions($dbt) {
+	private function UserActions($model) {
 		$db = new DBC;
 		$dbc = $db->connect();
 		
@@ -26,7 +26,7 @@ trait UserActions {
 			$approve = RUDActions::approve($dbt,$this->id,$this->name);
 		}
 		if (isset($_POST['hide'])) {	
-			$hide = RUDActions::hide($dbt,$this->id,$this->name);	
+			$hide = RUDActions::hide($dbt,$this->id,$this->name);
 		}
 		if (isset($_POST['restore'])) {
 			$restore = RUDActions::restore($dbt,$this->id,$this->name);
@@ -36,23 +36,22 @@ trait UserActions {
 
 		}
 		if (isset($_POST['trash-selected'])) {
-			$delete = RUDActions::trash_selected($dbt,$this->checkbox);
+			RUDActions::trash_selected($model,$this->checkbox);
 		}
 		if (isset($_POST['approve-selected'])) {
-			$delete = RUDActions::approve_selected($dbt,$this->checkbox);
+			RUDActions::approve_selected($model,$this->checkbox);
 		}
 		if (isset($_POST['restore-selected'])) {
-			$delete = RUDActions::restore_selected($dbt,$this->checkbox);
+			RUDActions::restore_selected($model,$this->checkbox);
 		}
 		if (isset($_POST['hide-selected'])) {
-			$delete = RUDActions::hide_selected($dbt,$this->checkbox);
+			RUDActions::hide_selected($model,$this->checkbox);
 		}
 		if (isset($_POST['delete-selected'])) {
-			$delete = RUDActions::delete_selected($dbt,$this->checkbox);
+			$delete = RUDActions::delete_selected($model,$this->checkbox);
 			return $delete;
 		}
 
-		
 	}
 
 }

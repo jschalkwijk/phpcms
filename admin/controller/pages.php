@@ -1,7 +1,7 @@
 <?php
 
 use CMS\Models\Controller\Controller;
-use CMS\Models\Content\Pages\Page;
+use CMS\Models\Pages\Page;
 use CMS\Models\Actions\UserActions;
 
 class Pages extends Controller
@@ -14,7 +14,7 @@ class Pages extends Controller
         $pages = Page::all(0);
         $action = ADMIN . 'pages';
         // Post requests need to be handled first! Then load the page, otherwise you will get the headers already sent error.
-        $this->UserActions('pages');
+        $this->UserActions($pages[0]);
         // view takes: page_title,[array of view files],params from the router,array of data from model
         $view = ['search' => ADMIN . 'search-page.php', 'actions' => ADMIN . 'manage_content.php'];
         $this->view(
@@ -61,6 +61,7 @@ class Pages extends Controller
         $action = ADMIN . 'pages/deleted-pages';
         $delete = $this->UserActions('pages');
         $pages = Page::all(1);
+        $this->UserActions($pages[0]);
         $this->view(
             'Deleted Pages',
             ['pages/pages.php'],

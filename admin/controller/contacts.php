@@ -9,8 +9,8 @@ class Contacts extends Controller
 
     public function index($params = null)
     {
-        $this->UserActions('contacts');
         $contacts = Contact::all(0);
+        $this->UserActions($contacts[0]);
         $this->view(
             'Contacts',
             ['contacts/contacts.php'],
@@ -25,8 +25,8 @@ class Contacts extends Controller
 
     public function deletedContacts($params = null)
     {
-        $this->UserActions('contacts');
         $contacts = Contact::all(1);
+        $this->UserActions($contacts[0]);
         $this->view(
             'Contacts',
             ['contacts/contacts.php'],

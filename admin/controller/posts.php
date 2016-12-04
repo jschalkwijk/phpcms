@@ -1,6 +1,6 @@
 <?php
 
-use CMS\Models\Content\Posts\Post;
+use CMS\Models\Posts\Post;
 use CMS\Models\Controller\Controller;
 
 class Posts extends Controller
@@ -10,9 +10,9 @@ class Posts extends Controller
 
     public function index($params = null)
     {
-        $posts = Post::all();
+        $posts = Post::all(0);
         // Post requests need to be handled first! Then load the page, otherwise you will get the headers already sent error.
-        $this->UserActions('posts');
+        $this->UserActions($posts[0]);
         // view takes: page_title,[array of view files],params from the router,array of data from model
         $view = ['search' => 'view/search/search-post.php', 'actions' => 'view/shared/manage-content.php'];
         $this->view('Posts', ['posts/posts-nav.php', 'posts/posts.php'], $params, ['posts' => $posts, 'view' => $view, 'trashed' => 0, 'js' => [JS . 'checkAll.js']]);
@@ -57,7 +57,7 @@ class Posts extends Controller
     public function DeletedPosts($params = null)
     {
         $posts = Post::all(1);
-        $this->UserActions('posts');
+        $this->UserActions($posts[0]);
         $view = ['search' => 'view/search/search-post.php', 'actions' => 'view/shared/manage-content.php'];
         $this->view('Deleted Posts', ['posts/posts.php'], $params, ['posts' => $posts, 'view' => $view, 'trashed' => 1, 'js' => [JS . 'checkAll.js']]);
     }

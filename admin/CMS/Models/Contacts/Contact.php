@@ -38,7 +38,9 @@
             'street_num_add',
             'zip',
             'notes',
-            'img_path'
+            'img_path',
+            'trashed',
+            'approved'
         ];
 
         protected $encrypted = [
