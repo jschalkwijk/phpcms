@@ -1,6 +1,6 @@
 <?php
 use CMS\Models\Controller\Controller;
-use CMS\Models\Content\Content;
+use CMS\Models\Posts\Post;
 class Blog extends Controller {
 
 	public function index($params = null){
@@ -9,9 +9,14 @@ class Blog extends Controller {
 		//$posts = $blog->displayPosts();	
 		//or directly with the autoloader.
 		// the fetchAll method return an object array with DB data.
-		$posts = Content::fetchAll('posts',0);
+		$posts = Post::all(0);
 		// view takes: page_title,[array of (optional: multiple)view files],params from the router,array of data from model
-		$this->view('Blog',['blog.php'],$params,['posts' => $posts]);	
+		$this->view(
+            'Blog',
+            ['blog.php'],
+            $params,
+            ['posts' => $posts]
+        );
 	}
 	
 	public function Category($params = null){
@@ -21,8 +26,13 @@ class Blog extends Controller {
 	}
 	
 	public function Post($params = null){
-		$post = Content::fetchSingle('posts',$params[0]);
-		$this->view($params[1],['single-post.php'],$params,['post' => $post]);
+		$post = Post::single($params[0]);
+		$this->view(
+            $params[1],
+            ['single-post.php'],
+            $params,
+            ['post' => $post]
+        );
 	}
 }
 ?>
