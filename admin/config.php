@@ -41,7 +41,7 @@ spl_autoload_register(function ($class) {
 	}
 });
 
-require_once(__DIR__. '/vendor/autoload.php'); 
+require_once(__DIR__. '/vendor/autoload.php');
 
 //function login_authenticate() {
 //	require_once('blocks/secure_login/authorize.php');
