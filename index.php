@@ -26,19 +26,19 @@ class APP {
 	public function router(){
 		// call URL metod to split the URL and add it to the class $this->routes.
 		$this->url();
-
+		$routes = $this->routes;
 		//Get the Controller
-		if(isset($this->routes[0])) {
+		if(isset($routes[0])) {
 			/*
 			 * $routes[0] resembles the controller file we want to call from the controller folder.
 			 * each controller has a index() func which is called if no other parameters are specified in the URL.
 			*/
-			$route = $this->routes[0];
+			$route = $routes[0];
 			// check if the controller file exists and assign to $controller.
 			if(file_exists('controller/'.$route.'.php')){
 				$this->controller = $route;
 				// delete key/value pair from array
-				unset($this->routes[0]);
+				unset($routes[0]);
 				// inlcude the controller
 				require_once('controller/'.$this->controller.'.php');
 				// call new controller
@@ -56,15 +56,15 @@ class APP {
 			 * The second part of the url is the method in the controlle we want to call,
 			 * if a method is specified, call the method.
 			*/
-			if(isset($this->routes[1])){
-				if(method_exists($this->controller,$this->routes[1])) {
-					$this->method = $this->routes[1];
-					$method = $this->routes[1];
+			if(isset($routes[1])){
+				if(method_exists($this->controller,$routes[1])) {
+					$this->method = $routes[1];
+					$method = $routes[1];
 					// delete key/value pair from array
-					unset($this->routes[1]);
+					unset($routes[1]);
 					// array_values resets the array keys to 0,1,2 etc
 					// the leftover from the url are the parameters you can use and pass to a method like you used to do with GET variables
-					$this->params = array_values($this->routes);
+					$this->params = array_values($routes);
 					// here we call the controller->methods(parameters) and pass the parameters to the method;
 					$app->$method($this->params);
 				} else {
@@ -79,7 +79,7 @@ class APP {
 				}
 			} else {
 				// if no method is selected, call the controllers index method
-				$app->index();
+				$app->index($this->routes);
 			}
 			// if there is no controller specified, render the main dashboard page.
 		} else {

@@ -1,3 +1,7 @@
+<?= $page_title;
+print_r($params);
+	?>
+
 <div class="container-fluid">
 	<div class="display top-margin">
 		<div class="row">

@@ -177,7 +177,18 @@ abstract class Model
         $joins = $model->join($joins);
 
         $query = $model->select().$joins['as'].$model->from().$joins['on'].$model->where([$model->primaryKey => $id]);
-        //echo $query;
+        echo $query;
+        return $model->newQuery($query);
+    }
+
+    public static function slug($slug,$joins = null)
+    {
+        $model = new static;
+        $model->connection = $model->database->connect();
+        $joins = $model->join($joins);
+
+        $query = $model->select().$joins['as'].$model->from().$joins['on'].$model->where(['title' => $slug]);
+        echo $query;
         return $model->newQuery($query);
     }
 

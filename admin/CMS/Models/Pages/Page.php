@@ -5,21 +5,19 @@ use CMS\Models\DBC\DBC;
 use CMS\Core\Model\Model;
 
 class Page extends Model{
-    function __construct() {
-        parent::__construct();
-        print "In SubClass constructor\n";
-    }
+//    function __construct() {
+//        parent::__construct();
+//        print "In SubClass constructor\n";
+//    }
 	protected $primaryKey = 'page_id';
 
 	public $table = 'pages';
 
 	protected $relations = [
-		'categories' => 'category_id',
 		'users' => 'user_id'
 	];
 
 	protected $joins = [
-		'categories' => ['title'],
 		'users' => ['username']
 	];
 

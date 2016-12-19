@@ -2,9 +2,9 @@
 
 /*
 ** Version - 0.5
-** CRAFT MVC Framework/CMS
+** PHP Framework/CMS
 ** Author - Jorn Schalkwijk
-** Website - http://www.jornschalkwijk.nl
+** Website - http://www.jornschalkwijk.com
 ** License: Free to use/modify for non commercial use only.
 */
 
