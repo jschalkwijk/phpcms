@@ -9,9 +9,10 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<?php
-		$page = $data['page'];
-		MetaTag::Tags($page);
-
+		if(isset($data['meta'])){
+			$meta = $data['meta'];
+			MetaTag::Tags($meta);
+		}
 	?>
 	<!-- Bootstrap -->
 	<!-- Latest compiled and minified CSS -->

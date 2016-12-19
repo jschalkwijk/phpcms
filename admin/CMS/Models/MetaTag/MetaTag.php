@@ -10,10 +10,13 @@
 
         public static function Tags($model)
         {
-            foreach($model as $meta)
-                echo '<meta name="title" content="'.$meta->title.'"><br>';
-                echo '<meta name="description" content="'.$meta->description.'"><br>';;
-                echo '<title>'.$meta->title.'</title>';
+            foreach ($model as $meta){
+                if (isset($meta->title) && isset($meta->description)) {
+                    echo '<meta name="title" content="' . $meta->title . '">'."\n    ";
+                    echo '<meta name="description" content="' . $meta->description . '">'."\n    ";
+                    echo '<title>' . $meta->title . '</title>';
+                }
+            }
         }
 
     }

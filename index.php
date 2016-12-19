@@ -79,6 +79,7 @@ class APP {
 				}
 			} else {
 				// if no method is selected, call the controllers index method
+				// $this->route contains the controller name and possible method name
 				$app->index($this->routes);
 			}
 			// if there is no controller specified, render the main dashboard page.
