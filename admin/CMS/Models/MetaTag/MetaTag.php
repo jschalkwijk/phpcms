@@ -6,8 +6,6 @@
 
     class MetaTag extends Model
     {
-        protected $columns = [];
-
         public static function Tags($model)
         {
             foreach ($model as $meta){

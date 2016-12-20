@@ -1,7 +1,7 @@
 <div id="nav">
 	<nav>
 		<ul>
-			<li><a href="<?php echo HOST.'/home' ;?>">Home</a></li>
+			<li><a href="<?php echo HOST.'/' ;?>">Home</a></li>
 			<li><a href="<?php echo HOST.'/about' ;?>">About Me</a></li>
 			<li><a href="<?php echo HOST.'/skills' ;?>">Skills</a></li>
 			<li><a href="<?php echo HOST.'/portfolio' ;?>">Portfolio</a></li>

@@ -6,11 +6,6 @@ use CMS\Models\Pages\Page;
 class Blog extends Controller {
 
 	public function index($params = null){
-		// render the model like this:
-		//$blog = $this->model('Blog');
-		//$posts = $blog->displayPosts();	
-		//or directly with the autoloader.
-		// the fetchAll method return an object array with DB data.
 		$posts = Post::all(0);
 		$meta = Page::slug($params[0]);
 		// view takes: page_title,[array of (optional: multiple)view files],params from the router,array of data from model
@@ -28,9 +23,11 @@ class Blog extends Controller {
 		$meta = Page::slug('Categories');
 		$this->view('Categories',['categories.php'],$params,['categories' => $categories,'meta' => $meta]);
 	}
+
 	public function Category($params = null){
 		$post = new Post();
-		$query = $post->select().$post->from().$post->where(['category_id' => $params[0]]);
+		$joins = $post->join();
+		$query = $post->select().$joins['as'].$post->from().$joins['on'].$post->where(['category_id' => $params[0]]);
 		$posts = $post->newQuery($query);
 
 		$meta = Categories::single($params[0]);

@@ -79,7 +79,7 @@ class APP {
 				}
 			} else {
 				// if no method is selected, call the controllers index method
-				// $this->route contains the controller name and possible method name
+				// $this->route contains the controller name and possible method name to id the current page for meta tags
 				$app->index($this->routes);
 			}
 			// if there is no controller specified, render the main dashboard page.
@@ -93,7 +93,7 @@ class APP {
 	 * Parses the url which will be explode at the / and creates an array which can be uses in the router.
 	*/
 	private function url(){
-		$dbc = new DBC;
+
 		if(isset($_GET['url'])){
 			// get the URL from the base defined in the.htaccess file.
 			// filter url

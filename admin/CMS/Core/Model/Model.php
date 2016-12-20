@@ -162,6 +162,11 @@ abstract class Model
 //        //echo $query;
 //        return $model->newQuery($model->query);
     }
+
+//    public function allWhere()
+//    {
+//
+//    }
     /**
      * Returns all class objects linked to the called model.
      *
