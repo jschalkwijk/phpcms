@@ -86,7 +86,7 @@ class APP {
 		} else {
 			require_once('controller/'.$this->controller.'.php');
 			$app = new $this->controller;
-			$app->index();
+			$app->index(['Home']);
 		}
 	}
 	/*

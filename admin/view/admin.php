@@ -1,7 +1,3 @@
-<?php
-	use CMS\Models\Users\UserWriter;
-?>
-
 <div class="container">
     <div class="row">
 
@@ -30,7 +26,6 @@
                                 require 'view/shared/content-table.php';
                             }
                         ?>
-                        </tr>
                     </table>
                     <?php
                         require($data['view']['actions']);

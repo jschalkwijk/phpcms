@@ -1,6 +1,7 @@
 <?php
-use CMS\Models\Controller\Controller;
-use CMS\Models\Pages\Page;
+	use CMS\Models\Controller\Controller;
+	use CMS\Models\Pages\Page;
+
 class Home extends Controller {
 
 	public function index($params = null){
@@ -16,7 +17,7 @@ class Home extends Controller {
 		$page = Page::slug($params[0]);
 //		$page = Page::single(74);
 
-		$this->view('About',['about.php'],$params,['meta' => $page]);
+		$this->view('Home',['home.php'],$params,['meta' => $page]);
 	}
 }
 ?>

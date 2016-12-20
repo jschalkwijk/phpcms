@@ -22,7 +22,7 @@ class CoreController {
 
 		require_once('templates/'.$tpl_name.'/header.php');
 		require_once('templates/'.$tpl_name.'/nav.php');
-		require_once('templates/'.$tpl_name.'/content-top.php');
+//		require_once('templates/'.$tpl_name.'/content-top.php');
 
 		foreach ($this->content as $content){
 			if(file_exists('view/'.$content)){
@@ -34,7 +34,7 @@ class CoreController {
 		if(!empty($this->errors)){
 			echo implode('<br />',$this->errors);
 		}
-		require_once('templates/'.$tpl_name.'/content-bottom.php');
+//		require_once('templates/'.$tpl_name.'/content-bottom.php');
 		require_once('templates/'.$tpl_name.'/footer.php');
 	}
 

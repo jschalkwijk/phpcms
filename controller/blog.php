@@ -1,8 +1,9 @@
 <?php
-use CMS\Models\Controller\Controller;
-use CMS\Models\Posts\Post;
-use CMS\Models\Pages\Page;
+	use CMS\Models\Controller\Controller;
+	use CMS\Models\Posts\Post;
+	use CMS\Models\Pages\Page;
 	use CMS\Models\Categories\Categories;
+
 class Blog extends Controller {
 
 	public function index($params = null){

@@ -1,11 +1,10 @@
-
-<?php 
+<?php
 	ob_start();
 	use CMS\Models\MetaTag\MetaTag;
- ?>
+?>
 
 <!DOCTYPE html>
-<html lang='eng' charset="UTF-8" >
+<html lang='eng' charset="UTF-8">
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<?php
@@ -15,9 +14,9 @@
 		}
 	?>
 	<!-- Bootstrap -->
-	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<!-- CSS -->
 	<link type="text/css" rel="stylesheet" href="<?php echo HOST."/templates/default/style.css"; ?>"/>
 </head>
 <body>
-	<div id="wrapper"> 
+<div id="wrapper">
