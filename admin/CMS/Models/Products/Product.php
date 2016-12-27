@@ -4,7 +4,7 @@ namespace CMS\Models\Products;
 use CMS\Models\DBC\DBC;
 use CMS\Models\File\FileUpload;
 use CMS\Models\File\Folders;
-use CMS\Models\Categories;
+use CMS\Models\Categories\Categories;
 use CMS\Core\Model\Model;
 
 class Product extends Model {

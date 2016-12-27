@@ -1,7 +1,7 @@
 <?php
 namespace CMS\Models\Posts;
 
-use CMS\Models\Categories as Cat;
+use CMS\Models\Categories\Categories as Cat;
 use CMS\Core\Model\Model;
 
 class Post extends Model {
