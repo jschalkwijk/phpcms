@@ -65,7 +65,7 @@ class Post extends Model {
         }
 		$this->hidden['user_id'] = $_SESSION['user_id'];
 		print_r($this->request);
-        if(!empty($this->title) && !empty($this->content) && (!empty($this->category_id) || !empty($this->category) )) {
+        if(!empty($this->title) && !empty($this->content)) {
 			$this->save();
 			$messages[] = 'Your post has been added/edited.<br />';
 			$output_form = true;

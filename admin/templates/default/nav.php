@@ -29,3 +29,4 @@
 		<li><a href="<?php echo HOME.'/login.php?id='.$_SESSION['user_id'].'&amp;username='.$_SESSION['username'];?>"><img class="glyph-medium" alt="logout" src="<?php echo IMG."logout-1.png"; ?>"/></a></li>
 	</ul>
 </nav>
+<div id="main">

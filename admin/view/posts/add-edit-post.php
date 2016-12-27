@@ -23,14 +23,14 @@
 	$posts = $data['post'];
 	(isset($data['output_form'])) ? $output_form = $data['output_form'] : $output_form = true;
 ?>
-<div class="container">
+<div id="main" class="container">
 	<div class="row">
 		<div class="col-sm-6 col-md-6">
 			<?php
 			if (isset($_POST['submit'])) {
 				echo '<div class="container medium">';
 					echo implode(",",$data['errors']);
-					echo implode(",",$data['messages']);
+//					echo implode(",",$data['messages']);
 				echo '</div>';
 			}
 			?>

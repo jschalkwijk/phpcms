@@ -39,6 +39,7 @@ class Posts extends Controller
         } else {
             $post = new Post($_POST);
             $add = $post->add();
+            print_r($post);
             $this->view(
                 'Add Post',
                 ['posts/add-edit-post.php'],

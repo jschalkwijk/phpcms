@@ -1,3 +1,4 @@
+</div> <!-- End Main-->
 <div class="container-fluid">
 	<footer class="row">
 		<div class="col-xs-6 col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3">
