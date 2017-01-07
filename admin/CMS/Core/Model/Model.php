@@ -146,27 +146,25 @@ abstract class Model
      * @return Object Array
      *
      */
-    public static function all($trashed = 0,$joins = null)
+    public static function all()
     {
         $model = new static;
         $model->connection = $model->database->connect();
-        $joins = $model->join($joins);
-        $query = $model->select().$joins['as'].$model->from().$joins['on'].$model->where(['trashed' => $trashed]).$model->orderBy($model->primaryKey,'DESC');
+        $query = $model->joined().$model->orderBy($model->primaryKey,'DESC');
         //echo $query;
-        return $model->newQuery($query);
 
-//        $model = new static;
-//        $model->connection = $model->database->connect();
-//        $joins = $model->join($joins);
-//        $model->select()->join()->where(['trashed' => $trashed]);
-//        //echo $query;
-//        return $model->newQuery($model->query);
+        return $model->newQuery($query);
+    }
+    public static function allWhere($columns = [])
+    {
+        $model = new static;
+        $model->connection = $model->database->connect();
+        $query = $model->joined().$model->where($columns).$model->orderBy($model->primaryKey,'DESC');
+        //echo $query;
+
+        return $model->newQuery($query);
     }
 
-//    public function allWhere()
-//    {
-//
-//    }
     /**
      * Returns all class objects linked to the called model.
      *
@@ -349,6 +347,12 @@ abstract class Model
     public function orderBy($column = '',$order = '')
     {
         return " ORDER BY {$column} {$order}";
+    }
+
+    public function joined()
+    {
+        $joins = $this->join();
+        return $this->select().$joins['as'].$this->from().$joins['on'];
     }
     /**
      * Returns array with the joined relations from the Model.

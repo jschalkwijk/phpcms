@@ -11,7 +11,7 @@ class Pages extends Controller
 
     public function index($params = null)
     {
-        $pages = Page::all(0);
+        $pages = Page::allWhere(['trashed' => 0]);
         $action = ADMIN . 'pages';
         // Post requests need to be handled first! Then load the page, otherwise you will get the headers already sent error.
         $this->UserActions($pages[0]);
@@ -60,7 +60,7 @@ class Pages extends Controller
     {
         $action = ADMIN . 'pages/deleted-pages';
         $delete = $this->UserActions('pages');
-        $pages = Page::all(1);
+        $pages = Page::allWhere(['trashed' => 1]);
         $this->UserActions($pages[0]);
         $this->view(
             'Deleted Pages',

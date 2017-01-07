@@ -9,7 +9,7 @@ class Users extends Controller {
 	use \CMS\Models\Actions\UserActions;
 
 	public function index($params = null){
-		$users = User::all(0);
+		$users = User::allWhere(['trashed' => 0]);
 		$this->UserActions($users[0]);
 		$this->view(
 			'Users',
@@ -48,7 +48,7 @@ class Users extends Controller {
 		}
 	}
 	public function DeletedUsers($params = null){
-		$users = User::all(1);
+		$users = User::allWhere(['trashed' => 1]);
         $this->UserActions($users[0]);
 		$this->view(
 			'Deleted Users',

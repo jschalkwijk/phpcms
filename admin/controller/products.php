@@ -12,7 +12,7 @@ class Products extends Controller
     public function index($params = null)
     {
         $this->UserActions('products');
-        $products = Product::All(0);
+        $products = Product::allWhere(['trashed' => 0]);
         $this->view(
             'Products',
             ['products/products.php'],
@@ -28,7 +28,7 @@ class Products extends Controller
     public function deletedProducts($params = null)
     {
         $this->UserActions('products');
-        $products = Product::fetchAll('products', 1);
+        $products = Product::allWhere(['trashed' => 1]);
         $this->view(
             'Products',
             ['products/products.php'],

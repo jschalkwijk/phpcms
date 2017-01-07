@@ -9,7 +9,7 @@ class Contacts extends Controller
 
     public function index($params = null)
     {
-        $contacts = Contact::all(0);
+        $contacts = Contact::allWhere(['trashed'=>0]);
         $this->UserActions($contacts[0]);
         $this->view(
             'Contacts',
@@ -25,7 +25,7 @@ class Contacts extends Controller
 
     public function deletedContacts($params = null)
     {
-        $contacts = Contact::all(1);
+        $contacts = Contact::allWhere(['trashed'=>1]);
         $this->UserActions($contacts[0]);
         $this->view(
             'Contacts',

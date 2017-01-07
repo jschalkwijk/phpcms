@@ -11,7 +11,7 @@ class Categories extends Controller
 
     public function index($params = null)
     {
-        $categories = Cat::all(0);
+        $categories = Cat::allWhere(['trashed'=>0]);
         $this->UserActions($categories[0]);
         if (isset($_POST['submit'])) {
             $category = new Cat($_POST);
@@ -46,7 +46,7 @@ class Categories extends Controller
     //
     public function DeletedCategories($params = null)
     {
-        $categories = Cat::all(1);
+        $categories = Cat::allWhere(['trashed'=>1]);
         $this->UserActions('categories');
         if (isset($_POST['submit'])) {
             $category = new Cat($_POST);
