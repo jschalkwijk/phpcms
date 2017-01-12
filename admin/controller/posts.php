@@ -39,7 +39,6 @@ class Posts extends Controller
         } else {
             $post = new Post($_POST);
             $add = $post->add();
-            print_r($post);
             $this->view(
                 'Add Post',
                 ['posts/add-edit-post.php'],
@@ -73,7 +72,13 @@ class Posts extends Controller
         ];
 
         $post = Post::single($params[0]);
-
+        $tags = $post[0]->tags();
+//        print_r($tags);
+        foreach($tags as $tag){
+            echo "<pre>";
+            print_r($tag);
+            echo "</pre>";
+        }
         if (!isset($_POST['submit'])) {
             $this->view(
                 'Edit Post',
@@ -81,6 +86,7 @@ class Posts extends Controller
                 $params,
                 [
                     'post' => $post,
+                    'tags' => $tags,
                     'output_form' => true,
                     'js' => $scripts
                 ]

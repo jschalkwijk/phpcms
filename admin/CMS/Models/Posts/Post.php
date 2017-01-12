@@ -32,6 +32,12 @@
 //	protected  $hidden = [
 //		'user_id'
 //	];
+		public function tags()
+		{
+			$this->statement = "SELECT";
+//			return $this->newQuery("SELECT * FROM taggables RIGHT JOIN tags ON taggables.tag_id = tags.tag_id WHERE taggable_type = 'post' AND taggable_id = $this->post_id ORDER BY tags.tag_id DESC");
+        	return $this->morpheus('CMS\Models\Tag\Tag');
+		}
 
 		public function getlink(){
 			return preg_replace("/[\s-]+/", "-", $this->title);

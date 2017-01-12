@@ -125,7 +125,7 @@ abstract class Model
             call_user_func(
                 array($this,$method)
             );
-//            echo $this->$method;
+            echo $this->$method;
         }
     }
 
@@ -184,7 +184,13 @@ abstract class Model
         return $model->newQuery($query);
     }
 
-    public static function slug($slug,$joins = null)
+    /**
+     * @param $slug
+     * @param null $joins
+     * @return mixed
+     */
+
+    public static function slug($slug, $joins = null)
     {
         $model = new static;
         $model->connection = $model->database->connect();
@@ -208,9 +214,15 @@ abstract class Model
         $this->query = $query;
         echo 'Query = '.$query.'<br>';
         echo 'Values Array: <br>';
+        echo "<pre>";
         print_r($this->values);
+        echo "</pre>";
+
         echo 'Request Array: <br>';
+        echo "<pre>";
         print_r($this->request);
+        echo "</pre>";
+
         try {
             // the connection has to  be made elsewhere in the child class
             // we need the connection to be tied to the class function
@@ -465,6 +477,9 @@ abstract class Model
         }
     }
 
+    /**
+     * @return Object
+     */
     public function savePatch()
     {
         $query = $this->update().$this->where([$this->primaryKey => $this->get_id()]);
@@ -522,5 +537,17 @@ abstract class Model
         } else {
             return '';
         }
+    }
+
+    ## Relations
+
+    public function morpheus($morphtabel)
+    {
+        $model = new $morphtabel;
+        $model->connection = $model->database->connect();
+        //query = $model->joined().$model->orderBy($model->primaryKey,'DESC');
+        $model->statement = "SELECT";
+        //echo $query;
+        return $model->newQuery("SELECT * FROM {$model->pivotTable} RIGHT JOIN {$model->table} ON {$model->pivotTable}.tag_id = {$model->table}.tag_id WHERE taggable_type = 'post' AND taggable_id = ".$this->get_id()." ORDER BY {$model->table}.tag_id DESC");
     }
 }

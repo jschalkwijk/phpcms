@@ -52,6 +52,13 @@
                             <option name="none" value="None">None</option>
                             <?php $category = Categories::getSelected($post->category_id, 'post'); ?>
                         </select>
+						<select id="tags" name="tag_id">
+                            <option name="none" value="None">None</option>
+                            <?php foreach($data['tags'] as $tag){
+								print_r($tag);
+								echo "<option name='$tag->title' value='$tag->tag_id'>$tag->title</option>";
+							} ?>
+                        </select>
                         <input type="text" name="category" placeholder="Category"
                                value="<?= $post->keep($post->category); ?>"/><br/>
                         <input type="hidden" name="cat_type" value="post"/><br/>
