@@ -1,14 +1,14 @@
 <div class="container large">
     <div class="center">
-        <a class="link-btn" href="<?= ADMIN . "contacts/add-contact"; ?>">Add Contact</a>
-        <a class="link-btn" href="<?= ADMIN . "contacts/deleted-contacts"; ?>">Deleted Contacts</a>
+        <a class="link-btn" href="<?= ADMIN . "contacts/create"; ?>">Add Contact</a>
+        <a class="link-btn" href="<?= ADMIN . "contacts/deleted"; ?>">Deleted Contacts</a>
     </div>
 </div>
 <div class="container">
     <div class="row">
         <div class="col-sm-6 col-lg-6 col-sm-offset-3 push-lg-3">
             <div class="center">
-                <?php ($data['trashed'] === 1) ? $action = ADMIN . 'contacts/deleted-contacts' : $action = 'contacts'; ?>
+                <?php ($data['trashed'] === 1) ? $action = ADMIN . 'contacts/deleted' : $action = 'contacts'; ?>
                 <form class="backend-form" method="post" action="<?= $action; ?>">
                     <table class="backend-table title">
                         <tbody>
@@ -29,7 +29,7 @@
                                 <td><?= $contact->lastName(); ?></td>
                                 <td><?= $contact->phone1(); ?></td>
                                 <td><?= $contact->mail1(); ?></td>
-                                <td><?= '<a href="' . ADMIN . 'contacts/edit-contact/' . $contact->contact_id . '/' . $contact->firstName() . '">Edit</a>' ?></td>
+                                <td><?= '<a href="' . ADMIN . 'contacts/edit/' . $contact->contact_id. '">Edit</a>' ?></td>
                                 <td class="td-btn"><p><input type="checkbox" name="checkbox[]"
                                                              value="<?= $contact->contact_id; ?>"/></p></td>
                             </tr>

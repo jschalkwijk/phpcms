@@ -8,7 +8,7 @@
 
                 <form class="backend-form" method="post" action="<?= $action; ?>">
                     <table class="backend-table title">
-                        <tr><th>Title</th><th>Author</th><th>Category</th><th>Tags</th>Date</thth><th>Edit</th><th>View</th><th><button type="button" id="check-all"><img class="glyph-small" alt="check-all-items" src="<?= IMG."/check.png"; ?>"/></button></th></tr>
+                        <tr><th>Title</th><th>Author</th><th>Category</th><th>Tags</th><th>Date</th><th>Edit</th><th>View</th><th><button type="button" id="check-all"><img class="glyph-small" alt="check-all-items" src="<?= IMG."/check.png"; ?>"/></button></th></tr>
                         <?php
                             $posts = $data['posts'];
                             foreach($posts as $single){

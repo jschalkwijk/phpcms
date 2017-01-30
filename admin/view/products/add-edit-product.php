@@ -36,7 +36,7 @@ tinymce.init({
 			<?php
 				if ($output_form){
                     foreach($products as $product) {
-                        (isset($params[0]) && isset($params[1])) ? $action = ADMIN.'products/edit-product/'.$product->product_id.'/'.$product->name : $action = ADMIN.'products/add-product';
+                        (isset($params[0]) && isset($params[1])) ? $action = ADMIN.'products/edit/'.$product->product_id : $action = ADMIN.'products/create';
             ?>
                         <form id="addpost-form" action="<?= $action; ?>" method="post">
                             <input type="hidden" name="id" value="<?= $product->product_id;?>"/>

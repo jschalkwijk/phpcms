@@ -30,7 +30,7 @@ class Pages extends Controller
         );
     }
 
-    public function AddPage($params = null)
+    public function create($params = null)
     {
         if (!isset($_POST['submit'])) {
             $page = new Page();
@@ -56,7 +56,7 @@ class Pages extends Controller
         }
     }
 
-    public function DeletedPages($params = null)
+    public function deleted($params = null)
     {
         $action = ADMIN . 'pages/deleted-pages';
         $delete = $this->UserActions('pages');
@@ -77,7 +77,7 @@ class Pages extends Controller
 
     }
 
-    public function EditPages($params = null)
+    public function edit($params = null)
     {
         $page = Page::one($params[0]);
         if (!isset($_POST['submit'])) {

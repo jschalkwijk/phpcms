@@ -2,8 +2,8 @@
     <div class="row">
         <div class="col-sm-6 col-lg-6 col-sm-offset-3 push-lg-3">
             <div class="center">
-                <a class="link-btn" href="<?= ADMIN . "pages/add-page"; ?>">Create Page</a>
-                <a class="link-btn" href="<?= ADMIN . "pages/deleted-pages"; ?>">Deleted Pages</a>
+                <a class="link-btn" href="<?= ADMIN . "pages/create"; ?>">Create Page</a>
+                <a class="link-btn" href="<?= ADMIN . "pages/deleted"; ?>">Deleted Pages</a>
             </div>
         </div>
     </div>

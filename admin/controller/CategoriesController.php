@@ -44,7 +44,7 @@ class Categories extends Controller
     }
 
     //
-    public function DeletedCategories($params = null)
+    public function deleted($params = null)
     {
         $categories = Cat::allWhere(['trashed'=>1]);
         $this->UserActions('categories');
@@ -80,7 +80,7 @@ class Categories extends Controller
     }
 
     //
-    public function EditCategories($params = null)
+    public function edit($params = null)
     {
         $category = Cat::one($params[0]);
         if (!isset($_POST['submit'])) {

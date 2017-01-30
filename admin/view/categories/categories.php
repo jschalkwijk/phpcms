@@ -1,7 +1,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-sm-6 col-lg-6 col-sm-offset-3 push-lg-3">
-            <?php require_once 'view/categories/add-category.php'; ?>
+            <?php require_once 'view/categories/create'; ?>
         </div>
 	</div>
 	<div class="row">

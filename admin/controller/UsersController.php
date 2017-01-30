@@ -22,7 +22,7 @@ class Users extends Controller {
 			]
 		);
 	}
-	public function AddUser($params = null){
+	public function create($params = null){
 		if(!isset($_POST['submit'])){
 			$user = new User();
 			$this->view(
@@ -47,7 +47,7 @@ class Users extends Controller {
 			);
 		}
 	}
-	public function DeletedUsers($params = null){
+	public function deleted($params = null){
 		$users = User::allWhere(['trashed' => 1]);
         $this->UserActions($users[0]);
 		$this->view(
@@ -61,7 +61,7 @@ class Users extends Controller {
 			]
 		);
 	}
-	public function EditUsers($params = null){
+	public function edit($params = null){
 		if (isset($_POST['submit_file']) || !empty($_FILES['files']['name'][0])) {
 			$file_dest = 'files/';
 			$thumb_dest= 'files/thumbs/';

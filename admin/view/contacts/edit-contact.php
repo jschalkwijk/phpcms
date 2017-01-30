@@ -48,7 +48,7 @@
             <?php
                 if ($output_form) {
                     foreach($contacts as $contact){
-                        (isset($params[0]) && isset($params[1])) ? $action = ADMIN . 'contacts/edit-contact/' . $contact->contact_id . '/' . $contact->firstName() : "";
+                        (isset($params[0]) && isset($params[1])) ? $action = ADMIN . 'contacts/edit/' . $contact->contact_id : "";
                         ?>
                         <form id="create-form" method="post" action="<?= $action; ?>">
                             <input type="hidden" name="contact_id" value="<?= $contact->contact_id; ?>"/>

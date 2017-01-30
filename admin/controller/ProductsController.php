@@ -25,7 +25,7 @@ class Products extends Controller
         );
     }
 
-    public function deletedProducts($params = null)
+    public function deleted($params = null)
     {
         $this->UserActions('products');
         $products = Product::allWhere(['trashed' => 1]);
@@ -40,7 +40,7 @@ class Products extends Controller
         );
     }
 
-    public function addProduct($params = null)
+    public function create($params = null)
     {
         if (!isset($_POST['submit'])) {
             $product = new Product();
@@ -67,7 +67,7 @@ class Products extends Controller
         }
     }
 
-    public function editProduct($params = null)
+    public function edit($params = null)
     {
         $product = Product::one($params[0]);
 

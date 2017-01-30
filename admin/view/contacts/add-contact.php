@@ -48,7 +48,7 @@ $contacts = $data['contact'];
                 <?php
                     if ($output_form) {
                         foreach($contacts as $contact){
-                            $action = ADMIN . 'contacts/add-contact';
+                            $action = ADMIN . 'contacts/create';
                         ?>
                             <form id="create-form" method="post" action="<?= $action; ?>">
                                 <input type="hidden" name="contact_id" value="<?= $contact->contact_id; ?>"/>

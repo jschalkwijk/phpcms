@@ -15,7 +15,7 @@
 	<td class="td-date"><p><?= $single->date; ?></p></td>
 	<?php
 	if ($_SESSION['rights'] == 'Admin' || $_SESSION['rights'] == 'Content Manager') { ?>
-		<td class="td-btn"><a href="<?= $single->table.'/edit-'.$single->table.'/' .$single->get_id().'/'.$single->getLink(); ?>"><img class="glyph-small link-btn" alt="edit-item" src="<?= IMG.'edit.png';?>"/></a></td>
+		<td class="td-btn"><a href="<?= $single->table.'/edit/' .$single->get_id(); ?>"><img class="glyph-small link-btn" alt="edit-item" src="<?= IMG.'edit.png';?>"/></a></td>
 		<?php if ($single->approved == 0 ) { ?>
 			<td class="td-btn"><img class="glyph-small" alt="item-hidden-from-front-end-user" src="<?= IMG.'hide.png'?>"/></td>
 		<?php }	else if ($single->approved == 1 ) { ?>

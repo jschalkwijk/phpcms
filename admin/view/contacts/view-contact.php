@@ -14,7 +14,7 @@
 					if ($contact->trashed == 0) { ?>
 						<button class="td-btn" type="submit" name="remove"><img class="glyph-small" src="<?= IMG.'trash-post.png'?>"></button>
 				<?php } ?>
-				<button type="button"><?= '<a href="'.ADMIN.'contacts/edit-contact/'.$contact->contact_id.'/'.$contact->firstName().'">Edit</a>'?></button>
+				<button type="button"><?= '<a href="'.ADMIN.'contacts/edit/'.$contact->contact_id.'">Edit</a>'?></button>
 			</form>
 		</div>
 	</div>

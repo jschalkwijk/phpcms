@@ -5,7 +5,7 @@
 	<p><input type="hidden" name="username" value="<?php /*echo $single->getUsername(); */?>" /></p>-->
 <?php 
 if ($_SESSION['rights'] == 'Admin') { ?>
-		<td class="td-btn"><a href="<?= ADMIN.'users/edit-'.$single->table.'/' .$single->user_id.'/'.$single->username;?>"><img class="glyph-small link-btn" src="<?= IMG.'edit.png';?>" alt="edit-item"/></a></td>
+		<td class="td-btn"><a href="<?= ADMIN.'users/edit/' .$single->user_id;?>"><img class="glyph-small link-btn" src="<?= IMG.'edit.png';?>" alt="edit-item"/></a></td>
 	<?php if ($single->approved == 0 ) { ?>
 				<td class="td-btn"><img class="glyph-small" src="<?= IMG.'hide.png'?>" alt="item-hidden-from-front-end-user"/></td>
 	<?php } else if ($single->approved == 1 ) { ?>

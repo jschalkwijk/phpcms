@@ -32,7 +32,7 @@ class Posts extends Controller
         );
     }
     //
-    public function AddPost($params = null)
+    public function create($params = null)
     {
         $scripts = [
             JS . 'mceAddons.js',
@@ -72,7 +72,7 @@ class Posts extends Controller
     }
 
     //
-    public function DeletedPosts($params = null)
+    public function deleted($params = null)
     {
         $posts = Post::allWhere(['trashed' => 1]);
         $this->UserActions($posts[0]);
@@ -81,7 +81,7 @@ class Posts extends Controller
     }
 
     //
-    public function EditPosts($params = null)
+    public function edit($params = null)
     {
         $scripts = [
             JS . 'tinyMCEsettings.js',

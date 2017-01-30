@@ -36,7 +36,7 @@
         <div class="col-xs-6 col-sm-6 col-lg-6 col-sm-offset-3 push-lg-3">
             <?php if ($output_form) {
                 foreach($pages as $page){
-                    (isset($params[0]) && isset($params[1])) ? $action = ADMIN . 'pages/edit-pages/' . $page->get_id() . '/' . $page->title : $action = ADMIN . 'pages/add-page';
+                    (isset($params[0]) && isset($params[1])) ? $action = ADMIN . 'pages/edit/' . $page->get_id() : $action = ADMIN . 'pages/create';
 
                 ?>
                     <iframe id="target">hello</iframe>

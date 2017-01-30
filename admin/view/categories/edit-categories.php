@@ -24,7 +24,7 @@
 			<?php if($output_form){
                 foreach ($categories as $category) {
             ?>
-                <form id="edit-form" method="post" action="<?= ADMIN."categories/edit-categories/".$category->get_id()."/".$category->title; ?>">
+                <form id="edit-form" method="post" action="<?= ADMIN."categories/edit/".$category->get_id(); ?>">
                     <input type="text" name="title" value="<?= $category->title;?>"/><br />
                     <!-- When page first loads, the hidden field will containe the set title, if the user edits the title. we can change the corresponding post categories. 			 -->
                     <input type="text" name="description" placeholder="Category Description (max 160 characters)" value="<?= $category->description; ?>"/><br />

@@ -37,7 +37,7 @@
 		<div class="col-sm-6 col-lg-6 col-sm-offset-3 push-lg-3">
 			<?php
 				foreach($users as $user ) {
-					(isset($params[0]) && isset($params[1])) ? $action = ADMIN . 'users/edit-users/' . $user->user_id . '/' . $user->username : $action = ADMIN . 'users/add-user';
+					(isset($params[0]) && isset($params[1])) ? $action = ADMIN . 'users/edit/' . $user->user_id: $action = ADMIN . 'users/create';
 					(isset($data['output_form'])) ? $output_form = $data['output_form'] : $output_form = true;
 					if ($output_form) {
 						?>

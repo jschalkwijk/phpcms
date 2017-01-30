@@ -23,7 +23,7 @@ class Contacts extends Controller
         );
     }
 
-    public function deletedContacts($params = null)
+    public function deleted($params = null)
     {
         $contacts = Contact::allWhere(['trashed'=>1]);
         $this->UserActions($contacts[0]);
@@ -39,7 +39,7 @@ class Contacts extends Controller
         );
     }
 
-    public function addContact($params = null)
+    public function create($params = null)
     {
         if (!isset($_POST['submit'])) {
             $contact = new Contact();
@@ -66,7 +66,7 @@ class Contacts extends Controller
         }
     }
 
-    public function editContact($params = null)
+    public function edit($params = null)
     {
         $contact = Contact::one($params[0]);
         if (isset($_POST['submit_file']) || !empty($_FILES['files']['name'][0])) {

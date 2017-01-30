@@ -1,7 +1,7 @@
 <div class="container">
     <div class="center">
-        <a class="link-btn" href="<?= ADMIN."products/add-product";?>">+ Product</a>
-	    <a class="link-btn" href="<?= ADMIN."products/deleted-products"; ?>">Deleted Products</a>
+        <a class="link-btn" href="<?= ADMIN."products/create";?>">+ Product</a>
+	    <a class="link-btn" href="<?= ADMIN."products/deleted"; ?>">Deleted Products</a>
     </div>
 </div>
 <div class="container">
@@ -23,7 +23,7 @@
                                 <!--<input type="hidden" name="id" value="<?php /*echo $product->getID() */?>" />-->
                                 <?php
                                 if ($_SESSION['rights'] == 'Admin' || $_SESSION['rights'] == 'Content Manager') { ?>
-                                        <td class="td-btn"><a href="<?= ADMIN.'products/edit-product/'.$product->product_id.'/'.$product->name ?>"><img class="glyph-small link-btn" src="<?= IMG.'edit.png';?>" alt="edit-item"/></a></td>
+                                        <td class="td-btn"><a href="<?= ADMIN.'products/edit/'.$product->product_id ?>"><img class="glyph-small link-btn" src="<?= IMG.'edit.png';?>" alt="edit-item"/></a></td>
                                     <?php if ($product->approved == 0 ) { ?>
                                             <td class="td-btn"><img class="glyph-small" src="<?= IMG.'hide.png'?>" alt="item-hidden-from-front-end-user"/><!-- </button> --></td>
                                     <?php }	else if ($product->approved == 1 ) { ?>

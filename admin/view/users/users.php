@@ -1,8 +1,8 @@
 <?php use CMS\Models\Users\UserWriter; ?>
 <div class="container">
     <div class="center">
-        <a class="link-btn" href="<?= ADMIN."users/add-user"; ?>">+ User</a>
-        <a class="link-btn" href="<?= ADMIN."users/deleted-users";?>">Deleted Users</a>
+        <a class="link-btn" href="<?= ADMIN."users/create"; ?>">+ User</a>
+        <a class="link-btn" href="<?= ADMIN."users/deleted";?>">Deleted Users</a>
     </div>
 </div>
 <div class="container">

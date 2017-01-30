@@ -13,7 +13,7 @@ $products = $data['product'];
 		<div class="col-sm-6 col-lg-6 col-sm-offset-3 push-lg-3">
 			<?php if($output_form){
                 foreach($products as $product){
-                    (isset($params[0]) && isset($params[1])) ? $action = ADMIN.'products/info/'.$product->product_id.'/'.$product->name : $action = ADMIN.'products/add-product';
+                    (isset($params[0]) && isset($params[1])) ? $action = ADMIN.'products/info/'.$product->product_id.'/'.$product->name : $action = ADMIN.'products/create';
                 ?>
                     <form class="small" enctype="multipart/form-data" method="post" action="<?= $action; ?>">
                         <input type="hidden" name="MAX_FILE_SIZE" value="43500000" />
@@ -51,7 +51,7 @@ $products = $data['product'];
 				<?php   }
 				if ($product->trashed == 0) { ?>
 					<button class="td-btn" type="submit" name="remove"><img class="glyph-small" src="<?= IMG.'trash-post.png'?>"/></button>
-					<button><?= '<a href="'.ADMIN.'/products/edit-product/'.$product->product_id.'/'.$product->name.'">Edit</a>'?></button>
+					<button><?= '<a href="'.ADMIN.'/products/edit/'.$product->product_id.'">Edit</a>'?></button>
 				<?php } ?>
 			</form>
 		</div>

@@ -40,7 +40,7 @@
 		<div class="col-sm-6 col-lg-6">
 			<?php if ($output_form) {
                 foreach ($posts as $post) {
-                    (isset($params[0]) && isset($params[1])) ? $action = ADMIN . 'posts/edit-posts/' . $post->post_id . '/' . $post->title : $action = ADMIN . 'posts/add-post';
+                    (isset($params[0]) && isset($params[1])) ? $action = ADMIN . 'posts/edit' . $post->post_id : $action = ADMIN . 'posts/create';
                     ?>
                     <form id="addpost-form" class="large" action="<?= $action; ?>" method="post">
                         <input type="text" name="title" placeholder="Title"
