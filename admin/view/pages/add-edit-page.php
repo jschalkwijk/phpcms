@@ -19,7 +19,7 @@
 <script type="text/javascript" src="<?= JS . "preview.js"; ?>"></script>
 <div class="container">
     <div class="row">
-        <div class="col-xs-6 col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3">
+        <div class="col-xs-6 col-sm-6 col-lg-6 col-sm-offset-3 push-lg-3">
             <?php
             $pages = $data['page'];
                 print_r($pages);
@@ -33,7 +33,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-6 col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3">
+        <div class="col-xs-6 col-sm-6 col-lg-6 col-sm-offset-3 push-lg-3">
             <?php if ($output_form) {
                 foreach($pages as $page){
                     (isset($params[0]) && isset($params[1])) ? $action = ADMIN . 'pages/edit-pages/' . $page->get_id() . '/' . $page->title : $action = ADMIN . 'pages/add-page';

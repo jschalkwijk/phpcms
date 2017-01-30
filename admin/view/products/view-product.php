@@ -10,7 +10,7 @@ $products = $data['product'];
 
 <div class="container">
 	<div class="row">
-		<div class="col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3">
+		<div class="col-sm-6 col-lg-6 col-sm-offset-3 push-lg-3">
 			<?php if($output_form){
                 foreach($products as $product){
                     (isset($params[0]) && isset($params[1])) ? $action = ADMIN.'products/info/'.$product->product_id.'/'.$product->name : $action = ADMIN.'products/add-product';
@@ -40,7 +40,7 @@ $products = $data['product'];
 	</div>
 
 	<div class="row">
-		<div class="col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3">
+		<div class="col-sm-6 col-lg-6 col-sm-offset-3 push-lg-3">
 			<form method="post" action="<?= ADMIN.'products/info/'.$product->product_id.'/'.$product->name; ?>">
 				<input type="hidden" name="id" value="<?= $product->product_id; ?>"/>
 				<input type="hidden" name="name" value="<?= $product->name ?>"/>
@@ -58,7 +58,7 @@ $products = $data['product'];
 	</div>
 
 	<div class="row">
-		<div class="col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3">
+		<div class="col-sm-6 col-lg-6 col-sm-offset-3 push-lg-3">
 			<form class="backend-form" method="post" action="<?= ADMIN."cart/add/".$product->product_id;?>">
 				<select name="quantity">
 					<?php
@@ -102,7 +102,7 @@ $products = $data['product'];
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3">
+		<div class="col-sm-6 col-lg-6 col-sm-offset-3 push-lg-3">
 			<button id="check-all"><img class="glyph-small" src="<?= IMG."check.png"; ?>"/></button>
 			<?php Folders::show_albums($product->album_id); ?>
 			<?php

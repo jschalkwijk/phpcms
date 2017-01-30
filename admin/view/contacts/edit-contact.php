@@ -17,7 +17,7 @@
 ?>
 <div class="container">
     <div class="row">
-        <div class="col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3">
+        <div class="col-sm-6 col-lg-6 col-sm-offset-3 push-lg-3">
             <?php
                 if (isset($_POST['submit'])) {
                     echo '<div class="container medium">';
@@ -29,7 +29,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3">
+        <div class="col-sm-6 col-lg-6 col-sm-offset-3 push-lg-3">
             <form class="small" enctype="multipart/form-data" method="post" action="<?= $action; ?>">
                 <input type="hidden" name="MAX_FILE_SIZE" value="43500000"/>
                 <label for="files[]">Choose File(max size: 3.5 MB): </label><br/>
@@ -44,7 +44,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3">
+        <div class="col-sm-6 col-lg-6 col-sm-offset-3 push-lg-3">
             <?php
                 if ($output_form) {
                     foreach($contacts as $contact){

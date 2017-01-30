@@ -2,7 +2,7 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3">
+		<div class="col-sm-6 col-lg-6 col-sm-offset-3 push-lg-3">
 			<div class="center">
 				<form method="post" action="<?= ADMIN.'users/profile/'.$user->getID().'/'.$user->getFirstName(); ?>">
 					<input type="hidden" name="id" value="<?= $user->getID(); ?>"/>
@@ -21,7 +21,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3">
+		<div class="col-sm-6 col-lg-6 col-sm-offset-3 push-lg-3">
 			<div class="center">
 				<img class="left" src="<?= ADMIN . $user->getUserImg(); ?>"/>
 				<h1><?= $user->getFirstName() . ' ' . $user->getLastName(); ?></h1>

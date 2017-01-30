@@ -20,7 +20,7 @@ tinymce.init({
 ?>
 <div class="container">
 	<div class="row">
-		<div class="col-sm-6 col-md-6">
+		<div class="col-sm-6 col-lg-6">
 		<?php
 			if (isset($_POST['submit'])) {
 				echo '<div class="container medium">';
@@ -32,7 +32,7 @@ tinymce.init({
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-sm-6 col-md-6">
+		<div class="col-sm-6 col-lg-6">
 			<?php
 				if ($output_form){
                     foreach($products as $product) {
@@ -65,7 +65,7 @@ tinymce.init({
                 } ?>
 
         </div>
-		<div class="col-sm-6 col-md-6">
+		<div class="col-sm-6 col-lg-6">
 			<?php
 				require_once('view/shared/include-files-tinymce.php');
 			?>

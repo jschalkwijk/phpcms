@@ -7,7 +7,7 @@
 </div>
 <div class="container">
     <div class="row">
-        <div class="col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3">
+        <div class="col-sm-6 col-lg-6 col-sm-offset-3 push-lg-3">
             <div class="center">
                 <form class="backend-form" method="post" action="<?= ADMIN."users"; ?>">
                     <table class="backend-table title">

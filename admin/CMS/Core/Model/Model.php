@@ -67,7 +67,7 @@ abstract class Model
      * For example, the current user_id.
      * @var array
      */
-    protected $hidden = [];
+    public $hidden = [];
 
     /**
      * @var string
@@ -90,7 +90,7 @@ abstract class Model
      * Holds the request values which are set to attributes when a new object class is created.
      * @var array
      */
-    protected $request = [];
+    public $request = [];
 
     /**
      * Model constructor.
@@ -212,16 +212,16 @@ abstract class Model
     public function newQuery($query)
     {
         $this->query = $query;
-        echo 'Query = '.$query.'<br>';
-        echo 'Values Array: <br>';
-        echo "<pre>";
-        print_r($this->values);
-        echo "</pre>";
-
-        echo 'Request Array: <br>';
-        echo "<pre>";
-        print_r($this->request);
-        echo "</pre>";
+//        echo 'Query = '.$query.'<br>';
+//        echo 'Values Array: <br>';
+//        echo "<pre>";
+//        print_r($this->values);
+//        echo "</pre>";
+//
+//        echo 'Request Array: <br>';
+//        echo "<pre>";
+//        print_r($this->request);
+//        echo "</pre>";
 
         try {
             // the connection has to  be made elsewhere in the child class
@@ -253,6 +253,7 @@ abstract class Model
             }
         } catch(\PDOException $e){
             $this->sqlError = $e->getMessage();
+            echo $e->getMessage();
             return false;
         }
     }
@@ -450,7 +451,7 @@ abstract class Model
     public function save()
     {
         $query = $this->insert($this->prepareQuery());
-
+//        echo $query;
         return $this->newQuery($query);
     }
 

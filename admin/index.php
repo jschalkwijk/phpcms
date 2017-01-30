@@ -19,7 +19,7 @@ Auth::authenticate();
 ob_start();
 
 class APP {
-	private $controller = 'dashboard';
+	private $controller = 'Dashboard';
 	private $routes = array();
 	private $params = array();
 	private $method;
@@ -32,18 +32,18 @@ class APP {
 		//Get the Controller	
 		if(isset($this->routes[0])) {
 			// $routes[0] resembles the controller file we want to call.
-			$route = $this->routes[0];
+			$route = ucfirst($this->routes[0]);
 			// check if the controller file exists and assign to $controller.
-			if(file_exists('controller/'.$route.'.php')){
+			if(file_exists('Controller/'.$route.'Controller.php')){
 				$this->controller = $route;
 				// delete key/value pair from array
 				unset($this->routes[0]);
 				// inlcude the controller
-				require_once('controller/'.$this->controller.'.php');
+				require_once('Controller/'.$this->controller.'Controller.php');
 				// call new controller
 				$app = new $this->controller;
 			} else {
-				require_once('controller/'.$this->controller.'.php');
+				require_once('Controller/'.$this->controller.'Controller.php');
 				$app = new $this->controller;
 				// set error message 
 				$app->error = 'Page not found';
@@ -75,14 +75,13 @@ class APP {
 			}
 		// if there is no controller specified, render the main dashboard page.			
 		} else {
-			require_once('controller/'.$this->controller.'.php');
+			require_once('Controller/'.$this->controller.'Controller.php');
 			$app = new $this->controller;
 			$app->index();
 		}			
 	}//
 	
 	private function url(){
-		$dbc = new DBC;
 		if(isset($_GET['url'])){
 			// get the URL from the base defined in the.htaccess file.
 			// filter url

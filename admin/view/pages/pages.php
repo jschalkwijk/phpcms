@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        <div class="col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3">
+        <div class="col-sm-6 col-lg-6 col-sm-offset-3 push-lg-3">
             <div class="center">
                 <a class="link-btn" href="<?= ADMIN . "pages/add-page"; ?>">Create Page</a>
                 <a class="link-btn" href="<?= ADMIN . "pages/deleted-pages"; ?>">Deleted Pages</a>
@@ -10,7 +10,7 @@
 </div>
 <div class="container">
     <div class="row">
-        <div class="col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3">
+        <div class="col-sm-6 col-lg-6 col-sm-offset-3 push-lg-3">
             <div class="center"> <?php
                 if (!empty($data['messages'])) {
                     echo '<div class="container medium">';
@@ -25,6 +25,7 @@
                             <th>Title</th>
                             <th>Author</th>
                             <th>Category</th>
+                            <th>Tags</th>
                             <th>Date</th>
                             <th>Edit</th>
                             <th>View</th>

@@ -1,6 +1,17 @@
 <tr><td class="td-title"><p><?= $single->title; ?></p></td>
 	<td class="td-author"><p><?= $single->users_username; ?></p></td>
 	<td class="td-category"><p><?= $single->categories_title; ?></p></td>
+	<td class="td-category">
+		<p>
+	<?php
+		if(is_callable([$single,"tags"])) {
+			foreach ($single->tags() as $tag){
+				echo " | " . $tag->title;
+			}
+		}
+	?>
+		<p>
+	</td>
 	<td class="td-date"><p><?= $single->date; ?></p></td>
 	<?php
 	if ($_SESSION['rights'] == 'Admin' || $_SESSION['rights'] == 'Content Manager') { ?>

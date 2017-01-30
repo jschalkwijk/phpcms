@@ -3,7 +3,7 @@
 ?>
 <div class="container">
     <div class="row">
-        <div class="col-md-6 col-md-offset-3">
+        <div class="col-lg-6 push-lg-3">
             <h1>Your future possessions</h1>
             <h3><?= "You have ".$this->basket->itemCount()." item(s) in your cart"; ?></h3>
             <?php if($this->basket->itemCount()) { ?>

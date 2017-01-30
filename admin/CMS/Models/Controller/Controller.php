@@ -9,13 +9,14 @@ class Controller extends CoreController
 {
 	protected $cart;
 	protected $basket;
-
+	protected $currentUser;
 	public function __construct()
 	{
 		if(empty($this->cart)){
 			$this->cart = new SessionStorage('cart');
 			$this->basket = new Basket($this->cart);
 		}
+		$this->currentUser = $_SESSION['user_id'];
 	}
 }
 

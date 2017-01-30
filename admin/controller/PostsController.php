@@ -2,11 +2,12 @@
 
 use CMS\Models\Posts\Post;
 use CMS\Models\Controller\Controller;
-
+use CMS\Models\Tag\Tag;
+use CMS\Models\Actions\UserActions;
 class Posts extends Controller
 {
 
-    use \CMS\Models\Actions\UserActions;
+    use UserActions;
 
     public function index($params = null)
     {
@@ -15,7 +16,20 @@ class Posts extends Controller
         $this->UserActions($posts[0]);
         // view takes: page_title,[array of view files],params from the router,array of data from model
         $view = ['search' => 'view/search/search-post.php', 'actions' => 'view/shared/manage-content.php'];
-        $this->view('Posts', ['posts/posts-nav.php', 'posts/posts.php'], $params, ['posts' => $posts, 'view' => $view, 'trashed' => 0, 'js' => [JS . 'checkAll.js']]);
+        $this->view(
+            'Posts',
+            [
+                'posts/posts-nav.php',
+                'posts/posts.php'
+            ],
+            $params,
+            [
+                'posts' => $posts,
+                'view' => $view,
+                'trashed' => 0,
+                'js' => [JS . 'checkAll.js']
+            ]
+        );
     }
     //
     public function AddPost($params = null)
@@ -24,6 +38,7 @@ class Posts extends Controller
             JS . 'mceAddons.js',
             JS . 'checkAll.js'
         ];
+        $tags = Tag::all();
 
         if (!isset($_POST['submit'])) {
             $post = new Post();
@@ -33,6 +48,7 @@ class Posts extends Controller
                 $params,
                 [
                     'post' => [$post],
+                    'tags' => $tags,
                     'js' => $scripts
                 ]
             );
@@ -45,7 +61,9 @@ class Posts extends Controller
                 $params,
                 [
                     'output_form' => $add['output_form'],
-                    'post' => [$post], 'errors' => $add['errors'],
+                    'post' => [$post],
+                    'tags' => $tags,
+                    'errors' => $add['errors'],
                     'messages' => $add['messages'],
                     'js' => $scripts
                 ]
@@ -72,13 +90,12 @@ class Posts extends Controller
         ];
 
         $post = Post::single($params[0]);
-        $tags = $post[0]->tags();
-//        print_r($tags);
-        foreach($tags as $tag){
-            echo "<pre>";
-            print_r($tag);
-            echo "</pre>";
-        }
+        $tags = Tag::allWhere(['type' => 'post']);
+        $selectedTag = [];
+        foreach ($post[0]->tags() as $tag) {
+            $selectedTag[] = $tag->tag_id;
+        };
+
         if (!isset($_POST['submit'])) {
             $this->view(
                 'Edit Post',
@@ -87,6 +104,7 @@ class Posts extends Controller
                 [
                     'post' => $post,
                     'tags' => $tags,
+                    'selectedTag' => $selectedTag,
                     'output_form' => true,
                     'js' => $scripts
                 ]
@@ -102,6 +120,8 @@ class Posts extends Controller
                 $params,
                 [
                     'post' => [$post],
+                    'tags' => $tags,
+                    'selectedTag' => $selectedTag,
                     'output_form' => $edit['output_form'],
                     'errors' => $edit['errors'],
                     'messages' => $edit['messages'],

@@ -31,6 +31,10 @@
             'title',
         ];
 
+        public $hidden = [
+            'type' => 'post',
+        ];
+
         #SETTERS
         public function setID($id){
             $this->tag_id = $id;
@@ -38,6 +42,9 @@
 
         #GETTERS
         public function id(){
+            return $this->tag_id;
+        }
+        public function get_id(){
             return $this->tag_id;
         }
 

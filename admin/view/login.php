@@ -82,7 +82,7 @@
 	if ($output_form) { ?>
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3">
+				<div class="col-sm-6 col-lg-6 col-sm-offset-3 push-lg-3">
 					<form id="login" action="<?= $_SERVER['PHP_SELF'];?>" method="post" enctype="mulipart/form-data">
 						<input type="text" name="username" placeholder="Username"/><br />
 						<input type="password" name="password" placeholder="Password"/><br />

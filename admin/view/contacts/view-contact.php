@@ -2,7 +2,7 @@
 
 <div class="container">
 	<div class="row">
-		<div class="col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3">
+		<div class="col-sm-6 col-lg-6 col-sm-offset-3 push-lg-3">
 			<form method="post" action="<?= ADMIN.'contacts/info/'.$contact->contact_id.'/'.$contact->firstName(); ?>">
 				<input type="hidden" name="id" value="<?= $contact->contact_id; ?>"/>
 				<input type="hidden" name="name" value="<?= $contact->firstName(); ?>"/>
@@ -19,7 +19,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3">
+		<div class="col-sm-6 col-lg-6 col-sm-offset-3 push-lg-3">
 			<h1><?= $contact->firstName().' '.$contact->lastName(); ?></h1>
 			<img class="left" src="<?= '/admin/'.$contact->img_path; ?>"/>
 			<table>

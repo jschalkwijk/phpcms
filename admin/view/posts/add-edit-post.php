@@ -25,7 +25,7 @@
 ?>
 <div id="main" class="container">
 	<div class="row">
-		<div class="col-sm-6 col-md-6">
+		<div class="col-sm-6 col-lg-6">
 			<?php
 			if (isset($_POST['submit'])) {
 				echo '<div class="container medium">';
@@ -37,7 +37,7 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-sm-6 col-md-6">
+		<div class="col-sm-6 col-lg-6">
 			<?php if ($output_form) {
                 foreach ($posts as $post) {
                     (isset($params[0]) && isset($params[1])) ? $action = ADMIN . 'posts/edit-posts/' . $post->post_id . '/' . $post->title : $action = ADMIN . 'posts/add-post';
@@ -52,12 +52,19 @@
                             <option name="none" value="None">None</option>
                             <?php $category = Categories::getSelected($post->category_id, 'post'); ?>
                         </select>
-						<select id="tags" name="tag_id">
+						<select id="tags" name="tag_id" multiple>
                             <option name="none" value="None">None</option>
-                            <?php foreach($data['tags'] as $tag){
-								print_r($tag);
-								echo "<option name='$tag->title' value='$tag->tag_id'>$tag->title</option>";
-							} ?>
+							<?php
+								foreach ($data['tags'] as $tag){
+									if(!in_array($tag->tag_id,$data['selectedTag'])) {
+										echo "<option name='$tag->title' value='$tag->tag_id'>$tag->title</option>";
+									} else {
+										echo "<option name='$tag->title' value='$tag->tag_id' selected>$tag->title</option>";
+									}
+								}
+							?>
+
+
                         </select>
                         <input type="text" name="category" placeholder="Category"
                                value="<?= $post->keep($post->category); ?>"/><br/>
@@ -77,7 +84,7 @@
             } ?>
 
         </div>
-		<div id="return" class="col-sm-6 col-md-6">
+		<div id="return" class="col-sm-6 col-lg-6">
 			<?php
 				require_once('view/shared/include-files-tinymce.php');
 			?>

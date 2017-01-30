@@ -11,7 +11,7 @@ if(!empty($data['customer'])) {
 </div>
 <div class="container center">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-lg-6">
             <form>
                 <table>
                     <thead></thead>
