@@ -173,7 +173,7 @@ abstract class Model
      * @return Object Array
      *
      */
-    public static function single($id,$joins = null)
+    public static function one($id,$joins = null)
     {
         $model = new static;
         $model->connection = $model->database->connect();

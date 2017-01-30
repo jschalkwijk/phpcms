@@ -68,7 +68,7 @@ class Contacts extends Controller
 
     public function editContact($params = null)
     {
-        $contact = Contact::single($params[0]);
+        $contact = Contact::one($params[0]);
         if (isset($_POST['submit_file']) || !empty($_FILES['files']['name'][0])) {
             $file_dest = 'files/users/' . $_SESSION['username'] . '/';
             $thumb_dest = 'files/thumbs/users/' . $_SESSION['username'] . '/';
@@ -103,7 +103,7 @@ class Contacts extends Controller
     public function info($params = null)
     {
         $this->UserActions('contacts');
-        $contact = Contact::single($params[0]);
+        $contact = Contact::one($params[0]);
         $this->view(
             'Add contact',
             ['contacts/view-contact.php'],

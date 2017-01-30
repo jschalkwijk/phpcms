@@ -10,7 +10,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-4 col-md-offset-4">
+        <div class="col-md-4 push-md-4">
             <div class="center">
                 <?php
                     if (isset($_POST['submit'])) {

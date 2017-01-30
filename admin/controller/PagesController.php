@@ -79,7 +79,7 @@ class Pages extends Controller
 
     public function EditPages($params = null)
     {
-        $page = Page::single($params[0]);
+        $page = Page::one($params[0]);
         if (!isset($_POST['submit'])) {
             $this->view(
                 'Edit Page',

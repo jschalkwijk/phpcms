@@ -44,7 +44,7 @@ class Cart extends Controller
         $quantity = trim((int)$_POST['quantity']);
 
         // TO DO: create exists function to only check if it exists.
-        $product = Product::single($id);
+        $product = Product::one($id);
 
         if (!$product) {
             header('Location: ' . ADMIN . 'cart');
@@ -64,7 +64,7 @@ class Cart extends Controller
         $id = $params[0];
         $quantity = trim((int)$_POST['quantity']);
         echo $quantity;
-        $product = Product::single($id);
+        $product = Product::one($id);
 
         $this->basket->update($product[0], $quantity);
         header('Location: ' . ADMIN . 'cart');

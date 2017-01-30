@@ -42,7 +42,7 @@
 
         public function edit($params = null)
         {
-            $tag = Tag::single($params[0])[0];
+            $tag = Tag::one($params[0])[0];
             if(isset($_POST['submit'])){
                 $tag->patch($_POST);
                 if(!empty($tag->title) ) {

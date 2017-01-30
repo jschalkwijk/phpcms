@@ -82,7 +82,7 @@ class Categories extends Controller
     //
     public function EditCategories($params = null)
     {
-        $category = Cat::single($params[0]);
+        $category = Cat::one($params[0]);
         if (!isset($_POST['submit'])) {
             $this->view(
                 'Edit Categories',

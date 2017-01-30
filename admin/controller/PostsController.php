@@ -89,7 +89,7 @@ class Posts extends Controller
             JS . 'checkAll.js'
         ];
 
-        $post = Post::single($params[0]);
+        $post = Post::one($params[0]);
         $tags = Tag::allWhere(['type' => 'post']);
         $selectedTag = [];
         foreach ($post[0]->tags() as $tag) {

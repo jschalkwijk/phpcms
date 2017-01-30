@@ -68,7 +68,7 @@ class Users extends Controller {
 			User::addProfileIMG($file_dest,$thumb_dest,$params);
 		}
 
-		$user = User::single($params[0]);
+		$user = User::one($params[0]);
 
 		if(!isset($_POST['submit'])){
 			$this->view(
@@ -101,7 +101,7 @@ class Users extends Controller {
 		if(empty($params)){
 			$params = [$_SESSION['user_id'],$_SESSION['username']];
 		}
-		$user = User::single($params[0]);;
+		$user = User::one($params[0]);;
 		$this->view(
 			'User',
 			['users/profile.php'],

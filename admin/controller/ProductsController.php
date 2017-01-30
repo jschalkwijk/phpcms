@@ -69,7 +69,7 @@ class Products extends Controller
 
     public function editProduct($params = null)
     {
-        $product = Product::Single($params[0]);
+        $product = Product::one($params[0]);
 
         if (!isset($_POST['submit'])) {
             $this->view(
@@ -115,7 +115,7 @@ class Products extends Controller
             File::downloadFiles();
         }
 
-        $product = Product::Single($params[0]);
+        $product = Product::one($params[0]);
         $this->view(
             'Product ' . $params[1],
             ['products/view-product.php'],
