@@ -20,7 +20,7 @@
 
 <?php
 
-	$posts = $data['post'];
+	$post = $data['post'];
 	(isset($data['output_form'])) ? $output_form = $data['output_form'] : $output_form = true;
 ?>
 <div id="main" class="container">
@@ -29,8 +29,7 @@
 			<?php
 			if (isset($_POST['submit'])) {
 				echo '<div class="container medium">';
-					echo implode(",",$data['errors']);
-//					echo implode(",",$data['messages']);
+					echo implode(",",$data['messages']);
 				echo '</div>';
 			}
 			?>
@@ -38,51 +37,47 @@
 	</div>
 	<div class="row">
 		<div class="col-sm-6 col-lg-6">
-			<?php if ($output_form) {
-                foreach ($posts as $post) {
-                    (isset($params[0]) && isset($params[1])) ? $action = ADMIN . 'posts/edit' . $post->post_id : $action = ADMIN . 'posts/create';
-                    ?>
-                    <form id="addpost-form" class="large" action="<?= $action; ?>" method="post">
-                        <input type="text" name="title" placeholder="Title"
-                               value="<?= $post->keep($post->title); ?>"><br/>
-                        <input type="text" name="description" placeholder="Post Description (max 160 characters)"
-                               value="<?= $post->keep($post->description) ?>"/><br/>
-                        <label for="select">Category</label>
-                        <select id="categories" name="category_id">
-                            <option name="none" value="None">None</option>
-                            <?php $category = Categories::getSelected($post->category_id, 'post'); ?>
-                        </select>
-						<select id="tags" name="tag_id" multiple>
-                            <option name="none" value="None">None</option>
-							<?php
-								foreach ($data['tags'] as $tag){
-									if(!in_array($tag->tag_id,$data['selectedTag'])) {
-										echo "<option name='$tag->title' value='$tag->tag_id'>$tag->title</option>";
-									} else {
-										echo "<option name='$tag->title' value='$tag->tag_id' selected>$tag->title</option>";
-									}
-								}
-							?>
+		<?php
+			(isset($params[0])) ? $action = ADMIN . 'posts/edit/' . $post->post_id : $action = ADMIN . 'posts/create';
+			?>
+			<form id="addpost-form" class="large" action="<?= $action; ?>" method="post">
+				<input type="text" name="title" placeholder="Title"
+					   value="<?= $post->keep($post->title); ?>"><br/>
+				<input type="text" name="description" placeholder="Post Description (max 160 characters)"
+					   value="<?= $post->keep($post->description) ?>"/><br/>
+				<label for="select">Category</label>
+				<select id="categories" name="category_id">
+					<option name="none" value="None">None</option>
+					<?php $category = Categories::getSelected($post->category_id, 'post'); ?>
+				</select>
+				<select id="tags" name="tag_id" multiple>
+					<option name="none" value="None">None</option>
+					<?php
+						foreach ($data['tags'] as $tag){
+							if(!in_array($tag->tag_id,$data['selectedTag'])) {
+								echo "<option name='$tag->title' value='$tag->tag_id'>$tag->title</option>";
+							} else {
+								echo "<option name='$tag->title' value='$tag->tag_id' selected>$tag->title</option>";
+							}
+						}
+					?>
 
 
-                        </select>
-                        <input type="text" name="category" placeholder="Category"
-                               value="<?= $post->keep($post->category); ?>"/><br/>
-                        <input type="hidden" name="cat_type" value="post"/><br/>
-                        <textarea type="text" name="content"
-                                  placeholder="Content"><?= $post->keep($post->content); ?></textarea><br/>
+				</select>
+				<input type="text" name="category" placeholder="Category"
+					   value="<?= $post->keep($post->category); ?>"/><br/>
+				<input type="hidden" name="cat_type" value="post"/><br/>
+				<textarea type="text" name="content"
+						  placeholder="Content"><?= $post->keep($post->content); ?></textarea><br/>
 
-                        <?php if (isset($params[0]) && isset($params[1])) { ?>
-                            <p>Are you sure you want to edit the following product?</p>
-                            <input type="radio" name="confirm" value="Yes"/> Yes
-                            <input type="radio" name="confirm" value="No" checked="checked"/> No <br/>
-                        <?php } ?>
+				<?php if (isset($params[0]) && isset($params[1])) { ?>
+					<p>Are you sure you want to edit the following product?</p>
+					<input type="radio" name="confirm" value="Yes"/> Yes
+					<input type="radio" name="confirm" value="No" checked="checked"/> No <br/>
+				<?php } ?>
 
-                        <button type="submit" name="submit">Submit</button>
-                    </form>
-                <?php }
-            } ?>
-
+				<button type="submit" name="submit">Submit</button>
+			</form>
         </div>
 		<div id="return" class="col-sm-6 col-lg-6">
 			<?php

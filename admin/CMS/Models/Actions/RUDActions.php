@@ -25,18 +25,19 @@ class RUDActions{
 
 	protected static function update(Model $model,$checkbox,$columns){
         $primaryKey = substr($model->table, 0, -1).'_id';
-        if($model->table == 'categories'){
-            $primaryKey = 'category_id';
-        }
+
         $query = $model->update($columns).$model->whereIN([$primaryKey => $checkbox]);
         $model->newQuery($query);
-//		header('Location: '.ADMIN.$model->table);
+		header('Location: '.ADMIN.$model->table);
 	}
 	public static function delete_selected($model,$checkbox){
 		$db = new DBC;
 		$dbc = $db->connect();
 
-		$id_row = substr($model->table, 0, -1).'_id';
+		$primaryKey = substr($model->table, 0, -1).'_id';
+		if($model->table == 'categories'){
+			$primaryKey = 'category_id';
+		}
 		$multiple = implode(",",$checkbox);
 		$flag = false;
 		$messages = [];
@@ -51,7 +52,7 @@ class RUDActions{
 
 		if($flag) {
             try{
-			    $dbc->query("DELETE FROM " . $model->table . " WHERE " . $id_row . " IN({$multiple})");
+			    $dbc->query("DELETE FROM " . $model->table . " WHERE " . $primaryKey . " IN({$multiple})");
             } catch (\PDOException $e){
                 echo $e->getMessage();
             }
@@ -62,7 +63,7 @@ class RUDActions{
 		if(!empty($messages)) {
 			return ['messages' => $messages];
 		} else {
-			header('Location: ' . ADMIN . $model->table . '/deleted-' . $model->table);
+			header('Location: ' . ADMIN . $model->table . '/deleted');
 		}
 	}
 

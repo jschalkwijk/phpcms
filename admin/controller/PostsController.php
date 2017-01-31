@@ -4,9 +4,11 @@ use CMS\Models\Posts\Post;
 use CMS\Models\Controller\Controller;
 use CMS\Models\Tag\Tag;
 use CMS\Models\Actions\UserActions;
+use CMS\Models\Categories\Categories as Cat;
+
 class Posts extends Controller
 {
-
+    public $messages = [];
     use UserActions;
 
     public function index($params = null)
@@ -32,52 +34,53 @@ class Posts extends Controller
         );
     }
     //
-    public function create($params = null)
-    {
-        $scripts = [
-            JS . 'mceAddons.js',
-            JS . 'checkAll.js'
-        ];
-        $tags = Tag::all();
-
-        if (!isset($_POST['submit'])) {
-            $post = new Post();
-            $this->view(
-                'Add Post',
-                ['posts/add-edit-post.php'],
-                $params,
-                [
-                    'post' => [$post],
-                    'tags' => $tags,
-                    'js' => $scripts
-                ]
-            );
-        } else {
-            $post = new Post($_POST);
-            $add = $post->add();
-            $this->view(
-                'Add Post',
-                ['posts/add-edit-post.php'],
-                $params,
-                [
-                    'output_form' => $add['output_form'],
-                    'post' => [$post],
-                    'tags' => $tags,
-                    'errors' => $add['errors'],
-                    'messages' => $add['messages'],
-                    'js' => $scripts
-                ]
-            );
-        }
-    }
-
-    //
     public function deleted($params = null)
     {
         $posts = Post::allWhere(['trashed' => 1]);
         $this->UserActions($posts[0]);
         $view = ['search' => 'view/search/search-post.php', 'actions' => 'view/shared/manage-content.php'];
         $this->view('Deleted Posts', ['posts/posts.php'], $params, ['posts' => $posts, 'view' => $view, 'trashed' => 1, 'js' => [JS . 'checkAll.js']]);
+    }
+    //
+    public function create($params = null)
+    {
+        $scripts = [
+            JS . 'mceAddons.js',
+            JS . 'checkAll.js'
+        ];
+
+        $tags = Tag::all();
+        $post = new Post($_POST);
+
+        if (isset($_POST['submit'])) {
+            if(!empty($post->category)) {
+                $category = new Cat(['title' => $post->category,'type' => $post->cat_type]);
+                $add = $category->add();
+                // add value to the request to be run by the prepareQuery
+                // otherwise it won't be seen added when save() is called.
+                $post->request['category_id'] = $add['category_id'];
+            }
+            $post->hidden['user_id'] = $this->currentUser;
+            print_r($post->request);
+            if(!empty($post->title) && !empty($post->content) && (!empty($post->category_id) || !empty($post->category) )) {
+                $post->save();
+                header("Location: ".ADMIN."posts");
+            } else {
+                $this->messages[] = "You forgot to fill in one or more of the required fields (title,content).<br />";
+            };
+        }
+
+        $this->view(
+            'Add Post',
+            ['posts/add-edit-post.php'],
+            $params,
+            [
+                'post' => $post,
+                'tags' => $tags,
+                'messages' => $this->messages,
+                'js' => $scripts
+            ]
+        );
     }
 
     //
@@ -89,46 +92,49 @@ class Posts extends Controller
             JS . 'checkAll.js'
         ];
 
-        $post = Post::one($params[0]);
+        $post = Post::one($params[0])[0];
         $tags = Tag::allWhere(['type' => 'post']);
         $selectedTag = [];
-        foreach ($post[0]->tags() as $tag) {
+
+        foreach ($post->tags() as $tag) {
             $selectedTag[] = $tag->tag_id;
         };
 
-        if (!isset($_POST['submit'])) {
-            $this->view(
-                'Edit Post',
-                ['posts/add-edit-post.php'],
-                $params,
-                [
-                    'post' => $post,
-                    'tags' => $tags,
-                    'selectedTag' => $selectedTag,
-                    'output_form' => true,
-                    'js' => $scripts
-                ]
-            );
-        } else {
-            $post = $post[0];
-            $post->request = $_POST;
-            $post->user_id = $_SESSION['user_id'];
-            $edit = $post->edit();
-            $this->view(
-                'Edit Post',
-                ['posts/add-edit-post.php'],
-                $params,
-                [
-                    'post' => [$post],
-                    'tags' => $tags,
-                    'selectedTag' => $selectedTag,
-                    'output_form' => $edit['output_form'],
-                    'errors' => $edit['errors'],
-                    'messages' => $edit['messages'],
-                    'js' => $scripts
-                ]
-            );
+        if (isset($_POST['submit'])) {
+            $post->patch($_POST);
+            if (!empty($post->category)) {
+                echo "Hello!";
+                $category = new Cat(['title' => $post->category, 'type' => $post->cat_type]);
+                $add = $category->add();
+                // add value to the request to be run by the prepareQuery
+                // otherwise it won't be seen added when save() is called.
+
+                $post->patch(['category_id' => $add['category_id']]);
+            }
+            $post->hidden['user_id'] = $this->currentUser;
+            print_r($post->request);
+            //update model but do not save it yet before check.
+
+            if (!empty($post->title) && !empty($post->content) && !empty($post->category_id)) {
+                $post->savePatch();
+                header("Location: ".ADMIN."posts");
+            } else {
+                $this->messages[] = "You forgot to fill in one or more of the required fields (title,content).<br />";
+            };
         }
+
+        $this->view(
+            'Edit Post',
+            ['posts/add-edit-post.php'],
+            $params,
+            [
+                'post' => $post,
+                'tags' => $tags,
+                'selectedTag' => $selectedTag,
+                'messages' => $this->messages,
+                'js' => $scripts
+            ]
+        );
     }
 }
 
