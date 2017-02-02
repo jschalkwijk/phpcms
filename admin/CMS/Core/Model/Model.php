@@ -541,14 +541,41 @@ abstract class Model
     }
 
     ## Relations
-
-    public function morpheus($morphtabel)
+    public function owns($relatedModel)
     {
-        $model = new $morphtabel;
+        $model = new $relatedModel;
         $model->connection = $model->database->connect();
-        //query = $model->joined().$model->orderBy($model->primaryKey,'DESC');
         $model->statement = "SELECT";
-        //echo $query;
-        return $model->newQuery("SELECT * FROM {$model->pivotTable} RIGHT JOIN {$model->table} ON {$model->pivotTable}.tag_id = {$model->table}.tag_id WHERE taggable_type = 'post' AND taggable_id = ".$this->get_id()." ORDER BY {$model->table}.tag_id DESC");
+        $query = "SELECT * FROM {$model->table} WHERE {$this->primaryKey} = {$this->get_id()}";
+        return $model->newQuery($query);
+    }
+
+    /**
+     * @param $relatedModel
+     * @param $foreignKey
+     * @return mixed
+     */
+    public function ownedBy($relatedModel,$foreignKey)
+    {
+        // TODO: Get a pluralizer to edit the pivottable name to change F.E. taggables to taggable and categories to category
+        $model = new $relatedModel;
+        $model->connection = $model->database->connect();
+        $model->statement = "SELECT";
+        $query = "SELECT * FROM {$model->table} WHERE {$model->primaryKey} = {$this->$foreignKey} LIMIT 1";
+        return $model->newQuery($query);
+    }
+    /**
+     * Morpheus returns Polymorphic many to many relationships
+     * @param $relatedModel
+     * @return mixed
+     */
+    public function morpheus($relatedModel)
+    {
+        // TODO: Get a pluralizer to edit the pivottable name to change F.E. taggables to taggable and categories to category
+        $model = new $relatedModel;
+        $model->connection = $model->database->connect();
+        $model->statement = "SELECT";
+        $query = "SELECT * FROM {$model->pivotTable} RIGHT JOIN {$model->table} ON {$model->pivotTable}.{$model->primaryKey} = {$model->table}.{$model->primaryKey} WHERE taggable_type = 'post' AND taggable_id = ".$this->get_id()." ORDER BY {$model->table}.{$model->primaryKey} DESC";
+        return $model->newQuery($query);
     }
 }
