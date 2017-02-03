@@ -5,6 +5,8 @@ use CMS\Models\DBC\DBC;
 use PDO;
 use PDOException;
 
+use CMS\Core\Pluralize\Inflect;
+
 /*
  * Values array na elke query resetten? voorkomt mischien problemen die ik had met het updated van een model
  * en het voorbereiden van statements.
@@ -43,12 +45,19 @@ abstract class Model
 
     /**
      * If the table has relations, specify them in an associative array as foreign table => foreign key
+     * This had to filled if you want your joins stated in the joins array to be actually joined in the query.
      * @var array
      */
     protected $relations = [];
 
     /**
      * If you want to join columns from related tables specify them in an associative array.
+     * Usage: table_name => ['column_name', 'column_name]
+     * Access them in the returned object by : tablename_columnname, like categories_title,users_username etc
+     *  Either use the joins var to join in related tables or use the relations ship functions.
+        I would use join if you just need a few row items. Only use the relation functions if you
+        really need all of it. To just display a category name for example just join that value.
+     *  If joins is used
      * @var array
      */
     protected $joins = [];
@@ -362,6 +371,12 @@ abstract class Model
         return " ORDER BY {$column} {$order}";
     }
 
+
+    /**
+     * Returns a query string to join the specified table and columns. Access them by
+     * tablename_columnname, like categories_title,users_username etc.
+     * @return string
+     */
     public function joined()
     {
         $joins = $this->join();
@@ -557,7 +572,6 @@ abstract class Model
      */
     public function ownedBy($relatedModel,$foreignKey)
     {
-        // TODO: Get a pluralizer to edit the pivottable name to change F.E. taggables to taggable and categories to category
         $model = new $relatedModel;
         $model->connection = $model->database->connect();
         $model->statement = "SELECT";
@@ -575,7 +589,8 @@ abstract class Model
         $model = new $relatedModel;
         $model->connection = $model->database->connect();
         $model->statement = "SELECT";
-        $query = "SELECT * FROM {$model->pivotTable} RIGHT JOIN {$model->table} ON {$model->pivotTable}.{$model->primaryKey} = {$model->table}.{$model->primaryKey} WHERE taggable_type = 'post' AND taggable_id = ".$this->get_id()." ORDER BY {$model->table}.{$model->primaryKey} DESC";
+        $singular = Inflect::singularize($model->pivotTable);
+        $query = "SELECT * FROM {$model->pivotTable} RIGHT JOIN {$model->table} ON {$model->pivotTable}.{$model->primaryKey} = {$model->table}.{$model->primaryKey} WHERE {$singular}_type = 'post' AND {$singular}_id = ".$this->get_id()." ORDER BY {$model->table}.{$model->primaryKey} DESC";
         return $model->newQuery($query);
     }
 }

@@ -15,8 +15,11 @@
 			'users' => 'user_id'
 		];
 
+        // either use the joins var to join in related tables or use the relationsship functions.
+        // I would use join if you just need a few row items. Only use the relation functions if you
+        // really need all of it. To just display a category name for example just join that value.
 		protected $joins = [
-			'categories' => ['title','description'],
+			'categories' => ['title'],
 			'users' => ['username','first_name','last_name']
 		];
 

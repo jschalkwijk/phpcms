@@ -40,6 +40,10 @@ class Categories extends Model{
         return preg_replace("/[\s-]+/", "-", $this->title);
     }
 
+    public function posts()
+    {
+        return $this->owns('CMS\Models\Posts\Post');
+    }
 	// Called from the controller.
 	// First a new contact object needs to be created inside the controller which then is used
 	// to call this function. As you can see, it is using the objects data. The objects data is formed

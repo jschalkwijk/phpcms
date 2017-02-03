@@ -6,6 +6,7 @@
                     echo $cat->title;
                 }
             }
+//            echo $single->categories_title;
             ?></p></td>
 	<td class="td-category">
 		<p>
