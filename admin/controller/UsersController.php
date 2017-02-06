@@ -23,29 +23,21 @@ class Users extends Controller {
 		);
 	}
 	public function create($params = null){
-		if(!isset($_POST['submit'])){
-			$user = new User();
-			$this->view(
-				'Add User',
-				['users/add-edit-user.php'],
-				$params,
-				['user' => $user]
-			);
-		} else {
+		$user = new User();
+		$messages = [];
+		if(isset($_POST['submit'])){
 			$user = new User($_POST);
-			$add = $user->add();
-			$this->view(
-				'Add User',
-				['users/add-edit-user.php'],
-				$params,
-				[
-					'user' => $user,
-					'output_form' => $add['output_form'],
-					'errors' => $add['errors'],
-					'messages' => $add['messages']
-				]
-			);
+			$user->add();
 		}
+		$this->view(
+			'Add User',
+			['users/add-edit-user.php'],
+			$params,
+			[
+				'user' => $user,
+				'messages' => $messages,
+			]
+		);
 	}
 	public function deleted($params = null){
 		$users = User::allWhere(['trashed' => 1]);
