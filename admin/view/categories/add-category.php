@@ -1,5 +1,5 @@
 <a href="categories/deleted"><button>Deleted Categories</button></a>
-<?php if (isset($data['errors'])) { echo implode(",",$data['errors']); } ?>
+<?php if (isset($data['messages'])) { echo implode(",",$data['messages']); } ?>
 <form id="addpost-form" action="<?= ADMIN."categories";?>" method="post">
     <input type="text" name="title" placeholder="Category"><br />
     <label for="post">Post</label>

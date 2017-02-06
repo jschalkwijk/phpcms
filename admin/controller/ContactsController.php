@@ -41,29 +41,22 @@ class Contacts extends Controller
 
     public function create($params = null)
     {
-        if (!isset($_POST['submit'])) {
-            $contact = new Contact();
-            $this->view(
-                'Add contact',
-                ['contacts/add-contact.php'],
-                $params,
-                ['contact' => [$contact]]
-            );
-        } else {
+        $contact = new Contact();
+        if (isset($_POST['submit'])) {
             $contact = new Contact($_POST);
             $add = $contact->add();
-            $this->view(
-                'Add contact',
-                ['contacts/add-contact.php'],
-                $params,
-                [
-                    'output_form' => $add['output_form'],
-                    'contact' => [$contact],
-                    'errors' => $add['errors'],
-                    'messages' => $add['messages']
-                ]
-            );
         }
+        $this->view(
+            'Add contact',
+            ['contacts/add-contact.php'],
+            $params,
+            [
+                'output_form' => $add['output_form'],
+                'contact' => $contact,
+                'errors' => $add['errors'],
+                'messages' => $add['messages']
+            ]
+        );
     }
 
     public function edit($params = null)
@@ -75,29 +68,21 @@ class Contacts extends Controller
             Contact::addProfileIMG($file_dest, $thumb_dest, $params);
         }
 
-        if (!isset($_POST['submit'])) {
-            $this->view(
-                'Add contact',
-                ['contacts/edit-contact.php'],
-                $params,
-                ['contact' => $contact]
-            );
-        } else {
-            $contact = $contact[0];
+        if (isset($_POST['submit'])) {
             $contact->request = $_POST;
             $contact->user_id = $_SESSION['user_id'];
             $add = $contact->edit();
-            $this->view(
-                'Edit',
-                ['contacts/edit-contact.php'],
-                $params,
-                ['output_form' => $add['output_form'],
-                 'contact' => [$contact],
-                 'errors' => $add['errors'],
-                 'messages' => $add['messages']
-                ]
-            );
         }
+        $this->view(
+            'Add contact',
+            ['contacts/edit-contact.php'],
+            $params,
+            [
+                'contact' => $contact,
+                'errors' => $add['errors'],
+                 'messages' => $add['messages']
+            ]
+        );
     }
 
     public function info($params = null)

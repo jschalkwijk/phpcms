@@ -14,7 +14,7 @@ tinymce.init({
 
 <?php
 
-	$products = $data['product'];
+	$product = $data['product'];
 
 	(isset($data['output_form'])) ? $output_form = $data['output_form'] : $output_form = true;
 ?>
@@ -35,7 +35,6 @@ tinymce.init({
 		<div class="col-sm-6 col-lg-6">
 			<?php
 				if ($output_form){
-                    foreach($products as $product) {
                         (isset($params[0]) && isset($params[1])) ? $action = ADMIN.'products/edit/'.$product->product_id : $action = ADMIN.'products/create';
             ?>
                         <form id="addpost-form" action="<?= $action; ?>" method="post">
@@ -61,7 +60,7 @@ tinymce.init({
 
                             <button type="submit" name="submit">Submit</button>
                         </form>
-                    <?php }
+                    <?php
                 } ?>
 
         </div>

@@ -190,7 +190,8 @@ abstract class Model
 
         $query = $model->select().$joins['as'].$model->from().$joins['on'].$model->where([$model->primaryKey => $id]);
         echo $query;
-        return $model->newQuery($query);
+        // newQuery returns an array, so for only one item, we are returning the first value [0]
+        return $model->newQuery($query)[0];
     }
 
     /**
@@ -575,7 +576,7 @@ abstract class Model
         $model = new $relatedModel;
         $model->connection = $model->database->connect();
         $model->statement = "SELECT";
-        $query = "SELECT * FROM {$model->table} WHERE {$model->primaryKey} = {$this->$foreignKey} LIMIT 1";
+        $query = "SELECT * FROM {$model->table} WHERE {$model->primaryKey} = {$this->$foreignKey}";
         return $model->newQuery($query);
     }
     /**

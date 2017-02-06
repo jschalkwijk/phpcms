@@ -42,59 +42,45 @@ class Products extends Controller
 
     public function create($params = null)
     {
-        if (!isset($_POST['submit'])) {
-            $product = new Product();
-            $this->view(
-                'Add Product',
-                ['products/add-edit-product.php'],
-                $params,
-                ['product' => [$product]]
-            );
-        } else {
+        $product = new Product();
+
+        if (isset($_POST['submit'])) {
             $product = new Product($_POST);
             $add = $product->add();
-            $this->view(
-                'Add Product',
-                ['products/add-edit-product.php'],
-                $params,
-                [
-                    'product' => [$product],
-                    'output_form' => $add['output_form'],
-                    'errors' => $add['errors'],
-                    'messages' => $add['messages']
-                ]
-            );
         }
+        $this->view(
+            'Add Product',
+            ['products/add-edit-product.php'],
+            $params,
+            [
+                'product' => $product,
+                'output_form' => $add['output_form'],
+                'errors' => $add['errors'],
+                'messages' => $add['messages']
+            ]
+        );
     }
 
     public function edit($params = null)
     {
         $product = Product::one($params[0]);
 
-        if (!isset($_POST['submit'])) {
-            $this->view(
-                'Edit Product',
-                ['products/add-edit-product.php'],
-                $params,
-                ['product' => $product]
-            );
-        } else {
-            $product = $product[0];
+        if (isset($_POST['submit'])) {
             $product->request = $_POST;
             $product->user_id = $_SESSION['user_id'];
             $edit = $product->edit();
-            $this->view(
-                'Edit Product',
-                ['products/add-edit-product.php'],
-                $params,
-                [
-                    'product' => [$product],
-                    'output_form' => $edit['output_form'],
-                    'errors' => $edit['errors'],
-                    'messages' => $edit['messages']
-                ]
-            );
         }
+        $this->view(
+            'Edit Product',
+            ['products/add-edit-product.php'],
+            $params,
+            [
+                'product' => $product,
+                'output_form' => $edit['output_form'],
+                'errors' => $edit['errors'],
+                'messages' => $edit['messages']
+            ]
+        );
     }
 
     public function info($params = null)

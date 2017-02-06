@@ -39,63 +39,12 @@ class Categories extends Model{
 	public function getlink(){
         return preg_replace("/[\s-]+/", "-", $this->title);
     }
-
+	#Relations
     public function posts()
     {
         return $this->owns('CMS\Models\Posts\Post');
     }
-	// Called from the controller.
-	// First a new contact object needs to be created inside the controller which then is used
-	// to call this function. As you can see, it is using the objects data. The objects data is formed
-	// by Post values passed to the object inside the controller.
 
-	public function edit(){
-
-		$messages = array();
-		$errors = array();
-		$output_form = false;
-
-            $this->hidden['user_id'] = $this->user_id;
-            $this->patch();
-            if(!empty($this->title) && $this->request['confirm'] === 'Yes' ) {
-                $this->savePatch();
-                $output_form = true;
-            } else {
-                $errors[] = "You forgot to fill in one or more of the required fields (title).<br />";
-            };
-
-			$messages[] = '<p>The category with title was successfully edited.';
-
-		// We return an array which contains value that can be passed from the controller to the view.
-		// If the form needs to be outputted, errors or success messages.
-		return ['output_form' => $output_form,'messages' => $messages, 'errors' => $errors];
-	}
-
-	// Called from the controller.
-	// First a new contact object needs to be created inside the controller which then is used
-	// to call this function. As you can see, it is using the objects data. The objects data is formed
-	// by Post values passed to the object inside the controller.
-	// It also updates the category table if a category is created.
-	public function add() {
-		$errors = array();
-		if(!empty($this->title)) {
-            $this->hidden['user_id'] = $_SESSION['user_id'];
-            print_r($this->request);
-            if(!empty($this->title) && !empty($this->type)) {
-                $this->save();
-                $category_id = $this->connection->lastInsertId();
-                echo "Category_id: ".$category_id;
-                $messages[] = 'Your post has been added/edited.<br />';
-            } else {
-                $errors[] = "You forgot to fill in one or more of the required fields (title).<br />";
-            };
-		} else {
-			$errors[] = 'You forgot to type in a category name.';
-		}
-		// We return an array which contains value that can be passed from the controller to the view.
-		// If the form needs to be outputted, errors or success messages.
-		return ['errors' => $errors,'category_id' => $category_id,'category_name' => $this->title];
-	}
 	// Returns a list of options with all the categories that are of the defined type.
 	// like type: post, type: product, type: page.
 	// We want to automatically have the te current category selected if we update a post

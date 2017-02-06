@@ -61,8 +61,6 @@
 							}
 						}
 					?>
-
-
 				</select>
 				<input type="text" name="category" placeholder="Category"
 					   value="<?= $post->keep($post->category); ?>"/><br/>

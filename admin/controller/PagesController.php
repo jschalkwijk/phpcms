@@ -80,33 +80,23 @@ class Pages extends Controller
     public function edit($params = null)
     {
         $page = Page::one($params[0]);
-        if (!isset($_POST['submit'])) {
-            $this->view(
-                'Edit Page',
-                ['pages/add-edit-page.php'],
-                $params,
-                [
-                    'page' => $page,
-                    'output_form' => true
-                ]
-            );
-        } else {
-//            $page = new Page($_POST);
-//            $page->page_id = $params[0];
-            $page = $page[0];
+        $messages = [];
+
+        if (isset($_POST['submit'])) {
             $page->request = $_POST;
             $edit = $page->add();
-            $this->view(
-                'Edit Page',
-                ['pages/add-edit-page.php'],
-                $params,
-                [
-                    'page' => [$page],
-                    'output_form' => $edit['output_form'],
-                    'messages' => $edit['messages']
-                ]
-            );
+            $messages = $edit['messages'];
         }
+
+        $this->view(
+            'Edit Page',
+            ['pages/add-edit-page.php'],
+            $params,
+            [
+                'page' => $page,
+                'messages' => $messages,
+            ]
+        );
 
     }
 

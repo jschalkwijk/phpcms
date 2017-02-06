@@ -1,7 +1,6 @@
 <?php
 	namespace CMS\Models\Posts;
 
-	use CMS\Models\Categories\Categories as Cat;
 	use CMS\Core\Model\Model;
 
 	class Post extends Model {
@@ -68,55 +67,6 @@
 		public function setTitle($title){
 			$this->title = $title;
 		}
-
-//		public function add()
-//		{
-//			if(!empty($this->category)) {
-//				$category = new Cat(['title' => $this->category,'type' => $this->cat_type]);
-//				$add = $category->add();
-//				// add value to the request to be run by the prepareQuery
-//				// otherwise it won't be seen added when save() is called.
-//				$this->request['category_id'] = $add['category_id'];
-//			}
-//			$this->hidden['user_id'] = $_SESSION['user_id'];
-//			print_r($this->request);
-//			if(!empty($this->title) && !empty($this->content) && (!empty($this->category_id) || !empty($this->category) )) {
-//				$this->save();
-//				$messages[] = 'Your post has been added/edited.<br />';
-//				$output_form = true;
-//			} else {
-//				$errors[] = "You forgot to fill in one or more of the required fields (title,content).<br />";
-//				$output_form = false;
-//			};
-//
-//			return ['output_form' => $output_form, 'errors' => $errors, 'messages' => $messages];
-//		}
-//
-//		public function edit()
-//		{
-//			if(!empty($this->request['category'])) {
-//				echo "Hello!";
-//				$category = new Cat(['title' => $this->request['category'],'type' => $this->request['cat_type']]);
-//				$add = $category->add();
-//				// add value to the request to be run by the prepareQuery
-//				// otherwise it won't be seen added when save() is called.
-//				$this->request['category_id'] = $add['category_id'];
-//			}
-//			$this->hidden['user_id'] = $this->user_id;
-//			print_r($this->request);
-//			//update model but do not save it yet before check.
-//			$this->patch();
-//			if(!empty($this->title) && !empty($this->content) && !empty($this->category_id)) {
-//				$this->savePatch();
-//				$messages[] = 'Your post has been added/edited.<br />';
-//				$output_form = true;
-//			} else {
-//				$errors[] = "You forgot to fill in one or more of the required fields (title,content).<br />";
-//				$output_form = true;
-//			};
-//
-//			return ['output_form' => $output_form, 'errors' => $errors, 'messages' => $messages];
-//		}
 
 	}
 	?>

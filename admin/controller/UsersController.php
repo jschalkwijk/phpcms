@@ -29,7 +29,7 @@ class Users extends Controller {
 				'Add User',
 				['users/add-edit-user.php'],
 				$params,
-				['user' => [$user]]
+				['user' => $user]
 			);
 		} else {
 			$user = new User($_POST);
@@ -69,33 +69,22 @@ class Users extends Controller {
 		}
 
 		$user = User::one($params[0]);
+		$messages = [];
 
-		if(!isset($_POST['submit'])){
-			$this->view(
-				'Edit User',
-				['users/add-edit-user.php'],
-				$params,
-				[
-					'user' => $user,
-					'output_form' => true
-				]
-			);
-		} else {
-			$user = $user[0];
+		if(isset($_POST['submit'])){
 			$user->request = $_POST;
-			$edit = $user->edit();
-			$this->view(
-				'Edit User',
-				['users/add-edit-user.php'],
-				$params,
-				[
-					'user' => [$user],
-					'output_form' => $edit['output_form'],
-					'errors' => $edit['errors'],
-					'messages' => $edit['messages']
-				]
-			);
+			$user->edit();
 		}
+
+		$this->view(
+			'Edit User',
+			['users/add-edit-user.php'],
+			$params,
+			[
+				'user' => $user,
+				'messages' => $messages,
+			]
+		);
 	}
 	public function Profile($params = null){
 		if(empty($params)){

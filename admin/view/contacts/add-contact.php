@@ -12,7 +12,7 @@
 </script>
 <?php
 
-$contacts = $data['contact'];
+$contact = $data['contact'];
 (isset($data['output_form'])) ? $output_form = $data['output_form'] : $output_form = true;
 ?>
 <div class="container">
@@ -45,34 +45,28 @@ $contacts = $data['contact'];
     </div>
         <div class="row">
             <div class="col-sm-6 col-lg-6 col-sm-offset-3 push-lg-3">
-                <?php
-                    if ($output_form) {
-                        foreach($contacts as $contact){
-                            $action = ADMIN . 'contacts/create';
-                        ?>
-                            <form id="create-form" method="post" action="<?= $action; ?>">
-                                <input type="hidden" name="contact_id" value="<?= $contact->contact_id; ?>"/>
-                                <input type="text" name="first_name" placeholder="First Name" value="<?= $contact->keep($contact->first_name); ?>"/><br/>
-                                <input type="text" name="last_name" placeholder="Last Name"
-                                       value="<?= $contact->keep($contact->last_name); ?>"/><br/>
-                                <input type="tel" name="phone_1" placeholder="Phone 1" value="<?= $contact->keep($contact->phone_1); ?>"/><br/>
-                                <input type="tel" name="phone_2" placeholder="Phone 2" value="<?= $contact->keep($contact->phone_2); ?>"/><br/>
-                                <input type="email" name="email_1" placeholder="E-mail 1" value="<?= $contact->keep($contact->mail_1); ?>"/><br/>
-                                <input type="email" name="email_2" placeholder="E-mail 2" value="<?= $contact->keep($contact->mail_2); ?>"/><br/>
-                                <input type="date" name="dob" placeholder="dob" value="<?= $contact->keep($contact->dob); ?>"/><br/>
-                                <input type="text" name="street" placeholder="Street" value="<?= $contact->keep($contact->street); ?>"/><br/>
-                                <input type="number" name="street_num" placeholder="Street Num"
-                                       value="<?= $contact->keep($contact->street_num); ?>"/>
-                                <input type="number" name="street_num_add" placeholder="Add"
-                                       value="<?= $contact->keep($contact->street_num_add); ?>"/><br/>
-                                <input type="" name="zip" placeholder="Zip/Postal" value="<?= $contact->keep($contact->zip); ?>"/><br/>
-                                <p>Personal Notes</p>
-                                <textarea name="notes" placeholder="Notes"><?= $contact->keep($contact->notes); ?></textarea>
-                                <button type="submit" name="submit">Submit</button>
-                                <br/>
-                            </form>
-                <?php   }
-                }   ?>
+                <?php $action = ADMIN . 'contacts/create'; ?>
+                <form id="create-form" method="post" action="<?= $action; ?>">
+                    <input type="hidden" name="contact_id" value="<?= $contact->contact_id; ?>"/>
+                    <input type="text" name="first_name" placeholder="First Name" value="<?= $contact->keep($contact->first_name); ?>"/><br/>
+                    <input type="text" name="last_name" placeholder="Last Name"
+                           value="<?= $contact->keep($contact->last_name); ?>"/><br/>
+                    <input type="tel" name="phone_1" placeholder="Phone 1" value="<?= $contact->keep($contact->phone_1); ?>"/><br/>
+                    <input type="tel" name="phone_2" placeholder="Phone 2" value="<?= $contact->keep($contact->phone_2); ?>"/><br/>
+                    <input type="email" name="email_1" placeholder="E-mail 1" value="<?= $contact->keep($contact->mail_1); ?>"/><br/>
+                    <input type="email" name="email_2" placeholder="E-mail 2" value="<?= $contact->keep($contact->mail_2); ?>"/><br/>
+                    <input type="date" name="dob" placeholder="dob" value="<?= $contact->keep($contact->dob); ?>"/><br/>
+                    <input type="text" name="street" placeholder="Street" value="<?= $contact->keep($contact->street); ?>"/><br/>
+                    <input type="number" name="street_num" placeholder="Street Num"
+                           value="<?= $contact->keep($contact->street_num); ?>"/>
+                    <input type="number" name="street_num_add" placeholder="Add"
+                           value="<?= $contact->keep($contact->street_num_add); ?>"/><br/>
+                    <input type="" name="zip" placeholder="Zip/Postal" value="<?= $contact->keep($contact->zip); ?>"/><br/>
+                    <p>Personal Notes</p>
+                    <textarea name="notes" placeholder="Notes"><?= $contact->keep($contact->notes); ?></textarea>
+                    <button type="submit" name="submit">Submit</button>
+                    <br/>
+                </form>
             </div>
         </div>
 </div>
