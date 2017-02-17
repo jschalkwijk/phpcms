@@ -1,7 +1,7 @@
 <?php
-	use CMS\Models\File\File;
-	use CMS\Models\File\FileWriter;
-	use CMS\Models\File\Folders;
+	use CMS\Models\Files\File;
+	use CMS\Models\Files\FileWriter;
+	use CMS\Models\Files\Folders;
 	use CMS\Models\DBC\DBC;
 ?>
 <div class="container">

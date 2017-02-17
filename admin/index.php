@@ -25,7 +25,6 @@ class APP {
 	private $method;
 	
 	public function router(){
-		$dbc = new DBC;
 		// call URL metod to split the URL and add it to the class $routes.
 		$this->url();
 		

@@ -1,5 +1,5 @@
 <?php
-namespace CMS\Models\File;
+namespace CMS\Models\Files;
 
 // Used by view/albums.php
 class FileWriter{

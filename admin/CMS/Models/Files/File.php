@@ -1,5 +1,5 @@
 <?php
-namespace CMS\Models\File;
+namespace CMS\Models\Files;
 
 use CMS\Models\DBC\DBC;
 use CMS\Models\Actions\FileActions;

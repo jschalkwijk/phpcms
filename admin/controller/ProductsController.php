@@ -3,7 +3,7 @@
 use CMS\Models\Controller\Controller;
 use CMS\Models\Actions\UserActions;
 use CMS\Models\Products\Product;
-use CMS\Models\File\File;
+use CMS\Models\Files\File;
 
 class Products extends Controller
 {

@@ -1,5 +1,5 @@
 <?php
-namespace CMS\Models\File;
+namespace CMS\Models\Files;
 
 use CMS\Models\DBC\DBC;
 use CMS\Models\Actions\FileActions;
@@ -117,7 +117,7 @@ class Folders {
         foreach($data as $row) {
 			echo '<tr class="meta">';
 			echo '<td><img class="glyph-medium" src="'.ADMIN.'images/files.png"/></td>';
-			echo '<td><a href="'.ADMIN.'file/albums/'.$row['album_id'].'/'.$row['name'].'""> '.$row['name'].'</a></td>';
+			echo '<td><a href="'.ADMIN.'files/albums/'.$row['album_id'].'/'.$row['name'].'""> '.$row['name'].'</a></td>';
 			echo '<td>Size</td>';
 			echo '<input type="hidden" name="album_name" value="'.$row['name'].'"/>';
 			echo '<td><input class="checkbox" type="checkbox" name="checkbox[]" value="'.$row['album_id'].'"/></td>';
