@@ -4,16 +4,11 @@ namespace CMS\Models\Files;
 use CMS\Models\DBC\DBC;
 use CMS\Models\Actions\FileActions;
 /*
- *
- * IMPORTANT
- *
  * als ik in een user of product foto's moet uploaden kan ik toch ook in de user table een
  * folder_id row aanmaken, zodat ik meteen het pad van de gelinkte folder kan fetchen.
- *
- *
+
  * */
 class Folders {
-	# Create a construct becaus we can then separate the html from the model.
 	use FileActions;
 
 	/* used by view/add-files.php to get the selected folder and optional folders to

@@ -4,7 +4,7 @@
 		<li><a href="<?php echo ADMIN; ?>">Dashboard</a></li>
 		<li><a href="<?php echo ADMIN."posts"; ?>">Posts</a></li>
 		<li><a href="<?php echo ADMIN."pages"; ?>">Pages</a></li>
-		<li><a href="<?php echo ADMIN."file"; ?>">Files</a></li>
+		<li><a href="<?php echo ADMIN."files"; ?>">Files</a></li>
 		<li><a href="<?php echo ADMIN."contacts"; ?>">Contacts</a></li>
 		<?php if($_SESSION['rights'] == 'Admin') { ?> <li><a href="<?php echo ADMIN."users"; ?>">Users</a></li> <?php } ?>
 		<!--

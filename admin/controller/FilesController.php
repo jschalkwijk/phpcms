@@ -2,7 +2,7 @@
 
 use CMS\Models\Controller\Controller;
 use CMS\Models\Files\Folders;
-use CMS\Models\Files\File as F;
+use CMS\Models\Files\File;
 
 class Files extends Controller
 {
@@ -13,14 +13,17 @@ class Files extends Controller
             Folders::delete_album($_POST['checkbox']);
         }
         if (isset($_POST['delete'])) {
-            F::delete_files($_POST['checkbox']);
+            File::delete_files($_POST['checkbox']);
         }
+        $files = File::allWhere(['album_id' => $params[0]]);
+
         $this->view(
             'Albums',
             [
                 'files/albums.php'
             ],
-            $params
+            $params,
+            ['files' => $files]
         );
     }
 
@@ -30,17 +33,19 @@ class Files extends Controller
             Folders::delete_album($_POST['checkbox']);
         }
         if (isset($_POST['delete'])) {
-            F::delete_files($_POST['checkbox']);
+            File::delete_files($_POST['checkbox']);
         }
         if (isset($_GET['download_files'])) {
-            F::downloadFiles();
+            File::downloadFiles();
         }
+        $files = File::allWhere(['album_id' => $params[0]]);
         $this->view(
             'Albums',
             [
                 'files/albums.php'
             ],
             $params,
+            ['files' => $files],
             ['js' => [JS . 'checkAll.js']]
         );
     }

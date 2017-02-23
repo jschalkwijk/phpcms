@@ -11,7 +11,6 @@
 // package index.php
 //ROUTING
 require_once('config.php');
-use CMS\Models\DBC\DBC;
 use CMS\Core\Auth\Auth;
 
 Auth::authenticate();

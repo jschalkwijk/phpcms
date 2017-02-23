@@ -1,8 +1,5 @@
 <?php
-	use CMS\Models\Files\File;
-	use CMS\Models\Files\FileWriter;
 	use CMS\Models\Files\Folders;
-	use CMS\Models\DBC\DBC;
 ?>
 <div class="container">
     	<div class="row">
@@ -13,8 +10,6 @@
 	<div class="row">
 		<div class="col-lg-6 col-lg-6 push-lg-3 col-lg-offset-3">
 			<?php
-				$dbc = new DBC;
-				$album_id = null;
 				if(isset($params[1])) {
 					$album_id = trim((int)$params[0]);
 					$album_name = trim($params[1]);
@@ -24,21 +19,25 @@
 					$img = ['jpg', 'jpeg', 'png'];
 					$url = $_SERVER["REQUEST_URI"];
 					echo '<form method="get" action="' . $url . '">';
+				} else {
+					$album_id = 0;
+				}
 			?>
 			<form id="check-files" method="post" action="<?= $url; ?>">
 				<table class="files-table">
 					<thead><th></th><th>Name</th><th>Type</th><th>Size</th></thead>
 					<tbody>
 						<?php
-						$files = File::fetchFilesByAlbum($album_id,0);
-						FileWriter::write($files,'view/files/single-file.php',$doc,$img);
-						?>
+                            $files = $data['files'];
+                            foreach($files as $single){
+								require 'view/files/single-file.php';
+							}
+                        ?>
 					</tbody>
 				</table>
 				<button type="submit" name="delete" id="delete">Delete Selected</button>
 				<button type="submit" name="download_files" id="download_files">Download files</button>
 			</form>
-			<?php } ?>
 		</div>
 	</div>
 	<div class="row">
