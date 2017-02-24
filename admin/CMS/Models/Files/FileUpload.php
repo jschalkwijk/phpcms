@@ -143,7 +143,7 @@ class FileUpload{
 
 		$path = $this->path;
 		$id = $album_id;
-		$file_dest = $this->file_dest.$path.'/'.$file_name_new;
+		$file_dest = $path.'/'.$file_name_new;
 		/*echo 'Line: 141 | path: '.$path.'<br />';
 
 		echo 'Line 143 | file_dest: '.$file_dest.'<br>';
@@ -154,7 +154,7 @@ class FileUpload{
 		$row = mysqli_fetch_array($data);
 		$id = $row['album_id'];*/
 
-		$thumb_path = $this->thumb_dest.$path.'/'.$thumb_name;
+		$thumb_path = $path.'/thumbs/'.$thumb_name;
 
 		// If upload paths contains 's etc we have to remove the \ (backslash) which is created automaticly.
 		// To insert the path in the Database we have to keep the \ (backslash) otherwise the query will fail.
@@ -165,7 +165,7 @@ class FileUpload{
 		$this->thumb_path = $thumb_path;
 		$thumb_path = str_replace(array("\\","'"),array("","''"),$thumb_path);
 		$user_id = $_SESSION['user_id'];
-		echo 'Line: 157 | path: '.$path.'<br />';
+		echo 'Line: 168 | path: '.$path.'<br />';
 		if(!empty($album_id)) {
 			if(move_uploaded_file($file_tmp,$path)) {
 				// add to uploade array, we dont use the new filename because thats all numbers,
@@ -191,7 +191,7 @@ class FileUpload{
 	protected function createThumb($file_dest,$file_name_new,$thumb_name,$thumb_dest,$album_name){
 
 		$path = str_replace("\\", "", $this->path);
-		$file_dest = $file_dest.$path.'/'.$file_name_new;
+		$file_dest = $path.'/'.$file_name_new;
 		//echo $file_dest;
 		if(!empty($file_dest)){
 			$image = $file_dest;
@@ -212,7 +212,7 @@ class FileUpload{
 			if ($image_size[2] == 3) { $old_image = imagecreatefrompng($image); }
 			imagecopyresized($new_image, $old_image, 0,0,0,0,$new_width,$new_height, $original_width,$original_height);
 			//echo $path.'<br />';
-			if(imagepng($new_image, $thumb_dest.$path.'/'.$thumb_name)){
+			if(imagepng($new_image, $path.'/thumbs/'.$thumb_name)){
 				return true;
 			} else {
 				return false;
@@ -229,16 +229,23 @@ class FileUpload{
 		// IF A ALBUM NAME ALREADY EXISTS, DON'T CREATE THE ALBUM.
 		$author = $_SESSION['username'];
 		$user_id = $_SESSION['user_id'];
-		(!empty($album_id)) ? $parent_id = trim((int)$album_id) : $parent_id = 0;
-		$file_dest = $this->file_dest.$this->path;
-		$thumb_dest = $this->thumb_dest.$this->path;
+		if(!empty($album_id)) {
+			$parent_id = trim((int)$album_id);
+			$file_dest = $this->path;
+		} else {
+			$parent_id = 0;
+			$file_dest = $this->file_dest.$this->path;
+			$this->path = $file_dest;
+		}
 
-		$path = $this->path;
+		$thumb_dest = $file_dest."/thumbs";
+
+//		$path = $this->path;
 
 		if(!file_exists($file_dest)){
 			try {
                 $query = $dbc->prepare("INSERT INTO albums(name,author,parent_id,path,user_id) VALUES(?,?,?,?,?)");
-				$query->execute([$album_name, $author, $parent_id, $path, $user_id]);
+				$query->execute([$album_name, $author, $parent_id, $file_dest, $user_id]);
 
 				mkdir(str_replace("\\", "", $file_dest), 0744);
 				mkdir(str_replace("\\", "", $thumb_dest), 0744);

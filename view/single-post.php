@@ -1,10 +1,9 @@
 <?php 
-	$posts = $data['post'];
+	$post = $data['post'];
 ?>
 <div class="top-padding">
 	<div class="container large">
 		<div class="row">
-			<?php foreach($posts as $post){ ?>
 			<article>
 				<h1><p class="article-title"><?php echo $post->title; ?></p></h1>
 				<p class="article-meta"><img class="glyph-small" src="<?php echo IMG_PATH.'author.png' ?>"/>
@@ -16,7 +15,6 @@
 				</p>
 				<div class="article-content"><p><?php echo $post->content; ?></p>
 			</article>
-			<? };?>
 		</div>
 	</div>
 </div>

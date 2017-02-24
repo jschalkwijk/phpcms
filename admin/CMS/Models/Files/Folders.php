@@ -1,6 +1,7 @@
 <?php
 namespace CMS\Models\Files;
 
+use CMS\Core\Model\Model;
 use CMS\Models\DBC\DBC;
 use CMS\Models\Actions\FileActions;
 /*
@@ -8,9 +9,45 @@ use CMS\Models\Actions\FileActions;
  * folder_id row aanmaken, zodat ik meteen het pad van de gelinkte folder kan fetchen.
 
  * */
-class Folders {
+class Folders extends Model{
 	use FileActions;
 
+	protected $primaryKey = 'album_id';
+	public $table = 'albums';
+
+	protected $relations = [
+		'users' => 'user_id'
+	];
+
+	// either use the joins var to join in related tables or use the relationsship functions.
+	// I would use join if you just need a few row items. Only use the relation functions if you
+	// really need all of it. To just display a category name for example just join that value.
+	protected $joins = [
+		'users' => ['username']
+	];
+
+	protected $allowed = [
+		'name',
+		'name',
+		'description',
+		'parent_id',
+		'type',
+		'path',
+		'user_id',
+	];
+
+	public function setID($id){
+		$this->id = $id;
+	}
+	public function get_id(){
+		return $this->album_id;
+	}
+
+	#Relations
+	public function files()
+	{
+		return $this->owns('CMS\Models\Files\File');
+	}
 	/* used by view/add-files.php to get the selected folder and optional folders to
 	 * upload files to.
 	 * Main folders don't have a parent folder so the parent_id = 0.
@@ -71,53 +108,10 @@ class Folders {
 
 		foreach($data as $row) {
 			// recursive deleting function. Deletes al folders/files and subfolders/files from server.
-			Folders::removeDir('./././files/'.$row['path']);
-			Folders::removeDir('./././files/'.'thumbs/'.$row['path']);
+			Folders::removeDir('./././'.$row['path']);
+			Folders::removeDir('./././'.$row['path'].'/thumbs');
 		}
 		Folders::removeRows($checkbox);
-		$db->close();
-	}
-
-	/*
-	 * Used in view/albums.php to display the folders inside of the parent folder that is currently
-	 * viewed by the user.
-	 * Selected folders created by the user itself. So NO folders will be displayed that you haven't
-	 * created yourself.
-	*/
-	public static function show_albums($album_id){
-		$db = new DBC;
-		$dbc = $db->connect();
-// Uncomment the below comments and comment the current if statement to only show folders the currentuser created. Update this
-// so the user can specify if the folder is personal or had to be used system wide for every user.
-		$user_id = $_SESSION['user_id'];
-//		if(!empty($album_id)){
-//			$query = "SELECT album_id,name FROM albums WHERE parent_id = $album_id AND user_id = $user_id";
-		if (empty($album_id)) { $album_id = 0; };
-			try {
-                $query = $dbc->prepare("SELECT album_id,name FROM albums WHERE parent_id = ?");
-                $query->execute([$album_id]);
-				$data = $query->fetchAll();
-            } catch (\PDOException $e){
-                echo $e->getMessage();
-            }
-//		} else {
-//			$query = $dbc->prepare("SELECT * FROM albums WHERE parent_id = 0 AND user_id = ?");
-//			$query->bind_param("i",$user_id);
-//			$query->execute();
-//			$data = $query->get_result();
-//			$query->close();
-//			// start form
-//			echo '<form method="get" action="'.$_SERVER["REQUEST_URI"].'" file">';
-//		}
-        foreach($data as $row) {
-			echo '<tr class="meta">';
-			echo '<td><img class="glyph-medium" src="'.ADMIN.'images/files.png"/></td>';
-			echo '<td><a href="'.ADMIN.'files/albums/'.$row['album_id'].'/'.$row['name'].'""> '.$row['name'].'</a></td>';
-			echo '<td>Size</td>';
-			echo '<input type="hidden" name="album_name" value="'.$row['name'].'"/>';
-			echo '<td><input class="checkbox" type="checkbox" name="checkbox[]" value="'.$row['album_id'].'"/></td>';
-			echo '</tr>';
-		}
 		$db->close();
 	}
 	

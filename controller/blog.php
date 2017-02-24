@@ -31,13 +31,13 @@ class Blog extends Controller {
 		$query = $post->select().$joins['as'].$post->from().$joins['on'].$post->where(['category_id' => $params[0]]);
 		$posts = $post->newQuery($query);
 
-		$meta = Categories::single($params[0]);
+		$meta = Categories::one($params[0]);
 		// view takes: page_title,[array of (optional: multiple)view files],params from the router,array of data from model
 		$this->view($params[1],['blog.php'],$params,['posts' => $posts,'meta' => $meta]);
 	}
 	
 	public function Post($params = null){
-		$post = Post::single($params[0]);
+		$post = Post::one($params[0]);
 		$this->view(
             $params[1],
             ['single-post.php'],

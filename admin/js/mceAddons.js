@@ -45,7 +45,9 @@ function handleImagesAdding(){
                 if (checked[i].checked) {
                     string = checked[i].value.split("#");
                     thumb = string[0];
+                    console.log("string: "+thumb);
                     path = string[1];
+                    console.log("path: "+path);
                     insertImages(path,thumb);
                 }
             }

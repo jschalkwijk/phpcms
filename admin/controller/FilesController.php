@@ -15,15 +15,14 @@ class Files extends Controller
         if (isset($_POST['delete'])) {
             File::delete_files($_POST['checkbox']);
         }
-        $files = File::allWhere(['album_id' => $params[0]]);
-
+        $folders = Folders::allWhere(['parent_id'=>0]);
         $this->view(
             'Albums',
             [
                 'files/albums.php'
             ],
             $params,
-            ['files' => $files]
+            ['folders' => $folders]
         );
     }
 
@@ -33,19 +32,21 @@ class Files extends Controller
             Folders::delete_album($_POST['checkbox']);
         }
         if (isset($_POST['delete'])) {
+            print_r($_POST['checkbox']);
             File::delete_files($_POST['checkbox']);
         }
         if (isset($_GET['download_files'])) {
             File::downloadFiles();
         }
-        $files = File::allWhere(['album_id' => $params[0]]);
+        $folder = Folders::one($params[0]);
+        $folders = Folders::allWhere(['parent_id'=>$params[0]]);
         $this->view(
             'Albums',
             [
                 'files/albums.php'
             ],
             $params,
-            ['files' => $files],
+            ['folder' => $folder,'folders' => $folders],
             ['js' => [JS . 'checkAll.js']]
         );
     }

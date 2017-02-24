@@ -1,8 +1,9 @@
 <?php
+	//TODO: removing thumb and path from database table, now we connect teh folder path + filename
 	echo '<tr class="meta">';
 	if (in_array($single->type, $img)){
 		if($single->secured == 0){
-			echo '<td class="media"><a class="image_link" href="'.ADMIN.$single->path.'">'.'<img class="ADMIN" src="'.ADMIN.$single->thumb_path.'"/></a></td>';
+			echo '<td class="media"><a class="image_link" href="'.ADMIN.$folder->path.'/'.$single->file_name.'">'.'<img class="files" src="'.ADMIN.$folder->path.'/thumbs/'.$single->thumb_name.'"/></a></td>';
 		}
 		if($single->secured == 1){
 			echo '<td class="media"><a href="'.ADMIN.'secured/'.$single->album_name.'/'.$single->file_name.'">'.'<img class="ADMIN" src="'.ADMIN.'secured/thumbs/'.$single->albums_album_name.'/'.$single->thumb_name.'"/>'.'</a></td>';
@@ -12,7 +13,7 @@
 	echo '<td>'.$single->type.'</td>';
 	echo '<td>Size</td>';
 	if (in_array($single->type, $doc)){
-		echo '<td><a href="'.$single->path.'">'.'<img class="ADMIN" src="'.IMG.'word.png"/>'.'</a></td>';
+		echo '<td><a href="'.$single->path.'">'.'<img class="files" src="'.IMG.'word.png"/>'.'</a></td>';
 	}
 	if ($single->type == 'pdf'){
 		echo '<td><a class="link-btn" href="'.$single->path.'">'.'<img class="ADMIN" src="/images/pdf.png"/>'.'</a></td>';

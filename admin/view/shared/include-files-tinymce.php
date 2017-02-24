@@ -28,20 +28,18 @@
 		while ($row = mysqli_fetch_assoc($result)) {
 	?>
 			<div class="media">
-				<div class="meta">
-					<input class="checkbox left" type="checkbox" name="checkbox[]" value="<?php echo ADMIN.$row['thumb_path']."#"."/admin/".$row['path'];?>"/>
-					<div class="left center"><?php echo $row['name'];?></div>
-				</div>
-				<div class="center">
-					<a class="image_link" href="#">
-						<img class="files" src="<?php echo ADMIN.$row['thumb_path'];?>" name="<?php echo ADMIN.$row['path'];?>"/>
-					</a>
-				</div>
+				<input class="checkbox left" type="checkbox" name="checkbox[]" value="<?php echo ADMIN.$row['thumb_path']."#".ADMIN.$row['path'];?>"/>
+<!--					<div class="left center">--><?php //echo $row['name'];?><!--</div>-->
+				<a class="image_link" href="#">
+					<img class="files" src="<?php echo ADMIN.$row['thumb_path'];?>" name="<?php echo ADMIN.$row['path'];?>"/>
+				</a>
+
 
 				<!--			// the value of the radio button corresponds to the actual filename stored in the-->
 				<!--			// DB, we can get this value with JS and then add the image with the correct src.-->
-				<span><strong><?php echo $row['name']; ?></strong></span><br />
+<!--				<span><strong>--><?php //echo $row['name']; ?><!--</strong></span><br />-->
 			</div>
+			</br>
 		<?php } ?>
 			<button id="add-multiple" type="button" name="add-multiple">Add Selection</button>
 			</div>
