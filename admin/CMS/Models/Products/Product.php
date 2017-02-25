@@ -2,13 +2,13 @@
 namespace CMS\Models\Products;
 
 use CMS\Models\DBC\DBC;
-use CMS\Models\File\FileUpload;
-use CMS\Models\File\Folders;
+use CMS\Models\Files\FileUpload;
+use CMS\Models\Files\Folders;
 use CMS\Models\Categories\Categories;
 use CMS\Core\Model\Model;
 
 class Product extends Model {
-	// will get the TRAIT actions that the user can perform like edit,delete,approve
+
     protected $primaryKey = "product_id";
     protected $table = "products";
 
@@ -36,10 +36,13 @@ class Product extends Model {
 	protected $tax;
 	private $total;
 
-	protected $file_path = 'files/products/';
-	protected $thumb_path = 'files/thumbs/products/';
+	protected $file_path = 'uploads/products/';
+	protected $thumb_path = 'uploads/thumbs/products/';
 	protected $maxStock;
 
+	public function folders(){
+		return $this->owns('CMS\Models\Files\Folders','parent_id','album_id');
+	}
 	public function get_id(){
 		return $this->product_id;
 	}
@@ -183,13 +186,26 @@ class Product extends Model {
 		# create product category, set type of category group
 		# create product category file folder.
 		if(!empty($category)) {
-			$category = Categories::addCategory($category,'product');
-			$category_name = $category['category_name'];
-			$this->category_id = $category['category_id'];
+			$category = new Categories(['title' => $category,'type'=>'product']);
+			if(!empty($category->title)) {
+				$category->hidden['user_id'] = $_SESSION['user_id'];
+				print_r($category->request);
+				if(!empty($category->title) && !empty($category->type)) {
+					$category->save();
+					$messages[] = 'Your category has been added/edited.<br />';
+				} else {
+					$messages[] = "You forgot to fill in one or more of the required fields (title).<br />";
+				};
+			} else {
+				$messages[] = 'You forgot to type in a category name.';
+			}
+			$category_name = $category->title;
+			$this->category_id = $category->connection->lastInsertId();
             $this->request['category_id'] = $this->category_id;
 			if(!file_exists($this->file_path.$category_name)) {
-				$this->file_path = $this->file_path.$category_name.'/';
-				$this->thumb_path = $this->thumb_path.$category_name.'/';
+				$this->file_path = $this->file_path.$category_name."/";
+				// this-file_path is now updated with the category name
+				$this->thumb_path = $this->file_path."/thumbs/";
 				Folders::auto_create_folder($category_name,$this->file_path,$this->thumb_path,'Products');
 			}
 		} else {
@@ -220,8 +236,8 @@ class Product extends Model {
         */
 		//create new product file folder inside Products folder.
 		if(!file_exists($this->file_path.$name)) {
-			$album_id = Folders::auto_create_folder($name,$this->file_path.$name,$this->thumb_path.$name,'Products',$category_name);
-		    $this->request['album_id'] = $album_id;
+			$album_id = Folders::auto_create_folder($name,$this->file_path.$name,$this->file_path.$name."/thumbs",'Products',$category_name);
+		    $this->hidden['album_id'] = $album_id;
         }
 
 		if(!empty($name) && !empty($price)){

@@ -1,9 +1,9 @@
 <?php
-use CMS\Models\File\Folders;
-use CMS\Models\File\File;
-use CMS\Models\File\FileWriter;
+use CMS\Models\Files\Folders;
+use CMS\Models\Files\File;
+use CMS\Models\Files\FileWriter;
 
-$products = $data['product'];
+$product = $data['product'];
 
 (isset($data['output_form'])) ? $output_form = $data['output_form'] : $output_form = true;
 ?>
@@ -12,7 +12,6 @@ $products = $data['product'];
 	<div class="row">
 		<div class="col-sm-6 col-lg-6 col-sm-offset-3 push-lg-3">
 			<?php if($output_form){
-                foreach($products as $product){
                     (isset($params[0]) && isset($params[1])) ? $action = ADMIN.'products/info/'.$product->product_id.'/'.$product->name : $action = ADMIN.'products/create';
                 ?>
                     <form class="small" enctype="multipart/form-data" method="post" action="<?= $action; ?>">
@@ -34,7 +33,7 @@ $products = $data['product'];
                         <?php 	} ?>
                         <button type="submit" name="submit_file">Add File('s)</button>
                     </form>
-                <?php }
+                <?php
                 }?>
 		</div>
 	</div>
@@ -104,12 +103,11 @@ $products = $data['product'];
 	<div class="row">
 		<div class="col-sm-6 col-lg-6 col-sm-offset-3 push-lg-3">
 			<button id="check-all"><img class="glyph-small" src="<?= IMG."check.png"; ?>"/></button>
-			<?php Folders::show_albums($product->album_id); ?>
 			<?php
 				$img = ['jpg','jpeg','png'];
 				$url = $_SERVER["REQUEST_URI"];
 				echo '<form method="get" action="'.$url.'">';
-				$files = File::fetchFilesByAlbum($product->album_id,0);
+				$files = File::allWhere(['album_id' => $product->album_id]);
 				FileWriter::write($files,ADMIN.'view/singleFile.php',[],$img);
 				echo '<div class="left">';
 				echo '<button type="submit" name="delete" id="delete">Delete Selected</button>';
@@ -117,6 +115,31 @@ $products = $data['product'];
 				echo '</div>';
 				echo '</form>';
 			?>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-6 col-lg-6 push-lg-3 col-lg-offset-3">
+			<form id="check-folders" method="post" action="<?= ADMIN.'files' ?>">
+				<button type="button" id="check-all"><img class="glyph-small" src="<?= IMG."check.png"; ?>"/></button>
+				<table class="files-table">
+					<thead></thead><th></th><th>Name</th><th>Size(MB)</th></thead>
+					<tbody>
+					<?php
+						foreach($product->folders() as $folder) { print_r($folder->files())?>
+
+							<tr class="meta">
+								<td><img class="glyph-medium" src="<?= ADMIN.'images/files.png' ?>"/></td>
+								<td><a href="<?= ADMIN ?>files/albums/<?= $folder->album_id.'/'.$folder->name ?>"> <?= $folder->name ?></a></td>
+								<td>Size</td>
+								<input type="hidden" name="album_name" value="<?= $folder->name ?>"/>
+								<td><input class="checkbox" type="checkbox" name="checkbox[]" value="<?= $folder->album_id ?>"/></td>
+							</tr>
+						<?php } ?>
+
+					</tbody>
+				</table>
+				<button type="submit" name="delete-albums" id="delete-albums">Delete Albums</button>
+			</form>
 		</div>
 	</div>
 </div>

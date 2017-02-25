@@ -160,7 +160,7 @@ class Folders extends Model{
 		if(!file_exists($file_dest)){
 			try {
                 $sql = "INSERT INTO albums(name,author,parent_id,path,user_id) VALUES(?,?,?,?,?)";
-                echo 'Create album: '.$sql.'<br />';
+                echo 'thumbs dest: '.$thumb_dest.'<br />';
                 $query = $dbc->prepare($sql);
                 $query->execute([$album_name,$author,$parent_id,$path,$user_id]);
 				$query->execute();

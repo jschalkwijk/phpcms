@@ -222,16 +222,16 @@ abstract class Model
     public function newQuery($query)
     {
         $this->query = $query;
-//        echo 'Query = '.$query.'<br>';
-//        echo 'Values Array: <br>';
-//        echo "<pre>";
-//        print_r($this->values);
-//        echo "</pre>";
-//
-//        echo 'Request Array: <br>';
-//        echo "<pre>";
-//        print_r($this->request);
-//        echo "</pre>";
+        echo 'Query = '.$query.'<br>';
+        echo 'Values Array: <br>';
+        echo "<pre>";
+        print_r($this->values);
+        echo "</pre>";
+
+        echo 'Request Array: <br>';
+        echo "<pre>";
+        print_r($this->request);
+        echo "</pre>";
 
         try {
             // the connection has to  be made elsewhere in the child class
@@ -557,12 +557,18 @@ abstract class Model
     }
 
     ## Relations
-    public function owns($relatedModel)
+    public function owns($relatedModel,$primaryKey = null,$foreignKey = null)
     {
         $model = new $relatedModel;
         $model->connection = $model->database->connect();
         $model->statement = "SELECT";
-        $query = "SELECT * FROM {$model->table} WHERE {$this->primaryKey} = {$this->get_id()}";
+        // if the current models primaryKey name is not named the same as the foreignkey in the related table, you can change it by adding it in the func,
+        // as well as the foreignKey name where we will get the ID from.
+        if($primaryKey == null && $foreignKey == null){
+            $query = "SELECT * FROM {$model->table} WHERE {$this->primaryKey} = {$this->get_id()}";
+        } else {
+            $query = "SELECT * FROM {$model->table} WHERE $primaryKey = {$this->$foreignKey}";
+        }
         return $model->newQuery($query);
     }
 
@@ -576,7 +582,9 @@ abstract class Model
         $model = new $relatedModel;
         $model->connection = $model->database->connect();
         $model->statement = "SELECT";
-        $query = "SELECT * FROM {$model->table} WHERE {$model->primaryKey} = {$this->$foreignKey}";
+        // print_r($this->$foreignKey);
+        // $this->$foreignKey is for example $this->category_id and gets the value
+        $query = "SELECT * FROM {$model->table} WHERE {$foreignKey} = {$this->$foreignKey}";
         return $model->newQuery($query);
     }
     /**
@@ -587,11 +595,13 @@ abstract class Model
     public function morpheus($relatedModel)
     {
         // TODO: Get a pluralizer to edit the pivottable name to change F.E. taggables to taggable and categories to category
+
         $model = new $relatedModel;
         $model->connection = $model->database->connect();
         $model->statement = "SELECT";
         $singular = Inflect::singularize($model->pivotTable);
         $query = "SELECT * FROM {$model->pivotTable} RIGHT JOIN {$model->table} ON {$model->pivotTable}.{$model->primaryKey} = {$model->table}.{$model->primaryKey} WHERE {$singular}_type = 'post' AND {$singular}_id = ".$this->get_id()." ORDER BY {$model->table}.{$model->primaryKey} DESC";
+//        SELECT * FROM taggables RIGHT JOIN tags ON taggables.tag_id = tags.tag_id WHERE taggable_type = 'post' AND taggable_id = 126 ORDER BY tags.tag_id DESC
         return $model->newQuery($query);
     }
 }

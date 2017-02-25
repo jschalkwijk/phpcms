@@ -8,6 +8,7 @@
 	$dbc = mysqli_connect(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME) or die('Error connecting to server');
 	$output = '';
 	if(isset($_POST['search-file'])) {
+		$table = 'files';
 		$searchq = mysqli_real_escape_string($dbc, trim($_POST['search']));
 		// replaces everything that is not a number or letter with nothing
 		$searchq = preg_replace("#[^0-9a-z]#i", " ", $searchq);
@@ -16,10 +17,11 @@
 		foreach ($searchTerms as $term) {
 			$term = trim($term);
 			if (!empty($term)) {
-				$searchTermBits[] = "name LIKE '%$term%'";
+				$searchTermBits[] = "{$table}.name LIKE '%$term%'";
 			}
 		}
-		$query = "SELECT * FROM files WHERE " . implode(' AND ', $searchTermBits);
+//		$query = "SELECT * FROM files WHERE " . implode(' AND ', $searchTermBits);
+		$query = "SELECT files.*, albums.path AS albums_path FROM files JOIN albums ON files.album_id = albums.album_id WHERE " . implode(' AND ', $searchTermBits);
 		$result = mysqli_query($dbc, $query) or die('Error connecting to database');
 	?>
 		<div id="add-image" class="container medium">
@@ -28,10 +30,10 @@
 		while ($row = mysqli_fetch_assoc($result)) {
 	?>
 			<div class="media">
-				<input class="checkbox left" type="checkbox" name="checkbox[]" value="<?php echo ADMIN.$row['thumb_path']."#".ADMIN.$row['path'];?>"/>
+				<input class="checkbox left" type="checkbox" name="checkbox[]" value="<?php echo ADMIN.$row['albums_path']."/thumbs/".$row['thumb_name']."#".ADMIN.$row['albums_path']."/".$row['name'];?>"/>
 <!--					<div class="left center">--><?php //echo $row['name'];?><!--</div>-->
 				<a class="image_link" href="#">
-					<img class="files" src="<?php echo ADMIN.$row['thumb_path'];?>" name="<?php echo ADMIN.$row['path'];?>"/>
+					<img class="files" src="<?php echo ADMIN.$row['albums_path']."/thumbs/".$row['thumb_name'];?>" name="<?php echo ADMIN.$row['path'];?>"/>
 				</a>
 
 

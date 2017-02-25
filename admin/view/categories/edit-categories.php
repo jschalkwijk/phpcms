@@ -28,5 +28,11 @@
 				<button type="submit" name="submit">Submit</button>
 			</form>
 		</div>
-	</div>
+	</div
+	<h3>Related Posts</h3><br>
+	<?php
+		foreach ($category->posts() as $post){
+			echo $post->title."<br>";
+		};
+	?>
 </div>

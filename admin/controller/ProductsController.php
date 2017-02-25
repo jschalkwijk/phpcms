@@ -4,6 +4,7 @@ use CMS\Models\Controller\Controller;
 use CMS\Models\Actions\UserActions;
 use CMS\Models\Products\Product;
 use CMS\Models\Files\File;
+use CMS\Models\Files\Folders;
 
 class Products extends Controller
 {
@@ -89,8 +90,8 @@ class Products extends Controller
 
         if (isset($_POST['submit_file']) || !empty($_FILES['files']['name'][0])) {
             # ik heb nu de products folder name in de het formulier staan, dit kan ik ook hier regelen doo het pad meteen goed aante geven
-            $file_dest = 'files/';
-            $thumb_dest = 'files/thumbs/';
+            $file_dest = 'uploads/';
+            $thumb_dest = 'uploads/thumbs/';
             Product::addProductIMG($file_dest, $thumb_dest, $params);
         }
 
@@ -102,12 +103,14 @@ class Products extends Controller
         }
 
         $product = Product::one($params[0]);
+        $folders = Folders::allWhere(['parent_id'=>$product->album_id]);
         $this->view(
             'Product ' . $params[1],
             ['products/view-product.php'],
             $params,
             [
                 'product' => $product,
+                'folders' => $folders,
                 'js' => [JS . 'checkAll.js']
             ]
         );
