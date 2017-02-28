@@ -221,17 +221,17 @@ abstract class Model
      */
     public function newQuery($query)
     {
-        $this->query = $query;
-        echo 'Query = '.$query.'<br>';
-        echo 'Values Array: <br>';
-        echo "<pre>";
-        print_r($this->values);
-        echo "</pre>";
-
-        echo 'Request Array: <br>';
-        echo "<pre>";
-        print_r($this->request);
-        echo "</pre>";
+//        $this->query = $query;
+//        echo 'Query = '.$query.'<br>';
+//        echo 'Values Array: <br>';
+//        echo "<pre>";
+//        print_r($this->values);
+//        echo "</pre>";
+//
+//        echo 'Request Array: <br>';
+//        echo "<pre>";
+//        print_r($this->request);
+//        echo "</pre>";
 
         try {
             // the connection has to  be made elsewhere in the child class

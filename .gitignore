@@ -1,6 +1,7 @@
 # project files
 /config.php
 /admin/config.php
+/admin/uploads/**
 *.htaccess
 
 # Compiled Object files, Static and Dynamic libs (Shared Objects)

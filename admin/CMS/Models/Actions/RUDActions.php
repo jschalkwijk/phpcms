@@ -24,17 +24,17 @@ class RUDActions{
 	}
 
 	protected static function update(Model $model,$checkbox,$columns){
-        $primaryKey = substr($model->table, 0, -1).'_id';
+//        $primaryKey = substr($model->table, 0, -1).'_id';
 
-        $query = $model->update($columns).$model->whereIN([$primaryKey => $checkbox]);
+        $query = $model->update($columns).$model->whereIN([$model->primaryKey => $checkbox]);
         $model->newQuery($query);
 		header('Location: '.ADMIN.$model->table);
 	}
-	public static function delete_selected($model,$checkbox){
+	public static function delete_selected(Model $model,$checkbox){
 		$db = new DBC;
 		$dbc = $db->connect();
 
-		$primaryKey = substr($model->table, 0, -1).'_id';
+		$primaryKey = $model->primaryKey;
 		if($model->table == 'categories'){
 			$primaryKey = 'category_id';
 		}
