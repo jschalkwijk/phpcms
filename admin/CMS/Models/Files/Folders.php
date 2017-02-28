@@ -131,9 +131,7 @@ class Folders extends Model{
 		 *	for insurance we have to check its id and use that as the parent folder.
 		 *	if it is set, it means we have created a category already and the folders parent should be the category folder.
 		*/
-		
 		if($category_name === null){
-
 			try {
                 $query = $dbc->prepare("SELECT album_id FROM albums WHERE name = ?");
 				$query->execute([$main_folder]);
@@ -154,16 +152,14 @@ class Folders extends Model{
                 echo $e->getMessage();
             }
 		}
-
-		$path = Folders::auto_create_path($album_name,$parent_id);
 	
 		if(!file_exists($file_dest)){
 			try {
                 $sql = "INSERT INTO albums(name,author,parent_id,path,user_id) VALUES(?,?,?,?,?)";
+                echo 'file dest: '.$file_dest.'<br />';
                 echo 'thumbs dest: '.$thumb_dest.'<br />';
                 $query = $dbc->prepare($sql);
                 $query->execute([$album_name,$author,$parent_id,$file_dest,$user_id]);
-				$query->execute();
 				mkdir($file_dest,0744);
 				mkdir($thumb_dest,0744);
             } catch (\PDOException $e){

@@ -11,8 +11,6 @@ class FileUpload{
 	private $path;
 	private $empty_path;
 	private $params;
-	private $img_path;
-	private $thumb_path;
 	private $album_name;
 
 	public function __construct($file_dest,$thumb_dest,$params,$empty_path = false){
@@ -70,7 +68,7 @@ class FileUpload{
 					$errors[] = 'Please select an album or create a new album.';
 				} else {
 					(empty($this->path))? $this->path = $this->create_path($album_id) : "";
-					echo 'Line 86: this-path'.$this->path;
+					echo 'Line 71: this-path'.$this->path;
 				}
 			}
 
@@ -99,7 +97,7 @@ class FileUpload{
 
 								if($this->uploadFile($file_tmp,$file_name,$file_ext,$file_name_new,$thumb_name,$position,$album_id)){
 									$uploaded[] = $file_name;
-									if(!$this->createThumb($file_dest,$file_name_new,$thumb_name,$thumb_dest,$this->album_name)){
+									if(!$this->createThumb($file_name_new,$thumb_name,$thumb_dest)){
 										$failed[] = 'Thumbnails failed to be created';
 										}
 								} else {
@@ -141,28 +139,15 @@ class FileUpload{
 		$db = new DBC;
 		$dbc = $db->connect();
 
-		$path = $this->path;
 		$id = $album_id;
-		$file_dest = $path.'/'.$file_name_new;
-		/*echo 'Line: 141 | path: '.$path.'<br />';
-
-		echo 'Line 143 | file_dest: '.$file_dest.'<br>';
-		echo 'Line 144 | album_name: '.$album_name;
-		$sql = "SELECT album_id FROM albums WHERE name LIKE '$album_name'";
-		//$sql = "SELECT album_id FROM albums WHERE name LIKE '$album_name' AND path LIKE '$path'";
-		$data = mysqli_query($this->dbc->connect(),$sql) or die('Error connecting to server');
-		$row = mysqli_fetch_array($data);
-		$id = $row['album_id'];*/
-
-		$thumb_path = $path.'/thumbs/'.$thumb_name;
+		$destination = $this->path.'/'.$file_name_new;
+		$thumb_path = $this->path.'/thumbs/'.$thumb_name;
 
 		// If upload paths contains 's etc we have to remove the \ (backslash) which is created automaticly.
 		// To insert the path in the Database we have to keep the \ (backslash) otherwise the query will fail.
-		$path = str_replace("\\","",$file_dest);
+		$path = str_replace("\\","",$destination);
 		// because we want to maybe insert a " ' " like in Person's Contacts, we need to change the ' to '', to escape the '. otherwise it will fail.
-		$file_dest = str_replace(array("\\","'"),array("","''"),$file_dest);
-		$this->img_path = $path;
-		$this->thumb_path = $thumb_path;
+		$destination = str_replace(array("\\","'"),array("","''"),$destination);
 		$thumb_path = str_replace(array("\\","'"),array("","''"),$thumb_path);
 		$user_id = $_SESSION['user_id'];
 		echo 'Line: 168 | path: '.$path.'<br />';
@@ -175,7 +160,7 @@ class FileUpload{
                     $sql = "INSERT INTO files(name,type,file_name,thumb_name,album_id,date,path,thumb_path,user_id) VALUES(?,?,?,?,?,NOW(),?,?,?)";
                     echo $sql;
                     $query = $dbc->prepare($sql);
-					$query->execute([$file_name, $file_ext, $file_name_new, $thumb_name, $id, $file_dest, $thumb_path, $user_id]);;
+					$query->execute([$file_name, $file_ext, $file_name_new, $thumb_name, $id, $destination, $thumb_path, $user_id]);;
 					return true;
                 } catch (\PDOException $e){
                         echo $e->getMessage();
@@ -188,13 +173,12 @@ class FileUpload{
 		}
 	}
 
-	protected function createThumb($file_dest,$file_name_new,$thumb_name,$thumb_dest,$album_name){
-
+	protected function createThumb($file_name_new,$thumb_name){
 		$path = str_replace("\\", "", $this->path);
-		$file_dest = $path.'/'.$file_name_new;
-		//echo $file_dest;
-		if(!empty($file_dest)){
-			$image = $file_dest;
+		$destination = $path.'/'.$file_name_new;
+
+		if(!empty($destination)){
+			$image = $destination;
 			// creates array with [0]width [1] height from the file
 			$image_size = getimagesize($image);
 			// get current size
@@ -231,29 +215,25 @@ class FileUpload{
 		$user_id = $_SESSION['user_id'];
 		if(!empty($album_id)) {
 			$parent_id = trim((int)$album_id);
-			$file_dest = $this->path;
+            $destination = $this->path;
 		} else {
 			$parent_id = 0;
-			$file_dest = $this->file_dest.$this->path;
-			$this->path = $file_dest;
+            $destination = $this->file_dest.$this->path;
+			$this->path = $destination;
 		}
 
-		$thumb_dest = $file_dest."/thumbs";
+		$thumb_dest = $destination."/thumbs";
 
 //		$path = $this->path;
 
-		if(!file_exists($file_dest)){
+		if(!file_exists($destination)){
 			try {
                 $query = $dbc->prepare("INSERT INTO albums(name,author,parent_id,path,user_id) VALUES(?,?,?,?,?)");
-				$query->execute([$album_name, $author, $parent_id, $file_dest, $user_id]);
+				$query->execute([$album_name, $author, $parent_id, $destination, $user_id]);
 
-				mkdir(str_replace("\\", "", $file_dest), 0744);
+				mkdir(str_replace("\\", "", $destination), 0744);
 				mkdir(str_replace("\\", "", $thumb_dest), 0744);
 
-//			$query = "SELECT album_id FROM albums WHERE name = '$album_name'";
-//			echo $query.'<br />';
-//			$data = mysqli_query($dbc, $query) or die('Error connecting to database');
-//			$row = mysqli_fetch_assoc($data);
 				// get the new created id of the folder.
 				$parent_id = $dbc->lastInsertId();
             } catch (\PDOException $e){

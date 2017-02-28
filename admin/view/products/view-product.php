@@ -24,7 +24,7 @@ $product = $data['product'];
                         <label for='secure'>Secure</label>
                         <input type="hidden" name="album_name" value=""/>
                         <input type="hidden" name="category_name" value="<?= $product->category; ?>"/>
-                        <input type="hidden" name="album_id" value="<?= $product->albumid; ?>"/>
+                        <input type="hidden" name="album_id" value="<?= $product->album_id; ?>"/>
                         <?php (isset($params)) ? Folders::get_albums($product->album_id,$product->name) : Folders::get_albums(null,null) ;?>
                         <?php 	if(!isset($_GET['album'])){ ?>
                             <input type="text" name="new_album_name" placeholder="Create New Album" maxlength="60"/>

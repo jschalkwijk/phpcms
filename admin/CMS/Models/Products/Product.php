@@ -204,9 +204,9 @@ class Product extends Model {
 			$this->category_id = $category->connection->lastInsertId();
             $this->request['category_id'] = $this->category_id;
 			if(!file_exists($this->file_path.$category_name)) {
-				$this->file_path = $this->file_path.$category_name."/";
+				$this->file_path = $this->file_path.$category_name;
 				// this-file_path is now updated with the category name
-				$this->thumb_path = $this->file_path."/thumbs/";
+				$this->thumb_path = $this->file_path."thumbs";
 				Folders::auto_create_folder($category_name,$this->file_path,$this->thumb_path,'Products');
 			}
 		} else {
@@ -236,8 +236,8 @@ class Product extends Model {
                 }
         */
 		//create new product file folder inside Products folder.
-		if(!file_exists($this->file_path.$name)) {
-			$album_id = Folders::auto_create_folder($name,$this->file_path.$name,$this->file_path.$name."/thumbs",'Products',$category_name);
+		if(!file_exists($this->file_path."/".$name)) {
+			$album_id = Folders::auto_create_folder($name,$this->file_path."/".$name,$this->file_path."/".$name."/thumbs",'Products',$category_name);
 		    $this->hidden['album_id'] = $album_id;
         }
 
