@@ -162,7 +162,7 @@ class Folders extends Model{
                 $sql = "INSERT INTO albums(name,author,parent_id,path,user_id) VALUES(?,?,?,?,?)";
                 echo 'thumbs dest: '.$thumb_dest.'<br />';
                 $query = $dbc->prepare($sql);
-                $query->execute([$album_name,$author,$parent_id,$path,$user_id]);
+                $query->execute([$album_name,$author,$parent_id,$file_dest,$user_id]);
 				$query->execute();
 				mkdir($file_dest,0744);
 				mkdir($thumb_dest,0744);

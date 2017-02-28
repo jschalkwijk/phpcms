@@ -9,8 +9,8 @@ use CMS\Core\Model\Model;
 
 class Product extends Model {
 
-    protected $primaryKey = "product_id";
-    protected $table = "products";
+    public $primaryKey = "product_id";
+    public $table = "products";
 
     protected $relations = [
         'categories' => 'category_id',
@@ -28,6 +28,7 @@ class Product extends Model {
         'category_id',
         'quantity',
         'price',
+        'trashed',
     ];
 
     protected $discount_price;

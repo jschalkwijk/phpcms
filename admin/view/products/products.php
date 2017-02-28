@@ -3,15 +3,16 @@
         <a class="link-btn" href="<?= ADMIN."products/create";?>">+ Product</a>
 	    <a class="link-btn" href="<?= ADMIN."products/deleted"; ?>">Deleted Products</a>
     </div>
-</div>
+</div>s
 <div class="container">
     <div class="row">
         <div class="col-sm-6 col-lg-6 col-sm-offset-3 push-lg-3">
             <div class="center">
                 <?php
                     $products = $data['products'];
+                    ($data['trashed'] === 1) ? $action = ADMIN.'products/deleted' : $action = ADMIN.'products' ;
                 ?>
-                <form class="backend-form" method="post" action="<?= ADMIN."products"; ?>">
+                <form class="backend-form" method="post" action="<?= $action; ?>">
                     <table class="backend-table title">
                         <tr><th>Name</th><th>Category</th><th>Price</th><th>In Stock</th><th>Edit</th><th>View</th><th><button type="button" id="check-all"><img class="glyph-small" src="<?= IMG."check.png"; ?>" alt="check-unheck-all-items"/></button></th></tr>
                         <?php foreach($products as $product){ ?>
