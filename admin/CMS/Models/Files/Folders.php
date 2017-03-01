@@ -48,6 +48,17 @@ class Folders extends Model{
 	{
 		return $this->owns('CMS\Models\Files\File');
 	}
+
+    public function subFolders(){
+        return $this->owns('CMS\Models\Files\Folders','parent_id','album_id');
+    }
+
+    public function products()
+    {
+        // Als ik alle producten van een hoofdvategorie wil fetchen dan moet ik een
+        // pivot tablemaken, categories_products, zodat ik meerder producten aan een categorie kan plakken.
+        return $this->ownedBy('CMS\Models\Products\Product','album_id');
+    }
 	/* used by view/add-files.php to get the selected folder and optional folders to
 	 * upload files to.
 	 * Main folders don't have a parent folder so the parent_id = 0.

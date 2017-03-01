@@ -41,9 +41,18 @@ class Product extends Model {
 	protected $thumb_path = 'uploads/thumbs/products/';
 	protected $maxStock;
 
-	public function folders(){
-		return $this->owns('CMS\Models\Files\Folders','parent_id','album_id');
-	}
+//    public function folder(){
+//        return $this->ownedBY('CMS\Models\Files\Folders','album_id');
+//    }
+// Products owns one main folder, that folder can have subFolders, which the folder owns itsself,
+// Also every folder owns 0 or more files.
+// check Folders model to see what I mean.
+    public function folder(){
+        return $this->ownsOne('CMS\Models\Files\Folders');
+    }
+//	public function folders(){
+//		return $this->owns('CMS\Models\Files\Folders','parent_id','album_id');
+//	}
 	public function get_id(){
 		return $this->product_id;
 	}

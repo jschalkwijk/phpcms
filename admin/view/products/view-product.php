@@ -125,7 +125,17 @@ $product = $data['product'];
 					<thead></thead><th></th><th>Name</th><th>Size(MB)</th></thead>
 					<tbody>
 					<?php
-						foreach($product->folders() as $folder) { print_r($folder->files())?>
+                    // get all products related to a folder
+//                    foreach($product->folder()->products() as $product){
+//                        echo "Productname".$product->name."<br>";
+//                    }
+//                    foreach($product->folder()->subFolders() as $folder){
+//                        echo "Foldername: ".$folder->name."<br>";
+//                        foreach($folder->files() as $file){
+//                            echo "Filename: ".$file->name."<br>";
+//                        };
+//                    };
+						foreach($product->folder()->subFolders() as $folder) {// echo "hello:<br>"; print_r($folder->files())?>
 
 							<tr class="meta">
 								<td><img class="glyph-medium" src="<?= ADMIN.'images/files.png' ?>"/></td>

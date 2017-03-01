@@ -13,6 +13,9 @@
 				$doc = ['txt', 'doc', 'docx', 'odt'];
 				$img = ['jpg', 'jpeg', 'png'];
 				$url = $_SERVER["REQUEST_URI"];
+                foreach($folder->products() as $product){
+                    echo "Productname".$product->name."<br>";
+                }
 		?>
 			<form id="check-files" method="post" action="<?= $url; ?>">
 				<table class="files-table">

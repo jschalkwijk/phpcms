@@ -557,6 +557,28 @@ abstract class Model
     }
 
     ## Relations
+    public function ownsOne($relatedModel,$primaryKey = null,$foreignKey = null)
+    {
+        $model = new $relatedModel;
+        $model->connection = $model->database->connect();
+        $model->statement = "SELECT";
+        // if the current models primaryKey name is not named the same as the foreignkey in the related table, you can change it by adding it in the func,
+        // as well as the foreignKey name where we will get the ID from.
+        if($primaryKey == null && $foreignKey == null){
+            // $query = "SELECT * FROM {$model->table} WHERE {$this->primaryKey} = {$this->get_id()}";
+            // album_id is primaryKey
+            $primaryKey = $model->primaryKey;
+            // $primarykey will be used to get the id value of the Model that is calling it
+            // $this->$primarykey actually says $this->album_id
+            // now we need an ID, for example Products has an album_id value if we call this from products we
+            // get that album ID and then fetch it.
+            return $model->one($this->$primaryKey);
+        } else {
+//            $query = "SELECT * FROM {$model->table} WHERE $primaryKey = {$this->$foreignKey}";
+            return $model->allWhere([$primaryKey =>$this->$foreignKey]);
+        }
+//        return $model->newQuery($query)[0];
+    }
     public function owns($relatedModel,$primaryKey = null,$foreignKey = null)
     {
         $model = new $relatedModel;
@@ -565,11 +587,13 @@ abstract class Model
         // if the current models primaryKey name is not named the same as the foreignkey in the related table, you can change it by adding it in the func,
         // as well as the foreignKey name where we will get the ID from.
         if($primaryKey == null && $foreignKey == null){
-            $query = "SELECT * FROM {$model->table} WHERE {$this->primaryKey} = {$this->get_id()}";
+           // $query = "SELECT * FROM {$model->table} WHERE {$this->primaryKey} = {$this->get_id()}";
+            return $model->allWhere([$this->primaryKey => $this->get_id()]);
         } else {
-            $query = "SELECT * FROM {$model->table} WHERE $primaryKey = {$this->$foreignKey}";
+//            $query = "SELECT * FROM {$model->table} WHERE $primaryKey = {$this->$foreignKey}";
+            return $model->allWhere([$primaryKey =>$this->$foreignKey]);
         }
-        return $model->newQuery($query);
+//        return $model->newQuery($query);
     }
 
     /**
@@ -584,7 +608,7 @@ abstract class Model
         $model->statement = "SELECT";
         // print_r($this->$foreignKey);
         // $this->$foreignKey is for example $this->category_id and gets the value
-        $query = "SELECT * FROM {$model->table} WHERE {$foreignKey} = {$this->$foreignKey}";
+        $query = "SELECT * FROM {$model->table} WHERE {$this->primaryKey} = {$this->$foreignKey}";
         return $model->newQuery($query);
     }
     /**

@@ -39,7 +39,7 @@ class Files extends Controller
             File::downloadFiles();
         }
         $folder = Folders::one($params[0]);
-        $folders = Folders::allWhere(['parent_id'=>$params[0]]);
+        $folders = $folder->subFolders();
         $this->view(
             'Albums',
             [
