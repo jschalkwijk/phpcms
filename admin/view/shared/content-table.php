@@ -1,7 +1,7 @@
 <tr><td class="td-title"><p><?= $single->title; ?></p></td>
 	<td class="td-author"><p><?= $single->users_username; ?></p></td>
 	<td class="td-category"><p><?php
-            if(is_callable([$single,"tags"])) {
+            if(is_callable([$single,"category"])) {
                 foreach ($single->category() as $cat){
                     echo $cat->title;
                 }

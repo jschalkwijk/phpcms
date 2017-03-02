@@ -28,11 +28,17 @@
 				<button type="submit" name="submit">Submit</button>
 			</form>
 		</div>
-	</div
+	</div>
 	<h3>Related Posts</h3><br>
 	<?php
 		foreach ($category->posts() as $post){
 			echo $post->title."<br>";
 		};
 	?>
+    <h3>Related Products</h3><br>
+    <?php
+        foreach ($category->products() as $product){
+            echo $product->name."<br>";
+        };
+    ?>
 </div>

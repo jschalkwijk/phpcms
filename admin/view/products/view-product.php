@@ -126,9 +126,9 @@ $product = $data['product'];
 					<tbody>
 					<?php
                     // get all products related to a folder
-//                    foreach($product->folder()->products() as $product){
-//                        echo "Productname".$product->name."<br>";
-//                    }
+                    foreach($product->folder()->products() as $product){
+                        echo "Productname".$product->name."<br>";
+                    }
 //                    foreach($product->folder()->subFolders() as $folder){
 //                        echo "Foldername: ".$folder->name."<br>";
 //                        foreach($folder->files() as $file){

@@ -45,7 +45,13 @@ class Categories extends Model{
         return $this->owns('CMS\Models\Posts\Post');
     }
 
-	// Returns a list of options with all the categories that are of the defined type.
+    public function products()
+    {
+        return $this->owns('CMS\Models\Products\Product');
+    }
+
+
+    // Returns a list of options with all the categories that are of the defined type.
 	// like type: post, type: product, type: page.
 	// We want to automatically have the te current category selected if we update a post
 	// This function is called inside a select form type:

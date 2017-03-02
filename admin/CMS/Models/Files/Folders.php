@@ -4,6 +4,8 @@ namespace CMS\Models\Files;
 use CMS\Core\Model\Model;
 use CMS\Models\DBC\DBC;
 use CMS\Models\Actions\FileActions;
+use CMS\Models\Products\Product;
+
 /*
  * als ik in een user of product foto's moet uploaden kan ik toch ook in de user table een
  * folder_id row aanmaken, zodat ik meteen het pad van de gelinkte folder kan fetchen.
@@ -57,8 +59,20 @@ class Folders extends Model{
     {
         // Als ik alle producten van een hoofdvategorie wil fetchen dan moet ik een
         // pivot tablemaken, categories_products, zodat ik meerder producten aan een categorie kan plakken.
-        return $this->ownedBy('CMS\Models\Products\Product','album_id');
+        return $this->ownedBy('CMS\Models\Products\Product','album_id','album_id');
+        // select category_id form categories  where folder_id = this->album_id,
+        // select products where category_id = the category_id fetched from previous query;
+        // SELECT * FROM products WHERE category_id =
+//        (SELECT category_id FROM categories
+//          WHERE album_id = $this->album_id')
+        //$query = "SELECT * FROM products WHERE category_id = $category_id"
+        //return Product::allWhere(['album_id' => $this->album_id]);
     }
+
+//    public function category()
+//    {
+//        return $this->ownedBy('CMS\Models\Categories\Categories','category_id','category_id');
+//    }
 	/* used by view/add-files.php to get the selected folder and optional folders to
 	 * upload files to.
 	 * Main folders don't have a parent folder so the parent_id = 0.

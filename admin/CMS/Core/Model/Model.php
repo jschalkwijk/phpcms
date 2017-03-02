@@ -557,6 +557,12 @@ abstract class Model
     }
 
     ## Relations
+    /**
+     * @param $relatedModel
+     * @param null $primaryKey
+     * @param null $foreignKey
+     * @return mixed
+     */
     public function ownsOne($relatedModel,$primaryKey = null,$foreignKey = null)
     {
         $model = new $relatedModel;
@@ -579,6 +585,13 @@ abstract class Model
         }
 //        return $model->newQuery($query)[0];
     }
+
+    /**
+     * @param $relatedModel
+     * @param null $primaryKey
+     * @param null $foreignKey
+     * @return mixed
+     */
     public function owns($relatedModel,$primaryKey = null,$foreignKey = null)
     {
         $model = new $relatedModel;
@@ -598,18 +611,45 @@ abstract class Model
 
     /**
      * @param $relatedModel
-     * @param $foreignKey
+     * @param null $primaryKey
+     * @param null $foreignKey
      * @return mixed
      */
-    public function ownedBy($relatedModel,$foreignKey)
+    public function ownedBy($relatedModel,$primaryKey = null,$foreignKey = null)
     {
         $model = new $relatedModel;
         $model->connection = $model->database->connect();
         $model->statement = "SELECT";
         // print_r($this->$foreignKey);
         // $this->$foreignKey is for example $this->category_id and gets the value
-        $query = "SELECT * FROM {$model->table} WHERE {$this->primaryKey} = {$this->$foreignKey}";
+        if($primaryKey == null && $foreignKey == null) {
+            $primaryKey = $model->primaryKey;
+            $query = "SELECT * FROM {$model->table} WHERE {$model->primaryKey} = {$this->$primaryKey}";
+        } else if($primaryKey != null && $foreignKey != null){
+            $query = "SELECT * FROM {$model->table} WHERE {$primaryKey} = {$this->$foreignKey}";
+        }
         return $model->newQuery($query);
+    }
+
+    public function ownedByMany()
+    {
+        
+    }
+
+    public function children()
+    {
+
+    }
+
+    /**
+     * @param $related_1
+     * @param $related_2
+     * @param null $primaryKey
+     * @param null $foreignKey
+     */
+    public function ownsThrough($related_1,$related_2,$primaryKey = null,$foreignKey = null)
+    {
+
     }
     /**
      * Morpheus returns Polymorphic many to many relationships

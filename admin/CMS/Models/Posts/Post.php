@@ -38,7 +38,7 @@
 
         public function category()
         {
-            return $this->ownedBy('CMS\Models\Categories\Categories','category_id');
+            return $this->ownedBy('CMS\Models\Categories\Categories');
         }
 		public function tags()
 		{
