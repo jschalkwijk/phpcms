@@ -13,12 +13,6 @@ use CMS\Core\Pluralize\Inflect;
  * Het opnieuw instellen van de model variables n een apparte functie? of alleen in patch? of alleen in update?
  * */
 
-/*
- * Relations:
- * Zal ik dit blijven doen met Join statements, of ga ik voor een relatie een apparte query
- * uitvoeren die meteen een heel object teruggeeft en die in bihvoorbeeld een post object zet.
- * alles van user met id 26 die hoort bij de betreffende post.
- * */
 /**
  * Class Model
  * @package CMS\Core\Model
@@ -233,11 +227,12 @@ abstract class Model
         print_r($this->request);
         echo "</pre>";
 
+        // make a function which updates the current sql statement. The first letters of the query determine what the statement is.
         try {
             // the connection has to  be made elsewhere in the child class
             // we need the connection to be tied to the class function
             // so we can use database functions for example $lastID = $dbc->lastInsertId();
-            // If we don't need that functionality we vcan create the connection here.
+            // If we don't need that functionality we can create the connection here.
             if(empty($this->connection)){
                 $this->connection = $this->database->connect();
             }
@@ -464,6 +459,7 @@ abstract class Model
      * Saves the object to the database
      * @return bool
      */
+    // TODO: Save should reset the request,values and hidden fields, if youneed to patch it later on in the same function, you won't get conflicts.
     public function save()
     {
         $query = $this->insert($this->prepareQuery());
@@ -636,20 +632,39 @@ abstract class Model
         
     }
 
-    public function children()
+    public function children($selfReference = null)
+    {
+        $this->statement = "SELECT";
+        if(empty($selfReference)) {
+            return $this->allWhere(['parent_id' => $this->get_id()]);
+        } else {
+            return $this->allWhere([$selfReference => $this->get_id()]);
+        }
+    }
+
+    public function childrenCascade()
     {
 
     }
 
+
     /**
-     * @param $related_1
-     * @param $related_2
+     * @param $model1
+     * @param $model2
      * @param null $primaryKey
      * @param null $foreignKey
+     * @return mixed
      */
-    public function ownsThrough($related_1,$related_2,$primaryKey = null,$foreignKey = null)
-    {
 
+    public function ownsThrough($model1, $model2, $primaryKey = null, $foreignKey = null)
+    {
+        $model1 = new $model1;
+        $model2 = new $model2;
+        $model1->connection = $model1->database->connect();
+        $model1->statement = "SELECT";
+        $query = "SELECT * FROM {$model1->table} WHERE {$model2->primaryKey} =
+        (SELECT {$model2->primaryKey} FROM {$model2->table} WHERE {$this->primaryKey} = {$this->album_id})";
+        return $model1->newQuery($query);
     }
     /**
      * Morpheus returns Polymorphic many to many relationships

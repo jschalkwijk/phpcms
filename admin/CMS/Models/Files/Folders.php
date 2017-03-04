@@ -52,21 +52,12 @@ class Folders extends Model{
 	}
 
     public function subFolders(){
-        return $this->owns('CMS\Models\Files\Folders','parent_id','album_id');
+        return $this->children();
     }
 
     public function products()
     {
-        // Als ik alle producten van een hoofdvategorie wil fetchen dan moet ik een
-        // pivot tablemaken, categories_products, zodat ik meerder producten aan een categorie kan plakken.
-        return $this->ownedBy('CMS\Models\Products\Product','album_id','album_id');
-        // select category_id form categories  where folder_id = this->album_id,
-        // select products where category_id = the category_id fetched from previous query;
-        // SELECT * FROM products WHERE category_id =
-//        (SELECT category_id FROM categories
-//          WHERE album_id = $this->album_id')
-        //$query = "SELECT * FROM products WHERE category_id = $category_id"
-        //return Product::allWhere(['album_id' => $this->album_id]);
+		return $this->ownsThrough('CMS\Models\Products\Product','CMS\Models\Categories\Categories');
     }
 
 //    public function category()

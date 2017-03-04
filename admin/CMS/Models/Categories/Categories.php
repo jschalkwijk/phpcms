@@ -25,7 +25,6 @@ class Categories extends Model{
         'approved'
     ];
 
-
 	#SETTERS
 	public function setID($id){
 		$this->id = $id;

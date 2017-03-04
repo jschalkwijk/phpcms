@@ -216,7 +216,14 @@ class Product extends Model {
 				$this->file_path = $this->file_path.$category_name;
 				// this-file_path is now updated with the category name
 				$this->thumb_path = $this->file_path."thumbs";
-				Folders::auto_create_folder($category_name,$this->file_path,$this->thumb_path,'Products');
+				$album_id = Folders::auto_create_folder($category_name,$this->file_path,$this->thumb_path,'Products');
+				echo "Products Album_ID: ".print_r($album_id);
+				$category->category_id = $this->category_id;
+				$category->hidden = ['album_id' => $album_id];
+				$category->request = [];
+				$category->values = [];
+				$category->patch();
+				$category->savePatch();
 			}
 		} else {
 			try {
