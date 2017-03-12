@@ -4,7 +4,6 @@ namespace CMS\Models\Files;
 use CMS\Core\Model\Model;
 use CMS\Models\DBC\DBC;
 use CMS\Models\Actions\FileActions;
-use CMS\Models\Products\Product;
 
 /*
  * als ik in een user of product foto's moet uploaden kan ik toch ook in de user table een
@@ -49,6 +48,7 @@ class Folders extends Model{
 	public function files()
 	{
 		return $this->owns('CMS\Models\Files\File');
+
 	}
 
     public function subFolders(){
