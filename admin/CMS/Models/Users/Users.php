@@ -2,12 +2,16 @@
 
 namespace CMS\Models\Users;
 
-use CMS\Core\Model\Model;
+use \Defuse\Crypto\Key;
 use \Defuse\Crypto\Crypto;
+use Defuse\Crypto\KeyProtectedByPassword;
 use \Defuse\Crypto\Exception as Ex;
+
+use CMS\Core\Model\Model;
 use \CMS\Models\DBC\DBC;
-use CMS\Models\File\Folders;
-use CMS\Models\File\FileUpload;
+use CMS\Models\Files\Folders;
+use CMS\Models\Files\FileUpload;
+
 
 class Users extends Model{
 
@@ -86,8 +90,10 @@ class Users extends Model{
 	}
 	protected function encrypt($value){
 		if(file_exists('././keys/Shared/shared.txt')){
-			$shared_key = file_get_contents('././keys/Shared/shared.txt');
-			return Crypto::binTohex(Crypto::encrypt(trim($value),$shared_key));
+			$keyAscii = file_get_contents('././keys/Shared/shared.txt');
+			$returnKey = Key::loadFromAsciiSafeString($keyAscii);
+
+			return Crypto::encrypt($value,$returnKey);
 		} else {
 			echo "Shared Encryption key could not be found!";
 			return false;
@@ -95,8 +101,10 @@ class Users extends Model{
 	}
 	protected function decrypt($value){
 		if(file_exists('././keys/Shared/shared.txt')){
-		$shared_key = file_get_contents('././keys/Shared/shared.txt');
-		return Crypto::decrypt(Crypto::hexTobin($value),$shared_key);
+			$keyAscii = file_get_contents('././keys/Shared/shared.txt');
+			$returnKey = Key::loadFromAsciiSafeString($keyAscii);
+
+			return Crypto::decrypt($value,$returnKey);
 		} else {
 			echo "Shared Encryption key could not be found!";
 			return false;
@@ -122,17 +130,10 @@ class Users extends Model{
 
 		if($query->rowCount() === 0){
 			// Create user specific Encryption key.
-			try {
-				$user_key = Crypto::createNewRandomKey();
-				$file = fopen('././keys/User/'.$username.'.txt','w');
-				fwrite($file, $user_key);
-				fclose($file);
-			} catch (Ex\CryptoTestFailedException $ex) {
-				die('Cannot safely create a key');
-			} catch (Ex\CannotPerformOperationException $ex) {
-				die('Cannot safely create a key');
-			}
-
+			$user_key = Key::createNewRandomKey();
+			$file = fopen('././keys/User/'.$username.'.txt','w');
+			fwrite($file, $user_key);
+			fclose($file);
 
 			$username = trim($this->username);
 			$password = trim($this->password);
@@ -143,13 +144,16 @@ class Users extends Model{
 
 			if(!empty($username) && !empty($password) && !empty($password_again)) {
 				if($password === $password_again) {
-					$this->request['new_password'] = password_hash($password, PASSWORD_BCRYPT);
+					$this->request['password'] = password_hash($password, PASSWORD_BCRYPT);
 					$this->request['album_id'] = $album_id;
 					foreach($this->request as $k => $v) {
 						if(in_array($k,$this->encrypted)) {
 							$this->request[$k] = $this->encrypt($v);
 						}
 					}
+					$protected_key = KeyProtectedByPassword::createRandomPasswordProtectedKey($password);
+					$protected_key_encoded = $protected_key->saveToAsciiSafeString();
+					$this->hidden['protected_key'] = $protected_key_encoded;
 					if($this->save()){
 						$messages[] = '<p class="container">New user <strong>'.$username.'</strong> has been successfully added.';
 					} else {
@@ -186,7 +190,7 @@ class Users extends Model{
 		$password = $this->request['password'];
 		$password_again = $this->request['password_again'];
 		try {
-            $query = $dbc->prepare("SELECT * FROM users WHERE username = ?");
+            $query = $dbc->prepare("SELECT * FROM users WHERE username = ? AND user_id != {$this->user_id}");
 			$query->execute([$username]);
         } catch (\PDOException $e){
             echo $e->getMessage();

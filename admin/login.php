@@ -3,6 +3,7 @@
 	require_once('config.php');
 	use CMS\Models\DBC\DBC;
 	use Defuse\Crypto\Crypto;
+	use Defuse\Crypto\Key;
 ?>
 <!DOCTYPE html>
 <html>
@@ -67,7 +68,8 @@
                             $_SESSION['user_id'] = (int)$row['user_id'];
                             $_SESSION['username'] = $row['username'];
                             $shared_key = file_get_contents('keys/Shared/shared.txt');
-                            $_SESSION['rights'] = Crypto::decrypt(Crypto::hexTobin($row['rights']), $shared_key);
+							$returnKey = Key::loadFromAsciiSafeString($shared_key);
+                            $_SESSION['rights'] = Crypto::decrypt($row['rights'], $returnKey);
                             $new_token = md5($row['username'] . $_SESSION['rights'] . $row['token']);
                             try {
                                 $query = $dbc->prepare("UPDATE users SET token = '$new_token' WHERE user_id = ? ");
