@@ -67,6 +67,8 @@
                             $user_id = (int)$row['user_id'];
                             $_SESSION['user_id'] = (int)$row['user_id'];
                             $_SESSION['username'] = $row['username'];
+							$_SESSION['key'] = $row['protected_key'];
+							$_SESSION['password'] = $password;
                             $shared_key = file_get_contents('keys/Shared/shared.txt');
 							$returnKey = Key::loadFromAsciiSafeString($shared_key);
                             $_SESSION['rights'] = Crypto::decrypt($row['rights'], $returnKey);

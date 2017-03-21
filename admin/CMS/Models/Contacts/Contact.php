@@ -5,8 +5,9 @@
     use \Defuse\Crypto\Crypto;
     use \Defuse\Crypto\Exception as Ex;
     use CMS\Models\DBC\DBC;
-    use CMS\Models\File\FileUpload;
+    use CMS\Models\Files\FileUpload;
     use CMS\Core\Model\Model;
+    use Defuse\Crypto\KeyProtectedByPassword;
 
     class Contact extends Model
     {
@@ -164,26 +165,28 @@
 
         protected function encrypt($value)
         {
-            if (file_exists('././keys/User/' . $_SESSION['username'] . '.txt')) {
-                $user_key = file_get_contents('././keys/User/' . $_SESSION['username'] . '.txt');
+            if (isset($_SESSION['key'])) {
 
-                return Crypto::binTohex(Crypto::encrypt(trim($value), $user_key));
+                $protected_key = KeyProtectedByPassword::loadFromAsciiSafeString($_SESSION['key']);;
+                // $returnKey = KeyProtectedByPassword::loadFromAsciiSafeString($protected_key_encoded);
+                $returnKey = $protected_key->unlockKey($_SESSION['password']);
+                return Crypto::encrypt($value,$returnKey);
             } else {
-                echo "Shared Encryption key could not be found!";
-
+                echo "Encryption key could not be found!";
                 return false;
             }
         }
 
         protected function decrypt($value)
         {
-            if (file_exists('././keys/User/' . $_SESSION['username'] . '.txt')) {
-                $user_key = file_get_contents('././keys/User/' . $_SESSION['username'] . '.txt');
+            if (isset($_SESSION['key'])) {
 
-                return Crypto::decrypt(Crypto::hexTobin($value), $user_key);
+                $protected_key = KeyProtectedByPassword::loadFromAsciiSafeString($_SESSION['key']);;
+                // $returnKey = KeyProtectedByPassword::loadFromAsciiSafeString($protected_key_encoded);
+                $returnKey = $protected_key->unlockKey($_SESSION['password']);
+                return Crypto::decrypt($value,$returnKey);
             } else {
-                echo "Shared Encryption key could not be found!";
-
+                echo "Encryption key could not be found!";
                 return false;
             }
         }

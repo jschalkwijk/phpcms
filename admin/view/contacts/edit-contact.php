@@ -30,7 +30,7 @@
     </div>
     <div class="row">
         <div class="col-sm-6 col-lg-6 col-sm-offset-3 push-lg-3">
-            <form class="small" enctype="multipart/form-data" method="post" action="<?= $action; ?>">
+            <form class="small" enctype="multipart/form-data" method="post" action="<?= ADMIN.'contacts/edit/'.$contact->get_id(); ?>">
                 <input type="hidden" name="MAX_FILE_SIZE" value="43500000"/>
                 <label for="files[]">Choose File(max size: 3.5 MB): </label><br/>
                 <input type="file" name="files[]" multiple/><br/>
@@ -45,7 +45,7 @@
     </div>
     <div class="row">
         <div class="col-sm-6 col-lg-6 col-sm-offset-3 push-lg-3">
-            <?php (isset($params[0]) && isset($params[1])) ? $action = ADMIN . 'contacts/edit/' . $contact->contact_id : ""; ?>
+            <?php (isset($params[0])) ? $action = ADMIN . 'contacts/edit/' . $contact->contact_id : ""; ?>
             <form id="create-form" method="post" action="<?= $action; ?>">
                 <input type="hidden" name="contact_id" value="<?= $contact->contact_id; ?>"/>
                 <input type="text" name="first_name" placeholder="First Name" value="<?= $contact->keep($contact->firstName()); ?>"/><br/>
