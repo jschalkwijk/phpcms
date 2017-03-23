@@ -2,22 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0a43c896-b199-4fd3-a7cd-831809ebb533" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/keys/User/.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/keys/User/Flok.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/keys/User/Floki.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/keys/User/Nola.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/keys/User/admin.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/keys/User/fez.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/keys/User/henkie.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/keys/User/index.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/keys/User/ivo.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/keys/User/jorn.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin/keys/User/lotte.txt" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/CMS/Models/Posts/Post.php" afterPath="$PROJECT_DIR$/admin/CMS/Models/Posts/Post.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/CMS/Models/Users/Users.php" afterPath="$PROJECT_DIR$/admin/CMS/Models/Users/Users.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/controller/UsersController.php" afterPath="$PROJECT_DIR$/admin/controller/UsersController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/view/users/add-edit-user.php" afterPath="$PROJECT_DIR$/admin/view/users/add-edit-user.php" />
     </list>
     <ignored path="CMS.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -46,10 +31,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Model.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Model.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/CMS/Core/Model/Model.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.9525268">
+            <state vertical-scroll-proportion="-25.916666">
               <caret line="234" column="85" selection-start-line="234" selection-start-column="85" selection-end-line="234" selection-end-column="85" />
               <folding>
                 <element signature="e#33#56#0#PHP" expanded="true" />
@@ -78,11 +63,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Post.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Post.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/admin/CMS/Models/Posts/Post.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="26" column="26" selection-start-line="26" selection-start-column="26" selection-end-line="26" selection-end-column="26" />
+            <state vertical-scroll-proportion="0.48238897">
+              <caret line="21" column="34" selection-start-line="21" selection-start-column="34" selection-end-line="21" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -111,8 +96,8 @@
       <file leaf-file-name="Users.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/CMS/Models/Users/Users.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="181" column="0" selection-start-line="181" selection-start-column="0" selection-end-line="181" selection-end-column="0" />
+            <state vertical-scroll-proportion="-58.75">
+              <caret line="222" column="43" selection-start-line="222" selection-start-column="43" selection-end-line="222" selection-end-column="43" />
               <folding>
                 <element signature="e#36#59#0#PHP" expanded="true" />
                 <marker date="1490185955000" expanded="true" signature="2440:2478" placeholder="SELECT * FRO... users" />
@@ -226,8 +211,8 @@
         <option value="$PROJECT_DIR$/admin/view/users/add-edit-user.php" />
         <option value="$PROJECT_DIR$/admin/Controller/UsersController.php" />
         <option value="$PROJECT_DIR$/admin/CMS/Models/Users/Users.php" />
-        <option value="$PROJECT_DIR$/admin/CMS/Models/Posts/Post.php" />
         <option value="$PROJECT_DIR$/admin/CMS/Core/Model/Model.php" />
+        <option value="$PROJECT_DIR$/admin/CMS/Models/Posts/Post.php" />
       </list>
     </option>
   </component>
@@ -420,9 +405,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="68" y="23" width="1852" height="1057" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23259668" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23259668" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297587" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297587" sideWeight="0.5025707" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294702" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -743,6 +728,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.32159266">
           <caret line="20" column="27" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -750,6 +736,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6431853">
           <caret line="78" column="46" selection-start-line="78" selection-start-column="46" selection-end-line="78" selection-end-column="46" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -811,7 +798,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/CMS/Core/Model/Model.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9525268">
+        <state vertical-scroll-proportion="-25.916666">
           <caret line="234" column="85" selection-start-line="234" selection-start-column="85" selection-end-line="234" selection-end-column="85" />
           <folding>
             <element signature="e#33#56#0#PHP" expanded="true" />
@@ -837,14 +824,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/CMS/Models/Posts/Post.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="26" column="26" selection-start-line="26" selection-start-column="26" selection-end-line="26" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/admin/view/posts/posts-nav.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -858,21 +837,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="17" column="28" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/CMS/Models/Users/Users.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="181" column="0" selection-start-line="181" selection-start-column="0" selection-end-line="181" selection-end-column="0" />
-          <folding>
-            <element signature="e#36#59#0#PHP" expanded="true" />
-            <marker date="1490185955000" expanded="true" signature="2440:2478" placeholder="SELECT * FRO... users" />
-            <marker date="1490185955000" expanded="true" signature="4993:5047" placeholder="SELECT * FRO... users" />
-            <marker date="1490185955000" expanded="true" signature="4993:5063" placeholder="SELECT * FRO... users" />
-            <marker date="1490185955000" expanded="true" signature="7030:7107" placeholder="..." />
-            <marker date="1490185955000" expanded="true" signature="7671:7718" placeholder="UPDATE users... " />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -908,6 +872,29 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="2" column="4" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/CMS/Models/Users/Users.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-58.75">
+          <caret line="222" column="43" selection-start-line="222" selection-start-column="43" selection-end-line="222" selection-end-column="43" />
+          <folding>
+            <element signature="e#36#59#0#PHP" expanded="true" />
+            <marker date="1490185955000" expanded="true" signature="2440:2478" placeholder="SELECT * FRO... users" />
+            <marker date="1490185955000" expanded="true" signature="4993:5047" placeholder="SELECT * FRO... users" />
+            <marker date="1490185955000" expanded="true" signature="4993:5063" placeholder="SELECT * FRO... users" />
+            <marker date="1490185955000" expanded="true" signature="7030:7107" placeholder="..." />
+            <marker date="1490185955000" expanded="true" signature="7671:7718" placeholder="UPDATE users... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/CMS/Models/Posts/Post.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.48238897">
+          <caret line="21" column="34" selection-start-line="21" selection-start-column="34" selection-end-line="21" selection-end-column="34" />
           <folding />
         </state>
       </provider>
