@@ -19,7 +19,7 @@
         // really need all of it. To just display a category name for example just join that value.
 		protected $joins = [
 			'categories' => ['title'],
-			'users' => ['username','first_name','last_name']
+			'users' => ['username']
 		];
 
 		protected $allowed = [

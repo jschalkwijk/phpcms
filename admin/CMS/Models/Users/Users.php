@@ -37,7 +37,6 @@ class Users extends Model{
 		'function',
 		'rights',
 		'album_id',
-		'password',
         'trashed',
         'approved'
 	];
@@ -144,7 +143,7 @@ class Users extends Model{
 
 			if(!empty($username) && !empty($password) && !empty($password_again)) {
 				if($password === $password_again) {
-					$this->request['password'] = password_hash($password, PASSWORD_BCRYPT);
+					$this->hidden['password'] = password_hash($password, PASSWORD_BCRYPT);
 					$this->request['album_id'] = $album_id;
 					foreach($this->request as $k => $v) {
 						if(in_array($k,$this->encrypted)) {
@@ -182,7 +181,6 @@ class Users extends Model{
 		$dbc = $db->connect();
 
 		$output_form = false;
-		$errors = array();
 		$messages = array();
 
 		$username = trim($this->request['username']);
@@ -196,43 +194,56 @@ class Users extends Model{
             echo $e->getMessage();
             exit();
         }
-        $this->patch();
-		if($query->rowCount() === 0 || ($query->rowCount() === 1 && ($username === $old_username))){
+
+		// Initial patch of objkect with the request values. if the main check fails when you enter no or incorrect values
+		// The values you have entered will be remembered so the user doesn't have to retype everything.
+		// if you leave this out the object is reset to its initial values.
+		//Because we fetch all the values with methods that decrypt, we have to encrypt all the alues before the initial patch.
+		foreach ($this->request as $k => $v) {
+			if (in_array($k, $this->encrypted)) {
+				$this->request[$k] = $this->encrypt($v);
+			}
+		}
+		$this->patch();
+
+		if((!empty($username) && $this->request['confirm'] == 'Yes') && ($query->rowCount() === 0 || ($query->rowCount() === 1 && ($username === $old_username)))){
 			$new_password = trim($password);
 			$new_password_again = trim($password_again);
 
 			// save edited object to database
-			if ($this->request['confirm'] == 'Yes') {
-                foreach ($this->request as $k => $v) {
-                    if (in_array($k, $this->encrypted)) {
-                        $this->request[$k] = $this->encrypt($v);
-                    }
-                }
-
-                $this->savePatch();
-                if (!empty($new_password) && !empty($new_password_again)) {
-                    if ($new_password === $new_password_again) {
-                        $hash = password_hash($new_password, PASSWORD_BCRYPT);
-                        $this->patch(['password' => $hash]);
-                        $this->savePatch();
-                        $messages[] = 'You password has been successfully changed.';
-                    } else {
-                        $errors[] = 'Passwords do not match, please retype your password correctly.';
-                        $output_form = true;
-                    }
-                }
-
-				// Confirm success with the user
-				$messages[] =  '<p>The user <strong>' . $this->username. '</strong> was successfully edited.';
-			} else {
-				$errors[] = '<p class="error">The user was not edited.</p>';
-				$output_form = true;
+			foreach ($this->request as $k => $v) {
+				if (in_array($k, $this->encrypted)) {
+					$this->request[$k] = $this->encrypt($v);
+				}
 			}
-			return ['output_form' => $output_form,'errors' => $errors,'messages' => $messages];
+			$this->patch();
+
+			/*
+			 * TODO : if a patch is successfully saved, the values array should be deleted inside the Model
+			 * automatically to avoid conflicts. For example in this case we need to patch twice for the password.
+			 */
+			$this->values = [];
+			if (!empty($new_password) && !empty($new_password_again)) {
+				if ($new_password === $new_password_again) {
+					$hash = password_hash($new_password, PASSWORD_BCRYPT);
+					$this->hidden['password'] = $hash;
+					$this->patch();
+					$messages[] = 'You password has been successfully changed.';
+				} else {
+					$messages[] = 'Passwords do not match, please retype your password correctly.';
+					$output_form = true;
+					return ['output_form' => $output_form,'messages' => $messages];
+				}
+			}
+			$this->savePatch();
+			// Confirm success with the user
+			$messages[] =  '<p>The user <strong>' . $this->username. '</strong> was successfully edited.';
+
+			return ['output_form' => $output_form,'messages' => $messages];
 		} else {
 			$output_form = true;
-			$errors[] = "Username already exists, please use another username.";
-			return ['output_form' => $output_form,'errors' => $errors,'messages' => $messages];
+			$messages[] = "Username is empty or already exists, please use another username.";
+			return ['output_form' => $output_form,'messages' => $messages];
 		}
 	}
 

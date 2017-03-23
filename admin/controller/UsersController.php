@@ -24,10 +24,9 @@ class Users extends Controller {
 	}
 	public function create($params = null){
 		$user = new User();
-		$messages = [];
 		if(isset($_POST['submit'])){
 			$user = new User($_POST);
-			$user->add();
+			$add = $user->add();
 		}
 		$this->view(
 			'Add User',
@@ -35,7 +34,7 @@ class Users extends Controller {
 			$params,
 			[
 				'user' => $user,
-				'messages' => $messages,
+				'messages' => $add['messages'],
 			]
 		);
 	}
@@ -61,11 +60,11 @@ class Users extends Controller {
 		}
 
 		$user = User::one($params[0]);
-		$messages = [];
 
 		if(isset($_POST['submit'])){
 			$user->request = $_POST;
-			$user->edit();
+			$add = $user->edit();
+			print_r($user);
 		}
 
 		$this->view(
@@ -74,7 +73,7 @@ class Users extends Controller {
 			$params,
 			[
 				'user' => $user,
-				'messages' => $messages,
+				'messages' => $add['messages'],
 			]
 		);
 	}
