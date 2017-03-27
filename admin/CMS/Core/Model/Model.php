@@ -460,6 +460,7 @@ abstract class Model
      * @return bool
      */
     // TODO: Save should reset the request,values and hidden fields, if youneed to patch it later on in the same function, you won't get conflicts.
+    // TODO: save or save patch could iterate over the model keys, and not the value array's http://php.net/manual/en/language.oop5.iterations.php
     public function save()
     {
         $query = $this->insert($this->prepareQuery());
