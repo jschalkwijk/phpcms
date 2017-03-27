@@ -31,11 +31,6 @@ class Users extends Model{
 
 	protected $allowed = [
 		'username',
-		'first_name',
-		'last_name',
-		'email',
-		'function',
-		'rights',
 		'album_id',
         'trashed',
         'approved'
@@ -128,11 +123,7 @@ class Users extends Model{
         }
 
 		if($query->rowCount() === 0){
-			// Create user specific Encryption key.
-			$user_key = Key::createNewRandomKey();
-			$file = fopen('././keys/User/'.$username.'.txt','w');
-			fwrite($file, $user_key);
-			fclose($file);
+
 
 			$username = trim($this->username);
 			$password = trim($this->password);
@@ -143,13 +134,13 @@ class Users extends Model{
 
 			if(!empty($username) && !empty($password) && !empty($password_again)) {
 				if($password === $password_again) {
-					$this->hidden['password'] = password_hash($password, PASSWORD_BCRYPT);
-					$this->request['album_id'] = $album_id;
-					foreach($this->request as $k => $v) {
-						if(in_array($k,$this->encrypted)) {
-							$this->request[$k] = $this->encrypt($v);
-						}
-					}
+					$this->password = password_hash($password, PASSWORD_BCRYPT);
+					$this->album_id = $album_id;
+//					foreach($this->request as $k => $v) {
+//						if(in_array($k,$this->encrypted)) {
+//							$this->request[$k] = $this->encrypt($v);
+//						}
+//					}
 					$protected_key = KeyProtectedByPassword::createRandomPasswordProtectedKey($password);
 					$protected_key_encoded = $protected_key->saveToAsciiSafeString();
 					$this->hidden['protected_key'] = $protected_key_encoded;
