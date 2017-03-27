@@ -15,8 +15,8 @@ use CMS\Models\Files\FileUpload;
 
 class Users extends Model{
 
-	private $file_path = 'files/users/';
-	private $thumb_path = 'files/thumbs/users/';
+	private $file_path = 'uploads/users/';
+	private $thumb_path = 'uploads/thumbs/users/';
 
 	protected $primaryKey = 'user_id';
 
@@ -42,6 +42,12 @@ class Users extends Model{
 		'email',
 		'function',
 		'rights',
+	];
+
+	protected $hidden = [
+		'password',
+		'protected_key',
+		'album_id',
 	];
 
 	public function firstName(){
@@ -134,7 +140,8 @@ class Users extends Model{
 
 			if(!empty($username) && !empty($password) && !empty($password_again)) {
 				if($password === $password_again) {
-					$this->password = password_hash($password, PASSWORD_BCRYPT);
+					$hash = password_hash($password, PASSWORD_BCRYPT);
+					$this->password = $hash;
 					$this->album_id = $album_id;
 //					foreach($this->request as $k => $v) {
 //						if(in_array($k,$this->encrypted)) {
@@ -143,7 +150,7 @@ class Users extends Model{
 //					}
 					$protected_key = KeyProtectedByPassword::createRandomPasswordProtectedKey($password);
 					$protected_key_encoded = $protected_key->saveToAsciiSafeString();
-					$this->hidden['protected_key'] = $protected_key_encoded;
+					$this->protected_key = $protected_key_encoded;
 					if($this->save()){
 						$messages[] = '<p class="container">New user <strong>'.$username.'</strong> has been successfully added.';
 					} else {
@@ -190,23 +197,17 @@ class Users extends Model{
 		// The values you have entered will be remembered so the user doesn't have to retype everything.
 		// if you leave this out the object is reset to its initial values.
 		//Because we fetch all the values with methods that decrypt, we have to encrypt all the alues before the initial patch.
-		foreach ($this->request as $k => $v) {
-			if (in_array($k, $this->encrypted)) {
-				$this->request[$k] = $this->encrypt($v);
-			}
-		}
+//		foreach ($this->request as $k => $v) {
+//			if (in_array($k, $this->encrypted)) {
+//				$this->request[$k] = $this->encrypt($v);
+//			}
+//		}
 		$this->patch();
 
 		if((!empty($username) && $this->request['confirm'] == 'Yes') && ($query->rowCount() === 0 || ($query->rowCount() === 1 && ($username === $old_username)))){
 			$new_password = trim($password);
 			$new_password_again = trim($password_again);
 
-			// save edited object to database
-			foreach ($this->request as $k => $v) {
-				if (in_array($k, $this->encrypted)) {
-					$this->request[$k] = $this->encrypt($v);
-				}
-			}
 			$this->patch();
 
 			/*
@@ -217,8 +218,8 @@ class Users extends Model{
 			if (!empty($new_password) && !empty($new_password_again)) {
 				if ($new_password === $new_password_again) {
 					$hash = password_hash($new_password, PASSWORD_BCRYPT);
-					$this->hidden['password'] = $hash;
-					$this->patch();
+					$this->password = $hash;
+//					$this->patch();
 					$messages[] = 'You password has been successfully changed.';
 				} else {
 					$messages[] = 'Passwords do not match, please retype your password correctly.';
@@ -226,6 +227,7 @@ class Users extends Model{
 					return ['output_form' => $output_form,'messages' => $messages];
 				}
 			}
+
 			$this->savePatch();
 			// Confirm success with the user
 			$messages[] =  '<p>The user <strong>' . $this->username. '</strong> was successfully edited.';

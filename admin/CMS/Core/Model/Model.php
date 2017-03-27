@@ -476,7 +476,7 @@ abstract class Model
     }
 
     /**
-     * Changes a existing data row or set
+     * Changes a existing data row or set with the request values or the given array with data.
      * @param array $attributes;
      * @return Object
      */
@@ -485,11 +485,16 @@ abstract class Model
         // If controller provided array
         if(!empty($attributes)) {
             $this->request = $attributes;
-            foreach ($this->request as $key => $value) {
-                    $this->$key = $value;
-            }
             // reset Values.
             $this->values = [];
+        }
+//        print_r($this->request);
+        // Reset Current Object values with new values;
+        if(!empty($this->request)) {
+            //$this->request = $attributes;
+            foreach ($this->request as $key => $value) {
+                $this->$key = $value;
+            }
         }
     }
 
