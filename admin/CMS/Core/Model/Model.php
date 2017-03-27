@@ -26,6 +26,8 @@ abstract class Model
     protected $connection;
 
     protected $sqlError;
+
+    public $lastInsertId;
     /**
      * Holds the Primary Key of the related table
      * Default set to 'id'. Change in extending class if needed.
@@ -244,7 +246,7 @@ abstract class Model
             if(!empty($this->values)) {
                 $query = $dbc->prepare($query);
                 $query->execute($this->values);
-                //$this->database->close();
+                $this->lastInsertId= $this->connection->lastInsertId();
             } else {
                 $query = $dbc->query($query);
                 //$this->database->close();

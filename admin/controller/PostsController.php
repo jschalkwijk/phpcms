@@ -55,10 +55,10 @@ class Posts extends Controller
         if (isset($_POST['submit'])) {
             if(!empty($post->category)) {
                 $category = new Cat(['title' => $post->category,'type' => $post->cat_type]);
-                $add = $category->add();
+                $category->save();
                 // add value to the request to be run by the prepareQuery
                 // otherwise it won't be seen added when save() is called.
-                $post->request['category_id'] = $add['category_id'];
+                $post->request['category_id'] = $category->lastInsertId;
             }
             $post->hidden['user_id'] = $this->currentUser;
             print_r($post->request);
@@ -105,11 +105,11 @@ class Posts extends Controller
             if (!empty($post->category)) {
                 echo "Hello!";
                 $category = new Cat(['title' => $post->category, 'type' => $post->cat_type]);
-                $add = $category->add();
+                $add = $category->save();
                 // add value to the request to be run by the prepareQuery
                 // otherwise it won't be seen added when save() is called.
 
-                $post->patch(['category_id' => $add['category_id']]);
+                $post->patch(['category_id' => $category->lastInsertId]);
             }
             $post->hidden['user_id'] = $this->currentUser;
             print_r($post->request);
