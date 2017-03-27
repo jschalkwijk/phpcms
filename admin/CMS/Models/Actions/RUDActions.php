@@ -27,8 +27,9 @@ class RUDActions{
 //        $primaryKey = substr($model->table, 0, -1).'_id';
 
         $query = $model->update($columns).$model->whereIN([$model->primaryKey => $checkbox]);
+		print_r($query);
         $model->newQuery($query);
-		header('Location: '.ADMIN.$model->table);
+//		header('Location: '.ADMIN.$model->table);
 	}
 	public static function delete_selected(Model $model,$checkbox){
 		$db = new DBC;

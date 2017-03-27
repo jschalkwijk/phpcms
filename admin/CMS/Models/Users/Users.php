@@ -18,7 +18,7 @@ class Users extends Model{
 	private $file_path = 'uploads/users/';
 	private $thumb_path = 'uploads/thumbs/users/';
 
-	protected $primaryKey = 'user_id';
+	public $primaryKey = 'user_id';
 
 	public $table = 'users';
 

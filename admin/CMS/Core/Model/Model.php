@@ -419,12 +419,12 @@ abstract class Model
     }
 
     /**
-     * @param $prep
+     * @param $prepared
      * @return string
      */
-    public function insert($prep)
+    public function insert($prepared)
     {
-        return "INSERT INTO $this->table (".implode(',',$prep['columns']).",date) VALUES(".implode(',',$prep['placeholders']).",NOW())";
+        return "INSERT INTO $this->table (".implode(',',$prepared['columns']).",date) VALUES(".implode(',',$prepared['placeholders']).",NOW())";
 
     }
 
@@ -438,21 +438,21 @@ abstract class Model
         // If controller provided array
         if(!empty($attributes)) {
             $this->request = $attributes;
-            foreach ($this->request as $key => $value) {
-                $this->$key = $value;
-            }
+//            foreach ($this->request as $key => $value) {
+//                $this->$key = $value;
+//            }
             // reset Values.
             $this->values = [];
         }
         // Reset Current Object values with new values;
-        // DONE: maybe remove this, this should already have been done with patching the object. can be done at same time above
-//        if(!empty($this->request)) {
-//            //$this->request = $attributes;
-//            foreach ($this->request as $key => $value) {
-//                $this->$key = $value;
-//            }
-//        }
-        $prep = $this->prepareQuery();
+        // TODO: maybe remove this, this should already have been done with patching the object. can be done at same time above
+        if(!empty($this->request)) {
+            //$this->request = $attributes;
+            foreach ($this->request as $key => $value) {
+                $this->$key = $value;
+            }
+        }
+        $prep = $this->prepareQuery($attributes);
         $string = array();
         foreach($prep['columns'] as $column){
             // Set column to ? for prepared statement
@@ -519,29 +519,41 @@ abstract class Model
         $placeholders = [];
         $columns = [];
 
-        if($attributes != null){
+        //When there are manually added attributes to the function we don't need to loop over the whole object,
+        // this means we only need to update that specific attributes
+        if ($attributes != null || !empty($attributes)) {
             $this->request = $attributes;
             $this->values = [];
-        }
-        // Voor nu reset ik de array. Bij het aanmaken van de Model worden de waardes
-        // gcreerd als er input is. Ik moet even goed kijken of dit goed gaat
-        // als ik de request waardes daar instel. Nu doe ik dat nog even hier.
-        //$this->values = [];
-        // Checks if request value is allowed to be inserted by user and then inserts it.
-        // TODO: or should I loop over the object keys here instead of the request?
+            foreach($this->request as $column => $value){
+                if(in_array($column,$this->allowed)  || in_array($column, $this->hidden)){
+                    $placeholders[] = '?';
+                    $columns[] = $column;
+                    $this->values[] = $value;
+                } else {
+                    echo "<p style='color: red;'>{$column} not set as allowed attribute</p>";
+                }
+            }
+        } else {
+            // Voor nu reset ik de array. Bij het aanmaken van de Model worden de waardes
+            // gcreerd als er input is. Ik moet even goed kijken of dit goed gaat
+            // als ik de request waardes daar instel. Nu doe ik dat nog even hier.
+            //$this->values = [];
+            // Checks if request value is allowed to be inserted by user and then inserts it.
+            // TODO: or should I loop over the object keys here instead of the request?
 
-        foreach ($this as $column => $value) {
-            if(in_array($column,$this->allowed) || in_array($column,$this->hidden)){
-                $placeholders[] = '?';
-                $columns[] = $column;
-                $this->values[] = $value;
-            } else if(!empty($this->encrypted) && in_array($column,$this->encrypted)) {
-//                $this->$column = $this->encrypt($value);
-                $placeholders[] = '?';
-                $columns[] = $column;
-                $this->values[] = $this->encrypt($value);
-            } else {
-                echo "<p style='color: red;'>{$column} not set as allowed/encrypted or hidden attribute</p>";
+            foreach ($this as $column => $value) {
+                if (in_array($column, $this->allowed) || in_array($column, $this->hidden)) {
+                    $placeholders[] = '?';
+                    $columns[] = $column;
+                    $this->values[] = $value;
+                } else if (!empty($this->encrypted) && in_array($column, $this->encrypted)) {
+    //                $this->$column = $this->encrypt($value);
+                    $placeholders[] = '?';
+                    $columns[] = $column;
+                    $this->values[] = $this->encrypt($value);
+                } else {
+                    echo "<p style='color: red;'>{$column} not set as allowed/encrypted or hidden attribute</p>";
+                }
             }
         }
 
