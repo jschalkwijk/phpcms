@@ -7,6 +7,8 @@ use PDOException;
 
 use CMS\Core\Pluralize\Inflect;
 
+// TODO: Nu doe ik alles oplasse of updaten met de request values, maar als ik dan een waarde aanpas moet dat in
+// de request array, $this->request['name'] = 'Jorn', ik wil dit kunnen doen $this->name = 'Jorn'. $this->save.
 /*
  * Values array na elke query resetten? voorkomt mischien problemen die ik had met het updated van een model
  * en het voorbereiden van statements.
@@ -438,7 +440,7 @@ abstract class Model
             $this->values = [];
         }
         // Reset Current Object values with new values;
-        // TODO: maybey romove this, this should already have been done with patching the object.
+        // TODO: maybey romove this, this should already have been done with patching the object. can be done at same time above
         if(!empty($this->request)) {
             //$this->request = $attributes;
             foreach ($this->request as $key => $value) {
@@ -522,6 +524,7 @@ abstract class Model
         // als ik de request waardes daar instel. Nu doe ik dat nog even hier.
         //$this->values = [];
         // Checks if request value is allowed to be inserted by user and then inserts it.
+        // TODO: or should I loop over the object keys here instead of the request?
         foreach($this->request as $column => $value){
             if(in_array($column,$this->allowed)){
                 $placeholders[] = '?';

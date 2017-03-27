@@ -34,8 +34,8 @@
       <file leaf-file-name="Product.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/CMS/Models/Products/Product.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.541667">
-              <caret line="203" column="34" selection-start-line="203" selection-start-column="34" selection-end-line="203" selection-end-column="34" />
+            <state vertical-scroll-proportion="-14.416667">
+              <caret line="206" column="12" selection-start-line="206" selection-start-column="12" selection-end-line="206" selection-end-column="12" />
               <folding>
                 <marker date="1489521069000" expanded="true" signature="2131:2295" placeholder="SELECT produ... products" />
                 <marker date="1489521069000" expanded="true" signature="3612:3662" placeholder="SELECT title... categories" />
@@ -49,17 +49,17 @@
       <file leaf-file-name="Model.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/admin/CMS/Core/Model/Model.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.571885">
-              <caret line="463" column="34" selection-start-line="463" selection-start-column="34" selection-end-line="463" selection-end-column="34" />
+            <state vertical-scroll-proportion="0.23961662">
+              <caret line="10" column="100" selection-start-line="10" selection-start-column="100" selection-end-line="10" selection-end-column="100" />
               <folding>
                 <element signature="e#33#56#0#PHP" expanded="true" />
-                <marker date="1490613044000" expanded="true" signature="12510:12628" placeholder="INSERT INTO ${$this-&gt;table}... " />
-                <marker date="1490613044000" expanded="true" signature="13606:13632" placeholder="UPDATE ${{$t... " />
-                <marker date="1490613044000" expanded="true" signature="16156:16167" placeholder="..." />
-                <marker date="1490613044000" expanded="true" signature="19928:19987" placeholder="SELECT * FRO... $" />
-                <marker date="1490613044000" expanded="true" signature="20095:20147" placeholder="SELECT * FRO... $" />
-                <marker date="1490613044000" expanded="true" signature="21064:21231" placeholder="SELECT * FRO... $" />
-                <marker date="1490613044000" expanded="true" signature="21799:22068" placeholder="SELECT * FRO... $" />
+                <marker date="1490613510000" expanded="true" signature="12735:12853" placeholder="INSERT INTO ${$this-&gt;table}... " />
+                <marker date="1490613510000" expanded="true" signature="13862:13888" placeholder="UPDATE ${{$t... " />
+                <marker date="1490613510000" expanded="true" signature="16496:16507" placeholder="..." />
+                <marker date="1490613510000" expanded="true" signature="20268:20327" placeholder="SELECT * FRO... $" />
+                <marker date="1490613510000" expanded="true" signature="20435:20487" placeholder="SELECT * FRO... $" />
+                <marker date="1490613510000" expanded="true" signature="21404:21571" placeholder="SELECT * FRO... $" />
+                <marker date="1490613510000" expanded="true" signature="22139:22408" placeholder="SELECT * FRO... $" />
               </folding>
             </state>
           </provider>
@@ -808,8 +808,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/CMS/Models/Products/Product.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.541667">
-          <caret line="203" column="34" selection-start-line="203" selection-start-column="34" selection-end-line="203" selection-end-column="34" />
+        <state vertical-scroll-proportion="-14.416667">
+          <caret line="206" column="12" selection-start-line="206" selection-start-column="12" selection-end-line="206" selection-end-column="12" />
           <folding>
             <marker date="1489521069000" expanded="true" signature="2131:2295" placeholder="SELECT produ... products" />
             <marker date="1489521069000" expanded="true" signature="3612:3662" placeholder="SELECT title... categories" />
@@ -821,17 +821,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/CMS/Core/Model/Model.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.571885">
-          <caret line="463" column="34" selection-start-line="463" selection-start-column="34" selection-end-line="463" selection-end-column="34" />
+        <state vertical-scroll-proportion="0.23961662">
+          <caret line="10" column="100" selection-start-line="10" selection-start-column="100" selection-end-line="10" selection-end-column="100" />
           <folding>
             <element signature="e#33#56#0#PHP" expanded="true" />
-            <marker date="1490613044000" expanded="true" signature="12510:12628" placeholder="INSERT INTO ${$this-&gt;table}... " />
-            <marker date="1490613044000" expanded="true" signature="13606:13632" placeholder="UPDATE ${{$t... " />
-            <marker date="1490613044000" expanded="true" signature="16156:16167" placeholder="..." />
-            <marker date="1490613044000" expanded="true" signature="19928:19987" placeholder="SELECT * FRO... $" />
-            <marker date="1490613044000" expanded="true" signature="20095:20147" placeholder="SELECT * FRO... $" />
-            <marker date="1490613044000" expanded="true" signature="21064:21231" placeholder="SELECT * FRO... $" />
-            <marker date="1490613044000" expanded="true" signature="21799:22068" placeholder="SELECT * FRO... $" />
+            <marker date="1490613510000" expanded="true" signature="12735:12853" placeholder="INSERT INTO ${$this-&gt;table}... " />
+            <marker date="1490613510000" expanded="true" signature="13862:13888" placeholder="UPDATE ${{$t... " />
+            <marker date="1490613510000" expanded="true" signature="16496:16507" placeholder="..." />
+            <marker date="1490613510000" expanded="true" signature="20268:20327" placeholder="SELECT * FRO... $" />
+            <marker date="1490613510000" expanded="true" signature="20435:20487" placeholder="SELECT * FRO... $" />
+            <marker date="1490613510000" expanded="true" signature="21404:21571" placeholder="SELECT * FRO... $" />
+            <marker date="1490613510000" expanded="true" signature="22139:22408" placeholder="SELECT * FRO... $" />
           </folding>
         </state>
       </provider>
