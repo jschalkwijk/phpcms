@@ -25,9 +25,9 @@ class Page extends Model{
 		'title','description','content','path','parent_id','trashed','approved'
 	];
 
-//	protected $hidden = [
-//		'user_id'
-//	];
+	protected $hidden = [
+		'user_id'
+	];
 
 	public function getlink(){
 		return preg_replace("/[\s-]+/", "-", $this->title);
@@ -78,7 +78,7 @@ class Page extends Model{
 		}
 
 		if (!empty($page_title) && !empty($page_content) && (!empty($this->request['front-end']) || !empty($this->request['back-end']) )) {
-			$this->hidden['user_id'] = $_SESSION['user_id'];
+			$this->user_id = $_SESSION['user_id'];
 			if(!isset($this->page_id)) {
 				echo '<h1>New page</h1>';
 				$this->save();

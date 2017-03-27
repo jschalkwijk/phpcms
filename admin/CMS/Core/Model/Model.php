@@ -74,7 +74,7 @@ abstract class Model
      * For example, the current user_id.
      * @var array
      */
-    public $hidden = [];
+    protected $hidden = [];
 
     /**
      * @var string
@@ -438,18 +438,20 @@ abstract class Model
         // If controller provided array
         if(!empty($attributes)) {
             $this->request = $attributes;
+            foreach ($this->request as $key => $value) {
+                $this->$key = $value;
+            }
             // reset Values.
             $this->values = [];
         }
         // Reset Current Object values with new values;
-        // TODO: maybey romove this, this should already have been done with patching the object. can be done at same time above
-        if(!empty($this->request)) {
-            //$this->request = $attributes;
-            foreach ($this->request as $key => $value) {
-                $this->$key = $value;
-            }
-        }
-
+        // DONE: maybe remove this, this should already have been done with patching the object. can be done at same time above
+//        if(!empty($this->request)) {
+//            //$this->request = $attributes;
+//            foreach ($this->request as $key => $value) {
+//                $this->$key = $value;
+//            }
+//        }
         $prep = $this->prepareQuery();
         $string = array();
         foreach($prep['columns'] as $column){
@@ -483,16 +485,11 @@ abstract class Model
         // If controller provided array
         if(!empty($attributes)) {
             $this->request = $attributes;
+            foreach ($this->request as $key => $value) {
+                    $this->$key = $value;
+            }
             // reset Values.
             $this->values = [];
-        }
-//        print_r($this->request);
-        // Reset Current Object values with new values;
-        if(!empty($this->request)) {
-            //$this->request = $attributes;
-            foreach ($this->request as $key => $value) {
-                $this->$key = $value;
-            }
         }
     }
 
@@ -527,21 +524,37 @@ abstract class Model
         //$this->values = [];
         // Checks if request value is allowed to be inserted by user and then inserts it.
         // TODO: or should I loop over the object keys here instead of the request?
-        foreach($this->request as $column => $value){
-            if(in_array($column,$this->allowed)){
+
+        foreach ($this as $column => $value) {
+            if(in_array($column,$this->allowed) || in_array($column,$this->hidden)){
                 $placeholders[] = '?';
                 $columns[] = $column;
                 $this->values[] = $value;
+            } else if(!empty($this->encrypted) && in_array($column,$this->encrypted)) {
+//                $this->$column = $this->encrypt($value);
+                $placeholders[] = '?';
+                $columns[] = $column;
+                $this->values[] = $this->encrypt($value);
             } else {
-                echo "<p style='color: red;'>{$column} not set as allowed attribute</p>";
+                echo "<p style='color: red;'>{$column} not set as allowed/encrypted or hidden attribute</p>";
             }
         }
-        // Checks if the hidden properties are allowed. Example: current user_id etc.
-        foreach($this->hidden as $column => $value){
-                $placeholders[] = '?';
-                $columns[] = $column;
-                $this->values[] = $value;
-        }
+
+//        foreach($this->request as $column => $value){
+//            if(in_array($column,$this->allowed)){
+//                $placeholders[] = '?';
+//                $columns[] = $column;
+//                $this->values[] = $value;
+//            } else {
+//                echo "<p style='color: red;'>{$column} not set as allowed attribute</p>";
+//            }
+//        }
+//        // Checks if the hidden properties are allowed. Example: current user_id etc.
+//        foreach($this->hidden as $column => $value){
+//                $placeholders[] = '?';
+//                $columns[] = $column;
+//                $this->values[] = $value;
+//        }
         return ['placeholders' => $placeholders,'columns' => $columns];
     }
 

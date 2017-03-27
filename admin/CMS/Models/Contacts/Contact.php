@@ -27,30 +27,20 @@
         }
 
         protected $allowed = [
-            'first_name',
-            'last_name',
-            'phone_1',
-            'phone_2',
-            'mail_1',
-            'mail_2',
-            'dob',
-            'street',
-            'street_num',
-            'street_num_add',
-            'zip',
-            'notes',
             'img_path',
             'trashed',
             'approved'
         ];
-
+        protected $hidden = [
+            'user_id',
+        ];
         protected $encrypted = [
             'first_name',
             'last_name',
             'phone_1',
             'phone_2',
-            'mail_1',
-            'mail_2',
+            'email_1',
+            'email_2',
             'dob',
             'street',
             'street_num',
@@ -210,15 +200,15 @@
             print_r($this->request);
             // Adding the encrypted data to the database.
             if (!empty($first_name) && (!empty($email_1)) || !empty($phone_1)) {
-                foreach($this->request as $k => $v) {
-                    if(in_array($k,$this->encrypted)) {
-                        $this->request[$k] = $this->encrypt($v);
-                    }
-                }
-                $this->hidden['user_id'] = $_SESSION['user_id'];
+//                foreach($this as $k => $v) {
+//                    if(in_array($k,$this->encrypted)) {
+//                        $this->$k = $this->encrypt($v);
+//                    }
+//                }
+                $this->user_id = $_SESSION['user_id'];
 
                 $this->save();
-                $id = $this->connection->lastInsertId();
+                $id = $this->lastInsertId;
                 $messages[] = 'The new contact ' . '<a href="/admin/contacts/info/' . $id . '/' . $first_name . '">' . $first_name . '</a>' . ' is successfully created.';
             } else {
                 $errors[] = 'Fill in all the required fields';
@@ -245,12 +235,12 @@
             $this->patch();
             // Adding the updated data to the DB.
             if (!empty($first_name) && (!empty($email_1)) || !empty($phone_1)) {
-                $this->hidden['user_id'] = $this->user_id;
-                foreach($this->request as $k => $v) {
-                    if(in_array($k,$this->encrypted)) {
-                        $this->request[$k] = $this->encrypt($v);
-                    }
-                }
+                $this->user_id = $_SESSION['user_id'];
+//                foreach($this as $k => $v) {
+//                    if(in_array($k,$this->encrypted)) {
+//                        $this->$k = $this->encrypt($v);
+//                    }
+//                }
                 $this->savePatch();
                 $messages[] = 'The contact ' . '<a href="/admin/contacts/info/' . $this->user_id . '/' . $first_name . '">' . $first_name . '</a>' . ' is successfully edited.';
             } else {

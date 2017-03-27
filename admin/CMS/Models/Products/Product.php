@@ -31,6 +31,11 @@ class Product extends Model {
         'trashed',
     ];
 
+	protected $hidden = [
+		'user_id',
+		'album_id'
+	];
+
     protected $discount_price;
 	protected $savings;
 	protected $tax_percentage = 21;
@@ -150,7 +155,7 @@ class Product extends Model {
 //            $album_id = Folders::auto_create_folder($this->name,$this->file_path.$this->name,$this->thumb_path.$this->name,'Products',$category_name);
 //        }
 
-        $this->hidden['user_id'] = $this->user_id;
+        $this->user_id = $_SESSION['user_id'];
         print_r($this->request);
         $this->patch();
         if(!empty($this->name) && !empty($this->description) && !empty($this->category_id)) {
@@ -198,7 +203,7 @@ class Product extends Model {
 		if(!empty($category)) {
 			$category = new Categories(['title' => $category,'type'=>'product']);
 			if(!empty($category->title)) {
-				$category->hidden['user_id'] = $_SESSION['user_id'];
+				$category->user_id = $_SESSION['user_id'];
 				print_r($category->request);
 				if(!empty($category->title) && !empty($category->type)) {
 					$category->save();
@@ -219,7 +224,7 @@ class Product extends Model {
 				$album_id = Folders::auto_create_folder($category_name,$this->file_path,$this->thumb_path,'Products');
 				echo "Products Album_ID: ".print_r($album_id);
 				$category->category_id = $this->category_id;
-				$category->hidden = ['album_id' => $album_id];
+				$category->album_id = $album_id;
 				$category->request = [];
 				$category->values = [];
 				$category->patch();
@@ -254,11 +259,11 @@ class Product extends Model {
 		//create new product file folder inside Products folder.
 		if(!file_exists($this->file_path."/".$name)) {
 			$album_id = Folders::auto_create_folder($name,$this->file_path."/".$name,$this->file_path."/".$name."/thumbs",'Products',$category_name);
-		    $this->hidden['album_id'] = $album_id;
+		    $this->album_id = $album_id;
         }
 
 		if(!empty($name) && !empty($price)){
-            $this->hidden['user_id'] = $_SESSION['user_id'];
+            $this->user_id = $_SESSION['user_id'];
             $this->save();
 			$output_form = false;
 			$messages[] = "Product {$name} successfully added.";

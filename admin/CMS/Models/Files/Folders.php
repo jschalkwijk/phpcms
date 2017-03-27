@@ -173,11 +173,11 @@ class Folders extends Model{
 			try {
                 $sql = "INSERT INTO albums(name,author,parent_id,path,user_id) VALUES(?,?,?,?,?)";
                 echo 'file dest: '.$file_dest.'<br />';
-                echo 'thumbs dest: '.$thumb_dest.'<br />';
+                echo 'thumbs dest: '.$file_dest.'/thumbs'.'<br />';
                 $query = $dbc->prepare($sql);
                 $query->execute([$album_name,$author,$parent_id,$file_dest,$user_id]);
 				mkdir($file_dest,0744);
-				mkdir($thumb_dest,0744);
+				mkdir($file_dest.'/thumbs',0744);
             } catch (\PDOException $e){
                 echo $e->getMessage();
             }
