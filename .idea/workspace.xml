@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0a43c896-b199-4fd3-a7cd-831809ebb533" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/CMS/Core/Model/Model.php" afterPath="$PROJECT_DIR$/admin/CMS/Core/Model/Model.php" />
     </list>
     <ignored path="CMS.iws" />
@@ -51,16 +50,16 @@
         <entry file="file://$PROJECT_DIR$/admin/CMS/Core/Model/Model.php">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.571885">
-              <caret line="468" column="5" selection-start-line="468" selection-start-column="5" selection-end-line="468" selection-end-column="5" />
+              <caret line="463" column="34" selection-start-line="463" selection-start-column="34" selection-end-line="463" selection-end-column="34" />
               <folding>
                 <element signature="e#33#56#0#PHP" expanded="true" />
-                <marker date="1490612820000" expanded="true" signature="12510:12628" placeholder="INSERT INTO ${$this-&gt;table}... " />
-                <marker date="1490612820000" expanded="true" signature="13508:13534" placeholder="UPDATE ${{$t... " />
-                <marker date="1490612820000" expanded="true" signature="16049:16060" placeholder="..." />
-                <marker date="1490612820000" expanded="true" signature="19821:19880" placeholder="SELECT * FRO... $" />
-                <marker date="1490612820000" expanded="true" signature="19988:20040" placeholder="SELECT * FRO... $" />
-                <marker date="1490612820000" expanded="true" signature="20957:21124" placeholder="SELECT * FRO... $" />
-                <marker date="1490612820000" expanded="true" signature="21692:21961" placeholder="SELECT * FRO... $" />
+                <marker date="1490613044000" expanded="true" signature="12510:12628" placeholder="INSERT INTO ${$this-&gt;table}... " />
+                <marker date="1490613044000" expanded="true" signature="13606:13632" placeholder="UPDATE ${{$t... " />
+                <marker date="1490613044000" expanded="true" signature="16156:16167" placeholder="..." />
+                <marker date="1490613044000" expanded="true" signature="19928:19987" placeholder="SELECT * FRO... $" />
+                <marker date="1490613044000" expanded="true" signature="20095:20147" placeholder="SELECT * FRO... $" />
+                <marker date="1490613044000" expanded="true" signature="21064:21231" placeholder="SELECT * FRO... $" />
+                <marker date="1490613044000" expanded="true" signature="21799:22068" placeholder="SELECT * FRO... $" />
               </folding>
             </state>
           </provider>
@@ -229,54 +228,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="admin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CMS" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CMS" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="admin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CMS" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Models" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CMS" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CMS" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="admin" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CMS" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Models" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Products" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -871,16 +822,16 @@
     <entry file="file://$PROJECT_DIR$/admin/CMS/Core/Model/Model.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.571885">
-          <caret line="468" column="5" selection-start-line="468" selection-start-column="5" selection-end-line="468" selection-end-column="5" />
+          <caret line="463" column="34" selection-start-line="463" selection-start-column="34" selection-end-line="463" selection-end-column="34" />
           <folding>
             <element signature="e#33#56#0#PHP" expanded="true" />
-            <marker date="1490612820000" expanded="true" signature="12510:12628" placeholder="INSERT INTO ${$this-&gt;table}... " />
-            <marker date="1490612820000" expanded="true" signature="13508:13534" placeholder="UPDATE ${{$t... " />
-            <marker date="1490612820000" expanded="true" signature="16049:16060" placeholder="..." />
-            <marker date="1490612820000" expanded="true" signature="19821:19880" placeholder="SELECT * FRO... $" />
-            <marker date="1490612820000" expanded="true" signature="19988:20040" placeholder="SELECT * FRO... $" />
-            <marker date="1490612820000" expanded="true" signature="20957:21124" placeholder="SELECT * FRO... $" />
-            <marker date="1490612820000" expanded="true" signature="21692:21961" placeholder="SELECT * FRO... $" />
+            <marker date="1490613044000" expanded="true" signature="12510:12628" placeholder="INSERT INTO ${$this-&gt;table}... " />
+            <marker date="1490613044000" expanded="true" signature="13606:13632" placeholder="UPDATE ${{$t... " />
+            <marker date="1490613044000" expanded="true" signature="16156:16167" placeholder="..." />
+            <marker date="1490613044000" expanded="true" signature="19928:19987" placeholder="SELECT * FRO... $" />
+            <marker date="1490613044000" expanded="true" signature="20095:20147" placeholder="SELECT * FRO... $" />
+            <marker date="1490613044000" expanded="true" signature="21064:21231" placeholder="SELECT * FRO... $" />
+            <marker date="1490613044000" expanded="true" signature="21799:22068" placeholder="SELECT * FRO... $" />
           </folding>
         </state>
       </provider>
