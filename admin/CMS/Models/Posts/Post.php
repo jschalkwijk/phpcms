@@ -31,9 +31,9 @@
 			'approved'
 		];
 
-//	protected  $hidden = [
-//		'user_id'
-//	];
+	protected  $hidden = [
+		'user_id'
+	];
         # Relations
 
         public function category()

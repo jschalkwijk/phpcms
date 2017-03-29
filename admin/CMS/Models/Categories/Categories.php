@@ -25,6 +25,10 @@ class Categories extends Model{
         'approved'
     ];
 
+	protected $hidden = [
+		'user_id',
+	];
+
 	#SETTERS
 	public function setID($id){
 		$this->id = $id;

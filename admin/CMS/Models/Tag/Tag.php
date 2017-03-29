@@ -26,13 +26,15 @@
         protected $joins = [
             'users' => ['username']
         ];
+        public $type = 'post';
 
         protected $allowed = [
             'title',
         ];
 
         public $hidden = [
-            'type' => 'post',
+            'user_id',
+            'type',
         ];
 
         #SETTERS

@@ -60,7 +60,7 @@ class Posts extends Controller
                 // otherwise it won't be seen added when save() is called.
                 $post->request['category_id'] = $category->lastInsertId;
             }
-            $post->hidden['user_id'] = $this->currentUser;
+            $post->user_id = $this->currentUser;
             print_r($post->request);
             if(!empty($post->title) && !empty($post->content) && (!empty($post->category_id) || !empty($post->category) )) {
                 $post->save();
@@ -111,7 +111,7 @@ class Posts extends Controller
 
                 $post->patch(['category_id' => $category->lastInsertId]);
             }
-            $post->hidden['user_id'] = $this->currentUser;
+            $post->user_id = $this->currentUser;
             print_r($post->request);
             //update model but do not save it yet before check.
 

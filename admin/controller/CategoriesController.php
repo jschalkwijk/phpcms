@@ -19,7 +19,7 @@ class Categories extends Controller
         if (isset($_POST['submit'])) {
             $category = new Cat($_POST);
             if(!empty($category->title)) {
-                $category->hidden['user_id'] = $this->currentUser;
+                $category->user_id = $this->currentUser;
                 print_r($category->request);
                 if(!empty($category->title) && !empty($category->type)) {
                     $category->save();

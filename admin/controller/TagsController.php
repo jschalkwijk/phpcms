@@ -30,7 +30,7 @@
             $tag = new Tag($_POST);
             if(isset($_POST['submit'])){
                 if(!empty($tag->title) ) {
-                    $tag->hidden['user_id'] = $this->currentUser;
+                    $tag->user_id = $this->currentUser;
                     $tag->save();
                     header("Location: ".ADMIN."tags");
                 } else {
@@ -46,7 +46,7 @@
             if(isset($_POST['submit'])){
                 $tag->patch($_POST);
                 if(!empty($tag->title) ) {
-                    $tag->hidden['user_id'] = $this->currentUser;
+                    $tag->user_ids = $this->currentUser;
                     $tag->savePatch();
                     header("Location: ".ADMIN."tags");
                 } else {
