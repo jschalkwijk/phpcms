@@ -157,19 +157,18 @@ abstract class Model
     {
         $model = new static;
         $model->connection = $model->database->connect();
-        $query = $model->joined().$model->orderBy($model->primaryKey,'DESC');
+
         //echo $query;
 
-        return $model->newQuery($query);
+        return  $model->joined()->orderBy($model->primaryKey,'DESC')->newQuery();
     }
     public static function allWhere($columns = [])
     {
         $model = new static;
         $model->connection = $model->database->connect();
-        $query = $model->joined().$model->where($columns).$model->orderBy($model->primaryKey,'DESC');
         //echo $query;
+        return $model->joined()->where($columns)->orderBy($model->primaryKey,'DESC')->newQuery();
 
-        return $model->newQuery($query);
     }
 
     /**
@@ -184,30 +183,27 @@ abstract class Model
     {
         $model = new static;
         $model->connection = $model->database->connect();
-        $joins = $model->join($joins);
 
-        $query = $model->select().$joins['as'].$model->from().$joins['on'].$model->where([$model->primaryKey => $id]);
-        echo $query;
         // newQuery returns an array, so for only one item, we are returning the first value [0]
-        return $model->newQuery($query)[0];
+        return $model->select()->join($joins)->where([$model->primaryKey => $id])->newQuery()[0];
     }
 
-    /**
-     * @param $slug
-     * @param null $joins
-     * @return mixed
-     */
-
-    public static function slug($slug, $joins = null)
-    {
-        $model = new static;
-        $model->connection = $model->database->connect();
-        $joins = $model->join($joins);
-
-        $query = $model->select().$joins['as'].$model->from().$joins['on'].$model->where(['title' => $slug]);
-        echo $query;
-        return $model->newQuery($query);
-    }
+//    /**
+//     * @param $slug
+//     * @param null $joins
+//     * @return mixed
+//     */
+//
+//    public static function slug($slug, $joins = null)
+//    {
+//        $model = new static;
+//        $model->connection = $model->database->connect();
+//        $joins = $model->join($joins);
+//
+//        $query = $model->select().$joins['as'].$model->from().$joins['on'].$model->where(['title' => $slug]);
+//        echo $query;
+//        return $model->newQuery($query);
+//    }
 
     /**
      * Executes mysql Query
@@ -217,10 +213,12 @@ abstract class Model
      * @return Object Array
      *
      */
-    public function newQuery($query)
+    public function newQuery($query = null)
     {
-        $this->query = $query;
-        echo 'Query = '.$query.'<br>';
+        if (!empty($query)) {
+            $this->query = $query;
+        }
+        echo 'Query = '.$this->query.'<br>';
         echo 'Values Array: <br>';
         echo "<pre>";
         print_r($this->values);
@@ -244,11 +242,11 @@ abstract class Model
             $dbc = $this->connection;
 
             if(!empty($this->values)) {
-                $query = $dbc->prepare($query);
+                $query = $dbc->prepare($this->query);
                 $query->execute($this->values);
-                $this->lastInsertId= $this->connection->lastInsertId();
+                $this->lastInsertId = $this->connection->lastInsertId();
             } else {
-                $query = $dbc->query($query);
+                $query = $dbc->query($this->query);
                 //$this->database->close();
             }
             if($this->statement == "SELECT") {
@@ -291,7 +289,7 @@ abstract class Model
      * Returns SELECT part of an sql statement.
      *
      * @param array $columns
-     * @return string
+     * @return object
      *
      */
     public function select($columns = ['*'])
@@ -299,7 +297,8 @@ abstract class Model
         $this->statement = "SELECT";
 //        $this->query ="SELECT ".$this->table.".".implode($columns);
 //        return $this;
-        return "SELECT {$this->table}.".implode($columns);
+        $this->query .= "SELECT {$this->table}.".implode($columns);
+        return $this;
     }
 
     /**
@@ -317,7 +316,7 @@ abstract class Model
      * Returns WHERE part of an sql statement.
      *
      * @param array $columns
-     * @return String
+     * @return object
      *
      */
     public function where($columns = [])
@@ -337,12 +336,13 @@ abstract class Model
             $this->values[] = $value;
         }
         $where = implode(' AND ', $string);
-        return " WHERE {$where}";
+        $this->query .= " WHERE {$where}";
+        return $this;
 }
 
     /**
      * @param array $columns
-     * @return string
+     * @return object
      */
     public function whereIN($columns = [])
     {
@@ -356,19 +356,21 @@ abstract class Model
                 $this->values[] = $value;
             }
         }
-        return " WHERE ".$string;
+        $this->query .=  " WHERE ".$string;
+        return $this;
     }
     /**
      * Returns Order By part of an sql statement.
      *
      * @param string $column
      * @param string $order
-     * @return string
+     * @return object
      *
      */
     public function orderBy($column = '',$order = '')
     {
-        return " ORDER BY {$column} {$order}";
+        $this->query .= " ORDER BY {$column} {$order}";
+        return $this;
     }
 
 
@@ -379,14 +381,14 @@ abstract class Model
      */
     public function joined()
     {
-        $joins = $this->join();
-        return $this->select().$joins['as'].$this->from().$joins['on'];
+        $this->select()->join();
+        return $this;
     }
     /**
      * Returns array with the joined relations from the Model.
      *
      * @param array $joins
-     * @return String Array
+     * @return object
      *
      */
     public function join($joins = null)
@@ -394,10 +396,8 @@ abstract class Model
         if($joins == null && !empty($this->joins)){
            $joins = $this->joins;
         } else if($joins == null && empty($this->joins)){
-            return [
-                "as" => "",
-                "on" => "",
-            ];
+            $this->query .= $this->from();
+            return $this;
         }
         $as = "";
         $on = "";
@@ -412,26 +412,25 @@ abstract class Model
                 $on .= " JOIN {$table} ON {$this->table}.{$foreignKey}  = {$table}.{$foreignKey} ";
             }
         }
-        return [
-            "as" => $as,
-            "on" => $on,
-        ];
+        $this->query .= $as.$this->from().$on;
+        return $this;
     }
 
     /**
      * @param $prepared
-     * @return string
+     * @return object
      */
     public function insert($prepared)
     {
-        return "INSERT INTO $this->table (".implode(',',$prepared['columns']).",date) VALUES(".implode(',',$prepared['placeholders']).",NOW())";
+        $this->query .= "INSERT INTO $this->table (".implode(',',$prepared['columns']).",date) VALUES(".implode(',',$prepared['placeholders']).",NOW())";
+        return $this;
 
     }
 
     /**
      * Returns update part of a sql statement
-     * @param $prep
-     * @return string
+     * @param $attributes
+     * @return object
      */
     public function update($attributes = [])
     {
@@ -459,7 +458,8 @@ abstract class Model
             $string[] = $column." = ?";
         }
         $set = implode(',', $string);
-        return "UPDATE {$this->table} SET {$set}";
+        $this->query.= "UPDATE {$this->table} SET {$set}";
+        return $this;
     }
 
     /**
@@ -470,9 +470,8 @@ abstract class Model
     // TODO: save or savePatch or Update could iterate over the model keys, and not the value array's http://php.net/manual/en/language.oop5.iterations.php
     public function save()
     {
-        $query = $this->insert($this->prepareQuery());
-//        echo $query;
-        return $this->newQuery($query);
+      return $this->insert($this->prepareQuery())->newQuery();
+
     }
 
     /**
@@ -503,8 +502,7 @@ abstract class Model
      */
     public function savePatch()
     {
-        $query = $this->update().$this->where([$this->primaryKey => $this->get_id()]);
-        return $this->newQuery($query);
+      return $this->update()->where([$this->primaryKey => $this->get_id()])->newQuery();
     }
 
     /**
