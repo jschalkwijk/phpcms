@@ -42,7 +42,7 @@
         }
 		public function tags()
 		{
-//			return $this->newQuery("SELECT * FROM taggables RIGHT JOIN tags ON taggables.tag_id = tags.tag_id WHERE taggable_type = 'post' AND taggable_id = $this->post_id ORDER BY tags.tag_id DESC");
+//			return $this->grab("SELECT * FROM taggables RIGHT JOIN tags ON taggables.tag_id = tags.tag_id WHERE taggable_type = 'post' AND taggable_id = $this->post_id ORDER BY tags.tag_id DESC");
         	return $this->morpheus('CMS\Models\Tag\Tag');
 		}
         ## end

@@ -160,14 +160,14 @@ abstract class Model
 
         //echo $query;
 
-        return  $model->joined()->orderBy($model->primaryKey,'DESC')->newQuery();
+        return  $model->joined()->orderBy($model->primaryKey,'DESC')->grab();
     }
     public static function allWhere($columns = [])
     {
         $model = new static;
         $model->connection = $model->database->connect();
         //echo $query;
-        return $model->joined()->where($columns)->orderBy($model->primaryKey,'DESC')->newQuery();
+        return $model->joined()->where($columns)->orderBy($model->primaryKey,'DESC')->grab();
 
     }
 
@@ -184,26 +184,23 @@ abstract class Model
         $model = new static;
         $model->connection = $model->database->connect();
 
-        // newQuery returns an array, so for only one item, we are returning the first value [0]
-        return $model->select()->join($joins)->where([$model->primaryKey => $id])->newQuery()[0];
+        // grab returns an array, so for only one item, we are returning the first value [0]
+        return $model->select()->join($joins)->where([$model->primaryKey => $id])->grab()[0];
     }
 
-//    /**
-//     * @param $slug
-//     * @param null $joins
-//     * @return mixed
-//     */
-//
-//    public static function slug($slug, $joins = null)
-//    {
-//        $model = new static;
-//        $model->connection = $model->database->connect();
-//        $joins = $model->join($joins);
-//
-//        $query = $model->select().$joins['as'].$model->from().$joins['on'].$model->where(['title' => $slug]);
-//        echo $query;
-//        return $model->newQuery($query);
-//    }
+    /**
+     * @param $slug
+     * @param null $joins
+     * @return mixed
+     */
+
+    public static function slug($slug, $joins = null)
+    {
+        $model = new static;
+        $model->connection = $model->database->connect();
+
+        return $model->select()->join($joins)->where(['title' => $slug])->grab();
+    }
 
     /**
      * Executes mysql Query
@@ -213,7 +210,7 @@ abstract class Model
      * @return Object Array
      *
      */
-    public function newQuery($query = null)
+    public function grab($query = null)
     {
         if (!empty($query)) {
             $this->query = $query;
@@ -253,7 +250,7 @@ abstract class Model
                 $query->setFetchMode(PDO::FETCH_ASSOC);
                 $results = $query->fetchAll();
                 $this->database->close();
-                return $this->fetchObjects($results);
+                return $this->collect($results);
             } else {
                 $this->database->close();
                 return true;
@@ -272,7 +269,7 @@ abstract class Model
      * @return Object Array
      *
      */
-    public function fetchObjects($results)
+    public function collect($results)
     {
         $data = [];
         foreach($results as $row) {
@@ -470,7 +467,7 @@ abstract class Model
     // TODO: save or savePatch or Update could iterate over the model keys, and not the value array's http://php.net/manual/en/language.oop5.iterations.php
     public function save()
     {
-      return $this->insert($this->prepareQuery())->newQuery();
+      return $this->insert($this->prepareQuery())->grab();
 
     }
 
@@ -502,7 +499,7 @@ abstract class Model
      */
     public function savePatch()
     {
-      return $this->update()->where([$this->primaryKey => $this->get_id()])->newQuery();
+      return $this->update()->where([$this->primaryKey => $this->get_id()])->grab();
     }
 
     /**
@@ -614,7 +611,7 @@ abstract class Model
 //            $query = "SELECT * FROM {$model->table} WHERE $primaryKey = {$this->$foreignKey}";
             return $model->allWhere([$primaryKey =>$this->$foreignKey]);
         }
-//        return $model->newQuery($query)[0];
+//        return $model->grab($query)[0];
     }
 
     /**
@@ -637,7 +634,7 @@ abstract class Model
 //            $query = "SELECT * FROM {$model->table} WHERE $primaryKey = {$this->$foreignKey}";
             return $model->allWhere([$primaryKey =>$this->$foreignKey]);
         }
-//        return $model->newQuery($query);
+//        return $model->grab($query);
     }
 
     /**
@@ -659,7 +656,7 @@ abstract class Model
         } else if($primaryKey != null && $foreignKey != null){
             $query = "SELECT * FROM {$model->table} WHERE {$primaryKey} = {$this->$foreignKey}";
         }
-        return $model->newQuery($query);
+        return $model->grab($query);
     }
 
     public function ownedByMany()
@@ -699,7 +696,7 @@ abstract class Model
         $model1->statement = "SELECT";
         $query = "SELECT * FROM {$model1->table} WHERE {$model2->primaryKey} =
         (SELECT {$model2->primaryKey} FROM {$model2->table} WHERE {$this->primaryKey} = {$this->album_id})";
-        return $model1->newQuery($query);
+        return $model1->grab($query);
     }
     /**
      * Morpheus returns Polymorphic many to many relationships
@@ -716,6 +713,6 @@ abstract class Model
         $singular = Inflect::singularize($model->pivotTable);
         $query = "SELECT * FROM {$model->pivotTable} RIGHT JOIN {$model->table} ON {$model->pivotTable}.{$model->primaryKey} = {$model->table}.{$model->primaryKey} WHERE {$singular}_type = 'post' AND {$singular}_id = ".$this->get_id()." ORDER BY {$model->table}.{$model->primaryKey} DESC";
 //        SELECT * FROM taggables RIGHT JOIN tags ON taggables.tag_id = tags.tag_id WHERE taggable_type = 'post' AND taggable_id = 126 ORDER BY tags.tag_id DESC
-        return $model->newQuery($query);
+        return $model->grab($query);
     }
 }

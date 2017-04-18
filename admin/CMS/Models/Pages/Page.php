@@ -146,7 +146,7 @@ class Page extends Model{
 				$this->patch(['path' => $path, 'parent_id' => $parent_id]);
                 $this->savePatch();
 //				$query = $this->update(['path' => $path, 'parent_id' => $parent_id]).$this->where([$this->primaryKey => $this->get_id()]);
-//				$this->newQuery($query);
+//				$this->grab($query);
 				$messages[] = 'The new page had been created, please approve the page before displaying it';
 			}
 		}

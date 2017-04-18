@@ -27,9 +27,7 @@ class Blog extends Controller {
 
 	public function Category($params = null){
 		$post = new Post();
-		$joins = $post->join();
-		$query = $post->select().$joins['as'].$post->from().$joins['on'].$post->where(['category_id' => $params[0]]);
-		$posts = $post->newQuery($query);
+	 	$posts = $post->select()->join()->where(['category_id' => $params[0]])->grab();
 
 		$meta = Categories::one($params[0]);
 		// view takes: page_title,[array of (optional: multiple)view files],params from the router,array of data from model
