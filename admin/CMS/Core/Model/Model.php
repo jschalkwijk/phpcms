@@ -148,8 +148,6 @@ abstract class Model
     /**
      * Returns all class objects linked to the called model.
      *
-     * @param int $trashed
-     * @param array $joins
      * @return Object Array
      *
      */
@@ -162,6 +160,12 @@ abstract class Model
 
         return  $model->joined()->orderBy($model->primaryKey,'DESC')->grab();
     }
+    /**
+     * Returns all class objects linked to the called model where value = ....
+     *
+     * @return Object Array
+     *
+     */
     public static function allWhere($columns = [])
     {
         $model = new static;
@@ -200,6 +204,7 @@ abstract class Model
         $model->connection = $model->database->connect();
 
         return $model->select()->join($joins)->where(['title' => $slug])->grab();
+
     }
 
     /**
@@ -286,7 +291,7 @@ abstract class Model
      * Returns SELECT part of an sql statement.
      *
      * @param array $columns
-     * @return object
+     * @return $this
      *
      */
     public function select($columns = ['*'])
@@ -313,7 +318,7 @@ abstract class Model
      * Returns WHERE part of an sql statement.
      *
      * @param array $columns
-     * @return object
+     * @return $this
      *
      */
     public function where($columns = [])
@@ -339,7 +344,7 @@ abstract class Model
 
     /**
      * @param array $columns
-     * @return object
+     * @return $this
      */
     public function whereIN($columns = [])
     {
@@ -361,7 +366,7 @@ abstract class Model
      *
      * @param string $column
      * @param string $order
-     * @return object
+     * @return $this
      *
      */
     public function orderBy($column = '',$order = '')
@@ -374,7 +379,7 @@ abstract class Model
     /**
      * Returns a query string to join the specified table and columns. Access them by
      * tablename_columnname, like categories_title,users_username etc.
-     * @return string
+     * @return $this
      */
     public function joined()
     {
@@ -385,7 +390,7 @@ abstract class Model
      * Returns array with the joined relations from the Model.
      *
      * @param array $joins
-     * @return object
+     * @return $this
      *
      */
     public function join($joins = null)
@@ -415,7 +420,7 @@ abstract class Model
 
     /**
      * @param $prepared
-     * @return object
+     * @return $this
      */
     public function insert($prepared)
     {
@@ -427,7 +432,7 @@ abstract class Model
     /**
      * Returns update part of a sql statement
      * @param $attributes
-     * @return object
+     * @return $this
      */
     public function update($attributes = [])
     {
@@ -474,7 +479,6 @@ abstract class Model
     /**
      * Changes a existing data row or set with the request values or the given array with data.
      * @param array $attributes;
-     * @return Object
      */
     public function patch($attributes = [])
     {
@@ -495,7 +499,7 @@ abstract class Model
     }
 
     /**
-     * @return Object
+     * @return Object array
      */
     public function savePatch()
     {
@@ -505,7 +509,7 @@ abstract class Model
     /**
      * Returns array with placeholders,column names that must be filled and the values belonging to them.
      * if no values are given query is prepared with the request values.
-     * @param $values
+     * @param $attributes
      * @return array
      *
      */
