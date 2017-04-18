@@ -13,7 +13,8 @@ class Posts extends Controller
 
     public function index($params = null)
     {
-        $posts = Post::allWhere(['trashed' => 0]);
+        $posts = Post::joined()->where(['trashed' => 0])->orderBy('post_id','DESC')->grab();
+        // $posts = Post::allWhere(['trashed' => 0]);
         // Post requests need to be handled first! Then load the page, otherwise you will get the headers already sent error.
         $this->UserActions($posts[0]);
         // view takes: page_title,[array of view files],params from the router,array of data from model

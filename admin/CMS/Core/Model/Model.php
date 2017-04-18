@@ -146,6 +146,15 @@ abstract class Model
     }
 
     /**
+     * @return Object static
+     */
+    public static function build()
+    {
+        $model = new static;
+        return $model;
+    }
+
+    /**
      * Returns all class objects linked to the called model.
      *
      * @return Object Array
@@ -158,11 +167,12 @@ abstract class Model
 
         //echo $query;
 
-        return  $model->joined()->orderBy($model->primaryKey,'DESC')->grab();
+//        return  $model->select()->join()->orderBy($model->primaryKey,'DESC')->grab();
+        return  $model->select()->from();
     }
     /**
      * Returns all class objects linked to the called model where value = ....
-     *
+     * @param array $columns
      * @return Object Array
      *
      */
@@ -171,7 +181,7 @@ abstract class Model
         $model = new static;
         $model->connection = $model->database->connect();
         //echo $query;
-        return $model->joined()->where($columns)->orderBy($model->primaryKey,'DESC')->grab();
+        return $model->select()->join()->where($columns)->orderBy($model->primaryKey,'DESC')->grab();
 
     }
 
@@ -299,19 +309,20 @@ abstract class Model
         $this->statement = "SELECT";
 //        $this->query ="SELECT ".$this->table.".".implode($columns);
 //        return $this;
-        $this->query .= "SELECT {$this->table}.".implode($columns);
+        $this->query .= "SELECT {$this->table}.".implode(",{$this->table}.",$columns);
         return $this;
     }
 
     /**
      * Returns FROM part of an sql statement.
      *
-     * @return string
+     * @return $this
      *
      */
     public function from()
     {
-        return " FROM {$this->table} ";
+        $this->query .= " FROM {$this->table} ";
+        return $this;
     }
 
     /**
@@ -379,12 +390,13 @@ abstract class Model
     /**
      * Returns a query string to join the specified table and columns. Access them by
      * tablename_columnname, like categories_title,users_username etc.
-     * @return $this
+     * @return static
      */
-    public function joined()
+    public static function joined($joins = null)
     {
-        $this->select()->join();
-        return $this;
+        $model = new static;
+        $model->select()->join($joins);
+        return $model;
     }
     /**
      * Returns array with the joined relations from the Model.
@@ -398,7 +410,7 @@ abstract class Model
         if($joins == null && !empty($this->joins)){
            $joins = $this->joins;
         } else if($joins == null && empty($this->joins)){
-            $this->query .= $this->from();
+            $this->from();
             return $this;
         }
         $as = "";
@@ -414,7 +426,11 @@ abstract class Model
                 $on .= " JOIN {$table} ON {$this->table}.{$foreignKey}  = {$table}.{$foreignKey} ";
             }
         }
-        $this->query .= $as.$this->from().$on;
+
+        $this->query .= $as;
+        $this->from();
+        $this->query .= $on;
+
         return $this;
     }
 
