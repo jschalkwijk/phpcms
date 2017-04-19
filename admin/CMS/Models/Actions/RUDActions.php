@@ -26,7 +26,7 @@ class RUDActions{
 	protected static function update(Model $model,$checkbox,$columns){
 //        $primaryKey = substr($model->table, 0, -1).'_id';
 
-        $query = $model->update($columns).$model->whereIN([$model->primaryKey => $checkbox]);
+        $query = $model->update($columns)->whereIN([$model->primaryKey => $checkbox]);
 		print_r($query);
         $model->grab($query);
 //		header('Location: '.ADMIN.$model->table);
