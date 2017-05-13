@@ -34,7 +34,7 @@
 	<div class="row">
 		<div class="col-sm-6 col-lg-6 col-sm-offset-3 push-lg-3">
 			<?php
-				(isset($params[0])) ? $action = ADMIN . 'users/edit/' . $user->user_id: $action = ADMIN . 'users/create';
+				(isset($params['id'])) ? $action = ADMIN . 'users/edit/' . $user->user_id: $action = ADMIN . 'users/create';
 			?>
 			<form id="add-user" method="post" action="<?= $action; ?>">
 				<input type="hidden" name="id" value="<?= $user->user_id; ?>"/>

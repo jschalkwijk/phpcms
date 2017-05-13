@@ -14,11 +14,16 @@ class ComposerStaticInit100ac0b7a95ecbde2545476f174db83f
     public static $prefixLengthsPsr4 = array (
         'C' => 
         array (
+            'Controller\\' => 11,
             'CMS\\' => 4,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'Controller\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Controller',
+        ),
         'CMS\\' => 
         array (
             0 => __DIR__ . '/../..' . '/CMS',

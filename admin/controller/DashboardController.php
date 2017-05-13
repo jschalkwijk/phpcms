@@ -1,12 +1,14 @@
 <?php
 
+	namespace Controller;
+
 use CMS\Models\Controller\Controller;
 use CMS\Models\Actions\UserActions;
 use CMS\Models\Users\Users;
 use CMS\Models\Posts\Post;
 use CMS\Models\Pages\Page;
 
-class Dashboard extends Controller {
+class DashboardController extends Controller {
 	use UserActions;
 
 	public function index($params = null){

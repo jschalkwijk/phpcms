@@ -1,10 +1,11 @@
 <?php
 
-use CMS\Models\Controller\Controller;
-use \CMS\Models\Users\Users as User;
-use \CMS\Models\DBC;
+	namespace Controller;
+	use CMS\Models\Controller\Controller;
+	use \CMS\Models\Users\Users as User;
+	use \CMS\Models\DBC;
 
-class Users extends Controller {
+class UsersController extends Controller {
 
 	use \CMS\Models\Actions\UserActions;
 
@@ -22,7 +23,7 @@ class Users extends Controller {
 			]
 		);
 	}
-	public function create($params = null){
+	public function create($response,$params = null){
 		$user = new User();
 		if(isset($_POST['submit'])){
 			$user = new User($_POST);
@@ -52,19 +53,19 @@ class Users extends Controller {
 			]
 		);
 	}
-	public function edit($params = null){
+	public function edit($response,$params = null){
 		if (isset($_POST['submit_file']) || !empty($_FILES['files']['name'][0])) {
 			$file_dest = 'files/';
 			$thumb_dest= 'files/thumbs/';
 			User::addProfileIMG($file_dest,$thumb_dest,$params);
 		}
 
-		$user = User::one($params[0]);
+		$user = User::one($params['id']);
 
 		if(isset($_POST['submit'])){
 			$user->request = $_POST;
 			$add = $user->edit();
-			print_r($user);
+//			print_r($user);
 		}
 
 		$this->view(
