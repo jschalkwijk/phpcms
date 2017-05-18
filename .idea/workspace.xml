@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0a43c896-b199-4fd3-a7cd-831809ebb533" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/view/files/albums.php" afterPath="$PROJECT_DIR$/admin/view/files/albums.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/view/files/add-files.php" afterPath="$PROJECT_DIR$/admin/view/files/add-files.php" />
     </list>
     <ignored path="CMS.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -112,8 +112,8 @@
       <file leaf-file-name="add-files.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/admin/view/files/add-files.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.27565083">
-              <caret line="12" column="30" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
+            <state vertical-scroll-proportion="0.39050537">
+              <caret line="17" column="82" selection-start-line="17" selection-start-column="82" selection-end-line="17" selection-end-column="82" />
               <folding>
                 <element signature="e#6#38#0#PHP" expanded="true" />
               </folding>
@@ -935,8 +935,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/view/files/add-files.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.27565083">
-          <caret line="12" column="30" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
+        <state vertical-scroll-proportion="0.39050537">
+          <caret line="17" column="82" selection-start-line="17" selection-start-column="82" selection-end-line="17" selection-end-column="82" />
           <folding>
             <element signature="e#6#38#0#PHP" expanded="true" />
           </folding>
