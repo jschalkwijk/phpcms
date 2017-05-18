@@ -1,12 +1,14 @@
 <?php
 
+    namespace Controller;
+
 use CMS\Models\Controller\Controller;
 use CMS\Models\Actions\UserActions;
 use CMS\Models\Products\Product;
 use CMS\Models\Files\File;
 use CMS\Models\Files\Folders;
 
-class Products extends Controller
+class ProductsController extends Controller
 {
     use UserActions;
 

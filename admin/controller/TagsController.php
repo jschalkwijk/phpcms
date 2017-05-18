@@ -1,14 +1,9 @@
 <?php
-    /**
-     * Created by PhpStorm.
-     * User: jorn
-     * Date: 11-01-17
-     * Time: 16:11
-     */
+    namespace Controller;
     use CMS\Models\Controller\Controller;
     use CMS\Models\Tag\Tag;
 
-    class Tags extends Controller{
+    class TagsController extends Controller{
         public $messages = [];
 
         public function index($params = null)

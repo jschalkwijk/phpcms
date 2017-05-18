@@ -1,5 +1,6 @@
 <?php
 
+    namespace Controller;
 use CMS\Models\Controller\Controller;
 use CMS\Models\DBC\DBC;
 use CMS\Models\Products\Product;
@@ -7,7 +8,7 @@ use CMS\Models\Basket\Basket;
 use CMS\Models\Basket\QuantityExc;
 use CMS\Models\Support\SessionStorage;
 
-class Cart extends Controller
+class CartController extends Controller
 {
 
     public function __construct()

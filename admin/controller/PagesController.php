@@ -1,10 +1,11 @@
 <?php
 
+    namespace Controller;
 use CMS\Models\Controller\Controller;
 use CMS\Models\Pages\Page;
 use CMS\Models\Actions\UserActions;
 
-class Pages extends Controller
+class PagesController extends Controller
 {
 
     use UserActions;

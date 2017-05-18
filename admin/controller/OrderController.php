@@ -1,5 +1,5 @@
 <?php
-
+    namespace Controller;
 use CMS\Models\Controller\Controller;
 use CMS\Models\Support\SessionStorage;
 use CMS\Models\Basket\Basket;
@@ -8,7 +8,7 @@ use CMS\Models\Order\CustomerDetails;
 use CMS\Models\Order\OrderDetails;
 use CMS\Models\Order\Order as Ordr;
 
-class Order extends Controller
+class OrdersController extends Controller
 {
     private $customer;
     private $customerSession;

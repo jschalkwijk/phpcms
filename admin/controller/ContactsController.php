@@ -1,9 +1,11 @@
 <?php
 
+    namespace Controller;
+
 use CMS\Models\Controller\Controller;
 use \CMS\Models\Contacts\Contact;
 
-class Contacts extends Controller
+class ContactsController extends Controller
 {
     use \CMS\Models\Actions\UserActions;
 

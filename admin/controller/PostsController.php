@@ -1,12 +1,14 @@
 <?php
 
+namespace Controller;
+
 use CMS\Models\Posts\Post;
 use CMS\Models\Controller\Controller;
 use CMS\Models\Tag\Tag;
 use CMS\Models\Actions\UserActions;
 use CMS\Models\Categories\Categories as Cat;
 
-class Posts extends Controller
+class PostsController extends Controller
 {
     public $messages = [];
     use UserActions;

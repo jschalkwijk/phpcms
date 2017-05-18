@@ -1,10 +1,10 @@
 <?php
-
+    namespace Controller;
 use CMS\Models\Controller\Controller;
 use CMS\Models\Actions\UserActions;
 use \CMS\Models\Categories\Categories as Cat;
 
-class Categories extends Controller
+class CategoriesController extends Controller
 {
 
     use UserActions;

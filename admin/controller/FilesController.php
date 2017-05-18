@@ -1,10 +1,12 @@
 <?php
 
+namespace Controller;
+
 use CMS\Models\Controller\Controller;
 use CMS\Models\Files\Folders;
 use CMS\Models\Files\File;
 
-class Files extends Controller
+class FilesController extends Controller
 {
 
     public function index($params = null)
