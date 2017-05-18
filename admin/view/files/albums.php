@@ -1,7 +1,8 @@
 <div class="container">
     	<div class="row">
     		<div class="col-sm-6 col-lg-6 col-sm-offset-3 push-lg-3">
-                <?php require_once 'view/files/add-files.php'; ?>
+                <h1>Hello</h1>
+<!--				--><?php //require_once 'view/files/add-files.php'; ?>
     		</div>
     	</div>
 	<div class="row">
@@ -41,6 +42,7 @@
 				<table class="files-table">
 					<thead></thead><th></th><th>Name</th><th>Size(MB)</th></thead>
 					<tbody>
+
 					<?php
 						foreach($data['folders'] as $folder) { ?>
 							<tr class="meta">
