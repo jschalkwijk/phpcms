@@ -2,7 +2,7 @@
     	<div class="row">
     		<div class="col-sm-6 col-lg-6 col-sm-offset-3 push-lg-3">
                 <h1>Hello</h1>
-<!--				--><?php //require_once 'view/files/add-files.php'; ?>
+				<?php require_once 'view/files/add-files.php'; ?>
     		</div>
     	</div>
 	<div class="row">

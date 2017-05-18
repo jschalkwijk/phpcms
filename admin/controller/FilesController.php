@@ -9,7 +9,7 @@ use CMS\Models\Files\File;
 class FilesController extends Controller
 {
 
-    public function index($params = null)
+    public function index($response,$params = null)
     {
         if (isset($_POST['delete-albums'])) {
             Folders::delete_album($_POST['checkbox']);
