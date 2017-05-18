@@ -92,6 +92,7 @@
                 $this->group[$prefix] = $first.$prefix;
             }
             $this->prefix = $this->group[$prefix];
+            $this->group = [];
         }
 
         /**

@@ -180,7 +180,6 @@ abstract class Model
     {
         $model = new static;
         $model->connection = $model->database->connect();
-        //echo $query;
         return $model->select()->join()->where($columns)->orderBy($model->primaryKey,'DESC')->grab();
 
     }

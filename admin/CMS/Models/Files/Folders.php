@@ -29,7 +29,6 @@ class Folders extends Model{
 
 	protected $allowed = [
 		'name',
-		'name',
 		'description',
 		'parent_id',
 		'type',

@@ -36,6 +36,16 @@
 
         public function group($prefix,\Closure $callback)
         {
+//            $router =  $this->container->router;
+//            if(empty($router->group)) {
+//                $router->group[$prefix] = $prefix;
+//            } else {
+//                reset($router->group);
+//                $first = key($router->group);
+//                $router->group[$prefix] = $first.$prefix;
+//            }
+//            $router->prefix = $router->group[$prefix];
+//            call_user_func($callback, $this,$this->container);
             $this->container->router->group($prefix);
             call_user_func($callback, $this,$this->container);
         }
