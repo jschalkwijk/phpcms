@@ -18,6 +18,9 @@ class FilesController extends Controller
             File::delete_files($_POST['checkbox']);
         }
         $folders = Folders::allWhere(['parent_id'=>0]);
+//        foreach($folders as $folder){
+//            print_r($folder);
+//        }
         $this->view(
             'Albums',
             [
