@@ -11,7 +11,7 @@ use CMS\Models\Pages\Page;
 class DashboardController extends Controller {
 	use UserActions;
 
-	public function index($params = null){
+	public function index($response,$params = null){
 		$posts = Post::all()->grab();
 		$pages = Page::all()->grab();
 		$users = Users::all()->grab();

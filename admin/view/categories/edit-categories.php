@@ -1,6 +1,6 @@
 <?php
 	$category = $data['category'];
-	if (!isset($params[0])) {
+	if (!isset($params['id'])) {
 		echo 'There is no category selected.';
 	}
 ?>

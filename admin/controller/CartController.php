@@ -22,7 +22,7 @@ class CartController extends Controller
         $this->basket->all();
     }
 
-    public function index($params = null)
+    public function index($response,$params = null)
     {
 
         //$basket->unsetProduct(10);
@@ -38,10 +38,10 @@ class CartController extends Controller
             ]);
     }
 
-    public function add($params = null)
+    public function add($response,$params = null)
     {
         $dbc = new DBC;
-        $id = $params[0];
+        $id = $params['id'];
         $quantity = trim((int)$_POST['quantity']);
 
         // TO DO: create exists function to only check if it exists.
@@ -60,9 +60,9 @@ class CartController extends Controller
 
     }
 
-    public function update($params = null)
+    public function update($response,$params = null)
     {
-        $id = $params[0];
+        $id = $params['id'];
         $quantity = trim((int)$_POST['quantity']);
         echo $quantity;
         $product = Product::one($id);

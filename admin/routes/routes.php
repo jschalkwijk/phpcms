@@ -46,6 +46,7 @@
             $app->get('/edit/:id', [new Controller\ProductsController, 'edit']);
             $app->get('/create', [new Controller\ProductsController, 'create']);
             $app->get('/delete', [new Controller\ProductsController, 'delete']);
+            $app->get('/info/:id/:name', [new Controller\ProductsController, 'info']);
         });
         $app->group('/files', function ($app, $container) {
             $app->get('', [new Controller\FilesController, 'index']);

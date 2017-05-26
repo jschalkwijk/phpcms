@@ -73,6 +73,8 @@
             return $this->respond($this->process($response));
 //            echo "Response: ";
 //            print_r($response);
+//            echo "<br><br>PregMatch: <br>";
+//            print_r($router->match);
 //            echo "<br><br>Routes: <br>";
 //            print_r($router->routes);
 //            echo "<br><br>Route Groups: <br>";

@@ -9,7 +9,7 @@ class ContactsController extends Controller
 {
     use \CMS\Models\Actions\UserActions;
 
-    public function index($params = null)
+    public function index($response,$params = null)
     {
         $contacts = Contact::allWhere(['trashed'=>0,'user_id' => $this->currentUser]);
         $this->UserActions($contacts[0]);
@@ -25,7 +25,7 @@ class ContactsController extends Controller
         );
     }
 
-    public function deleted($params = null)
+    public function deleted($response,$params = null)
     {
         $contacts = Contact::allWhere(['trashed'=>1,'user_id' => $this->currentUser]);
         $this->UserActions($contacts[0]);
@@ -41,7 +41,7 @@ class ContactsController extends Controller
         );
     }
 
-    public function create($params = null)
+    public function create($response,$params = null)
     {
         $contact = new Contact();
         if (isset($_POST['submit'])) {
@@ -61,9 +61,9 @@ class ContactsController extends Controller
         );
     }
 
-    public function edit($params = null)
+    public function edit($response,$params = null)
     {
-        $contact = Contact::one($params[0]);
+        $contact = Contact::one($params['id']);
         if (isset($_POST['submit_file']) || !empty($_FILES['files']['name'][0])) {
             $file_dest = 'files/users/' . $_SESSION['username'] . '/';
             $thumb_dest = 'files/thumbs/users/' . $_SESSION['username'] . '/';
@@ -87,10 +87,10 @@ class ContactsController extends Controller
         );
     }
 
-    public function info($params = null)
+    public function info($response,$params = null)
     {
         $this->UserActions('contacts');
-        $contact = Contact::one($params[0]);
+        $contact = Contact::one($params['id']);
         $this->view(
             'Add contact',
             ['contacts/view-contact.php'],

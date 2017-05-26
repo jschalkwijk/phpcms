@@ -12,7 +12,7 @@ $product = $data['product'];
 	<div class="row">
 		<div class="col-sm-6 col-lg-6 col-sm-offset-3 push-lg-3">
 			<?php if($output_form){
-                    (isset($params[0]) && isset($params[1])) ? $action = ADMIN.'products/info/'.$product->product_id.'/'.$product->name : $action = ADMIN.'products/create';
+                    (isset($params['id']) && isset($params[1])) ? $action = ADMIN.'products/info/'.$product->product_id.'/'.$product->name : $action = ADMIN.'products/create';
                 ?>
                     <form class="small" enctype="multipart/form-data" method="post" action="<?= $action; ?>">
                         <input type="hidden" name="MAX_FILE_SIZE" value="43500000" />

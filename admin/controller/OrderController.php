@@ -40,7 +40,7 @@ class OrdersController extends Controller
         $this->basket->all();
     }
 
-    public function index($params = null)
+    public function index($response,$params = null)
     {
 
         if (!empty($this->customerDetails->single())) {
@@ -60,7 +60,7 @@ class OrdersController extends Controller
         );
     }
 
-    public function payment($params = null)
+    public function payment($response,$params = null)
     {
         /* When a new customer is created and inserted to the DB , the $customer var doesn't hold the new ID yet.
          This is set after the customer is added, so we need to fetch it again with the customers->fetshSingle method in order
@@ -110,7 +110,7 @@ class OrdersController extends Controller
 
     }
 
-    public function confirm($params = null)
+    public function confirm($response,$params = null)
     {
 //        /* When a new customer is created and inserted to the DB , the $customer var doesn't hold the new ID yet.
 //          This is set after the customer is added, so we need to fetch it again with the customers->fetshSingle method in order

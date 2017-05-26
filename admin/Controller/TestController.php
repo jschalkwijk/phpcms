@@ -10,7 +10,7 @@
     use CMS\Models\Controller\Controller;
     class Test extends Controller
     {
-        public function index($params = null)
+        public function index($response,$params = null)
         {
             $this->view('Test',['test/test.php'],$params);
         }

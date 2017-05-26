@@ -13,7 +13,7 @@ class PostsController extends Controller
     public $messages = [];
     use UserActions;
 
-    public function index($params = null)
+    public function index($response,$params = null)
     {
         $posts = Post::joined()->where(['trashed' => 0])->orderBy('post_id','DESC')->grab();
         // $posts = Post::allWhere(['trashed' => 0]);
@@ -37,7 +37,7 @@ class PostsController extends Controller
         );
     }
     //
-    public function deleted($params = null)
+    public function deleted($response,$params = null)
     {
         $posts = Post::allWhere(['trashed' => 1]);
         $this->UserActions($posts[0]);
@@ -45,7 +45,7 @@ class PostsController extends Controller
         $this->view('Deleted Posts', ['posts/posts.php'], $params, ['posts' => $posts, 'view' => $view, 'trashed' => 1, 'js' => [JS . 'checkAll.js']]);
     }
     //
-    public function create($params = null)
+    public function create($response,$params = null)
     {
         $scripts = [
             JS . 'mceAddons.js',
@@ -87,7 +87,7 @@ class PostsController extends Controller
     }
 
     //
-    public function edit($params = null)
+    public function edit($response,$params = null)
     {
         $scripts = [
             JS . 'tinyMCEsettings.js',
@@ -95,7 +95,7 @@ class PostsController extends Controller
             JS . 'checkAll.js'
         ];
 
-        $post = Post::one($params[0]);
+        $post = Post::one($params['id']);
         $tags = Tag::allWhere(['type' => 'post']);
         $selectedTag = [];
 

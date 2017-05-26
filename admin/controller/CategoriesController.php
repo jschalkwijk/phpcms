@@ -9,7 +9,7 @@ class CategoriesController extends Controller
 
     use UserActions;
 
-    public function index($params = null)
+    public function index($response,$params = null)
     {
         $categories = Cat::allWhere(['trashed'=>0]);
         $this->UserActions($categories[0]);
@@ -47,7 +47,7 @@ class CategoriesController extends Controller
     }
 
     //
-    public function deleted($params = null)
+    public function deleted($response,$params = null)
     {
         $categories = Cat::allWhere(['trashed'=>1]);
         if(!empty($categories)) {
@@ -68,9 +68,9 @@ class CategoriesController extends Controller
     }
 
     //
-    public function edit($params = null)
+    public function edit($response,$params = null)
     {
-        $category = Cat::one($params[0]);
+        $category = Cat::one($params['id']);
         $messages = [];
 
         if (isset($_POST['submit'])) {

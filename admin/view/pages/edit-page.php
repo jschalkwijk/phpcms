@@ -14,10 +14,10 @@ tinymce.init({
 </script>
 <?php 
 	$dbc = new DBC;
-	if (isset($params[0]) && isset($params[1])) {
+	if (isset($params['id']) && isset($params['name'])) {
 		// Grab the score data from the GET
-		$id = mysqli_real_escape_string($dbc->connect(),trim((int)$params[0]));
-		$title = mysqli_real_escape_string($dbc->connect(),trim($params[1]));
+		$id = mysqli_real_escape_string($dbc->connect(),trim((int)$params['id']));
+		$title = mysqli_real_escape_string($dbc->connect(),trim($params['name']));
 
 	  } else if (isset($_POST['id']) && isset($_POST['title']) && isset($_POST['content'])) {
 		// Grab the score data from the POST

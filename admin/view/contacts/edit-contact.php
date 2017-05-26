@@ -45,7 +45,7 @@
     </div>
     <div class="row">
         <div class="col-sm-6 col-lg-6 col-sm-offset-3 push-lg-3">
-            <?php (isset($params[0])) ? $action = ADMIN . 'contacts/edit/' . $contact->contact_id : ""; ?>
+            <?php (isset($params['id'])) ? $action = ADMIN . 'contacts/edit/' . $contact->contact_id : ""; ?>
             <form id="create-form" method="post" action="<?= $action; ?>">
                 <input type="hidden" name="contact_id" value="<?= $contact->contact_id; ?>"/>
                 <input type="text" name="first_name" placeholder="First Name" value="<?= $contact->keep($contact->firstName()); ?>"/><br/>

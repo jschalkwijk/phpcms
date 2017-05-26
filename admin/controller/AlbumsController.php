@@ -4,7 +4,7 @@
 use CMS\Models\Controller\Controller;
 
 class AlbumsController extends Controller {
-	public function index($params = null){
+	public function index($response,$params = null){
 		$this->view('Albums',['add-files.php','albums.php'],$params);
 	}
 }

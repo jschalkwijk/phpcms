@@ -1,7 +1,7 @@
 <?php
 	$dbc = mysqli_connect(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME) or die('Error connecting to server');
-	$id = $params[0];
-	$title = $params[1];
+	$id = $params['id'];
+	$title = $params['name'];
 	$query = "SELECT * FROM pages where page_id = $id";
 	$page = mysqli_query($dbc,$query);
 	while ($row = mysqli_fetch_array($page)) {

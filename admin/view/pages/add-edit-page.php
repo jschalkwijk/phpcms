@@ -34,7 +34,7 @@
     </div>
     <div class="row">
         <div class="col-xs-6 col-sm-6 col-lg-6 col-sm-offset-3 push-lg-3">
-            <?php (isset($params[0]) && isset($params[1])) ? $action = ADMIN . 'pages/edit/' . $page->get_id() : $action = ADMIN . 'pages/create'; ?>
+            <?php (isset($params['id']) && isset($params['title'])) ? $action = ADMIN . 'pages/edit/' . $page->get_id() : $action = ADMIN . 'pages/create'; ?>
             <iframe id="target">hello</iframe>
             <form id="create-form" action="<?= $action; ?>" method="post">
                 <input type="checkbox" name="front-end"/>

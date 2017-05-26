@@ -12,7 +12,7 @@ class ProductsController extends Controller
 {
     use UserActions;
 
-    public function index($params = null)
+    public function index($response,$params = null)
     {
         $products = Product::allWhere(['trashed' => 0]);
         $this->UserActions($products[0]);
@@ -28,7 +28,7 @@ class ProductsController extends Controller
         );
     }
 
-    public function deleted($params = null)
+    public function deleted($response,$params = null)
     {
         $products = Product::allWhere(['trashed' => 1]);
         $this->UserActions($products[0]);
@@ -43,7 +43,7 @@ class ProductsController extends Controller
         );
     }
 
-    public function create($params = null)
+    public function create($response,$params = null)
     {
         $product = new Product();
 
@@ -64,9 +64,9 @@ class ProductsController extends Controller
         );
     }
 
-    public function edit($params = null)
+    public function edit($response,$params = null)
     {
-        $product = Product::one($params[0]);
+        $product = Product::one($params['id']);
 
         if (isset($_POST['submit'])) {
             $product->request = $_POST;
@@ -86,7 +86,7 @@ class ProductsController extends Controller
         );
     }
 
-    public function info($params = null)
+    public function info($response,$params = null)
     {
         $this->UserActions('products');
 
@@ -104,10 +104,10 @@ class ProductsController extends Controller
             File::downloadFiles();
         }
 
-        $product = Product::one($params[0]);
+        $product = Product::one($params['id']);
         $folders = Folders::allWhere(['parent_id'=>$product->album_id]);
         $this->view(
-            'Product ' . $params[1],
+            'Product ' . $params['name'],
             ['products/view-product.php'],
             $params,
             [

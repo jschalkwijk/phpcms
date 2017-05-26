@@ -33,11 +33,11 @@
          * @var array
          */
         protected $pattern = [
-            ':id' => '\d',
-            ':name' => '[a-zA-Z0-9-_.]',
-            ':num' => '[0-9]',
-            ':alpha' => '[a-zA-Z]',
-            ':alphaNum' => '[a-zA-Z0-9]',
+            ':id' => '\d+',
+            ':name' => '[a-zA-Z0-9_-]+',
+            ':num' => '[0-9]+',
+            ':alpha' => '[a-zA-Z]+',
+            ':alphaNum' => '[a-zA-Z0-9]+',
         ];
 
         /**
@@ -106,7 +106,8 @@
                 return $this->routes[$this->path];
             }
             foreach ($this->bindings as $key => $value) {
-                $string = "/" . ltrim(implode("\/+", $value), "\/+") . "+$/";
+                $string = "'^" . ltrim(implode("\/", $value), "\/+") . "$'";
+//                $string = '^\/products\/edit\/[0-9]+\/[a-zA-Z0-9_]+$^';
                 $this->match = $string;
                 if (preg_match($string, $this->path)) {
 

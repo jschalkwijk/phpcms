@@ -6,7 +6,7 @@
     class TagsController extends Controller{
         public $messages = [];
 
-        public function index($params = null)
+        public function index($response,$params = null)
         {
             $tags = Tag::all();
             $this->view(
@@ -20,7 +20,7 @@
             );
         }
 
-        public function create()
+        public function create($response)
         {
             $tag = new Tag($_POST);
             if(isset($_POST['submit'])){
@@ -35,9 +35,9 @@
             $this->view('Create Tag',['tags/create.php'],null,['tag' => $tag, 'messages' => $this->messages]);
         }
 
-        public function edit($params = null)
+        public function edit($response,$params = null)
         {
-            $tag = Tag::one($params[0])[0];
+            $tag = Tag::one($params['id']);
             if(isset($_POST['submit'])){
                 $tag->patch($_POST);
                 if(!empty($tag->title) ) {

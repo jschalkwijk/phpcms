@@ -10,7 +10,7 @@ class PagesController extends Controller
 
     use UserActions;
 
-    public function index($params = null)
+    public function index($response,$params = null)
     {
         $pages = Page::allWhere(['trashed' => 0]);
         $action = ADMIN . 'pages';
@@ -31,7 +31,7 @@ class PagesController extends Controller
         );
     }
 
-    public function create($params = null)
+    public function create($response,$params = null)
     {
         if (!isset($_POST['submit'])) {
             $page = new Page();
@@ -57,7 +57,7 @@ class PagesController extends Controller
         }
     }
 
-    public function deleted($params = null)
+    public function deleted($response,$params = null)
     {
         $action = ADMIN . 'pages/deleted-pages';
         $delete = $this->UserActions('pages');
@@ -78,9 +78,9 @@ class PagesController extends Controller
 
     }
 
-    public function edit($params = null)
+    public function edit($response,$params = null)
     {
-        $page = Page::one($params[0]);
+        $page = Page::one($params['id']);
         $messages = [];
 
         if (isset($_POST['submit'])) {

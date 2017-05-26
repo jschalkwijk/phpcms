@@ -9,7 +9,7 @@ class UsersController extends Controller {
 
 	use \CMS\Models\Actions\UserActions;
 
-	public function index($params = null){
+	public function index($response,$params = null){
 		$users = User::allWhere(['trashed' => 0]);
 		$this->UserActions($users[0]);
 		$this->view(
@@ -39,7 +39,7 @@ class UsersController extends Controller {
 			]
 		);
 	}
-	public function deleted($params = null){
+	public function deleted($response,$params = null){
 		$users = User::allWhere(['trashed' => 1]);
         $this->UserActions($users[0]);
 		$this->view(
@@ -78,11 +78,11 @@ class UsersController extends Controller {
 			]
 		);
 	}
-	public function Profile($params = null){
+	public function Profile($response,$params = null){
 		if(empty($params)){
 			$params = [$_SESSION['user_id'],$_SESSION['username']];
 		}
-		$user = User::one($params[0]);;
+		$user = User::one($params['id']);;
 		$this->view(
 			'User',
 			['users/profile.php'],

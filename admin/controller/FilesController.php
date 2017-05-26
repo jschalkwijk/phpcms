@@ -31,7 +31,7 @@ class FilesController extends Controller
         );
     }
 
-    public function albums($params = null)
+    public function albums($response,$params = null)
     {
         if (isset($_POST['delete-albums'])) {
             Folders::delete_album($_POST['checkbox']);
@@ -43,7 +43,7 @@ class FilesController extends Controller
         if (isset($_GET['download_files'])) {
             File::downloadFiles();
         }
-        $folder = Folders::one($params[0]);
+        $folder = Folders::one($params['id']);
         $folders = $folder->subFolders();
         $this->view(
             'Albums',

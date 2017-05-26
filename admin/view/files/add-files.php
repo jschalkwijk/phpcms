@@ -13,7 +13,7 @@ use CMS\Models\Files\Folders;
 <!--<div class="container">-->
 <!--	<div class="row">-->
 <!--		<div class="col-sm-6 col-lg-6 col-sm-offset-3 push-lg-3">-->
-			<form class="small" enctype="multipart/form-data" method="post" action="<?php (!isset($params[0])) ? ADMIN."files" : ADMIN."files/albums/".$params[0].'/'.$params[1];?>">
+			<form class="small" enctype="multipart/form-data" method="post" action="<?php (!isset($params['id'])) ? ADMIN."files" : ADMIN."files/albums/".$params['id'].'/'.$params['name'];?>">
 				<input type="hidden" name="MAX_FILE_SIZE" value="43500000" />
 				<label for="files[]">Choose File(max size: 3.5 MB): </label><br />
 				<input type="file" name="files[]" multiple/><br />
@@ -21,8 +21,8 @@ use CMS\Models\Files\Folders;
 				<label for='public'>Public</label>
 				<input type="checkbox" name="secure" value="secure"/>
 				<label for='secure'>Secure</label>
-				<?php (isset($params)) ? Folders::get_albums($params[0],$params[1]) : Folders::get_albums(null,null) ;?>
-				<?php 	if(!isset($params[0])){ ?>
+				<?php (isset($params)) ? Folders::get_albums($params['id'],$params['name']) : Folders::get_albums(null,null) ;?>
+				<?php 	if(!isset($params['id'])){ ?>
 							<input type="text" name="new_album_name" placeholder="Create New Album" maxlength="60"/>
 				<?php 	} else { ?>
 							<input type="text" name="new_album_name" placeholder="Create New Sub Folder" maxlength="60"/>

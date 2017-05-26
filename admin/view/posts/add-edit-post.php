@@ -38,7 +38,7 @@
 	<div class="row">
 		<div class="col-sm-6 col-lg-6">
 		<?php
-			(isset($params[0])) ? $action = ADMIN . 'posts/edit/' . $post->post_id : $action = ADMIN . 'posts/create';
+			(isset($params['id'])) ? $action = ADMIN . 'posts/edit/' . $post->post_id : $action = ADMIN . 'posts/create';
 			?>
 			<form id="addpost-form" class="large" action="<?= $action; ?>" method="post">
 				<input type="text" name="title" placeholder="Title"
@@ -68,7 +68,7 @@
 				<textarea type="text" name="content"
 						  placeholder="Content"><?= $post->keep($post->content); ?></textarea><br/>
 
-				<?php if (isset($params[0]) && isset($params[1])) { ?>
+				<?php if (isset($params['id'])) { ?>
 					<p>Are you sure you want to edit the following product?</p>
 					<input type="radio" name="confirm" value="Yes"/> Yes
 					<input type="radio" name="confirm" value="No" checked="checked"/> No <br/>
