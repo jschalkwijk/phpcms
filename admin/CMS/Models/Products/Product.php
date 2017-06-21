@@ -3,7 +3,7 @@ namespace CMS\Models\Products;
 
 use CMS\Models\DBC\DBC;
 use CMS\Models\Files\FileUpload;
-use CMS\Models\Files\Folders;
+use CMS\Models\Files\Folder;
 use CMS\Models\Categories\Categories;
 use CMS\Core\Model\Model;
 
@@ -53,7 +53,7 @@ class Product extends Model {
 // Also every folder owns 0 or more files.
 // check Folders model to see what I mean.
     public function folder(){
-        return $this->ownsOne('CMS\Models\Files\Folders');
+        return $this->ownsOne('CMS\Models\Files\Folder');
     }
 //	public function folders(){
 //		return $this->owns('CMS\Models\Files\Folders','parent_id','album_id');
@@ -121,7 +121,7 @@ class Product extends Model {
             if(!file_exists($this->file_path.$category_name)) {
                 $this->file_path = $this->file_path.$category_name.'/';
                 $this->thumb_path = $this->thumb_path.$category_name.'/';
-                Folders::auto_create_folder($category_name,$this->file_path,$this->thumb_path,'Products');
+                Folder::auto_create_folder($category_name,$this->file_path,$this->thumb_path,'Products');
             }
         } else {
             $this->category_id = trim((int)$this->request['category_id']);
@@ -221,7 +221,7 @@ class Product extends Model {
 				$this->file_path = $this->file_path.$category_name;
 				// this-file_path is now updated with the category name
 				$this->thumb_path = $this->file_path."thumbs";
-				$album_id = Folders::auto_create_folder($category_name,$this->file_path,$this->thumb_path,'Products');
+				$album_id = Folder::auto_create_folder($category_name,$this->file_path,$this->thumb_path,'Products');
 				echo "Products Album_ID: ".print_r($album_id);
 				$category->category_id = $this->category_id;
 				$category->album_id = $album_id;
@@ -258,7 +258,7 @@ class Product extends Model {
         */
 		//create new product file folder inside Products folder.
 		if(!file_exists($this->file_path."/".$name)) {
-			$album_id = Folders::auto_create_folder($name,$this->file_path."/".$name,$this->file_path."/".$name."/thumbs",'Products',$category_name);
+			$album_id = Folder::auto_create_folder($name,$this->file_path."/".$name,$this->file_path."/".$name."/thumbs",'Products',$category_name);
 		    $this->album_id = $album_id;
         }
 

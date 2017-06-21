@@ -1,7 +1,6 @@
 <div class="container">
     	<div class="row">
     		<div class="col-sm-6 col-lg-6 col-sm-offset-3 push-lg-3">
-                <h1>Hello</h1>
 				<?php require_once 'view/files/add-files.php'; ?>
     		</div>
     	</div>
@@ -47,7 +46,7 @@
 						foreach($data['folders'] as $folder) { ?>
 							<tr class="meta">
 								<td><img class="glyph-medium" src="<?= ADMIN.'images/files.png' ?>"/></td>
-								<td><a href="<?= ADMIN ?>files/albums/<?= $folder->album_id.'/'.$folder->name ?>"> <?= $folder->name ?></a></td>
+								<td><a href="<?= ADMIN ?>folders/<?= $folder->album_id.'/'.$folder->name ?>"> <?= $folder->name ?></a></td>
 								<td>Size</td>
 								<input type="hidden" name="album_name" value="<?= $folder->name ?>"/>
 								<td><input class="checkbox" type="checkbox" name="checkbox[]" value="<?= $folder->album_id ?>"/></td>

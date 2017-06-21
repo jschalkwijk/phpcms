@@ -1,5 +1,5 @@
 <?php
-use CMS\Models\Files\Folders;
+use CMS\Models\Files\Folder;
 use CMS\Models\Files\File;
 use CMS\Models\Files\FileWriter;
 
@@ -25,7 +25,7 @@ $product = $data['product'];
                         <input type="hidden" name="album_name" value=""/>
                         <input type="hidden" name="category_name" value="<?= $product->category; ?>"/>
                         <input type="hidden" name="album_id" value="<?= $product->album_id; ?>"/>
-                        <?php (isset($params)) ? Folders::get_albums($product->album_id,$product->name) : Folders::get_albums(null,null) ;?>
+                        <?php (isset($params)) ? Folder::get_albums($product->album_id,$product->name) : Folder::get_albums(null,null) ;?>
                         <?php 	if(!isset($_GET['album'])){ ?>
                             <input type="text" name="new_album_name" placeholder="Create New Album" maxlength="60"/>
                         <?php 	} else { ?>
@@ -135,7 +135,7 @@ $product = $data['product'];
 //                            echo "Filename: ".$file->name."<br>";
 //                        };
 //                    };
-						foreach($product->folder()->subFolders() as $folder) {// echo "hello:<br>"; print_r($folder->files())?>
+						foreach($product->folder()->children() as $folder) {// echo "hello:<br>"; print_r($folder->files())?>
 
 							<tr class="meta">
 								<td><img class="glyph-medium" src="<?= ADMIN.'images/files.png' ?>"/></td>

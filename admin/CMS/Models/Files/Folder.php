@@ -10,7 +10,7 @@ use CMS\Models\Actions\FileActions;
  * folder_id row aanmaken, zodat ik meteen het pad van de gelinkte folder kan fetchen.
 
  * */
-class Folders extends Model{
+class Folder extends Model{
 	use FileActions;
 
 	protected $primaryKey = 'album_id';
@@ -50,10 +50,6 @@ class Folders extends Model{
 
 	}
 
-    public function subFolders(){
-        return $this->children();
-    }
-
     public function products()
     {
 		return $this->ownsThrough('CMS\Models\Products\Product','CMS\Models\Categories\Categories');
@@ -63,6 +59,7 @@ class Folders extends Model{
 //    {
 //        return $this->ownedBy('CMS\Models\Categories\Categories','category_id','category_id');
 //    }
+
 	/* used by view/add-files.php to get the selected folder and optional folders to
 	 * upload files to.
 	 * Main folders don't have a parent folder so the parent_id = 0.

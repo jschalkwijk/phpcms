@@ -50,9 +50,12 @@
         });
         $app->group('/files', function ($app, $container) {
             $app->get('', [new Controller\FilesController, 'index']);
+            $app->post('/create', [new Controller\FilesController, 'create']);
             $app->map('/edit/:id', [new Controller\FilesController, 'edit'],['GET','POST']);
-            $app->map('/create', [new Controller\FilesController, 'create'],['GET','POST']);
             $app->get('/delete', [new Controller\FilesController, 'delete']);
+        });
+        $app->group('/folders',function($app,$container){
+            $app->get('/:id/:name', [new Controller\FilesController, 'albums']);
         });
     });
 

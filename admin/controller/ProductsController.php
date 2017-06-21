@@ -6,7 +6,7 @@ use CMS\Models\Controller\Controller;
 use CMS\Models\Actions\UserActions;
 use CMS\Models\Products\Product;
 use CMS\Models\Files\File;
-use CMS\Models\Files\Folders;
+use CMS\Models\Files\Folder;
 
 class ProductsController extends Controller
 {
@@ -105,7 +105,7 @@ class ProductsController extends Controller
         }
 
         $product = Product::one($params['id']);
-        $folders = Folders::allWhere(['parent_id'=>$product->album_id]);
+        $folders = Folder::allWhere(['parent_id'=>$product->album_id]);
         $this->view(
             'Product ' . $params['name'],
             ['products/view-product.php'],

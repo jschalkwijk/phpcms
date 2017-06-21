@@ -93,18 +93,14 @@ class FileUpload{
 							$thumb_name = $file_name.'.thumb_'.$file_name_new;
 
 							// move uploaded file to destination folder
-							if(isset($_POST['public'])) {
-
-								if($this->uploadFile($file_tmp,$file_name,$file_ext,$file_name_new,$thumb_name,$position,$album_id)){
-									$uploaded[] = $file_name;
-									if(!$this->createThumb($file_name_new,$thumb_name,$thumb_dest)){
-										$failed[] = 'Thumbnails failed to be created';
-										}
-								} else {
-									// add to failed array if it cant upload, etc.
-									$failed[$position] = "{$file_name} failed to upload.";
-								}
-
+							if($this->uploadFile($file_tmp,$file_name,$file_ext,$file_name_new,$thumb_name,$position,$album_id)){
+								$uploaded[] = $file_name;
+								if(!$this->createThumb($file_name_new,$thumb_name,$thumb_dest)){
+									$failed[] = 'Thumbnails failed to be created';
+									}
+							} else {
+								// add to failed array if it cant upload, etc.
+								$failed[$position] = "{$file_name} failed to upload.";
 							}
 						} else {
 							$failed[$position] = "{$file_name} is too large.";
