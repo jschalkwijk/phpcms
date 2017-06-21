@@ -7,7 +7,7 @@ use CMS\Models\Files\Folder;
 use CMS\Models\Files\File;
 use CMS\Models\Files\FileUpload;
 
-class FilesController extends Controller
+class UploadsController extends Controller
 {
 
     public function index($response,$params = null)

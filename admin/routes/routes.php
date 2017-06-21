@@ -49,13 +49,18 @@
             $app->get('/info/:id/:name', [new Controller\ProductsController, 'info']);
         });
         $app->group('/files', function ($app, $container) {
-            $app->get('', [new Controller\FilesController, 'index']);
-            $app->post('/create', [new Controller\FilesController, 'create']);
-            $app->map('/edit/:id', [new Controller\FilesController, 'edit'],['GET','POST']);
-            $app->get('/delete', [new Controller\FilesController, 'delete']);
+            $app->get('', [new Controller\UploadsController, 'index']);
+            $app->post('/create', [new Controller\UploadsController, 'create']);
+            $app->map('/edit/:id', [new Controller\UploadsController, 'edit'],['GET','POST']);
+            $app->get('/delete', [new Controller\UploadsController, 'delete']);
         });
         $app->group('/folders',function($app,$container){
-            $app->get('/:id/:name', [new Controller\FilesController, 'albums']);
+            $app->get('',[new Controller\FoldersController,'index']);
+            $app->map('/create', [new Controller\FoldersController, 'create'],['GET','POST']);
+            $app->get('/:id/:name', [new Controller\UploadsController, 'albums']);
+            $app->map('/edit/:id', [new Controller\FoldersController, 'edit'],['GET','POST']);
+            $app->get('/delete', [new Controller\FoldersController, 'delete']);
+            $app->get('/action', [new Controller\FoldersController, 'action']);
         });
     });
 
