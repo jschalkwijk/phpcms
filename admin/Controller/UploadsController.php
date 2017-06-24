@@ -59,13 +59,10 @@ class UploadsController extends Controller
 
     public function create($response,$params = null)
     {
-
-        $file_dest = 'uploads/';
-        $thumb_dest= 'uploads/thumbs/';
-        //print_r($params);
-        if (isset($_POST['submit_file']) || !empty($_FILES['files']['name'][0])) {
-            $upload = new FileUpload($file_dest,$thumb_dest,$params);
+        if (isset($_POST['submit']) || !empty($_FILES['files']['name'][0])) {
+            $folder = Folder::create($_POST);
         }
+        //TODO: now the folder is created upload the files.
         header("Location: ".ADMIN.'files' );
     }
 }

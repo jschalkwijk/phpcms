@@ -49,7 +49,7 @@
             $app->get('/info/:id/:name', [new Controller\ProductsController, 'info']);
         });
         $app->group('/files', function ($app, $container) {
-            $app->get('', [new Controller\UploadsController, 'index']);
+            $app->map('', [new Controller\UploadsController, 'index'],['GET','POST']);
             $app->post('/create', [new Controller\UploadsController, 'create']);
             $app->map('/edit/:id', [new Controller\UploadsController, 'edit'],['GET','POST']);
             $app->get('/delete', [new Controller\UploadsController, 'delete']);

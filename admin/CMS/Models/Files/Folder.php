@@ -1,6 +1,7 @@
 <?php
 namespace CMS\Models\Files;
 
+use CMS\Core\FileSystem\FileSystem;
 use CMS\Core\Model\Model;
 use CMS\Models\DBC\DBC;
 use CMS\Models\Actions\FileActions;
@@ -10,7 +11,7 @@ use CMS\Models\Actions\FileActions;
  * folder_id row aanmaken, zodat ik meteen het pad van de gelinkte folder kan fetchen.
 
  * */
-class Folder extends Model{
+class Folder extends Model {
 	use FileActions;
 
 	protected $primaryKey = 'album_id';
@@ -59,6 +60,56 @@ class Folder extends Model{
 //    {
 //        return $this->ownedBy('CMS\Models\Categories\Categories','category_id','category_id');
 //    }
+
+	/**
+	 * @param array $r
+	 * @param null $alternativePath
+	 * @return Folder
+     */
+	public static function create(array $r, $alternativePath = null): Folder {
+		$create = false;
+		$folder = new Folder($r);
+		$folder->user_id = $_SESSION['user_id'];;
+		if(!isset($r['parent']) && !empty($r['name'])) {
+			$create = true;
+			if($alternativePath != null){
+				$folder->path = $alternativePath.'/'.$folder->name;
+			} else {
+				$folder->path = "uploads/".$folder->name;
+			}
+		} else if(!isset($r['parent']) && empty($r['name']) && $r['destination'] == 0){
+			header("Location: ".ADMIN."files");
+		}
+		// if: upload to destination folder instead of current parent folder.
+		// else: upload to new folder inside the destination folder.
+		if($r['destination'] != 0 && !empty($r['name']) ){
+			$create = true;
+			$parent = Folder::one($r['destination']);
+			$folder->path = $parent->path.'/'.$folder->name;
+			$folder->parent_id = $parent->get_id();
+		} else if($r['destination'] != 0 && empty($r['name'])){
+			$folder = Folder::one($r['destination']);
+		} else if($r['destination'] == 0 && empty($r['name']) && isset($r['parent'])){
+			$folder = Folder::one($r['parent']);
+		}  else if($r['destination'] == 0 && isset($r['parent']) && !empty($r['name'])){
+			$create = true;
+			$parent = Folder::one($r['parent']);
+			$folder->path = $parent->path.'/'.$folder->name;
+			$folder->parent_id = $parent->get_id();
+		}
+
+
+		if ($create) {
+			$result = (new FileSystem)->makeDirectory($folder->path.'/thumbs', 0775,true);
+			if ($result) {
+				$folder->save();
+			} else {
+				return false;
+			}
+		}
+
+		return $folder;
+	}
 
 	/* used by view/add-files.php to get the selected folder and optional folders to
 	 * upload files to.
@@ -120,10 +171,10 @@ class Folder extends Model{
 
 		foreach($data as $row) {
 			// recursive deleting function. Deletes al folders/files and subfolders/files from server.
-			Folders::removeDir('./././'.$row['path']);
-			Folders::removeDir('./././'.$row['path'].'/thumbs');
+			Folder::removeDir('./././'.$row['path']);
+			Folder::removeDir('./././'.$row['path'].'/thumbs');
 		}
-		Folders::removeRows($checkbox);
+		Folder::removeRows($checkbox);
 		$db->close();
 	}
 	
