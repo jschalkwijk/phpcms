@@ -103,11 +103,11 @@ class Folder extends Model {
 			$result = (new FileSystem)->makeDirectory($folder->path.'/thumbs', 0775,true);
 			if ($result) {
 				$folder->save();
+				$folder->setID($folder->lastInsertId);
 			} else {
 				return false;
 			}
 		}
-
 		return $folder;
 	}
 
