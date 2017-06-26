@@ -9,6 +9,7 @@
 	"require": {
         "swiftmailer/swiftmailer": "^5.4",
 		"tinymce/tinymce": "^4.4",
-		"defuse/php-encryption": "^2.0"
+		"defuse/php-encryption": "^2.0",
+		"intervention/image": "^2.3"
     }
 }

@@ -104,8 +104,6 @@ class Folder extends Model {
 			if ($result) {
 				$folder->save();
 				$folder->setID($folder->lastInsertId);
-			} else {
-				return false;
 			}
 		}
 		return $folder;

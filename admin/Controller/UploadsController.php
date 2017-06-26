@@ -5,7 +5,7 @@ namespace Controller;
 use CMS\Models\Controller\Controller;
 use CMS\Models\Files\Folder;
 use CMS\Models\Files\File;
-use CMS\Models\Files\FileUpload;
+use Intervention\Image\ImageManager;
 
 class UploadsController extends Controller
 {
@@ -87,48 +87,40 @@ class UploadsController extends Controller
                     if ($file_error === 0) {
                         if ($file_size <= 43500000) {
                             // create unique id so there will be no overwriting files on the server
-                            $file_name_new = uniqid('', true) . '.' . $file_ext;
-                            $thumb_name = 'thumb_' . $file_name_new;
-
-
+                            $hash = uniqid('', true) . '.' . $file_ext;
+                            $thumb_name = 'thumb_' . $hash;
                             // If upload paths contains 's etc we have to remove the \ (backslash) which is created automaticly.
                             // To insert the path in the Database we have to keep the \ (backslash) otherwise the query will fail.
                             // because we want to maybe insert a " ' " like in Person's Contacts, we need to change the ' to '', to escape the '. otherwise it will fail.
                             $destination = str_replace(array("\\","'"),array("","''"),$folder->path);
                             $thumb_path = str_replace(array("\\","'"),array("","''"),$folder->path.'/thumbs');
+                            $file_path = $destination.'/'.$hash;
                             $user_id = $_SESSION['user_id'];
                             if(!empty($folder->get_id())) {
-                                if(move_uploaded_file($file_tmp,$destination.'/'.$file_name_new)) {
+                                if(move_uploaded_file($file_tmp,$file_path)) {
                                     // add to uploade array, we dont use the new filename because thats all numbers,
                                     // we use the original file name, we store both the original and new file name to the DB.
                                     $uploaded[$position] = $file_name;
-//                                    try {
-//                                        $sql = "INSERT INTO files(name,type,file_name,thumb_name,album_id,date,path,thumb_path,user_id) VALUES(?,?,?,?,?,NOW(),?,?,?)";
-//                                        echo $sql;
-//                                        $query = $dbc->prepare($sql);
-//                                        $query->execute([$file_name, $file_ext, $file_name_new, $thumb_name, $id, $destination, $thumb_path, $user_id]);;
-//                                        return true;
-//                                    } catch (\PDOException $e){
-//                                        echo $e->getMessage();
-//                                    }
+                                    $file = new File();
+                                    $file->name = $file_name;
+                                    $file->file_name = $hash;
+                                    $file->thumb_name = $thumb_name;
+                                    $file->size = $file_size;
+                                    $file->type = $file_ext;
+                                    $file->path = $file_path;
+                                    $file->thumb_path = $thumb_path;
+                                    $file->user_id =  $user_id ;
+                                    $file->album_id = $folder->get_id();
+                                    $file->save();
+                                    ini_set('memory_limit','256M');
+                                    $img = (new ImageManager)->make($file_path);
+                                    $img->fit(100,100)->save($folder->path.'/thumbs/'.$thumb_name);
                                 } else {
-                                    return false;
+                                    echo "<h1>Not uploaded</h1>";
                                 }
                             } else {
                                 echo "<h1>Not uploaded</h1>";
                             }
-
-
-//                            // move uploaded file to destination folder
-//                            if ($this->uploadFile($file_tmp, $file_name, $file_ext, $file_name_new, $thumb_name, $position, $album_id)) {
-//                                $uploaded[] = $file_name;
-//                                if (!$this->createThumb($file_name_new, $thumb_name, $thumb_dest)) {
-//                                    $failed[] = 'Thumbnails failed to be created';
-//                                }
-//                            } else {
-//                                // add to failed array if it cant upload, etc.
-//                                $failed[$position] = "{$file_name} failed to upload.";
-//                            }
                         } else {
                             $failed[$position] = "{$file_name} is too large.";
                         }
