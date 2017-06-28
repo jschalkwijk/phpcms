@@ -17,7 +17,7 @@
                     echo "Productname".$product->name."<br>";
                 }
 		?>
-			<form id="check-files" method="post" action="<?= $url; ?>">
+			<form id="check-files" method="post" action="<?= ADMIN.'files/action' ?>">
 				<table class="files-table">
 					<thead><th></th><th>Name</th><th>Type</th><th>Size</th></thead>
 					<tbody>
@@ -28,7 +28,7 @@
 					?>
 					</tbody>
 				</table>
-				<button type="submit" name="delete" id="delete">Delete Selected</button>
+				<button type="submit" name="delete-selected" id="delete-selected">Delete Files</button>
 				<button type="submit" name="download_files" id="download_files">Download files</button>
 			</form>
 		<?php } ?>
@@ -36,7 +36,7 @@
 	</div>
 	<div class="row">
 		<div class="col-lg-6 col-lg-6 push-lg-3 col-lg-offset-3">
-			<form id="check-folders" method="post" action="<?= ADMIN.'files' ?>">
+			<form id="check-folders" method="post" action="<?= ADMIN.'folders/action' ?>">
 				<button type="button" id="check-all"><img class="glyph-small" src="<?= IMG."check.png"; ?>"/></button>
 				<table class="files-table">
 					<thead></thead><th></th><th>Name</th><th>Size(MB)</th></thead>
@@ -54,7 +54,7 @@
 					<?php } ?>
 					</tbody>
 				</table>
-				<button type="submit" name="delete-albums" id="delete-albums">Delete Albums</button>
+				<button type="submit" name="delete-selected" id="delete-selected">Delete Albums</button>
 			</form>
 		</div>
 	</div>

@@ -17,9 +17,11 @@
             $app->map('/create', [new Controller\UsersController, 'create'],['GET','POST']);
         });
         $app->group('/posts', function ($app, $container) {
-            $app->get('', [new Controller\PostsController, 'index']);
+            $app->map('', [new Controller\PostsController, 'index'],['GET','POST']);
+            $app->map('/deleted', [new Controller\PostsController, 'deleted'],['GET','POST']);
             $app->map('/edit/:id', [new Controller\PostsController, 'edit'],['GET','POST']);
             $app->map('/create', [new Controller\PostsController, 'create'],['GET','POST']);
+            $app->get('/action', [new Controller\FoldersController, 'action']);
         });
         $app->group('/categories', function ($app, $container) {
             $app->get('', [new Controller\CategoriesController, 'index']);
@@ -53,6 +55,7 @@
             $app->post('/create', [new Controller\UploadsController, 'create']);
             $app->map('/edit/:id', [new Controller\UploadsController, 'edit'],['GET','POST']);
             $app->get('/delete', [new Controller\UploadsController, 'delete']);
+            $app->post('/action', [new Controller\UploadsController, 'action']);
         });
         $app->group('/folders',function($app,$container){
             $app->get('',[new Controller\FoldersController,'index']);
@@ -60,7 +63,7 @@
             $app->get('/:id/:name', [new Controller\UploadsController, 'albums']);
             $app->map('/edit/:id', [new Controller\FoldersController, 'edit'],['GET','POST']);
             $app->get('/delete', [new Controller\FoldersController, 'delete']);
-            $app->get('/action', [new Controller\FoldersController, 'action']);
+            $app->post('/action', [new Controller\FoldersController, 'action']);
         });
     });
 

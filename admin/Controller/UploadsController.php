@@ -2,6 +2,7 @@
 
 namespace Controller;
 
+use CMS\Models\Actions\UserActions;
 use CMS\Models\Controller\Controller;
 use CMS\Models\Files\Folder;
 use CMS\Models\Files\File;
@@ -9,15 +10,16 @@ use Intervention\Image\ImageManager;
 
 class UploadsController extends Controller
 {
+    use UserActions;
 
     public function index($response,$params = null)
     {
-        if (isset($_POST['delete-albums'])) {
-            Folder::delete_album($_POST['checkbox']);
-        }
-        if (isset($_POST['delete'])) {
-            File::delete_files($_POST['checkbox']);
-        }
+//        if (isset($_POST['delete-albums'])) {
+//            Folder::delete_album($_POST['checkbox']);
+//        }
+//        if (isset($_POST['delete'])) {
+//            File::delete_files($_POST['checkbox']);
+//        }
         $folders = Folder::allWhere(['parent_id'=>0]);
 //        foreach($folders as $folder){
 //            print_r($folder);
@@ -35,7 +37,7 @@ class UploadsController extends Controller
     public function albums($response,$params = null)
     {
         if (isset($_POST['delete-albums'])) {
-            Folder::delete_album($_POST['checkbox']);
+            Folder::delete($_POST['checkbox']);
         }
         if (isset($_POST['delete'])) {
             print_r($_POST['checkbox']);
@@ -62,7 +64,6 @@ class UploadsController extends Controller
         if (isset($_POST['submit']) || !empty($_FILES['files']['name'][0])) {
             $folder = Folder::create($_POST);
         }
-        //TODO: now the folder is created upload the files.
 
         if (!empty($_FILES['files']['name'][0])) {
             $files = $_FILES['files'];
@@ -108,7 +109,7 @@ class UploadsController extends Controller
                                     $file->size = $file_size;
                                     $file->type = $file_ext;
                                     $file->path = $file_path;
-                                    $file->thumb_path = $thumb_path;
+                                    $file->thumb_path = $thumb_path.'/'.$thumb_name;
                                     $file->user_id =  $user_id ;
                                     $file->album_id = $folder->get_id();
                                     $file->save();
@@ -144,6 +145,12 @@ class UploadsController extends Controller
         if (!empty($errors)) {
             echo implode(",", $errors);
         }
+    }
+
+    public function action($response, $params)
+    {
+        $this->UserActions(new File());
+//        header("Location: ".$_SERVER['H'])
     }
 }
 

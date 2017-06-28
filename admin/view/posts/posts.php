@@ -3,7 +3,7 @@
         <div class="col-xs-6 col-sm-6 col-lg-6 col-sm-offset-3 push-lg-3">
             <div class="center"><?php
                 require_once($data['view']['search']);
-                ($data['trashed'] === 1) ? $action = ADMIN.'posts/deleted' : $action = ADMIN.'posts' ;
+                ($data['trashed'] === 1) ? $action = ADMIN.'posts/deleted' : $action = ADMIN.'posts/action' ;
                 ?>
 
                 <form class="backend-form" method="post" action="<?= $action; ?>">

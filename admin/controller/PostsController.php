@@ -18,7 +18,6 @@ class PostsController extends Controller
         $posts = Post::joined()->where(['trashed' => 0])->orderBy('post_id','DESC')->grab();
         // $posts = Post::allWhere(['trashed' => 0]);
         // Post requests need to be handled first! Then load the page, otherwise you will get the headers already sent error.
-        $this->UserActions($posts[0]);
         // view takes: page_title,[array of view files],params from the router,array of data from model
         $view = ['search' => 'view/search/search-post.php', 'actions' => 'view/shared/manage-content.php'];
         $this->view(
@@ -40,7 +39,6 @@ class PostsController extends Controller
     public function deleted($response,$params = null)
     {
         $posts = Post::allWhere(['trashed' => 1]);
-        $this->UserActions($posts[0]);
         $view = ['search' => 'view/search/search-post.php', 'actions' => 'view/shared/manage-content.php'];
         $this->view('Deleted Posts', ['posts/posts.php'], $params, ['posts' => $posts, 'view' => $view, 'trashed' => 1, 'js' => [JS . 'checkAll.js']]);
     }
@@ -138,6 +136,12 @@ class PostsController extends Controller
                 'js' => $scripts
             ]
         );
+    }
+
+    public function action($response, $params)
+    {
+        $this->UserActions(new Post());
+
     }
 }
 

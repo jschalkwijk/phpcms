@@ -10,31 +10,10 @@ trait UserActions {
 	private $id;
 	private $name;
 	private $checkbox;
-	
-	private function UserActions($model) {
-		$db = new DBC;
-		$dbc = $db->connect();
-		
-		(isset($_POST['id'])) ? $this->id = mysqli_real_escape_string($dbc,trim((int)$_POST['id'])) : '';
-		(isset($_POST['name'])) ? $this->name = mysqli_real_escape_string($dbc,trim($_POST['name'])) : '';
-		(isset($_POST['checkbox'])) ? $this->checkbox = $_POST['checkbox'] : '';
-		
-		if (isset($_POST['remove'])) {
-			$remove = RUDActions::trash($dbt,$this->id,$this->name);
-		}
-		if (isset($_POST['approve'])) {
-			$approve = RUDActions::approve($dbt,$this->id,$this->name);
-		}
-		if (isset($_POST['hide'])) {	
-			$hide = RUDActions::hide($dbt,$this->id,$this->name);
-		}
-		if (isset($_POST['restore'])) {
-			$restore = RUDActions::restore($dbt,$this->id,$this->name);
-		} 
-		if (isset($_POST['delete'])) {
-			$delete = RUDActions::delete($dbt,$this->id,$this->name);
 
-		}
+	private function UserActions($model) {
+		(isset($_POST['checkbox'])) ? $this->checkbox = $_POST['checkbox'] : '';
+
 		if (isset($_POST['trash-selected'])) {
 			RUDActions::trash_selected($model,$this->checkbox);
 		}
@@ -51,6 +30,29 @@ trait UserActions {
 			$delete = RUDActions::delete_selected($model,$this->checkbox);
 			return $delete;
 		}
+//
+//		$db = new DBC;
+//		$dbc = $db->connect();
+//
+//		(isset($_POST['id'])) ? $this->id = mysqli_real_escape_string($dbc,trim((int)$_POST['id'])) : '';
+//		(isset($_POST['name'])) ? $this->name = mysqli_real_escape_string($dbc,trim($_POST['name'])) : '';
+
+//
+//		if (isset($_POST['remove'])) {
+//			$remove = RUDActions::trash($dbt,$this->id,$this->name);
+//		}
+//		if (isset($_POST['approve'])) {
+//			$approve = RUDActions::approve($dbt,$this->id,$this->name);
+//		}
+//		if (isset($_POST['hide'])) {
+//			$hide = RUDActions::hide($dbt,$this->id,$this->name);
+//		}
+//		if (isset($_POST['restore'])) {
+//			$restore = RUDActions::restore($dbt,$this->id,$this->name);
+//		}
+//		if (isset($_POST['delete'])) {
+//			$delete = RUDActions::delete($dbt,$this->id,$this->name);
+//		}
 
 	}
 

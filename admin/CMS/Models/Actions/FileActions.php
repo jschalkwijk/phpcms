@@ -148,6 +148,6 @@ trait FileActions{
 		}
 		rmdir($path);
 		return;
-}
+		}
 }
 ?>

@@ -1,9 +1,13 @@
 <?php
 namespace CMS\Models\Actions;
 
+use CMS\Core\FileSystem\FileSystem;
 use CMS\Core\Model\Model;
 use CMS\Models\DBC\DBC;
+use CMS\Models\Files\File;
+use CMS\Models\Files\Folder;
 use CMS\Models\Pages\Page;
+use CMS\Core\Pluralize\Inflect;
 // This are the  update,delete and approve functions which regards post,pages, users and products.
 // these will only remove rows, not files etc.
 // Import the UserActions trait inside the controller and enter the database name insid ethe function
@@ -24,25 +28,42 @@ class RUDActions{
 	}
 
 	protected static function update(Model $model,$checkbox,$columns){
-//        $primaryKey = substr($model->table, 0, -1).'_id';
 
-        $query = $model->update($columns)->whereIN([$model->primaryKey => $checkbox]);
-		print_r($query);
-        $model->grab($query);
-//		header('Location: '.ADMIN.$model->table);
+      	$model->update($columns)->whereIN([$model->primaryKey => $checkbox])->grab();
+
+		header('Location: '.ADMIN.$model->table);
 	}
 	public static function delete_selected(Model $model,$checkbox){
 		$db = new DBC;
 		$dbc = $db->connect();
 
-		$primaryKey = $model->primaryKey;
-		if($model->table == 'categories'){
-			$primaryKey = 'category_id';
-		}
+
+		$primaryKey = Inflect::singularize($model->table).'_id';;
+
 		$multiple = implode(",",$checkbox);
 		$flag = false;
 		$messages = [];
+		
+		if($model->table == 'albums'){
+			$parents = $checkbox;
+			// Delete all folders/files and subdirectories
+			foreach($parents as $parent){
+				$folder = Folder::one($parent);
+				(new FileSystem())->removeDirectory($folder->path);
+			}
+			Folder::removeRows($parents);
+		}
 
+		if($model->table == 'files'){
+			$files = File::allWhere(['file_id'=> $checkbox]);
+			foreach ($files as $file) {
+				$paths[] = $file->path;
+				$paths[] = $file->thumb_path;
+			};
+			(new FileSystem())->delete($paths);
+
+//			$files->delete();
+		}
 		if($model->table === "pages"){
 			$deleted = Page::deletePage($multiple);
 			$flag = $deleted['flag'];

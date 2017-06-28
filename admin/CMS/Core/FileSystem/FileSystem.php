@@ -57,4 +57,44 @@
             }
         }
 
+        /**
+         * Delete the directory recursively at a given path.
+         *
+         * @param  string|array  $paths
+         *
+         */
+
+        public function removeDirectory($paths) {
+            $paths = is_array($paths) ? $paths : [$paths];
+            foreach($paths as $path) {
+                $files = glob($path . '/*');
+                foreach ($files as $file) {
+                    is_dir($file) ? self::removeDirectory($file) : unlink($file);
+                }
+                rmdir($path);
+            }
+            return;
+        }
+
+        /**
+         * Delete the file at a given path.
+         *
+         * @param  string|array  $paths
+         * @return bool
+         */
+        public function delete($paths): bool
+        {
+            $paths = is_array($paths) ? $paths : [$paths];
+
+            $success = true;
+
+            foreach ($paths as $path) {
+                if (!unlink($path)) {
+                    $success = false;
+                }
+            }
+
+            return $success;
+        }
+
     }
