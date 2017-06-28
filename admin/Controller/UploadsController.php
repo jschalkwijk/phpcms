@@ -63,6 +63,7 @@ class UploadsController extends Controller
     {
         if (isset($_POST['submit']) || !empty($_FILES['files']['name'][0])) {
             $folder = Folder::create($_POST);
+            print_r($folder->get_id());
         }
 
         if (!empty($_FILES['files']['name'][0])) {

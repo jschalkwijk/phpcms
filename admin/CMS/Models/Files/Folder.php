@@ -38,7 +38,7 @@ class Folder extends Model {
 	];
 
 	public function setID($id){
-		$this->id = $id;
+		$this->album_id = $id;
 	}
 	public function get_id(){
 		return $this->album_id;

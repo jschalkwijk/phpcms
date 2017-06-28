@@ -21,7 +21,7 @@
             $app->map('/deleted', [new Controller\PostsController, 'deleted'],['GET','POST']);
             $app->map('/edit/:id', [new Controller\PostsController, 'edit'],['GET','POST']);
             $app->map('/create', [new Controller\PostsController, 'create'],['GET','POST']);
-            $app->get('/action', [new Controller\FoldersController, 'action']);
+            $app->post('/action', [new Controller\PostsController, 'action']);
         });
         $app->group('/categories', function ($app, $container) {
             $app->get('', [new Controller\CategoriesController, 'index']);
