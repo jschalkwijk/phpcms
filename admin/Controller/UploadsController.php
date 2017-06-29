@@ -34,36 +34,10 @@ class UploadsController extends Controller
         );
     }
 
-    public function albums($response,$params = null)
-    {
-        if (isset($_POST['delete-albums'])) {
-            Folder::delete($_POST['checkbox']);
-        }
-        if (isset($_POST['delete'])) {
-            print_r($_POST['checkbox']);
-            File::delete_files($_POST['checkbox']);
-        }
-        if (isset($_GET['download_files'])) {
-            File::downloadFiles();
-        }
-        $folder = Folder::one($params['id']);
-        $folders = $folder->children();
-        $this->view(
-            $folder->name,
-            [
-                'files/folders.php'
-            ],
-            $params,
-            ['folder' => $folder,'folders' => $folders],
-            ['js' => [JS . 'checkAll.js']]
-        );
-    }
-
     public function create($response,$params = null)
     {
         if (isset($_POST['submit']) || !empty($_FILES['files']['name'][0])) {
             $folder = Folder::create($_POST);
-            print_r($folder->get_id());
         }
 
         if (!empty($_FILES['files']['name'][0])) {
@@ -115,8 +89,10 @@ class UploadsController extends Controller
                                     $file->album_id = $folder->get_id();
                                     $file->save();
                                     ini_set('memory_limit','256M');
-                                    $img = (new ImageManager)->make($file_path);
-                                    $img->fit(100,100)->save($folder->path.'/thumbs/'.$thumb_name);
+                                    if($file_ext == "png" || $file_ext == "jpg" || $file_ext == "jpeg") {
+                                        $img = (new ImageManager)->make($file_path);
+                                        $img->fit(100, 100)->save($folder->path . '/thumbs/' . $thumb_name);
+                                    }
                                 } else {
                                     echo "<h1>Not uploaded</h1>";
                                 }
@@ -146,6 +122,7 @@ class UploadsController extends Controller
         if (!empty($errors)) {
             echo implode(",", $errors);
         }
+        header("Location: ".ADMIN.'folders/'.$folder->get_id().'/'.$folder->name);
     }
 
     public function action($response, $params)

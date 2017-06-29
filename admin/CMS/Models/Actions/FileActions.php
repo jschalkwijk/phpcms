@@ -7,7 +7,7 @@ use ZipArchive;
 // Used by files_File and File_Folders
 trait FileActions{
 	// used in File_Folders:
-	public static function removeRows($parents){
+	public static function deleteRecursive($parents){
 		$db = new DBC;
 		$dbc = $db->connect();
 

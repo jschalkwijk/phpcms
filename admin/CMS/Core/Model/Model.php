@@ -521,6 +521,12 @@ abstract class Model
       return $this->update()->where([$this->primaryKey => $this->get_id()])->grab();
     }
 
+    public function delete($keys)
+    {
+        $keys = is_array($keys) ? implode(",",$keys): $keys;
+
+        return $this->grab("DELETE FROM " . $this->table . " WHERE " . $this->primaryKey . " IN({$keys})");
+    }
     /**
      * Returns array with placeholders,column names that must be filled and the values belonging to them.
      * if no values are given query is prepared with the request values.

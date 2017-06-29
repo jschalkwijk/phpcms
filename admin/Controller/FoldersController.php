@@ -18,6 +18,20 @@
         public function edit(){
 
         }
+        public function show($response,$params = null)
+        {
+            $folder = Folder::one($params['id']);
+            $folders = $folder->children();
+            $this->view(
+                $folder->name,
+                [
+                    'files/folders.php'
+                ],
+                $params,
+                ['folder' => $folder,'folders' => $folders],
+                ['js' => [JS . 'checkAll.js']]
+            );
+        }
 
         public function action($response, $params)
         {

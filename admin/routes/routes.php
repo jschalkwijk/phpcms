@@ -60,7 +60,7 @@
         $app->group('/folders',function($app,$container){
             $app->get('',[new Controller\FoldersController,'index']);
             $app->map('/create', [new Controller\FoldersController, 'create'],['GET','POST']);
-            $app->get('/:id/:name', [new Controller\UploadsController, 'albums']);
+            $app->get('/:id/:name', [new Controller\FoldersController, 'show']);
             $app->map('/edit/:id', [new Controller\FoldersController, 'edit'],['GET','POST']);
             $app->get('/delete', [new Controller\FoldersController, 'delete']);
             $app->post('/action', [new Controller\FoldersController, 'action']);
