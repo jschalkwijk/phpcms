@@ -6,26 +6,29 @@ use CMS\Core\Model\Model;
 use CMS\Models\Files\File;
 use CMS\Models\Files\Folder;
 use CMS\Models\Pages\Page;
+
 // This are the  update,delete and approve functions which regards post,pages, users and products.
 // these will only remove rows, not files etc.
 // Import the UserActions trait inside the controller and enter the database name insid ethe function
 // to alter the DB rows.  UserActions handles the Post requests and calls these functions
-class RUDActions{
+
+class Actions{
 
 	public static function trash_selected($model,$checkbox){
-		RUDActions::update($model,$checkbox, ["trashed" => 1]);
+		Actions::update($model,$checkbox, ["trashed" => 1]);
 	}
 	public static function approve_selected($model,$checkbox){
-		RUDActions::update($model,$checkbox, ["approved" => 1]);
+		Actions::update($model,$checkbox, ["approved" => 1]);
 	}
 	public static function restore_selected($model,$checkbox){
-		RUDActions::update($model,$checkbox, ["trashed" => 0]);
+		Actions::update($model,$checkbox, ["trashed" => 0]);
 	}
 	public static function hide_selected($model,$checkbox){
-		RUDActions::update($model,$checkbox, ["approved" => 0]);
+		Actions::update($model,$checkbox, ["approved" => 0]);
 	}
 
 	protected static function update(Model $model,$checkbox,$columns){
+        $checkbox = (!is_array($checkbox)) ? [(int)$checkbox] : $checkbox;
 
       	$model->update($columns)->whereIN([$model->primaryKey => $checkbox])->grab();
 
