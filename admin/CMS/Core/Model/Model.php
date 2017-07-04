@@ -521,10 +521,14 @@ abstract class Model
       return $this->update()->where([$this->primaryKey => $this->get_id()])->grab();
     }
 
-    public function delete($keys)
+    public function delete($keys = null)
     {
-        $keys = is_array($keys) ? implode(",",$keys): $keys;
-
+        if(isset($keys)) {
+            $keys = is_array($keys) ? implode(",", $keys) : $keys;
+        } else {
+            $primaryKey= $this->primaryKey;
+            $keys = $this->$primaryKey;
+        }
         return $this->grab("DELETE FROM " . $this->table . " WHERE " . $this->primaryKey . " IN({$keys})");
     }
     /**
@@ -634,7 +638,7 @@ abstract class Model
             return $model->one($this->$primaryKey);
         } else {
 //            $query = "SELECT * FROM {$model->table} WHERE $primaryKey = {$this->$foreignKey}";
-            return $model->allWhere([$primaryKey =>$this->$foreignKey]);
+            return $model->allWhere([$primaryKey => $this->$foreignKey]);
         }
 //        return $model->grab($query)[0];
     }
@@ -657,7 +661,7 @@ abstract class Model
             return $model->allWhere([$this->primaryKey => $this->get_id()]);
         } else {
 //            $query = "SELECT * FROM {$model->table} WHERE $primaryKey = {$this->$foreignKey}";
-            return $model->allWhere([$primaryKey =>$this->$foreignKey]);
+            return $model->allWhere([$primaryKey => $this->$foreignKey]);
         }
 //        return $model->grab($query);
     }

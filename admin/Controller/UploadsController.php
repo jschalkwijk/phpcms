@@ -2,6 +2,7 @@
 
 namespace Controller;
 
+use CMS\Core\FileSystem\FileSystem;
 use CMS\Models\Actions\UserActions;
 use CMS\Models\Controller\Controller;
 use CMS\Models\Files\Folder;
@@ -14,16 +15,8 @@ class UploadsController extends Controller
 
     public function index($response,$params = null)
     {
-//        if (isset($_POST['delete-albums'])) {
-//            Folder::delete_album($_POST['checkbox']);
-//        }
-//        if (isset($_POST['delete'])) {
-//            File::delete_files($_POST['checkbox']);
-//        }
+
         $folders = Folder::allWhere(['parent_id'=>0]);
-//        foreach($folders as $folder){
-//            print_r($folder);
-//        }
         $this->view(
             'Albums',
             [
@@ -130,6 +123,14 @@ class UploadsController extends Controller
         $this->UserActions(new File());
 //        header("Location: ".$_SERVER['H'])
     }
+
+    public function destroy($response,$params)
+    {
+        $file = File::one($params['id']);
+        (new FileSystem())->delete([$file->path,$file->thumb_path]);
+        $file->delete($file->get_id());
+    }
+
 }
 
 ?>

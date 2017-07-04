@@ -2,6 +2,8 @@
 namespace CMS\Models\Actions;
 
 use \CMS\Models\DBC\DBC;
+use CMS\Models\Files\Folder;
+
 // Usage: Import UserActions into your controller. It takes a DB table name.
 // Depending on which post request is past to the controller the appropiate function will
 // be called from RUDactions. this will only be removing rows. Not files on the server.
@@ -11,23 +13,23 @@ trait UserActions {
 	private $name;
 	private $checkbox;
 
-	private function UserActions($model) {
+	public function UserActions($model) {
 		(isset($_POST['checkbox'])) ? $this->checkbox = $_POST['checkbox'] : '';
 
 		if (isset($_POST['trash-selected'])) {
-			RUDActions::trash_selected($model,$this->checkbox);
+			Actions::trash_selected($model,$this->checkbox);
 		}
 		if (isset($_POST['approve-selected'])) {
-			RUDActions::approve_selected($model,$this->checkbox);
+			Actions::approve_selected($model,$this->checkbox);
 		}
 		if (isset($_POST['restore-selected'])) {
-			RUDActions::restore_selected($model,$this->checkbox);
+			Actions::restore_selected($model,$this->checkbox);
 		}
 		if (isset($_POST['hide-selected'])) {
-			RUDActions::hide_selected($model,$this->checkbox);
+			Actions::hide_selected($model,$this->checkbox);
 		}
 		if (isset($_POST['delete-selected'])) {
-			$delete = RUDActions::delete_selected($model,$this->checkbox);
+			$delete = Actions::delete_selected($model,$this->checkbox);
 			return $delete;
 		}
 //
@@ -39,19 +41,19 @@ trait UserActions {
 
 //
 //		if (isset($_POST['remove'])) {
-//			$remove = RUDActions::trash($dbt,$this->id,$this->name);
+//			$remove = Actions::trash($dbt,$this->id,$this->name);
 //		}
 //		if (isset($_POST['approve'])) {
-//			$approve = RUDActions::approve($dbt,$this->id,$this->name);
+//			$approve = Actions::approve($dbt,$this->id,$this->name);
 //		}
 //		if (isset($_POST['hide'])) {
-//			$hide = RUDActions::hide($dbt,$this->id,$this->name);
+//			$hide = Actions::hide($dbt,$this->id,$this->name);
 //		}
 //		if (isset($_POST['restore'])) {
-//			$restore = RUDActions::restore($dbt,$this->id,$this->name);
+//			$restore = Actions::restore($dbt,$this->id,$this->name);
 //		}
 //		if (isset($_POST['delete'])) {
-//			$delete = RUDActions::delete($dbt,$this->id,$this->name);
+//			$delete = Actions::delete($dbt,$this->id,$this->name);
 //		}
 
 	}

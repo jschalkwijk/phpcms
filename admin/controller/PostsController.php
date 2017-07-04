@@ -2,6 +2,7 @@
 
 namespace Controller;
 
+use CMS\Models\Actions\Actions;
 use CMS\Models\Posts\Post;
 use CMS\Models\Controller\Controller;
 use CMS\Models\Tag\Tag;
@@ -142,6 +143,31 @@ class PostsController extends Controller
     {
         $this->UserActions(new Post());
 
+    }
+
+    public function approve($response,$params)
+    {
+        $post = Post::one($params['id']);
+        Actions::approve_selected($post,$params['id']);
+    }
+
+    public function hide($response,$params)
+    {
+        $post = Post::one($params['id']);
+        Actions::hide_selected($post,$params['id']);
+    }
+
+    public function trash($response,$params)
+    {
+        $post = Post::one($params['id']);
+        Actions::trash_selected($post,$params['id']);
+    }
+
+    public function destroy($response,$params)
+    {
+        $post = Post::one($params['id']);
+        $post->delete();
+        header("Location: ".ADMIN.$post->table);
     }
 }
 

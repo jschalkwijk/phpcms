@@ -19,7 +19,7 @@
 		?>
 			<form id="check-files" method="post" action="<?= ADMIN.'files/action' ?>">
 				<table class="files-table">
-					<thead><th></th><th>Name</th><th>Type</th><th>Size</th></thead>
+					<thead><th></th><th>Name</th><th>Type</th><th>Size</th><th>Del</th></thead>
 					<tbody>
 					<?php
 						foreach($folder->files() as $single){
