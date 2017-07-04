@@ -149,25 +149,28 @@ class PostsController extends Controller
     {
         $post = Post::one($params['id']);
         Actions::approve_selected($post,$params['id']);
+        header("Location: ".ADMIN.$post->table);
     }
 
     public function hide($response,$params)
     {
         $post = Post::one($params['id']);
         Actions::hide_selected($post,$params['id']);
+        header("Location: ".ADMIN.$post->table);
     }
 
     public function trash($response,$params)
     {
         $post = Post::one($params['id']);
         Actions::trash_selected($post,$params['id']);
+        header("Location: ".ADMIN.$post->table.'/deleted');
     }
 
     public function destroy($response,$params)
     {
         $post = Post::one($params['id']);
         $post->delete();
-        header("Location: ".ADMIN.$post->table);
+        header("Location: ".ADMIN.$post->table.'/deleted');
     }
 }
 
