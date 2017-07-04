@@ -46,10 +46,10 @@
 						foreach($data['folders'] as $folder) { ?>
 							<tr class="meta">
 								<td><img class="glyph-medium" src="<?= ADMIN.'images/files.png' ?>"/></td>
-								<td><a href="<?= ADMIN ?>folders/<?= $folder->album_id.'/'.$folder->name ?>"> <?= $folder->name ?></a></td>
+								<td><a href="<?= ADMIN ?>folders/<?= $folder->folder_id.'/'.$folder->name ?>"> <?= $folder->name ?></a></td>
 								<td>Size</td>
 								<input type="hidden" name="album_name" value="<?= $folder->name ?>"/>
-								<td><input class="checkbox" type="checkbox" name="checkbox[]" value="<?= $folder->album_id ?>"/></td>
+								<td><input class="checkbox" type="checkbox" name="checkbox[]" value="<?= $folder->folder_id ?>"/></td>
 							</tr>
 					<?php } ?>
 					</tbody>

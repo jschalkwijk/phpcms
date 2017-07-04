@@ -18,7 +18,7 @@ class UploadsController extends Controller
 
         $folders = Folder::allWhere(['parent_id'=>0]);
         $this->view(
-            'Albums',
+            'Folders',
             [
                 'files/folders.php'
             ],
@@ -79,7 +79,7 @@ class UploadsController extends Controller
                                     $file->path = $file_path;
                                     $file->thumb_path = $thumb_path.'/'.$thumb_name;
                                     $file->user_id =  $user_id ;
-                                    $file->album_id = $folder->get_id();
+                                    $file->folder_id = $folder->get_id();
                                     $file->save();
                                     ini_set('memory_limit','256M');
                                     if($file_ext == "png" || $file_ext == "jpg" || $file_ext == "jpeg") {

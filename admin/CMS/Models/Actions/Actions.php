@@ -39,9 +39,9 @@ class Actions{
 		$multiple = implode(",",$checkbox);
 		$messages = [];
 		
-		if($model->table == 'albums'){
+		if($model->table == 'folders'){
 			$parents = $checkbox;
-			$folders = Folder::allWhere(['album_id'=> $checkbox]);
+			$folders = Folder::allWhere(['folder_id'=> $checkbox]);
 			foreach ($folders as $folder) {
 				$paths[] = $folder->path;
 			};

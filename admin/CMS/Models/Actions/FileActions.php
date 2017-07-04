@@ -11,17 +11,17 @@ trait FileActions{
 		$db = new DBC;
 		$dbc = $db->connect();
 
-		//(!empty($row['album_id']))? $folders_id = [$id,$row['album_id']] : $folders_id = [$id];
+		//(!empty($row['folder_id']))? $folders_id = [$id,$row['folder_id']] : $folders_id = [$id];
 		// checks if the row from the db is not empty,
 		// if not, selects the id to the parent id,row[id], so we can get,
 		// all children from the top deleted album.
 		/* Example:
 		 * $id = 5 (Folder Users)
-		 * $row[album_id] = 24 ( user admin has parent_id 5, the folder Users)
+		 * $row[folder_id] = 24 ( user admin has parent_id 5, the folder Users)
 		 * Then again we check if there are folders with a parent_id of 24
 		 * if there is, add it to the array of folder_id's to delete.
 		 * In this case there is.
-		 * $row['album_id'] = 22 (admins contacts folder) has a parent_id of 24
+		 * $row['folder_id'] = 22 (admins contacts folder) has a parent_id of 24
 		 * This goes on until there are no folders left with a parent_id of 22 in this case.
 		*/
 		$folders = array();
@@ -32,19 +32,19 @@ trait FileActions{
 		while(sizeof($parents) > 0){
 			$placeholders = substr(str_repeat("?, ",count($parents)),0,-2);
 			try{
-                $sql = "SELECT album_id FROM albums WHERE parent_id IN ({$placeholders})";
+                $sql = "SELECT folder_id FROM folders WHERE parent_id IN ({$placeholders})";
                 echo $sql."<br />";
                 $query = $dbc->prepare($sql);
 				$query->execute($parents);
 				$data = $query->fetchAll();
-				// because we now have a new row[album_id], we need to check again if its empty,
+				// because we now have a new row[folder_id], we need to check again if its empty,
 				// if it is not, push it to the array.
 				//if it is, don't push it, en the loop will end with the while clause.
 				$parents = array();
 				foreach($data as $row){
 						// For each rows doen! multiple albims ids might be returned
-						$folders[] = $row['album_id'];
-						$parents[] = $row['album_id'];
+						$folders[] = $row['folder_id'];
+						$parents[] = $row['folder_id'];
 				}
 				$placeholders = substr(str_repeat("?, ",count($parents)),0,-2);
             } catch (\PDOException $e){
@@ -55,8 +55,8 @@ trait FileActions{
 		// Create s string with all the album id's.
 		$multiple = implode(",",$folders);
 		// deleting rows from database.
-		$dbc->query("DELETE FROM albums WHERE album_id IN({$multiple})");
-		$dbc->query("DELETE FROM files WHERE album_id IN({$multiple})");
+		$dbc->query("DELETE FROM folders WHERE folder_id IN({$multiple})");
+		$dbc->query("DELETE FROM files WHERE folder_id IN({$multiple})");
 
 		$db->close();
 	}

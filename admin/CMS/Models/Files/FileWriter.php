@@ -16,7 +16,7 @@ class FileWriter{
 			$name = $single->getName();
 			$type = $single->getType();
 			$file_name = $single->getFileName();
-			$album_id = $single->getAlbumID();
+			$folder_id = $single->getAlbumID();
 			$date = $single->getDate();
 			$secured = $single->getSecured();
 			$path = $single->getPath();

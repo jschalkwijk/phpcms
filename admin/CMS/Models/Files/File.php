@@ -11,7 +11,7 @@ class File extends Model{
 	public $table = 'files';
 
 	protected $relations = [
-		'albums' => 'album_id',
+		'folders' => 'folder_id',
 		'users' => 'user_id'
 	];
 
@@ -28,7 +28,7 @@ class File extends Model{
 		'type',
 		'file_name',
 		'thumb_name',
-		'album_id',
+		'folder_id',
 		'path',
 		'thumb_path',
 		'user_id',
@@ -58,7 +58,7 @@ class File extends Model{
 				$row['type'],
 				$row['name'],
 				$row['thumb_name'],
-				$row['album_id'],
+				$row['folder_id'],
 				$row['date'],
 				$row['secured'],
 				$row['path'],

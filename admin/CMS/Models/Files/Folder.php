@@ -14,8 +14,8 @@ use CMS\Models\Actions\FileActions;
 class Folder extends Model {
 	use FileActions;
 
-	protected $primaryKey = 'album_id';
-	public $table = 'albums';
+	protected $primaryKey = 'folder_id';
+	public $table = 'folders';
 
 	protected $relations = [
 		'users' => 'user_id'
@@ -38,10 +38,10 @@ class Folder extends Model {
 	];
 
 	public function setID($id){
-		$this->album_id = $id;
+		$this->folder_id = $id;
 	}
 	public function get_id(){
-		return $this->album_id;
+		return $this->folder_id;
 	}
 
 	#Relations
@@ -112,31 +112,31 @@ class Folder extends Model {
 	/* used by view/add-files.php to get the selected folder and optional folders to
 	 * upload files to.
 	 * Main folders don't have a parent folder so the parent_id = 0.
-	 * If the album_id != empty we search for it's child folders and put them in the form to select.
+	 * If the folder_id != empty we search for it's child folders and put them in the form to select.
 	 * */
-	public static function get_albums($album_id,$album_name) {
+	public static function get_albums($folder_id,$album_name) {
 		$db = new DBC;
 		$dbc = $db->connect();
 
-		($album_id != null) ? $id = trim((int)$album_id) : $id = 0;
+		($folder_id != null) ? $id = trim((int)$folder_id) : $id = 0;
 		try {
-            $album_query = $dbc->prepare("SELECT album_id,name FROM albums WHERE parent_id = ? OR album_id = ?");
+            $album_query = $dbc->prepare("SELECT folder_id,name FROM albums WHERE parent_id = ? OR folder_id = ?");
             $album_query->execute([$id, $id]);
 			$albums_data = $album_query->fetchAll();
         } catch (\PDOException $e){
             echo $e->getMessage();
         }
-		echo '<select id="albums" name="album_id">';
+		echo '<select id="albums" name="folder_id">';
 		if(!isset($album_name)){
 			echo '<option value="0">None</option>';
 		}
 		foreach($albums_data as $row){
-			echo '<option value="' . $row['album_id'] . '">' . $row['name'] . '</option>';
+			echo '<option value="' . $row['folder_id'] . '">' . $row['name'] . '</option>';
 		}
 
-		// Join to select all products with matching album_id's
-		//$album_query = "SELECT album_id FROM products WHERE product_id = $id ";
-//		$album_query = "SELECT products.*, albums.name as name FROM products LEFT JOIN albums ON products.album_id = albums.album_id WHERE albums.album_id = $id";
+		// Join to select all products with matching folder_id's
+		//$album_query = "SELECT folder_id FROM products WHERE product_id = $id ";
+//		$album_query = "SELECT products.*, albums.name as name FROM products LEFT JOIN albums ON products.folder_id = albums.folder_id WHERE albums.folder_id = $id";
 //		echo $album_query;
 //		$albums_data = mysqli_query($dbc->connect(),$album_query) or die("Error connecting to database");
 //		echo '<select id="albums" name="album_name">';
@@ -144,7 +144,7 @@ class Folder extends Model {
 //			echo '<option name="none" value="None">None</option>';
 //		} else {
 //			while($row = mysqli_fetch_array($albums_data)) {
-//				echo '<option value="'.$row['album_id'].'">'.$row['name'].'</option>';
+//				echo '<option value="'.$row['folder_id'].'">'.$row['name'].'</option>';
 //			}
 //		}
 
@@ -161,7 +161,7 @@ class Folder extends Model {
 		// get values from the checkboxes, these are the ID's of the Albums or subfolders.
 		$multiple = implode(",",$checkbox);
 		try {
-        $query = $dbc->query("SELECT album_id,path,name FROM albums WHERE album_id IN({$multiple})");
+        $query = $dbc->query("SELECT folder_id,path,name FROM albums WHERE folder_id IN({$multiple})");
         $data = $query->fetchAll();
         } catch (\PDOException $e){
             echo $e->getMessage();
@@ -194,21 +194,21 @@ class Folder extends Model {
 		*/
 		if($category_name === null){
 			try {
-                $query = $dbc->prepare("SELECT album_id FROM albums WHERE name = ?");
+                $query = $dbc->prepare("SELECT folder_id FROM albums WHERE name = ?");
 				$query->execute([$main_folder]);
 				$row = $query->fetch();
-				$parent_id = $row['album_id'];
+				$parent_id = $row['folder_id'];
             } catch (\PDOException $e){
                 echo $e->getMessage();
             }
 		} else {
-			$sql = "SELECT album_id FROM albums WHERE name = ?";
+			$sql = "SELECT folder_id FROM albums WHERE name = ?";
 			echo $sql.'<br />';
 			try {
                 $query = $dbc->prepare($sql);
                 $query->execute([$category_name]);
 				$row = $query->fetch();
-				$parent_id = $row['album_id'];
+				$parent_id = $row['folder_id'];
             } catch (\PDOException $e){
                 echo $e->getMessage();
             }
@@ -229,16 +229,16 @@ class Folder extends Model {
 		}
 		
 		try {
-            $query = $dbc->prepare("SELECT album_id FROM albums WHERE name = ?");
+            $query = $dbc->prepare("SELECT folder_id FROM albums WHERE name = ?");
             $query->execute([$album_name]);
 			$row = $query->fetch();
-			$album_id = $row['album_id'];
+			$folder_id = $row['folder_id'];
         } catch (\PDOException $e){
             echo $e->getMessage();
         }
 
 		$db->close();
-		return $album_id;
+		return $folder_id;
 	}
 	
 	// we use this function in a slightly different way then in the file_upload class because we cant
@@ -248,7 +248,7 @@ class Folder extends Model {
 		$dbc = $db->connect();
 
         try {
-		    $query = $dbc->prepare("SELECT path FROM albums WHERE album_id = ?");
+		    $query = $dbc->prepare("SELECT path FROM albums WHERE folder_id = ?");
 			$query->execute([$parent_id]);
 			$row = $query->fetch();
 			if($row['path'] === $album_name){

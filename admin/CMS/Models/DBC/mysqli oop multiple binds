@@ -1,4 +1,4 @@
- $sql = "SELECT album_id FROM albums WHERE parent_id IN ({$placeholders})";
+ $sql = "SELECT folder_id FROM albums WHERE parent_id IN ({$placeholders})";
                 echo $sql."<br />";
                 $query = $dbc->prepare($sql);
 				$type = array(str_repeat("i",count($parents)));

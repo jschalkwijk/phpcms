@@ -22,7 +22,7 @@ class FileUpload{
 		$this->params = $params;
 		// nieuwe toevoeging empty_path is nodig in het geval wij een bestand willen uploaden buiten
 		// de hoofd album/files structuur, zoals bijvoorbeeld in het geval van een product of gebruikers afbeelding.
-		// het pad, $this->path wordt namelijk gecreeerd vanuit de parameters van de URL, waarin bij de hoofdsctructuur, het album_id wordt gebruikt.
+		// het pad, $this->path wordt namelijk gecreeerd vanuit de parameters van de URL, waarin bij de hoofdsctructuur, het folder_id wordt gebruikt.
 		//Ex. http://craft:8888/admin/file/albums/31/Hankie
 		// Deze klopt als je in files zit of in een album, maar deze URL klopt NIET! als je in een product of user etc zit,
 		// Ex. http://craft:8888/admin/products/edit-product/3/Hankie
@@ -47,32 +47,32 @@ class FileUpload{
 
 			// !!!!!!!! IMPORTANT, dit kan boven de for loop, hoeft maar een keer te worden gedaan!
 			// Als ik nu een nieuwe folder maak dan komt de file in de hoofdolder, als ik dan de folder selecteer
-			// uit menu dan komt hij wel in die folder terrecht. ligt aan if not empty album_id
+			// uit menu dan komt hij wel in die folder terrecht. ligt aan if not empty folder_id
 
-			if(isset($_POST['album_id'])){
-				$album_id = trim((int)$_POST['album_id']);
-				echo 'album_id : '.$album_id;
+			if(isset($_POST['folder_id'])){
+				$folder_id = trim((int)$_POST['folder_id']);
+				echo 'folder_id : '.$folder_id;
 				if(isset($_POST['new_album_name'])) {
 					$new_album_name = trim(htmlentities($_POST['new_album_name']));
 					if(strlen($new_album_name) > 60){
 						$errors[] = 'Album name can only be 60 characters long.';
 					} else {
-						if(empty($this->path) && $album_id != 0) {
-							$this->path = $this->create_path($album_id,$new_album_name);
+						if(empty($this->path) && $folder_id != 0) {
+							$this->path = $this->create_path($folder_id,$new_album_name);
 						} else {
 							$this->path = $new_album_name;
 						}
-						$album_id = $this->create_album($new_album_name,$album_id);
+						$folder_id = $this->create_album($new_album_name,$folder_id);
 					}
-				} else if(empty($album_id)) {
+				} else if(empty($folder_id)) {
 					$errors[] = 'Please select an album or create a new album.';
 				} else {
-					(empty($this->path))? $this->path = $this->create_path($album_id) : "";
+					(empty($this->path))? $this->path = $this->create_path($folder_id) : "";
 					echo 'Line 71: this-path'.$this->path;
 				}
 			}
 
-			echo "New album ID: ".$album_id;
+			echo "New album ID: ".$folder_id;
 			// the path has to be created only once. If this->path is empty,
 			//execute function,else it's already filled.
 			// END ALBUM CREATION
@@ -93,7 +93,7 @@ class FileUpload{
 							$thumb_name = $file_name.'.thumb_'.$file_name_new;
 
 							// move uploaded file to destination folder
-							if($this->uploadFile($file_tmp,$file_name,$file_ext,$file_name_new,$thumb_name,$position,$album_id)){
+							if($this->uploadFile($file_tmp,$file_name,$file_ext,$file_name_new,$thumb_name,$position,$folder_id)){
 								$uploaded[] = $file_name;
 								if(!$this->createThumb($file_name_new,$thumb_name,$thumb_dest)){
 									$failed[] = 'Thumbnails failed to be created';
@@ -128,14 +128,14 @@ class FileUpload{
 		$db->close();
 	}
 
-	protected function uploadFile($file_tmp,$file_name,$file_ext,$file_name_new,$thumb_name,$position,$album_id){
+	protected function uploadFile($file_tmp,$file_name,$file_ext,$file_name_new,$thumb_name,$position,$folder_id){
 		// Ik moet naar boven werken met de id's om het nieuwe pad te creeeren,met een loop die checked of de parent_id
 		// != 0,dan moet de naam van dat album in de file_dest.
 		// Deze loop MOET in de create_album en create RThumb functie, die hebben dit pad ook nodig!!!
 		$db = new DBC;
 		$dbc = $db->connect();
 
-		$id = $album_id;
+		$id = $folder_id;
 		$destination = $this->path.'/'.$file_name_new;
 		$thumb_path = $this->path.'/thumbs/'.$thumb_name;
 
@@ -147,13 +147,13 @@ class FileUpload{
 		$thumb_path = str_replace(array("\\","'"),array("","''"),$thumb_path);
 		$user_id = $_SESSION['user_id'];
 		echo 'Line: 168 | path: '.$path.'<br />';
-		if(!empty($album_id)) {
+		if(!empty($folder_id)) {
 			if(move_uploaded_file($file_tmp,$path)) {
 				// add to uploade array, we dont use the new filename because thats all numbers,
 				// we use the original file name, we store both the original and new file name to the DB.
 				$uploaded[$position] = $file_name;
 				try {
-                    $sql = "INSERT INTO files(name,type,file_name,thumb_name,album_id,date,path,thumb_path,user_id) VALUES(?,?,?,?,?,NOW(),?,?,?)";
+                    $sql = "INSERT INTO files(name,type,file_name,thumb_name,folder_id,date,path,thumb_path,user_id) VALUES(?,?,?,?,?,NOW(),?,?,?)";
                     echo $sql;
                     $query = $dbc->prepare($sql);
 					$query->execute([$file_name, $file_ext, $file_name_new, $thumb_name, $id, $destination, $thumb_path, $user_id]);;
@@ -200,7 +200,7 @@ class FileUpload{
 		}
 	}
 
-	protected function create_album($album_name,$album_id) {
+	protected function create_album($album_name,$folder_id) {
 		$db = new DBC;
 		$dbc = $db->connect();
 		// the album_name and dest can be the same if you create a main folder!
@@ -209,8 +209,8 @@ class FileUpload{
 		// IF A ALBUM NAME ALREADY EXISTS, DON'T CREATE THE ALBUM.
 		$author = $_SESSION['username'];
 		$user_id = $_SESSION['user_id'];
-		if(!empty($album_id)) {
-			$parent_id = trim((int)$album_id);
+		if(!empty($folder_id)) {
+			$parent_id = trim((int)$folder_id);
             $destination = $this->path;
 		} else {
 			$parent_id = 0;
@@ -242,13 +242,13 @@ class FileUpload{
 		return $parent_id;
 	}
 	
-	protected function create_path($album_id,$new_album_name = null){
+	protected function create_path($folder_id,$new_album_name = null){
 		$db = new DBC;
 		$dbc = $db->connect();
 
-		$id = trim((int)$album_id);
+		$id = trim((int)$folder_id);
 		try {
-            $query = $dbc->prepare("SELECT name,path FROM albums WHERE album_id = ?");
+            $query = $dbc->prepare("SELECT name,path FROM albums WHERE folder_id = ?");
 
 			$query->execute([$id]);
 			$row = $query->fetch();

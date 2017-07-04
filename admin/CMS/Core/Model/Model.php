@@ -629,11 +629,11 @@ abstract class Model
         // as well as the foreignKey name where we will get the ID from.
         if($primaryKey == null && $foreignKey == null){
             // $query = "SELECT * FROM {$model->table} WHERE {$this->primaryKey} = {$this->get_id()}";
-            // album_id is primaryKey
+            // folder_id is primaryKey
             $primaryKey = $model->primaryKey;
             // $primarykey will be used to get the id value of the Model that is calling it
-            // $this->$primarykey actually says $this->album_id
-            // now we need an ID, for example Products has an album_id value if we call this from products we
+            // $this->$primarykey actually says $this->folder_id
+            // now we need an ID, for example Products has an folder_id value if we call this from products we
             // get that album ID and then fetch it.
             return $model->one($this->$primaryKey);
         } else {
@@ -724,7 +724,7 @@ abstract class Model
         $model1->connection = $model1->database->connect();
         $model1->statement = "SELECT";
         $query = "SELECT * FROM {$model1->table} WHERE {$model2->primaryKey} =
-        (SELECT {$model2->primaryKey} FROM {$model2->table} WHERE {$this->primaryKey} = {$this->album_id})";
+        (SELECT {$model2->primaryKey} FROM {$model2->table} WHERE {$this->primaryKey} = {$this->folder_id})";
         return $model1->grab($query);
     }
     /**

@@ -31,7 +31,7 @@ class Users extends Model{
 
 	protected $allowed = [
 		'username',
-		'album_id',
+		'folder_id',
         'trashed',
         'approved'
 	];
@@ -47,7 +47,7 @@ class Users extends Model{
 	protected $hidden = [
 		'password',
 		'protected_key',
-		'album_id',
+		'folder_id',
 	];
 
 	public function firstName(){
@@ -135,14 +135,14 @@ class Users extends Model{
 			$password = trim($this->password);
 			$password_again = trim($this->password_again);
 			# Create Folder
-			$album_id = Folders::auto_create_folder($username,$this->file_path.$username,$this->thumb_path.$username,'Users');
+			$folder_id = Folders::auto_create_folder($username,$this->file_path.$username,$this->thumb_path.$username,'Users');
 			Folders::auto_create_folder("$username"."\\'s ".'Contacts',$this->file_path.$username.'/'.$username.'\'s '.'Contacts',$this->thumb_path.$username.'/'.$username.'\'s '.'Contacts','Users',$username);
 
 			if(!empty($username) && !empty($password) && !empty($password_again)) {
 				if($password === $password_again) {
 					$hash = password_hash($password, PASSWORD_BCRYPT);
 					$this->password = $hash;
-					$this->album_id = $album_id;
+					$this->folder_id = $folder_id;
 //					foreach($this->request as $k => $v) {
 //						if(in_array($k,$this->encrypted)) {
 //							$this->request[$k] = $this->encrypt($v);

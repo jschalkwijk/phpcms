@@ -33,7 +33,7 @@ class Product extends Model {
 
 	protected $hidden = [
 		'user_id',
-		'album_id'
+		'folder_id'
 	];
 
     protected $discount_price;
@@ -47,7 +47,7 @@ class Product extends Model {
 	protected $maxStock;
 
 //    public function folder(){
-//        return $this->ownedBY('CMS\Models\Files\Folders','album_id');
+//        return $this->ownedBY('CMS\Models\Files\Folders','folder_id');
 //    }
 // Products owns one main folder, that folder can have subFolders, which the folder owns itsself,
 // Also every folder owns 0 or more files.
@@ -56,7 +56,7 @@ class Product extends Model {
         return $this->ownsOne('CMS\Models\Files\Folder');
     }
 //	public function folders(){
-//		return $this->owns('CMS\Models\Files\Folders','parent_id','album_id');
+//		return $this->owns('CMS\Models\Files\Folders','parent_id','folder_id');
 //	}
 	public function get_id(){
 		return $this->product_id;
@@ -152,7 +152,7 @@ class Product extends Model {
         */
         //create new product file folder inside Products folder.
 //        if(!file_exists($this->file_path.$this->name)) {
-//            $album_id = Folders::auto_create_folder($this->name,$this->file_path.$this->name,$this->thumb_path.$this->name,'Products',$category_name);
+//            $folder_id = Folders::auto_create_folder($this->name,$this->file_path.$this->name,$this->thumb_path.$this->name,'Products',$category_name);
 //        }
 
         $this->user_id = $_SESSION['user_id'];
@@ -221,10 +221,10 @@ class Product extends Model {
 				$this->file_path = $this->file_path.$category_name;
 				// this-file_path is now updated with the category name
 				$this->thumb_path = $this->file_path."thumbs";
-				$album_id = Folder::auto_create_folder($category_name,$this->file_path,$this->thumb_path,'Products');
-				echo "Products Album_ID: ".print_r($album_id);
+				$folder_id = Folder::auto_create_folder($category_name,$this->file_path,$this->thumb_path,'Products');
+				echo "Products Album_ID: ".print_r($folder_id);
 				$category->category_id = $this->category_id;
-				$category->album_id = $album_id;
+				$category->folder_id = $folder_id;
 				$category->request = [];
 				$category->values = [];
 				$category->patch();
@@ -258,8 +258,8 @@ class Product extends Model {
         */
 		//create new product file folder inside Products folder.
 		if(!file_exists($this->file_path."/".$name)) {
-			$album_id = Folder::auto_create_folder($name,$this->file_path."/".$name,$this->file_path."/".$name."/thumbs",'Products',$category_name);
-		    $this->album_id = $album_id;
+			$folder_id = Folder::auto_create_folder($name,$this->file_path."/".$name,$this->file_path."/".$name."/thumbs",'Products',$category_name);
+		    $this->folder_id = $folder_id;
         }
 
 		if(!empty($name) && !empty($price)){
