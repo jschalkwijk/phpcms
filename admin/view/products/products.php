@@ -18,26 +18,49 @@
                         <?php foreach($products as $product){ ?>
                             <tr>
                                 <td class="td-title"><a href="<?= ADMIN.'products/info/'.$product->product_id.'/'.$product->name; ?>"><?= $product->name; ?></a></td>
-                                <td class="td-author"><?= $product->category_title; ?></td>
+                                <td class="td-category"><p><?php
+                                            if(is_callable([$product,"category"])) {
+                                                foreach ($product->category() as $cat){
+                                                    echo $cat->title;
+                                                }
+                                            }
+                                        ?></p></td>
                                 <td class="td-date"><?= $product->price;?></td>
                                 <td class="td-category"><?= $product->quantity; ?></td>
-                                <!--<input type="hidden" name="id" value="<?php /*echo $product->getID() */?>" />-->
                                 <?php
                                 if ($_SESSION['rights'] == 'Admin' || $_SESSION['rights'] == 'Content Manager') { ?>
-                                        <td class="td-btn"><a href="<?= ADMIN.'products/edit/'.$product->product_id ?>"><img class="glyph-small link-btn" src="<?= IMG.'edit.png';?>" alt="edit-item"/></a></td>
-                                    <?php if ($product->approved == 0 ) { ?>
-                                            <td class="td-btn"><img class="glyph-small" src="<?= IMG.'hide.png'?>" alt="item-hidden-from-front-end-user"/><!-- </button> --></td>
-                                    <?php }	else if ($product->approved == 1 ) { ?>
-                                                <td class="td-btn"><img class="glyph-small" src="<?= IMG.'show.png'?>" alt="item-visible-from-front-end-user"/><!-- </button> --></td>
+                                    <?php
+                                    if ($_SESSION['rights'] == 'Admin' || $_SESSION['rights'] == 'Content Manager') { ?>
+                                        <td class="td-btn">
+                                            <a href="<?= $product->table . '/edit/' . $product->get_id(); ?>"><img class="glyph-small link-btn"
+                                                                                                                   alt="edit-item"
+                                                                                                                   src="<?= IMG . 'edit.png'; ?>"/></a>
+                                        </td>
+                                        <?php if ($product->approved == 0) { ?>
+                                            <td><a class="btn btn-sm btn-info" href="/admin/products/approve/<?= $product->get_id() ?>"><img
+                                                            class="glyph-small" alt="show-item"
+                                                            src="<?= IMG . 'hide.png' ?>"/></a></td>
+                                        <?php } else if ($product->approved == 1) { ?>
+                                            <td><a class="btn btn-sm btn-success" href="/admin/products/hide/<?= $product->get_id() ?>"><img
+                                                            class="glyph-small" alt="hide-item"
+                                                            src="<?= IMG . 'show.png' ?>"/></a></td>
+                                        <?php }
+                                        if ($product->trashed == 0) { ?>
+                                            <td><a href="/admin/products/trash/<?= $product->get_id() ?>" class="btn btn-sm btn-danger"><img
+                                                            class="glyph-small" alt="trash-item" src="<?= IMG . 'trash-post.png' ?>"/></a></td>
+                                            <?php
+                                        } else if ($product->trashed == 1) { ?>
+                                            <td><a href="/admin/products/destroy/<?= $product->get_id() ?>" class="btn btn-sm btn-danger"><img
+                                                            class="glyph-small" alt="destroy-item" src="<?= IMG . 'delete-post.png' ?>"/></a></td>
+                                        <?php } ?>
+                                        <td class="td-btn"><p><input type="checkbox" name="checkbox[]" value="<?= $product->get_id(); ?>"/></p></td>
+
                                     <?php } ?>
                                     <td class="td-btn"><p><input type="checkbox" name="checkbox[]" value="<?= $product->product_id; ?>"/></p></td>
                                 <?php } ?>
                             </tr>
                         <?php } ?>
                     </table>
-                    <?php
-                        require('view/shared/manage-content.php');
-                    ?>
                 </form>
             </div>
         </div>

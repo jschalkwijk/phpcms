@@ -55,6 +55,13 @@ class Product extends Model {
     public function folder(){
         return $this->ownsOne('CMS\Models\Files\Folder');
     }
+
+        # Relations
+
+        public function category()
+        {
+            return $this->ownedBy('CMS\Models\Categories\Categories');
+        }
 //	public function folders(){
 //		return $this->owns('CMS\Models\Files\Folders','parent_id','folder_id');
 //	}

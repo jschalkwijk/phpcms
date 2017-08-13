@@ -30,11 +30,11 @@
             </td>
             <?php if ($single->approved == 0) { ?>
                 <td><a class="btn btn-sm btn-info" href="/admin/posts/approve/<?= $single->get_id() ?>"><img
-                                class="glyph-small" alt="item-hidden-from-front-end-user"
+                                class="glyph-small" alt="show-item"
                                 src="<?= IMG . 'hide.png' ?>"/></a></td>
             <?php } else if ($single->approved == 1) { ?>
                 <td><a class="btn btn-sm btn-success" href="/admin/posts/hide/<?= $single->get_id() ?>"><img
-                                class="glyph-small" alt="item-visible-for-front-end-user"
+                                class="glyph-small" alt="hide-item"
                                 src="<?= IMG . 'show.png' ?>"/></a></td>
             <?php }
             if ($single->trashed == 0) { ?>
