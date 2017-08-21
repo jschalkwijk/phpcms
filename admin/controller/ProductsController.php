@@ -4,6 +4,7 @@
 
 use CMS\Models\Controller\Controller;
 use CMS\Models\Actions\UserActions;
+use CMS\Models\Actions\Actions;
 use CMS\Models\Products\Product;
 use CMS\Models\Files\File;
 use CMS\Models\Files\Folder;
@@ -116,6 +117,40 @@ class ProductsController extends Controller
                 'js' => [JS . 'checkAll.js']
             ]
         );
+    }
+
+    public function action($response, $params)
+    {
+        $this->UserActions(new Product());
+
+    }
+
+    public function approve($response,$params)
+    {
+        $product = Product::one($params['id']);
+        Actions::approve_selected($product ,$params['id']);
+        header("Location: ".ADMIN.$product->table);
+    }
+
+    public function hide($response,$params)
+    {
+        $product = Product::one($params['id']);
+        Actions::hide_selected($product ,$params['id']);
+        header("Location: ".ADMIN.$product->table);
+    }
+
+    public function trash($response,$params)
+    {
+        $product = Product::one($params['id']);
+        Actions::trash_selected($product ,$params['id']);
+        header("Location: ".ADMIN.$product->table.'/deleted');
+    }
+
+    public function destroy($response,$params)
+    {
+        $product = Product::one($params['id']);
+        $product->delete();
+        header("Location: ".ADMIN.$product->table.'/deleted');
     }
 }
 

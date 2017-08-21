@@ -12,9 +12,22 @@
                     $products = $data['products'];
                     ($data['trashed'] === 1) ? $action = ADMIN.'products/deleted' : $action = ADMIN.'products' ;
                 ?>
-                <form class="backend-form" method="post" action="<?= $action; ?>">
+                <form method="post" action="<?= $action; ?>">
                     <table class="backend-table title">
-                        <tr><th>Name</th><th>Category</th><th>Price</th><th>In Stock</th><th>Edit</th><th>View</th><th><button type="button" id="check-all"><img class="glyph-small" src="<?= IMG."check.png"; ?>" alt="check-unheck-all-items"/></button></th></tr>
+                        <tr>
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>In Stock</th>
+                            <th>Edit</th>
+                            <th>View</th>
+                            <th>Del</th>
+                            <th>
+                                <button type="button" id="check-all"><img class="glyph-small"
+                                                                          src="<?= IMG . "check.png"; ?>"
+                                                                          alt="check-unheck-all-items"/></button>
+                            </th>
+                        </tr>
                         <?php foreach($products as $product){ ?>
                             <tr>
                                 <td class="td-title"><a href="<?= ADMIN.'products/info/'.$product->product_id.'/'.$product->name; ?>"><?= $product->name; ?></a></td>
@@ -32,7 +45,7 @@
                                     <?php
                                     if ($_SESSION['rights'] == 'Admin' || $_SESSION['rights'] == 'Content Manager') { ?>
                                         <td class="td-btn">
-                                            <a href="<?= $product->table . '/edit/' . $product->get_id(); ?>"><img class="glyph-small link-btn"
+                                            <a class="btn btn-sm edit-link" href="<?= $product->table . '/edit/' . $product->get_id(); ?>"><img class="glyph-small"
                                                                                                                    alt="edit-item"
                                                                                                                    src="<?= IMG . 'edit.png'; ?>"/></a>
                                         </td>
@@ -54,10 +67,7 @@
                                                             class="glyph-small" alt="destroy-item" src="<?= IMG . 'delete-post.png' ?>"/></a></td>
                                         <?php } ?>
                                         <td class="td-btn"><p><input type="checkbox" name="checkbox[]" value="<?= $product->get_id(); ?>"/></p></td>
-
-                                    <?php } ?>
-                                    <td class="td-btn"><p><input type="checkbox" name="checkbox[]" value="<?= $product->product_id; ?>"/></p></td>
-                                <?php } ?>
+                                <?php } }?>
                             </tr>
                         <?php } ?>
                     </table>

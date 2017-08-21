@@ -12,9 +12,15 @@
     $app->get('/', [new Controller\DashboardController, 'index']);
     $app->group('/admin',function($app) {
         $app->group('/users', function ($app, $container) {
-            $app->get('', [new Controller\UsersController, 'index']);
+            $app->map('', [new Controller\UsersController, 'index'],['GET','POST']);
+            $app->map('/deleted', [new Controller\UsersController, 'deleted'],['GET','POST']);
             $app->map('/edit/:id', [new Controller\UsersController, 'edit'],['GET','POST']);
             $app->map('/create', [new Controller\UsersController, 'create'],['GET','POST']);
+            $app->post('/action', [new Controller\UsersController, 'action']);
+            $app->get('/approve/:id', [new Controller\UsersController, 'approve']);
+            $app->get('/hide/:id', [new Controller\UsersController, 'hide']);
+            $app->get('/trash/:id', [new Controller\UsersController, 'trash']);
+            $app->get('/destroy/:id', [new Controller\UsersController, 'destroy']);
         });
         $app->group('/posts', function ($app, $container) {
             $app->map('', [new Controller\PostsController, 'index'],['GET','POST']);
@@ -31,6 +37,11 @@
             $app->get('', [new Controller\CategoriesController, 'index']);
             $app->map('/edit/:id', [new Controller\CategoriesController, 'edit'],['GET','POST']);
             $app->map('/create', [new Controller\CategoriesController, 'create'],['GET','POST']);
+            $app->post('/action', [new Controller\PostsController, 'action']);
+            $app->get('/approve/:id', [new Controller\PostsController, 'approve']);
+            $app->get('/hide/:id', [new Controller\PostsController, 'hide']);
+            $app->get('/trash/:id', [new Controller\PostsController, 'trash']);
+            $app->get('/destroy/:id', [new Controller\PostsController, 'destroy']);
         });
         $app->group('/tags', function ($app, $container) {
             $app->get('', [new Controller\TagsController, 'index']);
@@ -43,9 +54,15 @@
             $app->map('/create', [new Controller\PagesController(), 'create'],['GET','POST']);
         });
         $app->group('/contacts', function ($app, $container) {
-            $app->get('', [new Controller\ContactsController, 'index']);
-            $app->get('/edit/:id', [new Controller\ContactsController(), 'edit']);
+            $app->get('', [new Controller\ContactsController, 'index'],['GET','POST']);
+            $app->get('/deleted', [new Controller\ContactsController, 'deleted'],['GET','POST']);
+            $app->get('/edit/:id', [new Controller\ContactsController(), 'edit'],['GET','POST']);
             $app->map('/create', [new Controller\ContactsController(), 'create'],['GET','POST']);
+            $app->post('/action', [new Controller\ContactsController, 'action']);
+            $app->get('/approve/:id', [new Controller\ContactsController, 'approve']);
+            $app->get('/hide/:id', [new Controller\ContactsController, 'hide']);
+            $app->get('/trash/:id', [new Controller\ContactsController, 'trash']);
+            $app->get('/destroy/:id', [new Controller\ContactsController, 'destroy']);
         });
         $app->group('/products', function ($app, $container) {
             $app->get('', [new Controller\ProductsController, 'index']);
@@ -53,6 +70,11 @@
             $app->map('/create', [new Controller\ProductsController, 'create'],['GET','POST']);
             $app->get('/delete', [new Controller\ProductsController, 'delete']);
             $app->get('/info/:id/:name', [new Controller\ProductsController, 'info']);
+            $app->post('/action', [new Controller\ProductsController, 'action']);
+            $app->get('/approve/:id', [new Controller\ProductsController, 'approve']);
+            $app->get('/hide/:id', [new Controller\ProductsController, 'hide']);
+            $app->get('/trash/:id', [new Controller\ProductsController, 'trash']);
+            $app->get('/destroy/:id', [new Controller\ProductsController, 'destroy']);
         });
         $app->group('/files', function ($app, $container) {
             $app->map('', [new Controller\UploadsController, 'index'],['GET','POST']);

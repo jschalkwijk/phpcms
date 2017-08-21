@@ -24,7 +24,7 @@
     <?php
         if ($_SESSION['rights'] == 'Admin' || $_SESSION['rights'] == 'Content Manager') { ?>
             <td class="td-btn">
-                <a href="<?= $single->table . '/edit/' . $single->get_id(); ?>"><img class="glyph-small link-btn"
+                <a class="btn btn-sm edit-link" href="<?= $single->table . '/edit/' . $single->get_id(); ?>"><img class="glyph-small"
                                                                                      alt="edit-item"
                                                                                      src="<?= IMG . 'edit.png'; ?>"/></a>
             </td>

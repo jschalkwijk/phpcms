@@ -4,6 +4,7 @@
 
 use CMS\Models\Controller\Controller;
 use \CMS\Models\Contacts\Contact;
+use CMS\Models\Actions\Actions;
 
 class ContactsController extends Controller
 {
@@ -12,7 +13,6 @@ class ContactsController extends Controller
     public function index($response,$params = null)
     {
         $contacts = Contact::allWhere(['trashed'=>0,'user_id' => $this->currentUser]);
-        $this->UserActions($contacts[0]);
         $this->view(
             'Contacts',
             ['contacts/contacts.php'],
@@ -28,7 +28,6 @@ class ContactsController extends Controller
     public function deleted($response,$params = null)
     {
         $contacts = Contact::allWhere(['trashed'=>1,'user_id' => $this->currentUser]);
-        $this->UserActions($contacts[0]);
         $this->view(
             'Contacts',
             ['contacts/contacts.php'],
@@ -89,7 +88,6 @@ class ContactsController extends Controller
 
     public function info($response,$params = null)
     {
-        $this->UserActions('contacts');
         $contact = Contact::one($params['id']);
         $this->view(
             'Add contact',
@@ -98,6 +96,40 @@ class ContactsController extends Controller
             ['contact' => $contact]
         );
     }
+    public function action($response, $params)
+    {
+        $this->UserActions(new Contact());
+
+    }
+
+    public function approve($response,$params)
+    {
+        $contact = Contact::one($params['id']);
+        Actions::approve_selected($contact,$params['id']);
+        header("Location: ".ADMIN.$contact->table);
+    }
+
+    public function hide($response,$params)
+    {
+        $contact = Contact::one($params['id']);
+        Actions::hide_selected($contact,$params['id']);
+//        header("Location: ".ADMIN.$contact->table);
+    }
+
+    public function trash($response,$params)
+    {
+        $contact = Contact::one($params['id']);
+        Actions::trash_selected($contact,$params['id']);
+        header("Location: ".ADMIN.$contact->table.'/deleted');
+    }
+
+    public function destroy($response,$params)
+    {
+        $contact = Contact::one($params['id']);
+        $contact->delete();
+        header("Location: ".ADMIN.$contact->table.'/deleted');
+    }
+
 }
 
 ?>

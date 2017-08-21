@@ -12,7 +12,7 @@
     class Contact extends Model
     {
 
-        protected $primaryKey = "contact_id";
+        public $primaryKey = "contact_id";
         public $table = 'contacts';
         protected $relations = [
             'users' => 'user_id',

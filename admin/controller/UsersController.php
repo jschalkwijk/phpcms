@@ -3,7 +3,7 @@
 	namespace Controller;
 	use CMS\Models\Controller\Controller;
 	use \CMS\Models\Users\Users as User;
-	use \CMS\Models\DBC;
+	use CMS\Models\Actions\Actions;
 
 class UsersController extends Controller {
 
@@ -11,7 +11,6 @@ class UsersController extends Controller {
 
 	public function index($response,$params = null){
 		$users = User::allWhere(['trashed' => 0]);
-		$this->UserActions($users[0]);
 		$this->view(
 			'Users',
 			['users/users.php'],
@@ -41,7 +40,6 @@ class UsersController extends Controller {
 	}
 	public function deleted($response,$params = null){
 		$users = User::allWhere(['trashed' => 1]);
-        $this->UserActions($users[0]);
 		$this->view(
 			'Deleted Users',
 			['users/users.php'],
@@ -90,5 +88,39 @@ class UsersController extends Controller {
 			['user' => $user]
 		);
 	}
+
+    public function action($response, $params)
+    {
+        $this->UserActions(new User());
+
+    }
+
+    public function approve($response,$params)
+    {
+        $user = User::one($params['id']);
+        Actions::approve_selected($user,$params['id']);
+        header("Location: ".ADMIN.$user->table);
+    }
+
+    public function hide($response,$params)
+    {
+        $user = User::one($params['id']);
+        Actions::hide_selected($user,$params['id']);
+        header("Location: ".ADMIN.$user->table);
+    }
+
+    public function trash($response,$params)
+    {
+        $user = User::one($params['id']);
+        Actions::trash_selected($user,$params['id']);
+        header("Location: ".ADMIN.$user->table.'/deleted');
+    }
+
+    public function destroy($response,$params)
+    {
+        $user = User::one($params['id']);
+        $user->delete();
+        header("Location: ".ADMIN.$user->table.'/deleted');
+    }
 }
 ?>

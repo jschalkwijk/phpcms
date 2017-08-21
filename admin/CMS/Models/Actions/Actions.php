@@ -32,7 +32,7 @@ class Actions{
 
       	$model->update($columns)->whereIN([$model->primaryKey => $checkbox])->grab();
 
-		header('Location: '.ADMIN.$model->table);
+//		header('Location: '.ADMIN.$model->table);
 	}
 	public static function delete_selected(Model $model,$checkbox){
 

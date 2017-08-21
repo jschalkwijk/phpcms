@@ -437,6 +437,10 @@ button:hover  {
 	text-decoration: none;
 	background-color: black;
 }
+
+.edit-link {
+	background-color: #80B12C;
+}
 /* Wrapper */
 
 #wrapper {

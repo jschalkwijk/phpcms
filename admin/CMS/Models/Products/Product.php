@@ -28,12 +28,14 @@ class Product extends Model {
         'category_id',
         'quantity',
         'price',
-        'trashed',
+
     ];
 
 	protected $hidden = [
 		'user_id',
-		'folder_id'
+		'folder_id',
+        'trashed',
+        'approved'
 	];
 
     protected $discount_price;
