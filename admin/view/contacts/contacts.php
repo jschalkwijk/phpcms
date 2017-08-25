@@ -8,8 +8,7 @@
     <div class="row">
         <div class="col-sm-6 col-lg-6 col-sm-offset-3 push-lg-3">
             <div class="center">
-                <?php ($data['trashed'] === 1) ? $action = ADMIN . 'contacts/deleted' : $action = 'contacts'; ?>
-                <form method="post" action="<?= $action; ?>">
+                <form method="post" action="/admin/contacts/action">
                     <table class="backend-table title">
                         <tbody>
                         <tr>

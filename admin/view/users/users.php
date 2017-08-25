@@ -8,8 +8,8 @@
     <div class="row">
         <div class="col-sm-6 col-lg-6 col-sm-offset-3 push-lg-3">
             <div class="center">
-                <?php ($data['trashed'] === 1) ? $action = ADMIN.'users/deleted' : $action = ADMIN.'users' ; ?>
-                <form method="post" action="<?= $action; ?>">
+
+                <form method="post" action="/admin/users/action">
                     <table class="backend-table title">
                         <tr><th>User</th><th>Rights</th><?php if ($_SESSION['rights'] == 'Admin') { ?> <th>Edit</th><th>View</th><th><button type="button" id="check-all"><img class="glyph-small" src="<?= IMG."check.png";?>" alt="check-uncheck-all-items"/></button></th></tr> <?php } ?>
                         <?php

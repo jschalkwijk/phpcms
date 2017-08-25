@@ -441,6 +441,12 @@ button:hover  {
 .edit-link {
 	background-color: #80B12C;
 }
+
+.form-action {
+	height: 28px;
+	width: 28px;
+}
+
 /* Wrapper */
 
 #wrapper {

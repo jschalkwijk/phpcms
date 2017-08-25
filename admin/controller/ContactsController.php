@@ -99,6 +99,7 @@ class ContactsController extends Controller
     public function action($response, $params)
     {
         $this->UserActions(new Contact());
+        header("Location: ".ADMIN."contacts");
 
     }
 
@@ -113,7 +114,7 @@ class ContactsController extends Controller
     {
         $contact = Contact::one($params['id']);
         Actions::hide_selected($contact,$params['id']);
-//        header("Location: ".ADMIN.$contact->table);
+        header("Location: ".ADMIN.$contact->table);
     }
 
     public function trash($response,$params)

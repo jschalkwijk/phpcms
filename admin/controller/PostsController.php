@@ -141,8 +141,9 @@ class PostsController extends Controller
 
     public function action($response, $params)
     {
-        $this->UserActions(new Post());
-
+        $post = new Post();
+        $this->UserActions($post);
+        header("Location: ".ADMIN.$post->table);
     }
 
     public function approve($response,$params)
