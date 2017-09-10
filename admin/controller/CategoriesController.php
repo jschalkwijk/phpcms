@@ -72,9 +72,8 @@ class CategoriesController extends Controller
     {
         $category = Cat::one($params['id']);
         $messages = [];
-
+        $tree = $category->tree($category->children());
         if (isset($_POST['submit'])) {
-            $category = $category;
             $category->request = $_POST;
             $category->user_id = $this->currentUser;
 
@@ -94,6 +93,7 @@ class CategoriesController extends Controller
             $params,
             [
                 'category' => $category,
+                'tree' => $tree,
                 'messages' => $messages,
             ]
         );

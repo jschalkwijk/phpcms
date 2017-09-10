@@ -53,6 +53,31 @@ class Categories extends Model{
         return $this->owns('CMS\Models\Products\Product');
     }
 
+    /**
+     * @param $array
+     * @return string
+     *
+     * Takes an array with the first chidren of the Object, then if those children have children
+     * it wil cascade over them en create a list output.
+     */
+    public function tree($array)
+    {
+        $html = '<ul class="list-group">';
+
+        foreach ($array as $key => $value)
+        {
+            $html .= '<li class="list-group-item">' . $value->title;
+            if (!empty($value->children()))
+            {
+                $html .= $this->tree($value->children());
+            }
+            $html .= '</li>';
+        }
+
+        $html .= '</ul>' ;
+
+        return $html;
+    }
 
     // Returns a list of options with all the categories that are of the defined type.
 	// like type: post, type: product, type: page.

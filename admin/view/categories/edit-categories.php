@@ -29,6 +29,10 @@
 			</form>
 		</div>
 	</div>
+    <h3>Tree</h3><br>
+    <?php
+        echo $data['tree'];
+    ?>
 	<h3>Related Posts</h3><br>
 	<?php
 		foreach ($category->posts() as $post){
