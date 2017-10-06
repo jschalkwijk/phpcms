@@ -53,6 +53,11 @@ class Categories extends Model{
         return $this->owns('CMS\Models\Products\Product');
     }
 
+    public function user()
+    {
+        return $this->ownedBy('CMS\Models\Users\Users');
+    }
+
     /**
      * @param $array
      * @return string

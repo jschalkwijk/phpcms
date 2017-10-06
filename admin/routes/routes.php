@@ -35,6 +35,7 @@
         });
         $app->group('/categories', function ($app, $container) {
             $app->get('', [new Controller\CategoriesController, 'index']);
+            $app->get('/show/:id', [new Controller\CategoriesController, 'show']);
             $app->map('/edit/:id', [new Controller\CategoriesController, 'edit'],['GET','POST']);
             $app->map('/create', [new Controller\CategoriesController, 'create'],['GET','POST']);
             $app->post('/action', [new Controller\PostsController, 'action']);

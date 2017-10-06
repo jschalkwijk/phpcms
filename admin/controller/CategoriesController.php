@@ -46,6 +46,22 @@ class CategoriesController extends Controller
         );
     }
 
+    public function show($response, $params = null)
+    {
+        $category = Cat::one($params['id']);
+        $tree = $category->tree($category->children());
+
+        $this->view(
+            $category->name,
+            ['categories/show.php'],
+            $params,
+            [
+                'category' => $category,
+                'tree' => $tree,
+                'trashed' => 0
+            ]
+        );
+    }
     //
     public function deleted($response,$params = null)
     {

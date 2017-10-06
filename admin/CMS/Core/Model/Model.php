@@ -685,7 +685,7 @@ abstract class Model
         } else if($primaryKey != null && $foreignKey != null){
             $query = "SELECT * FROM {$model->table} WHERE {$primaryKey} = {$this->$foreignKey}";
         }
-        return $model->grab($query);
+        return $model->grab($query)[0];
     }
 
     public function ownedByMany()
