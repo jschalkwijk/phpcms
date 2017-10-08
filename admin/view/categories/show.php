@@ -37,7 +37,7 @@
                 <?php
                     echo $category->title;
                     echo $category->description;
-                    echo $category->user()->firstName();
+                    echo $category->user->firstName;
                     echo $category->created_at;
                     echo $category->updated_at;
                     echo "<h3>Tree</h3>";

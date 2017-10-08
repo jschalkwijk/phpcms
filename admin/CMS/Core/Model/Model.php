@@ -126,13 +126,13 @@ abstract class Model
      * @return mixed
      */
     function __get($property) {
-        $method = "get_$property";
+        $method = "$property";
 //        print_r($method);
         if(method_exists($this, $method)  && is_callable(array($this,$method))) {
             call_user_func(
                 array($this,$method)
             );
-            echo $this->$method;
+            return $this->$method();
         }
     }
 
