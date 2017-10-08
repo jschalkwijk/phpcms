@@ -1,5 +1,5 @@
 <tr>
-    <td class="td-title"><p><?= $single->title; ?></p></td>
+    <td class="td-title"><p><a href="<?= $single->table.'/show/'.$single->get_id()?>"><?= $single->title; ?></a></p></td>
 	<td class="td-author"><p><?= $single->users_username; ?></p></td>
 	<td class="td-category"><p><?php
             if(is_callable([$single,"category"])) {

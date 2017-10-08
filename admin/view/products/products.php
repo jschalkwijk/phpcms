@@ -33,9 +33,8 @@
                                 <td class="td-title"><a href="<?= ADMIN.'products/info/'.$product->product_id.'/'.$product->name; ?>"><?= $product->name; ?></a></td>
                                 <td class="td-category"><p><?php
                                             if(is_callable([$product,"category"])) {
-                                                foreach ($product->category() as $cat){
-                                                    echo $cat->title;
-                                                }
+                                                echo $product->category()->title;
+
                                             }
                                         ?></p></td>
                                 <td class="td-date"><?= $product->price;?></td>
