@@ -24,6 +24,7 @@ trait FileActions{
 		 * $row['folder_id'] = 22 (admins contacts folder) has a parent_id of 24
 		 * This goes on until there are no folders left with a parent_id of 22 in this case.
 		*/
+        $parents = is_array($parents) ? $parents : [$parents];
 		$folders = array();
 		foreach ($parents as $parent){
 			$folders[] = $parent;

@@ -39,7 +39,7 @@
 			<form id="check-folders" method="post" action="<?= ADMIN.'folders/action' ?>">
 				<button type="button" id="check-all"><img class="glyph-small" src="<?= IMG."check.png"; ?>"/></button>
 				<table class="files-table">
-					<thead></thead><th></th><th>Name</th><th>Size(MB)</th></thead>
+					<thead></thead><th></th><th>Name</th><th>Size(MB)</th><th>Delete</th></thead>
 					<tbody>
 
 					<?php
@@ -49,6 +49,8 @@
 								<td><a href="<?= ADMIN ?>folders/<?= $folder->folder_id.'/'.$folder->name ?>"> <?= $folder->name ?></a></td>
 								<td>Size</td>
 								<input type="hidden" name="album_name" value="<?= $folder->name ?>"/>
+                                <td><a href="<?= ADMIN.$folder->table.'/destroy/',$folder->get_id()?>" class="form-action btn btn-sm btn-danger"><img
+                                                class="glyph-small" alt="destroy-item" src=""/></a></td>
 								<td><input class="checkbox" type="checkbox" name="checkbox[]" value="<?= $folder->folder_id ?>"/></td>
 							</tr>
 					<?php } ?>

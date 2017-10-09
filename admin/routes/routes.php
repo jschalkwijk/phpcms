@@ -35,7 +35,7 @@
         });
         $app->group('/categories', function ($app, $container) {
             $app->get('', [new Controller\CategoriesController, 'index']);
-            $app->get('/show/:id', [new Controller\CategoriesController, 'show']);
+            $app->get('/:id', [new Controller\CategoriesController, 'show']);
             $app->map('/edit/:id', [new Controller\CategoriesController, 'edit'],['GET','POST']);
             $app->map('/create', [new Controller\CategoriesController, 'create'],['GET','POST']);
             $app->post('/action', [new Controller\PostsController, 'action']);
@@ -92,6 +92,7 @@
             $app->map('/edit/:id', [new Controller\FoldersController, 'edit'],['GET','POST']);
             $app->get('/delete', [new Controller\FoldersController, 'delete']);
             $app->post('/action', [new Controller\FoldersController, 'action']);
+            $app->get('/destroy/:id', [new Controller\FoldersController, 'destroy']);
         });
     });
 

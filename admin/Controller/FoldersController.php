@@ -3,6 +3,7 @@
     use CMS\Models\Actions\UserActions;
     use CMS\Models\Controller\Controller;
     use CMS\Models\Files\Folder;
+    use CMS\Core\FileSystem\FileSystem;
 
     class FoldersController extends Controller
     {
@@ -37,5 +38,11 @@
         {
             $this->UserActions(new Folder());
         }
-        
+
+        public function destroy($response,$params)
+        {
+            $folder = Folder::one($params['id']);
+            (new FileSystem())->removeDirectory($folder->path);
+            Folder::deleteRecursive($params['id']);
+        }
     }
