@@ -10,9 +10,8 @@
             <div class="center">
                 <?php
                     $products = $data['products'];
-                    ($data['trashed'] === 1) ? $action = ADMIN.'products/deleted' : $action = ADMIN.'products' ;
                 ?>
-                <form method="post" action="<?= $action; ?>">
+                <form method="post" action="<?= ADMIN.'/products/action' ?>">
                     <table class="backend-table title">
                         <tr>
                             <th>Name</th>
@@ -70,7 +69,11 @@
                             </tr>
                         <?php } ?>
                     </table>
+                    <?php
+                        require('view/shared/manage-content.php');
+                    ?>
                 </form>
+
             </div>
         </div>
     </div>

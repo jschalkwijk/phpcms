@@ -44,13 +44,12 @@
 
 					<?php
 						foreach($data['folders'] as $folder) { ?>
-							<tr class="meta">
+							<tr>
 								<td><img class="glyph-medium" src="<?= ADMIN.'images/files.png' ?>"/></td>
 								<td><a href="<?= ADMIN ?>folders/<?= $folder->folder_id.'/'.$folder->name ?>"> <?= $folder->name ?></a></td>
 								<td>Size</td>
 								<input type="hidden" name="album_name" value="<?= $folder->name ?>"/>
-                                <td><a href="<?= ADMIN.$folder->table.'/destroy/',$folder->get_id()?>" class="form-action btn btn-sm btn-danger"><img
-                                                class="glyph-small" alt="destroy-item" src=""/></a></td>
+                                <td><a href="<?= ADMIN.$folder->table.'/destroy/',$folder->get_id()?>" class="btn btn-sm btn-danger">Delete</a></td>
 								<td><input class="checkbox" type="checkbox" name="checkbox[]" value="<?= $folder->folder_id ?>"/></td>
 							</tr>
 					<?php } ?>

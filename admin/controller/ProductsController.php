@@ -122,6 +122,7 @@ class ProductsController extends Controller
     public function action($response, $params)
     {
         $this->UserActions(new Product());
+        header("Location: ".ADMIN."products");
 
     }
 
