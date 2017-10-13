@@ -23,7 +23,7 @@ $product = $data['product'];
                         <input type="checkbox" name="secure" value="secure"/>
                         <label for='secure'>Secure</label>
                         <input type="hidden" name="album_name" value=""/>
-                        <input type="hidden" name="category_name" value="<?= $product->category_name; ?>"/>
+                        <input type="hidden" name="category_name" value="<?= $product->category->name; ?>"/>
                         <input type="hidden" name="album_id" value="<?= $product->folder_id; ?>"/>
                         <?php (isset($params)) ? Folder::get_albums($product->folder_id,$product->name) : Folder::get_albums(null,null) ;?>
 
@@ -105,7 +105,7 @@ $product = $data['product'];
 				$img = ['jpg','jpeg','png'];
 				$url = $_SERVER["REQUEST_URI"];
 				echo '<form method="get" action="'.$url.'">';
-				$files = File::allWhere(['album_id' => $product->album_id]);
+				$files = File::allWhere(['folder_id' => $product->album_id]);
 				FileWriter::write($files,ADMIN.'view/singleFile.php',[],$img);
 				echo '<div class="left">';
 				echo '<button type="submit" name="delete" id="delete">Delete Selected</button>';
