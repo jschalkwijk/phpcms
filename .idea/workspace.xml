@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="0a43c896-b199-4fd3-a7cd-831809ebb533" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/CMS/Core/Model/Model.php" afterPath="$PROJECT_DIR$/admin/CMS/Core/Model/Model.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/CMS/Models/Files/Folder.php" afterPath="$PROJECT_DIR$/admin/CMS/Models/Files/Folder.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/view/products/view-product.php" afterPath="$PROJECT_DIR$/admin/view/products/view-product.php" />
     </list>
     <ignored path="CMS.iws" />
@@ -139,11 +137,11 @@
       <file leaf-file-name="view-product.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/admin/view/products/view-product.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="299">
-              <caret line="115" column="14" lean-forward="true" selection-start-line="115" selection-start-column="14" selection-end-line="115" selection-end-column="14" />
+            <state relative-caret-position="503">
+              <caret line="86" column="53" lean-forward="false" selection-start-line="86" selection-start-column="53" selection-end-line="86" selection-end-column="53" />
               <folding>
                 <element signature="e#6#34#0#PHP" expanded="true" />
-                <marker date="1507904303000" expanded="true" signature="659:1025" ph="..." />
+                <marker date="1507904563000" expanded="true" signature="659:1025" ph="..." />
               </folding>
             </state>
           </provider>
@@ -556,12 +554,12 @@
       <workItem from="1506934887987" duration="3579000" />
       <workItem from="1507452770816" duration="3529000" />
       <workItem from="1507811813506" duration="1450000" />
-      <workItem from="1507901777253" duration="1997000" />
+      <workItem from="1507901777253" duration="2256000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="49719000" />
+    <option name="totallyTimeSpent" value="49978000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1085,11 +1083,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/view/products/view-product.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="115" column="14" lean-forward="true" selection-start-line="115" selection-start-column="14" selection-end-line="115" selection-end-column="14" />
+        <state relative-caret-position="503">
+          <caret line="86" column="53" lean-forward="false" selection-start-line="86" selection-start-column="53" selection-end-line="86" selection-end-column="53" />
           <folding>
             <element signature="e#6#34#0#PHP" expanded="true" />
-            <marker date="1507904303000" expanded="true" signature="659:1025" ph="..." />
+            <marker date="1507904563000" expanded="true" signature="659:1025" ph="..." />
           </folding>
         </state>
       </provider>
