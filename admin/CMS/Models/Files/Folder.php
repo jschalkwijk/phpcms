@@ -120,7 +120,7 @@ class Folder extends Model {
 
 		($folder_id != null) ? $id = trim((int)$folder_id) : $id = 0;
 		try {
-            $album_query = $dbc->prepare("SELECT folder_id,name FROM albums WHERE parent_id = ? OR folder_id = ?");
+            $album_query = $dbc->prepare("SELECT folder_id,name FROM folders WHERE parent_id = ? OR folder_id = ?");
             $album_query->execute([$id, $id]);
 			$albums_data = $album_query->fetchAll();
         } catch (\PDOException $e){
@@ -161,7 +161,7 @@ class Folder extends Model {
 		// get values from the checkboxes, these are the ID's of the Albums or subfolders.
 		$multiple = implode(",",$checkbox);
 		try {
-        $query = $dbc->query("SELECT folder_id,path,name FROM albums WHERE folder_id IN({$multiple})");
+        $query = $dbc->query("SELECT folder_id,path,name FROM folders WHERE folder_id IN({$multiple})");
         $data = $query->fetchAll();
         } catch (\PDOException $e){
             echo $e->getMessage();
@@ -194,7 +194,7 @@ class Folder extends Model {
 		*/
 		if($category_name === null){
 			try {
-                $query = $dbc->prepare("SELECT folder_id FROM albums WHERE name = ?");
+                $query = $dbc->prepare("SELECT folder_id FROM folders WHERE name = ?");
 				$query->execute([$main_folder]);
 				$row = $query->fetch();
 				$parent_id = $row['folder_id'];
@@ -202,7 +202,7 @@ class Folder extends Model {
                 echo $e->getMessage();
             }
 		} else {
-			$sql = "SELECT folder_id FROM albums WHERE name = ?";
+			$sql = "SELECT folder_id FROM folders WHERE name = ?";
 			echo $sql.'<br />';
 			try {
                 $query = $dbc->prepare($sql);
@@ -216,7 +216,7 @@ class Folder extends Model {
 	
 		if(!file_exists($file_dest)){
 			try {
-                $sql = "INSERT INTO albums(name,author,parent_id,path,user_id) VALUES(?,?,?,?,?)";
+                $sql = "INSERT INTO folders(name,author,parent_id,path,user_id) VALUES(?,?,?,?,?)";
                 echo 'file dest: '.$file_dest.'<br />';
                 echo 'thumbs dest: '.$file_dest.'/thumbs'.'<br />';
                 $query = $dbc->prepare($sql);
@@ -229,7 +229,7 @@ class Folder extends Model {
 		}
 		
 		try {
-            $query = $dbc->prepare("SELECT folder_id FROM albums WHERE name = ?");
+            $query = $dbc->prepare("SELECT folder_id FROM folders WHERE name = ?");
             $query->execute([$album_name]);
 			$row = $query->fetch();
 			$folder_id = $row['folder_id'];
@@ -248,7 +248,7 @@ class Folder extends Model {
 		$dbc = $db->connect();
 
         try {
-		    $query = $dbc->prepare("SELECT path FROM albums WHERE folder_id = ?");
+		    $query = $dbc->prepare("SELECT path FROM folders WHERE folder_id = ?");
 			$query->execute([$parent_id]);
 			$row = $query->fetch();
 			if($row['path'] === $album_name){

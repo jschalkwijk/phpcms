@@ -688,9 +688,20 @@ abstract class Model
         return $model->grab($query)[0];
     }
 
-    public function ownedByMany()
+    public function ownedByMany($relatedModel,$primaryKey = null,$foreignKey = null)
     {
-        
+        $model = new $relatedModel;
+        $model->connection = $model->database->connect();
+        $model->statement = "SELECT";
+        // print_r($this->$foreignKey);
+        // $this->$foreignKey is for example $this->category_id and gets the value
+        if($primaryKey == null && $foreignKey == null) {
+            $primaryKey = $model->primaryKey;
+            $query = "SELECT * FROM {$model->table} WHERE {$model->primaryKey} = {$this->$primaryKey}";
+        } else if($primaryKey != null && $foreignKey != null){
+            $query = "SELECT * FROM {$model->table} WHERE {$primaryKey} = {$this->$foreignKey}";
+        }
+        return $model->grab($query);
     }
 
     public function children($selfReference = null)

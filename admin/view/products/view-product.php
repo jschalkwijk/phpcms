@@ -12,7 +12,7 @@ $product = $data['product'];
 	<div class="row">
 		<div class="col-sm-6 col-lg-6 col-sm-offset-3 push-lg-3">
 			<?php if($output_form){
-                    (isset($params['id']) && isset($params[1])) ? $action = ADMIN.'products/info/'.$product->product_id.'/'.$product->name : $action = ADMIN.'products/create';
+                    (isset($params['id']) && isset($params['name'])) ? $action = ADMIN.'products/info/'.$product->product_id.'/'.$product->name : $action = ADMIN.'products/create';
                 ?>
                     <form class="small" enctype="multipart/form-data" method="post" action="<?= $action; ?>">
                         <input type="hidden" name="MAX_FILE_SIZE" value="43500000" />
@@ -23,14 +23,12 @@ $product = $data['product'];
                         <input type="checkbox" name="secure" value="secure"/>
                         <label for='secure'>Secure</label>
                         <input type="hidden" name="album_name" value=""/>
-                        <input type="hidden" name="category_name" value="<?= $product->category; ?>"/>
-                        <input type="hidden" name="album_id" value="<?= $product->album_id; ?>"/>
-                        <?php (isset($params)) ? Folder::get_albums($product->album_id,$product->name) : Folder::get_albums(null,null) ;?>
-                        <?php 	if(!isset($_GET['album'])){ ?>
-                            <input type="text" name="new_album_name" placeholder="Create New Album" maxlength="60"/>
-                        <?php 	} else { ?>
-                            <input type="text" name="new_album_name" placeholder="Create New Sub Folder" maxlength="60"/>
-                        <?php 	} ?>
+                        <input type="hidden" name="category_name" value="<?= $product->category_name; ?>"/>
+                        <input type="hidden" name="album_id" value="<?= $product->folder_id; ?>"/>
+                        <?php (isset($params)) ? Folder::get_albums($product->folder_id,$product->name) : Folder::get_albums(null,null) ;?>
+
+                            <input type="text" name="new_album_name" placeholder="Create New Folder" maxlength="60"/>
+
                         <button type="submit" name="submit_file">Add File('s)</button>
                     </form>
                 <?php
@@ -86,7 +84,7 @@ $product = $data['product'];
 				</tr>
 				<tr>
 					<td>Category</td>
-					<td><?= $product->category; ?></td
+					<td><?= $product->category->name; ?></td
 				</tr>
 				<tr>
 					<td>Description</td>
