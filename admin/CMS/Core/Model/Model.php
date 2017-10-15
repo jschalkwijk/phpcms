@@ -168,7 +168,7 @@ abstract class Model
         //echo $query;
 
 //        return  $model->select()->join()->orderBy($model->primaryKey,'DESC')->grab();
-        return  $model->select()->from();
+        return  $model->select()->from()->orderBy($model->primaryKey,'DESC')->grab();
     }
     /**
      * Returns all class objects linked to the called model where value = ....

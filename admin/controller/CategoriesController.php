@@ -87,6 +87,7 @@ class CategoriesController extends Controller
     public function edit($response,$params = null)
     {
         $category = Cat::one($params['id']);
+        $categories = Cat::all();
         $messages = [];
         $tree = $category->tree($category->children());
         if (isset($_POST['submit'])) {
@@ -109,6 +110,7 @@ class CategoriesController extends Controller
             $params,
             [
                 'category' => $category,
+                'categories' => $categories,
                 'tree' => $tree,
                 'messages' => $messages,
             ]

@@ -22,7 +22,8 @@ class Categories extends Model{
         'description',
         'type',
         'trashed',
-        'approved'
+        'approved',
+        'parent_id'
     ];
 
 	protected $hidden = [

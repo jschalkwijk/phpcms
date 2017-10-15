@@ -1,5 +1,6 @@
 <?php
 	$category = $data['category'];
+	$categories = $data['categories'];
 	if (!isset($params['id'])) {
 		echo 'There is no category selected.';
 	}
@@ -22,6 +23,21 @@
 				<input type="text" name="title" placeholder="Category" value="<?= $category->title;?>"/><br />
 				<!-- When page first loads, the hidden field will containe the set title, if the user edits the title. we can change the corresponding post categories. 			 -->
 				<input type="text" name="description" placeholder="Category Description (max 160 characters)" value="<?= $category->description; ?>"/><br />
+                <select id="parent" name="parent_id">
+                    <?php
+                        if($category->parent_id == 0){
+                        echo '<option value="0" selected>None</option>';
+                    }
+                    foreach($categories as $cat) {
+                        if($category->parent_id == $cat->get_id()){
+                           echo  '<option value="'. $cat->get_id().'" selected>'.$cat->title.'</option>';
+                        }
+                        else {
+                            echo  '<option value="'. $cat->get_id().'">'.$cat->title.'</option>';
+                        }
+                    }
+                    ?>
+                </select>
 				<p>Are you sure you want to edit the following category?</p>
 				<input type="radio" name="confirm" value="Yes" /> Yes
 				<input type="radio" name="confirm" value="No" checked="checked" /> No <br />
