@@ -45,4 +45,22 @@
             (new FileSystem())->removeDirectory($folder->path);
             Folder::deleteRecursive($params['id']);
         }
+
+        public function move($response,$params)
+        {
+            $folder = Folder::one($params['id']);
+            $destination = Folder::one($_POST['parent_id']);
+            if (isset($_POST['submit'])) {
+                if((new FileSystem())->moveDirectory($folder->path, $destination->path)){
+                    $new_path = $destination->path.'/'.$folder->name;
+
+                    $folder->patch([
+                        'parent_id' => $destination->get_id(),
+                        'path' => $new_path,
+                    ]);
+                }
+            }
+
+            header("Location: ".ADMIN.$folder->table);
+        }
     }

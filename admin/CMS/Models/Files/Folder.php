@@ -264,6 +264,11 @@ class Folder extends Model {
             return false;
         }
 	}
-//
+    // Move Directory
+    public static function move()
+    {
+
+    }
 }
+
 ?>
