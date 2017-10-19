@@ -50,11 +50,13 @@
          */
         public function moveDirectory($from, $to, $overwrite = false)
         {
-            if ($overwrite && $this->exists($to)) {
-                return rename($from, $to) === true;
-            } else {
-                return false;
-            }
+//            if ($overwrite && $this->exists($to)) {
+//                return rename($from, $to) === true;
+//            } else {
+//                return false;
+//            }
+//            die($from.' '.$to);
+            return rename($from, $to) === true;
         }
 
         /**

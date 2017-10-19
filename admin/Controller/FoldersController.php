@@ -10,15 +10,39 @@
         use UserActions;
         public function index($response,$params = null)
         {
-            $folders = Folder::all()->grab();
+            $folders = Folder::all();
             $this->view('Folders',['files/folders.php'],$params,['folders' => $folders]);
         }
         public function create(){
 
         }
-        public function edit(){
+
+        public function edit($response,$params)
+        {
+            $folder = Folder::one($params['id']);
+            $folders = Folder::all();
+            if (isset($_POST['submit'])) {
+                $folder->patch($_POST);
+
+                if($_POST['parent_id'] != $folder->get_id()){
+
+                    $destination = Folder::one($_POST['parent_id']);
+                    if((new FileSystem())->moveDirectory($_SERVER['DOCUMENT_ROOT'].'/admin/'.$folder->path, $_SERVER['DOCUMENT_ROOT'].'/admin/'.$destination->path.'/'.$folder->name,true)){
+                        $new_path = $destination->path.'/'.$folder->name;
+
+//                    $folder->patch($_POST);
+                        $folder->patch([
+                            'path' => $new_path,
+                        ]);
+                    }
+                }
+                $folder->savePatch();
+                header("Location: ".ADMIN.$folder->table.'/'.$folder->get_id().'/'.$folder->name);
+            }
+            $this->view('Folders',['files/edit-folder.php'],$params,['folder' => $folder,'folders' => $folders]);
 
         }
+
         public function show($response,$params = null)
         {
             $folder = Folder::one($params['id']);
@@ -44,23 +68,5 @@
             $folder = Folder::one($params['id']);
             (new FileSystem())->removeDirectory($folder->path);
             Folder::deleteRecursive($params['id']);
-        }
-
-        public function move($response,$params)
-        {
-            $folder = Folder::one($params['id']);
-            $destination = Folder::one($_POST['parent_id']);
-            if (isset($_POST['submit'])) {
-                if((new FileSystem())->moveDirectory($folder->path, $destination->path)){
-                    $new_path = $destination->path.'/'.$folder->name;
-
-                    $folder->patch([
-                        'parent_id' => $destination->get_id(),
-                        'path' => $new_path,
-                    ]);
-                }
-            }
-
-            header("Location: ".ADMIN.$folder->table);
         }
     }

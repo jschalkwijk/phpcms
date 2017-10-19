@@ -93,7 +93,7 @@
             $app->get('/delete', [new Controller\FoldersController, 'delete']);
             $app->post('/action', [new Controller\FoldersController, 'action']);
             $app->get('/destroy/:id', [new Controller\FoldersController, 'destroy']);
-            $app->get('/move/:id', [new Controller\FoldersController, 'move']);
+            $app->map('/edit/:id', [new Controller\FoldersController, 'edit'],['GET','POST']);
         });
     });
 
