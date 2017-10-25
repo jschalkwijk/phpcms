@@ -511,6 +511,8 @@ abstract class Model
                 $this->$key = $value;
             }
         }
+
+        return $this;
     }
 
     /**

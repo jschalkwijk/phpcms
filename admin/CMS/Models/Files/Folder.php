@@ -264,11 +264,26 @@ class Folder extends Model {
             return false;
         }
 	}
-    // Move Directory
-    public static function move()
+    // Rename Recursively
+    public function renameRecursion(Array $children,Folder $destination)
     {
+        foreach ($children as $folder) {
+            $new_path = $destination->path.'/'.$folder->name;
+            
+//                    $folder->patch($_POST);
+            $folder->patch(['path' => $new_path])->savePatch();
+            $files = File::allWhere(['folder_id' => $folder->get_id()]);
+            foreach ($files as $file) {
+                $name = $file->file_name;
+                $file->patch(['path' => $new_path.'/'.$name,'thumb_path' => $new_path.'/thumbs/'.$name])->savePatch();
+            }
 
+            if (!empty($folder->children())) {
+                $this->renameRecursion($folder->children(),$folder);
+            }
+        }
     }
+
 }
 
 ?>

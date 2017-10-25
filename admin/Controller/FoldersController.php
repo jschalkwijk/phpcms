@@ -4,6 +4,7 @@
     use CMS\Models\Controller\Controller;
     use CMS\Models\Files\Folder;
     use CMS\Core\FileSystem\FileSystem;
+    use CMS\Models\Files\File;
 
     class FoldersController extends Controller
     {
@@ -37,6 +38,12 @@
                     }
                 }
                 $folder->savePatch();
+                $files = File::allWhere(['folder_id' => $folder->get_id()]);
+                foreach ($files as $file) {
+                    $name = $file->file_name;
+                    $file->patch(['path' => $new_path.'/'.$name,'thumb_path' => $new_path.'/thumbs/'.$name])->savePatch();
+                }
+                $folder->renameRecursion($folder->children(),$folder);
                 header("Location: ".ADMIN.$folder->table.'/'.$folder->get_id().'/'.$folder->name);
             }
             $this->view('Folders',['files/edit-folder.php'],$params,['folder' => $folder,'folders' => $folders]);
