@@ -72,63 +72,27 @@ class Actions{
 		if(!empty($messages)) {
 			return ['messages' => $messages];
 		} else {
-			header('Location: ' . ADMIN . $model->table . '/deleted');
+			return header('Location: ' . ADMIN . $model->table . '/deleted');
 		}
 	}
 
-	/*// used by Main:Content, Sub(Post,Page),Main: User.
-	public static function trash($dbt,$id,$name){
-		$dbc = new DBC;
-		$id_row = substr($dbt, 0, -1).'_id';
-		$query = "UPDATE ".$dbt." SET trashed = 1,approved = 0 WHERE ".$id_row." = $id";
-		mysqli_query($dbc->connect(),$query) or die('error connecting');
-		$dbc->disconnect();
-		}
-		//header('Location: '.ADMIN.$dbt.'/info/'.$id.'/'.$name);
+    public static function move_selected(Model $model,$checkbox,$to)
+    {
+        $paths = [];
+        $thumbs = [];
 
-	public static function restore($dbt,$id,$name){
-		$dbc = new DBC;
-		$id_row = substr($dbt, 0, -1).'_id';
-		$query = "UPDATE ".$dbt." SET trashed = 0 WHERE ".$id_row." = $id";
-		mysqli_query($dbc->connect(),$query) or die('error connecting');
-		$dbc->disconnect();
-		header('Location: '.ADMIN.$dbt.'/info/'.$id.'/'.$name);
+        if($model->table == 'files'){
+            $files = File::allWhere(['file_id'=> $checkbox]);
+            foreach ($files as $file) {
+                $paths[] = $file->path;
+                $thumbs[] = $file->thumb_path;
+            };
+            $fileSys = new FileSystem();
+            $fileSys->move($paths,$to);
+            $fileSys->move($thumbs,$to.'/thumbs');
+
+            (new FileSystem())->move($paths,$to);
+        }
 	}
-
-	public static function approve($dbt,$id,$name){
-
-		$dbc = new DBC;
-		$id_row = substr($dbt, 0, -1).'_id';
-		$query = "UPDATE ".$dbt." SET approved = 1 WHERE ".$id_row." = $id";
-		mysqli_query($dbc->connect(),$query) or die('error connecting');
-		$dbc->disconnect();
-		header('Location: '.ADMIN.$dbt.'/info/'.$id.'/'.$name);
-	}
-	public static function hide($dbt,$id,$name){
-
-		$dbc = new DBC;
-		$id_row = substr($dbt, 0, -1).'_id';
-		$query = "UPDATE ".$dbt."  SET approved = 0 WHERE ".$id_row." = $id";
-		mysqli_query($dbc,$query) or die('error connecting');
-		$dbc->disconnect();
-		header('Location: '.ADMIN.$dbt.'/info/'.$id.'/'.$name);
-	}
-	public static function delete($dbt,$id,$name){
-		$dbc = new DBC;
-		$id_row = substr($dbt, 0, -1).'_id';
-		$query1 = "SELECT url FROM pages WHERE ".$id_row." = $id LIMIT 1";
-		$data = mysqli_query($dbc->connect(),$query1) or die('error connecting');
-		$row = mysqli_fetch_array($data);
-		if(unlink('../'.$row['path'])){
-			echo 'Page deleted from server.';
-		} else {
-			echo 'Oops, something went wrong, the page is not deleted from the server.';
-		}
-		// Delete the data record permanently!
-		$query2 = "DELETE FROM ".$dbt." WHERE ".$id_row." = $id LIMIT 1";
-		mysqli_query($dbc->connect(),$query2);
-		$dbc->disconnect();
-		header('Location: '.ADMIN.$dbt.'/info/'.$id.'/'.$name);
-	}*/
 }
 ?>

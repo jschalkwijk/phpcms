@@ -32,6 +32,10 @@ trait UserActions {
 			$delete = Actions::delete_selected($model,$this->checkbox);
 			return $delete;
 		}
+        if (isset($_POST['move-selected']) && $_POST['destination'] != 0) {
+		    $to = Folder::one($_POST['destination']);
+            Actions::move_selected($model,$this->checkbox,$to->path);
+        }
 //
 //		$db = new DBC;
 //		$dbc = $db->connect();

@@ -53,7 +53,7 @@
         public function show($response,$params = null)
         {
             $folder = Folder::one($params['id']);
-            $folders = $folder->children();
+            $folders = Folder::all();;
             $this->view(
                 $folder->name,
                 [

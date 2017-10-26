@@ -23,6 +23,59 @@
         }
 
         /**
+         * Move a file to a new location.
+         *
+         * @param  string|array  $path
+         * @param  string  $target
+         * @return bool
+         */
+        public function move($path, $target): bool
+        {
+            $paths = is_array($path) ? $path : [$path];
+            $success = true;
+
+            foreach ($paths as $path) {
+                if (!rename($path, $target)) {
+                    $success = false;
+                }
+            }
+
+            return $success;
+        }
+
+        /**
+         * Copy a file to a new location.
+         *
+         * @param  string  $path
+         * @param  string  $target
+         * @return bool
+         */
+        public function copy($path, $target)
+        {
+            $paths = is_array($path) ? $path : [$path];
+            $success = true;
+
+            foreach ($paths as $path) {
+                if (!copy($path, $target)) {
+                    $success = false;
+                }
+            }
+
+            return $success;
+        }
+
+        /**
+         * Determine if the given path is a directory.
+         *
+         * @param  string  $directory
+         * @return bool
+         */
+        public function isDirectory($directory)
+        {
+            return is_dir($directory);
+        }
+
+        /**
          * Create a directory.
          *
          * @param  string  $path
@@ -50,12 +103,6 @@
          */
         public function moveDirectory($from, $to, $overwrite = false)
         {
-//            if ($overwrite && $this->exists($to)) {
-//                return rename($from, $to) === true;
-//            } else {
-//                return false;
-//            }
-//            die($from.' '.$to);
             return rename($from, $to) === true;
         }
 

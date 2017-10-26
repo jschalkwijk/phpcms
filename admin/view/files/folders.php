@@ -28,8 +28,19 @@
 					?>
 					</tbody>
 				</table>
+                <span>Move to: </span>
+                <select id="parent" name="destination">
+                    <?php
+                        echo '<option value="0" selected>None</option>';
+
+                        foreach($data['folders']as $f) {
+                            echo  '<option value="'. $f->get_id().'">'.$f->name.'</option>';
+                        }
+                    ?>
+                </select>
 				<button type="submit" name="delete-selected" id="delete-selected">Delete Files</button>
 				<button type="submit" name="download_files" id="download_files">Download files</button>
+				<button type="submit" name="move_selected" id="move_selected">Move files</button>
 			</form>
 		<?php } ?>
 		</div>
@@ -43,7 +54,7 @@
 					<tbody>
 
 					<?php
-						foreach($data['folders'] as $folder) { ?>
+						foreach($folder->children() as $folder) { ?>
 							<tr>
 								<td><img class="glyph-medium" src="<?= ADMIN.'images/files.png' ?>"/></td>
 								<td><a href="<?= ADMIN ?>folders/<?= $folder->folder_id.'/'.$folder->name ?>"> <?= $folder->name ?></a></td>

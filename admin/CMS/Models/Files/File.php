@@ -74,6 +74,8 @@ class File extends Model{
 	
 	//get the trait file for the user actions.
 	use FileActions;
+
+
 }
 
 ?>
