@@ -36,30 +36,6 @@ trait UserActions {
 		    $to = Folder::one($_POST['destination']);
             Actions::move_selected($model,$this->checkbox,$to->path);
         }
-//
-//		$db = new DBC;
-//		$dbc = $db->connect();
-//
-//		(isset($_POST['id'])) ? $this->id = mysqli_real_escape_string($dbc,trim((int)$_POST['id'])) : '';
-//		(isset($_POST['name'])) ? $this->name = mysqli_real_escape_string($dbc,trim($_POST['name'])) : '';
-
-//
-//		if (isset($_POST['remove'])) {
-//			$remove = Actions::trash($dbt,$this->id,$this->name);
-//		}
-//		if (isset($_POST['approve'])) {
-//			$approve = Actions::approve($dbt,$this->id,$this->name);
-//		}
-//		if (isset($_POST['hide'])) {
-//			$hide = Actions::hide($dbt,$this->id,$this->name);
-//		}
-//		if (isset($_POST['restore'])) {
-//			$restore = Actions::restore($dbt,$this->id,$this->name);
-//		}
-//		if (isset($_POST['delete'])) {
-//			$delete = Actions::delete($dbt,$this->id,$this->name);
-//		}
-
 	}
 
 }

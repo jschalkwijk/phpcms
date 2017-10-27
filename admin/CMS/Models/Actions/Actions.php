@@ -78,20 +78,15 @@ class Actions{
 
     public static function move_selected(Model $model,$checkbox,$to)
     {
-        $paths = [];
-        $thumbs = [];
-
         if($model->table == 'files'){
             $files = File::allWhere(['file_id'=> $checkbox]);
-            foreach ($files as $file) {
-                $paths[] = $file->path;
-                $thumbs[] = $file->thumb_path;
-            };
             $fileSys = new FileSystem();
-            $fileSys->move($paths,$to);
-            $fileSys->move($thumbs,$to.'/thumbs');
-
-            (new FileSystem())->move($paths,$to);
+            foreach ($files as $file) {
+                $path = $_SERVER['DOCUMENT_ROOT'].'/admin/'.$file->path;
+                $thumb = $_SERVER['DOCUMENT_ROOT'].'/admin/'.$file->thumb_path;
+                $fileSys->move($path,$to.'/'.$file->file_name);
+                $fileSys->move($thumb,$to.'/thumbs/'.$file->thumb_name);
+            };
         }
 	}
 }

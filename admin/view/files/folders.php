@@ -40,7 +40,7 @@
                 </select>
 				<button type="submit" name="delete-selected" id="delete-selected">Delete Files</button>
 				<button type="submit" name="download_files" id="download_files">Download files</button>
-				<button type="submit" name="move_selected" id="move_selected">Move files</button>
+				<button type="submit" name="move-selected" id="move_selected">Move files</button>
 			</form>
 		<?php } ?>
 		</div>
@@ -54,7 +54,12 @@
 					<tbody>
 
 					<?php
-						foreach($folder->children() as $folder) { ?>
+                        if(isset($data['folders']) && !isset($data['folder'])){
+                            $folders = $data['folders'];
+                        } else {
+                            $folders = $folder->children();
+                        }
+						foreach($folders as $folder) { ?>
 							<tr>
 								<td><img class="glyph-medium" src="<?= ADMIN.'images/files.png' ?>"/></td>
 								<td><a href="<?= ADMIN ?>folders/<?= $folder->folder_id.'/'.$folder->name ?>"> <?= $folder->name ?></a></td>

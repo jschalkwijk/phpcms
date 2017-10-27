@@ -25,20 +25,20 @@
         /**
          * Move a file to a new location.
          *
-         * @param  string|array  $path
+         * @param  string $path
          * @param  string  $target
          * @return bool
          */
         public function move($path, $target): bool
         {
-            $paths = is_array($path) ? $path : [$path];
+//            $paths = is_array($path) ? $path : [$path];
             $success = true;
 
-            foreach ($paths as $path) {
+//            foreach ($paths as $path) {
                 if (!rename($path, $target)) {
                     $success = false;
                 }
-            }
+//            }
 
             return $success;
         }
