@@ -34,7 +34,7 @@ trait UserActions {
 		}
         if (isset($_POST['move-selected']) && $_POST['destination'] != 0) {
 		    $to = Folder::one($_POST['destination']);
-            Actions::move_selected($model,$this->checkbox,$to->path);
+            Actions::move_selected($model,$this->checkbox,$to);
         }
 	}
 

@@ -487,8 +487,7 @@ abstract class Model
     // TODO: save or savePatch or Update could iterate over the model keys, and not the value array's http://php.net/manual/en/language.oop5.iterations.php
     public function save()
     {
-      return $this->insert($this->prepareQuery())->grab();
-
+      return $this->insert($this->prepareQuery())->grab() === true;
     }
 
     /**

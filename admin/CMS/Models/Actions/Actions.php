@@ -76,7 +76,7 @@ class Actions{
 		}
 	}
 
-    public static function move_selected(Model $model,$checkbox,$to)
+    public static function move_selected(Model $model,$checkbox,Folder $folder)
     {
         if($model->table == 'files'){
             $files = File::allWhere(['file_id'=> $checkbox]);
@@ -84,8 +84,16 @@ class Actions{
             foreach ($files as $file) {
                 $path = $_SERVER['DOCUMENT_ROOT'].'/admin/'.$file->path;
                 $thumb = $_SERVER['DOCUMENT_ROOT'].'/admin/'.$file->thumb_path;
-                $fileSys->move($path,$to.'/'.$file->file_name);
-                $fileSys->move($thumb,$to.'/thumbs/'.$file->thumb_name);
+                $fileSys->move($path,$folder->path.'/'.$file->file_name);
+                $fileSys->move($thumb,$folder->path.'/thumbs/'.$file->thumb_name);
+
+                $file->patch(
+                    [
+                        'folder_id' => $folder->get_id(),
+                        'path' => $folder->path.'/'.$file->file_name,
+                        'thumb_path' => $folder->path.'/thumbs/'.$file->thumb_name
+                    ]
+                )->savePatch();
             };
         }
 	}
