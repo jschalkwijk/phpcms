@@ -3,9 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="0a43c896-b199-4fd3-a7cd-831809ebb533" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/CMS/Core/Model/Model.php" afterPath="$PROJECT_DIR$/admin/CMS/Core/Model/Model.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/CMS/Models/Actions/Actions.php" afterPath="$PROJECT_DIR$/admin/CMS/Models/Actions/Actions.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/CMS/Models/Actions/UserActions.php" afterPath="$PROJECT_DIR$/admin/CMS/Models/Actions/UserActions.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/CMS/Core/CoreController/CoreController.php" afterPath="$PROJECT_DIR$/admin/CMS/Core/CoreController/CoreController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/view/files/add-files.php" afterPath="$PROJECT_DIR$/admin/view/files/add-files.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/view/files/folders.php" afterPath="$PROJECT_DIR$/admin/view/files/folders.php" />
     </list>
     <ignored path="CMS.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -38,12 +38,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Model.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Model.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/CMS/Core/Model/Model.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="280">
-              <caret line="492" column="7" lean-forward="true" selection-start-line="492" selection-start-column="7" selection-end-line="492" selection-end-column="7" />
+            <state relative-caret-position="300">
+              <caret line="22" column="1" lean-forward="true" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
               <folding>
+                <element signature="e#33#56#0#PHP" expanded="true" />
                 <marker date="1509115419000" expanded="true" signature="13005:13131" ph="INSERT INTO ${$this-&gt;table}... " />
                 <marker date="1509115419000" expanded="true" signature="14299:14325" ph="UPDATE ${{$t... " />
                 <marker date="1509115419000" expanded="true" signature="16008:16084" ph="DELETE FROM " />
@@ -60,21 +61,22 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Folder.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/CMS/Models/Files/Folder.php">
+      <file leaf-file-name="CoreController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin/CMS/Core/CoreController/CoreController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-              <folding>
-                <element signature="e#35#70#0#PHP" expanded="true" />
-                <marker date="1508603509000" expanded="true" signature="3562:3633" ph="SELECT folde... albums" />
-                <marker date="1508603509000" expanded="true" signature="5195:5266" ph="SELECT folde... albums" />
-                <marker date="1508603509000" expanded="true" signature="6505:6549" ph="SELECT folde... albums" />
-                <marker date="1508603509000" expanded="true" signature="6769:6813" ph="SELECT folde... albums" />
-                <marker date="1508603509000" expanded="true" signature="7173:7246" ph="INSERT INTO albums... " />
-                <marker date="1508603509000" expanded="true" signature="7716:7760" ph="SELECT folde... albums" />
-                <marker date="1508603509000" expanded="true" signature="8362:8406" ph="SELECT path albums" />
-              </folding>
+            <state relative-caret-position="190">
+              <caret line="22" column="6" lean-forward="true" selection-start-line="22" selection-start-column="6" selection-end-line="22" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PostsController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin/Controller/PostsController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="602">
+              <caret line="145" column="41" lean-forward="false" selection-start-line="145" selection-start-column="8" selection-end-line="145" selection-end-column="48" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -92,8 +94,8 @@
       <file leaf-file-name="FoldersController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/Controller/FoldersController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="227">
-              <caret line="30" column="57" lean-forward="false" selection-start-line="30" selection-start-column="57" selection-end-line="30" selection-end-column="93" />
+            <state relative-caret-position="240">
+              <caret line="16" column="33" lean-forward="true" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="33" />
               <folding>
                 <element signature="e#36#71#0#PHP" expanded="true" />
               </folding>
@@ -104,19 +106,11 @@
       <file leaf-file-name="UploadsController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/Controller/UploadsController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1755">
-              <caret line="122" column="22" lean-forward="false" selection-start-line="122" selection-start-column="22" selection-end-line="122" selection-end-column="22" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="routes.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/routes/routes.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="840">
-              <caret line="60" column="97" lean-forward="false" selection-start-line="60" selection-start-column="97" selection-end-line="60" selection-end-column="97" />
-              <folding />
+            <state relative-caret-position="-53">
+              <caret line="4" column="4" lean-forward="true" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
+              <folding>
+                <element signature="e#30#65#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -131,11 +125,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="folders.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="folders.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/admin/view/files/folders.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="660">
-              <caret line="44" column="18" lean-forward="false" selection-start-line="44" selection-start-column="18" selection-end-line="44" selection-end-column="18" />
+            <state relative-caret-position="401">
+              <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="add-files.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin/view/files/add-files.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="17" column="33" lean-forward="true" selection-start-line="17" selection-start-column="33" selection-end-line="17" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -144,7 +148,7 @@
       <file leaf-file-name="Actions.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/CMS/Models/Actions/Actions.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="377">
+            <state relative-caret-position="1275">
               <caret line="89" column="29" lean-forward="true" selection-start-line="89" selection-start-column="29" selection-end-line="89" selection-end-column="29" />
               <folding>
                 <element signature="e#37#72#0#PHP" expanded="true" />
@@ -157,7 +161,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>request</find>
       <find>attributes</find>
       <find>title</find>
       <find>s</find>
@@ -187,6 +190,7 @@
       <find>update(</find>
       <find>patch</find>
       <find>$to</find>
+      <find>extract($data);</find>
     </findStrings>
     <replaceStrings>
       <replace>hash</replace>
@@ -218,7 +222,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/admin/Controller/ProfileController.php" />
         <option value="$PROJECT_DIR$/admin/Controller/TagsController.php" />
         <option value="$PROJECT_DIR$/admin/view/contacts/edit-contact.php" />
         <option value="$PROJECT_DIR$/admin/view/pages/add-edit-page.php" />
@@ -231,7 +234,6 @@
         <option value="$PROJECT_DIR$/admin/view/files/albums.php" />
         <option value="$PROJECT_DIR$/admin/CMS/Models/Files/Folders.php" />
         <option value="$PROJECT_DIR$/admin/Controller/FilesController.php" />
-        <option value="$PROJECT_DIR$/admin/view/files/add-files.php" />
         <option value="$PROJECT_DIR$/vendor/intervention/image/src/Intervention/Image/ImageManager.php" />
         <option value="$PROJECT_DIR$/admin/CMS/Models/Actions/RUDActions.php" />
         <option value="$PROJECT_DIR$/admin/view/files/single-file.php" />
@@ -264,11 +266,13 @@
         <option value="$PROJECT_DIR$/admin/CMS/Models/Files/File.php" />
         <option value="$PROJECT_DIR$/admin/Controller/FoldersController.php" />
         <option value="$PROJECT_DIR$/admin/Controller/UploadsController.php" />
-        <option value="$PROJECT_DIR$/admin/view/files/folders.php" />
         <option value="$PROJECT_DIR$/admin/CMS/Core/FileSystem/FileSystem.php" />
         <option value="$PROJECT_DIR$/admin/CMS/Models/Actions/UserActions.php" />
         <option value="$PROJECT_DIR$/admin/CMS/Models/Actions/Actions.php" />
         <option value="$PROJECT_DIR$/admin/CMS/Core/Model/Model.php" />
+        <option value="$PROJECT_DIR$/admin/CMS/Core/CoreController/CoreController.php" />
+        <option value="$PROJECT_DIR$/admin/view/files/add-files.php" />
+        <option value="$PROJECT_DIR$/admin/view/files/folders.php" />
       </list>
     </option>
   </component>
@@ -323,6 +327,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -367,10 +372,75 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CMS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CMS" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="admin" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CMS" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CMS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CMS" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="admin" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CMS" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Core" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CMS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CMS" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="admin" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CMS" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Core" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CoreController" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -378,7 +448,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/admin/CMS/models" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="prop_add_unversioned_files" value="true" />
-    <property name="SearchEverywhereHistoryKey" value="uploa&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/Controller/UploadsController.php&#10;edit-f&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/files/edit-folder.php&#10;routes&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/routes/routes.php&#10;fol&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/Controller/FoldersController.php&#10;edit&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/files/edit-folder.php&#10;Folders&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/Controller/FoldersController.php&#10;actio&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Models/Actions/Actions.php&#10;Upl&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/Controller/UploadsController.php&#10;single-f&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/files/single-file.php&#10;Post&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/Controller/PostsController.php&#10;Fil&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Models/Files/File.php&#10;Cat&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Models/Categories/Categories.php&#10;categ&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/Controller/CategoriesController.php&#10;Folder&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Models/Files/Folder.php&#10;Model&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Core/Model/Model.php&#10;cate&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/Controller/CategoriesController.php&#10;rou&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/routes/routes.php&#10;post&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/Controller/PostsController.php&#10;edit-c&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/categories/edit-categories.php&#10;Fold&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Models/Files/Folder.php&#10;folder&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/files/folders.php&#10;cat&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/categories/categories.php&#10;products&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/products/products.php&#10;Productscontroller&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/Controller/ProductsController.php&#10;Fol&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Models/Files/Folder.php&#10;Upload&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Models/Files/FileUpload.php&#10;Uploads&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/Controller/UploadsController.php&#10;products.php&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/products/products.php&#10;content-&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/shared/content-table.php&#10;posts&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/Controller/PostsController.php&#10;Users&#9;null&#9;null&#10;edit-&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/categories/edit-categories.php&#10;uplo&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/Controller/UploadsController.php&#10;Mode&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Core/Model/Model.php&#10;user&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/users/users.php&#10;COnta&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/Controller/ContactsController.php&#10;Contact&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Models/Contacts/Contact.php&#10;manag&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/shared/manage-content.php&#10;con&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/shared/content-table.php&#10;contacts&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/contacts/contacts.php&#10;users&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/users/users.php&#10;conten&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/shared/content-table.php&#10;posts]&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/Controller/PostsController.php&#10;Produ&#9;null&#9;null&#10;Categor&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Models/Categories/Categories.php&#10;Prod&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Models/Products/Product.php&#10;pos&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/Controller/PostsController.php&#10;content&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/shared/content-table.php&#10;folders&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/files/folders.php&#10;route&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/routes/routes.php" />
+    <property name="SearchEverywhereHistoryKey" value="add-fi&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/files/add-files.php&#10;post&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/Controller/PostsController.php&#10;uploa&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/Controller/UploadsController.php&#10;edit-f&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/files/edit-folder.php&#10;routes&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/routes/routes.php&#10;fol&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/Controller/FoldersController.php&#10;edit&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/files/edit-folder.php&#10;Folders&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/Controller/FoldersController.php&#10;actio&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Models/Actions/Actions.php&#10;Upl&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/Controller/UploadsController.php&#10;single-f&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/files/single-file.php&#10;Post&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/Controller/PostsController.php&#10;Fil&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Models/Files/File.php&#10;Cat&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Models/Categories/Categories.php&#10;categ&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/Controller/CategoriesController.php&#10;Folder&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Models/Files/Folder.php&#10;Model&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Core/Model/Model.php&#10;cate&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/Controller/CategoriesController.php&#10;rou&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/routes/routes.php&#10;edit-c&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/categories/edit-categories.php&#10;Fold&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Models/Files/Folder.php&#10;folder&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/files/folders.php&#10;cat&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/categories/categories.php&#10;products&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/products/products.php&#10;Productscontroller&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/Controller/ProductsController.php&#10;Fol&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Models/Files/Folder.php&#10;Upload&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Models/Files/FileUpload.php&#10;Uploads&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/Controller/UploadsController.php&#10;products.php&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/products/products.php&#10;content-&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/shared/content-table.php&#10;posts&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/Controller/PostsController.php&#10;Users&#9;null&#9;null&#10;edit-&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/categories/edit-categories.php&#10;uplo&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/Controller/UploadsController.php&#10;Mode&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Core/Model/Model.php&#10;user&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/users/users.php&#10;COnta&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/Controller/ContactsController.php&#10;Contact&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Models/Contacts/Contact.php&#10;manag&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/shared/manage-content.php&#10;con&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/shared/content-table.php&#10;contacts&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/contacts/contacts.php&#10;users&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/users/users.php&#10;conten&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/shared/content-table.php&#10;posts]&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/Controller/PostsController.php&#10;Produ&#9;null&#9;null&#10;Categor&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Models/Categories/Categories.php&#10;Prod&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Models/Products/Product.php&#10;pos&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/Controller/PostsController.php&#10;content&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/shared/content-table.php&#10;folders&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/files/folders.php" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
   </component>
   <component name="RecentsManager">
@@ -528,12 +598,13 @@
       <workItem from="1508751767479" duration="1107000" />
       <workItem from="1509033479786" duration="3502000" />
       <workItem from="1509097571485" duration="2826000" />
-      <workItem from="1509114839151" duration="543000" />
+      <workItem from="1509114839151" duration="706000" />
+      <workItem from="1509174514299" duration="1978000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="75099000" />
+    <option name="totallyTimeSpent" value="77240000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -548,7 +619,7 @@
     <frame x="68" y="23" width="1852" height="1057" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3127072" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3160221" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297587" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29430053" sideWeight="0.50607735" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294702" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -635,20 +706,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/admin/CMS/Core/CoreController/CoreController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="20" lean-forward="false" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/CMS/Router/Response.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/admin/CMS/Router/Exceptions/MethodNotAllowedException.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -882,13 +939,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/Controller/PostsController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2100">
-          <caret line="145" column="41" lean-forward="false" selection-start-line="145" selection-start-column="8" selection-end-line="145" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/admin/Controller/CategoriesController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="602">
@@ -968,37 +1018,21 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/Controller/UploadsController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1755">
-          <caret line="122" column="22" lean-forward="false" selection-start-line="122" selection-start-column="22" selection-end-line="122" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/view/files/folders.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="660">
-          <caret line="44" column="18" lean-forward="false" selection-start-line="44" selection-start-column="18" selection-end-line="44" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/Controller/FoldersController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
-          <caret line="30" column="57" lean-forward="false" selection-start-line="30" selection-start-column="57" selection-end-line="30" selection-end-column="93" />
-          <folding>
-            <element signature="e#36#71#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/admin/CMS/Models/Actions/UserActions.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="525">
           <caret line="36" column="61" lean-forward="false" selection-start-line="36" selection-start-column="61" selection-end-line="36" selection-end-column="61" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/CMS/Models/Actions/Actions.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1275">
+          <caret line="89" column="29" lean-forward="true" selection-start-line="89" selection-start-column="29" selection-end-line="89" selection-end-column="29" />
+          <folding>
+            <element signature="e#37#72#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1010,21 +1044,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/CMS/Models/Actions/Actions.php">
+    <entry file="file://$PROJECT_DIR$/admin/Controller/PostsController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="89" column="29" lean-forward="true" selection-start-line="89" selection-start-column="29" selection-end-line="89" selection-end-column="29" />
-          <folding>
-            <element signature="e#37#72#0#PHP" expanded="true" />
-          </folding>
+        <state relative-caret-position="602">
+          <caret line="145" column="41" lean-forward="false" selection-start-line="145" selection-start-column="8" selection-end-line="145" selection-end-column="48" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/CMS/Core/Model/Model.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="492" column="7" lean-forward="true" selection-start-line="492" selection-start-column="7" selection-end-line="492" selection-end-column="7" />
+        <state relative-caret-position="300">
+          <caret line="22" column="1" lean-forward="true" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
           <folding>
+            <element signature="e#33#56#0#PHP" expanded="true" />
             <marker date="1509115419000" expanded="true" signature="13005:13131" ph="INSERT INTO ${$this-&gt;table}... " />
             <marker date="1509115419000" expanded="true" signature="14299:14325" ph="UPDATE ${{$t... " />
             <marker date="1509115419000" expanded="true" signature="16008:16084" ph="DELETE FROM " />
@@ -1037,6 +1070,50 @@
             <marker date="1509115419000" expanded="true" signature="24370:24538" ph="SELECT * FRO... $" />
             <marker date="1509115419000" expanded="true" signature="25102:25371" ph="SELECT * FRO... $" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/CMS/Core/CoreController/CoreController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="22" column="6" lean-forward="true" selection-start-line="22" selection-start-column="6" selection-end-line="22" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/Controller/FoldersController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="33" lean-forward="true" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="33" />
+          <folding>
+            <element signature="e#36#71#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/Controller/UploadsController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-53">
+          <caret line="4" column="4" lean-forward="true" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
+          <folding>
+            <element signature="e#30#65#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/view/files/add-files.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="33" lean-forward="true" selection-start-line="17" selection-start-column="33" selection-end-line="17" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/view/files/folders.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="401">
+          <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>

@@ -7,8 +7,8 @@
 	<div class="row">
 		<div class="col-lg-6 col-lg-6 push-lg-3 col-lg-offset-3">
 		<?php
-			if(isset($data['folder'])){
-				$folder = $data['folder'];
+			if(isset($folder)){
+//				$folder = $data['folder'];
 				echo '<h1>' . $folder->name . '</h1>';
 				$doc = ['txt', 'doc', 'docx', 'odt'];
 				$img = ['jpg', 'jpeg', 'png'];
@@ -33,7 +33,7 @@
                     <?php
                         echo '<option value="0" selected>None</option>';
 
-                        foreach($data['folders']as $f) {
+                        foreach($folders as $f) {
                             echo  '<option value="'. $f->get_id().'">'.$f->name.'</option>';
                         }
                     ?>
