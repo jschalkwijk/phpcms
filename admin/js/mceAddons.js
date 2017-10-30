@@ -66,7 +66,7 @@ function handleImagesAdding(){
                 // after changing the inner html of the searh results, call the mce init function again
                 mce();
             };
-
+            console.log("Hello");
             xhttp.open("POST", "/admin/view/shared/include-files-tinymce.php", true);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhttp.send("search-file=submit&search=" + searchTerm);
