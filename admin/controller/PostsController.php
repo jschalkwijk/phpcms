@@ -114,8 +114,6 @@ class PostsController extends Controller
                 $post->patch(['category_id' => $category->lastInsertId]);
             }
             $post->user_id = $this->currentUser;
-            print_r($post->request);
-            //update model but do not save it yet before check.
 
             if (!empty($post->title) && !empty($post->content) && !empty($post->category_id)) {
                 $post->savePatch();

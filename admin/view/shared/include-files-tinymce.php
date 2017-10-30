@@ -1,11 +1,11 @@
-<?php include_once "../../config.php"; ?>
+<?php require $_SERVER['DOCUMENT_ROOT']."/config.php"; ?>
 <div class="xsmall">
 	<div class="container search">
 		<input type="text" id="search" name="search" placeholder="Search files"/>
 		<button type="submit" id="search-file" name="search-file">Search</button>
 	</div><br />
 	<?php
-	$dbc = mysqli_connect(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME) or die('Error connecting to server');
+	$dbc = mysqli_connect('localhost','root','root','nerdcms_db') or die('Error connecting to server');
 	$output = '';
 	if(isset($_POST['search-file'])) {
 		$table = 'files';
@@ -21,7 +21,7 @@
 			}
 		}
 //		$query = "SELECT * FROM files WHERE " . implode(' AND ', $searchTermBits);
-		$query = "SELECT files.*, albums.path AS albums_path FROM files JOIN albums ON files.album_id = albums.album_id WHERE " . implode(' AND ', $searchTermBits);
+		$query = "SELECT files.*, folders.path AS folders_path FROM files JOIN folders ON files.folder_id = folders.folder_id WHERE " . implode(' AND ', $searchTermBits);
 		$result = mysqli_query($dbc, $query) or die('Error connecting to database');
 	?>
 		<div id="add-image" class="container medium">
@@ -30,10 +30,10 @@
 		while ($row = mysqli_fetch_assoc($result)) {
 	?>
 			<div class="media">
-				<input class="checkbox left" type="checkbox" name="checkbox[]" value="<?php echo ADMIN.$row['albums_path']."/thumbs/".$row['thumb_name']."#".ADMIN.$row['albums_path']."/".$row['name'];?>"/>
+				<input class="checkbox left" type="checkbox" name="checkbox[]" value="<?php echo '/admin/'.$row['folders_path']."/thumbs/".$row['thumb_name']."#".'/admin/'.$row['folders_path']."/".$row['name'];?>"/>
 <!--					<div class="left center">--><?php //echo $row['name'];?><!--</div>-->
 				<a class="image_link" href="#">
-					<img class="files" src="<?php echo ADMIN.$row['albums_path']."/thumbs/".$row['thumb_name'];?>" name="<?php echo ADMIN.$row['path'];?>"/>
+					<img class="files" src="<?php echo '/admin/'.$row['folders_path']."/thumbs/".$row['thumb_name'];?>" name="<?php echo '/admin/'.$row['path'];?>"/>
 				</a>
 
 

@@ -1,6 +1,3 @@
-<?php
-use CMS\Models\Files\Folder;
-?>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-6 offset-md-3 col-lg-6 offset-lg-3">

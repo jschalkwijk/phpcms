@@ -19,7 +19,9 @@
 <script type="text/javascript" src="<?= JS."preview.js";?>"></script>
 
 <?php
-
+    foreach ($data['js'] as $script){
+        echo '<script type="text/javascript" src="'.$script.'"></script>';
+    }
 	$post = $data['post'];
 	(isset($data['output_form'])) ? $output_form = $data['output_form'] : $output_form = true;
 ?>
@@ -42,9 +44,9 @@
 			?>
 			<form id="addpost-form" class="large" action="<?= $action; ?>" method="post">
 				<input type="text" name="title" placeholder="Title"
-					   value="<?= $post->keep($post->title); ?>"><br/>
+					   value="<?= $post->title; ?>"><br/>
 				<input type="text" name="description" placeholder="Post Description (max 160 characters)"
-					   value="<?= $post->keep($post->description) ?>"/><br/>
+					   value="<?= $post->description ?>"/><br/>
 				<label for="select">Category</label>
 				<select id="categories" name="category_id">
 					<option name="none" value="None">None</option>
@@ -63,7 +65,7 @@
 					?>
 				</select>
 				<input type="text" name="category" placeholder="Category"
-					   value="<?= $post->keep($post->category); ?>"/><br/>
+					   value=""/><br/>
 				<input type="hidden" name="cat_type" value="post"/><br/>
 				<textarea type="text" name="content"
 						  placeholder="Content"><?= $post->keep($post->content); ?></textarea><br/>
@@ -79,7 +81,7 @@
         </div>
 		<div id="return" class="col-sm-6 col-lg-6">
 			<?php
-				require_once('view/shared/include-files-tinymce.php');
+				require_once('./view/shared/include-files-tinymce.php');
 			?>
 		</div>
 
