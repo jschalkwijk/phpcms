@@ -12,9 +12,9 @@ class DashboardController extends Controller {
 	use UserActions;
 
 	public function index($response,$params = null){
-		$posts = Post::all()->grab();
-		$pages = Page::all()->grab();
-		$users = Users::all()->grab();
+		$posts = Post::all();
+		$pages = Page::all();
+		$users = Users::all();
 		$views = ['actions' => 'shared/manage-content.php'];
 		if(!empty($_POST)) {
 			$this->UserActions($_POST['dbt']);
