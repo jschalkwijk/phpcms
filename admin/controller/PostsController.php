@@ -113,9 +113,10 @@ class PostsController extends Controller
 
                 $post->patch(['category_id' => $category->lastInsertId]);
             }
-            $post->user_id = $this->currentUser;
+
 
             if (!empty($post->title) && !empty($post->content) && !empty($post->category_id)) {
+                $post->user_id = $this->currentUser;
                 $post->savePatch();
                 header("Location: ".ADMIN."posts");
             } else {
