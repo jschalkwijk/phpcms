@@ -49,6 +49,17 @@
             $app->map('/edit/:id', [new Controller\TagsController, 'edit'],['GET','POST']);
             $app->map('/create', [new Controller\TagsController, 'create'],['GET','POST']);
         });
+        $app->group('/comments', function ($app, $container) {
+            $app->map('', [new Controller\CommentsController, 'index'],['GET','POST']);
+            $app->map('/deleted', [new Controller\CommentsController, 'deleted'],['GET','POST']);
+            $app->map('/edit/:id', [new Controller\CommentsController, 'edit'],['GET','POST']);
+            $app->map('/create', [new Controller\CommentsController, 'create'],['GET','POST']);
+            $app->post('/action', [new Controller\CommentsController, 'action']);
+            $app->get('/approve/:id', [new Controller\CommentsController, 'approve']);
+            $app->get('/hide/:id', [new Controller\CommentsController, 'hide']);
+            $app->get('/trash/:id', [new Controller\CommentsController, 'trash']);
+            $app->get('/destroy/:id', [new Controller\CommentsController, 'destroy']);
+        });
         $app->group('/pages', function ($app, $container) {
             $app->get('', [new Controller\PagesController, 'index']);
             $app->map('/edit/:id', [new Controller\PagesController(), 'edit'],['GET','POST']);
