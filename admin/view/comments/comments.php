@@ -34,7 +34,11 @@
                                 <td><?= $c->title ?></td>
                                 <td class="td-category"><?= $c->user->username?></td>
                                 <td class="td-category"><?= $c->post->title ?></td>
-                                <td>0</td>
+                                <td> <?php
+                                        echo count($c->replies());
+
+                                    ?>
+                                </td>
                                 <td class="td-date"><p><?= $c->date; ?></p></td>
                                 <?php
                                     if ($_SESSION['rights'] == 'Admin' || $_SESSION['rights'] == 'Content Manager') { ?>

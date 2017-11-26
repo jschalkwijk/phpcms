@@ -1,17 +1,17 @@
 <?php
-    namespace CMS\Models\Comments;
+    namespace CMS\Models\Comments\Replies;
 
     use CMS\Core\Model\Model;
 
-    class Comment extends Model {
+    class Reply extends Model {
 
-        public $primaryKey = 'comment_id';
+        public $primaryKey = 'reply_id';
 
-        public $table = 'comments';
+        public $table = 'replies';
 
         protected $relations = [
             'users' => 'user_id',
-            'posts' => 'post_id',
+            'comments' => 'comment_id',
         ];
 
         protected $allowed = [
@@ -26,14 +26,9 @@
         ];
         # Relations
 
-        public function post()
+        public function comment()
         {
-            return $this->ownedBy('CMS\Models\Posts\Post');
-        }
-
-        public function replies()
-        {
-            return $this->owns('CMS\Models\Comments\Replies\Reply');
+            return $this->ownedBy('CMS\Models\Posts\Comment');
         }
 
         public function user()
@@ -46,10 +41,10 @@
         }
 
         public function get_id(){
-            return $this->comment_id;
+            return $this->reply_id;
         }
         public function setID($id){
-            $this->comment_id = $id;
+            $this->reply_id = $id;
         }
         public function getTable(){
             return $this->table;

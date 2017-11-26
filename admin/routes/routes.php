@@ -10,7 +10,7 @@
     *
     */
     $app->get('/', [new Controller\DashboardController, 'index']);
-    $app->group('/admin',function($app) {
+    $app->group('/admin',function($app,$container) {
         $app->group('/users', function ($app, $container) {
             $app->map('', [new Controller\UsersController, 'index'],['GET','POST']);
             $app->map('/deleted', [new Controller\UsersController, 'deleted'],['GET','POST']);
@@ -49,6 +49,7 @@
             $app->map('/edit/:id', [new Controller\TagsController, 'edit'],['GET','POST']);
             $app->map('/create', [new Controller\TagsController, 'create'],['GET','POST']);
         });
+
         $app->group('/comments', function ($app, $container) {
             $app->map('', [new Controller\CommentsController, 'index'],['GET','POST']);
             $app->map('/deleted', [new Controller\CommentsController, 'deleted'],['GET','POST']);
@@ -59,6 +60,16 @@
             $app->get('/hide/:id', [new Controller\CommentsController, 'hide']);
             $app->get('/trash/:id', [new Controller\CommentsController, 'trash']);
             $app->get('/destroy/:id', [new Controller\CommentsController, 'destroy']);
+        });
+        $app->group('/replies', function ($app, $container) {
+            $app->map('', [new Controller\RepliesController, 'index'],['GET','POST']);
+            $app->map('/edit/:id', [new Controller\RepliesController, 'edit'],['GET','POST']);
+            $app->map('/create', [new Controller\RepliesController, 'create'],['GET','POST']);
+            $app->post('/action', [new Controller\RepliesController, 'action']);
+            $app->get('/approve/:id', [new Controller\RepliesController, 'approve']);
+            $app->get('/hide/:id', [new Controller\RepliesController, 'hide']);
+            $app->get('/trash/:id', [new Controller\RepliesController, 'trash']);
+            $app->get('/destroy/:id', [new Controller\RepliesController, 'destroy']);
         });
         $app->group('/pages', function ($app, $container) {
             $app->get('', [new Controller\PagesController, 'index']);
