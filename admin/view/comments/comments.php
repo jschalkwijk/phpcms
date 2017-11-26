@@ -35,8 +35,7 @@
                                 <td class="td-category"><?= $c->user->username?></td>
                                 <td class="td-category"><?= $c->post->title ?></td>
                                 <td> <?php
-                                        echo count($c->replies());
-
+                                        echo count($c->replies);
                                     ?>
                                 </td>
                                 <td class="td-date"><p><?= $c->date; ?></p></td>

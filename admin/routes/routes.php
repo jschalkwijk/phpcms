@@ -25,6 +25,7 @@
         $app->group('/posts', function ($app, $container) {
             $app->map('', [new Controller\PostsController, 'index'],['GET','POST']);
             $app->map('/deleted', [new Controller\PostsController, 'deleted'],['GET','POST']);
+            $app->get('/:id',[new Controller\PostsController, 'show']);
             $app->map('/edit/:id', [new Controller\PostsController, 'edit'],['GET','POST']);
             $app->map('/create', [new Controller\PostsController, 'create'],['GET','POST']);
             $app->post('/action', [new Controller\PostsController, 'action']);

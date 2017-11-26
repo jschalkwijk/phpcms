@@ -1,4 +1,3 @@
-window.onload = init;
 
 function init() {
 	rsMenu();
@@ -67,4 +66,6 @@ function currentPage() {
 }
 
 // functie verbeteren door de css ook door javascript te laten creëren.
+
+addLoadEvent(init());
 

@@ -129,10 +129,10 @@ abstract class Model
         $method = "$property";
 //        print_r($method);
         if(method_exists($this, $method)  && is_callable(array($this,$method))) {
-//            return call_user_func(
-//                array($this,$method)
-//            );
-            return $this->$method();
+            return call_user_func(
+                array($this,$method)
+            );
+//            return $this->$method();
         }
     }
 
@@ -646,8 +646,8 @@ abstract class Model
 
     /**
      * @param $relatedModel
-     * @param null $primaryKey
-     * @param null $foreignKey
+     * @param string $primaryKey
+     * @param string $foreignKey
      * @return mixed
      */
     public function owns($relatedModel,$primaryKey = null,$foreignKey = null)

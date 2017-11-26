@@ -44,6 +44,19 @@ class PostsController extends Controller
         $this->view('Deleted Posts', ['posts/posts.php'], $params, ['posts' => $posts, 'view' => $view, 'trashed' => 1, 'js' => [JS . 'checkAll.js']]);
     }
     //
+    public function show($response,$params = null)
+    {
+        $post = Post::one($params['id']);
+
+        $this->view(
+            $post->title,
+            ['posts/show.php'],
+            $params,
+            [
+                'post' => $post,
+            ]
+        );
+    }
     public function create($response,$params = null)
     {
         $scripts = [

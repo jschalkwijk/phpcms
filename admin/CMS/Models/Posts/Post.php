@@ -2,8 +2,10 @@
 	namespace CMS\Models\Posts;
 
 	use CMS\Core\Model\Model;
+    use CMS\Models\Comments\Comment;
+    use CMS\Models\Users\Users;
 
-	class Post extends Model {
+    class Post extends Model {
 
 		public $primaryKey = 'post_id';
 
@@ -44,6 +46,16 @@
 		{
 //			return $this->grab("SELECT * FROM taggables RIGHT JOIN tags ON taggables.tag_id = tags.tag_id WHERE taggable_type = 'post' AND taggable_id = $this->post_id ORDER BY tags.tag_id DESC");
         	return $this->morpheus('CMS\Models\Tag\Tag');
+		}
+
+        public function user()
+        {
+            return $this->ownedBy( Users::class);
+		}
+
+        public function comments()
+        {
+            return $this->owns(Comment::class);
 		}
         ## end
 
