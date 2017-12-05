@@ -66,12 +66,18 @@
                             <?php foreach($post->comments as $key => $c) { ?>
                                 <li class="comment">
                                     <a class="float-left" >
-                                        <img class="comment-object rounded-circle" src="<?= $c->user->img_path?>" alt="profile-picture">
+                                        <img class="comment-object rounded-circle" src="<?= 'http://cms:8888/admin/'.$c->user->img_path?>" alt="profile-picture">
                                     </a>
                                     <div class="comment-body comment-<?= $c->comment_id?>">
                                         <h4 class="comment-heading text-uppercase reviews"><?= $c->user->username?></h4>
                                         <ul class="comment-date text-uppercase reviews list-inline">
-                                            <li class="list-inline-item dd"><?= $c->created_at?></li>
+                                            <li class="list-inline-item"><?= $c->date?></li>
+                                            <li class="list-inline-item">
+                                                <?php
+                                                    $single = $c;
+                                                    require 'view/shared/comment-action.php';
+                                                ?>
+                                            </li>
                                         </ul>
                                         <p class="comment-text">
                                             <?=  $c->content ?>
@@ -92,12 +98,18 @@
                                                 <?php foreach($c->replies as $r) { ?>
                                                     <li class="comment comment-replied">
                                                         <a class="float-left" >
-                                                            <img class="comment-object rounded-circle" src="<?= $r->user->img_path; ?>" alt="profile">
+                                                            <img class="comment-object rounded-circle" src="<?= 'http://cms:8888/admin/'.$r->user->img_path; ?>" alt="profile">
                                                         </a>
                                                         <div class="comment-body">
                                                             <h4 class="comment-heading text-uppercase reviews"><span class="glyphicon glyphicon-share-alt"></span> <?= $r->user->username?></h4>
                                                             <ul class="comment-date text-uppercase reviews list-inline">
-                                                                <li class="list-inline-item dd"><?= $r->created_at?></li>
+                                                                <li class="list-inline-item"><?= $r->date?></li>
+                                                                <li class="list-inline-item">
+                                                                    <?php
+                                                                        $single = $r;
+                                                                        require 'view/shared/comment-action.php';
+                                                                    ?>
+                                                                </li>
                                                             </ul>
                                                             <p class="comment-text">
                                                                 <?=  $r->content ?>

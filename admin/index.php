@@ -13,7 +13,7 @@
 	require_once('config.php');
 	use CMS\Core\Auth\Auth;
 	Auth::authenticate();
-//	ob_start();
+	ob_start();
 	/*
 	|--------------------------------------------------------------------------
 	| Register The Auto Loader
@@ -45,7 +45,7 @@
 	*/
 	$app->run();
 
-//	ob_end_flush();
+	ob_end_flush();
 
 
 

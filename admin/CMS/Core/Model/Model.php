@@ -577,7 +577,7 @@ abstract class Model
                     $columns[] = $column;
                     $this->values[] = $this->encrypt($value);
                 } else {
-                    echo "<p style='color: red;'>{$column} not set as allowed/encrypted or hidden attribute</p>";
+//                    echo "<p style='color: red;'>{$column} not set as allowed/encrypted or hidden attribute</p>";
                 }
             }
         }

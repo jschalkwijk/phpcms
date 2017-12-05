@@ -42,7 +42,7 @@
                         foreach($pages as $single){
                             require 'view/shared/content-table.php';
                         }
-                        require($data['view']['actions']);
+                        require('view/shared/manage-content.php');
                     ?>
                     <input type="hidden" name="dbt" value="pages"/>
                 </form>
@@ -63,7 +63,7 @@
                                 require 'view/users/user_table.php';
                             }
                             require('view/shared/manage-content.php');
-                        ?>
+                    ?>
                         <input type="hidden" name="dbt" value="login"/>
                     </form>
             </table>

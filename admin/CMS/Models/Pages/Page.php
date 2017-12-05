@@ -3,12 +3,10 @@ namespace CMS\Models\Pages;
 
 use CMS\Models\DBC\DBC;
 use CMS\Core\Model\Model;
+use CMS\Models\Users\Users;
 
 class Page extends Model{
-//    function __construct() {
-//        parent::__construct();
-//        print "In SubClass constructor\n";
-//    }
+
 	protected $primaryKey = 'page_id';
 
 	public $table = 'pages';
@@ -47,7 +45,12 @@ class Page extends Model{
 		return $this->category_type;
 	}
 
-	public function add(){
+    public function user()
+    {
+        return $this->ownedBy( Users::class);
+    }
+
+    public function add(){
 		$this->connection = $this->database->connect();
 		$dbc = $this->connection;
 

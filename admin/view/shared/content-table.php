@@ -1,12 +1,12 @@
 <tr>
-    <td class="td-title"><p><a href="<?= $single->table.'/'.$single->get_id()?>"><?= $single->title; ?></a></p></td>
-	<td class="td-author"><p><?= $single->users_username; ?></p></td>
-	<td class="td-category"><p><?php
+    <td class="td-title"><a href="/admin/<?= $single->table.'/'.$single->get_id()?>"><?= $single->title; ?></a></td>
+	<td class="td-author"><a href="/admin/<?= $single->user->table?>/<?= $single->user->get_id()?>"><?= $single->users_username; ?></a></td>
+	<td class="td-category"><?php
             if(is_callable([$single,"category"])) {
-                echo $single->category()->title;
+                echo "<a href='/admin/{$single->category->table}/{$single->category->get_id()}'>{$single->category->title}</a>";
             }
-//            echo $single->categories_title;
-            ?></p></td>
+            ?>
+    </td>
 	<td class="td-category">
 		<p>
 	<?php
@@ -19,31 +19,6 @@
 		</p>
 	</td>
 	<td class="td-date"><p><?= $single->date; ?></p></td>
-    <?php
-        if ($_SESSION['rights'] == 'Admin' || $_SESSION['rights'] == 'Content Manager') { ?>
-            <td class="td-btn">
-                <a class="btn btn-sm edit-link" href="<?= $single->table . '/edit/' . $single->get_id(); ?>"><img class="glyph-small"
-                                                                                     alt="edit-item"
-                                                                                     src="<?= IMG . 'edit.png'; ?>"/></a>
-            </td>
-            <?php if ($single->approved == 0) { ?>
-                <td><a class="btn btn-sm btn-info" href="/admin/posts/approve/<?= $single->get_id() ?>"><img
-                                class="glyph-small" alt="show-item"
-                                src="<?= IMG . 'hide.png' ?>"/></a></td>
-            <?php } else if ($single->approved == 1) { ?>
-                <td><a class="btn btn-sm btn-success" href="/admin/posts/hide/<?= $single->get_id() ?>"><img
-                                class="glyph-small" alt="hide-item"
-                                src="<?= IMG . 'show.png' ?>"/></a></td>
-            <?php }
-            if ($single->trashed == 0) { ?>
-                <td><a href="/admin/posts/trash/<?= $single->get_id() ?>" class="btn btn-sm btn-danger"><img
-                                class="glyph-small" alt="trash-item" src="<?= IMG . 'trash-post.png' ?>"/></a></td>
-                <?php
-            } else if ($single->trashed == 1) { ?>
-                <td><a href="/admin/posts/destroy/<?= $single->get_id() ?>" class="btn btn-sm btn-danger"><img
-                                class="glyph-small" alt="destroy-item" src="<?= IMG . 'delete-post.png' ?>"/></a></td>
-            <?php } ?>
-            <td class="td-btn"><p><input type="checkbox" name="checkbox[]" value="<?= $single->get_id(); ?>"/></p></td>
-
-        <?php } ?>
+    <!-- Single actions per item -->
+    <?= require 'view/shared/single-action.php'; ?>
 </tr>

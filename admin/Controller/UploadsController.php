@@ -87,10 +87,10 @@ class UploadsController extends Controller
                                         $img->fit(100, 100)->save($folder->path . '/thumbs/' . $thumb_name);
                                     }
                                 } else {
-                                    echo "<h1>Not uploaded</h1>";
+//                                    echo "<h1>Not uploaded</h1>";
                                 }
                             } else {
-                                echo "<h1>Not uploaded</h1>";
+//                                echo "<h1>Not uploaded</h1>";
                             }
                         } else {
                             $failed[$position] = "{$file_name} is too large.";
