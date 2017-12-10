@@ -16,7 +16,7 @@
 		convert_urls: true
 	});
 </script>
-<script type="text/javascript" src="<?= JS."preview.js";?>"></script>
+<script type="text/javascript" src="<?= "/admin/view/posts/edit-lock/edit-lock.js";?>"></script>
 
 <?php
     foreach ($data['js'] as $script){
@@ -40,6 +40,8 @@
 	<div class="row">
 		<div class="col-sm-6 col-lg-6">
 		<?php
+           /*  if I redirect to update, I can prevent the self locking problem, but the I can't return to the edit
+            page if the validation doesn't checkout.*/
 			(isset($params['id'])) ? $action = ADMIN . 'posts/edit/' . $post->post_id : $action = ADMIN . 'posts/create';
 			?>
 			<form id="addpost-form" class="large" action="<?= $action; ?>" method="post">

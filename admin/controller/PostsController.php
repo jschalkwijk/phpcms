@@ -108,17 +108,67 @@ class PostsController extends Controller
         ];
 
         $post = Post::one($params['id']);
-        $tags = Tag::allWhere(['type' => 'post']);
-        $selectedTag = [];
+        /*  if I redirect to update, I can prevent the self locking problem, but the I can't return to the edit
+            page if the validation doesn't checkout. Maybe if I allow a Model to past to the edit controller method I can send the patched Method
+            before saving
+        */
 
-        foreach ($post->tags() as $tag) {
-            $selectedTag[] = $tag->tag_id;
-        };
+        if(date('Y-m-d H:i:s') > $post->locked_till ){
+            $tags = Tag::allWhere(['type' => 'post']);
+            $selectedTag = [];
 
+            foreach ($post->tags() as $tag) {
+                $selectedTag[] = $tag->tag_id;
+            };
+
+            if (isset($_POST['submit'])) {
+                $post->patch($_POST);
+                if (!empty($post->category)) {
+                    $category = new Cat(['title' => $post->category, 'type' => $post->cat_type]);
+                    $add = $category->save();
+                    // add value to the request to be run by the prepareQuery
+                    // otherwise it won't be seen added when save() is called.
+
+                    $post->patch(['category_id' => $category->lastInsertId]);
+                }
+
+
+                if (!empty($post->title) && !empty($post->content) && !empty($post->category_id)) {
+                    $post->user_id = $this->currentUser;
+                    /*  if I redirect to update, I can prevent the self locking problem, but the I can't return to the edit
+                    page if the validation doesn't checkout.*/
+                    $post->locked_till = date('Y-m-d H:i:s',strtotime("-10 seconds"));
+                    $post->savePatch();
+                    header("Location: ".ADMIN."posts");
+                } else {
+                    $this->messages[] = "You forgot to fill in one or more of the required fields (title,content).<br />";
+                };
+            };
+
+            $this->view(
+                'Edit Post',
+                ['posts/add-edit-post.php'],
+                $params,
+                [
+                    'post' => $post,
+                    'tags' => $tags,
+                    'selectedTag' => $selectedTag,
+                    'messages' => $this->messages,
+                    'js' => $scripts
+                ]
+            );
+        } else {
+//            header("Location: ".ADMIN.$post->table.'/locked');
+            return "locked";
+        }
+    }
+
+    public function update($response,$params = null)
+    {
+        $post = Post::one($params['id']);
         if (isset($_POST['submit'])) {
             $post->patch($_POST);
             if (!empty($post->category)) {
-                echo "Hello!";
                 $category = new Cat(['title' => $post->category, 'type' => $post->cat_type]);
                 $add = $category->save();
                 // add value to the request to be run by the prepareQuery
@@ -127,30 +177,19 @@ class PostsController extends Controller
                 $post->patch(['category_id' => $category->lastInsertId]);
             }
 
-
             if (!empty($post->title) && !empty($post->content) && !empty($post->category_id)) {
                 $post->user_id = $this->currentUser;
+                $post->locked_till = date('Y-m-d H:i:s',strtotime("-10 seconds"));
                 $post->savePatch();
                 header("Location: ".ADMIN."posts");
             } else {
                 $this->messages[] = "You forgot to fill in one or more of the required fields (title,content).<br />";
             };
-        }
-
-        $this->view(
-            'Edit Post',
-            ['posts/add-edit-post.php'],
-            $params,
-            [
-                'post' => $post,
-                'tags' => $tags,
-                'selectedTag' => $selectedTag,
-                'messages' => $this->messages,
-                'js' => $scripts
-            ]
-        );
+        };
     }
+    public function locked(){
 
+    }
     public function action($response, $params)
     {
         $post = new Post();

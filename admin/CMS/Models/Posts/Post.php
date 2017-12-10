@@ -34,7 +34,8 @@
 		];
 
 	protected  $hidden = [
-		'user_id'
+		'user_id',
+        'locked_till'
 	];
         # Relations
 
