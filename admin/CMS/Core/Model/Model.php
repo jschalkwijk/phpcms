@@ -221,7 +221,7 @@ abstract class Model
      * Returns an array with the rows as a class object if statement is select.
      * Else it will perform a query which returns true if successful.
      * @param string $query
-     * @return Object Array
+     * @return mixed
      *
      */
     public function grab($query = null)
@@ -246,19 +246,20 @@ abstract class Model
             // we need the connection to be tied to the class function
             // so we can use database functions for example $lastID = $dbc->lastInsertId();
             // If we don't need that functionality we can create the connection here.
-            if(empty($this->connection)){
-                $this->connection = $this->database->connect();
-            }
-
-            $dbc = $this->connection;
+//            if(empty($this->connection)){
+//                $this->connection = $this->database->connect();
+//            }
+//
+            $dbc = $this->database->connect();
 
             if(!empty($this->values)) {
                 $query = $dbc->prepare($this->query);
                 $query->execute($this->values);
-                $this->lastInsertId = $this->connection->lastInsertId();
+                $this->lastInsertId = $dbc->lastInsertId();
+//                return $this;
             } else {
                 $query = $dbc->query($this->query);
-                //$this->database->close();
+//                $this->database->close();
             }
             if($this->statement == "SELECT") {
                 $query->setFetchMode(PDO::FETCH_ASSOC);
@@ -267,7 +268,7 @@ abstract class Model
                 return $this->collect($results);
             } else {
                 $this->database->close();
-                return true;
+                return $this;
             }
         } catch(\PDOException $e){
             $this->sqlError = $e->getMessage();
@@ -280,7 +281,7 @@ abstract class Model
      * Returns an array with the rows as objects
      * For every ro of data a new class object is created for the current model.
      * @param array $results
-     * @return Object Array
+     * @return array
      *
      */
     public function collect($results)

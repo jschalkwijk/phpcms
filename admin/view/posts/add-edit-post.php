@@ -42,7 +42,7 @@
 		<?php
            /*  if I redirect to update, I can prevent the self locking problem, but the I can't return to the edit
             page if the validation doesn't checkout.*/
-			(isset($params['id'])) ? $action = ADMIN . 'posts/edit/' . $post->post_id : $action = ADMIN . 'posts/create';
+			(isset($params['id'])) ? $action = ADMIN . 'posts/update/' . $post->post_id : $action = ADMIN . 'posts/create';
 			?>
 			<form id="addpost-form" class="large" action="<?= $action; ?>" method="post">
 				<input type="text" name="title" placeholder="Title"
