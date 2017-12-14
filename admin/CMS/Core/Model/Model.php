@@ -229,16 +229,16 @@ abstract class Model
         if (!empty($query)) {
             $this->query = $query;
         }
-//        echo 'Query = '.$this->query.'<br>';
-//        echo 'Values Array: <br>';
-//        echo "<pre>";
-//        print_r($this->values);
-//        echo "</pre>";
-//
-//        echo 'Request Array: <br>';
-//        echo "<pre>";
-//        print_r($this->request);
-//        echo "</pre>";
+        echo 'Query = '.$this->query.'<br>';
+        echo 'Values Array: <br>';
+        echo "<pre>";
+        print_r($this->values);
+        echo "</pre>";
+
+        echo 'Request Array: <br>';
+        echo "<pre>";
+        print_r($this->request);
+        echo "</pre>";
 
         // make a function which updates the current sql statement. The first letters of the query determine what the statement is.
         try {
@@ -452,24 +452,25 @@ abstract class Model
      */
     public function update($attributes = [])
     {
-        // If controller provided array
-        if(!empty($attributes)) {
-            $this->request = $attributes;
+//        // If controller provided array
+//        if(!empty($attributes)) {
+//            $this->request = $attributes;
+////            foreach ($this->request as $key => $value) {
+////                $this->$key = $value;
+////            }
+//            // reset Values.
+//            $this->values = [];
+//        }
+//        // Reset Current Object values with new values;
+//        // TODO: maybe remove this, this should already have been done with patching the object. can be done at same time above
+//        if(!empty($this->request)) {
+//            //$this->request = $attributes;
 //            foreach ($this->request as $key => $value) {
 //                $this->$key = $value;
 //            }
-            // reset Values.
-            $this->values = [];
-        }
-        // Reset Current Object values with new values;
-        // TODO: maybe remove this, this should already have been done with patching the object. can be done at same time above
-        if(!empty($this->request)) {
-            //$this->request = $attributes;
-            foreach ($this->request as $key => $value) {
-                $this->$key = $value;
-            }
-        }
-        $prep = $this->prepareQuery($attributes);
+//        }
+
+        $prep = $this->prepareQuery($this->request);
         $string = array();
         foreach($prep['columns'] as $column){
             // Set column to ? for prepared statement
@@ -503,7 +504,8 @@ abstract class Model
             // reset Values.
             $this->values = [];
         }
-//        print_r($this->request);
+        echo "Patch Request: <br>";
+        print_r($this->request);
         // Reset Current Object values with new values;
         if(!empty($this->request)) {
             //$this->request = $attributes;

@@ -5,6 +5,7 @@ namespace Controller;
 use CMS\Models\Actions\Actions;
 use CMS\Models\Posts\Post;
 use CMS\Models\Controller\Controller;
+use CMS\Models\Support\SessionStorage;
 use CMS\Models\Tag\Tag;
 use CMS\Models\Actions\UserActions;
 use CMS\Models\Categories\Categories as Cat;
@@ -107,11 +108,11 @@ class PostsController extends Controller
             JS . 'checkAll.js'
         ];
 
-       if(!isset($_SESSION['invalid_edit'])){
+       if(!SessionStorage::getByName('edit')->exists($params['id'])){
            $post = Post::one($params['id']);
        } else {
-           $post = $_SESSION['invalid_edit'];
-           unset($_SESSION['invalid_edit']);
+           $post = SessionStorage::getByName('edit')->get($params['id']);
+           SessionStorage::getByName('edit')->unsetIndex($post->post_id);
        }
         /*  if I redirect to update, I can prevent the self locking problem, but the I can't return to the edit
             page if the validation doesn't checkout. Maybe if I allow a Model to past to the edit controller method I can send the patched Method
@@ -186,6 +187,11 @@ class PostsController extends Controller
                 $post->user_id = $this->currentUser;
                 $post->locked_till = date('Y-m-d H:i:s',strtotime("-10 seconds"));
                 $post->savePatch();
+
+                if(isset($_SESSION['edit'][$post->post_id])){
+                    SessionStorage::getByName('edit')->unsetIndex($post->post_id);
+                }
+
                 header("Location: ".ADMIN."posts");
             } else {
                 $this->messages[] = "You forgot to fill in one or more of the required fields (title,content).<br />";
@@ -193,7 +199,10 @@ class PostsController extends Controller
                 // is still active.
                 $post->patch(['locked_till' => date('Y-m-d H:i:s',strtotime("-10 seconds"))])->savePatch();
                 //store the unsaved object in the session so all edited parts are saved when returning to the edit page for editting.
-                $_SESSION['invalid_edit'] = $post;
+
+                (new SessionStorage('edit'))->set($post->post_id,$post);
+
+//                $_SESSION['invalid_edit'] = $post;
                 header("Location: ".ADMIN."posts/edit/".$post->post_id);
             };
         };

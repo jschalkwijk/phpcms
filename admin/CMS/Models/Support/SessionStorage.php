@@ -65,6 +65,9 @@ class SessionStorage implements Store
         // ount all basket items in the session
         return count($this->all());
     }
+    public static function getByName ($basket){
+        return new SessionStorage($basket);
+    }
 }
 
 ?>
