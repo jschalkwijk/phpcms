@@ -453,14 +453,14 @@ abstract class Model
     public function update($attributes = [])
     {
 //        // If controller provided array
-//        if(!empty($attributes)) {
-//            $this->request = $attributes;
-////            foreach ($this->request as $key => $value) {
-////                $this->$key = $value;
-////            }
-//            // reset Values.
-//            $this->values = [];
-//        }
+        if(!empty($attributes)) {
+            $this->request = $attributes;
+            foreach ($this->request as $key => $value) {
+                $this->$key = $value;
+            }
+            // reset Values.
+            $this->values = [];
+        }
 //        // Reset Current Object values with new values;
 //        // TODO: maybe remove this, this should already have been done with patching the object. can be done at same time above
 //        if(!empty($this->request)) {

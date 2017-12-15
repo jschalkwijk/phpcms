@@ -27,21 +27,16 @@
 ?>
 <div id="main" class="container">
 	<div class="row">
-		<div class="col-sm-6 col-lg-6">
-			<?php
-			if (isset($_POST['submit'])) {
-				echo '<div class="container medium">';
-					echo implode(",",$data['messages']);
-				echo '</div>';
-			}
-			?>
-		</div>
+        <div class="col-xs-6 col-sm-6 col-md-6">
+            <?php
+            foreach($data['errors'] as $error){ ?>
+                <div class="alert alert-warning"><?= $error ?></div>
+            <?php } ?>
+        </div>
 	</div>
 	<div class="row">
 		<div class="col-sm-6 col-lg-6">
 		<?php
-           /*  if I redirect to update, I can prevent the self locking problem, but the I can't return to the edit
-            page if the validation doesn't checkout.*/
 			(isset($params['id'])) ? $action = ADMIN . 'posts/update/' . $post->post_id : $action = ADMIN . 'posts/create';
 			?>
 			<form id="addpost-form" class="large" action="<?= $action; ?>" method="post">

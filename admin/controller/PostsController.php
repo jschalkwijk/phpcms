@@ -3,6 +3,8 @@
 namespace Controller;
 
 use CMS\Models\Actions\Actions;
+use CMS\Models\Support\Error;
+use CMS\Models\Support\Session;
 use CMS\Models\Posts\Post;
 use CMS\Models\Controller\Controller;
 use CMS\Models\Support\SessionStorage;
@@ -127,30 +129,6 @@ class PostsController extends Controller
                 $selectedTag[] = $tag->tag_id;
             };
 
-//            if (isset($_POST['submit'])) {
-//                $post->patch($_POST);
-//                if (!empty($post->category)) {
-//                    $category = new Cat(['title' => $post->category, 'type' => $post->cat_type]);
-//                    $add = $category->save();
-//                    // add value to the request to be run by the prepareQuery
-//                    // otherwise it won't be seen added when save() is called.
-//
-//                    $post->patch(['category_id' => $category->lastInsertId]);
-//                }
-//
-//
-//                if (!empty($post->title) && !empty($post->content) && !empty($post->category_id)) {
-//                    $post->user_id = $this->currentUser;
-//                    /*  if I redirect to update, I can prevent the self locking problem, but the I can't return to the edit
-//                    page if the validation doesn't checkout.*/
-//                    $post->locked_till = date('Y-m-d H:i:s',strtotime("-10 seconds"));
-//                    $post->savePatch();
-//                    header("Location: ".ADMIN."posts");
-//                } else {
-//                    $this->messages[] = "You forgot to fill in one or more of the required fields (title,content).<br />";
-//                };
-//            };
-
             $this->view(
                 'Edit Post',
                 ['posts/add-edit-post.php'],
@@ -159,13 +137,12 @@ class PostsController extends Controller
                     'post' => $post,
                     'tags' => $tags,
                     'selectedTag' => $selectedTag,
-                    'messages' => $this->messages,
+                    'errors' => (new Error())->errors(),
                     'js' => $scripts
                 ]
             );
         } else {
-//            header("Location: ".ADMIN.$post->table.'/locked');
-            return "locked";
+            header("Location: ".ADMIN.'posts/locked');
         }
     }
 
@@ -194,7 +171,12 @@ class PostsController extends Controller
 
                 header("Location: ".ADMIN."posts");
             } else {
-                $this->messages[] = "You forgot to fill in one or more of the required fields (title,content).<br />";
+                Session::flash("status","Post not Updated.<br />");
+                $errors = new Error([
+                    'You forgot to fill in the Title',
+                    'You forgot to fill in the Category',
+                    'You forgot to fill in the Content',
+                ]);
                 // set back the lock on the post, otherwise you cannot access the edit page for 5 seconds because the lock
                 // is still active.
                 $post->patch(['locked_till' => date('Y-m-d H:i:s',strtotime("-10 seconds"))])->savePatch();
@@ -207,8 +189,9 @@ class PostsController extends Controller
             };
         };
     }
-    public function locked(){
-
+    public function locked($response,$params)
+    {
+        $this->view('Locked',['shared/locked.php']);
     }
     public function action($response, $params)
     {

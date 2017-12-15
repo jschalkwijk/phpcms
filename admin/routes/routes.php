@@ -34,6 +34,7 @@
             $app->get('/hide/:id', [new Controller\PostsController, 'hide']);
             $app->get('/trash/:id', [new Controller\PostsController, 'trash']);
             $app->get('/destroy/:id', [new Controller\PostsController, 'destroy']);
+            $app->get('/locked', [new Controller\PostsController, 'locked']);
         });
         $app->group('/categories', function ($app, $container) {
             $app->get('', [new Controller\CategoriesController, 'index']);
@@ -119,6 +120,7 @@
             $app->get('/destroy/:id', [new Controller\FoldersController, 'destroy']);
             $app->map('/edit/:id', [new Controller\FoldersController, 'edit'],['GET','POST']);
         });
+        $app->get('/locked',[new Controller\Locked,'index']);
     });
 
 
