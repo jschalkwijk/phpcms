@@ -2,6 +2,8 @@
 
 namespace CMS\Models\Users;
 
+use CMS\Models\Permission;
+use CMS\Models\Role;
 use \Defuse\Crypto\Key;
 use \Defuse\Crypto\Crypto;
 use Defuse\Crypto\KeyProtectedByPassword;
@@ -110,6 +112,39 @@ class Users extends Model{
 			return false;
 		}
 	}
+
+	#Permissions
+//    public function hasRole(...$roles): bool
+//    {
+//        foreach ($roles as $role){
+//            if ($this->roles->contains('name',strtolower($role))){
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
+
+    protected function hasPermission($permission): bool
+    {
+        return (bool) count($this->permissions()->where('name', $permission));
+    }
+    public function hasPermissionTo($permission)
+    {
+        // has permission through a role
+
+        return $this->hasPermission($permission);
+    }
+
+    #relations
+    public function roles()
+    {
+        return $this->ownedByMany(Role::class);
+    }
+    public function permissions()
+    {
+        return $this->ownedByMany(Permission::class);
+    }
+
 
 	public function add(){
 		$db = new DBC;

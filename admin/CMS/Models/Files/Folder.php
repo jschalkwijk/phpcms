@@ -3,8 +3,10 @@ namespace CMS\Models\Files;
 
 use CMS\Core\FileSystem\FileSystem;
 use CMS\Core\Model\Model;
+use CMS\Models\Categories\Categories;
 use CMS\Models\DBC\DBC;
 use CMS\Models\Actions\FileActions;
+use CMS\Models\Products\Product;
 
 /*
  * als ik in een user of product foto's moet uploaden kan ik toch ook in de user table een
@@ -53,7 +55,7 @@ class Folder extends Model {
 
     public function products()
     {
-		return $this->ownsThrough('CMS\Models\Products\Product','CMS\Models\Categories\Categories');
+		return $this->ownsThrough(Product::class,Categories::class);
     }
 
 //    public function category()
