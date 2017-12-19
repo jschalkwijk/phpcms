@@ -110,11 +110,11 @@ class PostsController extends Controller
             JS . 'checkAll.js'
         ];
 
-       if(!SessionStorage::getByName('edit')->exists($params['id'])){
+       if(!SessionStorage::getByName('old')->exists($params['id'])){
            $post = Post::one($params['id']);
        } else {
-           $post = SessionStorage::getByName('edit')->get($params['id']);
-           SessionStorage::getByName('edit')->unsetIndex($post->post_id);
+           $post = SessionStorage::getByName('old')->get($params['id']);
+           SessionStorage::getByName('old')->unsetIndex($post->post_id);
        }
         /*  if I redirect to update, I can prevent the self locking problem, but the I can't return to the edit
             page if the validation doesn't checkout. Maybe if I allow a Model to past to the edit controller method I can send the patched Method
@@ -165,8 +165,8 @@ class PostsController extends Controller
                 $post->locked_till = date('Y-m-d H:i:s',strtotime("-10 seconds"));
                 $post->savePatch();
 
-                if(isset($_SESSION['edit'][$post->post_id])){
-                    SessionStorage::getByName('edit')->unsetIndex($post->post_id);
+                if(isset($_SESSION['old'][$post->post_id])){
+                    SessionStorage::getByName('old')->unsetIndex($post->post_id);
                 }
 
                 header("Location: ".ADMIN."posts");
@@ -180,9 +180,11 @@ class PostsController extends Controller
                 // set back the lock on the post, otherwise you cannot access the edit page for 5 seconds because the lock
                 // is still active.
                 $post->patch(['locked_till' => date('Y-m-d H:i:s',strtotime("-10 seconds"))])->savePatch();
+                echo "Object after savePatch<br>";
+                print_r($post->category_id);
                 //store the unsaved object in the session so all edited parts are saved when returning to the edit page for editting.
 
-                (new SessionStorage('edit'))->set($post->post_id,$post);
+//                (new SessionStorage('old'))->set($post->post_id,$post);
 
 //                $_SESSION['invalid_edit'] = $post;
                 header("Location: ".ADMIN."posts/edit/".$post->post_id);

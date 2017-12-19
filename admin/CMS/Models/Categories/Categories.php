@@ -3,6 +3,9 @@ namespace CMS\Models\Categories;
 
 use CMS\Models\DBC\DBC;
 use CMS\Core\Model\Model;
+use CMS\Models\Posts\Post;
+use CMS\Models\Products\Product;
+use CMS\Models\Users\Users;
 
 class Categories extends Model{
     public $primaryKey = 'category_id';
@@ -46,17 +49,17 @@ class Categories extends Model{
 	#Relations
     public function posts()
     {
-        return $this->owns('CMS\Models\Posts\Post');
+        return $this->owns(Post::class);
     }
 
     public function products()
     {
-        return $this->owns('CMS\Models\Products\Product');
+        return $this->owns(Product::class);
     }
 
     public function user()
     {
-        return $this->ownedBy('CMS\Models\Users\Users');
+        return $this->ownedBy(Users::class);
     }
 
     /**
