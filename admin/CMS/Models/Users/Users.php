@@ -117,24 +117,32 @@ class Users extends Model{
 //    public function hasRole(...$roles): bool
 //    {
 //        foreach ($roles as $role){
-//            if ($this->roles->contains('name',strtolower($role))){
+//            if ($this->roles->contains('name',$role)){
 //                return true;
 //            }
 //        }
 //        return false;
 //    }
-
-    protected function hasPermission($permission): bool
-    {
-        return (bool) count($this->permissions()->where('name', $permission));
-    }
-    public function hasPermissionTo($permission)
-    {
-        // has permission through a role
-
-        return $this->hasPermission($permission);
-    }
-
+//
+//    protected function hasPermission($permission): bool
+//    {
+//        return (bool) count($this->permissions()->where('name', $permission));
+//    }
+//    public function hasPermissionTo($permission)
+//    {
+//        // has permission through a role
+//
+//        return $this->hasPermission($permission);
+//    }
+//
+//    public function hasPermissionThroughRole($permission){
+//        foreach ($permission->roles as $role){
+//            if ($this->roles->contains($role)){
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
     #relations
     public function roles()
     {
