@@ -113,7 +113,45 @@ class Users extends Model{
 		}
 	}
 
-	#Permissions
+//	#Permissions
+//    public function getPermissions(array $permissions)
+//    {
+//        return Permission::where(['name',$permissions])->grab();
+//    }
+//
+//    public function givePermissionTo(...$permissions)
+//    {
+//        $permissions = $this->getPermissions(array_flatten($permissions));
+//
+//        if($permissions === null){
+//            return $this;
+//        }
+//
+//        $this->permissions()->saveMany($permissions);
+//
+//        return back();
+//        // get permission models
+//        // save many to user permissions
+//    }
+//
+//    public function revokePermissionTo(...$permissions){
+//        $permissions = $this->getPermissions(array_flatten($permissions));
+//
+//        $this->permissions()->detach($permissions);
+//
+//        return back();
+//
+//    }
+//
+//    public function refreshPermissions(...$permissions)
+//    {
+//        $this->permissions()->detach();
+//
+//        $this->givePermissionTo(array_flatten($permissions));
+//
+//        return back();
+//    }
+
 //    public function hasRole(...$roles): bool
 //    {
 //        foreach ($roles as $role){

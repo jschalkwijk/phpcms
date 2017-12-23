@@ -336,7 +336,7 @@ abstract class Model
     {
         $string = array();
         foreach ($columns as $column => $value) {
-            // if the length is 1 and the value is an array we have to call WhereIN because
+            // if the length is 1 and the array value is an array we have to call WhereIN because
             // the system has provided an Array. We use this for the Model functions so we don't
             // have to make two distinct update queries for example.
             // if ypu create your own query inside a controller you can use the whereIn directly.
