@@ -152,43 +152,50 @@ class Users extends Model{
 //        return back();
 //    }
 
-//    public function hasRole(...$roles): bool
-//    {
-//        foreach ($roles as $role){
-//            if ($this->roles->contains('name',$role)){
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-//
-//    protected function hasPermission($permission): bool
-//    {
-//        return (bool) count($this->permissions()->where('name', $permission));
-//    }
-//    public function hasPermissionTo($permission)
-//    {
-//        // has permission through a role
-//
-//        return $this->hasPermission($permission);
-//    }
-//
-//    public function hasPermissionThroughRole($permission){
-//        foreach ($permission->roles as $role){
-//            if ($this->roles->contains($role)){
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
+    public function hasRole(...$roles): bool
+    {
+        foreach ($this->roles() as $user_roles){
+            if(in_array($user_roles->name,$roles)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    protected function hasPermission($permission): bool
+    {
+        foreach ($this->permissions() as $user_permission){
+            if($user_permission->name == $permission){
+                return true;
+            }
+        }
+        return false;
+    }
+    public function hasPermissionTo($permission)
+    {
+        return $this->hasPermissionThroughRole($permission) || $this->hasPermission($permission);
+    }
+
+
+    public function hasPermissionThroughRole($permission){
+           // Get permissions through the users Roles
+           $user_permissions = $this->ownsThroughMany(Permission::class,Role::class,'roles_permissions','users_roles');
+           // Check if permission is assigned to the users Role
+           foreach ($user_permissions as $user_permission){
+              if($user_permission->name == $permission){
+                  return true;
+              }
+           }
+           return false;
+    }
     #relations
     public function roles()
     {
-        return $this->ownedByMany(Role::class);
+        return $this->ownedByMany(Role::class,'users_roles');
     }
     public function permissions()
     {
-        return $this->ownedByMany(Permission::class);
+        return $this->ownedByMany(Permission::class,'users_permissions');
     }
 
 

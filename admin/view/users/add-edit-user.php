@@ -3,6 +3,15 @@
 	$dbc = new \CMS\Models\DBC\DBC;
 
 	$user = $data['user'];
+	foreach ($user->roles() as $role){
+	    echo $role->name."<br>";
+    };
+	if($user->hasPermissionTo('test')){
+	    echo "I have this permission";
+    };
+	if($user->hasRole('admin')){
+	    echo "I have this Role";
+    };
 ?>
 <div class="container">
 	<div class="row">

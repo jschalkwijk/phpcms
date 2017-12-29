@@ -7,7 +7,8 @@ use CMS\Models\Users\Users;
 
 class Role extends Model
 {
-    protected $primaryKey = "role_id";
+    public $primaryKey = "role_id";
+    public $table = "roles";
 
     public function permissions()
     {

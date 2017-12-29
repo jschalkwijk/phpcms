@@ -4,6 +4,7 @@ namespace CMS\Core\Model;
 use CMS\Models\DBC\DBC;
 use PDO;
 use PDOException;
+use ArrayAccess;
 
 use CMS\Core\Pluralize\Inflect;
 
@@ -265,7 +266,11 @@ abstract class Model
                 $query->setFetchMode(PDO::FETCH_ASSOC);
                 $results = $query->fetchAll();
                 $this->database->close();
-                return $this->collect($results);
+                if($query->rowCount() > 0){
+                    return $this->collect($results);
+                } else {
+                    return [];
+                }
             } else {
                 $this->database->close();
                 return $this;
@@ -692,7 +697,14 @@ abstract class Model
         return $model->grab($query)[0];
     }
 
-    public function ownedByMany($relatedModel,$primaryKey = null,$foreignKey = null)
+    /**
+     * @param string $relatedModel
+     * @param string $pivotTable
+     * @param null $primaryKey
+     * @param null $foreignKey
+     * @return mixed
+     */
+    public function ownedByMany($relatedModel, $pivotTable, $primaryKey = null, $foreignKey = null)
     {
         $model = new $relatedModel;
         $model->connection = $model->database->connect();
@@ -700,11 +712,13 @@ abstract class Model
         // print_r($this->$foreignKey);
         // $this->$foreignKey is for example $this->category_id and gets the value
         if($primaryKey == null && $foreignKey == null) {
-            $primaryKey = $model->primaryKey;
-            $query = "SELECT * FROM {$model->table} WHERE {$model->primaryKey} = {$this->$primaryKey}";
-        } else if($primaryKey != null && $foreignKey != null){
-            $query = "SELECT * FROM {$model->table} WHERE {$primaryKey} = {$this->$foreignKey}";
+       //     $query = "SELECT * FROM {$model->table} WHERE {$model->primaryKey} = {$this->$primaryKey}";
+            $query = "SELECT * FROM $model->table WHERE $model->primaryKey IN ( SELECT $model->primaryKey FROM $pivotTable WHERE $this->primaryKey = {$this->get_id()})";
+        } else if($pivotTable != null && $primaryKey != null && $foreignKey != null){
+            //$query = "SELECT * FROM {$model->table} WHERE {$primaryKey} = {$this->$foreignKey}";
+            $query = "SELECT * FROM $model->table WHERE $model->primaryKey IN ( SELECT $foreignKey FROM $pivotTable WHERE $primaryKey = ({$this->$primaryKey})";
         }
+
         return $model->grab($query);
     }
 
@@ -739,7 +753,33 @@ abstract class Model
         $model1->connection = $model1->database->connect();
         $model1->statement = "SELECT";
         $query = "SELECT * FROM {$model1->table} WHERE {$model2->primaryKey} =
-        (SELECT {$model2->primaryKey} FROM {$model2->table} WHERE {$this->primaryKey} = {$this->folder_id})";
+        (SELECT {$model2->primaryKey} FROM {$model2->table} WHERE {$this->primaryKey} = {$this->get_id()})";
+        return $model1->grab($query);
+    }
+
+    /**
+     * @param $model1
+     * @param $model2
+     * @param $pivotTableOne
+     * @param $pivotTableTwo
+     * @param null $primaryKey
+     * @param null $foreignKey
+     * @return mixed
+     */
+    public function ownsThroughMany($ownsModel, $throughModel, $pivotTableOne, $pivotTableTwo, $primaryKey = null, $foreignKey = null)
+    {
+        $model1 = new $ownsModel;
+        $model2 = new $throughModel;
+        $model1->connection = $model1->database->connect();
+        $model1->statement = "SELECT";
+        $query = "SELECT * FROM $model1->table WHERE $model1->primaryKey IN 
+                    (
+                       SELECT $model1->primaryKey FROM {$pivotTableOne} WHERE {$model2->primaryKey} IN
+                      (
+                        SELECT {$model2->primaryKey} FROM {$pivotTableTwo} WHERE {$this->primaryKey} = {$this->get_id()}
+                      )
+                    )";
+
         return $model1->grab($query);
     }
     /**
