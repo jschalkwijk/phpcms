@@ -174,7 +174,7 @@ abstract class Model
     /**
      * Returns all class objects linked to the called model where value = ....
      * @param array $columns
-     * @return Object Array
+     * @return array|bool
      *
      */
     public static function allWhere($columns = [])
@@ -269,11 +269,11 @@ abstract class Model
                 if($query->rowCount() > 0){
                     return $this->collect($results);
                 } else {
-                    return [];
+                    return false;
                 }
             } else {
                 $this->database->close();
-                return $this;
+                return true;
             }
         } catch(\PDOException $e){
             $this->sqlError = $e->getMessage();
@@ -447,7 +447,6 @@ abstract class Model
     {
         $this->query .= "INSERT INTO $this->table (".implode(',',$prepared['columns']).",date) VALUES(".implode(',',$prepared['placeholders']).",NOW())";
         return $this;
-
     }
 
     /**
@@ -721,6 +720,64 @@ abstract class Model
 
         return $model->grab($query);
     }
+
+
+    /**
+     * Save an array of new models and attach them to the parent model.
+     *
+     * @param  $models
+     * @param  $pivotTable
+     * @return boolean
+     */
+    public function saveMany($models,$pivotTable = null) : bool
+    {
+        if(isset($pivotTable)){
+            $this->pivotTable = $pivotTable;
+        } else if(!isset($this->pivotTable ) && $pivotTable == null) {
+            return false;
+        }
+
+        foreach ($models as $key => $model) {
+            $attributes =[$this->primaryKey => $this->get_id(),$model->primaryKey => $model->get_id()] ;
+            $prepared = $model->prepareQuery($attributes);
+            $model->query .= "INSERT INTO $this->pivotTable (".implode(',',$prepared['columns']).") VALUES(".implode(',',$prepared['placeholders']).")";
+            print_r($model->query);
+            if($model->grab() != true){
+                return false;
+            };
+        }
+
+        return true;
+    }
+
+    /**
+     * @param array $models
+     * @param string|null $pivotTable
+     * @return bool
+     */
+    public function removeMany(array $models, $pivotTable = null) : bool
+    {
+        if(isset($pivotTable)){
+            $this->pivotTable = $pivotTable;
+        } else if(!isset($this->pivotTable ) && $pivotTable == null) {
+            return false;
+        }
+        $ids = [];
+        foreach ($models as $key => $model) {
+            $ids[] = $model->get_id();
+        }
+
+        $modelPrimaryKey = $models[0]->primaryKey;
+        $ids = implode(',',$ids);
+        $this->query = "DELETE FROM $this->pivotTable WHERE $modelPrimaryKey IN($ids) AND $this->primaryKey = {$this->get_id()}";
+
+        if($this->grab() != true){
+            return false;
+        };
+
+        return true;
+    }
+
 
     public function children($selfReference = null)
     {

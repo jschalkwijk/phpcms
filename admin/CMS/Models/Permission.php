@@ -9,6 +9,11 @@ class Permission extends Model
     protected $primaryKey = "permission_id";
     public $table = "permissions";
 
+    protected $allowed = [
+        'permission_id',
+        'user_id',
+    ];
+
     public function get_id()
     {
         return $this->permission_id;
@@ -19,7 +24,7 @@ class Permission extends Model
     }
     public function users()
     {
-        return $this->ownedByMany(User::class);
+        return $this->ownedByMany(User::class,'users_permissions');
     }
 
 }

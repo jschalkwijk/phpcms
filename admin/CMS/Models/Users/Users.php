@@ -13,6 +13,7 @@ use CMS\Core\Model\Model;
 use \CMS\Models\DBC\DBC;
 use CMS\Models\Files\Folders;
 use CMS\Models\Files\FileUpload;
+use JsonSchema\Constraints\ObjectConstraint;
 
 
 class Users extends Model{
@@ -114,34 +115,41 @@ class Users extends Model{
 	}
 
 //	#Permissions
-//    public function getPermissions(array $permissions)
-//    {
-//        return Permission::where(['name',$permissions])->grab();
-//    }
+    public function getPermissions(array $permissions)
+    {
+        return Permission::allWhere(['name' => $permissions]);
+    }
 //
-//    public function givePermissionTo(...$permissions)
-//    {
-//        $permissions = $this->getPermissions(array_flatten($permissions));
-//
-//        if($permissions === null){
-//            return $this;
-//        }
-//
-//        $this->permissions()->saveMany($permissions);
-//
-//        return back();
-//        // get permission models
-//        // save many to user permissions
-//    }
-//
-//    public function revokePermissionTo(...$permissions){
-//        $permissions = $this->getPermissions(array_flatten($permissions));
-//
-//        $this->permissions()->detach($permissions);
-//
-//        return back();
-//
-//    }
+    public function givePermissionTo(array $permissions)
+        {
+        $permissions = $this->getPermissions($permissions);
+
+        if(empty($permissions)){
+            return false;
+        }
+
+        if(!$this->saveMany($permissions,'users_permissions')){
+            return false;
+        };
+        // flash Message in controller.
+        return true;
+    }
+
+    public function revokePermissionTo(array $permissions){
+        $permissions = $this->getPermissions($permissions);
+
+        if(empty($permissions)){
+            return false;
+        }
+
+        if(!$this->removeMany($permissions,'users_permissions')){
+            return false;
+        };
+
+        // flash Message in controller.
+        return true;
+
+    }
 //
 //    public function refreshPermissions(...$permissions)
 //    {
