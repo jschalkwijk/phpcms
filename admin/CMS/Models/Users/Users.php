@@ -150,15 +150,14 @@ class Users extends Model{
         return true;
 
     }
-//
-//    public function refreshPermissions(...$permissions)
-//    {
-//        $this->permissions()->detach();
-//
-//        $this->givePermissionTo(array_flatten($permissions));
-//
-//        return back();
-//    }
+
+    public function refreshPermissions(array $permissions)
+    {
+        $this->removeMany($this->permissions());
+
+        return $this->givePermissionTo($permissions);
+
+    }
 
     public function hasRole(...$roles): bool
     {
@@ -172,6 +171,9 @@ class Users extends Model{
 
     protected function hasPermission($permission): bool
     {
+        if(!$this->permissions()){
+            return false;
+        }
         foreach ($this->permissions() as $user_permission){
             if($user_permission->name == $permission){
                 return true;

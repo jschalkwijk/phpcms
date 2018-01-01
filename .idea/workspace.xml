@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="0a43c896-b199-4fd3-a7cd-831809ebb533" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/CMS/Core/Model/Model.php" afterPath="$PROJECT_DIR$/admin/CMS/Core/Model/Model.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/CMS/Models/Permission.php" afterPath="$PROJECT_DIR$/admin/CMS/Models/Permission.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/CMS/Models/Users/Users.php" afterPath="$PROJECT_DIR$/admin/CMS/Models/Users/Users.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/view/users/add-edit-user.php" afterPath="$PROJECT_DIR$/admin/view/users/add-edit-user.php" />
     </list>
@@ -54,8 +52,8 @@
       <file leaf-file-name="Model.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/CMS/Core/Model/Model.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="411">
-              <caret line="179" column="50" lean-forward="false" selection-start-line="179" selection-start-column="50" selection-end-line="179" selection-end-column="50" />
+            <state relative-caret-position="5213">
+              <caret line="721" column="5" lean-forward="true" selection-start-line="721" selection-start-column="5" selection-end-line="721" selection-end-column="5" />
               <folding>
                 <element signature="e#33#56#0#PHP" expanded="true" />
                 <marker date="1514805797000" expanded="true" signature="13182:13308" ph="INSERT INTO ${$this-&gt;table}... " />
@@ -120,8 +118,8 @@
       <file leaf-file-name="Permission.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/CMS/Models/Permission.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+            <state relative-caret-position="165">
+              <caret line="11" column="26" lean-forward="false" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -130,12 +128,13 @@
       <file leaf-file-name="Users.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/admin/CMS/Models/Users/Users.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="24" lean-forward="true" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
+            <state relative-caret-position="435">
+              <caret line="29" column="6" lean-forward="true" selection-start-line="29" selection-start-column="6" selection-end-line="29" selection-end-column="6" />
               <folding>
-                <marker date="1514805814000" expanded="true" signature="5034:5072" ph="SELECT * FRO... users" />
-                <marker date="1514805814000" expanded="true" signature="7401:7455" ph="SELECT * FRO... users" />
-                <marker date="1514805814000" expanded="true" signature="9904:9951" ph="UPDATE users... " />
+                <element signature="e#36#62#0#PHP" expanded="true" />
+                <marker date="1514817133000" expanded="true" signature="5068:5106" ph="SELECT * FRO... users" />
+                <marker date="1514817133000" expanded="true" signature="7435:7489" ph="SELECT * FRO... users" />
+                <marker date="1514817133000" expanded="true" signature="9938:9985" ph="UPDATE users... " />
               </folding>
             </state>
           </provider>
@@ -154,10 +153,10 @@
       <file leaf-file-name="add-edit-user.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/view/users/add-edit-user.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="9" lean-forward="true" selection-start-line="17" selection-start-column="9" selection-end-line="17" selection-end-column="9" />
+            <state relative-caret-position="345">
+              <caret line="23" column="5" lean-forward="true" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
               <folding>
-                <marker date="1514805903000" expanded="true" signature="919:1185" ph="..." />
+                <marker date="1514817048000" expanded="true" signature="1002:1268" ph="..." />
               </folding>
             </state>
           </provider>
@@ -326,10 +325,10 @@
         <option value="$PROJECT_DIR$/admin/CMS/Models/Categories/Categories.php" />
         <option value="$PROJECT_DIR$/admin/CMS/Models/Files/Folder.php" />
         <option value="$PROJECT_DIR$/admin/CMS/Models/Role.php" />
-        <option value="$PROJECT_DIR$/admin/CMS/Models/Permission.php" />
         <option value="$PROJECT_DIR$/admin/CMS/Core/Model/Model.php" />
-        <option value="$PROJECT_DIR$/admin/CMS/Models/Users/Users.php" />
+        <option value="$PROJECT_DIR$/admin/CMS/Models/Permission.php" />
         <option value="$PROJECT_DIR$/admin/view/users/add-edit-user.php" />
+        <option value="$PROJECT_DIR$/admin/CMS/Models/Users/Users.php" />
       </list>
     </option>
   </component>
@@ -614,12 +613,12 @@
       <workItem from="1514046581740" duration="58000" />
       <workItem from="1514383184360" duration="10920000" />
       <workItem from="1514558741635" duration="1649000" />
-      <workItem from="1514719184780" duration="8618000" />
+      <workItem from="1514719184780" duration="10232000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="160900000" />
+    <option name="totallyTimeSpent" value="162514000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1113,16 +1112,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/CMS/Models/Permission.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="30" column="0" lean-forward="true" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+        <state relative-caret-position="165">
+          <caret line="11" column="26" lean-forward="false" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/CMS/Core/Model/Model.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="411">
-          <caret line="179" column="50" lean-forward="false" selection-start-line="179" selection-start-column="50" selection-end-line="179" selection-end-column="50" />
+        <state relative-caret-position="5213">
+          <caret line="721" column="5" lean-forward="true" selection-start-line="721" selection-start-column="5" selection-end-line="721" selection-end-column="5" />
           <folding>
             <element signature="e#33#56#0#PHP" expanded="true" />
             <marker date="1514805797000" expanded="true" signature="13182:13308" ph="INSERT INTO ${$this-&gt;table}... " />
@@ -1167,22 +1166,23 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/view/users/add-edit-user.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="9" lean-forward="true" selection-start-line="17" selection-start-column="9" selection-end-line="17" selection-end-column="9" />
+        <state relative-caret-position="345">
+          <caret line="23" column="5" lean-forward="true" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
           <folding>
-            <marker date="1514805903000" expanded="true" signature="919:1185" ph="..." />
+            <marker date="1514817048000" expanded="true" signature="1002:1268" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/CMS/Models/Users/Users.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="24" lean-forward="true" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
+        <state relative-caret-position="435">
+          <caret line="29" column="6" lean-forward="true" selection-start-line="29" selection-start-column="6" selection-end-line="29" selection-end-column="6" />
           <folding>
-            <marker date="1514805814000" expanded="true" signature="5034:5072" ph="SELECT * FRO... users" />
-            <marker date="1514805814000" expanded="true" signature="7401:7455" ph="SELECT * FRO... users" />
-            <marker date="1514805814000" expanded="true" signature="9904:9951" ph="UPDATE users... " />
+            <element signature="e#36#62#0#PHP" expanded="true" />
+            <marker date="1514817133000" expanded="true" signature="5068:5106" ph="SELECT * FRO... users" />
+            <marker date="1514817133000" expanded="true" signature="7435:7489" ph="SELECT * FRO... users" />
+            <marker date="1514817133000" expanded="true" signature="9938:9985" ph="UPDATE users... " />
           </folding>
         </state>
       </provider>
