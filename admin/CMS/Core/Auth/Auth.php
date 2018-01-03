@@ -3,6 +3,8 @@
 namespace CMS\Core\Auth;
 
 use CMS\Models\DBC\DBC;
+use CMS\Models\Support\Session;
+use CMS\Models\Users\Users;
 
 class Auth
 {
@@ -10,7 +12,9 @@ class Auth
     {
         // set cookies to be used with httponly, so no other scripts can access them
         ini_set('session.cookie_httponly', 1);
-        session_start();
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
         // prevent session hijacking
         if(isset($_SESSION['last_ip']) === false) {
             $_SESSION['last_ip'] = $_SERVER['REMOTE_ADDR'];
@@ -19,10 +23,9 @@ class Auth
         if($_SESSION['last_ip'] !== $_SERVER['REMOTE_ADDR']) {
             session_unset();
             session_destroy();
-            header('Location: login');
-            exit();
+            return false;
         }
-        $authorize = false;
+
         if(!isset($_SESSION['user_id'])) {
             if(isset($_COOKIE['t']) && isset($_COOKIE['u'])) {
                 $token = $_COOKIE['t'];
@@ -37,22 +40,25 @@ class Auth
                         $_SESSION['user_id'] = (int)$row['user_id'];
                         $_SESSION['username'] = $row['username'];
                         $_SESSION['rights'] = $row['rights'];
-                        $authorize = true;
+                        return true;
                     }
-                } else {
-                    $authorize = false;
                 }
+                return false;
 
-            } else {
-                $authorize = false;
             }
-        } else {
-            $authorize = true;
+            return false;
         }
-        // if user is not authorized, redirect to the login page and exit the script.
-        if (!$authorize) {
-            header('Location: '.ADMIN.'login.php');
-            exit();
+        return true;
+
+    }
+
+    public static function user()
+    {
+        if(Auth::authenticate()){
+            $user_id = Session::get('user_id');
+            return Users::one($user_id);
         }
+
+        return false;
     }
 }

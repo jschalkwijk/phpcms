@@ -1,9 +1,8 @@
 <?php
 
-namespace CMS\Models;
+namespace CMS\Models\Users;
 
 use CMS\Core\Model\Model;
-use CMS\Models\Users\Users;
 
 class Role extends Model
 {
@@ -12,11 +11,11 @@ class Role extends Model
 
     public function permissions()
     {
-        return $this->ownedByMany(Permission::class);
+        return $this->ownedByMany(Permission::class,'roles_permissions');
     }
     public function users()
     {
-        return $this->ownedByMany(Users::class);
+        return $this->ownedByMany(Users::class,'users_roles');
     }
 
 }

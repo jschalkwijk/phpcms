@@ -2,18 +2,13 @@
 
 namespace CMS\Models\Users;
 
-use CMS\Models\Permission;
-use CMS\Models\Role;
 use \Defuse\Crypto\Key;
 use \Defuse\Crypto\Crypto;
 use Defuse\Crypto\KeyProtectedByPassword;
-use \Defuse\Crypto\Exception as Ex;
 
 use CMS\Core\Model\Model;
 use \CMS\Models\DBC\DBC;
 use CMS\Models\Files\Folders;
-use CMS\Models\Files\FileUpload;
-use JsonSchema\Constraints\ObjectConstraint;
 
 
 class Users extends Model{

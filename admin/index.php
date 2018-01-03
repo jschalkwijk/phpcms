@@ -12,7 +12,12 @@
 //ROUTING
 	require_once('config.php');
 	use CMS\Core\Auth\Auth;
-	Auth::authenticate();
+
+    if (!Auth::authenticate()) {
+        header('Location: '.ADMIN.'login.php');
+        exit();
+    }
+
 	ob_start();
 	/*
 	|--------------------------------------------------------------------------

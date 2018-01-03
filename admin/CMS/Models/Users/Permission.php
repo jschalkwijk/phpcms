@@ -1,6 +1,6 @@
 <?php
 
-namespace CMS\Models;
+namespace CMS\Models\Users;
 
 use CMS\Core\Model\Model;
 
@@ -24,7 +24,7 @@ class Permission extends Model
     }
     public function users()
     {
-        return $this->ownedByMany(User::class,'users_permissions');
+        return $this->ownedByMany(Users::class,'users_permissions');
     }
 
 }

@@ -1,27 +1,7 @@
 <?php
 //	use CMS\Models\Files\Folders;
 	$dbc = new \CMS\Models\DBC\DBC;
-
 	$user = $data['user'];
-	foreach ($user->roles() as $role){
-	    echo $role->name."<br>";
-    };
-    if(!$user->givePermissionTo(['kill','rape'])){
-        echo "NOT NOT";
-    }
-	if($user->hasPermissionTo('kill')){
-	    echo "I have this permission";
-    };
-	if($user->hasRole('admin')){
-	    echo "I have this Role";
-    };
-
-//    if($user->revokePermissionTo(['rape','kill'])){
-//        echo "Murder";
-//    }
-        if($user->refreshPermissions(['test'])){
-        echo "Murder";
-    }
 ?>
 <div class="container">
 	<div class="row">
