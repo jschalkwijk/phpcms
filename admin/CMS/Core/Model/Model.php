@@ -723,7 +723,7 @@ abstract class Model
 
 
     /**
-     * Save an array of new models and attach them to the parent model.
+     * Save an array of models and attach them to the parent model.
      *
      * @param  $models
      * @param  $pivotTable

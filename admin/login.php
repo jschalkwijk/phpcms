@@ -18,9 +18,11 @@
 	// for some reason the autoloader does not work on this page for the crypto class..
 	// require_once 'CMS/Models/Encryption/Crypto.php';
 	$output_form = False;
+
+    // prevent session hijacking
+    ini_set('session.cookie_httponly', true);
+
 	session_start();
-	// prevent session hijacking
-	ini_set('session.cookie_httponly', true);
 
 	if(isset($_SESSION['last_ip']) === false) {
 		$_SESSION['last_ip'] = $_SERVER['REMOTE_ADDR'];

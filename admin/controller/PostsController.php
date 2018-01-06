@@ -184,7 +184,7 @@ class PostsController extends Controller
                 print_r($post->category_id);
                 //store the unsaved object in the session so all edited parts are saved when returning to the edit page for editting.
 
-//                (new SessionStorage('old'))->set($post->post_id,$post);
+                (new SessionStorage('old'))->set($post->post_id,$post);
 
 //                $_SESSION['invalid_edit'] = $post;
                 header("Location: ".ADMIN."posts/edit/".$post->post_id);

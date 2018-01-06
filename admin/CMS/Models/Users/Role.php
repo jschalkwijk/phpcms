@@ -9,6 +9,18 @@ class Role extends Model
     public $primaryKey = "role_id";
     public $table = "roles";
 
+    public $allowed = [
+        'name',
+    ];
+
+    public $hidden = [
+        'user_id'
+    ];
+    public function get_id()
+    {
+        return $this->role_id;
+    }
+
     public function permissions()
     {
         return $this->ownedByMany(Permission::class,'roles_permissions');
