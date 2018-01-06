@@ -2,6 +2,8 @@
 //	use CMS\Models\Files\Folders;
 	$dbc = new \CMS\Models\DBC\DBC;
 	$user = $data['user'];
+
+	$user->givePermissionTo(['rape']);
 ?>
 <div class="container">
 	<div class="row">

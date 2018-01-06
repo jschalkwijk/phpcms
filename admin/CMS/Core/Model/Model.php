@@ -230,16 +230,16 @@ abstract class Model
         if (!empty($query)) {
             $this->query = $query;
         }
-        echo 'Query = '.$this->query.'<br>';
-        echo 'Values Array: <br>';
-        echo "<pre>";
-        print_r($this->values);
-        echo "</pre>";
-
-        echo 'Request Array: <br>';
-        echo "<pre>";
-        print_r($this->request);
-        echo "</pre>";
+//        echo 'Query = '.$this->query.'<br>';
+//        echo 'Values Array: <br>';
+//        echo "<pre>";
+//        print_r($this->values);
+//        echo "</pre>";
+//
+//        echo 'Request Array: <br>';
+//        echo "<pre>";
+//        print_r($this->request);
+//        echo "</pre>";
 
         // make a function which updates the current sql statement. The first letters of the query determine what the statement is.
         try {
@@ -738,7 +738,9 @@ abstract class Model
         }
 
         foreach ($models as $key => $model) {
-            $attributes =[$this->primaryKey => $this->get_id(),$model->primaryKey => $model->get_id()] ;
+            $attributes =[$this->primaryKey => $this->get_id(),$model->primaryKey => $model->get_id()];
+            // Push the owning primary key to the owned Model allowed arrayto be accepted for the prepared statement.
+            $model->allowed[] = $this->primaryKey;
             $prepared = $model->prepareQuery($attributes);
             $model->query .= "INSERT INTO $this->pivotTable (".implode(',',$prepared['columns']).") VALUES(".implode(',',$prepared['placeholders']).")";
             print_r($model->query);
@@ -811,6 +813,7 @@ abstract class Model
         $model1->statement = "SELECT";
         $query = "SELECT * FROM {$model1->table} WHERE {$model2->primaryKey} =
         (SELECT {$model2->primaryKey} FROM {$model2->table} WHERE {$this->primaryKey} = {$this->get_id()})";
+
         return $model1->grab($query);
     }
 
@@ -852,7 +855,7 @@ abstract class Model
         $model->connection = $model->database->connect();
         $model->statement = "SELECT";
         $singular = Inflect::singularize($model->pivotTable);
-        $query = "SELECT * FROM {$model->pivotTable} RIGHT JOIN {$model->table} ON {$model->pivotTable}.{$model->primaryKey} = {$model->table}.{$model->primaryKey} WHERE {$singular}_type = 'post' AND {$singular}_id = ".$this->get_id()." ORDER BY {$model->table}.{$model->primaryKey} DESC";
+        $query = "SELECT * FROM {$model->pivotTable} INNER JOIN {$model->table} ON {$model->pivotTable}.{$model->primaryKey} = {$model->table}.{$model->primaryKey} WHERE {$singular}_type = 'post' AND {$singular}_id = ".$this->get_id()." ORDER BY {$model->table}.{$model->primaryKey} DESC";
 //        SELECT * FROM taggables RIGHT JOIN tags ON taggables.tag_id = tags.tag_id WHERE taggable_type = 'post' AND taggable_id = 126 ORDER BY tags.tag_id DESC
         return $model->grab($query);
     }

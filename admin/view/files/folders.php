@@ -13,7 +13,8 @@
 				$doc = ['txt', 'doc', 'docx', 'odt'];
 				$img = ['jpg', 'jpeg', 'png'];
 				$url = $_SERVER["REQUEST_URI"];
-                foreach($folder->products() as $product){
+                $products= (!$folder->products)? [] : $folder->products();
+                foreach($products as $product){
                     echo "Productname".$product->name."<br>";
                 }
 		?>
@@ -22,7 +23,8 @@
 					<thead><th></th><th>Name</th><th>Type</th><th>Size</th><th>Del</th></thead>
 					<tbody>
 					<?php
-						foreach($folder->files() as $single){
+                        $files = (!$folder->files)? [] : $folder->files();
+						foreach($files as $single){
 							require 'view/files/single-file.php';
 						}
 					?>
@@ -57,7 +59,8 @@
                         if(isset($data['folders']) && !isset($data['folder'])){
                             $folders = $data['folders'];
                         } else {
-                            $folders = $folder->children();
+
+                         $folders = (!$folder->children)? [] : $folder->children();
                         }
 						foreach($folders as $folder) { ?>
 							<tr>
