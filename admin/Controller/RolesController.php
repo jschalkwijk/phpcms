@@ -72,7 +72,7 @@
             }
             $this->view(
                     'Edit Role',
-                    ['posts/add-edit-role.php'],
+                    ['roles/create.php'],
                     $params,
                     [
                         'role' => $role,
