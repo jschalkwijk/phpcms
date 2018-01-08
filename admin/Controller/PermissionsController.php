@@ -11,11 +11,13 @@
 
         public function index($response,$params)
         {
-
+            $permissions = Permission::all();
+            $this->view('Permissions',['permissions/permissions.php'],$params,['permissions' => $permissions]);
         }
 
         public function show($response,$params){
-
+            $permission = Permission::one($params['id']);
+            $this->view('Permission '.$permission->name,['permissions/show.php'],$params,['permission' => $permission]);
         }
 
         public function create($response,$params)

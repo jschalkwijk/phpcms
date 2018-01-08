@@ -29,6 +29,7 @@
         {
             $role = new Role($_POST);
             $permissions = Permission::all();
+
             if(isset($_POST['submit'])){
                 if(isset($_POST['name']) && !empty($_POST['name'])){
                     if($role->save()) {
@@ -64,19 +65,26 @@
 
         public function edit($response,$params)
         {
+            $permissions = Permission::all();
+
             if(!SessionStorage::getByName('old')->exists($params['id'])){
                 $role = Role::one($params['id']);
             } else {
                 $role = SessionStorage::getByName('old')->get($params['id']);
                 SessionStorage::getByName('old')->unsetIndex($role->role_id);
             }
+            foreach ($role->permissions() as $permission) {
+                $currentPermissions[] = $permission->permission_id;
+            };
             $this->view(
                     'Edit Role',
                     ['roles/create.php'],
                     $params,
                     [
                         'role' => $role,
-                        'errors' => (new Error())->errors(), s
+                        'permissions' => $permissions,
+                        'currentPermissions' => $currentPermissions,
+                        'errors' => (new Error())->errors(),
                     ]
                 );
 
@@ -87,11 +95,14 @@
             $role = Role::one($params['id']);
             if (isset($_POST['submit'])) {
                 $role->patch($_POST);
-                if (!empty($role->name) && !empty($role->description)) {
-                    $role->savePatch();
+                if (!empty($role->name)) {
 
-                    if (isset($_SESSION['old'][$role->post_id])) {
-                        SessionStorage::getByName('old')->unsetIndex($role->post_id);
+                    if($role->savePatch()) {
+                        $role->sync(Permission::class,$role->permissions,$_POST['checkbox'],'roles_permissions');
+                    }
+
+                    if (isset($_SESSION['old'][$role->role_id])) {
+                        SessionStorage::getByName('old')->unsetIndex($role->role_id);
                     }
 
                     header("Location: " . ADMIN . "roles");

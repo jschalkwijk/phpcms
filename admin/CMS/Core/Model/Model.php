@@ -230,16 +230,16 @@ abstract class Model
         if (!empty($query)) {
             $this->query = $query;
         }
-//        echo 'Query = '.$this->query.'<br>';
-//        echo 'Values Array: <br>';
-//        echo "<pre>";
-//        print_r($this->values);
-//        echo "</pre>";
-//
-//        echo 'Request Array: <br>';
-//        echo "<pre>";
-//        print_r($this->request);
-//        echo "</pre>";
+        echo 'Query = '.$this->query.'<br>';
+        echo 'Values Array: <br>';
+        echo "<pre>";
+        print_r($this->values);
+        echo "</pre>";
+
+        echo 'Request Array: <br>';
+        echo "<pre>";
+        print_r($this->request);
+        echo "</pre>";
 
         // make a function which updates the current sql statement. The first letters of the query determine what the statement is.
         try {
@@ -269,7 +269,7 @@ abstract class Model
                 if($query->rowCount() > 0){
                     return $this->collect($results);
                 } else {
-                    return false;
+                    return [];
                 }
             } else {
                 $this->database->close();
@@ -715,7 +715,7 @@ abstract class Model
             $query = "SELECT * FROM $model->table WHERE $model->primaryKey IN ( SELECT $model->primaryKey FROM $pivotTable WHERE $this->primaryKey = {$this->get_id()})";
         } else if($pivotTable != null && $primaryKey != null && $foreignKey != null){
             //$query = "SELECT * FROM {$model->table} WHERE {$primaryKey} = {$this->$foreignKey}";
-            $query = "SELECT * FROM $model->table WHERE $model->primaryKey IN ( SELECT $foreignKey FROM $pivotTable WHERE $primaryKey = ({$this->$primaryKey})";
+            $query = "SELECT * FROM $model->table WHERE $model->primaryKey IN ( SELECT $foreignKey FROM $pivotTable WHERE $primaryKey = {$this->$primaryKey})";
         }
 
         return $model->grab($query);
@@ -754,14 +754,12 @@ abstract class Model
 
     /**
      * @param array $models
-     * @param string|null $pivotTable
+     * @param string $pivotTable
      * @return bool
      */
-    public function removeMany(array $models, $pivotTable = null) : bool
+    public function removeMany(array $models, $pivotTable) : bool
     {
-        if(isset($pivotTable)){
-            $this->pivotTable = $pivotTable;
-        } else if(!isset($this->pivotTable ) && $pivotTable == null) {
+        if(!isset($pivotTable)) {
             return false;
         }
         $ids = [];
@@ -771,9 +769,52 @@ abstract class Model
 
         $modelPrimaryKey = $models[0]->primaryKey;
         $ids = implode(',',$ids);
-        $this->query = "DELETE FROM $this->pivotTable WHERE $modelPrimaryKey IN($ids) AND $this->primaryKey = {$this->get_id()}";
+        $this->query = "DELETE FROM $pivotTable WHERE $modelPrimaryKey IN($ids) AND $this->primaryKey = {$this->get_id()}";
 
         if($this->grab() != true){
+            return false;
+        };
+
+        return true;
+    }
+
+    /**
+     * @param string $class
+     * @param array $currentRelations
+     * @param array $ids
+     * @param string $pivotTable
+     * @return bool
+     */
+    public function sync($class, $currentRelations, $ids, $pivotTable): bool
+    {
+        if(!isset($pivotTable)) {
+            return false;
+        }
+        // get current permission id's
+        foreach ($currentRelations as $relation) {
+            if(!isset($primaryKey)) {
+                $primaryKey = $relation->primaryKey;
+            }
+            $currentIds[] = $relation->$primaryKey;
+        };
+        // return the difference for new added permission id's
+        $attach = array_diff($ids,$currentIds);
+        // return old permissions
+        $detach = array_diff($currentIds,$ids);
+        if(empty($attach) && empty($detach)){
+            return false;
+        }
+        //get the new models to attach
+        $new = $class::allWhere([$primaryKey => $attach]);
+
+        // save new models
+        if (!empty($new) && !$this->saveMany($new, $pivotTable)) {
+            return false;
+        };
+        // get old models
+        $old = $class::allWhere([$primaryKey => $detach]);
+        // remove old models
+        if (!empty($old) && !$this->removeMany($old, $pivotTable)) {
             return false;
         };
 

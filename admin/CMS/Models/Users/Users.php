@@ -148,7 +148,7 @@ class Users extends Model{
 
     public function refreshPermissions(array $permissions)
     {
-        $this->removeMany($this->permissions());
+        $this->removeMany($this->permissions(),'users_permissions');
 
         return $this->givePermissionTo($permissions);
 
