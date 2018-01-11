@@ -24,7 +24,15 @@ class Permission extends Model
     }
     public function users()
     {
-        return $this->ownedByMany(Users::class,'users_permissions');
+        $users1 = $this->ownedByMany(Users::class,'users_permissions');
+        $users2 = $this->hasUsersThroughRoles();
+
+        return array_merge($users1,$users2);
+    }
+
+    public function hasUsersThroughRoles()
+    {
+        return $this->ownsThroughMany(Users::class,Role::class,'users_roles','roles_permissions');
     }
 
 }

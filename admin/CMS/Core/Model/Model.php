@@ -474,7 +474,7 @@ abstract class Model
 //            }
 //        }
 
-        $prep = $this->prepareQuery($this->request);
+        $prep = $this->prepareQuery();
         $string = array();
         foreach($prep['columns'] as $column){
             // Set column to ? for prepared statement
@@ -508,8 +508,7 @@ abstract class Model
             // reset Values.
             $this->values = [];
         }
-        echo "Patch Request: <br>";
-        print_r($this->request);
+
         // Reset Current Object values with new values;
         if(!empty($this->request)) {
             //$this->request = $attributes;
@@ -517,7 +516,8 @@ abstract class Model
                 $this->$key = $value;
             }
         }
-
+        echo "Patch Request: <br>";
+        print_r($this->request);
         return $this;
     }
 
@@ -561,8 +561,13 @@ abstract class Model
                     $placeholders[] = '?';
                     $columns[] = $column;
                     $this->values[] = $value;
+                }  else if (!empty($this->encrypted) && in_array($column, $this->encrypted)) {
+                    //                $this->$column = $this->encrypt($value);
+                    $placeholders[] = '?';
+                    $columns[] = $column;
+                    $this->values[] = $this->encrypt($value);
                 } else {
-                    echo "<p style='color: red;'>{$column} not set as allowed attribute</p>";
+//                    echo "<p style='color: red;'>{$column} not set as allowed attribute</p>";
                 }
             }
         } else {
@@ -589,21 +594,6 @@ abstract class Model
             }
         }
 
-//        foreach($this->request as $column => $value){
-//            if(in_array($column,$this->allowed)){
-//                $placeholders[] = '?';
-//                $columns[] = $column;
-//                $this->values[] = $value;
-//            } else {
-//                echo "<p style='color: red;'>{$column} not set as allowed attribute</p>";
-//            }
-//        }
-//        // Checks if the hidden properties are allowed. Example: current user_id etc.
-//        foreach($this->hidden as $column => $value){
-//                $placeholders[] = '?';
-//                $columns[] = $column;
-//                $this->values[] = $value;
-//        }
         return ['placeholders' => $placeholders,'columns' => $columns];
     }
 

@@ -1,4 +1,4 @@
-<?php $role = $data['role']; ?>
+<?php $permission = $data['permission']; ?>
 <div class="container">
     <div class="row">
         <div class="col-xs-6 col-sm-6 col-md-6 push-sm-3 push-md-3">
@@ -10,9 +10,9 @@
     </div>
     <div class="row">
         <div class="col-xs-6 col-sm-6 col-md-6 push-sm-3 push-md-3">
-            <?php (isset($params['id'])) ? $action = ADMIN . 'roles/update/' . $role->role_id : $action = ADMIN . 'roles/create'; ?>
+            <?php (isset($params['id'])) ? $action = ADMIN . 'permissions/update/' . $permission->permission_id : $action = ADMIN . 'permissions/create'; ?>
             <form action="<?= $action;?>" method="post">
-                <input type="text" name="name" placeholder="Role Name" value="<?= $role->name ?>"><br />
+                <input type="text" name="name" placeholder="Role Name" value="<?= $permission->name ?>"><br />
                 <button type="submit" name="submit">Submit</button>
                 <table class="table">
                     <thead>
@@ -23,16 +23,16 @@
                         <tr>
                             <?php
                                 $i = 1;
-                                foreach($data['permissions'] as $permission){
+                                foreach($data['roles'] as $role){
                                     echo "<td>";
-                                    if(in_array($permission->permission_id,$data['currentPermissions'])) {
-                                        echo "<input type='checkbox' value='$permission->permission_id' name='checkbox[]' checked/>";
+                                    if(in_array($role->role_id,$data['currentRoles'])) {
+                                        echo "<input type='checkbox' value='$role->role_id' name='checkbox[]' checked/>";
                                     } else {
-                                        echo "<input type='checkbox' value='$permission->permission_id' name='checkbox[]'/>";
+                                        echo "<input type='checkbox' value='$role->role_id' name='checkbox[]'/>";
                                     }
                                     echo "</td>";
                                     ?>
-                                    <td><lable><?= $permission->name?></lable> </td>
+                                    <td><lable><?= $role->name?></lable> </td>
                                     <?php if ($i % 4 == 0) echo "</tr><tr>"; $i++;?>
                             <?php } ?>
                         </tr>

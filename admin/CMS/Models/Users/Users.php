@@ -29,9 +29,9 @@ class Users extends Model{
 
 	protected $allowed = [
 		'username',
-		'folder_id',
+		'album_id',
         'trashed',
-        'approved'
+        'approved' ,
 	];
 
 	protected $encrypted = [
@@ -45,7 +45,7 @@ class Users extends Model{
 	protected $hidden = [
 		'password',
 		'protected_key',
-		'folder_id',
+		'album_id',
 	];
 
 	public function firstName(){
@@ -296,12 +296,11 @@ class Users extends Model{
 //			}
 //		}
 		$this->patch();
-
+                                 
 		if((!empty($username) && $this->request['confirm'] == 'Yes') && ($query->rowCount() === 0 || ($query->rowCount() === 1 && ($username === $old_username)))){
-			$new_password = trim($password);
-			$new_password_again = trim($password_again);
 
-			$this->patch();
+		    $new_password = trim($password);
+			$new_password_again = trim($password_again);
 
 			/*
 			 * TODO : if a patch is successfully saved, the values array should be deleted inside the Model
@@ -312,7 +311,7 @@ class Users extends Model{
 				if ($new_password === $new_password_again) {
 					$hash = password_hash($new_password, PASSWORD_BCRYPT);
 					$this->password = $hash;
-//					$this->patch();
+					$this->patch(['password' => $this->password]);
 					$messages[] = 'You password has been successfully changed.';
 				} else {
 					$messages[] = 'Passwords do not match, please retype your password correctly.';

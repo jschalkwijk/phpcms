@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-xs-6 col-sm-6 col-lg-6 col-sm-offset-3 push-lg-2">
             <div class="center">
-                <form  method="post" action="/admin/roles/action">
+                <form  method="post" action="/admin/permissions/action">
                     <table class="backend-table title">
                         <tr class="meta">
                             <th>Name</th>
@@ -15,8 +15,8 @@
                             </th>
                         </tr>
                         <?php
-                            $roles = $data['roles'];
-                            foreach ($roles as $single) { ?>
+                            $permissions = $data['permissions'];
+                            foreach ($permissions as $single) { ?>
                             <tr>
                                 <td class="td-title"><a href="/admin/<?= $single->table.'/'.$single->get_id()?>"><?= $single->name; ?></a></td>
                                 <td class="td-date"><p><?= $single->date; ?></p></td>
