@@ -2,9 +2,12 @@
     namespace Controller;
 
     use CMS\Models\Controller\Controller;
+    use CMS\Models\Support\Error;
+    use CMS\Models\Support\Session;
     use CMS\Models\Users\Permission;
     use CMS\Models\Actions\UserActions;
     use CMS\Models\Actions\Actions;
+    use CMS\Models\Users\Role;
 
     class PermissionsController extends Controller {
         use UserActions;
@@ -22,6 +25,28 @@
 
         public function create($response,$params)
         {
+            $permission = new Permission($_POST);
+
+            if (isset($_POST['submit']) && !empty($permission->name)) {
+                if (!empty($permission->name)) {
+                    $permission->save();
+                } else {
+                    $errors = new Error([
+                        'You forgot to fill in a name',
+                    ]);
+                }
+            }
+
+            $this->view(
+                'Create Permission',
+                ['permissions/create.php'],
+                $params,
+                [
+                    'permission' => $permission,
+                    'roles' => Role::all(),
+                    'errors' => (new Error())->errors()
+                ]
+            );
 
         }
 
@@ -32,7 +57,29 @@
 
         public function edit($response,$params)
         {
+            $permission = Permission::one($params['id']);
 
+            if (isset($_POST['submit'])) {
+                $permission->patch($_POST);
+                if (!empty($permission->name)){
+                  $permission->savePatch();
+                } else {
+                    $errors = new Error([
+                        'You forgot to fill in a name',
+                    ]);
+                }
+            }
+
+            $this->view(
+                'Edit Permission '.$permission->name,
+                ['permissions/create.php'],
+                $params,
+                [
+                    'permission' => $permission,
+                    'roles' => Role::all(),
+                    'errors' => (new Error())->errors()
+                ]
+            );
         }
 
         public function update($response,$params)

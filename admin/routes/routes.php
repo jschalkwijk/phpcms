@@ -40,7 +40,7 @@
             $app->get('/:id',[new Controller\PermissionsController, 'show']);
             $app->map('/deleted', [new Controller\PermissionsController, 'deleted'],['GET','POST']);
             $app->map('/edit/:id', [new Controller\PermissionsController, 'edit'],['GET','POST']);
-            $app->post('/update/:id', [new Controller\PermissionsController, 'update']);
+            $app->post('/update/:id', [new Controller\PermissionsController, 'create']);
             $app->map('/create', [new Controller\PermissionsController, 'create'],['GET','POST']);
             $app->post('/action', [new Controller\PermissionsController, 'action']);
             $app->get('/approve/:id', [new Controller\PermissionsController, 'approve']);

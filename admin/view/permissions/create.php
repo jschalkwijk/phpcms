@@ -12,12 +12,12 @@
         <div class="col-xs-6 col-sm-6 col-md-6 push-sm-3 push-md-3">
             <?php (isset($params['id'])) ? $action = ADMIN . 'permissions/update/' . $permission->permission_id : $action = ADMIN . 'permissions/create'; ?>
             <form action="<?= $action;?>" method="post">
-                <input type="text" name="name" placeholder="Role Name" value="<?= $permission->name ?>"><br />
+                <input type="text" name="name" placeholder="Permission Name" value="<?= $permission->name ?>"><br />
                 <button type="submit" name="submit">Submit</button>
                 <table class="table">
                     <thead>
                             <tr>
-                            <th class="text-center" colspan="6">Permissions</th>
+                            <th class="text-center" colspan="6">Select Role (Optional)</th>
                     </thead>
                     <tbody>
                         <tr>
@@ -25,14 +25,15 @@
                                 $i = 1;
                                 foreach($data['roles'] as $role){
                                     echo "<td>";
-                                    if(in_array($role->role_id,$data['currentRoles'])) {
+                                    if (isset($data['currentPermissions']) && in_array($permission->permission_id,$data['currentPermissions'])) {
                                         echo "<input type='checkbox' value='$role->role_id' name='checkbox[]' checked/>";
                                     } else {
                                         echo "<input type='checkbox' value='$role->role_id' name='checkbox[]'/>";
                                     }
+
                                     echo "</td>";
                                     ?>
-                                    <td><lable><?= $role->name?></lable> </td>
+                                    <td><label><?= ucfirst($role->name) ?></label> </td>
                                     <?php if ($i % 4 == 0) echo "</tr><tr>"; $i++;?>
                             <?php } ?>
                         </tr>
