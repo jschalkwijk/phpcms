@@ -2,7 +2,9 @@
 
 	namespace Controller;
 	use CMS\Models\Controller\Controller;
-	use \CMS\Models\Users\Users as User;
+    use CMS\Models\Users\Permission;
+    use CMS\Models\Users\Role;
+    use \CMS\Models\Users\Users as User;
 	use CMS\Models\Actions\Actions;
 
 class UsersController extends Controller {
@@ -34,6 +36,8 @@ class UsersController extends Controller {
 			$params,
 			[
 				'user' => $user,
+				'permissions' => Permission::all(),
+				'roles' => Role::all(),
 				'messages' => $add['messages'],
 			]
 		);

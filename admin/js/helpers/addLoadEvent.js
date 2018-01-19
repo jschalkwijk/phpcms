@@ -1,13 +1,13 @@
 function addLoadEvent(func) {
-    var oldonload = window.onload;
-    if (typeof window.onload != 'function') {
-        window.onload = func;
-    } else {
+    if (window.addEventListener)
+        window.addEventListener("load", func, false);
+    else if (window.attachEvent)
+        window.attachEvent("onload", func);
+    else { // fallback
+        var old = window.onload;
         window.onload = function() {
-            if (oldonload) {
-                oldonload();
-            }
+            if (old) old();
             func();
-        }
+        };
     }
 }

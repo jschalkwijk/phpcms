@@ -5,6 +5,8 @@
 
 	$user->givePermissionTo(['rape']);
 ?>
+<script src="/admin/view/users/users.js"></script>
+
 <div class="container">
 	<div class="row">
 		<div class="col-sm-6 col-lg-6 col-sm-offset-3 push-lg-3">
@@ -37,7 +39,7 @@
 			<?php
 				(isset($params['id'])) ? $action = ADMIN . 'users/edit/' . $user->user_id: $action = ADMIN . 'users/create';
 			?>
-			<form id="add-user" method="post" action="<?= $action; ?>">
+			<form id="add-use" method="post" action="<?= $action; ?>">
 				<input type="hidden" name="id" value="<?= $user->user_id; ?>"/>
 				<input type="hidden" name="old_username" value="<?= $user->username; ?>"/>
 				<input type="text" name="username" placeholder="Username"
@@ -50,23 +52,63 @@
 				<input type="text" name="email" placeholder="Email" value="<?= $user->mail(); ?>"/> <br/>
 				<input type="text" name="function" placeholder="Function"
 					   value="<?= $user->position(); ?>"/> <br/>
-				<p>Rights</p>
-				<input type="radio" name="rights" value="Admin" <?php if ($user->rights() == 'Admin') {
-					echo 'checked="checked"';
-				} ?>/>
-				<span> Admin | Can add new vacancies, approve and change them. Add/delete/change users and changes user rights/passwords.</span><br/>
-				<input type="radio" name="rights"
-					   value="Content Manager" <?php if ($user->keep($user->rights()) == 'Content Manager') {
-					echo 'checked="checked"';
-				} ?>/>
-				<span> Content Manager | Can add new vacancies, approve and change them.</span><br/>
-				<input type="radio" name="rights" value="Author" <?php if ($user->keep($user->rights()) == 'Author') {
-					echo 'checked="checked"';
-				} ?>/>
-				<span> Author | Can add new vacancies, change them. The changes made need approval from either a Admin or Content Manager.</span><br/>
-				<p>Are you sure you want to edit this user?</p>
-				<input type="radio" name="confirm" value="Yes"/> Yes
-				<input type="radio" name="confirm" value="No" checked="checked"/> No <br/>
+
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th class="text-center" colspan="6">Roles</th>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <?php
+                            $i = 1;
+                            foreach($data['roles'] as $role){
+                                echo "<td><input type='checkbox' value='$role->role_id' name='roles[]'/></td>";
+                                foreach ($role->permissions as $perm){
+                                    $permissionsID[] = $perm->permission_id;
+                                }
+                                echo "<td><input id='role_$role->role_id' type='hidden' value='".json_encode($permissionsID)."'/></td>";
+                                $permissionsID = [];
+                                ?>
+
+                                <td><label><?= ucfirst($role->name) ?></label> </td>
+                                <?php if ($i % 4 == 0) echo "</tr><tr>"; $i++;?>
+                            <?php } ?>
+                    </tr>
+                    </tbody>
+                </table>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th class="text-center" colspan="6">Permissions</th>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <?php
+                            $i = 1;
+                            foreach($data['permissions'] as $permission){
+                                echo "<td><input type='checkbox' value='$permission->permission_id' name='permissions[]'/></td>";
+                                ?>
+                                <td><lable><?= ucfirst($permission->name)?></lable></td>
+                                <?php if ($i % 4 == 0) echo "</tr><tr>"; $i++;?>
+                            <?php } ?>
+                    </tr>
+                    </tbody>
+                </table>
+
+<!--				<span> Admin | Can add new vacancies, approve and change them. Add/delete/change users and changes user rights/passwords.</span><br/>-->
+<!--				<input type="radio" name="rights"-->
+<!--					   value="Content Manager" --><?php //if ($user->keep($user->rights()) == 'Content Manager') {
+//					echo 'checked="checked"';
+//				} ?><!--/>-->
+<!--				<span> Content Manager | Can add new vacancies, approve and change them.</span><br/>-->
+<!--				<input type="radio" name="rights" value="Author" --><?php //if ($user->keep($user->rights()) == 'Author') {
+//					echo 'checked="checked"';
+//				} ?><!--/>-->
+<!--				<span> Author | Can add new vacancies, change them. The changes made need approval from either a Admin or Content Manager.</span><br/>-->
+<!--				<p>Are you sure you want to edit this user?</p>-->
+<!--				<input type="radio" name="confirm" value="Yes"/> Yes-->
+<!--				<input type="radio" name="confirm" value="No" checked="checked"/> No <br/>-->
 				<button type="submit" name="submit">Update</button>
 			</form>
 		</div>

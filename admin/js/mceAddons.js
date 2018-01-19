@@ -3,7 +3,7 @@
  */
 /* Made to add files on click to the tinyMCE editor */
 
-window.onload = mce;
+// window.onload = mce;
 
 // called after image search.
 function mce(){
@@ -73,3 +73,4 @@ function handleImagesAdding(){
         });
     }
 }
+addLoadEvent(mce);

@@ -43,12 +43,15 @@ The CSS, XHTML and design is released under GPL: http://www.opensource.org/licen
 }
 
 /* Add Post styles*/
-#addpost-form input,#create-form input, #edit-form input ,#add-user input {
+
+form input[type=text],form input[type=password] {
 	width: 100%;
 	height: 30px;
 	border-radius: 5px;
 	margin-bottom: 5px;
 }
+
+
 #addpost-form textarea , #create-form textarea, #edit-form textarea,#add-user textarea{
 	width: 100%;
 	min-height: 500px;

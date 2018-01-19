@@ -2,7 +2,7 @@
  * Created by jorn on 11-04-16.
  */
 
-handleCheck();
+addLoadEvent(handleCheck);
 
 /* called by mceAddons.js when needed*/
 function check(){

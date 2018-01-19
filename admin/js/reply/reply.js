@@ -75,4 +75,4 @@ function init2(){
     controller.actions();
 }
 
-addLoadEvent(init2());
+addLoadEvent(init2);

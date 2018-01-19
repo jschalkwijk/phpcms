@@ -16,6 +16,7 @@
 		convert_urls: true
 	});
 </script>
+
 <script type="text/javascript" src="<?= "/admin/view/posts/edit-lock/edit-lock.js";?>"></script>
 
 <?php
