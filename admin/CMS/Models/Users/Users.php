@@ -112,7 +112,12 @@ class Users extends Model{
 //	#Permissions
     public function getPermissions(array $permissions)
     {
-        return Permission::allWhere(['name' => $permissions]);
+        if(array_filter($permissions,'is_int')){
+            return Permission::allWhere(['permission_id' => $permissions]);
+        } else {
+            return Permission::allWhere(['name' => $permissions]);
+        }
+
     }
 //
     public function givePermissionTo(array $permissions)

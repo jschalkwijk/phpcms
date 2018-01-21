@@ -28,7 +28,9 @@ class UsersController extends Controller {
 		$user = new User();
 		if(isset($_POST['submit'])){
 			$user = new User($_POST);
-			$add = $user->add();
+			$user->add();
+			$user->user_id = $user->lastInsertId;
+			$user->givePermissionTo($_POST['permissions[]']);
 		}
 		$this->view(
 			'Add User',
@@ -38,9 +40,13 @@ class UsersController extends Controller {
 				'user' => $user,
 				'permissions' => Permission::all(),
 				'roles' => Role::all(),
-				'messages' => $add['messages'],
 			]
 		);
+	}
+
+    public function store($response,$params = null)
+    {
+
 	}
 	public function deleted($response,$params = null){
 		$users = User::allWhere(['trashed' => 1]);
@@ -63,10 +69,21 @@ class UsersController extends Controller {
 		}
 
 		$user = User::one($params['id']);
+		$roles = $user->roles();
+        foreach ($roles as $role) {
+            $currentRoles[] = $role->role_id;
+            foreach ($role->permissions() as $permission){
+                $currentPermissions[] = $permission->permission_id;
+            }
+        };
+        foreach ($user->permissions() as $customPermission){
+            $customPermissions[] = $customPermission->permission_id;
+        }
 
 		if(isset($_POST['submit'])){
 			$user->request = $_POST;
-			$add = $user->edit();
+			$user->edit();
+            $user->givePermissionTo($_POST['permissions[]']);
 //			print_r($user);
 		}
 
@@ -76,7 +93,11 @@ class UsersController extends Controller {
 			$params,
 			[
 				'user' => $user,
-				'messages' => $add['messages'],
+                'permissions' => Permission::all(),
+                'roles' => Role::all(),
+                'currentRoles' => $currentRoles,
+                'currentPermissions' => $currentPermissions,
+                'customPermissions' => $customPermissions,
 			]
 		);
 	}

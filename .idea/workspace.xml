@@ -3,15 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="0a43c896-b199-4fd3-a7cd-831809ebb533" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/CMS/Core/Model/Model.php" afterPath="$PROJECT_DIR$/admin/CMS/Core/Model/Model.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/CMS/Models/Users/Users.php" afterPath="$PROJECT_DIR$/admin/CMS/Models/Users/Users.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/controller/UsersController.php" afterPath="$PROJECT_DIR$/admin/controller/UsersController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/js/checkAll.js" afterPath="$PROJECT_DIR$/admin/js/checkAll.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/js/helpers/addLoadEvent.js" afterPath="$PROJECT_DIR$/admin/js/helpers/addLoadEvent.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/js/mceAddons.js" afterPath="$PROJECT_DIR$/admin/js/mceAddons.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/js/reply/reply.js" afterPath="$PROJECT_DIR$/admin/js/reply/reply.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/templates/default/style.css" afterPath="$PROJECT_DIR$/admin/templates/default/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/view/posts/posts.php" afterPath="$PROJECT_DIR$/admin/view/posts/posts.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/view/permissions/create.php" afterPath="$PROJECT_DIR$/admin/view/permissions/create.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/view/users/add-edit-user.php" afterPath="$PROJECT_DIR$/admin/view/users/add-edit-user.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin/view/users/users.js" afterPath="$PROJECT_DIR$/admin/view/users/users.js" />
     </list>
     <ignored path="CMS.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -44,13 +40,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="add-edit-user.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="add-edit-user.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/admin/view/users/add-edit-user.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1050">
-              <caret line="70" column="51" lean-forward="false" selection-start-line="70" selection-start-column="51" selection-end-line="70" selection-end-column="51" />
+            <state relative-caret-position="264">
+              <caret line="88" column="24" lean-forward="true" selection-start-line="88" selection-start-column="24" selection-end-line="88" selection-end-column="24" />
               <folding>
-                <marker date="1516346145000" expanded="true" signature="623:889" ph="..." />
+                <marker date="1516544886000" expanded="true" signature="586:852" ph="..." />
               </folding>
             </state>
           </provider>
@@ -59,54 +55,19 @@
       <file leaf-file-name="Role.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/CMS/Models/Users/Role.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="24" column="5" lean-forward="false" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
+            <state relative-caret-position="270">
+              <caret line="18" column="28" lean-forward="true" selection-start-line="18" selection-start-column="28" selection-end-line="18" selection-end-column="28" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Model.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/CMS/Core/Model/Model.php">
+      <file leaf-file-name="create.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin/view/roles/create.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="10350">
-              <caret line="695" column="20" lean-forward="false" selection-start-line="695" selection-start-column="20" selection-end-line="695" selection-end-column="20" />
-              <folding>
-                <marker date="1516309947000" expanded="true" signature="13199:13325" ph="INSERT INTO ${$this-&gt;table}... " />
-                <marker date="1516309947000" expanded="true" signature="14494:14520" ph="UPDATE ${{$t... " />
-                <marker date="1516309947000" expanded="true" signature="16237:16313" ph="DELETE FROM " />
-                <marker date="1516309947000" expanded="true" signature="17661:17672" ph="..." />
-                <marker date="1516309947000" expanded="true" signature="22426:22485" ph="SELECT * FRO... $" />
-                <marker date="1516309947000" expanded="true" signature="22593:22645" ph="SELECT * FRO... $" />
-                <marker date="1516309947000" expanded="true" signature="23334:23393" ph="SELECT * FRO... $" />
-                <marker date="1516309947000" expanded="true" signature="23438:23521" ph="SELECT * FRO... $" />
-                <marker date="1516309947000" expanded="true" signature="23438:23538" ph="SELECT * FRO... $" />
-                <marker date="1516309947000" expanded="true" signature="23438:23545" ph="SELECT * FRO... $" />
-                <marker date="1516309947000" expanded="true" signature="23438:23562" ph="SELECT * FRO... $" />
-                <marker date="1516309947000" expanded="true" signature="23438:23565" ph="SELECT * FRO... ${$model-&gt;table}" />
-                <marker date="1516309947000" expanded="true" signature="23438:23583" ph="SELECT * FRO... $" />
-                <marker date="1516309947000" expanded="true" signature="23582:23583" ph="SELECT * FRO... $" />
-                <marker date="1516309947000" expanded="true" signature="23696:23748" ph="SELECT * FRO... $" />
-                <marker date="1516309947000" expanded="true" signature="23793:23857" ph="SELECT * FRO... ${$model-&gt;table}" />
-                <marker date="1516309947000" expanded="true" signature="23793:23858" ph="SELECT * FRO... $" />
-                <marker date="1516309947000" expanded="true" signature="23793:23869" ph="SELECT * FRO... ${$model-&gt;table}" />
-                <marker date="1516309947000" expanded="true" signature="23793:23874" ph="SELECT * FRO... ${$model-&gt;table}" />
-                <marker date="1516309947000" expanded="true" signature="23793:23875" ph="SELECT * FRO... $" />
-                <marker date="1516309947000" expanded="true" signature="23793:23886" ph="SELECT * FRO... ${$model-&gt;table}" />
-                <marker date="1516309947000" expanded="true" signature="23793:23893" ph="SELECT * FRO... $" />
-                <marker date="1516309947000" expanded="true" signature="23793:23904" ph="SELECT * FRO... ${$model-&gt;table}" />
-                <marker date="1516309947000" expanded="true" signature="23793:23907" ph="SELECT * FRO... $" />
-                <marker date="1516309947000" expanded="true" signature="23793:23928" ph="SELECT * FRO... " />
-                <marker date="1516309947000" expanded="true" signature="24814:24934" ph="INSERT INTO ${$this-&gt;pivotTable}... " />
-                <marker date="1516309947000" expanded="true" signature="25560:25610" ph="DELETE FROM " />
-                <marker date="1516309947000" expanded="true" signature="25560:25640" ph="DELETE FROM " />
-                <marker date="1516309947000" expanded="true" signature="25560:25656" ph="DELETE FROM " />
-                <marker date="1516309947000" expanded="true" signature="27868:28035" ph="SELECT * FRO... $" />
-                <marker date="1516309947000" expanded="true" signature="28088:28284" ph="/** * @param... " />
-                <marker date="1516309947000" expanded="true" signature="28614:28988" ph="SELECT * FRO... ${$model1-&gt;table}" />
-                <marker date="1516309947000" expanded="true" signature="28718:28966" ph="SELECT ${$mo... $" />
-                <marker date="1516309947000" expanded="true" signature="29553:29822" ph="SELECT * FRO... $" />
-              </folding>
+            <state relative-caret-position="75">
+              <caret line="5" column="54" lean-forward="true" selection-start-line="5" selection-start-column="54" selection-end-line="5" selection-end-column="54" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -114,18 +75,8 @@
       <file leaf-file-name="Permission.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/CMS/Models/Users/Permission.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="28" lean-forward="false" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="header.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin/templates/default/header.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="84" lean-forward="false" selection-start-line="14" selection-start-column="84" selection-end-line="14" selection-end-column="84" />
+            <state relative-caret-position="555">
+              <caret line="37" column="0" lean-forward="true" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -134,8 +85,8 @@
       <file leaf-file-name="add-edit-post.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/view/posts/add-edit-post.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="9" lean-forward="false" selection-start-line="17" selection-start-column="9" selection-end-line="17" selection-end-column="9" />
+            <state relative-caret-position="495">
+              <caret line="86" column="6" lean-forward="false" selection-start-line="86" selection-start-column="6" selection-end-line="86" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -144,18 +95,42 @@
       <file leaf-file-name="UsersController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/Controller/UsersController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="31" column="9" lean-forward="false" selection-start-line="31" selection-start-column="9" selection-end-line="31" selection-end-column="9" />
+            <state relative-caret-position="381">
+              <caret line="91" column="40" lean-forward="true" selection-start-line="91" selection-start-column="40" selection-end-line="91" selection-end-column="40" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="users.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Users.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin/CMS/Models/Users/Users.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1469">
+              <caret line="198" column="24" lean-forward="true" selection-start-line="198" selection-start-column="24" selection-end-line="198" selection-end-column="24" />
+              <folding>
+                <marker date="1516536159000" expanded="true" signature="5083:5121" ph="SELECT * FRO... users" />
+                <marker date="1516536159000" expanded="true" signature="7450:7504" ph="SELECT * FRO... users" />
+                <marker date="1516536159000" expanded="true" signature="9999:10046" ph="UPDATE users... " />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PostsController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin/Controller/PostsController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1512">
+              <caret line="37" column="0" lean-forward="false" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="44" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="users.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin/view/users/users.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="29" column="0" lean-forward="true" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+            <state relative-caret-position="270">
+              <caret line="18" column="40" lean-forward="true" selection-start-line="18" selection-start-column="40" selection-end-line="18" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -175,7 +150,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>ownsThr</find>
       <find>Permissions</find>
       <find>$post</find>
       <find>patch(</find>
@@ -188,7 +162,6 @@
       <find>roles</find>
       <find>role</find>
       <find>permissions</find>
-      <find>permission</find>
       <find>not set as</find>
       <find>data['roles']</find>
       <find>add-</find>
@@ -205,9 +178,10 @@
       <find>functioninit()</find>
       <find>function init()</find>
       <find>checkbox</find>
+      <find>merge</find>
+      <find>permission</find>
     </findStrings>
     <replaceStrings>
-      <replace>$product</replace>
       <replace>products</replace>
       <replace>product</replace>
       <replace>ProductsController</replace>
@@ -229,14 +203,15 @@
       <replace>Session::</replace>
       <replace>$foreignKey</replace>
       <replace>Permission</replace>
-      <replace>$role</replace>
       <replace>\$model</replace>
       <replace>Roles</replace>
       <replace>Permissions</replace>
       <replace>permissions</replace>
       <replace>permission</replace>
-      <replace>role</replace>
       <replace>roles</replace>
+      <replace>unique</replace>
+      <replace>$role</replace>
+      <replace>role</replace>
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/controller</dir>
@@ -260,7 +235,6 @@
         <option value="$PROJECT_DIR$/admin/CMS/Models/Support/Error.php" />
         <option value="$PROJECT_DIR$/admin/CMS/Models/Support/Flash.php" />
         <option value="$PROJECT_DIR$/admin/CMS/Models/Support/Session.php" />
-        <option value="$PROJECT_DIR$/admin/view/posts/add-edit-post.php" />
         <option value="$PROJECT_DIR$/admin/CMS/App.php" />
         <option value="$PROJECT_DIR$/admin/CMS/Core/CoreController/CoreController.php" />
         <option value="$PROJECT_DIR$/admin/view/shared/locked.php" />
@@ -278,17 +252,12 @@
         <option value="$PROJECT_DIR$/admin/Controller/TestController.php" />
         <option value="$PROJECT_DIR$/admin/view/roles/roles.php" />
         <option value="$PROJECT_DIR$/admin/view/roles/show.php" />
-        <option value="$PROJECT_DIR$/admin/Controller/RolesController.php" />
         <option value="$PROJECT_DIR$/admin/view/permissions/permissions.php" />
-        <option value="$PROJECT_DIR$/admin/CMS/Models/Users/Users.php" />
         <option value="$PROJECT_DIR$/admin/view/permissions/show.php" />
         <option value="$PROJECT_DIR$/admin/CMS/Models/Users/Permission.php" />
         <option value="$PROJECT_DIR$/admin/routes/routes.php" />
         <option value="$PROJECT_DIR$/admin/Controller/PermissionsController.php" />
-        <option value="$PROJECT_DIR$/admin/view/permissions/create.php" />
         <option value="$PROJECT_DIR$/admin/view/roles/create.php" />
-        <option value="$PROJECT_DIR$/admin/Controller/UsersController.php" />
-        <option value="$PROJECT_DIR$/admin/templates/default/style.css" />
         <option value="$PROJECT_DIR$/admin/js/user.js" />
         <option value="$PROJECT_DIR$/admin/CMS/Core/Model/Model.php" />
         <option value="$PROJECT_DIR$/admin/CMS/Models/Controller/Controller.php" />
@@ -301,8 +270,14 @@
         <option value="$PROJECT_DIR$/admin/templates/default/header.php" />
         <option value="$PROJECT_DIR$/admin/Controller/PostsController.php" />
         <option value="$PROJECT_DIR$/admin/CMS/Models/Users/Role.php" />
-        <option value="$PROJECT_DIR$/admin/view/users/add-edit-user.php" />
+        <option value="$PROJECT_DIR$/admin/view/posts/add-edit-post.php" />
         <option value="$PROJECT_DIR$/admin/view/users/users.js" />
+        <option value="$PROJECT_DIR$/admin/view/permissions/create.php" />
+        <option value="$PROJECT_DIR$/admin/CMS/Models/Users/Users.php" />
+        <option value="$PROJECT_DIR$/admin/Controller/RolesController.php" />
+        <option value="$PROJECT_DIR$/admin/Controller/UsersController.php" />
+        <option value="$PROJECT_DIR$/admin/view/users/add-edit-user.php" />
+        <option value="$PROJECT_DIR$/admin/templates/default/style.css" />
       </list>
     </option>
   </component>
@@ -321,8 +296,9 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds">
+    <option name="x" value="69" />
     <option name="y" value="23" />
-    <option name="width" value="1920" />
+    <option name="width" value="1851" />
     <option name="height" value="1057" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
@@ -357,6 +333,7 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -383,9 +360,48 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CMS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CMS" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="admin" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="view" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CMS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CMS" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="admin" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="view" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="permissions" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -393,7 +409,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/admin/CMS/models" />
     <property name="settings.editor.selected.configurable" value="editing.templates" />
     <property name="prop_add_unversioned_files" value="true" />
-    <property name="SearchEverywhereHistoryKey" value="role&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Models/Users/Role.php&#10;usersco&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/Controller/UsersController.php&#10;users&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Models/Users/Users.php&#10;permiss&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Models/Users/Permission.php&#10;postc&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/Controller/PostsController.php&#10;add-ed&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/posts/add-edit-post.php&#10;addl&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/js/helpers/addLoadEvent.js&#10;pos&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/posts/posts.php&#10;postsc&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/Controller/PostsController.php&#10;posts&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/posts/posts.php&#10;single-&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/shared/single-action.php&#10;conten&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/shared/content-table.php&#10;post&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/posts/posts.php&#10;Contr&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Models/Controller/Controller.php&#10;Mode&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Core/Model/Model.php&#10;style&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/templates/default/style.css&#10;style.css&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/templates/default/style.css&#10;usersCo&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/Controller/UsersController.php&#10;permissions/&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/permissions&#10;roles/crea&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/roles/create.php&#10;roles&#9;null&#9;null&#10;routes&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/routes/routes.php&#10;Post&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Models/Posts/Post.php&#10;per&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Models/Users/Permission.php&#10;Permi&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/permissions/permissions.php&#10;Contac&#9;null&#9;null&#10;contact&#9;null&#9;null&#10;permis&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Models/Users/Permission.php&#10;userscon&#9;null&#9;null&#10;USer&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Models/Users/Users.php&#10;User&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Models/Users/Users.php&#10;permi&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Models/Users/Permission.php&#10;Model&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Core/Model/Model.php&#10;Mo\&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Core/Model&#10;postcon&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/Controller/PostsController.php&#10;app&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/App.php&#10;create&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/roles/create.php&#10;Error&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Models/Support/Error.php&#10;Role&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Models/Users/Role.php&#10;user&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Models/Users/Users.php&#10;content&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/shared/content-table.php&#10;add-edit&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/posts/add-edit-post.php&#10;add-&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/categories/add-category.php&#10;Mod&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Core/Model/Model.php&#10;rout&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/routes/routes.php&#10;auth&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Core/Auth/Auth.php&#10;folderscon&#9;null&#9;null&#10;folders&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/files/folders.php&#10;postcont&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/Controller/PostsController.php&#10;content-t&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/shared/content-table.php" />
+    <property name="SearchEverywhereHistoryKey" value="sty&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/templates/default/style.css&#10;perm&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Models/Users/Permission.php&#10;Roles&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/Controller/RolesController.php&#10;Role&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Models/Users/Role.php&#10;roles&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/roles/roles.php&#10;roles/cre&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/roles/create.php&#10;permi&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/Controller/PermissionsController.php&#10;posts&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/Controller/PostsController.php&#10;users&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/Controller/UsersController.php&#10;chec&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/js/checkAll.js&#10;checkaa&#9;null&#9;null&#10;role&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Models/Users/Role.php&#10;usersco&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/Controller/UsersController.php&#10;permiss&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Models/Users/Permission.php&#10;postc&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/Controller/PostsController.php&#10;add-ed&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/posts/add-edit-post.php&#10;addl&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/js/helpers/addLoadEvent.js&#10;pos&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/posts/posts.php&#10;postsc&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/Controller/PostsController.php&#10;single-&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/shared/single-action.php&#10;conten&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/shared/content-table.php&#10;post&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/posts/posts.php&#10;Contr&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Models/Controller/Controller.php&#10;Mode&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Core/Model/Model.php&#10;style&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/templates/default/style.css&#10;style.css&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/templates/default/style.css&#10;usersCo&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/Controller/UsersController.php&#10;permissions/&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/permissions&#10;roles/crea&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/roles/create.php&#10;routes&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/routes/routes.php&#10;Post&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Models/Posts/Post.php&#10;per&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Models/Users/Permission.php&#10;Permi&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/permissions/permissions.php&#10;Contac&#9;null&#9;null&#10;contact&#9;null&#9;null&#10;permis&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Models/Users/Permission.php&#10;userscon&#9;null&#9;null&#10;USer&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Models/Users/Users.php&#10;User&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Models/Users/Users.php&#10;Model&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Core/Model/Model.php&#10;Mo\&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Core/Model&#10;postcon&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/Controller/PostsController.php&#10;app&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/App.php&#10;create&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/roles/create.php&#10;Error&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Models/Support/Error.php&#10;user&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Models/Users/Users.php&#10;content&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/shared/content-table.php&#10;add-edit&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/posts/add-edit-post.php&#10;add-&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/view/categories/add-category.php&#10;Mod&#9;FILE&#9;file:///Volumes/HDD Mac/Websites/CMS/admin/CMS/Core/Model/Model.php" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$2/Languages" value="PHP" />
   </component>
@@ -576,12 +592,13 @@
       <workItem from="1515750304127" duration="3401000" />
       <workItem from="1516183457543" duration="8653000" />
       <workItem from="1516340436832" duration="8255000" />
-      <workItem from="1516381454496" duration="37000" />
+      <workItem from="1516381454496" duration="6081000" />
+      <workItem from="1516468364263" duration="14229000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="232000000" />
+    <option name="totallyTimeSpent" value="252273000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -593,10 +610,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1920" height="1057" extended-state="6" />
+    <frame x="69" y="23" width="1851" height="1057" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14376996" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1509121" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32953367" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.29430053" sideWeight="0.50607735" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294702" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -714,27 +731,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/admin/CMS/App.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="11" column="24" lean-forward="false" selection-start-line="11" selection-start-column="24" selection-end-line="11" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/CMS/Models/Support/Flash.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="10" column="10" lean-forward="false" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/CMS/Models/Support/Session.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="403">
-          <caret line="65" column="35" lean-forward="false" selection-start-line="65" selection-start-column="35" selection-end-line="65" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/admin/CMS/Models/Support/Error.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -760,13 +756,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="17" column="32" lean-forward="false" selection-start-line="17" selection-start-column="32" selection-end-line="17" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/view/roles/roles.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="29" lean-forward="false" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
         </state>
       </provider>
     </entry>
@@ -819,20 +808,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/Controller/RolesController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="37" column="61" lean-forward="true" selection-start-line="37" selection-start-column="61" selection-end-line="37" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/Controller/PermissionsController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="23" column="9" lean-forward="true" selection-start-line="23" selection-start-column="9" selection-end-line="23" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/admin/view/permissions/permissions.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
@@ -840,31 +815,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/view/roles/create.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="585">
-          <caret line="39" column="24" lean-forward="true" selection-start-line="16" selection-start-column="16" selection-end-line="39" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/view/permissions/create.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="570">
-          <caret line="38" column="29" lean-forward="true" selection-start-line="22" selection-start-column="24" selection-end-line="38" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/default/style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-866">
           <caret line="62" column="6" lean-forward="false" selection-start-line="62" selection-start-column="5" selection-end-line="62" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/templates/default/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="63" column="1" lean-forward="false" selection-start-line="63" selection-start-column="1" selection-end-line="63" selection-end-column="1" />
         </state>
       </provider>
     </entry>
@@ -992,13 +946,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin/js/checkAll.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/admin/js/mceAddons.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -1010,44 +957,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
           <caret line="13" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/CMS/Models/Users/Permission.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="28" lean-forward="false" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/Controller/PostsController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-328">
-          <caret line="37" column="0" lean-forward="false" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/CMS/Models/Users/Users.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1028">
-          <caret line="303" column="0" lean-forward="false" selection-start-line="303" selection-start-column="0" selection-end-line="303" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/view/posts/add-edit-post.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="9" lean-forward="false" selection-start-line="17" selection-start-column="9" selection-end-line="17" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/Controller/UsersController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="31" column="9" lean-forward="false" selection-start-line="31" selection-start-column="9" selection-end-line="31" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1094,29 +1003,153 @@
         </state>
       </provider>
     </entry>
+    <entry file="phar://$PROJECT_DIR$/admin/composer.phar/src/Composer/IO/BaseIO.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="223">
+          <caret line="66" column="19" lean-forward="false" selection-start-line="66" selection-start-column="19" selection-end-line="66" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/js/checkAll.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="4" lean-forward="false" selection-start-line="25" selection-start-column="4" selection-end-line="25" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/EcmaScript5.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="223">
+          <caret line="119" column="0" lean-forward="false" selection-start-line="119" selection-start-column="0" selection-end-line="119" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/EcmaScript.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="827" column="3" lean-forward="false" selection-start-line="827" selection-start-column="3" selection-end-line="827" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/Controller/PostsController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1512">
+          <caret line="37" column="0" lean-forward="false" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/Controller/PermissionsController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="502">
+          <caret line="76" column="17" lean-forward="true" selection-start-line="76" selection-start-column="17" selection-end-line="76" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/view/permissions/create.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" column="28" lean-forward="true" selection-start-line="21" selection-start-column="27" selection-end-line="22" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/view/roles/roles.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="29" lean-forward="false" selection-start-line="15" selection-start-column="29" selection-end-line="15" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/view/posts/add-edit-post.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="86" column="6" lean-forward="false" selection-start-line="86" selection-start-column="6" selection-end-line="86" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/Controller/RolesController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1155">
+          <caret line="44" column="41" lean-forward="false" selection-start-line="44" selection-start-column="41" selection-end-line="44" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/view/roles/create.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="54" lean-forward="true" selection-start-line="5" selection-start-column="54" selection-end-line="5" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/admin/CMS/Models/Users/Role.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" column="5" lean-forward="false" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
+        <state relative-caret-position="270">
+          <caret line="18" column="28" lean-forward="true" selection-start-line="18" selection-start-column="28" selection-end-line="18" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/CMS/Models/Users/Permission.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="37" column="0" lean-forward="true" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/CMS/Models/Users/Users.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1469">
+          <caret line="198" column="24" lean-forward="true" selection-start-line="198" selection-start-column="24" selection-end-line="198" selection-end-column="24" />
+          <folding>
+            <marker date="1516536159000" expanded="true" signature="5083:5121" ph="SELECT * FRO... users" />
+            <marker date="1516536159000" expanded="true" signature="7450:7504" ph="SELECT * FRO... users" />
+            <marker date="1516536159000" expanded="true" signature="9999:10046" ph="UPDATE users... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/Controller/UsersController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="381">
+          <caret line="91" column="40" lean-forward="true" selection-start-line="91" selection-start-column="40" selection-end-line="91" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/view/users/users.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="40" lean-forward="true" selection-start-line="18" selection-start-column="40" selection-end-line="18" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin/templates/default/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20">
+          <caret line="260" column="0" lean-forward="true" selection-start-line="260" selection-start-column="0" selection-end-line="260" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/admin/view/users/add-edit-user.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1050">
-          <caret line="70" column="51" lean-forward="false" selection-start-line="70" selection-start-column="51" selection-end-line="70" selection-end-column="51" />
+        <state relative-caret-position="264">
+          <caret line="88" column="24" lean-forward="true" selection-start-line="88" selection-start-column="24" selection-end-line="88" selection-end-column="24" />
           <folding>
-            <marker date="1516346145000" expanded="true" signature="623:889" ph="..." />
+            <marker date="1516544886000" expanded="true" signature="586:852" ph="..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin/view/users/users.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="29" column="0" lean-forward="true" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>

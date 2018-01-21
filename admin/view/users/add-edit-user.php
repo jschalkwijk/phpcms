@@ -2,8 +2,6 @@
 //	use CMS\Models\Files\Folders;
 	$dbc = new \CMS\Models\DBC\DBC;
 	$user = $data['user'];
-
-	$user->givePermissionTo(['rape']);
 ?>
 <script src="/admin/view/users/users.js"></script>
 
@@ -63,11 +61,16 @@
                         <?php
                             $i = 1;
                             foreach($data['roles'] as $role){
-                                echo "<td><input type='checkbox' value='$role->role_id' name='roles[]'/></td>";
+                                if(isset($data['currentRoles']) && in_array($role->role_id,$data['currentRoles'])) {
+                                    echo "<td><input type='checkbox' value='$role->role_id' name='roles[]' checked/></td>";
+                                } else {
+                                    echo "<td><input type='checkbox' value='$role->role_id' name='roles[]'/></td>";
+                                }
+
                                 foreach ($role->permissions as $perm){
                                     $permissionsID[] = $perm->permission_id;
                                 }
-                                echo "<td><input id='role_$role->role_id' type='hidden' value='".json_encode($permissionsID)."'/></td>";
+                                echo "<td><input id='role_$role->role_id' class='$role->name' type='hidden' value='".json_encode($permissionsID)."'/></td>";
                                 $permissionsID = [];
                                 ?>
 
@@ -87,7 +90,13 @@
                         <?php
                             $i = 1;
                             foreach($data['permissions'] as $permission){
-                                echo "<td><input type='checkbox' value='$permission->permission_id' name='permissions[]'/></td>";
+                                if(isset($data['currentPermissions']) && in_array($permission->permission_id,$data['currentPermissions'])) {
+                                    echo "<td><input type='checkbox' value='$permission->permission_id' name='permissions[]' checked disabled/></td>";
+                                } else if( isset($data['customPermissions']) && in_array($permission->permission_id,$data['customPermissions'])){
+                                    echo "<td><input type='checkbox' value='$permission->permission_id' name='permissions[]' checked /></td>";
+                                } else {
+                                    echo "<td><input type='checkbox' value='$permission->permission_id' name='permissions[]'/></td>";
+                                }
                                 ?>
                                 <td><lable><?= ucfirst($permission->name)?></lable></td>
                                 <?php if ($i % 4 == 0) echo "</tr><tr>"; $i++;?>
@@ -95,20 +104,6 @@
                     </tr>
                     </tbody>
                 </table>
-
-<!--				<span> Admin | Can add new vacancies, approve and change them. Add/delete/change users and changes user rights/passwords.</span><br/>-->
-<!--				<input type="radio" name="rights"-->
-<!--					   value="Content Manager" --><?php //if ($user->keep($user->rights()) == 'Content Manager') {
-//					echo 'checked="checked"';
-//				} ?><!--/>-->
-<!--				<span> Content Manager | Can add new vacancies, approve and change them.</span><br/>-->
-<!--				<input type="radio" name="rights" value="Author" --><?php //if ($user->keep($user->rights()) == 'Author') {
-//					echo 'checked="checked"';
-//				} ?><!--/>-->
-<!--				<span> Author | Can add new vacancies, change them. The changes made need approval from either a Admin or Content Manager.</span><br/>-->
-<!--				<p>Are you sure you want to edit this user?</p>-->
-<!--				<input type="radio" name="confirm" value="Yes"/> Yes-->
-<!--				<input type="radio" name="confirm" value="No" checked="checked"/> No <br/>-->
 				<button type="submit" name="submit">Update</button>
 			</form>
 		</div>

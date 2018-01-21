@@ -25,7 +25,7 @@
                                 $i = 1;
                                 foreach($data['roles'] as $role){
                                     echo "<td>";
-                                    if (isset($data['currentPermissions']) && in_array($permission->permission_id,$data['currentPermissions'])) {
+                                    if (isset($data['currentRoles']) && in_array($role->role_id,$data['currentRoles'])) {
                                         echo "<input type='checkbox' value='$role->role_id' name='checkbox[]' checked/>";
                                     } else {
                                         echo "<input type='checkbox' value='$role->role_id' name='checkbox[]'/>";
