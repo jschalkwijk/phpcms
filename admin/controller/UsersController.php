@@ -30,7 +30,12 @@ class UsersController extends Controller {
 			$user = new User($_POST);
 			$user->add();
 			$user->user_id = $user->lastInsertId;
-			$user->givePermissionTo($_POST['permissions[]']);
+            if(isset($_POST['permissions'])) {
+                $user->givePermissionTo($_POST['permissions']);
+            }
+            if(isset($_POST['roles'])){
+                $user->giveRoleTo($_POST['roles']);
+            }
 		}
 		$this->view(
 			'Add User',
@@ -70,6 +75,9 @@ class UsersController extends Controller {
 
 		$user = User::one($params['id']);
 		$roles = $user->roles();
+		$currentPermissions = [];
+		$currentRoles = [];
+		$customPermissions = [];
         foreach ($roles as $role) {
             $currentRoles[] = $role->role_id;
             foreach ($role->permissions() as $permission){
@@ -83,7 +91,12 @@ class UsersController extends Controller {
 		if(isset($_POST['submit'])){
 			$user->request = $_POST;
 			$user->edit();
-            $user->givePermissionTo($_POST['permissions[]']);
+			if(isset($_POST['permissions'])) {
+                $user->givePermissionTo($_POST['permissions']);
+            }
+            if(isset($_POST['roles'])){
+			    $user->giveRoleTo($_POST['roles']);
+            }
 //			print_r($user);
 		}
 

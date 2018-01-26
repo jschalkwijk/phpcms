@@ -11,8 +11,8 @@ class Permission extends Model
 
     protected $allowed = [
         'permission_id',
-        'name'
-//        'user_id',
+        'name',
+        'user_id',
     ];
 
     public function get_id()

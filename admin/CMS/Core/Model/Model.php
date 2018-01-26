@@ -729,7 +729,7 @@ abstract class Model
 
         foreach ($models as $key => $model) {
             $attributes =[$this->primaryKey => $this->get_id(),$model->primaryKey => $model->get_id()];
-            // Push the owning primary key to the owned Model allowed arrayto be accepted for the prepared statement.
+            // Push the owning primary key to the owned Model allowed array to be accepted for the prepared statement.
             $model->allowed[] = $this->primaryKey;
             $prepared = $model->prepareQuery($attributes);
             $model->query .= "INSERT INTO $this->pivotTable (".implode(',',$prepared['columns']).") VALUES(".implode(',',$prepared['placeholders']).")";
@@ -792,7 +792,7 @@ abstract class Model
         // return old permissions
         $detach = array_diff($currentIds,$ids);
         if(empty($attach) && empty($detach)){
-            return false;
+            return true;
         }
         //get the new models to attach
         $new = $class::allWhere([$primaryKey => $attach]);

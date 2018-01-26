@@ -9,7 +9,7 @@
 	<div class="row">
 		<div class="col-sm-6 col-lg-6 col-sm-offset-3 push-lg-3">
 			<?php
-			if (isset($_POST['submit'])) {
+			if (isset($_POST['submit']) && isset($data['messages'])) {
 				echo '<div class="container medium">';
 					echo implode(",",$data['messages']);
 				echo '</div>';

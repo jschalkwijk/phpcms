@@ -1,6 +1,6 @@
 <tr>
-<td class="td-title"><p><?= '<a href="'.ADMIN.'contacts/profile/'.$single->user_id.'/'.$single->username.'">'.$single->username.'</a>'; ?></p></td>
-<td class="td-title"><p><?= $single->rights(); ?></p></td>
+<td class="td-title"><p><?= '<a href="'.ADMIN.'users/'.$single->user_id.'">'.$single->username.'</a>'; ?></p></td>
+<td class="td-title"><p><?php foreach ($single->roles() as $role){ echo $role->name.' | '; }; ?></p></td>
 	<!--<p><input type="hidden" name="id" value="<?php /*echo $single->getID(); */?>"/></p>
 	<p><input type="hidden" name="username" value="<?php /*echo $single->getUsername(); */?>" /></p>-->
     <?php

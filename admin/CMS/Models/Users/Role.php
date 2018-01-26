@@ -11,6 +11,7 @@ class Role extends Model
 
     public $allowed = [
         'name',
+        'role_id',
     ];
 
     public $hidden = [

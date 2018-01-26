@@ -28,10 +28,11 @@ class Users extends Model{
 	];
 
 	protected $allowed = [
+	    'role_id',
 		'username',
 		'album_id',
         'trashed',
-        'approved' ,
+        'approved',
 	];
 
 	protected $encrypted = [
@@ -39,10 +40,11 @@ class Users extends Model{
 		'last_name',
 		'email',
 		'function',
-		'rights',
 	];
 
 	protected $hidden = [
+	    'user_id',
+        'permission_id',
 		'password',
 		'protected_key',
 		'album_id',
@@ -76,13 +78,6 @@ class Users extends Model{
 			return false;
 		}
 	}
-	public function rights(){
-		if(isset($this->rights)) {
-			return $this->decrypt($this->rights);
-		} else {
-			return false;
-		}
-	}
 	public function get_id(){
 		return $this->user_id;
 	}
@@ -112,7 +107,7 @@ class Users extends Model{
 //	#Permissions
     public function getPermissions(array $permissions)
     {
-        if(array_filter($permissions,'is_int')){
+        if(array_filter($permissions,'is_numeric')){
             return Permission::allWhere(['permission_id' => $permissions]);
         } else {
             return Permission::allWhere(['name' => $permissions]);
@@ -122,17 +117,16 @@ class Users extends Model{
 //
     public function givePermissionTo(array $permissions)
         {
-        $permissions = $this->getPermissions($permissions);
-
-        if(empty($permissions)){
-            return false;
-        }
-
-        if(!$this->saveMany($permissions,'users_permissions')){
-            return false;
-        };
-        // flash Message in controller.
-        return true;
+            if(array_filter($permissions,'is_numeric')  && !empty($this->permissions())){
+                if(!$this->sync(Permission::class,$this->permissions(),$permissions,'users_permissions')){
+                    return false;
+                }
+                // flash Message in controller.
+                return true;
+            } else {
+                $permissions = $this->getPermissions($permissions);
+                return $this->saveMany($permissions,'users_permissions');
+            }
     }
 
     public function revokePermissionTo(array $permissions){
@@ -157,16 +151,6 @@ class Users extends Model{
 
         return $this->givePermissionTo($permissions);
 
-    }
-
-    public function hasRole(...$roles): bool
-    {
-        foreach ($this->roles() as $user_roles){
-            if(in_array($user_roles->name,$roles)){
-                return true;
-            }
-        }
-        return false;
     }
 
     protected function hasPermission($permission): bool
@@ -198,6 +182,80 @@ class Users extends Model{
            }
            return false;
     }
+
+    #roles
+    public function getRoles(array $roles)
+    {
+        if(array_filter($roles,'is_numeric')){
+            return Role::allWhere(['role_id' => $roles]);
+        } else {
+            return Role::allWhere(['name' => $roles]);
+        }
+
+    }
+    public function giveRoleTo(array $roles)
+    {
+        if(array_filter($roles,'is_numeric') && !empty($this->roles())){
+            if(!$this->sync(Role::class,$this->roles(),$roles,'users_roles')){
+                return false;
+            }
+            // flash Message in controller.
+            return true;
+        } else {
+            $roles = $this->getRoles($roles);
+            return $this->saveMany($roles,'users_roles');
+        }
+    }
+    public function revokeRoleTo(array $roles){
+        $roles = $this->getRoles($roles);
+
+        if(empty($roles)){
+            return false;
+        }
+
+        if(!$this->removeMany($roles,'users_permissions')){
+            return false;
+        };
+        // flash Message in controller.
+        return true;
+
+    }
+
+    public function refreshRoles(array $roles)
+    {
+        $this->removeMany($this->roles(),'users_roles');
+
+        return $this->giveRoleTo($roles);
+
+    }
+
+    public function hasRole(...$roles): bool
+    {
+        foreach ($this->roles() as $user_roles){
+            if(in_array($user_roles->name,$roles)){
+                return true;
+            }
+        }
+        return false;
+    }
+    public function hasRoleTo($permission)
+    {
+        return $this->hasRoleThroughPermission($permission) || $this->hasRole($permission);
+    }
+
+
+    public function hasRoleThroughPermission($role){
+        // Get permissions through the users Roles
+        $user_roles = $this->ownsThroughMany(Role::class,Permission::class,'users_roles','roles_permissions');
+        // Check if permission is assigned to the users Role
+        foreach ($user_roles as $user_role){
+            if($user_role->name == $role){
+                return true;
+            }
+        }
+        return false;
+    }
+
     #relations
     public function roles()
     {
@@ -302,7 +360,7 @@ class Users extends Model{
 //		}
 		$this->patch();
                                  
-		if((!empty($username) && $this->request['confirm'] == 'Yes') && ($query->rowCount() === 0 || ($query->rowCount() === 1 && ($username === $old_username)))){
+		if((!empty($username)) && ($query->rowCount() === 0 || ($query->rowCount() === 1 && ($username === $old_username)))){
 
 		    $new_password = trim($password);
 			$new_password_again = trim($password_again);
