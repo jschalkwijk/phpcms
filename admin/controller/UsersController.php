@@ -1,6 +1,7 @@
 <?php
 
 	namespace Controller;
+
 	use CMS\Models\Controller\Controller;
     use CMS\Models\Users\Permission;
     use CMS\Models\Users\Role;

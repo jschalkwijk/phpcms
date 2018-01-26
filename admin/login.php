@@ -73,7 +73,7 @@
 							$_SESSION['password'] = $password;
                             $shared_key = file_get_contents('keys/Shared/shared.txt');
 							$returnKey = Key::loadFromAsciiSafeString($shared_key);
-                            $_SESSION['rights'] = Crypto::decrypt($row['rights'], $returnKey);
+//                            $_SESSION['rights'] = Crypto::decrypt($row['rights'], $returnKey);
                             $new_token = md5($row['username'] . $_SESSION['rights'] . $row['token']);
                             try {
                                 $query = $dbc->prepare("UPDATE users SET token = '$new_token' WHERE user_id = ? ");
