@@ -32,6 +32,8 @@ class UsersController extends Controller {
 			$user->user_id = $user->lastInsertId;
             if(isset($_POST['permissions'])) {
                 $user->givePermissionTo($_POST['permissions']);
+            } else {
+
             }
             if(isset($_POST['roles'])){
                 $user->giveRoleTo($_POST['roles']);
@@ -93,9 +95,13 @@ class UsersController extends Controller {
 			$user->edit();
 			if(isset($_POST['permissions'])) {
                 $user->givePermissionTo($_POST['permissions']);
+            } else {
+			    $user->refreshPermissions();
             }
             if(isset($_POST['roles'])){
 			    $user->giveRoleTo($_POST['roles']);
+            } else {
+                $user->refreshRoles();
             }
 //			print_r($user);
 		}

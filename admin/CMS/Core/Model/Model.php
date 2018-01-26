@@ -749,7 +749,7 @@ abstract class Model
      */
     public function removeMany(array $models, $pivotTable) : bool
     {
-        if(!isset($pivotTable)) {
+        if(!isset($pivotTable) || empty($models)) {
             return false;
         }
         $ids = [];

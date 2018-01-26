@@ -145,9 +145,13 @@ class Users extends Model{
 
     }
 
-    public function refreshPermissions(array $permissions)
+    public function refreshPermissions(array $permissions = [])
     {
         $this->removeMany($this->permissions(),'users_permissions');
+
+        if(empty($permissions)){
+            return true;
+        }
 
         return $this->givePermissionTo($permissions);
 
@@ -221,9 +225,13 @@ class Users extends Model{
 
     }
 
-    public function refreshRoles(array $roles)
+    public function refreshRoles(array $roles = [])
     {
         $this->removeMany($this->roles(),'users_roles');
+
+        if(empty($permissions)){
+            return true;
+        }
 
         return $this->giveRoleTo($roles);
 
