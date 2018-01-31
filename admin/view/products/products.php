@@ -38,10 +38,8 @@
                                         ?></p></td>
                                 <td class="td-date"><?= $product->price;?></td>
                                 <td class="td-category"><?= $product->quantity; ?></td>
-                                <?php
-                                if ($_SESSION['rights'] == 'Admin' || $_SESSION['rights'] == 'Content Manager') { ?>
                                     <?php
-                                    if ($_SESSION['rights'] == 'Admin' || $_SESSION['rights'] == 'Content Manager') { ?>
+                                    if ($this->user->hasRole('admin')) { ?>
                                         <td class="td-btn">
                                             <a class="btn btn-sm edit-link" href="<?= $product->table . '/edit/' . $product->get_id(); ?>"><img class="glyph-small"
                                                                                                                    alt="edit-item"
@@ -65,7 +63,7 @@
                                                             class="glyph-small" alt="destroy-item" src="<?= IMG . 'delete-post.png' ?>"/></a></td>
                                         <?php } ?>
                                         <td class="td-btn"><p><input type="checkbox" name="checkbox[]" value="<?= $product->get_id(); ?>"/></p></td>
-                                <?php } }?>
+                                <?php }?>
                             </tr>
                         <?php } ?>
                     </table>

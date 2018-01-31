@@ -29,7 +29,7 @@
                                 <td><?= $contact->phone1(); ?></td>
                                 <td><?= $contact->mail1(); ?></td>
                                 <?php
-                                    if ($_SESSION['rights'] == 'Admin' || $_SESSION['rights'] == 'Content Manager') { ?>
+                                    if ($this->user->hasRole('admin')) { ?>
                                         <td class="td-btn">
                                             <a class="btn btn-sm edit-link" href="<?= $contact->table . '/edit/' . $contact->get_id(); ?>"><img class="glyph-small"
                                                                                                                                               alt="edit-item"

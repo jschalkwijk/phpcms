@@ -5,7 +5,7 @@
                 <p class="logged">Hello <?= $_SESSION['username']; ?></p>
                 <a href="<?= ADMIN."add-post";?>"><button>+ Post</button></a>
                 <a href="<?= ADMIN."add-page"; ?>"><button>+ Page</button></a>
-                <?php if($_SESSION['rights'] == 'Admin') { echo '<a href="'.ADMIN."add-user".'><button>+ User</button></a>'; } ?>
+                <?php if($this->user->hasRole('admin')) { echo '<a href="'.ADMIN."add-user".'><button>+ User</button></a>'; } ?>
                 <a href="#"><button>+ Products</button></a>
             </div>
 
@@ -54,7 +54,7 @@
         <div class="col-sm-4 col-md-4">
             <h2>New Users</h2>
             <table class="backend-table title">
-                <tr><th>User</th><th>Rights</th> <?php if ($_SESSION['rights'] == 'Admin') { ?> <th>Edit</th><th>View</th><!-- <th>Remove</th> --><?php } ?> </tr>
+                <tr><th>User</th><th>Rights</th> <?php if ($this->user->hasRole('admin')) { ?> <th>Edit</th><th>View</th><!-- <th>Remove</th> --><?php } ?> </tr>
                 <form class="backend-form" method="post" action="<?= ADMIN; ?>">
                         <?php
                             $users = $data['users'];

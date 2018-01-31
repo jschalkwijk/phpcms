@@ -4,7 +4,7 @@
 	<!--<p><input type="hidden" name="id" value="<?php /*echo $single->getID(); */?>"/></p>
 	<p><input type="hidden" name="username" value="<?php /*echo $single->getUsername(); */?>" /></p>-->
     <?php
-        if ($_SESSION['rights'] == 'Admin' || $_SESSION['rights'] == 'Content Manager') { ?>
+        if ($this->user->hasRole('admin')) { ?>
             <td class="td-btn">
                 <a class="btn btn-sm edit-link" href="<?= $single->table . '/edit/' . $single->get_id(); ?>"><img class="glyph-small"
                                                                                                                   alt="edit-item"

@@ -29,6 +29,9 @@
         'config' => function () {
             return require 'config/database.php';
         },
+        'user' => function(){
+            return \CMS\Core\Auth\Auth::user();
+        }
     ]);
 
     $app = new App($container);

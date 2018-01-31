@@ -6,7 +6,7 @@
 		<li><a href="<?php echo ADMIN."pages"; ?>">Pages</a></li>
 		<li><a href="<?php echo ADMIN."files"; ?>">Files</a></li>
 		<li><a href="<?php echo ADMIN."contacts"; ?>">Contacts</a></li>
-		<?php if($_SESSION['rights'] == 'Admin') { ?> <li><a href="<?php echo ADMIN."users"; ?>">Users</a></li> <?php } ?>
+		<?php if($this->user->hasRole('admin')) { ?> <li><a href="<?php echo ADMIN."users"; ?>">Users</a></li> <?php } ?>
 		<!--
 <li><a href="/admin/downloads">Downloads</a></li>
 		<li><a href="/admin/projects">Projects</a></li>

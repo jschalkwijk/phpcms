@@ -11,7 +11,7 @@
 
                 <form method="post" action="/admin/users/action">
                     <table class="backend-table title">
-                        <tr><th>User</th><th>Rights</th><?php if ($_SESSION['rights'] == 'Admin') { ?> <th>Edit</th><th>View</th><th><button type="button" id="check-all"><img class="glyph-small" src="<?= IMG."check.png";?>" alt="check-uncheck-all-items"/></button></th></tr> <?php } ?>
+                        <tr><th>User</th><th>Rights</th><?php if ($this->user->hasRole('admin')) { ?> <th>Edit</th><th>View</th><th><button type="button" id="check-all"><img class="glyph-small" src="<?= IMG."check.png";?>" alt="check-uncheck-all-items"/></button></th></tr> <?php } ?>
                         <?php
                         $users = $data['users'];
                         foreach ($users as $single) {

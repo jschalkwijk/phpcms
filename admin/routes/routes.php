@@ -11,95 +11,107 @@
     */
     $app->get('/', [new Controller\DashboardController, 'index']);
     $app->group('/admin',function($app,$container) {
+        $user = $container->user;
         $app->group('/users', function ($app, $container) {
             $app->map('', [new Controller\UsersController, 'index'],['GET','POST']);
             $app->map('/deleted', [new Controller\UsersController, 'deleted'],['GET','POST']);
-            $app->map('/edit/:id', [new Controller\UsersController, 'edit'],['GET','POST']);
-            $app->map('/create', [new Controller\UsersController, 'create'],['GET','POST']);
-            $app->post('/action', [new Controller\UsersController, 'action']);
-            $app->get('/approve/:id', [new Controller\UsersController, 'approve']);
-            $app->get('/hide/:id', [new Controller\UsersController, 'hide']);
-            $app->get('/trash/:id', [new Controller\UsersController, 'trash']);
-            $app->get('/destroy/:id', [new Controller\UsersController, 'destroy']);
+            if($container->user->hasRole('admin')){
+                $app->map('/edit/:id', [new Controller\UsersController, 'edit'],['GET','POST']);
+                $app->map('/create', [new Controller\UsersController, 'create'],['GET','POST']);
+                $app->post('/action', [new Controller\UsersController, 'action']);
+                $app->get('/approve/:id', [new Controller\UsersController, 'approve']);
+                $app->get('/hide/:id', [new Controller\UsersController, 'hide']);
+                $app->get('/trash/:id', [new Controller\UsersController, 'trash']);
+                $app->get('/destroy/:id', [new Controller\UsersController, 'destroy']);
+            }
         });
-        $app->group('/roles', function ($app, $container) {
-            $app->map('', [new Controller\RolesController, 'index'],['GET','POST']);
-            $app->get('/:id',[new Controller\RolesController, 'show']);
-            $app->map('/deleted', [new Controller\RolesController, 'deleted'],['GET','POST']);
-            $app->map('/edit/:id', [new Controller\RolesController, 'edit'],['GET','POST']);
-            $app->post('/update/:id', [new Controller\RolesController, 'update']);
-            $app->map('/create', [new Controller\RolesController, 'create'],['GET','POST']);
-            $app->post('/action', [new Controller\RolesController, 'action']);
-            $app->get('/approve/:id', [new Controller\RolesController, 'approve']);
-            $app->get('/hide/:id', [new Controller\RolesController, 'hide']);
-            $app->get('/trash/:id', [new Controller\RolesController, 'trash']);
-            $app->get('/destroy/:id', [new Controller\RolesController, 'destroy']);
-        });
-        $app->group('/permissions', function ($app, $container) {
-            $app->map('', [new Controller\PermissionsController, 'index'],['GET','POST']);
-            $app->get('/:id',[new Controller\PermissionsController, 'show']);
-            $app->map('/deleted', [new Controller\PermissionsController, 'deleted'],['GET','POST']);
-            $app->map('/edit/:id', [new Controller\PermissionsController, 'edit'],['GET','POST']);
-            $app->post('/update/:id', [new Controller\PermissionsController, 'create']);
-            $app->map('/create', [new Controller\PermissionsController, 'create'],['GET','POST']);
-            $app->post('/action', [new Controller\PermissionsController, 'action']);
-            $app->get('/approve/:id', [new Controller\PermissionsController, 'approve']);
-            $app->get('/hide/:id', [new Controller\PermissionsController, 'hide']);
-            $app->get('/trash/:id', [new Controller\PermissionsController, 'trash']);
-            $app->get('/destroy/:id', [new Controller\PermissionsController, 'destroy']);
-        });
-        $app->group('/posts', function ($app, $container) {
-            $app->map('', [new Controller\PostsController, 'index'],['GET','POST']);
-            $app->map('/deleted', [new Controller\PostsController, 'deleted'],['GET','POST']);
-            $app->get('/:id',[new Controller\PostsController, 'show']);
-            $app->map('/edit/:id', [new Controller\PostsController, 'edit'],['GET','POST']);
-            $app->post('/update/:id', [new Controller\PostsController, 'update']);
-            $app->map('/create', [new Controller\PostsController, 'create'],['GET','POST']);
-            $app->post('/action', [new Controller\PostsController, 'action']);
-            $app->get('/approve/:id', [new Controller\PostsController, 'approve']);
-            $app->get('/hide/:id', [new Controller\PostsController, 'hide']);
-            $app->get('/trash/:id', [new Controller\PostsController, 'trash']);
-            $app->get('/destroy/:id', [new Controller\PostsController, 'destroy']);
-            $app->get('/locked', [new Controller\PostsController, 'locked']);
-        });
-        $app->group('/categories', function ($app, $container) {
-            $app->get('', [new Controller\CategoriesController, 'index']);
-            $app->get('/:id', [new Controller\CategoriesController, 'show']);
-            $app->map('/edit/:id', [new Controller\CategoriesController, 'edit'],['GET','POST']);
-            $app->map('/create', [new Controller\CategoriesController, 'create'],['GET','POST']);
-            $app->post('/action', [new Controller\PostsController, 'action']);
-            $app->get('/approve/:id', [new Controller\PostsController, 'approve']);
-            $app->get('/hide/:id', [new Controller\PostsController, 'hide']);
-            $app->get('/trash/:id', [new Controller\PostsController, 'trash']);
-            $app->get('/destroy/:id', [new Controller\PostsController, 'destroy']);
-        });
-        $app->group('/tags', function ($app, $container) {
-            $app->get('', [new Controller\TagsController, 'index']);
-            $app->map('/edit/:id', [new Controller\TagsController, 'edit'],['GET','POST']);
-            $app->map('/create', [new Controller\TagsController, 'create'],['GET','POST']);
-        });
+        if ($user->hasRole('admin')) {
+            $app->group('/roles', function ($app, $container) {
+                $app->map('', [new Controller\RolesController, 'index'], ['GET', 'POST']);
+                $app->get('/:id', [new Controller\RolesController, 'show']);
+                $app->map('/deleted', [new Controller\RolesController, 'deleted'], ['GET', 'POST']);
+                $app->map('/edit/:id', [new Controller\RolesController, 'edit'], ['GET', 'POST']);
+                $app->post('/update/:id', [new Controller\RolesController, 'update']);
+                $app->map('/create', [new Controller\RolesController, 'create'], ['GET', 'POST']);
+                $app->post('/action', [new Controller\RolesController, 'action']);
+                $app->get('/approve/:id', [new Controller\RolesController, 'approve']);
+                $app->get('/hide/:id', [new Controller\RolesController, 'hide']);
+                $app->get('/trash/:id', [new Controller\RolesController, 'trash']);
+                $app->get('/destroy/:id', [new Controller\RolesController, 'destroy']);
+            });
+        }
 
-        $app->group('/comments', function ($app, $container) {
-            $app->map('', [new Controller\CommentsController, 'index'],['GET','POST']);
-            $app->map('/deleted', [new Controller\CommentsController, 'deleted'],['GET','POST']);
-            $app->map('/edit/:id', [new Controller\CommentsController, 'edit'],['GET','POST']);
-            $app->map('/create', [new Controller\CommentsController, 'create'],['GET','POST']);
-            $app->post('/action', [new Controller\CommentsController, 'action']);
-            $app->get('/approve/:id', [new Controller\CommentsController, 'approve']);
-            $app->get('/hide/:id', [new Controller\CommentsController, 'hide']);
-            $app->get('/trash/:id', [new Controller\CommentsController, 'trash']);
-            $app->get('/destroy/:id', [new Controller\CommentsController, 'destroy']);
-        });
-        $app->group('/replies', function ($app, $container) {
-            $app->map('', [new Controller\RepliesController, 'index'],['GET','POST']);
-            $app->map('/edit/:id', [new Controller\RepliesController, 'edit'],['GET','POST']);
-            $app->map('/create', [new Controller\RepliesController, 'create'],['GET','POST']);
-            $app->post('/action', [new Controller\RepliesController, 'action']);
-            $app->get('/approve/:id', [new Controller\RepliesController, 'approve']);
-            $app->get('/hide/:id', [new Controller\RepliesController, 'hide']);
-            $app->get('/trash/:id', [new Controller\RepliesController, 'trash']);
-            $app->get('/destroy/:id', [new Controller\RepliesController, 'destroy']);
-        });
+        if ($user->hasRole('admin')) {
+            $app->group('/permissions', function ($app, $container) {
+                $app->map('', [new Controller\PermissionsController, 'index'], ['GET', 'POST']);
+                $app->get('/:id', [new Controller\PermissionsController, 'show']);
+                $app->map('/deleted', [new Controller\PermissionsController, 'deleted'], ['GET', 'POST']);
+                $app->map('/edit/:id', [new Controller\PermissionsController, 'edit'], ['GET', 'POST']);
+                $app->post('/update/:id', [new Controller\PermissionsController, 'create']);
+                $app->map('/create', [new Controller\PermissionsController, 'create'], ['GET', 'POST']);
+                $app->post('/action', [new Controller\PermissionsController, 'action']);
+                $app->get('/approve/:id', [new Controller\PermissionsController, 'approve']);
+                $app->get('/hide/:id', [new Controller\PermissionsController, 'hide']);
+                $app->get('/trash/:id', [new Controller\PermissionsController, 'trash']);
+                $app->get('/destroy/:id', [new Controller\PermissionsController, 'destroy']);
+            });
+        }
+
+        if ($user->hasRole('admin','author')) {
+            $app->group('/posts', function ($app, $container) {
+                $app->map('', [new Controller\PostsController, 'index'], ['GET', 'POST']);
+                $app->map('/deleted', [new Controller\PostsController, 'deleted'], ['GET', 'POST']);
+                $app->get('/:id', [new Controller\PostsController, 'show']);
+                $app->map('/edit/:id', [new Controller\PostsController, 'edit'], ['GET', 'POST']);
+                $app->post('/update/:id', [new Controller\PostsController, 'update']);
+                $app->map('/create', [new Controller\PostsController, 'create'], ['GET', 'POST']);
+                $app->post('/action', [new Controller\PostsController, 'action']);
+                $app->get('/approve/:id', [new Controller\PostsController, 'approve']);
+                $app->get('/hide/:id', [new Controller\PostsController, 'hide']);
+                $app->get('/trash/:id', [new Controller\PostsController, 'trash']);
+                $app->get('/destroy/:id', [new Controller\PostsController, 'destroy']);
+                $app->get('/locked', [new Controller\PostsController, 'locked']);
+            });
+            $app->group('/categories', function ($app, $container) {
+                $app->get('', [new Controller\CategoriesController, 'index']);
+                $app->get('/:id', [new Controller\CategoriesController, 'show']);
+                $app->map('/edit/:id', [new Controller\CategoriesController, 'edit'], ['GET', 'POST']);
+                $app->map('/create', [new Controller\CategoriesController, 'create'], ['GET', 'POST']);
+                $app->post('/action', [new Controller\PostsController, 'action']);
+                $app->get('/approve/:id', [new Controller\PostsController, 'approve']);
+                $app->get('/hide/:id', [new Controller\PostsController, 'hide']);
+                $app->get('/trash/:id', [new Controller\PostsController, 'trash']);
+                $app->get('/destroy/:id', [new Controller\PostsController, 'destroy']);
+            });
+            $app->group('/tags', function ($app, $container) {
+                $app->get('', [new Controller\TagsController, 'index']);
+                $app->map('/edit/:id', [new Controller\TagsController, 'edit'], ['GET', 'POST']);
+                $app->map('/create', [new Controller\TagsController, 'create'], ['GET', 'POST']);
+            });
+
+            $app->group('/comments', function ($app, $container) {
+                $app->map('', [new Controller\CommentsController, 'index'], ['GET', 'POST']);
+                $app->map('/deleted', [new Controller\CommentsController, 'deleted'], ['GET', 'POST']);
+                $app->map('/edit/:id', [new Controller\CommentsController, 'edit'], ['GET', 'POST']);
+                $app->map('/create', [new Controller\CommentsController, 'create'], ['GET', 'POST']);
+                $app->post('/action', [new Controller\CommentsController, 'action']);
+                $app->get('/approve/:id', [new Controller\CommentsController, 'approve']);
+                $app->get('/hide/:id', [new Controller\CommentsController, 'hide']);
+                $app->get('/trash/:id', [new Controller\CommentsController, 'trash']);
+                $app->get('/destroy/:id', [new Controller\CommentsController, 'destroy']);
+            });
+            $app->group('/replies', function ($app, $container) {
+                $app->map('', [new Controller\RepliesController, 'index'], ['GET', 'POST']);
+                $app->map('/edit/:id', [new Controller\RepliesController, 'edit'], ['GET', 'POST']);
+                $app->map('/create', [new Controller\RepliesController, 'create'], ['GET', 'POST']);
+                $app->post('/action', [new Controller\RepliesController, 'action']);
+                $app->get('/approve/:id', [new Controller\RepliesController, 'approve']);
+                $app->get('/hide/:id', [new Controller\RepliesController, 'hide']);
+                $app->get('/trash/:id', [new Controller\RepliesController, 'trash']);
+                $app->get('/destroy/:id', [new Controller\RepliesController, 'destroy']);
+            });
+        }
+
         $app->group('/pages', function ($app, $container) {
             $app->get('', [new Controller\PagesController, 'index']);
             $app->map('/edit/:id', [new Controller\PagesController(), 'edit'],['GET','POST']);

@@ -12,7 +12,7 @@ class UsersController extends Controller {
 
 	use \CMS\Models\Actions\UserActions;
 
-	public function index($response,$params = null){
+    public function index($response,$params = null){
 		$users = User::allWhere(['trashed' => 0]);
 		$this->view(
 			'Users',
