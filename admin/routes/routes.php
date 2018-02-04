@@ -39,9 +39,7 @@
                 $app->get('/trash/:id', [new Controller\RolesController, 'trash']);
                 $app->get('/destroy/:id', [new Controller\RolesController, 'destroy']);
             });
-        }
 
-        if ($user->hasRole('admin')) {
             $app->group('/permissions', function ($app, $container) {
                 $app->map('', [new Controller\PermissionsController, 'index'], ['GET', 'POST']);
                 $app->get('/:id', [new Controller\PermissionsController, 'show']);

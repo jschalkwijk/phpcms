@@ -1,11 +1,14 @@
 <?php
 namespace CMS\Core\CoreController;
 
+use CMS\Core\Auth\Auth;
+
 class CoreController {
 	private $errors;
 	private $tpl_name = 'default';
 	private $content;
 	private $jscripts;
+	protected $user;
 
 	public $error = '';
 
@@ -19,7 +22,7 @@ class CoreController {
 		$this->content = $file_paths;
 		$this->jscripts = $jscripts;
 		$tpl_name = $this->tpl_name;
-
+        $this->user = Auth::user();
 		require_once('templates/'.$tpl_name.'/header.php');
 		require_once('templates/'.$tpl_name.'/nav.php');
 //		require_once('templates/'.$tpl_name.'/content-top.php');

@@ -24,6 +24,7 @@
                         </tr>
                         <?php
                             $posts = $data['posts'];
+                            $admin = $this->user->hasRole('admin');
                             foreach ($posts as $single) {
                                 require 'view/shared/content-table.php';
                             }

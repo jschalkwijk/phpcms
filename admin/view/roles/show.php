@@ -17,7 +17,7 @@
                      <?php
                          $i = 1;
                          foreach($role->permissions as $permission){ ?>
-                             <td> <?= $permission->name ?> </td>
+                             <td><a href="/admin/permissions/<?= $permission->permission_id?>"> <?= $permission->name ?></a> </td>
                              <?php if ($i % 2 == 0) echo "</tr><tr>"; $i++;?>
                          <?php } ?>
                  </tr>

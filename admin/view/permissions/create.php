@@ -10,7 +10,7 @@
     </div>
     <div class="row">
         <div class="col-xs-6 col-sm-6 col-md-6 push-sm-3 push-md-3">
-            <?php (isset($params['id'])) ? $action = ADMIN . 'permissions/update/' . $permission->permission_id : $action = ADMIN . 'permissions/create'; ?>
+            <?php (isset($params['id'])) ? $action = ADMIN . 'permissions/edit/' . $permission->permission_id : $action = ADMIN . 'permissions/create'; ?>
             <form action="<?= $action;?>" method="post">
                 <input type="text" name="name" placeholder="Permission Name" value="<?= $permission->name ?>"><br />
                 <button type="submit" name="submit">Submit</button>

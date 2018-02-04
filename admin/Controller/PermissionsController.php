@@ -26,15 +26,21 @@
         public function create($response,$params)
         {
             $permission = new Permission($_POST);
-
+            $errors = new Error();
             if (isset($_POST['submit']) && !empty($permission->name)) {
                 if (!empty($permission->name)) {
                     $permission->save();
-                } else {
-                    $errors = new Error([
-                        'You forgot to fill in a name',
-                    ]);
+                    $permission->permission_id = $permission->lastInsertId;
+                    if(!$permission->saveMany(Role::allWhere(['role_id' => $_POST['checkbox']]),'roles_permissions')) {
+                        $errors->push([
+                            'Roles are not saved',
+                        ]);
+                    }
                 }
+            } else {
+                $errors->push([
+                    'You forgot to fill in a name',
+                ]);
             }
 
             $this->view(
@@ -44,7 +50,7 @@
                 [
                     'permission' => $permission,
                     'roles' => Role::all(),
-                    'errors' => (new Error())->errors()
+                    'errors' => $errors->errors()
                 ]
             );
 
@@ -58,17 +64,29 @@
         public function edit($response,$params)
         {
             $permission = Permission::one($params['id']);
+            $errors = new Error();
 
             if (isset($_POST['submit'])) {
                 $permission->patch($_POST);
                 if (!empty($permission->name)){
-                  $permission->savePatch();
-                } else {
-                    $errors = new Error([
-                        'You forgot to fill in a name',
-                    ]);
+                    $permission->savePatch();
+                    if(!$permission->sync(Role::class,$permission->roles(),$_POST['checkbox'],'roles_permissions')) {
+                        $errors->push([
+                            'Roles are not saved',
+                        ]);
+                    }
                 }
+            } else {
+                $errors->push([
+                    'You forgot to fill in a name',
+                ]);
             }
+
+            $roles = $permission->roles();
+            $currentRoles = [];
+            foreach ($roles as $role) {
+                $currentRoles[] = $role->role_id;
+            };
 
             $this->view(
                 'Edit Permission '.$permission->name,
@@ -77,7 +95,8 @@
                 [
                     'permission' => $permission,
                     'roles' => Role::all(),
-                    'errors' => (new Error())->errors()
+                    'currentRoles' => $currentRoles,
+                    'errors' => $errors,
                 ]
             );
         }

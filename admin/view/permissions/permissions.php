@@ -16,13 +16,14 @@
                         </tr>
                         <?php
                             $permissions = $data['permissions'];
+                            $admin = $this->user->hasRole('admin');
                             foreach ($permissions as $single) { ?>
                             <tr>
                                 <td class="td-title"><a href="/admin/<?= $single->table.'/'.$single->get_id()?>"><?= $single->name; ?></a></td>
                                 <td class="td-date"><p><?= $single->date; ?></p></td>
                                 <!-- Single actions per item -->
                                 <?php
-                                    if ($this->user->hasRole('admin')) { ?>
+                                    if ($admin) { ?>
                                         <td class="td-btn">
                                             <a class="btn btn-sm edit-link" href="<?= $single->table . '/edit/' . $single->get_id(); ?>"><img class="glyph-small"
                                                                                                                                               alt="edit-item"

@@ -257,6 +257,7 @@ abstract class Model
                 $query = $dbc->prepare($this->query);
                 $query->execute($this->values);
                 $this->lastInsertId = $dbc->lastInsertId();
+                $this->{$this->primaryKey} = $this->lastInsertId;
 //                return $this;
             } else {
                 $query = $dbc->query($this->query);
@@ -792,7 +793,7 @@ abstract class Model
         // return old permissions
         $detach = array_diff($currentIds,$ids);
         if(empty($attach) && empty($detach)){
-            return true;
+            return false;
         }
         //get the new models to attach
         $new = $class::allWhere([$primaryKey => $attach]);

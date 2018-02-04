@@ -19,6 +19,7 @@
                     <tr><th class="td-title">Title</th><th class="td-author">Author</th><th class="td-category">Category</th><th>Tags</th><th class="td-date">Date</th><th>Edit</th><th>View</th>
                     <th><button type="button" id="check-all"><img class="glyph-small" alt="check-all-items" src="<?= IMG."/check.png"; ?>"/></button></th></tr>
                     <?php
+                        $admin = $this->user->hasRole('admin');
                         $posts = $data['posts'];
                         foreach($posts as $single){
                             require 'view/shared/content-table.php';
