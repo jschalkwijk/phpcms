@@ -14,6 +14,7 @@
         $user = $container->user;
         $app->group('/users', function ($app, $container) {
             $app->map('', [new Controller\UsersController, 'index'],['GET','POST']);
+            $app->get('/:id', [new Controller\UsersController, 'show']);
             $app->map('/deleted', [new Controller\UsersController, 'deleted'],['GET','POST']);
             if($container->user->hasRole('admin')){
                 $app->map('/edit/:id', [new Controller\UsersController, 'edit'],['GET','POST']);

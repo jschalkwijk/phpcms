@@ -25,6 +25,19 @@ class UsersController extends Controller {
 			]
 		);
 	}
+
+	public function show($response,$params = null){
+            $user = User::one($params['id']);
+            $this->view(
+                'User '.$user->username,
+                ['users/show.php'],
+                $params,
+                [
+                    'user' => $user,
+                ]
+            );
+
+    }
 	public function create($response,$params = null){
 		$user = new User();
 		if(isset($_POST['submit'])){
@@ -56,6 +69,7 @@ class UsersController extends Controller {
     {
 
 	}
+
 	public function deleted($response,$params = null){
 		$users = User::allWhere(['trashed' => 1]);
 		$this->view(

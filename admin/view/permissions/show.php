@@ -11,7 +11,7 @@
                  <thead>
                  <tr>
                      <th class="text-center" colspan="6">Assigned to the following Roles</th>
-                 </thead>git
+                 </thead>
                  <tbody>
                  <tr>
                      <?php
