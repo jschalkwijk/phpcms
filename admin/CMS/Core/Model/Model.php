@@ -230,16 +230,16 @@ abstract class Model
         if (!empty($query)) {
             $this->query = $query;
         }
-//        echo 'Query = '.$this->query.'<br>';
-//        echo 'Values Array: <br>';
-//        echo "<pre>";
-//        print_r($this->values);
-//        echo "</pre>";
-//
-//        echo 'Request Array: <br>';
-//        echo "<pre>";
-//        print_r($this->request);
-//        echo "</pre>";
+        echo 'Query = '.$this->query.'<br>';
+        echo 'Values Array: <br>';
+        echo "<pre>";
+        print_r($this->values);
+        echo "</pre>";
+
+        echo 'Request Array: <br>';
+        echo "<pre>";
+        print_r($this->request);
+        echo "</pre>";
 
         // make a function which updates the current sql statement. The first letters of the query determine what the statement is.
         try {
@@ -257,7 +257,13 @@ abstract class Model
                 $query = $dbc->prepare($this->query);
                 $query->execute($this->values);
                 $this->lastInsertId = $dbc->lastInsertId();
-                $this->{$this->primaryKey} = $this->lastInsertId;
+                if($this->{$this->primaryKey} == 0 ) {
+                    $this->{$this->primaryKey} = $this->lastInsertId;
+                }
+                // TODO: when updating we should set the statement to update to check for lastInsert instead of above solution
+//                if($this->statement == "UPDATE") {
+//                    $this->{$this->primaryKey} = $this->lastInsertId;
+//                }
 //                return $this;
             } else {
                 $query = $dbc->query($this->query);
@@ -729,17 +735,20 @@ abstract class Model
         }
 
         foreach ($models as $key => $model) {
+            echo "this model<br>";
+            print_r($this->user_);
             $attributes =[$this->primaryKey => $this->get_id(),$model->primaryKey => $model->get_id()];
+            echo "attributes <br>";
+            print_r($attributes);
             // Push the owning primary key to the owned Model allowed array to be accepted for the prepared statement.
             $model->allowed[] = $this->primaryKey;
             $prepared = $model->prepareQuery($attributes);
             $model->query .= "INSERT INTO $this->pivotTable (".implode(',',$prepared['columns']).") VALUES(".implode(',',$prepared['placeholders']).")";
-            print_r($model->query);
+
             if($model->grab() != true){
                 return false;
             };
         }
-
         return true;
     }
 

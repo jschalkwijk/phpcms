@@ -345,10 +345,10 @@ class Users extends Model{
 		$output_form = false;
 		$messages = array();
 
-		$username = trim($this->request['username']);
-		$old_username = trim($this->request['old_username']);
-		$password = $this->request['password'];
-		$password_again = $this->request['password_again'];
+		$username = trim($_POST['username']);
+		$old_username = trim($_POST['old_username']);
+		$password = $_POST['password'];
+		$password_again = $_POST['password_again'];
 		try {
             $query = $dbc->prepare("SELECT * FROM users WHERE username = ? AND user_id != {$this->user_id}");
 			$query->execute([$username]);
@@ -366,7 +366,7 @@ class Users extends Model{
 //				$this->request[$k] = $this->encrypt($v);
 //			}
 //		}
-		$this->patch();
+		$this->patch($_POST);
                                  
 		if((!empty($username)) && ($query->rowCount() === 0 || ($query->rowCount() === 1 && ($username === $old_username)))){
 

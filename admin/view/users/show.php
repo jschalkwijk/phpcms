@@ -33,7 +33,15 @@
                     <th class="text-center" colspan="6">Permissions</th>
                 </thead>
                     <tbody>
-                    <tr>
+                    <tr><?php
+                            $i = 1;
+                            foreach($user->roles as $role){
+                                foreach($role->permissions() as $permission) {
+                                ?>
+
+                                <td><a href="/admin/permissions/<?= $permission->permissions_id?>"> <?= ucfirst($permission->name) ?></a> </td>
+                                <?php if ($i % 4 == 0) echo "</tr><tr>"; $i++;?>
+                            <?php }} ?>
                         <?php
                         $i = 1;
                         foreach($user->permissions as $permission){ ?>

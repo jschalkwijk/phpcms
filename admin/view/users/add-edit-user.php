@@ -38,7 +38,7 @@
 				(isset($params['id'])) ? $action = ADMIN . 'users/edit/' . $user->user_id: $action = ADMIN . 'users/create';
 			?>
 			<form id="add-use" method="post" action="<?= $action; ?>">
-				<input type="hidden" name="id" value="<?= $user->user_id; ?>"/>
+				<input type="hidden" name="user_id" value="<?= $user->user_id; ?>"/>
 				<input type="hidden" name="old_username" value="<?= $user->username; ?>"/>
 				<input type="text" name="username" placeholder="Username"
 					   value="<?= $user->username; ?>"/><br/>
