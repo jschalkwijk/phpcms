@@ -230,16 +230,16 @@ abstract class Model
         if (!empty($query)) {
             $this->query = $query;
         }
-        echo 'Query = '.$this->query.'<br>';
-        echo 'Values Array: <br>';
-        echo "<pre>";
-        print_r($this->values);
-        echo "</pre>";
-
-        echo 'Request Array: <br>';
-        echo "<pre>";
-        print_r($this->request);
-        echo "</pre>";
+//        echo 'Query = '.$this->query.'<br>';
+//        echo 'Values Array: <br>';
+//        echo "<pre>";
+//        print_r($this->values);
+//        echo "</pre>";
+//
+//        echo 'Request Array: <br>';
+//        echo "<pre>";
+//        print_r($this->request);
+//        echo "</pre>";
 
         // make a function which updates the current sql statement. The first letters of the query determine what the statement is.
         try {

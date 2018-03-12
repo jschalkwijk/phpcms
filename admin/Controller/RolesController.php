@@ -17,7 +17,7 @@
         public function index($response,$params)
         {
             $roles = Role::all();
-            $this->view('Roles', ['roles/roles.php'], $params, ['roles' => $roles]);
+            $this->view('Roles', ['roles/roles.php'], $params, ['roles' => $roles,'errors' => (new Error())->errors()]);
         }
 
         public function show($response,$params){
@@ -104,6 +104,7 @@
                     if (isset($_SESSION['old'][$role->role_id])) {
                         SessionStorage::getByName('old')->unsetIndex($role->role_id);
                     }
+                    Session::flash("status", "Role {$role->name} updated successfully <br />");
 
                     header("Location: " . ADMIN . "roles");
                 } else {

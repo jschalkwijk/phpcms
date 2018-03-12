@@ -1,5 +1,10 @@
 <div class="container">
     <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6 push-sm-3 push-md-3">
+            <div class="alert alert-success"><?= \CMS\Models\Support\Session::flash('status');?></div>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-xs-6 col-sm-6 col-lg-6 col-sm-offset-3 push-lg-2">
             <div class="center">
                 <form  method="post" action="/admin/roles/action">

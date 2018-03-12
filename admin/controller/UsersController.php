@@ -119,6 +119,7 @@ class UsersController extends Controller {
             } else {
                 $user->refreshRoles();
             }
+            $user = User::one($params['id']);
 //			print_r($user);
 		}
 

@@ -4,6 +4,9 @@
         <div class="col-xs-6 col-sm-6 col-md-6 push-sm-3 push-md-3">
             <?php
                 foreach($data['errors'] as $error){ ?>
+                    <div class="alert alert-danger"><?= \CMS\Models\Support\Session::flash('status');?></div>
+                <?php }
+                foreach($data['errors'] as $error){ ?>
                     <div class="alert alert-warning"><?= $error?></div>
                 <?php } ?>
         </div>
