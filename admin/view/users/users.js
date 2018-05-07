@@ -38,13 +38,17 @@ function checkPermissions() {
         (function(i){
             var check = roles[i];
             check.onclick = function () {
-                // Convert JSON string containing the permissions_id's To javascript object.
-                var rolePermissions = JSON.parse(document.getElementById('role_'+check.value).value);
-
+                // Convert JSON string containing the permissions_id's To javascript object doesnt work properly in
+                // saferi browser when trying to get indexOf.
+                // var rolePermissions = JSON.parse(document.getElementById('role_'+check.value).value);
+                var rolePermissions = document.getElementById('role_'+check.value).value;
+                console.log(typeof rolePermissions)
                 // Check permissions that belong to the role if they are in the rolePermissions array;
                 if(check.checked === true){
                     for(var j = 0; j < permissions.length; j++){
                         var inArray = (rolePermissions.indexOf(permissions[j].value) > -1);
+
+                        console.log(inArray)
                         if(inArray){
                             permissions[j].checked = true;
                             permissions[j].disabled = true;
@@ -61,7 +65,7 @@ function checkPermissions() {
                             // Convert JSON string containing the permissions_id's that should be checked is a role is checked to javascript object.
                             // add only unique values to the array.
                             checkedRolePermissions = checkedRolePermissions.concat(JSON.parse(document.getElementById('role_'+roles[x].value).value)).unique();
-                            uncheck = uncheck.concat(rolePermissions.diff(checkedRolePermissions)).unique();
+                            uncheck = uncheck.concat(JSON.parse(rolePermissions).diff(checkedRolePermissions)).unique();
                         }
                     }
                     // console.log("role permissions "+rolePermissions)
@@ -78,6 +82,8 @@ function checkPermissions() {
                         }
                     } else if(checkedPermissions !== null) {
                         for(var y = 0; y < checkedPermissions.length; y++){
+                            console.log(typeof checkedPermissions[y].value);
+                            console.log(typeof uncheck[y]);
                             var ggg = (uncheck.indexOf(checkedPermissions[y].value) > -1);
                             if(ggg){
                                 checkedPermissions[y].checked = false;
