@@ -53,6 +53,7 @@
         public function run()
         {
             $router = $this->container->router;
+
             $router->setPath($_GET['url'] ?? '/');
 
             try {
@@ -98,7 +99,7 @@
                 if (!is_object($callable[0])) {
                     $callable[0] = new $callable[0];
                 }
-
+                // returns the controller function
                 return call_user_func($callable, $response,$this->container->router->getParams());
             }
 

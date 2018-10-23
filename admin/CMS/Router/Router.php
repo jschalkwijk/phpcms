@@ -105,12 +105,18 @@
             if($this->path == '/'){
                 return $this->routes[$this->path];
             }
+//            echo '<pre>';
+//            print_r($this->routes);
+//            echo '</pre>';
             foreach ($this->bindings as $key => $value) {
                 $string = "'^" . ltrim(implode("\/", $value), "\/+") . "$'";
 //                $string = '^\/products\/edit\/[0-9]+\/[a-zA-Z0-9_]+$^';
                 $this->match = $string;
                 if (preg_match($string, $this->path)) {
-
+                    echo '<pre>';
+                    print_r($this->params);
+                    print_r($this->bindings[$key]);
+                    echo '</pre>';
                     $this->params = array_combine(
                         str_replace(
                             ':','',
@@ -120,10 +126,15 @@
                         ),
                         $this->params
                     );
-
+                    echo '<pre>';
+                    print_r($this->params);
+                    echo '</pre>';
                     if (!in_array($_SERVER['REQUEST_METHOD'], $this->methods[$key])) {
                         throw new MethodNotAllowedException('Method not Allowed!');
                     }
+                    echo '<pre>';
+                    print_r($this->routes[$key]);
+                    echo '</pre>';
                     return $this->routes[$key];
                 }
             }
